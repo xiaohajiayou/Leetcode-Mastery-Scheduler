@@ -1,0 +1,898 @@
+body {
+    background-color: #0D1F2D; /* 深色背景 */
+    background-size: cover; /* 背景覆盖 */
+    color: #ffffff; /* 白色字体 */
+    font-family: 'Raleway', sans-serif;
+    position: relative;
+}
+/* 导航栏样式 */
+.nav-bar {
+    background-color: #0D1F2D;
+
+    display: flex;
+    flex-direction: column;  /* 改为纵向排列 */
+    align-items: center;     /* 水平居中 */
+    border-bottom: 1px solid #4a9d9c;
+}
+
+.nav-row {
+    display: flex;
+    justify-content: center;  /* 内容居中 */
+    align-items: center;
+    margin: 0;  /* 移除外边距 */
+    padding: 2px 0;  /* 减小上下内边距 */
+    line-height: 1;  /* 减小行高 */
+    margin-top: -5px;
+}
+
+/* 标题行样式 */
+.nav-title {
+color: #FF3D3D;
+font-weight: 900;  /* 更粗的字体 */
+font-size: 1.2em;  /* 更大的字号 */
+text-transform: uppercase;  /* 转换为大写 */
+letter-spacing: 2px;  /* 字母间距 */
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  /* 添加阴影效果 */
+font-family: 'Arial Black', Gadget, sans-serif;  /* 更粗重的字体 */
+margin-top: 5px;
+padding: 5px 10px;  /* 添加内边距 */
+background: linear-gradient(180deg, #ff6b6b 0%, #FF3D3D 100%);  /* 渐变色 */
+-webkit-background-clip: text;  /* 使渐变色应用到文字 */
+-webkit-text-fill-color: transparent;  /* 使文字透明以显示背景 */
+display: inline-block;  /* 确保渐变效果生效 */
+}
+
+/* 专门为标题容器添加类 */
+.nav-row.title-row {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+/* 特别处理第二个标题行 */
+.nav-row.title-row + .nav-row.title-row {
+    margin-top: -10px;  /* 调整这个值来控制两行标题间的间距 */
+}
+
+/* 网站信息行样式 */
+.nav-site {
+    color: #4a9d9c;
+    font-size: 0.9em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background-color: rgba(74, 157, 156, 0.1);
+}
+
+/* 导航按钮行样式 */
+.nav-btn {
+    background: none;
+    border: none;
+    color: #888;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    position: relative;
+}
+
+.nav-btn:hover {
+    color: #fff;
+}
+
+.nav-btn.active {
+    color: #fff;
+}
+
+.nav-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background-color: #4a9d9c;
+    border-radius: 2px;
+}
+
+.nav-right {
+    display: flex;
+    gap: 10px;
+}
+
+/* 开关按钮样式 */
+.switch-btn {
+    background-color: #2a2b30;
+    border: 1px solid #3a3b40;
+    color: #888;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.switch-btn:hover {
+    background-color: #3a3b40;
+    color: #fff;
+}
+
+
+.text-date {
+    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */
+    font-size: 1em; /* 修改字体大小 */
+    align-items: center;
+    gap: 2px;
+}
+.text-muted {
+    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */
+    font-size: 0.8em; /* 修改字体大小 */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+
+.review-card {
+    background-color: #1d2e3d; /* 卡片背景 */
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    margin: 20px 0;
+    transition: transform 0.2s;
+    
+}
+
+        .review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px #4a9d9c;
+}
+
+.problem-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9em;
+    color: #ffffff; /* 白色字体 */
+}
+
+
+
+.difficulty-Easy {
+    color: #4a9d9c;
+}
+
+.difficulty-Medium {
+    color: #f0b215;
+}
+
+.difficulty-Hard {
+    color: #FF3D3D;
+}
+
+.progress {
+    height: 8px;
+    margin-top: 10px;
+}
+
+.btn-review {
+
+    border: none;
+    color: #e0e0e0;
+    font-size: 1.5em;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    pointer-events: auto !important;
+}
+
+
+.btn-review:hover {
+    color: #afffff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-review:active {
+    transform: translateY(0);
+}
+
+.btn-review:disabled {
+
+    color: white;
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+.btn-review.btn-lg {
+    font-size: 1.1em;
+    padding: 10px 24px;
+}
+
+.review-card .btn-review,
+.container .btn-review {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+.review-card.reviewed {
+    opacity: 0.6;
+}
+
+.header-section {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #1d2e3d;
+    border: 1px solid rgba(74, 157, 156, 0.1);  /* 降低边框透明度 */
+    box-shadow: 0 0 8px rgba(74, 157, 156, 0.1);  /* 降低阴影透明度 */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 10px;
+    margin: 10px 15px;
+}
+
+.header-section:hover {
+    border-color: rgba(74, 157, 156, 0.2);  /* 降低悬停时边框透明度 */
+    box-shadow: 
+        0 0 12px rgba(74, 157, 156, 0.15),  /* 降低外阴影透明度 */
+        inset 0 0 8px rgba(74, 157, 156, 0.05);  /* 降低内阴影透明度 */
+    transform: translateY(-1px);
+}
+
+.header-section::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border-radius: 15px;
+    background: linear-gradient(45deg, 
+        rgba(74, 157, 156, 0.05),  /* 降低渐变透明度 */
+        rgba(74, 157, 156, 0.1),
+        rgba(74, 157, 156, 0.05)
+    );
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-section:hover::before {
+    opacity: 1;
+}
+
+.completion-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(#afffff var(--percentage), #3a3a4d var(--percentage)); /* 使用深色作为背景 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    transition: background 0.5s ease; /* 背景渐变动画 */
+}
+
+.inner-circle {
+    width: 100px;
+    height: 100px;
+    background: #1d2e3d; /* 内圈背景 */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #FF3D3D; /* 内圈字体颜色 */
+    transition: transform 0.5s ease; /* 内圈缩放动画 */
+}
+
+.retrievability {
+    font-size: 1.0em;
+    color: #ffffff; /* 白色字体 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.retrievability-icon {
+    margin-right: 10px;
+    color: #4a9d9c;
+    animation: pulse 2s infinite;
+}
+
+.retrievability-value {
+    font-weight: bold;
+    margin-left: 10px;
+    color: #4a9d9c; /* Green color for good retrievability */
+    transition: color 0.3s;
+}
+
+.retrievability-value.low {
+    color: #FF3D3D; /* Red color for low retrievability */
+}
+
+.trend-icon {
+    margin-left: 10px;
+    font-size: 1.5em;
+    transition: transform 0.3s;
+}
+
+.trend-up {
+    color: #4a9d9c; /* Green for upward trend */
+}
+
+.trend-down {
+    color: #FF3D3D; /* Red for downward trend */
+}
+
+.low-memory-warning {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 0;
+}
+
+.low-memory-warning.active {
+    display: flex;
+}
+
+.card-limit-input input[type="number"]::-webkit-inner-spin-button,
+.card-limit-input input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.card-limit-input input[type="number"] {
+    -moz-appearance: textfield;
+    background: #3a3a4d; /* 输入框背景 */
+    color: #ffffff; /* 输入框字体颜色 */
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.2em;
+    padding: 5px;
+    border: 2px solid #0D6E6E; /* 输入框边框颜色 */
+    border-radius: 8px;
+    margin: 0 10px;
+}
+
+.gear-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gear-button .fa-gear {
+    font-size: 1.8em;
+    color: #0D6E6E; /* 齿轮图标颜色 */
+    transition: all 0.3s ease;
+}
+
+.gear-button .direction-icon {
+    position: absolute;
+    font-size: 1em;
+    color: #e2c027;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    font-weight: bold;
+}
+
+/* 悬停效果 */
+.gear-button:hover .fa-gear {
+    color: #4a9d9c; /* 悬停时齿轮图标颜色 */
+    filter: drop-shadow(0 0 2px rgba(255, 152, 0, 0.5));
+}
+
+.gear-button:hover .direction-icon {
+    color: #000;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* 点击动画 */
+.gear-button.left:active {
+    transform: rotate(-45deg);
+}
+
+.gear-button.right:active {
+    transform: rotate(45deg);
+}
+
+.card-limit-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.card-limit-label {
+    font-size: 1.1em;
+    color: #ffffff; /* 白色字体 */
+    margin-right: 5px;
+}
+
+/* 工具提示 */
+.gear-button::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.gear-button:hover::after {
+    opacity: 1;
+}
+
+/* 视图容器样式 */
+.view {
+    display: none;
+    transition: opacity 0.3s ease;
+}
+
+.view.active {
+    display: block;
+}
+
+/* 题目列表页面样式 */
+.problem-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    position: relative;
+    width: 300px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px 35px 8px 15px;
+    border: none;
+    border-radius: 20px;
+    background: #2a2b30;
+    color: #fff;
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+/* 更多选项页面样式 */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.option-card {
+    background: #1d2e3d;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(74, 157, 156, 0.2);
+}
+
+.option-card i {
+    font-size: 2em;
+    color: #4a9d9c;
+    margin-bottom: 15px;
+}
+
+.option-card h4 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.option-card p {
+    color: #888;
+    font-size: 0.9em;
+}
+
+/* 导航标签样式 */
+#problemListView .nav-tabs {
+    border-bottom: 1px solid #4a9d9c;
+
+}
+
+#problemListView .nav-tabs .nav-link {
+    color: #888;
+    border: none;
+    background: none;
+
+
+    transition: all 0.3s ease;
+}
+
+#problemListView .nav-tabs .nav-link:hover {
+    color: #fff;
+}
+
+#problemListView .nav-tabs .nav-link.active {
+    color: #4a9d9c;
+    background: none;
+    border-bottom: 2px solid #4a9d9c;
+}
+
+/* 确保tab内容区域正确显示 */
+#problemListView .tab-content {
+    display: flex;
+}
+
+#problemListView .tab-pane {
+    transition: opacity 0.3s ease;
+}
+
+#problemListView .tab-pane.active {
+    opacity: 1;
+}
+
+
+
+
+
+iframe {
+    overflow: hidden;
+    border: 0;
+}
+
+.custom-btn {
+    border-color: #0D6E6E;
+    color: #4a9d9c;
+}
+
+.custom-btn:hover {
+    border-color: rgba(235, 173, 129, 1);
+    background-color: rgba(235, 173, 129, 1);
+}
+
+.custom-btn:disabled {
+    border-color: #e0e0e0;
+    color: #e0e0e0;
+}
+
+.page-input {
+    background-color: transparent;
+    color: #e0e0e0;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.875rem;  /* 相当于 Bootstrap 的 sm 大小 */
+    margin-left: 5px !important; 
+    margin-right: 5px !important;
+}
+
+.page-input:focus {
+    outline: none;
+    border-color: #afffff;
+    box-shadow: 0 0 5px rgba(74, 157, 156, 0.5);
+}
+
+.multifont {
+    font-family: 'Courier Prime', 'Noto Sans SC', sans-serif;
+}
+
+a {
+    color: chocolate;
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bd-violet-bg);
+    --bs-tooltip-color: var(--bs-white);
+}
+
+/* 题目列表样式 */
+#problemListView {
+    padding: 5px;
+}
+
+.problem-list-header {
+    margin-bottom: 15px;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.nav-tabs .nav-link {
+    margin-bottom: -1px;
+    color: #495057;
+    border: 1px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.tab-content {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-top: none;
+}
+
+.tab-pane {
+    display: none;
+}
+.tab-pane.active {
+    display: block;
+}
+
+
+
+/* 确保switch容器不会阻挡点击事件 */
+#switch-area {
+    pointer-events: auto;
+    position: relative;
+    z-index: 100;
+}
+
+
+
+
+
+
+/* 自定义表格样式 */
+.table {
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+
+
+    --bs-table-border-color: #afffff !important;       /* 边框颜色 */
+
+    --bs-table-hover-color: #f56464 !important;        /* 悬停文字颜色 */
+    --bs-table-hover-bg: #ebe3e3 !important;          /* 悬停背景颜色 */
+    border: none !important;              /* 移除表格外边框 */
+    border-collapse: collapse !important;  /* 确保边框合并 */
+}
+
+
+td, th {
+    padding: 4px !important;
+}
+
+.table {
+    margin-bottom: 0;
+    min-width: auto !important;
+}
+
+/* 确保表格容器有正确的宽度和溢出处理 */
+.table-responsive {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+
+
+/* 专门设置表头样式 */
+.table thead,
+.table > thead{
+    border: none !important;              
+    background: linear-gradient(to right, #0D6E6E, #4a9d9c) !important;  
+}
+
+/* 确保表头单元格没有背景色 */
+.table thead tr,
+.table thead th {
+    background: transparent !important;    /* 确保tr和th是透明的 */
+    border: none !important;              
+    color: #ffffff !important;            /* 表头文字颜色 */
+}
+
+
+
+
+/* 记忆概率指示器样式 */
+.memory-indicator {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.memory-indicator:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+.memory-indicator i {
+    font-size: 1.1em;
+}
+
+/* 颜色类 */
+.text-success { color: #4caf50 !important; }
+.text-warning { color: #ff9800 !important; }
+.text-danger { color: #f44336 !important; }
+
+
+
+/* 设置卡片样式调整 */
+.option-card {
+    background-color: #1d2e3d;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(74, 157, 156, 0.2);
+}
+
+.option-card i {
+    font-size: 2em;
+    color: #4a9d9c;
+    margin-bottom: 15px;
+}
+
+.option-card h4 {
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.option-card p {
+    color: #888;
+    font-size: 0.9em;
+}
+
+/* 表单控件样式 */
+.form-select {
+    background-color: #0D1F2D;
+    color: #fff;
+    border: 1px solid #4a9d9c;
+    margin-top: 10px;
+}
+
+.sync-tips {
+    margin-top: 10px;
+    font-size: 0.8em;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.save-section {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 开关按钮样式 */
+.form-check-input.custom-switch {
+    background-color: #0D1F2D !important;
+    border-color: #4a9d9c !important;
+    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);
+    transition: all 0.3s ease;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    opacity: 1;
+    z-index: 100;
+    position: relative;
+    outline: none !important;
+    /* 自定义滑块圆圈颜色为亮蓝色 */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e") !important;
+}
+
+/* 选中状态下的样式 */
+.form-check-input.custom-switch:checked {
+    background-color: #0D6E6E !important;
+    border-color: #0D6E6E !important;
+    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);
+    /* 选中状态下保持相同的蓝色圆圈 */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e") !important;
+}
+
+/* 悬停状态加强发光效果 */
+.form-check-input.custom-switch:hover {
+    box-shadow: 0 0 15px rgba(97, 218, 251, 0.9);
+}
+
+/* 焦点状态 */
+.form-check-input.custom-switch:focus {
+    background-color: inherit !important;  /* 继承当前状态的背景色 */
+    border-color: #4a9d9c !important;
+    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);
+    outline: none !important;
+}
+
+/* 选中且焦点状态 */
+.form-check-input.custom-switch:checked:focus {
+    background-color: #4a9d9c !important;
+}
+
+
+
+
+
+/* SweetAlert2 自定义样式 */
+.colored-toast.swal2-icon-success {
+    background-color: #1d2e3d !important;
+    border: 1px solid #4a9d9c !important;
+}
+
+.colored-toast .swal2-title {
+    color: #ffffff !important;
+    font-size: 1em !important;
+}
+
+.colored-toast .swal2-close {
+    color: #4a9d9c !important;
+}
+
+.colored-toast .swal2-html-container {
+    color: #888 !important;
+    font-size: 0.9em !important;
+}
+
+/* 成功图标颜色 */
+.colored-toast .swal2-success-line-tip,
+.colored-toast .swal2-success-line-long {
+    background-color: #4a9d9c !important;
+}
+
+.colored-toast .swal2-success-ring {
+    border-color: #4a9d9c !important;
+}

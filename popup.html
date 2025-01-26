@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leetcode-Mastery-Scheduler Daily Review</title>
+    <meta charset="utf-8">
+    <link href="lib/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 添加这一行来链接popup.css -->
+    <link rel="stylesheet" href="./src/popup/popup.css">
+</head>
+
+<body style="width: 300px; height: 500px; overflow-y: auto;">
+    <div class="low-memory-warning" id="lowMemoryWarning"></div>
+    <!-- 添加导航栏 -->
+    <div class="nav-bar">
+        <div class="nav-row title-row">
+            <span class="nav-title">Mastery</span>
+        </div>
+        <div class="nav-row title-row">
+            <span class="nav-title">Scheduler</span>
+        </div>
+        <div class="nav-row">
+            <!-- site switcher -->
+            <div id="switch-area">
+                <div class="form-check form-switch text-center justify-content-center my-3"
+                    style=" text-align: center; display: flex;">
+                    <input class="form-check-input custom-switch" type="checkbox" role="switch" id="switchButton">
+                    &nbsp;
+                    <label class="form-check-label nav-site" for="flexSwitchCheckDefault" id="siteLabel"></label>
+                </div>
+            </div>
+        </div>
+        <div class="nav-row">
+            <button type="button" class="nav-btn active" data-view="reviewView">复习</button>
+            <button type="button" class="nav-btn" data-view="problemListView">题目列表</button>
+            <button type="button" class="nav-btn" data-view="moreView">更多</button>
+        </div>
+    </div>
+
+    <div class="container py-3" style="position: relative;">
+        <div id="reviewView" class="view active">
+            <!-- Header Section -->
+            <div class="header-section text-center">
+                <!-- <div style="background-image: url('image.png'); background-size: cover; background-position: center; filter: blur(1px); position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: -1;"></div> -->
+
+
+
+
+                <p class="text-date">
+                    <span id="currentDate"></span>
+                </p>
+                
+                <!-- Progress Circle -->
+                <div class="completion-circle my-3">
+                    <div class="inner-circle">
+                        <span id="completionRate">0%</span>
+                    </div>
+                </div>
+                
+                <p class="mt-2">
+                    <span id="completedCount">0</span> / <span id="totalCount">0</span> problems reviewed
+                </p>
+
+                <!-- Retrievability Average -->
+                <p class="retrievability">
+                    <i class="fas fa-lightbulb retrievability-icon"></i>
+                    Memory Quality: <span id="retrievabilityAverage" class="retrievability-value">0.00</span>
+                    <i id="trendIcon" class="trend-icon"></i>
+                </p>
+
+            </div>
+
+            <!-- Card Limit Input -->
+            <div class="card-limit-input">
+                <span class="card-limit-label"> Today:</span>
+                <button class="gear-button left" data-tooltip="Decrease">
+                    <i class="fas fa-gear"></i>
+                    <i class="fas fa-minus direction-icon"></i>
+                </button>
+                <input type="number" id="cardLimit" min="1" max="20" readonly>
+                <span class="total-problems">/ 1</span>
+                <button class="gear-button right" data-tooltip="Increase">
+                    <i class="fas fa-gear"></i>
+                    <i class="fas fa-plus direction-icon"></i>
+                </button>
+            </div>
+            <!-- Review List -->
+            <div id="reviewList">
+                
+                <!-- Review cards will be dynamically inserted here -->
+            </div>
+
+        </div>
+       
+            <!-- 题目列表页面 -->
+        <div id="problemListView" class="view" style="display: none;">
+            <div class="container-sm m-0">
+
+
+        
+                <!-- doc -->
+                <div class="multifont my-0 py-0 by-0" style="text-align: center;">
+                    <small>🔗 <a target="_blank" href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler">Get Started</a> / <a
+                            target="_blank" href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler">用法</a></small>
+                </div>
+        
+
+        
+
+        
+                <!-- navbar -->
+                <ul class="nav nav-tabs text-center justify-content-center" id="myTab" role="tablist"
+                    style="font-size: smaller; font-family: 'PT Mono', monospace; position: relative; z-index: 100;">
+                    <!-- <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="need-review-tab" data-bs-toggle="tab"
+                            data-bs-target="#need-review-pane" type="button" role="tab" aria-controls="need-review-pane"
+                            aria-selected="true" style="color: rgb(248, 246, 246);">Due</button>
+                    </li> -->
+                    <!-- 修改其他标签页的 class，使其成为默认激活的标签页 -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="no-review-tab" data-bs-toggle="tab"
+                            data-bs-target="#no-review-pane" type="button" role="tab" aria-controls="no-review-pane"
+                            aria-selected="true" style="color: rgb(248, 246, 246);">Schedule</button>
+                    </li>
+                </ul>
+        
+                <!-- tab-content -->
+                <div class="tab-content multifont" id="myTabContent" style="
+                    background-color: #1d2e3d;
+                    margin-top: 10px;
+                    border: none !important;
+                    margin-left: -15px;  /* 减少左边距 */
+                    margin-right: -15px; /* 减少右边距 */
+                    padding-left: 0;     /* 移除内边距 */
+                    padding-right: 0;    /* 移除内边距 */
+                    width: calc(100% + 30px); /* 扩大宽度 */
+                ">
+                    <!-- 对应的内容面板也要设置为激活状态 -->
+                    <div class="tab-pane fade show active" id="no-review-pane" role="tabpanel" aria-labelledby="no-review-tab">
+                        <table id="no-review-table" class="table table-striped table-hover table-sm">
+                        </table>
+                        <!-- pagination -->
+                        <nav aria-label="Page navigation example row"
+                            style="font-size: smaller; display: flex; justify-content: space-between; align-items: center; text-align: center; font-family: 'Courier Prime', monospace;">
+                            <button type="button" class="btn btn-outline-warning custom-btn config-btn" id="optionsBtn"
+                                data-bs-toggle="tooltip" data-bs-title="Open Options" data-bs-placement="right"
+                                style="display: flex; justify-content: center; align-items: center;">
+                                <small class="fa-solid fa-gear fa-2xs my-2"></small>
+                            </button>
+                            <div style="display: flex; justify-content: center; align-items: center; flex-grow: 1;">
+                                <button type="button" class="btn btn-outline-warning custom-btn" id="prevButton1">&lt;</button>
+                                <input type="text" class="page-input ms-2" id="pageInput1" style="width: 7.5%;"
+                                    placeholder="1" />
+                                <label for="pageInput2" class="form-label mt-2 me-2" id="pageInputLabel1">/1</label>
+                                <button type="button" class="btn btn-outline-warning custom-btn" id="nextButton1">&gt;</button>
+                            </div>
+                            <button type="button" class="btn btn-outline-warning custom-btn undo-ops-btn" id="undoOps1"
+                                data-bs-toggle="tooltip" data-bs-title="undo latest operation" data-bs-placement="left"
+                                style="display: flex; justify-content: center; align-items: center;">
+                                <small class="fa-solid fa-arrow-rotate-left fa-2xs my-2"></small>
+                            </button>
+                        </nav>
+                    </div>
+                    <div class="tab-pane fade" id="completed-pane" role="tabpanel" aria-labelledby="completed-tab" tabindex="0">
+                        <table id="completed-table" class="table table-striped table-hover table-sm">
+                        </table>
+                        <!-- pagination -->
+                        <nav aria-label="Page navigation example row"
+                            style="font-size: smaller; display: flex; justify-content: space-between; align-items: center; text-align: center; font-family: 'Courier Prime', monospace;">
+                            <button type="button" class="btn btn-outline-warning custom-btn config-btn" id="optionsBtn"
+                                data-bs-toggle="tooltip" data-bs-title="Open Options" data-bs-placement="right"
+                                style="display: flex; justify-content: center; align-items: center;">
+                                <small class="fa-solid fa-gear fa-2xs my-2"></small>
+                            </button>
+                            <div style="display: flex; justify-content: center; align-items: center; flex-grow: 1;">
+                                <button type="button" class="btn btn-outline-warning custom-btn" id="prevButton2">&lt;</button>
+                                <input type="text" id="pageInput2" style="width: 7.5%;"
+                                    placeholder="1" />
+                                <label for="pageInput2" class="form-label mt-2 me-2" id="pageInputLabel2">/1</label>
+                                <button type="button" class="btn btn-outline-warning custom-btn" id="nextButton2">&gt;</button>
+                            </div>
+                            <button type="button" class="btn btn-outline-warning custom-btn undo-ops-btn" id="undoOps2"
+                                data-bs-toggle="tooltip" data-bs-title="undo latest operation" data-bs-placement="left"
+                                style="display: flex; justify-content: center; align-items: center;">
+                                <small class="fa-solid fa-arrow-rotate-left fa-2xs my-2"></small>
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+        
+                <!-- footer -->
+                <!-- star & donate -->
+                <!-- <div class="text-center mb-3 mt-3"
+                    style="display: flex; align-items: center; justify-content: center; text-align: center; position:fixed; bottom: 0;">
+                    <iframe src="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler"
+                        frameborder="0" scrolling="0" width="200" height="30" title="GitHub" loading="lazy" class="col-3 mb-0"></iframe>
+                    <a class="col-9 mb-0 ms-0" href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler" target="_blank">
+                        <button type="button" class="btn btn-outline-warning custom-btn"
+                            style="font-size: smaller; font-family: 'Courier Prime', monospace;">Request new features / Report a
+                            bug</button>
+                    </a>
+                </div> -->
+            </div>
+        </div>
+
+            <!-- 更多选项页面 -->
+            <div id="moreView" class="view" style="display: none;">
+                <div class="more-options">
+                    <h3>设置</h3>
+                    <form id="optionsForm" class="options-grid">
+
+
+                        <!-- 排序设置 -->
+                        <div class="option-card">
+                            <i class="fas fa-sort"></i>
+                            <h4>题目排序</h4>
+                            <div class="form-group">
+                                <select class="form-select form-control" id="problemSorterSelect" name="problemSorterSelect">
+                                    <!-- options.js will add sorter options -->
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <!-- 云同步设置 -->
+                        <div class="option-card">
+                            <i class="fas fa-cloud"></i>
+                            <h4>云同步</h4>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input custom-switch" type="checkbox" id="syncToggle">
+                                <label class="form-check-label" for="syncToggle">启用云同步</label>
+                            </div>
+                            <p class="sync-tips">
+                                <small>⚠️ 实验性功能，需要：</small>
+                                <small>1. 启用云同步</small>
+                                <small>2. 登录相同Chrome账号</small>
+                                <small>3. 开启Chrome同步</small>
+                            </p>
+                        </div>
+
+
+
+                        <!-- 保存按钮 -->
+                        <div class="save-section">
+                            <button type="submit" class="btn btn-outline-warning custom-btn">
+                                <i class="fas fa-save"></i> 保存设置
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- 保存成功提示 -->
+                    <div id="feedbackMessage" class="alert alert-success mt-3" style="display: none;" role="alert">
+                        设置已保存！
+                    </div>
+                </div>
+            </div>
+
+
+        
+    </div>
+
+
+
+
+
+
+
+    <!-- Review Card Template -->
+    <template id="reviewCardTemplate">
+        <div class="review-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="problem-title mb-2">
+                        <span class="problem-name"></span>
+                    </h5>
+                    <div class="text-muted">
+                        <span class="difficulty"></span> | 
+                        <span class="retrievability"></span> |
+                        <span class="next-review"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-review">
+                        <i class="fas fa-check-circle"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <script type="text/javascript" src="lib/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="lib/fontawesome.js"></script>
+    <script src="dist/popup.js"></script>
+</body>
+</html>

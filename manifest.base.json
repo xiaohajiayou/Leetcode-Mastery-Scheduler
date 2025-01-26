@@ -1,0 +1,49 @@
+{
+    "manifest_version": 3,
+    "name": "Leetcode-Mastery-Scheduler",
+    "version": "0.9.8",
+    "id": "cjefkebbnakfajkompokhkipnbihbacc", 
+    "author": "Haolin Zhong",
+    "description": "Leetcode-Mastery-Scheduler tracks your LeetCode progress and prompt you to review based FSRS",
+    "homepage_url": "https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler",
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": false  
+    },
+    "icons": {
+        "128": "assets/logo.png",
+        "48": "assets/logo.png",
+        "16": "assets/logo.png"
+    },
+    "action": {
+        "default_icon": "assets/logo.png",
+        "default_popup": "popup.html"
+    },
+    "background": {},
+    "permissions": [
+        "https://leetcode.com/*",
+        "https://leetcode.cn/*",
+        "unlimitedStorage",
+        "storage"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://leetcode.com/*"
+            ],
+            "js": [
+                "dist/leetcode.js"
+            ],
+            "run_at": "document_idle"
+        },
+        {
+            "matches": [
+                "https://leetcode.cn/*"
+            ],
+            "js": [
+                "dist/leetcodecn.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

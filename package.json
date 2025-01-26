@@ -1,0 +1,44 @@
+{
+  "name": "Leetcode-Mastery-Scheduler",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">\r   <img src=\"assets/logo2.png\" style=\"width: 10%;\" />\r   <br>\r     <B>P</B>ractice <B>M</B>akes <B>C</B>ode <B>A</B>ccepted\r   <br>\r </h1>",
+  "main": "src/popup.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "manifest:dev": "cross-env NODE_ENV=dev node ./deploy/generate-manifest.js",
+    "manifest:prod": "cross-env NODE_ENV=prod node ./deploy/generate-manifest.js",
+    "release:dev": "npm run build && npm run manifest:dev && node ./deploy/zip.js",
+    "release:prod": "npm run build && npm run manifest:prod && node ./deploy/zip.js",
+    "clear": "node ./deploy/clear.js",
+    "deploy:dev": "npm run clear && npm run release:dev && node ./deploy/unzip.js",
+    "deploy:prod": "npm run clear && npm run release:prod && node ./deploy/unzip.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler"
+  },
+  "keywords": [],
+  "author": "Haolin Zhong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler"
+  },
+  "homepage": "https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler",
+  "dependencies": {
+    "archiver": "^6.0.1",
+    "css-loader": "^6.8.1",
+    "jszip": "^3.10.1",
+    "style-loader": "^3.3.3",
+    "sweetalert2": "^11.15.10",
+    "ts-fsrs": "^4.6.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}
