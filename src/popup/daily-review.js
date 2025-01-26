@@ -297,6 +297,7 @@ export function updateCardLimitDisplay() {
     let currentValue = store.defaultCardLimit || 1;
     if (currentValue > totalProblems && totalProblems > 0) {
         currentValue = totalProblems;
+        store.defaultCardLimit = totalProblems;
     }
     input.value = currentValue;
     
@@ -753,5 +754,6 @@ window.onload = function() {
         updateCardLimitDisplay();
         createReviewCards();
     }
+    
 
 };
