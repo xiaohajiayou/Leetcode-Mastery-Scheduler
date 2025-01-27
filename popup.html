@@ -211,31 +211,38 @@
 
 
                         <!-- 排序设置 -->
-                        <div class="option-card">
-                            <i class="fas fa-sort"></i>
-                            <h4>题目排序</h4>
+                        <div class="option-card" style="padding: 12px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <i class="fas fa-sort" style="font-size: 0.95em; line-height: 1; position: relative; top: 7px;"></i>
+                                    <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">Problem Sort</h4>
+                                </div>
+                            </div>
                             <div class="form-group">
-                                <select class="form-select form-control" id="problemSorterSelect" name="problemSorterSelect">
+                                <select class="form-select form-control" id="problemSorterSelect" name="problemSorterSelect" style="font-size: 0.9em;">
                                     <!-- options.js will add sorter options -->
                                 </select>
                             </div>
                         </div>
 
-
                         <!-- 云同步设置 -->
-                        <div class="option-card">
-                            <i class="fas fa-cloud"></i>
-                            <h4>云同步</h4>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input custom-switch" type="checkbox" id="syncToggle">
-                                <label class="form-check-label" for="syncToggle">启用云同步</label>
+                        <div class="option-card" style="padding: 12px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <i class="fas fa-cloud" style="font-size: 0.95em; line-height: 1; position: relative; top: 7px;""></i>
+                                    <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">Cloud Sync</h4>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input custom-switch" type="checkbox" id="syncToggle">
+                                </div>
                             </div>
-                            <p class="sync-tips">
-                                <small>⚠️ 实验性功能，需要：</small>
-                                <small>1. 启用云同步</small>
-                                <small>2. 登录相同Chrome账号</small>
-                                <small>3. 开启Chrome同步</small>
-                            </p>
+                            
+                            <div class="sync-tips" style="padding: 8px; border-radius: 4px; ">
+                                <small style="display: block; color: #dc3545; margin-bottom: 4px; font-size: 0.8em;">⚠️ Experimental Feature</small>
+                                <small style="display: block; margin-bottom: 2px; font-size: 0.8em;">1. Enable cloud sync</small>
+                                <small style="display: block; margin-bottom: 2px; font-size: 0.8em;">2. Sign in to Chrome account</small>
+                                <small style="display: block; font-size: 0.8em;">3. Turn on Chrome sync</small>
+                            </div>
                         </div>
 
 
