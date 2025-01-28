@@ -549,16 +549,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let viewId;
             switch(targetView) {
-                case '复习':
+                case 'Review':
                     viewId = 'reviewView';
                     await initializeReviewPage();
                     break;
-                case '题目列表':
+                case 'Problems':
                     viewId = 'problemListView';
                     await loadProblemList(); // 加载题目列表
                     // renderAll();
                     break;
-                case '更多':
+                case 'Settings':
                     viewId = 'moreView';
                     break;
             }
