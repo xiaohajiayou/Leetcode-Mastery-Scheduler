@@ -17,7 +17,7 @@ export const store = {
     hardIntv: [0, 1, 2, 3, 4],
     problemSortBy: problemSorters.sortByReviewTimeAsc,
     isCloudSyncEnabled: false,
-    defaultCardLimit: 3
+    defaultCardLimit: 1
 }
 
 export const daily_store = {

@@ -11,93 +11,6 @@ import { descriptionOf, idOf, problemSorterArr } from "./util/sort";
 // 在文件顶部导入 SweetAlert2
 import Swal from 'sweetalert2';
 
-// 模拟数据
-const mockReviewData = {
-    totalProblems: 8,
-    completedProblems: 3,
-    problems: [
-        {
-            index: "1",
-            name: "Two Sum",
-            difficulty: "Easy",
-            lastReview: "3 days ago",
-            nextReview: "in 2 days",
-            retrievability: 0.92,
-            proficiency: 2,
-            maxProficiency: 5
-        },
-        {
-            index: "3",
-            name: "Longest Substring Without Repeating Characters",
-            difficulty: "Medium",
-            lastReview: "7 days ago",
-            nextReview: "in 4 days",
-            retrievability: 0.88,
-            proficiency: 3,
-            maxProficiency: 5
-        },
-        {
-            index: "23",
-            name: "Merge k Sorted Lists",
-            difficulty: "Hard",
-            lastReview: "14 days ago",
-            nextReview: "in 7 days",
-            retrievability: 0.99,
-            proficiency: 1,
-            maxProficiency: 5
-        },
-        {
-            index: "53",
-            name: "Maximum Subarray",
-            difficulty: "Medium",
-            lastReview: "5 days ago",
-            nextReview: "in 3 days",
-            retrievability: 0.90,
-            proficiency: 2,
-            maxProficiency: 5
-        },
-        {
-            index: "70",
-            name: "Climbing Stairs",
-            difficulty: "Easy",
-            lastReview: "4 days ago",
-            nextReview: "in 2 days",
-            retrievability: 0.95,
-            proficiency: 4,
-            maxProficiency: 5
-        },
-        {
-            index: "121",
-            name: "Best Time to Buy and Sell Stock",
-            difficulty: "Easy",
-            lastReview: "6 days ago",
-            nextReview: "in 3 days",
-            retrievability: 0.87,
-            proficiency: 3,
-            maxProficiency: 5
-        },
-        {
-            index: "200",
-            name: "Number of Islands",
-            difficulty: "Medium",
-            lastReview: "8 days ago",
-            nextReview: "in 5 days",
-            retrievability: 0.89,
-            proficiency: 2,
-            maxProficiency: 5
-        },
-        {
-            index: "295",
-            name: "Find Median from Data Stream",
-            difficulty: "Hard",
-            lastReview: "10 days ago",
-            nextReview: "in 6 days",
-            retrievability: 0.84,
-            proficiency: 1,
-            maxProficiency: 5
-        }
-    ]
-};
 
 // 判断是否是今天需要复习的题目
 function isReviewDueToday(problem) {
@@ -205,12 +118,18 @@ function updateStats() {
     ).length;
 
     // 获取当前显示的卡片数量
-    const cardLimit = parseInt(document.getElementById('cardLimit').value, 10)|| store.defaultCardLimit || 1;
+    let cardLimit = parseInt(document.getElementById('cardLimit').value, 10)|| store.defaultCardLimit || 1;
     console.log('当前卡片限制值:', {
         rawValue: document.getElementById('cardLimit').value,
         parsedCardLimit: cardLimit,
         element: document.getElementById('cardLimit')
     });
+    const totalProblems = daily_store.dailyReviewProblems?.length || 0;
+    if (cardLimit > totalProblems && totalProblems > 0) {
+        cardLimit = totalProblems;
+        // store.defaultCardLimit = totalProblems;
+        // setDefaultCardLimit(totalProblems);
+    }
 
     // 更新显示的已复习数量
     document.getElementById('completedCount').textContent = completedCount;
@@ -297,7 +216,8 @@ export function updateCardLimitDisplay() {
     let currentValue = store.defaultCardLimit || 1;
     if (currentValue > totalProblems && totalProblems > 0) {
         currentValue = totalProblems;
-        store.defaultCardLimit = totalProblems;
+        // store.defaultCardLimit = totalProblems;
+        // setDefaultCardLimit(totalProblems);
     }
     input.value = currentValue;
     
@@ -583,10 +503,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // 确保在页面完全加载后也执行一次检查
-window.onload = function() {
+window.onload = async function() {
     console.log('页面完全加载完成，检查导航功能是否正常初始化');
     const navButtons = document.querySelectorAll('.nav-btn');
     console.log('页面加载完成后的导航按钮数量:', navButtons.length);
+    await initializeReviewPage();
 };
 
 // 加载题目列表
