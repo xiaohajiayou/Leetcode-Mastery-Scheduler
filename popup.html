@@ -181,36 +181,75 @@
                     background-color: #1d2e3d;
                     margin-top: 10px;
                     border: none !important;
-                    margin-left: -15px;  /* 减少左边距 */
-                    margin-right: -15px; /* 减少右边距 */
-                    padding-left: 0;     /* 移除内边距 */
-                    padding-right: 0;    /* 移除内边距 */
-                    width: calc(100% + 30px); /* 扩大宽度 */
+                    margin-left: -15px;
+                    margin-right: -15px;
+                    padding-left: 0;
+                    padding-right: 0;
+                    width: calc(100% + 30px);
                 ">
-                    <!-- 对应的内容面板也要设置为激活状态 -->
                     <div class="tab-pane fade show active" id="no-review-pane" role="tabpanel" aria-labelledby="no-review-tab">
-                        <table id="no-review-table" class="table table-striped table-hover table-sm">
+                        <!-- 表格 -->
+                        <table id="no-review-table" class="table table-striped table-hover table-sm" style="margin-bottom: 1rem;">
                         </table>
-                        <!-- pagination -->
-                        <nav aria-label="Page navigation example row"
-                            style="font-size: smaller; display: flex; justify-content: space-between; align-items: center; text-align: center; font-family: 'Courier Prime', monospace;">
-                            <button type="button" class="btn btn-outline-warning custom-btn config-btn" id="optionsBtn"
-                                data-bs-toggle="tooltip" data-bs-title="Open Options" data-bs-placement="right"
-                                style="display: flex; justify-content: center; align-items: center;">
-                                <small class="fa-solid fa-gear fa-2xs my-2"></small>
-                            </button>
-                            <div style="display: flex; justify-content: center; align-items: center; flex-grow: 1;">
-                                <button type="button" class="btn btn-outline-warning custom-btn" id="prevButton1">&lt;</button>
-                                <input type="text" class="page-input ms-2" id="pageInput1" style="width: 7.5%;"
-                                    placeholder="1" />
-                                <label for="pageInput2" class="form-label mt-2 me-2" id="pageInputLabel1">/1</label>
-                                <button type="button" class="btn btn-outline-warning custom-btn" id="nextButton1">&gt;</button>
+                        
+                        <!-- 导航栏 - 移除设置按钮并居中所有元素 -->
+                        <nav aria-label="Page navigation"
+                            style="
+                                font-size: smaller; 
+                                display: flex; 
+                                justify-content: center;
+                                text-align: center; 
+                                font-family: 'Courier Prime', monospace;
+                            "
+                        >
+                            <!-- 分页控件容器和撤销按钮组合 -->
+                            <div style="
+                                display: flex; 
+                            ">
+                                <button type="button" class="btn btn-outline-warning custom-btn" id="prevButton1" 
+                                    style="padding: 0.25rem 0.5rem; font-size: 0.875rem;margin-right: 0.5rem;">&lt;</button>
+                                <input type="text" class="page-input" id="pageInput1" 
+                                    style="
+                                        width: 2.5rem;
+                                        height: 1.75rem;
+                                        padding: 0.25rem;
+                                        font-size: 0.875rem;
+                                        text-align: center;
+                                        border-radius: 0.25rem;
+                                        border: 1px solid #495057;
+                                        background-color: #1d2e3d;
+                                        color: #e9ecef;
+                                    " 
+                                    placeholder="1" 
+                                />
+                                <label for="pageInput2" 
+                                    class="form-label mb-0" 
+                                    id="pageInputLabel1"
+                                    style="
+                                        font-size: 0.875rem;
+                                        line-height: 1.75rem;
+                                        color: #e9ecef;
+                                        margin-right: 0.25rem;
+                                    "
+                                >/1</label>
+                                <button type="button" class="btn btn-outline-warning custom-btn" id="nextButton1"
+                                    style="padding: 0.25rem 0.5rem; font-size: 0.875rem;margin-right: 0.5rem;margin-left: 0.5rem;">&gt;</button>
+                                
+                                <!-- 撤销按钮 -->
+                                <button type="button" class="btn btn-outline-warning custom-btn undo-ops-btn" id="undoOps1"
+                                    data-bs-toggle="tooltip" data-bs-title="undo latest operation" data-bs-placement="left"
+                                    style="
+                                        display: flex; 
+                                        justify-content: center; 
+                                        align-items: center;
+                                        padding: 0.25rem 0.5rem;
+                                        font-size: 0.875rem;
+                                        margin-left: 0.5rem;
+                                    "
+                                >
+                                    <small class="fa-solid fa-arrow-rotate-left fa-2xs"></small>
+                                </button>
                             </div>
-                            <button type="button" class="btn btn-outline-warning custom-btn undo-ops-btn" id="undoOps1"
-                                data-bs-toggle="tooltip" data-bs-title="undo latest operation" data-bs-placement="left"
-                                style="display: flex; justify-content: center; align-items: center;">
-                                <small class="fa-solid fa-arrow-rotate-left fa-2xs my-2"></small>
-                            </button>
                         </nav>
                     </div>
                     <div class="tab-pane fade" id="completed-pane" role="tabpanel" aria-labelledby="completed-tab" tabindex="0">
