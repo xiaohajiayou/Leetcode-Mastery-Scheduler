@@ -476,6 +476,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 case 'Problems':
                     viewId = 'problemListView';
                     await loadProblemList(); // 加载题目列表
+                    initializeFeedbackButton();
                     // renderAll();
                     break;
                 case 'Settings':
@@ -657,12 +658,56 @@ export async function initializeReviewPage() {
     createReviewCards();
 }
 
+export function initializeFeedbackButton() {
+    const button = document.querySelector('.feedback-btn');  // 使用新的类名
+    if (!button) return;
+
+    button.addEventListener('mouseenter', function() {
+        this.style.background = '#1a3244';
+        this.style.borderColor = '#61dafb';
+        this.style.boxShadow = '0 0 10px rgba(97, 218, 251, 0.5)';
+        this.style.color = '#61dafb';
+        this.querySelector('.btn-content').style.transform = 'translateX(2px)';
+        this.querySelector('i').style.color = '#61dafb';
+    });
+
+    button.addEventListener('mouseleave', function() {
+        this.style.background = '#1d2e3d';
+        this.style.borderColor = 'rgba(97, 218, 251, 0.3)';
+        this.style.boxShadow = 'none';
+        this.style.color = '#61dafb';
+        this.querySelector('.btn-content').style.transform = 'translateX(0)';
+        this.querySelector('i').style.color = '#61dafb';
+    });
+    const buttonReview = document.querySelector('.feedback-btn-review');  // 使用新的类名
+    if (!buttonReview) return;
+
+    buttonReview.addEventListener('mouseenter', function() {
+        this.style.background = '#1a3244';
+        this.style.borderColor = '#61dafb';
+        this.style.boxShadow = '0 0 10px rgba(97, 218, 251, 0.5)';
+        this.style.color = '#61dafb';
+        this.querySelector('.btn-content').style.transform = 'translateX(2px)';
+        this.querySelector('i').style.color = '#61dafb';
+    });
+
+    buttonReview.addEventListener('mouseleave', function() {
+        this.style.background = '#1d2e3d';
+        this.style.borderColor = 'rgba(97, 218, 251, 0.3)';
+        this.style.boxShadow = 'none';
+        this.style.color = '#61dafb';
+        this.querySelector('.btn-content').style.transform = 'translateX(0)';
+        this.querySelector('i').style.color = '#61dafb';
+    });
+}
+
 // 确保在页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('DOM加载完成');
     await initializeReviewPage();
     // 添加设置初始化
     await initializeOptions();
+    initializeFeedbackButton();
 });
 
 // 以防万一，也添加 window.onload

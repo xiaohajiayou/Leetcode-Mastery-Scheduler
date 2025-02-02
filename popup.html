@@ -92,6 +92,8 @@
                 <div id="reviewList" style="flex: 1;">
                     <!-- Review cards will be dynamically inserted here -->
                 </div>
+                <!-- 添加一个占位div，确保内容不会被footer遮挡 -->
+                <div style="height: 10px;"></div>
 
                 <!-- footer -->
                 <div class="footer" style="
@@ -125,18 +127,40 @@
                         style="text-decoration: none;"
                     >
                         <button type="button" 
-                                class="btn btn-outline-warning custom-btn" 
-                                style="
-                                    font-size: 0.8em; 
-                                    font-family: 'Courier Prime', monospace;
-                                    padding: 4px 12px;
-                                    opacity: 0.9;
+                            class="btn custom-btn feedback-btn-review" 
+                            style="
+                                font-size: 0.875rem;
+                                font-family: 'Courier Prime', monospace;
+                                padding: 0.5rem 1.2rem;
+                                background: #1d2e3d;
+                                    border: 1px solid rgba(97, 218, 251, 0.3);
+                                    color: #61dafb;
+                                    border-radius: 6px;
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 0.6rem;
                                     transition: all 0.3s ease;
+                                    position: relative;
+                                    overflow: hidden;
                                 "
-                                onmouseover="this.style.opacity='1'"
-                                onmouseout="this.style.opacity='0.9'"
                         >
-                            Report Issues
+                            <div class="btn-content" 
+                                 style="
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 0.6rem;
+                                    transition: all 0.3s ease;
+                                 "
+                            >
+                                <i class="fas fa-comment-dots" 
+                                   style="
+                                    font-size: 0.875rem;
+                                    color: #61dafb;
+                                    transition: all 0.3s ease;
+                                   "
+                                ></i>
+                                <span>Issues</span>
+                            </div>
                         </button>
                     </a>
                 </div>
@@ -314,22 +338,44 @@
                     
                     <!-- 反馈按钮 -->
                     <a href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler/issues" 
-                       target="_blank" 
-                       style="text-decoration: none;"
+                        target="_blank" 
+                        style="text-decoration: none;"
                     >
                         <button type="button" 
-                                class="btn btn-outline-warning custom-btn" 
+                        class="btn custom-btn feedback-btn" 
                                 style="
-                                    font-size: 0.8em; 
+                                    font-size: 0.875rem;
                                     font-family: 'Courier Prime', monospace;
-                                    padding: 4px 12px;
-                                    opacity: 0.9;
+                                    padding: 0.5rem 1.2rem;
+                                    background: #1d2e3d;
+                                    border: 1px solid rgba(97, 218, 251, 0.3);
+                                    color: #61dafb;
+                                    border-radius: 6px;
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 0.6rem;
                                     transition: all 0.3s ease;
+                                    position: relative;
+                                    overflow: hidden;
                                 "
-                                onmouseover="this.style.opacity='1'"
-                                onmouseout="this.style.opacity='0.9'"
                         >
-                            Report Issues
+                            <div class="btn-content" 
+                                 style="
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 0.6rem;
+                                    transition: all 0.3s ease;
+                                 "
+                            >
+                                <i class="fas fa-comment-dots" 
+                                   style="
+                                    font-size: 0.875rem;
+                                    color: #61dafb;
+                                    transition: all 0.3s ease;
+                                   "
+                                ></i>
+                                <span>Feedback</span>
+                            </div>
                         </button>
                     </a>
                 </div>
