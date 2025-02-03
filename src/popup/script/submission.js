@@ -101,7 +101,7 @@ export const addRecordButton = () => {
     // 创建按钮
     const button = document.createElement('button');
     button.className = 'Leetcode-Mastery-Scheduler-record-btn';
-    button.textContent = '记录难度';
+    button.textContent = 'Rate It';
     
     // 添加点击事件
     button.addEventListener('click', async () => {
@@ -175,12 +175,12 @@ const showDifficultyFeedbackDialog = () => {
         dialog.className = 'feedback-dialog';
         dialog.innerHTML = `
             <button class="close-button">&times;</button>
-            <h3>这道题对你来说难度如何？</h3>
+            <h3>How difficult was this problem for you?</h3>
             <div class="quality-buttons">
-                <button data-quality="1">完全不会</button>
-                <button data-quality="2">有点难</button>
-                <button data-quality="3">正常</button>
-                <button data-quality="4">简单</button>
+                <button data-quality="1">Very Hard</button>
+                <button data-quality="2">Hard</button>
+                <button data-quality="3">Medium</button>
+                <button data-quality="4">Easy</button>
             </div>
         `;
         // 点击遮罩层关闭
