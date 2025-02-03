@@ -93,20 +93,10 @@
                     <!-- Review cards will be dynamically inserted here -->
                 </div>
                 <!-- 添加一个占位div，确保内容不会被footer遮挡 -->
-                <div style="height: 10px;"></div>
+                <div style="height: 25px;"></div>
 
                 <!-- footer -->
-                <div class="footer" style="
-                    background: linear-gradient(to bottom, rgba(29, 46, 61, 0.8) 0%, #1d2e3d 100%);
-                    backdrop-filter: blur(5px);
-                    padding: 10px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 16px;
-                    border-top: 1px solid rgba(255, 255, 255, 0.1);
-                    margin-top: auto;  /* 将 footer 推到底部 */
-                ">
+                <div class="footer">
                     <!-- GitHub Star -->
                     <iframe 
                         src="https://ghbtns.com/github-btn.html?user=xiaohajiayou&repo=Leetcode-Mastery-Scheduler&type=star&count=true" 
@@ -126,39 +116,9 @@
                         target="_blank" 
                         style="text-decoration: none;"
                     >
-                        <button type="button" 
-                            class="btn custom-btn feedback-btn-review" 
-                            style="
-                                font-size: 0.875rem;
-                                font-family: 'Courier Prime', monospace;
-                                padding: 0.5rem 1.2rem;
-                                background: #1d2e3d;
-                                    border: 1px solid rgba(97, 218, 251, 0.3);
-                                    color: #61dafb;
-                                    border-radius: 6px;
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 0.6rem;
-                                    transition: all 0.3s ease;
-                                    position: relative;
-                                    overflow: hidden;
-                                "
-                        >
-                            <div class="btn-content" 
-                                 style="
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 0.6rem;
-                                    transition: all 0.3s ease;
-                                 "
-                            >
-                                <i class="fas fa-comment-dots" 
-                                   style="
-                                    font-size: 0.875rem;
-                                    color: #61dafb;
-                                    transition: all 0.3s ease;
-                                   "
-                                ></i>
+                        <button type="button" class="btn custom-btn feedback-btn-review">
+                            <div class="btn-content">
+                                <i class="fas fa-comment-dots"></i>
                                 <span>Issues</span>
                             </div>
                         </button>

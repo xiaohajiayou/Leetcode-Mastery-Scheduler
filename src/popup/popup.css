@@ -605,6 +605,34 @@ iframe {
     color: #e0e0e0;
 }
 
+
+.footer {
+    background: linear-gradient(to bottom, rgba(29, 46, 61, 0.8) 0%, #1d2e3d 100%);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+    padding: 8px 0;  /* 添加上下内边距 */
+}
+
+.feedback-btn-review {
+    padding: 0.35rem 0.8rem !important;  /* 减小按钮内边距 */
+    font-size: 0.8rem !important;  /* 稍微减小字体 */
+    min-height: 28px;  /* 设置最小高度 */
+}
+
+.feedback-btn-review .btn-content {
+    gap: 0.4rem !important;  /* 减小图标和文字间距 */
+}
+
+.feedback-btn-review i {
+    font-size: 0.8rem !important;  /* 减小图标大小 */
+}
+
+
 .page-input {
     background-color: transparent;
     color: #e0e0e0;
