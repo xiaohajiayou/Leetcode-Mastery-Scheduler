@@ -11,6 +11,26 @@ import { descriptionOf, idOf, problemSorterArr } from "./util/sort";
 // 在文件顶部导入 SweetAlert2
 import Swal from 'sweetalert2';
 
+// 在文件开头添加
+const LAST_AVERAGE_KEY = 'lastRetrievabilityAverage';
+const LAST_UPDATE_TIME_KEY = 'lastUpdateTime';
+let yesterdayRetrievabilityAverage = 0.00;
+
+// 获取上次存储的平均值和时间
+function loadLastAverageData() {
+    const lastData = {
+        average: parseFloat(localStorage.getItem(LAST_AVERAGE_KEY)) || 0.00,
+        timestamp: parseInt(localStorage.getItem(LAST_UPDATE_TIME_KEY)) || 0
+    };
+    return lastData;
+}
+
+// 存储当前的平均值和时间
+function saveCurrentAverageData(average) {
+    localStorage.setItem(LAST_AVERAGE_KEY, average.toString());
+    localStorage.setItem(LAST_UPDATE_TIME_KEY, Date.now().toString());
+}
+
 
 // 判断是否是今天需要复习的题目
 function isReviewDueToday(problem) {
@@ -92,8 +112,7 @@ async function loadDailyReviewData() {
         });
     });
 }
-// 假设昨天的平均记忆质量
-let yesterdayRetrievabilityAverage = 0.00;
+
 
 // 计算可检索性均值
 function calculateRetrievabilityAverage() {
@@ -141,15 +160,46 @@ function updateStats() {
     document.getElementById('completionRate').textContent = `${completionRate}%`;
     // document.querySelector('.completion-circle').style.setProperty('--percentage', `${completionRate}%`);
     // 更新可检索性均值
-    const retrievabilityAverage = calculateRetrievabilityAverage();
+    const currentRetrievabilityAverage = calculateRetrievabilityAverage();
     const retrievabilityElement = document.getElementById('retrievabilityAverage');
-    retrievabilityElement.textContent = retrievabilityAverage;
+    retrievabilityElement.textContent = currentRetrievabilityAverage;
+
+
+    // 获取上次存储的数据
+    const lastData = loadLastAverageData();
+    const hoursSinceLastUpdate = (Date.now() - lastData.timestamp) / (1000 * 60 * 60);
+    
+    // 如果超过24小时，更新存储的数据
+    if (hoursSinceLastUpdate >= 24) {
+        console.log('距离上次更新已超过24小时:', {
+            hoursSinceLastUpdate: hoursSinceLastUpdate.toFixed(2) + '小时',
+            lastUpdateTime: new Date(lastData.timestamp).toLocaleString(),
+            lastAverage: lastData.average.toFixed(2),
+            currentAverage: currentRetrievabilityAverage.toFixed(2)
+        });
+        
+        yesterdayRetrievabilityAverage = lastData.average;
+        saveCurrentAverageData(currentRetrievabilityAverage);
+        
+        console.log('已更新存储数据:', {
+            newYesterdayAverage: yesterdayRetrievabilityAverage.toFixed(2),
+            savedCurrentAverage: currentRetrievabilityAverage.toFixed(2),
+            saveTime: new Date().toLocaleString()
+        });
+    } else {
+        console.log('距离上次更新未超过24小时:', {
+            hoursSinceLastUpdate: hoursSinceLastUpdate.toFixed(2) + '小时',
+            lastUpdateTime: new Date(lastData.timestamp).toLocaleString(),
+            usingLastAverage: lastData.average.toFixed(2)
+        });
+        yesterdayRetrievabilityAverage = lastData.average;
+    }
 
     // 更新趋势图标
     const trendIcon = document.getElementById('trendIcon');
-    if (retrievabilityAverage > yesterdayRetrievabilityAverage) {
+    if (currentRetrievabilityAverage > yesterdayRetrievabilityAverage) {
         trendIcon.className = 'fas fa-arrow-up trend-icon trend-up';
-    } else if (retrievabilityAverage < yesterdayRetrievabilityAverage) {
+    } else if (currentRetrievabilityAverage < yesterdayRetrievabilityAverage) {
         trendIcon.className = 'fas fa-arrow-down trend-icon trend-down';
     } else {
         trendIcon.className = '';
@@ -157,7 +207,7 @@ function updateStats() {
 
     // 根据可检索性均值调整颜色和背景提示
     const lowMemoryWarning = document.getElementById('lowMemoryWarning');
-    if (retrievabilityAverage < 0.90) {
+    if (currentRetrievabilityAverage < 0.90) {
         retrievabilityElement.classList.add('low');
         lowMemoryWarning.classList.add('active');
     } else {
@@ -329,7 +379,7 @@ function createReviewCards() {
         // 设置可检索性
         const retrievability = getCurrentRetrievability(problem);
         const retrievabilitySpan = card.querySelector('.retrievability');
-        retrievabilitySpan.textContent = `${retrievability.toFixed(2)}`;
+        retrievabilitySpan.textContent = `${retrievability.toFixed(1)}`;
         retrievabilitySpan.classList.add(retrievability < 0.9 ? 'text-danger' : 'text-success');
         
         
@@ -338,10 +388,10 @@ function createReviewCards() {
             ? (() => {
                 const daysUntilReview = Math.ceil((new Date(fsrsState.nextReview) - new Date()) / (1000 * 60 * 60 * 24));
                 if (daysUntilReview > 0) {
-                    return `${daysUntilReview} day${daysUntilReview > 1 ? 's' : ''} Review`;
+                    return `Review in ${daysUntilReview} day${daysUntilReview > 1 ? 's' : ''}`;
                 } else {
                     const daysOverdue = Math.abs(daysUntilReview);
-                    return `  ${daysOverdue} day${daysOverdue > 1 ? 's' : ''} Delay`;
+                    return `Delay by ${daysOverdue} day${daysOverdue > 1 ? 's' : ''}`;
                 }
             })()
             : 'Not scheduled';
@@ -481,6 +531,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     break;
                 case 'Settings':
                     viewId = 'moreView';
+                    await initializeOptions();
                     break;
             }
             
@@ -504,12 +555,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // 确保在页面完全加载后也执行一次检查
-window.onload = async function() {
-    console.log('页面完全加载完成，检查导航功能是否正常初始化');
-    const navButtons = document.querySelectorAll('.nav-btn');
-    console.log('页面加载完成后的导航按钮数量:', navButtons.length);
-    await initializeReviewPage();
-};
+// window.onload = async function() {
+//     console.log('页面完全加载完成，检查导航功能是否正常初始化');
+//     const navButtons = document.querySelectorAll('.nav-btn');
+//     console.log('页面加载完成后的导航按钮数量:', navButtons.length);
+//     await initializeReviewPage();
+// };
 
 // 加载题目列表
 // function loadProblemList() {
@@ -654,7 +705,7 @@ export async function initializeReviewPage() {
     // 初始化显示
     setCurrentDate();
     updateStats();
-    updateCardLimitDisplay();
+    // updateCardLimitDisplay();
     createReviewCards();
 }
 
@@ -706,7 +757,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     console.log('DOM加载完成');
     await initializeReviewPage();
     // 添加设置初始化
-    await initializeOptions();
     initializeFeedbackButton();
 });
 
