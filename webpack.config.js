@@ -36,7 +36,9 @@ module.exports = {
         },
         options: './src/popup/options.js',
         leetcode: './src/popup/script/leetcode.js',
-        leetcodecn: './src/popup/script/leetcodecn.js'
+        leetcodecn: './src/popup/script/leetcodecn.js',
+        background: './src/background.js',
+        reminder: './src/content-scripts/reminder.js'
     },
     output: {
         filename: '[name].js',

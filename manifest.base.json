@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Leetcode Mastery Scheduler",
-    "version": "0.0.4",
+    "version": "0.0.6",
     "author": "Hacode",
     "description": "Leetcode-Mastery-Scheduler tracks your LeetCode progress and prompt you to review based FSRS",
     "homepage_url": "https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler",
@@ -18,14 +18,40 @@
         "default_icon": "assets/bear.png",
         "default_popup": "popup.html"
     },
-    "background": {},
+    "background": {
+        "service_worker": "dist/background.js"
+    },
     "permissions": [
-        "https://leetcode.com/*",
-        "https://leetcode.cn/*",
         "unlimitedStorage",
-        "storage"
+        "storage",
+        "idle",
+        "alarms",
+        "scripting",
+        "activeTab",
+        "tabs"
     ],
+
     "content_scripts": [
+        {
+            "matches": [
+                "https://*.bilibili.com/*",     
+                "https://*.youtube.com/*",      
+                "https://*.douyu.com/*",        
+                "https://*.huya.com/*",         
+                "https://*.netflix.com/*",      
+                "https://*.iqiyi.com/*",        
+                "https://*.youku.com/*",        
+                "https://v.qq.com/*",          
+                "https://*.zhihu.com/*",        
+                "https://*.weibo.com/*",        
+                "https://*.douyin.com/*",       
+                "https://*.tiktok.com/*"        
+            ],
+            "js": [
+                "dist/reminder.js"
+            ],
+            "run_at": "document_idle"
+        },
         {
             "matches": [
                 "https://leetcode.com/*"

@@ -1,11 +1,10 @@
 import { renderAll } from './view/view.js';
-import { daily_store } from "./store";
 import { getAllProblems, syncProblems } from "./service/problemService.js";
 import { getLevelColor,getCurrentRetrievability } from './util/utils.js';
 import { handleFeedbackSubmission } from './script/submission.js';
 import './popup.css';
 import { isCloudSyncEnabled, loadConfigs, setCloudSyncEnabled, setProblemSorter,setDefaultCardLimit } from "./service/configService";
-import { store } from './store';
+import { store,daily_store } from './store';
 import { optionPageFeedbackMsgDOM } from './util/doms';
 import { descriptionOf, idOf, problemSorterArr } from "./util/sort";
 // 在文件顶部导入 SweetAlert2
@@ -124,17 +123,43 @@ function calculateRetrievabilityAverage() {
         return sum + retrievability;
     }, 0);
     
-    return (totalRetrievability / problems.length).toFixed(2);
+    return Number((totalRetrievability / problems.length).toFixed(2));
 }
 
 
 // 更新顶部统计信息
 function updateStats() {
     console.log('更新统计信息');
+    // 添加空值检查
+    if (!daily_store || !daily_store.dailyReviewProblems) {
+        console.log('daily_store 或 dailyReviewProblems 为空:', {
+            daily_store: daily_store,
+            problems: daily_store?.dailyReviewProblems
+        });
+        // 设置默认值
+        const completedCount = 0;
+        const totalProblems = 0;
+        
+        // 更新显示
+        document.getElementById('completedCount').textContent = completedCount;
+        document.getElementById('totalCount').textContent = totalProblems;
+        document.getElementById('completionRate').textContent = '0%';
+        updateProgressCircle(0);
+        return;
+    }
+
     // 计算今日已复习的题目数量
     const completedCount = daily_store.dailyReviewProblems.filter(problem => 
         isReviewedToday(problem)
     ).length;
+
+    //背景脚本通信
+    if(completedCount>0){
+        chrome.runtime.sendMessage({
+            action: 'updateReviewStatus',
+            count: completedCount
+        });
+    }
 
     // 获取当前显示的卡片数量
     let cardLimit = parseInt(document.getElementById('cardLimit').value, 10)|| store.defaultCardLimit || 1;
@@ -143,8 +168,10 @@ function updateStats() {
         parsedCardLimit: cardLimit,
         element: document.getElementById('cardLimit')
     });
+
+    
     const totalProblems = daily_store.dailyReviewProblems?.length || 0;
-    if (cardLimit > totalProblems && totalProblems > 0) {
+    if (cardLimit > totalProblems ) {
         cardLimit = totalProblems;
         // store.defaultCardLimit = totalProblems;
         // setDefaultCardLimit(totalProblems);
@@ -159,8 +186,13 @@ function updateStats() {
     updateProgressCircle(completionRate);
     document.getElementById('completionRate').textContent = `${completionRate}%`;
     // document.querySelector('.completion-circle').style.setProperty('--percentage', `${completionRate}%`);
-    // 更新可检索性均值
-    const currentRetrievabilityAverage = calculateRetrievabilityAverage();
+    // 计算当前的可检索性均值，并确保是数字类型
+    const currentRetrievabilityAverage = parseFloat(calculateRetrievabilityAverage()) || 0;
+    console.log('当前可检索性均值:', {
+        raw: calculateRetrievabilityAverage(),
+        parsed: currentRetrievabilityAverage,
+        type: typeof currentRetrievabilityAverage
+    });
     const retrievabilityElement = document.getElementById('retrievabilityAverage');
     retrievabilityElement.textContent = currentRetrievabilityAverage;
 
@@ -386,8 +418,12 @@ function createReviewCards() {
         // 设置下次复习时间
         const nextReviewTips = fsrsState.nextReview 
             ? (() => {
-                const daysUntilReview = Math.ceil((new Date(fsrsState.nextReview) - new Date()) / (1000 * 60 * 60 * 24));
-                if (daysUntilReview > 0) {
+                const msUntilReview = new Date(fsrsState.nextReview) - new Date();
+                const daysUntilReview = Math.ceil(msUntilReview / (1000 * 60 * 60 * 24));
+                
+                if (msUntilReview >= 0 && msUntilReview <= 24 * 60 * 60 * 1000) {
+                    return 'Review today';  // 24小时内需要复习
+                } else if (daysUntilReview > 0) {
                     return `Review in ${daysUntilReview} day${daysUntilReview > 1 ? 's' : ''}`;
                 } else {
                     const daysOverdue = Math.abs(daysUntilReview);
