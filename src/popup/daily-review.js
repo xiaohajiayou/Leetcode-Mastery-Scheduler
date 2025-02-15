@@ -172,12 +172,30 @@ function updateStats() {
 
     
     const totalProblems = daily_store.dailyReviewProblems?.length || 0;
-    if (cardLimit > totalProblems ) {
+    if (cardLimit > totalProblems) {
         cardLimit = totalProblems;
-        // store.defaultCardLimit = totalProblems;
-        // setDefaultCardLimit(totalProblems);
     }
 
+    // 添加空状态提示
+    const addProblemWrapper = document.querySelector('.add-problem-wrapper');
+    // 先移除可能存在的空状态提示
+    const existingEmptyState = document.querySelector('.empty-state');
+    if (existingEmptyState) {
+        existingEmptyState.remove();
+    }
+    
+    if (totalProblems === 0 || cardLimit === 0) {
+        const emptyState = document.createElement('div');
+        emptyState.className = 'empty-state';
+        emptyState.innerHTML = `
+
+        <i class="fas fa-lightbulb"></i>
+            Time to learn something new!
+        `;
+        addProblemWrapper.insertAdjacentElement('beforebegin', emptyState);
+    }
+
+    
     // 更新显示的已复习数量
     document.getElementById('completedCount').textContent = completedCount;
     document.getElementById('totalCount').textContent = cardLimit; // 使用当前的卡片数量

@@ -38,7 +38,12 @@ module.exports = {
         leetcode: './src/popup/script/leetcode.js',
         leetcodecn: './src/popup/script/leetcodecn.js',
         background: './src/background.js',
-        reminder: './src/content-scripts/reminder.js'
+        reminder: './src/content-scripts/reminder.js',
+        // 添加 GitHub Star 加载脚本
+        githubStar: {
+            import: './src/popup/script/loadGithubStar.js',
+            filename: 'loadGithubStar.js'
+        }
     },
     output: {
         filename: '[name].js',

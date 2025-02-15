@@ -464,6 +464,28 @@ display: inline-block;  /* 确保渐变效果生效 */
     justify-content: center;
 }
 
+.empty-state {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #4a9d9c;
+    font-size: 0.9em;
+    opacity: 0.8;
+    font-style: italic;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.empty-state i {
+    font-size: 1em;
+    color: #ffd700;  /* 给灯泡图标一个金色 */
+}
+
+
+
 .add-problem {
     display: flex;
     align-items: center;
@@ -727,18 +749,30 @@ iframe {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;           /* 按钮之间的间距 */
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin-top: auto;
     padding: 8px 0;  /* 添加上下内边距 */
 }
 
+#github-star-container {
+    display: flex;
+    align-items: center;  /* 垂直居中对齐 */
+    height: 30px;        /* 固定高度，与按钮一致 */
+}
 
+/* 确保 GitHub Star 按钮的样式 */
+.github-star-btn {
+    display: flex;
+    align-items: center;
+    height: 100%;        /* 使其填满容器高度 */
+}
 
 .feedback-btn-review {
     padding: 0.35rem 0.8rem !important;  /* 减小按钮内边距 */
     font-size: 0.8rem !important;  /* 稍微减小字体 */
     min-height: 28px;  /* 设置最小高度 */
+    padding: 0 12px;     /* 水平内边距 */
 }
 
 .feedback-btn-review .btn-content {

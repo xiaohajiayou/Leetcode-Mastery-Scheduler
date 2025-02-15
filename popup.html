@@ -129,18 +129,12 @@
                 <!-- footer -->
                 <div class="footer">
                     <!-- GitHub Star -->
-                    <iframe 
-                        src="https://ghbtns.com/github-btn.html?user=xiaohajiayou&repo=Leetcode-Mastery-Scheduler&type=star&count=true" 
-                        frameborder="0" 
-                        scrolling="0" 
-                        width="100" 
-                        height="20"
-                        title="Star us on GitHub!"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        data-bs-title="A star from you would make our day! ✨"
-                        style="opacity: 0.9;"
-                    ></iframe>
+                    <!-- 先放一个占位符 -->
+                    <div id="github-star-container"></div>
+
+                    <!-- 将 GitHub iframe 加载逻辑放在单独的脚本文件中 -->
+
+                    <script async defer src="dist/loadGithubStar.js"></script>
                     
                     <!-- 反馈按钮 -->
                     <a href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler/issues" 
