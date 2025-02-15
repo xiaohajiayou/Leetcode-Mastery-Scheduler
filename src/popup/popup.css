@@ -513,35 +513,7 @@ display: inline-block;  /* 确保渐变效果生效 */
     padding: 20px 0;
 }
 
-.option-card {
-    background: #1d2e3d;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
 
-.option-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(74, 157, 156, 0.2);
-}
-
-.option-card i {
-    font-size: 2em;
-    color: #4a9d9c;
-    margin-bottom: 15px;
-}
-
-.option-card h4 {
-    color: #fff;
-    margin-bottom: 10px;
-}
-
-.option-card p {
-    color: #888;
-    font-size: 0.9em;
-}
 
 /* 导航标签样式 */
 #problemListView .nav-tabs {
@@ -801,7 +773,6 @@ td, th {
     padding: 20px;
     text-align: center;
     transition: all 0.3s ease;
-    margin-bottom: 20px;
 }
 
 .option-card:hover {
@@ -835,13 +806,20 @@ td, th {
 
 .sync-tips {
     margin-top: 10px;
-    font-size: 0.8em;
+    font-size: 1.0em;
     color: #888;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-
+.reminder-tips {
+    margin-top: 10px;
+    font-size: 1.0em;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 .save-section {
     grid-column: 1 / -1;
     text-align: center;

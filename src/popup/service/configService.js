@@ -92,10 +92,25 @@ export const loadDefaultCardLimit = async () => {
     store.defaultCardLimit = await getDefaultCardLimit();
 }
 
+// 添加新的配置项和方法
+export async function setReminderEnabled(enabled) {
+    await chrome.storage.local.set({ reminderEnabled: enabled });
+}
 
+export async function isReminderEnabled() {
+    const { reminderEnabled } = await chrome.storage.local.get('reminderEnabled');
+    return reminderEnabled || false;
+}
+// 添加加载提醒设置到 store 的函数
+export const loadReminderConfig = async () => {
+    store.isReminderEnabled = await isReminderEnabled();
+}
+
+// 更新 loadConfigs 函数
 export const loadConfigs = async () => {
     await loadReviewIntervals();
     await loadProblemSorter();
     await loadCloudSyncConfig();
-    await loadDefaultCardLimit();  // 添加这一行
+    await loadDefaultCardLimit();
+    await loadReminderConfig();  // 添加这一行
 }

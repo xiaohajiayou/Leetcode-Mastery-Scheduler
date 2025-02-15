@@ -351,7 +351,7 @@
 
                         <!-- 排序设置 -->
                         <div class="option-card" style="padding: 12px;">
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between">
                                 <div style="display: flex; align-items: center; gap: 12px;">
                                     <i class="fas fa-sort" style="font-size: 0.95em; line-height: 1; position: relative; top: 7px;"></i>
                                     <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">Problem Sort</h4>
@@ -366,7 +366,7 @@
 
                         <!-- 云同步设置 -->
                         <div class="option-card" style="padding: 12px;">
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between">
                                 <div style="display: flex; align-items: center; gap: 12px;">
                                     <i class="fas fa-cloud" style="font-size: 0.95em; line-height: 1; position: relative; top: 7px;""></i>
                                     <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">Cloud Sync</h4>
@@ -377,10 +377,28 @@
                             </div>
                             
                             <div class="sync-tips" style="padding: 8px; border-radius: 4px; ">
-                                <small style="display: block; color: #dc3545; margin-bottom: 4px; font-size: 0.8em;">⚠️ Experimental Feature</small>
+                        
                                 <small style="display: block; margin-bottom: 2px; font-size: 0.8em;">1. Enable cloud sync</small>
                                 <small style="display: block; margin-bottom: 2px; font-size: 0.8em;">2. Sign in to Chrome account</small>
                                 <small style="display: block; font-size: 0.8em;">3. Turn on Chrome sync</small>
+                            </div>
+                        </div>
+
+                        <!-- 主动提醒设置 -->
+                        <div class="option-card" style="padding: 12px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <i class="fas fa-bell" style="font-size: 0.95em; line-height: 1; position: relative; top: 7px;"></i>
+                                    <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">Active Reminder</h4>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input custom-switch" type="checkbox" id="reminderToggle">
+                                </div>
+                            </div>
+                            
+                            <div class="reminder-tips" style="padding: 8px; border-radius: 4px;">
+                                <small style="display: block; margin-bottom: 2px; font-size: 0.8em;">1. Enable to receive reminders</small>
+                                <small style="display: block; font-size: 0.8em;">2. Disable to stop all pop-up reminders</small>
                             </div>
                         </div>
 

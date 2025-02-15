@@ -1,3 +1,5 @@
+console.log('Reminder content script loaded');
+
 function createReminderPopup() {
     console.log('开始创建提醒弹窗');
     
@@ -103,4 +105,11 @@ function createReminderPopup() {
     });
 }
 
-createReminderPopup(); 
+// 改为监听消息
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    console.log('收到消息:', request);
+    if (request.action === 'showReminder') {
+        console.log('准备创建弹窗');
+        createReminderPopup();
+    }
+}); 

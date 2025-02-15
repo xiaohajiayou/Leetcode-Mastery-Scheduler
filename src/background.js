@@ -1,5 +1,5 @@
 const WORKER_STARTUP_TIME = Date.now();
-const CHECK_INTERVAL_MINUTES = 5;
+const CHECK_INTERVAL_MINUTES = 1;
 const CHECK_INTERVAL_MS = CHECK_INTERVAL_MINUTES * 60 * 1000;
 const KEEP_ALIVE_INTERVAL_MS = 30 * 1000;  // 30秒
 
@@ -57,40 +57,45 @@ chrome.runtime.onStartup.addListener(() => {
 // 执行初始化
 initialize();
 
-// 监听定时器
-chrome.alarms.onAlarm.addListener((alarm) => {
-    const now = new Date().toLocaleString();
-    console.log(`定时器触发 [${now}]:`, {
-        名称: alarm.name,
-        计划时间: new Date(alarm.scheduledTime).toLocaleString(),
-        下次触发时间: new Date(alarm.scheduledTime + CHECK_INTERVAL_MS).toLocaleString(),
-        Service_Worker存活时间: ((Date.now() - WORKER_STARTUP_TIME) / (1000 * 60)).toFixed(2) + '分钟'
+// 获取存储的数据
+async function getStorageData(keys) {
+    return new Promise(resolve => {
+        chrome.storage.local.get(keys, resolve);
     });
-    
-    if (alarm.name === 'reviewReminder') {
-        console.log(`[${now}] 开始执行 checkAndRemind`);
-        checkAndRemind();
-    }
-});
+}
+
+// 检查提醒设置
+async function isReminderEnabled() {
+    const { reminderEnabled } = await getStorageData(['reminderEnabled']);
+    return reminderEnabled || false;
+}
 
 // 检查上次提醒时间
-function checkLastReminder() {
-    return new Promise(resolve => {
-        chrome.storage.local.get(['lastReminderTime', 'nextReminderDelay'], data => {
-            const now = Date.now();
-            const lastTime = data.lastReminderTime || 0;
-            const delay = data.nextReminderDelay || CHECK_INTERVAL_MS;  // 默认使用常量定义的间隔
-            
-            console.log('检查提醒时间:', {
-                现在: new Date(now).toLocaleString(),
-                上次提醒: new Date(lastTime).toLocaleString(),
-                延迟时间: Math.round(delay / (60 * 1000)) + '分钟',
-                是否可以提醒: now - lastTime >= delay
-            });
-            
-            resolve(now - lastTime >= delay);
-        });
+async function checkLastReminder() {
+    const { lastReminderTime, nextReminderDelay } = await getStorageData([
+        'lastReminderTime',
+        'nextReminderDelay'
+    ]);
+    
+    const now = Date.now();
+    const lastTime = lastReminderTime || 0;
+    const delay = nextReminderDelay || CHECK_INTERVAL_MS;
+
+    console.log('检查提醒时间:', {
+        现在: new Date(now).toLocaleString(),
+        上次提醒: new Date(lastTime).toLocaleString(),
+        延迟时间: Math.round(delay / (60 * 1000)) + '分钟',
+        是否可以提醒: now - lastTime >= delay
     });
+
+    // 如果时间到了，清除自定义延迟时间
+    if (now - lastTime >= delay) {
+        chrome.storage.local.remove('nextReminderDelay', () => {
+            console.log('延迟时间已重置为默认值');
+        });
+    }
+
+    return now - lastTime >= delay;
 }
 
 // 检查今日是否有复习记录
@@ -140,14 +145,14 @@ async function shouldShowReminder() {
         }
 
         // 检查是否可以显示提醒
-        const canShowReminder = await checkLastReminder();
-        console.log('是否可以显示提醒:', canShowReminder);
-        if (!canShowReminder) return false;
+        // const canShowReminder = await checkLastReminder();
+        // console.log('是否可以显示提醒:', canShowReminder);
+        // if (!canShowReminder) return false;
 
         // 检查今日是否已复习
-        const hasReviewed = await hasReviewedToday();
-        console.log('今日是否已复习:', hasReviewed);
-        if (hasReviewed) return false;
+        // const hasReviewed = await hasReviewedToday();
+        // console.log('今日是否已复习:', hasReviewed);
+        // if (hasReviewed) return false;
 
         return true;
     } catch (error) {
@@ -157,7 +162,9 @@ async function shouldShowReminder() {
 }
 
 // 显示提醒
-async function showReminder() {
+async function showReminder(retryCount = 0) {
+    const MAX_RETRIES = 2;
+    
     try {
         // 先获取当前活动标签页
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -166,25 +173,93 @@ async function showReminder() {
             return;
         }
 
-        console.log('准备注入提醒脚本');
-        await chrome.scripting.executeScript({
-            target: { tabId: tab.id },
-            files: ['dist/reminder.js']
+        // 检查当前页面是否是目标网站
+        const isTargetWebsite = tab.url.match(/\.(bilibili|youtube)\.com/);
+        if (!isTargetWebsite) {
+            console.log('当前页面不是目标网站:', tab.url);
+            return;
+        }
+
+        // 确保页面已完全加载
+        if (tab.status !== 'complete') {
+            console.log('页面尚未完全加载，等待重试...');
+            if (retryCount < MAX_RETRIES) {
+                setTimeout(() => showReminder(retryCount + 1), 1000);
+            }
+            return;
+        }
+
+        console.log(`准备发送显示提醒消息 (重试次数: ${retryCount}/${MAX_RETRIES})`);
+        await chrome.tabs.sendMessage(tab.id, {
+            action: 'showReminder'
         });
-        console.log('提醒脚本注入成功');
+        console.log('提醒消息发送成功');
     } catch (error) {
-        console.error('提醒脚本注入失败:', error);
+        console.error('发送提醒消息失败:', error);
+        if (retryCount < MAX_RETRIES) {
+            console.log(`将在 ${retryCount + 1} 秒后重试...`);
+            setTimeout(() => showReminder(retryCount + 1), (retryCount + 1) * 1000);
+        } else {
+            console.log('达到最大重试次数，放弃重试');
+        }
+    }
+}
+
+// 初始化检查
+async function initialCheck() {
+    const { lastReminderTime } = await getStorageData(['lastReminderTime']);
+    
+    if (!lastReminderTime) {
+        console.log('首次启动，执行初始检查');
+        const enabled = await isReminderEnabled();
+        
+        if (enabled) {
+            await checkAndRemind();
+        } else {
+            console.log('提醒功能未启用');
+        }
+    } else {
+        console.log('非首次启动，等待定时器触发检查');
     }
 }
 
 // 主检查函数
 async function checkAndRemind() {
     console.log('开始检查提醒条件');
-    
-    if (await shouldShowReminder()) {
+
+    // 检查提醒功能是否启用
+    const enabled = await isReminderEnabled();
+    if (!enabled) {
+        console.log('提醒功能未启用');
+        return;
+    }
+
+    const shouldRemind = await shouldShowReminder();
+    if (shouldRemind) {
         await showReminder();
+    } else {
+        console.log('当前不需要显示提醒');
     }
 }
+
+// 执行初始化检查
+initialCheck();
+
+// 监听定时器
+chrome.alarms.onAlarm.addListener((alarm) => {
+    const now = new Date().toLocaleString();
+    console.log(`定时器触发 [${now}]:`, {
+        名称: alarm.name,
+        计划时间: new Date(alarm.scheduledTime).toLocaleString(),
+        下次触发时间: new Date(alarm.scheduledTime + CHECK_INTERVAL_MS).toLocaleString(),
+        Service_Worker存活时间: ((Date.now() - WORKER_STARTUP_TIME) / (1000 * 60)).toFixed(2) + '分钟'
+    });
+    
+    if (alarm.name === 'reviewReminder') {
+        console.log(`[${now}] 开始执行 checkAndRemind`);
+        checkAndRemind();
+    }
+});
 
 // 添加消息监听处理
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -212,8 +287,4 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     
     // 返回 true 表示会异步发送响应
     return true;
-}); 
-
-// 立即执行一次检查
-console.log('执行初始检查');
-checkAndRemind();
+});

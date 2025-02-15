@@ -17,7 +17,8 @@ export const store = {
     hardIntv: [0, 1, 2, 3, 4],
     problemSortBy: problemSorters.sortByReviewTimeAsc,
     isCloudSyncEnabled: false,
-    defaultCardLimit: 1
+    defaultCardLimit: 1,
+    isReminderEnabled: false
 }
 
 export const daily_store = {

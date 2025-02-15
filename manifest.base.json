@@ -26,7 +26,6 @@
         "storage",
         "idle",
         "alarms",
-        "scripting",
         "activeTab",
         "tabs"
     ],
@@ -50,7 +49,8 @@
             "js": [
                 "dist/reminder.js"
             ],
-            "run_at": "document_idle"
+            "run_at": "document_end",  
+            "all_frames": false        
         },
         {
             "matches": [

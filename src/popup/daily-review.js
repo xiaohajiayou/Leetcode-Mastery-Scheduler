@@ -3,7 +3,7 @@ import { getAllProblems, syncProblems } from "./service/problemService.js";
 import { getLevelColor,getCurrentRetrievability } from './util/utils.js';
 import { handleFeedbackSubmission } from './script/submission.js';
 import './popup.css';
-import { isCloudSyncEnabled, loadConfigs, setCloudSyncEnabled, setProblemSorter,setDefaultCardLimit } from "./service/configService";
+import { isCloudSyncEnabled, loadConfigs, setCloudSyncEnabled, setProblemSorter,setDefaultCardLimit,setReminderEnabled } from "./service/configService";
 import { store,daily_store } from './store';
 import { optionPageFeedbackMsgDOM } from './util/doms';
 import { descriptionOf, idOf, problemSorterArr } from "./util/sort";
@@ -667,28 +667,25 @@ async function initializeOptions() {
     if (syncToggle) {
         syncToggle.checked = store.isCloudSyncEnabled || false;
     }
-    // 初始化默认卡片数量
-    // const defaultCardLimitInput = document.getElementById('defaultCardLimit');
-    // if (defaultCardLimitInput) {
-    //     defaultCardLimitInput.value = store.defaultCardLimit || 1;
-    // }
+
+
+    // 初始化提醒开关
+    const reminderToggle = document.getElementById('reminderToggle');
+    if (reminderToggle) {
+        reminderToggle.checked = store.isReminderEnabled || false;
+    }
 
     // 修改保存成功提示
     optionsForm.addEventListener('submit', async e => {
         e.preventDefault();
         const selectedSorterId = problemSorterSelect.value;
         const isCloudSyncEnabled = syncToggle.checked;
-        // const defaultCardLimit = parseInt(defaultCardLimitInput.value, 10);
+        const isReminderEnabled = reminderToggle.checked;
 
         await setProblemSorter(Number(selectedSorterId));
         await setCloudSyncEnabled(isCloudSyncEnabled);
-        // await setDefaultCardLimit(defaultCardLimit);
-        // // 更新当前显示的卡片数量
-        // const cardLimitInput = document.getElementById('cardLimit');
-        // if (cardLimitInput) {
-        //     cardLimitInput.value = defaultCardLimit;
-        //     updateCardDisplay(); // 更新卡片显示
-        // }
+        await setReminderEnabled(isReminderEnabled);
+
         // 使用 SweetAlert2 显示保存成功提示
         Swal.fire({
             icon: 'success',
