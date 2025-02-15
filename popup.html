@@ -84,6 +84,9 @@
                     <i class="fas fa-plus direction-icon"></i>
                 </button>
             </div>
+
+
+
             <!-- Review List Container -->
             <div style="
             display: flex;
@@ -91,6 +94,34 @@
                 <!-- Review List -->
                 <div id="reviewList" style="flex: 1;">
                     <!-- Review cards will be dynamically inserted here -->
+                </div>
+
+                <!-- 添加一个专门的容器来居中按钮 -->
+                <div class="add-problem-wrapper">
+                    <button class="gear-button add-problem" 
+                            data-tooltip="Add New Problem from url"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top">  <!-- 使用 top 位置 -->
+                        <div class="add-problem-content">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- 添加新建题目的弹窗 -->
+                <div id="addProblemDialog" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <h3>Add New Problem</h3>
+                        <div class="form-group">
+                            <label for="problemUrl">Problem URL:</label>
+                            <input type="text" id="problemUrl" class="form-control" 
+                                placeholder="https://leetcode.com/problems/..." />
+                        </div>
+                        <div class="button-group">
+                            <button id="confirmAdd" class="btn btn-outline-warning custom-btn">Add</button>
+                            <button id="cancelAdd" class="btn btn-outline-secondary custom-btn">Cancel</button>
+                        </div>
+                    </div>
                 </div>
                 <!-- 添加一个占位div，确保内容不会被footer遮挡 -->
                 <div style="height: 25px;"></div>

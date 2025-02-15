@@ -36,32 +36,50 @@ export const queryProblemInfo = async (slug, site) => {
     return content.data.question;
 }
 
-/*
-    Extract basic problem information
-*/
-export const getProblemInfo = async () => {
-    let problemUrl = window.location.href;
-
-    const match = problemUrl.match(/(com|cn)(\/|$)/);
-    console.log(`current site is ${match[1]}`);
+// 从URL获取站点和题目标识
+function extractProblemInfo(url) {
+    const match = url.match(/(com|cn)(\/|$)/);
     const site = match ? match[1] : "com";
+    console.log(`site is ${site}`);
 
+    let cleanUrl = url;
     const possible_suffix = ["/submissions/", "/description/", "/discussion/", "/solutions/"];
     for (const suffix of possible_suffix) {
-        if (problemUrl.includes(suffix)) {
-            problemUrl = problemUrl.substring(0, problemUrl.lastIndexOf(suffix) + 1);
+        if (cleanUrl.includes(suffix)) {
+            cleanUrl = cleanUrl.substring(0, cleanUrl.lastIndexOf(suffix) + 1);
             break;
         }
     }
 
-    const problemSlug = problemUrl.split("/").splice(-2)[0];
+    const problemSlug = cleanUrl.split("/").splice(-2)[0];
+    return { site, problemSlug, cleanUrl };
+}
 
+// 基础的获取题目信息函数
+export const getProblemInfo = async (url) => {
+    const { site, problemSlug, cleanUrl } = extractProblemInfo(url);
+    
     const question = await queryProblemInfo(problemSlug, site);
 
     return {
         problemIndex: question.questionFrontendId,
         problemName: `${question.questionFrontendId}. ${site === "cn" ? question.translatedTitle : question.title}`,
         problemLevel: question.difficulty,
-        problemUrl
+        problemUrl: cleanUrl
     };
 }
+
+// 从当前页面URL获取题目信息
+export const getProblemInfoByHref = async () => {
+    const currentUrl = window.location.href;
+    return await getProblemInfo(currentUrl);
+}
+
+// 从指定URL获取题目信息
+export const getProblemInfoByUrl = async (url) => {
+    if (!url.includes('leetcode.com/problems/') && !url.includes('leetcode.cn/problems/')) {
+        throw new Error('请输入有效的 LeetCode 题目链接');
+    }
+    return await getProblemInfo(url);
+}
+

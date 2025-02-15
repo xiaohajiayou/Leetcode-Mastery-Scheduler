@@ -7,6 +7,7 @@ import { isCloudSyncEnabled, loadConfigs, setCloudSyncEnabled, setProblemSorter,
 import { store,daily_store } from './store';
 import { optionPageFeedbackMsgDOM } from './util/doms';
 import { descriptionOf, idOf, problemSorterArr } from "./util/sort";
+import {handleAddProblem} from "./script/submission.js"
 // 在文件顶部导入 SweetAlert2
 import Swal from 'sweetalert2';
 
@@ -590,24 +591,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// 确保在页面完全加载后也执行一次检查
-// window.onload = async function() {
-//     console.log('页面完全加载完成，检查导航功能是否正常初始化');
-//     const navButtons = document.querySelectorAll('.nav-btn');
-//     console.log('页面加载完成后的导航按钮数量:', navButtons.length);
-//     await initializeReviewPage();
-// };
 
-// 加载题目列表
-// function loadProblemList() {
-//     const problemList = document.getElementById('problemList');
-//     if(!problemList.children.length) { // 只在第一次加载
-//         mockReviewData.problems.forEach(problem => {
-//             const problemCard = createProblemCard(problem);
-//             problemList.appendChild(problemCard);
-//         });
-//     }
-// }
 
 // 创建题目卡片
 function createProblemCard(problem) {
@@ -638,6 +622,98 @@ async function loadProblemList() {
 }
 
 
+// 显示/隐藏弹窗
+function toggleAddProblemDialog(show = true) {
+    const dialog = document.getElementById('addProblemDialog');
+    if (!dialog) {
+        console.error('找不到添加题目弹窗');
+        return;
+    }
+
+    dialog.style.display = show ? 'block' : 'none';
+    
+    if (!show) {
+        // 重置表单
+        const urlInput = document.getElementById('problemUrl');
+        if (urlInput) {
+            urlInput.value = '';
+        }
+    }
+}
+
+
+
+// 初始化添加题目功能
+function initializeAddProblem() {
+    const addButton = document.querySelector('.gear-button.add-problem');
+    if (!addButton) return;
+
+    // 点击添加按钮显示弹窗
+    addButton.addEventListener('click', () => {
+        toggleAddProblemDialog(true);
+    });
+
+    // 取消按钮
+    const cancelButton = document.getElementById('cancelAdd');
+    if (cancelButton) {
+        cancelButton.addEventListener('click', () => {
+            toggleAddProblemDialog(false);
+        });
+    }
+
+    // 确认添加按钮
+    const confirmButton = document.getElementById('confirmAdd');
+    if (confirmButton) {
+        confirmButton.addEventListener('click', async () => {
+            const urlInput = document.getElementById('problemUrl');
+            
+            const url = urlInput.value.trim();
+
+            try {
+                await handleAddProblem(url);
+                toggleAddProblemDialog(false);
+                await loadDailyReviewData();
+                updateCardDisplay();
+                
+                // 显示成功提示
+                Swal.fire({
+                    icon: 'success',
+                    title: '添加成功',
+                    text: '题目已成功添加到复习列表',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    background: '#1d2e3d',
+                    color: '#ffffff',
+                    toast: true,
+                    position: 'top-end',
+                    customClass: {
+                        popup: 'colored-toast'
+                    }
+                });
+            } catch (error) {
+                // 显示错误提示
+                Swal.fire({
+                    icon: 'error',
+                    title: '添加失败',
+                    text: error.message,
+                    background: '#1d2e3d',
+                    color: '#ffffff',
+                    confirmButtonColor: '#4a9d9c'
+                });
+            }
+        });
+    }
+
+    // 点击弹窗外部关闭弹窗
+    const dialog = document.getElementById('addProblemDialog');
+    if (dialog) {
+        dialog.addEventListener('click', (e) => {
+            if (e.target === dialog) {
+                toggleAddProblemDialog(false);
+            }
+        });
+    }
+}
 
 // 添加设置相关的初始化函数
 async function initializeOptions() {
@@ -791,6 +867,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     await initializeReviewPage();
     // 添加设置初始化
     initializeFeedbackButton();
+    initializeAddProblem();
 });
 
 // 以防万一，也添加 window.onload

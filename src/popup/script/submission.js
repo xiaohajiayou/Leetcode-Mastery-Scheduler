@@ -1,5 +1,5 @@
 import { getDifficultyBasedSteps, getSubmissionResult, isSubmissionSuccess, isSubmitButton, needReview, updateProblemUponSuccessSubmission } from "../util/utils";
-import { getAllProblems, createOrUpdateProblem, getCurrentProblemInfoFromLeetCode, syncProblems } from "../service/problemService";
+import { getAllProblems, createOrUpdateProblem, getCurrentProblemInfoFromLeetCodeByHref,getCurrentProblemInfoFromLeetCodeByUrl, syncProblems } from "../service/problemService";
 import { Problem } from "../entity/problem";
 import { updateProblemWithFSRS } from "../util/fsrs";
 /* 
@@ -30,7 +30,7 @@ const monitorSubmissionResult = () => {
 
         if (!isSuccess) return;
 
-        const { problemIndex, problemName, problemLevel, problemUrl } = await getCurrentProblemInfoFromLeetCode();
+        const { problemIndex, problemName, problemLevel, problemUrl } = await getCurrentProblemInfoFromLeetCodeByHref();
         await syncProblems();   // prior to fetch local problem data, sync local problem data with cloud
         const problems = await getAllProblems();
         let problem = problems[problemIndex];
@@ -134,7 +134,7 @@ export async function handleFeedbackSubmission(problem = null) {
         // 如果没有传入 problem，说明是新提交，需要获取题目信息
         if (!problem) {
             await syncProblems();   // 同步云端数据
-            const { problemIndex, problemName, problemLevel, problemUrl } = await getCurrentProblemInfoFromLeetCode();
+            const { problemIndex, problemName, problemLevel, problemUrl } = await getCurrentProblemInfoFromLeetCodeByHref();
             const problems = await getAllProblems();
             problem = problems[problemIndex];
             
@@ -321,3 +321,64 @@ const addDialogStyles = () => {
     `;
     document.head.appendChild(style);
 };
+
+
+
+
+
+
+// 处理新建题目 - 设置为今天待复习
+export async function handleAddProblem(url) {
+    try {
+        await syncProblems();  // 同步云端数据
+        const problems = await getAllProblems();
+        
+        // 使用新的API获取题目信息
+        const problemInfo = await getCurrentProblemInfoFromLeetCodeByUrl(url);
+        
+        const { problemIndex, problemName, problemLevel, problemUrl } = problemInfo;
+        
+        // 检查是否已存在
+        if (problems[problemIndex] && !problems[problemIndex].isDeleted) {
+            throw new Error('该题目已存在');
+        }
+        
+        const now = Date.now();
+        // 创建新问题
+        const problem = new Problem(
+            problemIndex,
+            problemName,
+            problemLevel,
+            problemUrl,
+            now,    // createTime
+            0,      // nextStep
+            null    // lastReviewTime
+        );
+        
+        // 设置初始状态
+        problem.proficiency = 0;
+        problem.isDeleted = false;
+        problem.modificationTime = now;
+        
+        // 设置初始 FSRS 状态 - 设置 nextReview 为今天
+        problem.fsrsState = {
+            difficulty: null,
+            stability: null,
+            state: 'New',
+            lastReview: null,
+            nextReview: now,    // 设置为当前时间，使其显示在今天的待复习列表中
+            reviewCount: 0,
+            lapses: 0,
+            quality: null
+        };
+        
+        await createOrUpdateProblem(problem);
+        await syncProblems();
+        
+        return problem;
+    } catch (error) {
+        console.error('添加题目失败:', error);
+        throw error;
+    }
+}
+

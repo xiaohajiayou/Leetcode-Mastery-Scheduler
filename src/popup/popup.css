@@ -458,6 +458,149 @@ display: inline-block;  /* 确保渐变效果生效 */
     opacity: 1;
 }
 
+
+.add-problem-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.add-problem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px dashed rgba(74, 157, 156, 0.5);
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    color: #4a9d9c;
+    opacity: 0.8;
+}
+
+.add-problem-content {
+    display: flex;
+    align-items: center;
+}
+
+.add-problem i {
+    font-size: 0.8em;
+}
+
+
+/* 悬停效果 */
+.add-problem:hover {
+    background: rgba(74, 157, 156, 0.1);
+    border-style: solid;
+    opacity: 1;
+}
+
+/* 添加虚线分隔 */
+.add-problem-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(74, 157, 156, 0.3),
+        transparent
+    );
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: #1d2e3d;
+    border-radius: 8px;
+    padding: 16px;          /* 减小内边距 */
+    width: 280px;           /* 固定更小的宽度 */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(97, 218, 251, 0.2);
+    animation: modalFadeIn 0.3s ease;
+}
+
+.modal-content h3 {
+    color: #61dafb;
+    margin-bottom: 12px;    /* 减小标题下方间距 */
+    font-size: 1em;         /* 减小标题字体 */
+}
+
+.form-group {
+    margin-bottom: 12px;    /* 减小表单组间距 */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 4px;     /* 减小标签下方间距 */
+    color: #e9ecef;
+    font-size: 0.85em;      /* 减小标签字体 */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 6px 8px;       /* 减小输入框内边距 */
+    border: 1px solid rgba(97, 218, 251, 0.3);
+    border-radius: 4px;
+    background: rgba(29, 46, 61, 0.8);
+    color: #e9ecef;
+    font-size: 0.85em;      /* 减小输入框字体 */
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;               /* 减小按钮间距 */
+    margin-top: 12px;       /* 减小按钮组上方间距 */
+}
+
+.button-group button {
+    padding: 4px 12px;      /* 减小按钮内边距 */
+    border-radius: 4px;
+    font-size: 0.85em;      /* 减小按钮字体 */
+}
+
+/* 自定义按钮样式 */
+.custom-btn {
+    border: 1px solid;
+}
+
+.btn-outline-warning {
+    border-color: #ffc107;
+    color: #ffc107;
+}
+
+.btn-outline-warning:hover {
+    background: rgba(255, 193, 7, 0.1);
+}
+
+.btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background: rgba(108, 117, 125, 0.1);
+}
+
+
+
+
+
+
 /* 视图容器样式 */
 .view {
     display: none;
@@ -589,6 +732,8 @@ iframe {
     margin-top: auto;
     padding: 8px 0;  /* 添加上下内边距 */
 }
+
+
 
 .feedback-btn-review {
     padding: 0.35rem 0.8rem !important;  /* 减小按钮内边距 */

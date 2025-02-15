@@ -1,4 +1,4 @@
-import { getProblemInfo } from "../delegate/leetCodeDelegate";
+import { getProblemInfoByHref,getProblemInfoByUrl } from "../delegate/leetCodeDelegate";
 import { getLocalStorageData, setLocalStorageData } from "../delegate/localStorageDelegate";
 import { addNewOperationHistory } from "./operationHistoryService";
 import { OPS_TYPE } from "../entity/operationHistory";
@@ -33,9 +33,16 @@ export const getProblemsByMode = async (useCnMode) => {
     return problems;
 }
 
-export const getCurrentProblemInfoFromLeetCode = async () => {
-    return await getProblemInfo();
+// 从当前页面获取题目信息
+export const getCurrentProblemInfoFromLeetCodeByHref = async () => {
+    return await getProblemInfoByHref();
 }
+
+// 从指定URL获取题目信息
+export const getCurrentProblemInfoFromLeetCodeByUrl = async (url) => {
+    return await getProblemInfoByUrl(url);
+}
+
 
 export const setProblems = async (problems) => {
     let cnMode = await isInCnMode();
