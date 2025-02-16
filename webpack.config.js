@@ -62,11 +62,11 @@ module.exports = {
     },
     // mode: 'production'
     // 开发模式，代码不会被压缩
-    mode: 'development',
-    // 生成源码映射，方便调试
-    devtool: 'source-map',
-    // 关闭代码最小化
-    optimization: {
-        minimize: false
-    }
+    // mode: 'development',
+    // // 生成源码映射，方便调试
+    // devtool: 'source-map',
+    // // 关闭代码最小化
+    // optimization: {
+    //     minimize: false
+    // }
 }
