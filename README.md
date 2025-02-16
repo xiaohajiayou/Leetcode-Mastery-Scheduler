@@ -23,7 +23,7 @@
     智能评估优先级，灵活复习，更聪明地刷题！
 </h2>
 
-![alt text](https://s2.loli.net/2025/02/13/ryxP8s7aVitSgXb.jpg)    
+![alt text](https://s2.loli.net/2025/02/16/eNEV49CM8ABWdZ7.jpg)   
 
 # 🚀 Get Started
 1. Install the LMS plugin. Initially click the `rate it` button on LeetCode pages to adjust your review schedule in real-time based on your mastery of each problem.
@@ -56,13 +56,17 @@
    
    监控娱乐网站，检查每日复习情况，主动提醒弹窗
 
+4. Support adding problem records via URL (for IDE problem-solving and casual browsing).
+   
+   支持通过 URL 添加题目记录（配合 IDE 刷题，工位摸鱼专用）
+
 
     
 
 
 
     
-# 📥 **安装方法**
+# 📥 How to Install / 安装方法
 
 
 
