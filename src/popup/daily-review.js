@@ -834,6 +834,7 @@ export async function initializeReviewPage() {
     updateStats();
     // updateCardLimitDisplay();
     createReviewCards();
+    initializeAddProblem();
 }
 
 export function initializeFeedbackButton() {
@@ -885,7 +886,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     await initializeReviewPage();
     // 添加设置初始化
     initializeFeedbackButton();
-    initializeAddProblem();
 });
 
 // 以防万一，也添加 window.onload
