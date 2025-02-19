@@ -12,8 +12,9 @@
 
 <div align="center">
 
-  [<img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license"/>](https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler/blob/main/LICENSE)
+ [<img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license"/>](https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler/blob/main/LICENSE)
   ![Stars](https://img.shields.io/github/stars/xiaohajiayou/Leetcode-Mastery-Scheduler)
+  [![Bilibili](https://img.shields.io/badge/Bilibili-00A1D6?style=flat&logo=bilibili&logoColor=white)](https://www.bilibili.com/video/BV1RnAYeEEu6/?spm_id_from=333.1387.homepage.video_card.click&vd_source=09dab0452e2548023f6f83174148ee0c)
 
 </div>
 
@@ -40,7 +41,7 @@
 5. 打开题目列表，查看当前复习规划的所有题目
 6. 刷题快乐!
 
-
+![alt text](https://s2.loli.net/2025/02/20/CrmZewAQlWUNuc4.gif)
 
 
 # 🔑 Key Features / 主要特性
