@@ -13,7 +13,8 @@
 <div align="center">
 
  [<img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license"/>](https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler/blob/main/LICENSE)
-  ![Stars](https://img.shields.io/github/stars/xiaohajiayou/Leetcode-Mastery-Scheduler)
+![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/cfohhebfjnjojkloclmlfjgjekmoinke?style=flat&color=orange)
+![Chrome Web Store Rating](https://img.shields.io/chrome-web-store/rating/cfohhebfjnjojkloclmlfjgjekmoinke)
   [![Bilibili](https://img.shields.io/badge/Bilibili-00A1D6?style=flat&logo=bilibili&logoColor=white)](https://www.bilibili.com/video/BV1RnAYeEEu6/?spm_id_from=333.1387.homepage.video_card.click&vd_source=09dab0452e2548023f6f83174148ee0c)
 
 </div>
@@ -99,4 +100,6 @@ This project is based on [PMCA (Practice Makes Code Accepted)](https://github.co
 本项目基于 [PMCA (Practice Makes Code Accepted)](https://github.com/HaolinZhong/PMCA) 的代码开发，在保持重复复习的核心理念的同时，我们特别针对有限时间内的复习场景进行了优化。改进包括更智能的优先级评估算法实现，以及更灵活的使用交互逻辑，帮助用户在有限的学习时间内获得最大收益。
 
 
+# 🌟 Star History 
 
+[![Star History Chart](https://api.star-history.com/svg?repos=xiaohajiayou/Leetcode-Mastery-Scheduler&type=Date)](https://star-history.com/#xiaohajiayou/Leetcode-Mastery-Scheduler&Date)
