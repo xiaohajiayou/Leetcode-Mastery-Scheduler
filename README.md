@@ -82,12 +82,26 @@
 
 <br>
 
+# 📝 Next Steps / 安排
 
-# 💡 Tips / 提示
-   - When using Chrome and Edge browsers, your learning data will automatically sync with your account (data synchronization relies on the browser's native sync mechanism, please ensure you are logged into your browser account and have enabled extension data synchronization).
-   - 使用 Chrome和Edge 浏览器时，您的学习数据会自动与账户同步（数据同步功能依赖浏览器的原生同步机制，请确保您已登录浏览器账户并开启了扩展数据同步功能。）
+| 任务/功能         | 状态       | 备注               |
+|--------------------|------------|--------------------|
+| 监控提醒   | ✅ 已完成  | bilibili、youtube       |
+| 兼容`ctrl + enter`       | ❌ 待完成  | 待评估工作量       |
+| 兼容火狐       | ❌ 待完成  | 待评估可行性       |
+| 兼容洛谷等其他刷题网站           | ❌ 待完成  | 待评估可行性       |
 
-# 📚 **Feedback / 反馈**  
+
+
+
+
+
+
+
+# 🌟 Star History 
+
+[![Star History Chart](https://api.star-history.com/svg?repos=xiaohajiayou/Leetcode-Mastery-Scheduler&type=Date)](https://star-history.com/#xiaohajiayou/Leetcode-Mastery-Scheduler&Date)
+
 We welcome every user to try LMS! If you find it helpful, please give our GitHub repository a Star - it's the greatest support for our work. If you encounter any issues or find bugs during use, feel free to submit an Issue and we'll address it as soon as possible.
 
 我们欢迎每一位用户试用LMS！如果你觉得它对你有帮助，请为我们的GitHub仓库点一个Star，这将是对我们工作的最大支持。如果你在使用过程中遇到任何问题或发现bug，欢迎随时提交Issue，我们会尽快为你解决。
@@ -98,8 +112,3 @@ We welcome every user to try LMS! If you find it helpful, please give our GitHub
 This project is based on [PMCA (Practice Makes Code Accepted)](https://github.com/HaolinZhong/PMCA), with improvements to its codebase. While maintaining the core concept of spaced repetition learning, we have optimized it specifically for time-constrained review scenarios. The improvements include smarter algorithm implementation for priority assessment and more flexible user interaction logic to help users make the most of their limited study time.
 
 本项目基于 [PMCA (Practice Makes Code Accepted)](https://github.com/HaolinZhong/PMCA) 的代码开发，在保持重复复习的核心理念的同时，我们特别针对有限时间内的复习场景进行了优化。改进包括更智能的优先级评估算法实现，以及更灵活的使用交互逻辑，帮助用户在有限的学习时间内获得最大收益。
-
-
-# 🌟 Star History 
-
-[![Star History Chart](https://api.star-history.com/svg?repos=xiaohajiayou/Leetcode-Mastery-Scheduler&type=Date)](https://star-history.com/#xiaohajiayou/Leetcode-Mastery-Scheduler&Date)
