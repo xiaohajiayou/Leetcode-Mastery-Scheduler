@@ -15,7 +15,8 @@
  [<img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license"/>](https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler/blob/main/LICENSE)
 ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/cfohhebfjnjojkloclmlfjgjekmoinke?style=flat&color=orange)
 ![Chrome Web Store Rating](https://img.shields.io/chrome-web-store/rating/cfohhebfjnjojkloclmlfjgjekmoinke)
-  [![Bilibili](https://img.shields.io/badge/Bilibili-00A1D6?style=flat&logo=bilibili&logoColor=white)](https://www.bilibili.com/video/BV1RnAYeEEu6/?spm_id_from=333.1387.homepage.video_card.click&vd_source=09dab0452e2548023f6f83174148ee0c)
+[![Bilibili](https://img.shields.io/badge/Bilibili-00A1D6?style=flat&logo=bilibili&logoColor=white)](https://www.bilibili.com/video/BV1RnAYeEEu6/?spm_id_from=333.1387.homepage.video_card.click&vd_source=09dab0452e2548023f6f83174148ee0c)
+[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=flat&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=N-_q4tvyBiA&t=5s)
 
 </div>
 
