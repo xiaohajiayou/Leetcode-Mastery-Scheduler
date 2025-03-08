@@ -1,14 +1,12 @@
-// 检测是否为 Edge 浏览器
-const isEdge = navigator.userAgent.indexOf("Edg") !== -1;
 
 // 设置更短的超时时间
-const TIMEOUT_DURATION = isEdge ? 1000 : 3000;
+const TIMEOUT_DURATION = 500 ;
 
 function loadGithubStar() {
     const container = document.getElementById('github-star-container');
     if (!container) return;
 
-    // 如果是 Edge 浏览器且无法快速加载，直接显示静态按钮
+    // 如果浏览器且无法快速加载，直接显示静态按钮
     const timeout = setTimeout(() => {
         container.innerHTML = `
             <a href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler" 
@@ -38,14 +36,5 @@ function loadGithubStar() {
     container.appendChild(iframe);
 }
 
-// Edge 浏览器使用更快的加载策略
-if (isEdge) {
-    setTimeout(loadGithubStar, 100);
-} else {
-    // 其他浏览器使用 requestIdleCallback
-    if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadGithubStar, { timeout: 1000 });
-    } else {
-        setTimeout(loadGithubStar, 500);
-    }
-}
+
+setTimeout(loadGithubStar, 100);
