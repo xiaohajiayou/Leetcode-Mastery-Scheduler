@@ -52,7 +52,7 @@ function addStaticButton(container) {
     container.innerHTML = `
         <a href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler" 
            target="_blank" 
-           style="text-decoration: none; display: inline-block;">
+           style="text-decoration: none; display: inline-block; margin-right: 15px;">
             <img alt="GitHub stars" 
                  src="https://img.shields.io/github/stars/xiaohajiayou/Leetcode-Mastery-Scheduler?style=social" 
                  height="20"

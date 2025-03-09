@@ -53,7 +53,7 @@ const jumpToSchedulePage = (event) => {
     }
     input1DOM.classList.remove("is-invalid");
     if (page === store.scheduledPage) return;
-    update_schedule_table_content(store.reviewScheduledProblems, page);
+    renderScheduledTableContent(store.reviewScheduledProblems, page);
     setRecordOperationHandlers();
 }
 
