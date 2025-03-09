@@ -52,10 +52,11 @@ function addStaticButton(container) {
     container.innerHTML = `
         <a href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler" 
            target="_blank" 
-           style="text-decoration: none;">
-            <button class="btn custom-btn" style="padding: 4px 12px;">
-                <i class="fab fa-github"></i> Star
-            </button>
+           style="text-decoration: none; display: inline-block;">
+            <img alt="GitHub stars" 
+                 src="https://img.shields.io/github/stars/xiaohajiayou/Leetcode-Mastery-Scheduler?style=social" 
+                 height="20"
+                 style="margin: 0; vertical-align: middle;">
         </a>
     `;
 }
@@ -65,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM已加载，准备加载GitHub Star按钮');
     
     // 立即尝试加载
-    loadGithubStar();
+    // loadGithubStar();
     
     // 添加备份检查，如果5秒后容器仍然为空，则使用静态按钮
     setTimeout(function() {
@@ -74,5 +75,5 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('5秒后容器仍为空，添加静态按钮');
             addStaticButton(container);
         }
-    }, 3000);
+    }, 3500);
 });
