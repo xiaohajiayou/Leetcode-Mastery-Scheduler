@@ -1081,3 +1081,32 @@ td, th {
 .colored-toast .swal2-success-ring {
     border-color: #4a9d9c !important;
 }
+
+/* 更新概要样式 */
+.update-badge {
+    background-color: #FF3D3D;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.update-summary {
+    background-color: rgba(74, 157, 156, 0.1);
+    border-radius: 4px;
+    padding: 3px 0 !important;
+    margin-bottom: 8px !important;
+}
+
+.update-summary a {
+    color: #4a9d9c;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.update-summary a:hover {
+    text-decoration: underline;
+    color: #afffff;
+}
