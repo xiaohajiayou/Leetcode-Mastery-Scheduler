@@ -29,19 +29,25 @@
 ![alt text](https://s2.loli.net/2025/02/16/eNEV49CM8ABWdZ7.jpg)   
 
 # 🚀 Get Started
-1. Install the LMS plugin. Initially click the `rate it` button on LeetCode pages to adjust your review schedule in real-time based on your mastery of each problem.
-2. The review homepage automatically evaluates the retrievability priority (probability of recall) for each problem, allowing you to flexibly adjust daily review volume based on your schedule.
-3. The FSRS algorithm accommodates breaks and early review sessions, automatically inferring overall problem retrievability over time and dynamically adjusting next review times to match your learning pace.
-4. Complete reviews by checking them off in the plugin's `popup` window, or by clicking the `rate it` button on the problem page.
-5. Open the problem list to view all problems in your current review plan.
-6. Happy coding!
+
+1.  Install the LMS plugin. Initially, click the `rate` button at the bottom-right corner of the LeetCode/Li Kou page (you can drag it to a different position). Rate your mastery of the problem, and the algorithm will adjust your review schedule based on your rating.
+    
+2.  The plugin's homepage automatically assesses the retrievability priority of each problem (the probability of being able to recall it). You can flexibly adjust your daily review volume based on your schedule.
+    
+3.  The FSRS algorithm allows for breaks and cramming sessions. It will automatically infer the overall recall probability of the problems over time and dynamically adjust the next review time to fit your learning pace.
+    
+4.  You can complete your review by ticking the box in the plugin's `popup` window, or you can click into the problem page and complete the review via the `rate it` button.
+    
+5.  Open the problem list to see all the problems in your current review plan.
+    
+6.  Happy problem-solving! The key to mastering things quickly is to avoid forgetting!
 # 🚀 用法
-1. 安装LMS插件. 初始在LeetCode / 力扣页面点击`rate it`按钮，根据每次复习题目的掌握情况，实时调整复习计划。
-2. 复习首页自动评估每道题的可检索性优先级（能够回忆起来的概率），可根据时间安排，灵活调整每日的复习量。
-3. FSRS算法允许休息和提前突击复习，其算法会随时间流逝，自动推理整体题目的可检索性，动态调整下一次复习时间，以适应你的学习节奏。 
-4. 在插件的`popup`弹窗中打勾完成复习；也可点击进入题目页面，通过`rate it`按钮完成复习。
+1. 安装LMS插件. 初始在LeetCode / 力扣页面右下角点击`rate`按钮（可拖动位置），为题目掌握情况打分，算法参考打分情况实时调整复习计划。
+2. 插件主页自动评估每道题的可检索性优先级（能够回忆起来的概率），用户可根据时间安排，灵活调整每日的复习量。
+3. FSRS算法允许休息和提前突击复习，其算法会随时间流逝，自动推理整体题目的会回忆概率，动态调整下一次复习时间，以适应你的学习节奏。 
+4. 可在插件的`popup`弹窗中打勾完成复习；也可点击进入题目页面，通过`rate it`按钮完成复习。
 5. 打开题目列表，查看当前复习规划的所有题目
-6. 刷题快乐!
+6. 刷题快乐，速成的本质在于不要遗忘!
 
 ![alt text](https://s2.loli.net/2025/02/20/CrmZewAQlWUNuc4.gif)
 
