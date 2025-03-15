@@ -34,7 +34,7 @@
     "jszip": "^3.10.1",
     "style-loader": "^3.3.3",
     "sweetalert2": "^11.15.10",
-    "ts-fsrs": "^4.6.0",
+    "ts-fsrs": "^4.7.0",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   },
