@@ -2,6 +2,7 @@ import localStorageDelegate from "../delegate/localStorageDelegate";
 import cloudStorageDelegate from "../delegate/cloudStorageDelegate";
 import { store } from "../store";
 import { COMPILE_ERROR_AND_TLE_CLASSNAME, COMPILE_ERROR_AND_TLE_CLASSNAME_CN, COMPILE_ERROR_AND_TLE_CLASSNAME_NEW, PAGE_SIZE, SUBMIT_BUTTON_ATTRIBUTE_NAME, SUBMIT_BUTTON_ATTRIBUTE_VALUE, SUCCESS_CLASSNAME, SUCCESS_CLASSNAME_CN, SUCCESS_CLASSNAME_NEW, WRONG_ANSWER_CLASSNAME, WRONG_ANSWER_CLASSNAME_CN, WRONG_ANSWER_CLASSNAME_NEW, forggettingCurve } from "./constants";
+import { forgetting_curve, dateDiffInDays } from "ts-fsrs"
 
 export const needReview = (problem) => {
     if (problem.proficiency >= forggettingCurve.length) {
@@ -169,12 +170,6 @@ export const getCurrentRetrievability = (problem) => {
         return 1;
     }
     
-    const now = Date.now();
-    const elapsedDays = (now - problem.fsrsState.lastReview) / (24 * 60 * 60 * 1000);
-    return calculateRetrievability(problem.fsrsState.stability, elapsedDays);
-};
-
-// 计算可检索性的辅助函数
-const calculateRetrievability = (stability, elapsedDays) => {
-    return Math.exp(Math.log(0.9) * elapsedDays / stability);
+    const elapsedDays = dateDiffInDays(new Date(problem.fsrsState.lastReview), new Date());
+    return forgetting_curve(elapsedDays, problem.fsrsState.stability);
 };
