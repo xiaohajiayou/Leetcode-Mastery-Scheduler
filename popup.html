@@ -111,12 +111,47 @@
                 <!-- 添加新建题目的弹窗 -->
                 <div id="addProblemDialog" class="modal" style="display: none;">
                     <div class="modal-content">
-                        <h3>Add New Problem</h3>
-                        <div class="form-group">
-                            <label for="problemUrl">Problem URL:</label>
-                            <input type="text" id="problemUrl" class="form-control" 
-                                placeholder="https://leetcode.com/problems/..." />
+                        <h3>Add Review Card</h3>
+                        
+                        <!-- 选项卡切换 -->
+                        <div class="tab-container">
+                            <div class="tab-buttons">
+                                <button id="urlTabButton" class="tab-button active">LeetCode Card</button>
+                                <button id="manualTabButton" class="tab-button">Blank card</button>
+                            </div>
                         </div>
+                        
+                        <!-- URL 输入表单 -->
+                        <div id="urlTab" class="tab-content active">
+                            <div class="form-group">
+                                <label for="problemUrl">Leetcode URL:</label>
+                                <input type="text" id="problemUrl" class="form-control" 
+                                    placeholder="https://leetcode.com/problems/..." />
+                            </div>
+                        </div>
+                        
+                        <!-- 手动输入表单 -->
+                        <div id="manualTab" class="tab-content">
+                            <div class="form-group">
+                                <label for="problemName">Problem Name:</label>
+                                <input type="text" id="problemName" class="form-control" 
+                                    placeholder="例如: Two Sum" />
+                            </div>
+                            <div class="form-group">
+                                <label for="problemLevel">Level:</label>
+                                <select id="problemLevel" class="form-control">
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Hard">Hard</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="customUrl">Custom URL (Optional):</label>
+                                <input type="text" id="customUrl" class="form-control" 
+                                    placeholder="https://..." />
+                            </div>
+                        </div>
+                        
                         <div class="button-group">
                             <button id="confirmAdd" class="btn btn-outline-warning custom-btn">Add</button>
                             <button id="cancelAdd" class="btn btn-outline-secondary custom-btn">Cancel</button>
@@ -131,9 +166,18 @@
                     <!-- GitHub Star -->
                     <!-- 先放一个占位符 -->
                     <div id="github-star-container" 
-                        data-bs-toggle="tooltip" 
-                        data-bs-placement="top" 
-                        title="A star from you would make our day! 🌟">
+                    data-bs-toggle="tooltip" 
+                    data-bs-placement="top" 
+                    title="A star from you would make our day! 🌟">
+                        <a href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler" 
+                        target="_blank" 
+                        style="text-decoration: none; display: inline-block; margin-right: 15px;">
+                            <img alt="GitHub" 
+                                src="https://img.shields.io/badge/GitHub-%20Star%20Us-color%3D%2523%234a9d9c?style=flat&color=%234a9d9c
+                                " 
+                                height="20"
+                                style="margin: 0; vertical-align: middle;">
+                        </a>
                     </div>
 
                     <!-- 将 GitHub iframe 加载逻辑放在单独的脚本文件中 -->
@@ -296,11 +340,11 @@
                     <small>
                         <div>
                             <span class="update-badge">NEW!</span> 
-                            新增评分按钮位置自定义 / Adjustable rating button position
+                            新增添加空白卡片功能（洛谷、原创笔试题） / Added blank card feature for Luogu and original interview questions.
                         </div>
                         <div>
                             <a target="_blank" href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler/blob/main/changelog.md">
-                                View full changelog now(V0.0.10)
+                                View full changelog now(V0.1.0)
                             </a>
                         </div>
                     </small>
@@ -326,7 +370,7 @@
                     box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
                 ">
                     <!-- GitHub Star 按钮 -->
-                    <iframe 
+                    <!-- <iframe 
                         src="https://ghbtns.com/github-btn.html?user=xiaohajiayou&repo=Leetcode-Mastery-Scheduler&type=star&count=true" 
                         frameborder="0" 
                         scrolling="0" 
@@ -337,7 +381,21 @@
                         data-bs-placement="top"
                         data-bs-title="A star from you would make our day! ✨"
                         style="opacity: 0.9;"
-                    ></iframe>
+                    ></iframe> -->
+                    <div id="github-problems" 
+                    data-bs-toggle="tooltip" 
+                    data-bs-placement="top" 
+                    title="A star from you would make our day! 🌟">
+                        <a href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler" 
+                        target="_blank" 
+                        style="text-decoration: none; display: inline-block; margin-right: 15px;">
+                            <img alt="GitHub" 
+                                src="https://img.shields.io/badge/GitHub-%20Star%20Us-color%3D%2523%234a9d9c?style=flat&color=%234a9d9c
+                                " 
+                                height="20"
+                                style="margin: 0; vertical-align: middle;">
+                        </a>
+                    </div>
                     
                     <!-- 反馈按钮 -->
                     <a href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler/issues" 
@@ -349,7 +407,6 @@
                                 style="
                                     font-size: 0.875rem;
                                     font-family: 'Courier Prime', monospace;
-                                    padding: 0.5rem 1.2rem;
                                     background: #1d2e3d;
                                     border: 1px solid rgba(97, 218, 251, 0.3);
                                     color: #61dafb;
