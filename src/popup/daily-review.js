@@ -1,7 +1,7 @@
 import { renderAll } from './view/view.js';
 import { getAllProblems, syncProblems } from "./service/problemService.js";
 import { getLevelColor,getCurrentRetrievability } from './util/utils.js';
-import { handleFeedbackSubmission } from './script/submission.js';
+import { handleFeedbackSubmission, handleAddBlankProblem } from './script/submission.js';
 import './popup.css';
 import { isCloudSyncEnabled, loadConfigs, setCloudSyncEnabled, setProblemSorter,setDefaultCardLimit,setReminderEnabled } from "./service/configService";
 import { store,daily_store } from './store';
@@ -640,21 +640,36 @@ async function loadProblemList() {
 }
 
 
-// 显示/隐藏弹窗
-function toggleAddProblemDialog(show = true) {
+// 显示/隐藏添加题目弹窗
+function toggleAddProblemDialog(show) {
     const dialog = document.getElementById('addProblemDialog');
-    if (!dialog) {
-        console.error('找不到添加题目弹窗');
-        return;
-    }
-
-    dialog.style.display = show ? 'block' : 'none';
+    if (!dialog) return;
     
-    if (!show) {
-        // 重置表单
-        const urlInput = document.getElementById('problemUrl');
-        if (urlInput) {
-            urlInput.value = '';
+    if (show) {
+        dialog.style.display = 'block';
+    } else {
+        dialog.style.display = 'none';
+        
+        // 清除所有输入字段
+        const problemUrl = document.getElementById('problemUrl');
+        const problemName = document.getElementById('problemName');
+        const customUrl = document.getElementById('customUrl');
+        
+        if (problemUrl) problemUrl.value = '';
+        if (problemName) problemName.value = '';
+        if (customUrl) customUrl.value = '';
+        
+        // 重置选项卡到默认状态
+        const urlTabButton = document.getElementById('urlTabButton');
+        const manualTabButton = document.getElementById('manualTabButton');
+        const urlTab = document.getElementById('urlTab');
+        const manualTab = document.getElementById('manualTab');
+        
+        if (urlTabButton && manualTabButton && urlTab && manualTab) {
+            urlTabButton.classList.add('active');
+            manualTabButton.classList.remove('active');
+            urlTab.classList.add('active');
+            manualTab.classList.remove('active');
         }
     }
 }
@@ -666,10 +681,97 @@ function initializeAddProblem() {
     const addButton = document.querySelector('.gear-button.add-problem');
     if (!addButton) return;
 
+    // 添加选项卡切换样式
+    const style = document.createElement('style');
+    style.textContent = `
+        .tab-container {
+            margin-bottom: 15px;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid #3a4a5c;
+            margin-bottom: 15px;
+        }
+        
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 8px 15px;
+            color: #a0aec0;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-button.active {
+            color: #4a9d9c;
+            border-bottom: 2px solid #4a9d9c;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* 修复弹窗背景色 - 使用更强的选择器 */
+        #addProblemDialog .modal-content {
+            background-color: #1d2e3d !important;
+            color: #ffffff !important;
+        }
+        
+        #addProblemDialog .tab-content,
+        #addProblemDialog .form-group {
+            background-color: #1d2e3d !important;
+            color: #ffffff !important;
+        }
+        
+        #addProblemDialog input.form-control, 
+        #addProblemDialog select.form-control {
+            background-color: #2d3e4d !important;
+            color: #ffffff !important;
+            border: 1px solid #3a4a5c !important;
+        }
+        
+        #addProblemDialog input.form-control::placeholder {
+            color: #8096a8 !important;
+        }
+        
+        #addProblemDialog label {
+            color: #a0aec0 !important;
+        }
+    `;
+    document.head.appendChild(style);
+
     // 点击添加按钮显示弹窗
     addButton.addEventListener('click', () => {
         toggleAddProblemDialog(true);
     });
+
+    // 选项卡切换功能
+    const urlTabButton = document.getElementById('urlTabButton');
+    const manualTabButton = document.getElementById('manualTabButton');
+    const urlTab = document.getElementById('urlTab');
+    const manualTab = document.getElementById('manualTab');
+
+    if (urlTabButton && manualTabButton) {
+        urlTabButton.addEventListener('click', () => {
+            urlTabButton.classList.add('active');
+            manualTabButton.classList.remove('active');
+            urlTab.classList.add('active');
+            manualTab.classList.remove('active');
+        });
+
+        manualTabButton.addEventListener('click', () => {
+            manualTabButton.classList.add('active');
+            urlTabButton.classList.remove('active');
+            manualTab.classList.add('active');
+            urlTab.classList.remove('active');
+        });
+    }
 
     // 取消按钮
     const cancelButton = document.getElementById('cancelAdd');
@@ -683,12 +785,39 @@ function initializeAddProblem() {
     const confirmButton = document.getElementById('confirmAdd');
     if (confirmButton) {
         confirmButton.addEventListener('click', async () => {
-            const urlInput = document.getElementById('problemUrl');
-            
-            const url = urlInput.value.trim();
-
             try {
-                await handleAddProblem(url);
+                let result;
+                
+                // 判断当前激活的是哪个选项卡
+                if (urlTab.classList.contains('active')) {
+                    // 从URL添加
+                    const url = document.getElementById('problemUrl').value.trim();
+                    if (!url) {
+                        throw new Error('Please enter a valid problem URL.');
+                    }
+                    result = await handleAddProblem(url);
+                } else {
+                    // 创建空白卡片
+                    const name = document.getElementById('problemName').value.trim();
+                    const level = document.getElementById('problemLevel').value;
+                    const customUrl = document.getElementById('customUrl').value.trim();
+                    
+                    if (!name) {
+                        throw new Error('Please enter the problem name.');
+                    }
+                    
+                    if (!level) {
+                        throw new Error('Please select a difficulty level.');
+                    }
+                    
+                    // 如果提供了URL，检查其格式是否有效
+                    if (customUrl && !customUrl.match(/^https?:\/\/.+/)) {
+                        throw new Error('Please enter a valid URL starting with http:// or https://');
+                    }
+                    
+                    result = await handleAddBlankProblem(name, level, customUrl);
+                }
+                
                 toggleAddProblemDialog(false);
                 await loadDailyReviewData();
                 updateCardDisplay();
@@ -696,14 +825,14 @@ function initializeAddProblem() {
                 // 显示成功提示
                 Swal.fire({
                     icon: 'success',
-                    title: '添加成功',
-                    text: '题目已成功添加到复习列表',
+                    title: 'SUCCESS',
+                    text: 'Problem added to review list.',
                     showConfirmButton: false,
                     timer: 1500,
                     background: '#1d2e3d',
                     color: '#ffffff',
                     toast: true,
-                    position: 'top-end',
+                    position: 'center-end',
                     customClass: {
                         popup: 'colored-toast'
                     }
@@ -712,7 +841,7 @@ function initializeAddProblem() {
                 // 显示错误提示
                 Swal.fire({
                     icon: 'error',
-                    title: '添加失败',
+                    title: 'ADD FAIL',
                     text: error.message,
                     background: '#1d2e3d',
                     color: '#ffffff',

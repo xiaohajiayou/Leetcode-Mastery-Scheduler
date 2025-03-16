@@ -111,12 +111,47 @@
                 <!-- 添加新建题目的弹窗 -->
                 <div id="addProblemDialog" class="modal" style="display: none;">
                     <div class="modal-content">
-                        <h3>Add New Problem</h3>
-                        <div class="form-group">
-                            <label for="problemUrl">Problem URL:</label>
-                            <input type="text" id="problemUrl" class="form-control" 
-                                placeholder="https://leetcode.com/problems/..." />
+                        <h3>Add Review Card</h3>
+                        
+                        <!-- 选项卡切换 -->
+                        <div class="tab-container">
+                            <div class="tab-buttons">
+                                <button id="urlTabButton" class="tab-button active">LeetCode Card</button>
+                                <button id="manualTabButton" class="tab-button">Blank card</button>
+                            </div>
                         </div>
+                        
+                        <!-- URL 输入表单 -->
+                        <div id="urlTab" class="tab-content active">
+                            <div class="form-group">
+                                <label for="problemUrl">Leetcode URL:</label>
+                                <input type="text" id="problemUrl" class="form-control" 
+                                    placeholder="https://leetcode.com/problems/..." />
+                            </div>
+                        </div>
+                        
+                        <!-- 手动输入表单 -->
+                        <div id="manualTab" class="tab-content">
+                            <div class="form-group">
+                                <label for="problemName">Problem Name:</label>
+                                <input type="text" id="problemName" class="form-control" 
+                                    placeholder="例如: Two Sum" />
+                            </div>
+                            <div class="form-group">
+                                <label for="problemLevel">Level:</label>
+                                <select id="problemLevel" class="form-control">
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Hard">Hard</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="customUrl">Custom URL (Optional):</label>
+                                <input type="text" id="customUrl" class="form-control" 
+                                    placeholder="https://..." />
+                            </div>
+                        </div>
+                        
                         <div class="button-group">
                             <button id="confirmAdd" class="btn btn-outline-warning custom-btn">Add</button>
                             <button id="cancelAdd" class="btn btn-outline-secondary custom-btn">Cancel</button>

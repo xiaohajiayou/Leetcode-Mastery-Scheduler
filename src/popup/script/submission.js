@@ -467,7 +467,7 @@ export async function handleAddProblem(url) {
         
         // 检查是否已存在
         if (problems[problemIndex] && !problems[problemIndex].isDeleted) {
-            throw new Error('该题目已存在');
+            throw new Error('Duplicate problem name exists.');
         }
         
         const now = Date.now();
@@ -504,7 +504,73 @@ export async function handleAddProblem(url) {
         
         return problem;
     } catch (error) {
-        console.error('添加题目失败:', error);
+        console.error('Failed to add card:', error);
+        throw error;
+    }
+}
+
+// 处理添加空白卡片
+export async function handleAddBlankProblem(name, level, customUrl = '') {
+    try {
+        await syncProblems();  // 同步云端数据
+        const problems = await getAllProblems();
+        
+        // 获取当前自定义题目的数量，用于生成递增的索引
+        const customProblems = Object.values(problems).filter(p => 
+            p.index && p.index.startsWith('custom_') && !p.isDeleted);
+        const customCount = customProblems.length + 1;
+        
+        // 生成有规律的索引: custom_年月日_序号
+        const today = new Date();
+        const dateStr = `${today.getFullYear()}${String(today.getMonth() + 1).padStart(2, '0')}${String(today.getDate()).padStart(2, '0')}`;
+        const customIndex = `custom_${dateStr}_${String(customCount).padStart(3, '0')}`;
+        
+        // 检查名称是否已存在
+        const existingProblem = Object.values(problems).find(p => 
+            p.name === name && !p.isDeleted);
+        
+        if (existingProblem) {
+            throw new Error('Duplicate problem name exists.');
+        }
+        
+        const now = Date.now();
+        // 创建新问题，在名称前添加索引前缀
+        const formattedName = `Ext-${customCount}. ${name}`;
+        
+        const problem = new Problem(
+            customIndex,
+            formattedName,  // 名称前添加索引前缀
+            level,
+            customUrl,
+            now,    // createTime
+            0,      // nextStep
+            null    // lastReviewTime
+        );
+        
+        // 设置初始状态
+        problem.proficiency = 0;
+        problem.isDeleted = false;
+        problem.modificationTime = now;
+        problem.isCustom = true;  // 标记为自定义题目
+        
+        // 设置初始 FSRS 状态 - 设置 nextReview 为今天
+        problem.fsrsState = {
+            difficulty: null,
+            stability: null,
+            state: 'New',
+            lastReview: null,
+            nextReview: now,    // 设置为当前时间，使其显示在今天的待复习列表中
+            reviewCount: 0,
+            lapses: 0,
+            quality: null
+        };
+        
+        await createOrUpdateProblem(problem);
+        await syncProblems();
+        
+        return problem;
+    } catch (error) {
+        console.error('Failed to add blank card:', error);
         throw error;
     }
 }
