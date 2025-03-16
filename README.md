@@ -52,22 +52,6 @@
 ![alt text](https://s2.loli.net/2025/02/20/CrmZewAQlWUNuc4.gif)
 
 
-# 🔑 Key Features / 主要特性
-1. Switch between LeetCode global and LeetCode China data through a slider toggle.
-   
-   通过滑块切换LeetCode国际版以及力扣中国版的刷题数据。
-
-2. Cloud synchronization of problem-solving data across Chrome and Edge browsers.
-   
-   在chrome 和 edge浏览器，分别实现刷题数据云同步
-
-3. Monitor entertainment websites, check daily review progress, and provide proactive reminders via pop-up notifications.
-   
-   监控娱乐网站，检查每日复习情况，主动提醒弹窗
-
-4. Support adding problem records via URL (for IDE problem-solving and casual browsing).
-   
-   支持通过 URL 添加题目记录（配合 IDE 刷题，工位摸鱼专用）
 
 
     
@@ -89,16 +73,33 @@
 
 <br>
 
-# 📝 Next Steps / 安排
+# 📝 安排
 
 | 任务/功能         | 状态       | 备注               |
 |--------------------|------------|--------------------|
+| 多设备数据云同步   | ✅ 已完成  | Edge、Chrome       |
 | 监控提醒   | ✅ 已完成  | bilibili、youtube       |
+| url添加题目   | ✅ 已完成  | 目前仅力扣题目（配合 IDE 刷题，工位摸鱼专用）       |
+| 添加自定义卡片   | ❌ 待完成  | 待完成（用于记录面试手撕题或原创笔试题）      |
 | 兼容`ctrl + enter`       | ❌ 待完成  | 待评估工作量       |
-| 兼容火狐       | ❌ 待完成  | 待评估可行性       |
-| 兼容洛谷等其他刷题网站           | ❌ 待完成  | 待评估可行性       |
+| 不同网站题目数据源切换   | ❌ 待完成  | 待完成（目前仅支持力扣国际站和中国站，待兼容洛谷等）       |
+| 兼容火狐       | ❌ 待完成  | 待评估可行性       | 
+| 提供笔记功能       | ❌ 待完成  | 待评估可行性（浏览器存储数据上限可能无法支持）       | 
+| 接入Anki fsrs官方训练端口       | ❌ 待完成  | 待评估可行性（用户可拟合出最适合自己的记忆曲线）       | 
 
 
+# 📝 Next Steps
+| Task/Feature          | Status     | Notes                                      |
+|-----------------------|------------|--------------------------------------------|
+| Multi-device data cloud sync | ✅ Completed | Edge, Chrome                              |
+| Monitoring reminders  | ✅ Completed | bilibili, youtube                          |
+| URL-based problem addition | ✅ Completed | Currently only for LeetCode problems (ideal for IDE-based problem-solving and stealthy practice at work) |
+| Add custom cards      | ❌ Pending  | Pending (for recording interview whiteboard problems or original written test questions) |
+| Compatibility with `ctrl + enter` | ❌ Pending  | Workload to be assessed                   |
+| Switching between different website problem data sources | ❌ Pending | Pending (currently supports only LeetCode international and Chinese sites; future compatibility with Luogu and others to be explored) |
+| Compatibility with Firefox | ❌ Pending | Feasibility to be assessed                 |
+| Note-taking feature   | ❌ Pending  | Feasibility to be assessed (browser storage limits may be a constraint) |
+| Integration with Anki FSRS official training port | ❌ Pending | Feasibility to be assessed (users may be able to fit their own optimal memory curve) |
 
 
 
