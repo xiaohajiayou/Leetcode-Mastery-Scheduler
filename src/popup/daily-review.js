@@ -148,8 +148,8 @@ function calculateRetrievabilityAverage() {
 function updateStats() {
     console.log('更新统计信息');
     // 设置默认值
-    const completedCount = 0;
-    const totalProblems = 0;
+    let completedCount = 0;
+    let totalProblems = 0;
     // 添加空值检查
     if (!daily_store || !daily_store.dailyReviewProblems) {
         console.log('daily_store 或 dailyReviewProblems 为空:', {
