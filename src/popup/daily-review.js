@@ -16,6 +16,13 @@ const LAST_AVERAGE_KEY = 'lastRetrievabilityAverage';
 const LAST_UPDATE_TIME_KEY = 'lastUpdateTime';
 let yesterdayRetrievabilityAverage = 0.00;
 
+
+
+async function loadProblemList() {
+    await renderAll();
+}
+
+
 // 获取上次存储的平均值和时间
 function loadLastAverageData() {
     const lastData = {
@@ -23,50 +30,6 @@ function loadLastAverageData() {
         timestamp: parseInt(localStorage.getItem(LAST_UPDATE_TIME_KEY)) || 0
     };
     return lastData;
-}
-
-// 存储当前的平均值和时间
-function saveCurrentAverageData(average) {
-    localStorage.setItem(LAST_AVERAGE_KEY, average.toString());
-    localStorage.setItem(LAST_UPDATE_TIME_KEY, Date.now().toString());
-}
-
-
-// 判断是否是今天需要复习的题目
-function isReviewDueToday(problem) {
-    if (!problem.fsrsState?.nextReview) {
-        console.log('题目没有下次复习时间:', problem.name);
-        return false;
-    }
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    const nextReview = new Date(problem.fsrsState.nextReview);
-    nextReview.setHours(0, 0, 0, 0);
-    
-    const isDue = nextReview <= today;
-    
-    console.log('复习时间检查:', {
-        problemName: problem.name,
-        nextReview: nextReview.toISOString(),
-        today: today.toISOString(),
-        isDue: isDue
-    });
-    
-    return isDue;
-}
-
-function isReviewedToday(problem) {
-    if (!problem.fsrsState?.lastReview) return false;
-    
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    const lastReview = new Date(problem.fsrsState.lastReview);
-    lastReview.setHours(0, 0, 0, 0);
-    
-    return lastReview.getTime() === today.getTime();
 }
 
 async function loadDailyReviewData() {
@@ -113,6 +76,59 @@ async function loadDailyReviewData() {
     });
 }
 
+// 存储当前的平均值和时间
+function saveCurrentAverageData(average) {
+    localStorage.setItem(LAST_AVERAGE_KEY, average.toString());
+    localStorage.setItem(LAST_UPDATE_TIME_KEY, Date.now().toString());
+}
+
+// 设置当前日期
+function setCurrentDate() {
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const today = new Date().toLocaleDateString('en-US', options);
+    document.getElementById('currentDate').textContent = today;
+}
+
+
+// 判断是否是今天需要复习的题目
+function isReviewDueToday(problem) {
+    if (!problem.fsrsState?.nextReview) {
+        console.log('题目没有下次复习时间:', problem.name);
+        return false;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const nextReview = new Date(problem.fsrsState.nextReview);
+    nextReview.setHours(0, 0, 0, 0);
+    
+    const isDue = nextReview <= today;
+    
+    console.log('复习时间检查:', {
+        problemName: problem.name,
+        nextReview: nextReview.toISOString(),
+        today: today.toISOString(),
+        isDue: isDue
+    });
+    
+    return isDue;
+}
+
+function isReviewedToday(problem) {
+    if (!problem.fsrsState?.lastReview) return false;
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const lastReview = new Date(problem.fsrsState.lastReview);
+    lastReview.setHours(0, 0, 0, 0);
+    
+    return lastReview.getTime() === today.getTime();
+}
+
+
+
 
 // 计算可检索性均值
 function calculateRetrievabilityAverage() {
@@ -131,15 +147,16 @@ function calculateRetrievabilityAverage() {
 // 更新顶部统计信息
 function updateStats() {
     console.log('更新统计信息');
+    // 设置默认值
+    let completedCount = 0;
+    let totalProblems = 0;
     // 添加空值检查
     if (!daily_store || !daily_store.dailyReviewProblems) {
         console.log('daily_store 或 dailyReviewProblems 为空:', {
             daily_store: daily_store,
             problems: daily_store?.dailyReviewProblems
         });
-        // 设置默认值
-        const completedCount = 0;
-        const totalProblems = 0;
+
         
         // 更新显示
         document.getElementById('completedCount').textContent = completedCount;
@@ -149,18 +166,7 @@ function updateStats() {
         return;
     }
 
-    // 计算今日已复习的题目数量
-    const completedCount = daily_store.dailyReviewProblems.filter(problem => 
-        isReviewedToday(problem)
-    ).length;
 
-    //背景脚本通信
-    if(completedCount>0){
-        chrome.runtime.sendMessage({
-            action: 'updateReviewStatus',
-            count: completedCount
-        });
-    }
 
     // 获取当前显示的卡片数量
     let cardLimit = parseInt(document.getElementById('cardLimit').value, 10)|| store.defaultCardLimit || 1;
@@ -170,8 +176,15 @@ function updateStats() {
         element: document.getElementById('cardLimit')
     });
 
+
+
+    // 计算今日已复习的题目数量
+    completedCount = daily_store.dailyReviewProblems.filter(problem => 
+        isReviewedToday(problem)
+    ).length;
+
     
-    const totalProblems = daily_store.dailyReviewProblems?.length || 0;
+    totalProblems = daily_store.dailyReviewProblems?.length || 0;
     if (cardLimit > totalProblems) {
         cardLimit = totalProblems;
     }
@@ -292,16 +305,6 @@ function updateProgressCircle(completionRate) {
 
 
 
-// 更新卡片显示
-export function updateCardDisplay() {
-    console.log('更新卡片显示');
-    
-    // 重置已复习的问题数量
-    // mockReviewData.completedProblems = 0; // 重置已复习数量
-    updateStats(); // 更新统计信息，传递当前显示的卡片数量
-
-    createReviewCards(); // 创建新的卡片
-}
 
 // 更新卡片限制和显示
 export function updateCardLimitDisplay() {
@@ -337,6 +340,9 @@ export function updateCardLimitDisplay() {
         totalProblems
     });
 }
+
+
+
 // 改变卡片数量
 // 所有功能函数
 export async function changeCardLimit(delta) {
@@ -352,6 +358,16 @@ export async function changeCardLimit(delta) {
         store.defaultCardLimit = newValue;
         updateCardDisplay();
     }
+}
+
+
+// 更新卡片显示
+export function updateCardDisplay() {
+    console.log('更新卡片显示');
+    
+    updateStats(); // 更新统计信息，传递当前显示的卡片数量
+
+    createReviewCards(); // 创建新的卡片
 }
 
 
@@ -377,26 +393,13 @@ async function markAsReviewed(button, problem) {
     button.disabled = true;
     card.style.opacity = '0.4';
 
-    // 更新问题状态
-    // if (problem && problem.fsrsState) {
-    //     problem.fsrsState.lastReview = Date.now();
-    //     problem.fsrsState.reviewCount = (problem.fsrsState.reviewCount || 0) + 1;
-    //     这里可以添加保存到存储的逻辑
-    //     await updateProblem(problem);
-    // }
+
 
     // 更新统计信息
     updateStats();
     console.log('更新完成');
 }
 
-// 标记所有题目为已复习
-function markAllAsReviewed() {
-    console.log('执行 markAllAsReviewed');
-    const buttons = document.querySelectorAll('.review-card .btn-review:not(:disabled)');
-    console.log('找到未禁用的按钮数量:', buttons.length);
-    buttons.forEach(button => markAsReviewed(button));
-}
 
 // 创建题目卡片时的事件绑定
 function createReviewCards() {
@@ -532,112 +535,11 @@ function createReviewCards() {
 
 
 
-// 设置当前日期
-function setCurrentDate() {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const today = new Date().toLocaleDateString('en-US', options);
-    document.getElementById('currentDate').textContent = today;
-}
-
-// 页面切换功能
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM加载完成,开始初始化页面切换功能');
-    
-    // 检查是否找到导航按钮
-    const navButtons = document.querySelectorAll('.nav-btn');
-    console.log('找到导航按钮数量:', navButtons.length);
-    
-    // 检查是否找到视图
-    const views = document.querySelectorAll('.view');
-    console.log('找到视图数量:', views.length);
-    
-    // 打印所有视图的ID
-    views.forEach(view => console.log('视图ID:', view.id));
-    
-    navButtons.forEach((button, index) => {
-        console.log(`为第 ${index + 1} 个按钮绑定点击事件:`, button.textContent);
-        
-        button.addEventListener('click', async function(e) {
-            e.preventDefault(); // 阻止默认行为
-            e.stopPropagation(); // 阻止事件冒泡
-            
-            console.log('按钮被点击:', this.textContent);
-            
-            // 移除所有按钮的激活状态
-            navButtons.forEach(btn => btn.classList.remove('active'));
-            // 添加当前按钮的激活状态
-            this.classList.add('active');
-            
-            // 获取目标视图
-            const targetView = this.textContent.trim();
-            console.log('目标视图:', targetView);
-            
-            let viewId;
-            switch(targetView) {
-                case 'Review':
-                    viewId = 'reviewView';
-                    await initializeReviewPage();
-                    break;
-                case 'Problems':
-                    viewId = 'problemListView';
-                    await loadProblemList(); // 加载题目列表
-                    initializeFeedbackButton();
-                    // renderAll();
-                    break;
-                case 'Settings':
-                    viewId = 'moreView';
-                    await initializeOptions();
-                    break;
-            }
-            
-            console.log('切换到视图ID:', viewId);
-            
-            // 切换视图
-            views.forEach(view => {
-                console.log('检查视图:', view.id);
-                if(view.id === viewId) {
-                    view.classList.add('active');
-                    view.style.display = 'block';
-                    console.log('激活视图:', view.id);
-                } else {
-                    view.classList.remove('active');
-                    view.style.display = 'none';
-                    console.log('隐藏视图:', view.id);
-                }
-            });
-        });
-    });
-});
 
 
 
-// 创建题目卡片
-function createProblemCard(problem) {
-    const card = document.createElement('div');
-    card.className = 'problem-card';
-    card.innerHTML = `
-        <h4>${problem.index}. ${problem.name}</h4>
-        <div class="problem-info">
-            <span class="difficulty-${problem.difficulty}">${problem.difficulty}</span>
-            <span class="last-review">上次复习: ${problem.lastReview}</span>
-        </div>
-        <div class="problem-stats">
-            <div class="stat">
-                <i class="fas fa-brain"></i>
-                <span>${problem.retrievability.toFixed(2)}</span>
-            </div>
-            <div class="stat">
-                <i class="fas fa-chart-line"></i>
-                <span>${problem.proficiency}/${problem.maxProficiency}</span>
-            </div>
-        </div>
-    `;
-    return card;
-}
 
-async function loadProblemList() {
-    await renderAll();
-}
+
 
 
 // 显示/隐藏添加题目弹窗
@@ -1009,13 +911,88 @@ export function initializeFeedbackButton() {
     });
 }
 
-// 确保在页面加载完成后初始化
+
+
+// 页面切换功能
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('DOM加载完成');
+    console.log('DOM加载完成,开始初始化复习页面和切换绑定');
     await initializeReviewPage();
     // 添加设置初始化
     initializeFeedbackButton();
+    
+    
+    // 检查是否找到导航按钮
+    const navButtons = document.querySelectorAll('.nav-btn');
+    console.log('找到导航按钮数量:', navButtons.length);
+    
+    // 检查是否找到视图
+    const views = document.querySelectorAll('.view');
+    console.log('找到视图数量:', views.length);
+    
+    // 打印所有视图的ID
+    views.forEach(view => console.log('视图ID:', view.id));
+    
+    navButtons.forEach((button, index) => {
+        console.log(`为第 ${index + 1} 个按钮绑定点击事件:`, button.textContent);
+        
+        button.addEventListener('click', async function(e) {
+            e.preventDefault(); // 阻止默认行为
+            e.stopPropagation(); // 阻止事件冒泡
+            
+            console.log('按钮被点击:', this.textContent);
+            
+            // 移除所有按钮的激活状态
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            // 添加当前按钮的激活状态
+            this.classList.add('active');
+            
+            // 获取目标视图
+            const targetView = this.textContent.trim();
+            console.log('目标视图:', targetView);
+            
+            let viewId;
+            switch(targetView) {
+                case 'Review':
+                    viewId = 'reviewView';
+                    await initializeReviewPage();
+                    break;
+                case 'Problems':
+                    viewId = 'problemListView';
+                    await loadProblemList(); // 加载题目列表
+                    initializeFeedbackButton();
+                    // renderAll();
+                    break;
+                case 'Settings':
+                    viewId = 'moreView';
+                    await initializeOptions();
+                    break;
+            }
+            
+            console.log('切换到视图ID:', viewId);
+            
+            // 切换视图
+            views.forEach(view => {
+                console.log('检查视图:', view.id);
+                if(view.id === viewId) {
+                    view.classList.add('active');
+                    view.style.display = 'block';
+                    console.log('激活视图:', view.id);
+                } else {
+                    view.classList.remove('active');
+                    view.style.display = 'none';
+                    console.log('隐藏视图:', view.id);
+                }
+            });
+        });
+    });
 });
+
+
+
+
+
+
+
 
 // 以防万一，也添加 window.onload
 window.onload = function() {

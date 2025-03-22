@@ -1,10 +1,10 @@
 import { loadConfigs } from "../service/configService";
-import { submissionListener,addRecordButton } from "./submission";
+import { addRecordButton } from "./submission";
 
 console.log(`Hello Leetcode-Mastery-Scheduler!`);
 
 await loadConfigs();
-// document.addEventListener('click', submissionListener);
+
 
 
 document.addEventListener('DOMContentLoaded', addRecordButton);

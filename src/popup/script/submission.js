@@ -2,72 +2,9 @@ import { getDifficultyBasedSteps, getSubmissionResult, isSubmissionSuccess, isSu
 import { getAllProblems, createOrUpdateProblem, getCurrentProblemInfoFromLeetCodeByHref,getCurrentProblemInfoFromLeetCodeByUrl, syncProblems } from "../service/problemService";
 import { Problem } from "../entity/problem";
 import { updateProblemWithFSRS } from "../util/fsrs";
-/* 
-    monitorSubmissionResult will repeateadly check for the submission result.
-*/
-const monitorSubmissionResult = () => {
 
-    let submissionResult;
-    let maxRetry = 10;
-    const retryInterval = 1000;
 
-    const functionId = setInterval(async () => {
 
-        if (maxRetry <= 0) {
-            clearInterval(functionId);
-            return;
-        }
-
-        submissionResult = getSubmissionResult();
-
-        if (submissionResult === undefined || submissionResult.length === 0) {
-            maxRetry--;
-            return;
-        }
-
-        clearInterval(functionId);
-        let isSuccess = isSubmissionSuccess(submissionResult);
-
-        if (!isSuccess) return;
-
-        const { problemIndex, problemName, problemLevel, problemUrl } = await getCurrentProblemInfoFromLeetCodeByHref();
-        await syncProblems();   // prior to fetch local problem data, sync local problem data with cloud
-        const problems = await getAllProblems();
-        let problem = problems[problemIndex];
-        
-        if (problem && problem.isDeleted !== true) {
-            const reviewNeeded = needReview(problem);
-            if (reviewNeeded) {
-                await createOrUpdateProblem(updateProblemUponSuccessSubmission(problem));
-            }
-        } else {
-            problem = new Problem(problemIndex, problemName, problemLevel, problemUrl, Date.now(), getDifficultyBasedSteps(problemLevel)[0], Date.now());
-            await createOrUpdateProblem(problem);
-        }
-        await syncProblems(); // after problem updated, sync to cloud
-
-        console.log("Submission successfully tracked!");
-
-    }, retryInterval)
-};
-
-export const submissionListener = (event) => {
-
-    const element = event.target;
-    
-    const filterConditions = [
-        isSubmitButton(element),
-        element.parentElement && isSubmitButton(element.parentElement),
-        element.parentElement && element.parentElement.parentElement && isSubmitButton(element.parentElement.parentElement),
-    ]
-
-    const isSubmission = filterConditions.reduce((prev, curr) => prev || curr);
-
-    if (isSubmission) {
-        monitorSubmissionResult();
-    }
-
-};
 
 
 
@@ -258,26 +195,45 @@ export async function handleFeedbackSubmission(problem = null) {
             return null;
         }
 
-        // 如果没有传入 problem，说明是新提交，需要获取题目信息
+        // 如果没有传入 problem，说明是页面提交，需要获取题目信息
         if (!problem) {
             await syncProblems();   // 同步云端数据
             const { problemIndex, problemName, problemLevel, problemUrl } = await getCurrentProblemInfoFromLeetCodeByHref();
             const problems = await getAllProblems();
             problem = problems[problemIndex];
             
-            if (problem && problem.isDeleted !== true) {
-                problem = updateProblemWithFSRS(problem, feedback);
-                await createOrUpdateProblem(updateProblemUponSuccessSubmission(problem));
-            } else {
+            if (!problem || problem.isDeleted == true) {
                 problem = new Problem(problemIndex, problemName, problemLevel, problemUrl, Date.now(), getDifficultyBasedSteps(problemLevel)[0], Date.now());
-                problem = updateProblemWithFSRS(problem, feedback);
-                await createOrUpdateProblem(problem);
             }
-        } else {
-            // 如果传入了 problem，说明是复习
-            problem = updateProblemWithFSRS(problem, feedback);
-            await createOrUpdateProblem(problem);
         }
+        
+        // 检查上次复习时间是否是今天，如果是则不允许再次复习
+        if (problem.fsrsState && problem.fsrsState.lastReview) {
+            const lastReviewDate = new Date(problem.fsrsState.lastReview);
+            const today = new Date();
+            
+            // 比较年、月、日是否相同（考虑时区影响）
+            if (lastReviewDate.getFullYear() === today.getFullYear() &&
+                lastReviewDate.getMonth() === today.getMonth() &&
+                lastReviewDate.getDate() === today.getDate()) {
+                
+                // 显示双语警告提示
+                showToast("今天已经复习过这道题了，请明天再来！\nYou've already reviewed this problem today. Please come back tomorrow!", "warning");
+                return null;
+            }
+        }
+        
+        problem = updateProblemWithFSRS(problem, feedback);
+        await createOrUpdateProblem(problem);
+
+        // 计算下次复习时间与今天的天数差
+        const nextReviewDate = new Date(problem.fsrsState.nextReview);
+        const today = new Date();
+        const diffTime = nextReviewDate.getTime() - today.getTime();
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        // 显示复习成功提示，包含下次复习时间
+        showToast(`复习成功！下次复习时间：${nextReviewDate.toLocaleDateString()}（${diffDays}天后）\nReview successful! Next review: ${nextReviewDate.toLocaleDateString()} (in ${diffDays} days)`, "success");
 
         await syncProblems(); // 同步到云端
         console.log("提交成功！");
@@ -288,7 +244,109 @@ export async function handleFeedbackSubmission(problem = null) {
     }
 }
 
-
+// 添加一个更醒目的提示框函数，支持不同类型的提示
+function showToast(message, type = "info", duration = 5000) {
+    // 检查是否已存在toast样式
+    if (!document.getElementById('lms-toast-style')) {
+        const style = document.createElement('style');
+        style.id = 'lms-toast-style';
+        style.textContent = `
+            .lms-toast {
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 12px 24px;
+                border-radius: 4px;
+                z-index: 10000;
+                font-size: 14px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                animation: lms-toast-in 0.3s ease;
+                max-width: 80%;
+                text-align: center;
+                white-space: pre-line;
+                font-weight: 500;
+            }
+            
+            .lms-toast-info {
+                background-color: #1890ff;
+                color: white;
+                border-left: 4px solid #096dd9;
+            }
+            
+            .lms-toast-success {
+                background-color: #52c41a;
+                color: white;
+                border-left: 4px solid #389e0d;
+            }
+            
+            .lms-toast-warning {
+                background-color: #ffd666;
+                color: #874d00;
+                border-left: 4px solid #faad14;
+                font-weight: bold;
+            }
+            
+            .lms-toast-error {
+                background-color: #ff4d4f;
+                color: white;
+                border-left: 4px solid #cf1322;
+                font-weight: bold;
+            }
+            
+            @keyframes lms-toast-in {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, 0);
+                }
+            }
+            
+            .lms-toast-icon {
+                margin-right: 8px;
+                font-weight: bold;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // 移除可能存在的旧提示
+    const existingToast = document.querySelector('.lms-toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+    
+    const toast = document.createElement('div');
+    toast.className = `lms-toast lms-toast-${type}`;
+    
+    // 添加图标
+    let icon = '';
+    switch(type) {
+        case 'info': icon = 'ℹ️'; break;
+        case 'success': icon = '✅'; break;
+        case 'warning': icon = '⚠️'; break;
+        case 'error': icon = '❌'; break;
+    }
+    
+    toast.innerHTML = `<span class="lms-toast-icon">${icon}</span>${message}`;
+    document.body.appendChild(toast);
+    
+    // 添加点击关闭功能
+    toast.addEventListener('click', () => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    });
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+}
 
 // 6. 显示评分对话框
 const showDifficultyFeedbackDialog = () => {
