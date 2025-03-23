@@ -341,6 +341,16 @@ export function updateCardLimitDisplay() {
     });
 }
 
+// 更新卡片显示
+export function updateCardDisplay() {
+    console.log('更新卡片显示');
+    
+    updateStats(); // 更新统计信息，传递当前显示的卡片数量
+
+    createReviewCards(); // 创建新的卡片
+}
+
+
 
 
 // 改变卡片数量
@@ -361,14 +371,6 @@ export async function changeCardLimit(delta) {
 }
 
 
-// 更新卡片显示
-export function updateCardDisplay() {
-    console.log('更新卡片显示');
-    
-    updateStats(); // 更新统计信息，传递当前显示的卡片数量
-
-    createReviewCards(); // 创建新的卡片
-}
 
 
 // 标记题目为已复习
@@ -396,7 +398,7 @@ async function markAsReviewed(button, problem) {
 
 
     // 更新统计信息
-    updateStats();
+    updateCardDisplay();
     console.log('更新完成');
 }
 
@@ -440,16 +442,30 @@ function createReviewCards() {
         // 设置下次复习时间
         const nextReviewTips = fsrsState.nextReview 
             ? (() => {
-                const msUntilReview = new Date(fsrsState.nextReview) - new Date();
-                const daysUntilReview = Math.ceil(msUntilReview / (1000 * 60 * 60 * 24));
+                const nextReviewDate = new Date(fsrsState.nextReview);
+                const now = new Date();
                 
-                if (msUntilReview >= 0 && msUntilReview <= 24 * 60 * 60 * 1000) {
-                    return 'Review today';  // 24小时内需要复习
-                } else if (daysUntilReview > 0) {
-                    return `Review in ${daysUntilReview} day${daysUntilReview > 1 ? 's' : ''}`;
-                } else {
-                    const daysOverdue = Math.abs(daysUntilReview);
+                // 获取当前日期和下次复习日期（不含时间）
+                const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                const reviewDay = new Date(nextReviewDate.getFullYear(), nextReviewDate.getMonth(), nextReviewDate.getDate());
+                
+                // 计算日期差（天数）
+                const diffTime = reviewDay.getTime() - today.getTime();
+                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+                
+                if (diffDays < 0) {
+                    // 已经过了计划复习日期
+                    const daysOverdue = Math.abs(diffDays);
                     return `Delay by ${daysOverdue} day${daysOverdue > 1 ? 's' : ''}`;
+                } else if (diffDays === 0) {
+                    // 今天需要复习
+                    return 'Review today';
+                } else if (diffDays === 1) {
+                    // 明天需要复习
+                    return 'Review tomorrow';
+                } else {
+                    // x天后复习
+                    return `Review in ${diffDays} days`;
                 }
             })()
             : 'Not scheduled';

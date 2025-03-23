@@ -184,6 +184,9 @@ export const addRecordButton = () => {
 // 抽取成通用的处理函数
 export async function handleFeedbackSubmission(problem = null) {
     try {
+        // 记录是否为页面提交
+        const isPageSubmission = !problem;
+        
         // 显示难度反馈弹窗
         const feedback = await showDifficultyFeedbackDialog().catch(error => {
             console.log(error);  // "用户取消评分"
@@ -226,14 +229,17 @@ export async function handleFeedbackSubmission(problem = null) {
         problem = updateProblemWithFSRS(problem, feedback);
         await createOrUpdateProblem(problem);
 
-        // 计算下次复习时间与今天的天数差
-        const nextReviewDate = new Date(problem.fsrsState.nextReview);
-        const today = new Date();
-        const diffTime = nextReviewDate.getTime() - today.getTime();
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        // 只有在页面提交时才显示成功提示
+        if (isPageSubmission) {
+            // 计算下次复习时间与今天的天数差
+            const nextReviewDate = new Date(problem.fsrsState.nextReview);
+            const today = new Date();
+            const diffTime = nextReviewDate.getTime() - today.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        // 显示复习成功提示，包含下次复习时间
-        showToast(`复习成功！下次复习时间：${nextReviewDate.toLocaleDateString()}（${diffDays}天后）\nReview successful! Next review: ${nextReviewDate.toLocaleDateString()} (in ${diffDays} days)`, "success");
+            // 显示复习成功提示，包含下次复习时间
+            showToast(`复习成功！下次复习时间：${nextReviewDate.toLocaleDateString()}（${diffDays}天后）\nReview successful! Next review: ${nextReviewDate.toLocaleDateString()} (in ${diffDays} days)`, "success");
+        }
 
         await syncProblems(); // 同步到云端
         console.log("提交成功！");
@@ -245,7 +251,7 @@ export async function handleFeedbackSubmission(problem = null) {
 }
 
 // 添加一个更醒目的提示框函数，支持不同类型的提示
-function showToast(message, type = "info", duration = 5000) {
+function showToast(message, type = "info", duration = 4000) {
     // 检查是否已存在toast样式
     if (!document.getElementById('lms-toast-style')) {
         const style = document.createElement('style');
