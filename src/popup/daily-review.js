@@ -10,6 +10,8 @@ import { descriptionOf, idOf, problemSorterArr } from "./util/sort";
 import {handleAddProblem} from "./script/submission.js"
 // 在文件顶部导入 SweetAlert2
 import Swal from 'sweetalert2';
+// 导入 getAllRevlogs 函数
+import { getAllRevlogs, exportRevlogsToCSV } from './util/fsrs.js';
 
 // 在文件开头添加
 const LAST_AVERAGE_KEY = 'lastRetrievabilityAverage';
@@ -347,6 +349,7 @@ export function updateCardDisplay() {
     
     updateStats(); // 更新统计信息，传递当前显示的卡片数量
 
+    
     createReviewCards(); // 创建新的卡片
 }
 
@@ -1001,6 +1004,28 @@ document.addEventListener('DOMContentLoaded', async function() {
             });
         });
     });
+
+    // 调试 revlogs
+    try {
+        console.log('===== 开始调试 revlogs =====');
+        const allRevlogs = await getAllRevlogs();
+        console.log('所有复习日志:', allRevlogs);
+        
+        // 计算总复习次数
+        let totalReviews = 0;
+        Object.keys(allRevlogs).forEach(cardId => {
+            totalReviews += allRevlogs[cardId]?.length || 0;
+        });
+        console.log(`总复习次数: ${totalReviews}`);
+        
+        // 导出 CSV 并打印
+        const csvContent = await exportRevlogsToCSV();
+        console.log('CSV 格式的复习日志:');
+        console.log(csvContent);
+        console.log('===== 结束调试 revlogs =====');
+    } catch (error) {
+        console.error('调试 revlogs 时出错:', error);
+    }
 });
 
 
