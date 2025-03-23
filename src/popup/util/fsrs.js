@@ -116,11 +116,34 @@ export const calculateNextReview = (problem, feedback) => {
     }
 };
 
+// 将状态转换为数字
+const stateToNumber = (state) => {
+    switch (state) {
+        case 'New': return 0;
+        case 'Learning': return 1;
+        case 'Review': return 2;
+        case 'Relearning': return 3;
+        default: return 0;
+    }
+};
+
 // 5. 更新问题状态
 export const updateProblemWithFSRS = (problem, feedback) => {
     const now = Date.now();
     const fsrsResult = calculateNextReview(problem, feedback);
-
+    
+    // 创建新的复习日志条目，只包含必要字段
+    const newRevlog = {
+        card_id: problem.index, // 使用问题索引作为卡片ID
+        review_time: now, // 复习时间（毫秒时间戳）
+        review_rating: qualityToRating(feedback.quality), // 复习评分 (1-4)
+        review_state: stateToNumber(problem.fsrsState?.state || 'New') // 复习状态 (0-3)
+    };
+    
+    // 将复习日志存储到单独的 localStorage 键中
+    saveRevlog(problem.index, newRevlog);
+    
+    // 更新问题状态（不修改原有结构）
     problem.fsrsState = {
         ...problem.fsrsState,
         difficulty: fsrsResult.difficulty,
@@ -135,4 +158,94 @@ export const updateProblemWithFSRS = (problem, feedback) => {
 
     problem.modificationTime = now;
     return problem;
+};
+
+// 保存单个复习日志
+export const saveRevlog = async (cardId, revlog) => {
+    try {
+        // 从 localStorage 获取现有的复习日志
+        const existingRevlogsStr = await new Promise((resolve) => {
+            chrome.storage.local.get(['fsrs_revlogs'], (result) => {
+                resolve(result.fsrs_revlogs || '{}');
+            });
+        });
+        
+        let existingRevlogs;
+        try {
+            existingRevlogs = JSON.parse(existingRevlogsStr);
+        } catch (e) {
+            console.error('Error parsing revlogs:', e);
+            existingRevlogs = {};
+        }
+        
+        // 确保该卡片的日志数组存在
+        if (!existingRevlogs[cardId]) {
+            existingRevlogs[cardId] = [];
+        }
+        
+        // 添加新的复习日志
+        existingRevlogs[cardId].push(revlog);
+        
+        // 保存回 localStorage
+        await new Promise((resolve) => {
+            chrome.storage.local.set({ 'fsrs_revlogs': JSON.stringify(existingRevlogs) });
+            resolve();
+        });
+        
+        return true;
+    } catch (error) {
+        console.error('Error saving revlog:', error);
+        return false;
+    }
+};
+
+// 获取所有复习日志
+export const getAllRevlogs = async () => {
+    try {
+        const revlogsStr = await new Promise((resolve) => {
+            chrome.storage.local.get(['fsrs_revlogs'], (result) => {
+                resolve(result.fsrs_revlogs || '{}');
+            });
+        });
+        
+        let allRevlogs;
+        try {
+            allRevlogs = JSON.parse(revlogsStr);
+        } catch (e) {
+            console.error('Error parsing revlogs:', e);
+            return {};
+        }
+        
+        return allRevlogs;
+    } catch (error) {
+        console.error('Error getting revlogs:', error);
+        return {};
+    }
+};
+
+// 导出复习日志为CSV格式
+export const exportRevlogsToCSV = async () => {
+    try {
+        // 获取所有复习日志
+        const allRevlogs = await getAllRevlogs();
+        
+        // CSV 头部 - 只包含必要字段
+        const csvHeader = 'card_id,review_time,review_rating,review_state\n';
+        
+        // 收集所有卡片的复习日志
+        let csvContent = csvHeader;
+        
+        Object.keys(allRevlogs).forEach(cardId => {
+            const cardRevlogs = allRevlogs[cardId] || [];
+            cardRevlogs.forEach(log => {
+                // 只导出必要字段
+                csvContent += `${log.card_id},${log.review_time},${log.review_rating},${log.review_state}\n`;
+            });
+        });
+        
+        return csvContent;
+    } catch (error) {
+        console.error('Error exporting revlogs to CSV:', error);
+        return '';
+    }
 };
