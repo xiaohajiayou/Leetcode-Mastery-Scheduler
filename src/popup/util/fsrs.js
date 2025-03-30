@@ -1,4 +1,4 @@
-import { FSRS, Rating, createEmptyCard, generatorParameters } from 'ts-fsrs';
+import { FSRS, Rating, S_MIN, State, TypeConvert, createEmptyCard, dateDiffInDays, generatorParameters } from 'ts-fsrs';
 
 // 1. 创建自定义参数
 const params = generatorParameters({
@@ -26,77 +26,42 @@ const qualityToRating = (quality) => {
 export const calculateNextReview = (problem, feedback) => {
     try {
         const now = new Date();
-
-        // 如果没有 fsrsState，创建一个默认的
-        if (!problem.fsrsState) {
-            problem.fsrsState = {
-                difficulty: null,
-                quality: null,
-                lastReview: problem.submissionTime || now.getTime(),
-                nextReview: null,
-                reviewCount: 0,
-                stability: 0,
-                state: 'New',
-                lapses: 0
-            };
-        }
-
-        const lastReview = problem.fsrsState.lastReview 
+        const lastReview = problem.fsrsState && problem.fsrsState.lastReview
             ? new Date(problem.fsrsState.lastReview)
             : new Date(problem.submissionTime || now.getTime());
 
-        let card = createEmptyCard(lastReview);
-        
-        if (problem.fsrsState.state !== 'New') {
-            card = {
-                ...card,
-                state: problem.fsrsState.state,
-                stability: problem.fsrsState.stability || 0,
-                difficulty: problem.fsrsState.difficulty || 0,
-                reps: problem.fsrsState.reviewCount || 0,
-                lapses: problem.fsrsState.lapses || 0,
-                // 添加时间相关字段
-                elapsed_days: problem.fsrsState.lastReview 
-                    ? (now - new Date(problem.fsrsState.lastReview)) / (24 * 60 * 60 * 1000)
-                    : 0,
-                scheduled_days: problem.fsrsState.nextReview 
-                    ? (new Date(problem.fsrsState.nextReview) - new Date(problem.fsrsState.lastReview)) / (24 * 60 * 60 * 1000)
-                    : 0
-            };
+        // 如果没有 fsrsState，创建一个默认的
+        if (!problem.fsrsState) {
+            problem.fsrsState = createEmptyCard(lastReview, (card) => {
+                return {
+                    nextReview: +card.due,
+                    stability: card.stability,
+                    difficulty: card.difficulty,
+                    state: card.state,
+                    reps: card.reps,
+                    lapses: card.lapses
+                }
+            });
         }
-        
+        let card = problem.fsrsState
+
         const rating = qualityToRating(feedback.quality);
-        const scheduling_cards = fsrs.repeat(card, now);
-        const result = scheduling_cards[rating];
+        const result = fsrs.next({
+            due: card.nextReview,
+            stability: card.stability,
+            difficulty: card.difficulty,
+            elapsed_days: (now.getTime() - lastReview.getTime()) / (1000 * 60 * 60 * 24),
+            scheduled_days: Math.floor((card.nextReview - card.lastReview) / (1000 * 60 * 60 * 24)),
+            reps: card.reviewCount,
+            lapse_count: card.lapses,
+            state: card.state,
+            last_review: card.lastReview || undefined,
+        }, now, rating);
 
-        if (!result || !result.card) {
-            console.error('FSRS calculation failed:', result);
-            // 默认间隔
-            const defaultDays = {
-                [Rating.Again]: 1,
-                [Rating.Hard]: 3,
-                [Rating.Good]: 7,
-                [Rating.Easy]: 14
-            }[rating] || 1;
-
-            return {
-                nextReview: now.getTime() + (defaultDays * 24 * 60 * 60 * 1000),
-                stability: card.stability,
-                difficulty: card.difficulty,
-                state: card.state,
-                reps: card.reps + 1,
-                lapses: card.lapses
-            };
-        }
-
-        // 确保间隔至少为1天
-        const nextReviewTime = Math.max(
-            result.card.due.getTime(),
-            now.getTime() + (24 * 60 * 60 * 1000)
-        );
 
         return {
-            nextReview: nextReviewTime,
+            /**长期调度模式，ivl一定大于1d */
+            nextReview: +result.card.due,
             stability: result.card.stability,
             difficulty: result.card.difficulty,
             state: result.card.state,
@@ -107,25 +72,17 @@ export const calculateNextReview = (problem, feedback) => {
         console.error('Error in calculateNextReview:', error);
         return {
             nextReview: now.getTime() + (24 * 60 * 60 * 1000),
-            stability: problem.fsrsState.stability || 0,
-            difficulty: problem.fsrsState.difficulty || 0,
-            state: problem.fsrsState.state || 'New',
+            stability: problem.fsrsState.stability || S_MIN,
+            /** ref: https://github.com/open-spaced-repetition/ts-fsrs/blob/5eabd189d4740027ce1018cc968e67ca46c048a3/src/fsrs/default.ts#L20-L40 */
+            difficulty: problem.fsrsState.difficulty || params.w[4],
+            /** 长期调度下状态一定是New或Review */
+            state: problem.fsrsState.state || State.Review,
             reps: (problem.fsrsState.reviewCount || 0) + 1,
             lapses: problem.fsrsState.lapses || 0
         };
     }
 };
 
-// 将状态转换为数字
-const stateToNumber = (state) => {
-    switch (state) {
-        case 'New': return 0;
-        case 'Learning': return 1;
-        case 'Review': return 2;
-        case 'Relearning': return 3;
-        default: return 0;
-    }
-};
 
 // 5. 更新问题状态
 export const updateProblemWithFSRS = (problem, feedback) => {
@@ -137,7 +94,7 @@ export const updateProblemWithFSRS = (problem, feedback) => {
         card_id: problem.index, // 使用问题索引作为卡片ID
         review_time: now, // 复习时间（毫秒时间戳）
         review_rating: qualityToRating(feedback.quality), // 复习评分 (1-4)
-        review_state: stateToNumber(problem.fsrsState?.state || 'New') // 复习状态 (0-3)
+        review_state: TypeConvert.state(problem.fsrsState ? problem.fsrsState?.state : 'New') // 复习状态 (0-3)
     };
     
     // 将复习日志存储到单独的 localStorage 键中
@@ -149,7 +106,7 @@ export const updateProblemWithFSRS = (problem, feedback) => {
         difficulty: fsrsResult.difficulty,
         stability: fsrsResult.stability,
         state: fsrsResult.state,
-        lastReview: now,
+        lastReview: fsrsResult.lastReview,
         nextReview: fsrsResult.nextReview,
         reviewCount: fsrsResult.reps,
         lapses: fsrsResult.lapses,
