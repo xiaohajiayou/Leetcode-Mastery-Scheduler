@@ -94,7 +94,7 @@ export const updateProblemWithFSRS = (problem, feedback) => {
         card_id: problem.index, // 使用问题索引作为卡片ID
         review_time: now, // 复习时间（毫秒时间戳）
         review_rating: qualityToRating(feedback.quality), // 复习评分 (1-4)
-        review_state: TypeConvert.state(problem.fsrsState ? problem.fsrsState?.state : 'New') // 复习状态 (0-3)
+        review_state: TypeConvert.state(problem.fsrsState ? problem.fsrsState?.state ?? State.New : 'New') // 复习状态 (0-3)
     };
     
     // 将复习日志存储到单独的 localStorage 键中
