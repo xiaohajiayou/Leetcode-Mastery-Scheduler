@@ -21,9 +21,9 @@
 </div>
 
 <h2 align="center">
-    Smart Prioritization, Flexible Review, Code Smarter!
+  Train Memory Curves, Smart Prioritization, Flexible Review, Code Smarter!
     <br>
-    智能评估优先级，灵活复习，更聪明地刷题！
+    训练记忆曲线，智能评估优先级，灵活复习，更聪明地刷题！
 </h2>
 
 ![alt text](https://s2.loli.net/2025/02/16/eNEV49CM8ABWdZ7.jpg)   
