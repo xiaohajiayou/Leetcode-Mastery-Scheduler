@@ -1,6 +1,6 @@
 {
   "name": "Leetcode-Mastery-Scheduler",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "<h1 align=\"center\">\r   <img src=\"assets/logo2.png\" style=\"width: 10%;\" />\r   <br>\r     <B>P</B>ractice <B>M</B>akes <B>C</B>ode <B>A</B>ccepted\r   <br>\r </h1>",
   "main": "src/popup.js",
   "directories": {

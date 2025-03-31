@@ -1,6 +1,23 @@
 # Changelog
 
 # Changelog
+## [0.1.2] - 2025-04-01
+### Fixed
+- incorrect state judgment && error lastreview time (#27)
+  错误的状态判断以及错误的上次复习时间 (#27)
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## [0.1.1] - 2025-03-24
 ### Fixed
 - Fix the issue where the same question could be rated multiple times within one day on the web version (#XX)
