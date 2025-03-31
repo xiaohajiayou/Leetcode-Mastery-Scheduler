@@ -26,9 +26,21 @@ const qualityToRating = (quality) => {
 export const calculateNextReview = (problem, feedback) => {
     try {
         const now = new Date();
-        const lastReview = problem.fsrsState && problem.fsrsState.lastReview
-            ? new Date(problem.fsrsState.lastReview)
-            : new Date(problem.submissionTime || now.getTime());
+        
+        // 确保有一个有效的 lastReview 日期
+        let lastReview;
+        if (problem.fsrsState && problem.fsrsState.lastReview) {
+            lastReview = new Date(problem.fsrsState.lastReview);
+        } else if (problem.submissionTime) {
+            lastReview = new Date(problem.submissionTime);
+        } else {
+            lastReview = new Date(now.getTime()); // 默认为昨天
+        }
+        
+        // 检查日期是否有效
+        if (isNaN(lastReview.getTime())) {
+            lastReview = new Date(now.getTime()); // 如果无效，使用昨天
+        }
 
         // 如果没有 fsrsState，创建一个默认的
         if (!problem.fsrsState) {
@@ -38,26 +50,38 @@ export const calculateNextReview = (problem, feedback) => {
                     stability: card.stability,
                     difficulty: card.difficulty,
                     state: card.state,
-                    reps: card.reps,
-                    lapses: card.lapses
+                    reviewCount: card.reps,
+                    lapses: card.lapses,
+                    lastReview: +lastReview  // 存储为时间戳
                 }
             });
         }
-        let card = problem.fsrsState
+        let card = problem.fsrsState;
+        
+ 
+        
+        // 确保 nextReview 有效
+        if (!card.nextReview || isNaN(card.nextReview)) {
+            card.nextReview = +lastReview; // 默认为一天后
+        }
 
         const rating = qualityToRating(feedback.quality);
+        
+        // 确保所有参数都有有效值
+        const scheduledDays = Math.max(0, Math.floor((card.nextReview - card.lastReview) / (1000 * 60 * 60 * 24)));
+        const elapsedDays = Math.max(0, (now.getTime() - lastReview.getTime()) / (1000 * 60 * 60 * 24));
+        
         const result = fsrs.next({
             due: card.nextReview,
             stability: card.stability,
             difficulty: card.difficulty,
-            elapsed_days: (now.getTime() - lastReview.getTime()) / (1000 * 60 * 60 * 24),
-            scheduled_days: Math.floor((card.nextReview - card.lastReview) / (1000 * 60 * 60 * 24)),
+            elapsed_days: elapsedDays,
+            scheduled_days: scheduledDays,
             reps: card.reviewCount,
             lapse_count: card.lapses,
             state: card.state,
-            last_review: card.lastReview || undefined,
+            last_review: lastReview,  // 使用已经转换好的 Date 对象
         }, now, rating);
-
 
         return {
             /**长期调度模式，ivl一定大于1d */
@@ -65,11 +89,12 @@ export const calculateNextReview = (problem, feedback) => {
             stability: result.card.stability,
             difficulty: result.card.difficulty,
             state: result.card.state,
-            reps: result.card.reps,
+            reviewCount: result.card.reps,
             lapses: result.card.lapses
         };
     } catch (error) {
         console.error('Error in calculateNextReview:', error);
+        const now = new Date(); // 在 catch 块中定义 now 变量
         return {
             nextReview: now.getTime() + (24 * 60 * 60 * 1000),
             stability: problem.fsrsState.stability || S_MIN,
@@ -77,7 +102,7 @@ export const calculateNextReview = (problem, feedback) => {
             difficulty: problem.fsrsState.difficulty || params.w[4],
             /** 长期调度下状态一定是New或Review */
             state: problem.fsrsState.state || State.Review,
-            reps: (problem.fsrsState.reviewCount || 0) + 1,
+            reviewCount: (problem.fsrsState.reviewCount || 0) + 1,
             lapses: problem.fsrsState.lapses || 0
         };
     }
@@ -106,7 +131,7 @@ export const updateProblemWithFSRS = (problem, feedback) => {
         difficulty: fsrsResult.difficulty,
         stability: fsrsResult.stability,
         state: fsrsResult.state,
-        lastReview: fsrsResult.lastReview,
+        lastReview: now,
         nextReview: fsrsResult.nextReview,
         reviewCount: fsrsResult.reps,
         lapses: fsrsResult.lapses,
