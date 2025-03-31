@@ -24,7 +24,7 @@
 
 
 
-
+console.log(`[${process.env.NODE_ENV}]webpack.config.js loaded`);
 module.exports = {
     entry: {
         popup: {
@@ -54,13 +54,12 @@ module.exports = {
             }
         ]
     },
-    mode: 'production',
     // 开发模式，代码不会被压缩
-    // mode: 'development',
+    mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
     // 生成源码映射，方便调试
     devtool: 'source-map',
     // 关闭代码最小化
     optimization: {
-        minimize: false
+        minimize: process.env.NODE_ENV === 'production'
     }
 }
