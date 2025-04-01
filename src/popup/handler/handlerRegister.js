@@ -3,6 +3,7 @@ import { setModeSwitchHandlers } from "./modeSwitchHandler";
 import { setPageJumpHandlers } from "./pageJumpHandler"
 import { setPopupUnloadHandler } from "./popupUnloadHandler";
 import { setRecordOperationHandlers } from "./recordOperationHandler";
+import { setNoteHandlers } from "./noteHandler";
 
 export const registerAllHandlers = () => {
     setPageJumpHandlers();
@@ -10,4 +11,5 @@ export const registerAllHandlers = () => {
     setRecordOperationHandlers();
     setConfigJumpHandlers();
     setPopupUnloadHandler();
+    setNoteHandlers();
 }
