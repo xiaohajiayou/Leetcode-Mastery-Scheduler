@@ -47,7 +47,7 @@
         },
         {
             "matches": [
-                "https://leetcode.com/*"
+                "https://leetcode.com/problems/*"
             ],
             "js": [
                 "dist/leetcode.js"
@@ -56,7 +56,7 @@
         },
         {
             "matches": [
-                "https://leetcode.cn/*"
+                "https://leetcode.cn/problems/*"
             ],
             "js": [
                 "dist/leetcodecn.js"

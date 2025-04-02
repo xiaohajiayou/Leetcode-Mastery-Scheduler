@@ -2,33 +2,40 @@ import { input0DOM, input1DOM, input2DOM, nextButton0DOM, nextButton1DOM, nextBu
 import { renderCompletedTableContent, renderReviewTableContent, renderScheduledTableContent } from "../view/view";
 import { store } from "../store";
 import { setRecordOperationHandlers } from "./recordOperationHandler";
+import { setNoteHandlers } from "./noteHandler";
 
 const goToPrevReviewPage = () => {
     renderReviewTableContent(store.needReviewProblems, store.toReviewPage - 1);
     setRecordOperationHandlers();
+    setNoteHandlers();
 }
 const goToNextReviewPage = () => {
     renderReviewTableContent(store.needReviewProblems, store.toReviewPage + 1);
     setRecordOperationHandlers();
+    setNoteHandlers();
 }
-const goToPrevSchedulePage = () => {
-    renderScheduledTableContent(store.reviewScheduledProblems, store.scheduledPage - 1);
+const goToPrevSchedulePage = async () => {
+    await renderScheduledTableContent(store.reviewScheduledProblems, store.scheduledPage - 1);
     setRecordOperationHandlers();
+    setNoteHandlers();
 }
 
-const goToNextSchedulePage = () => {
-    renderScheduledTableContent(store.reviewScheduledProblems, store.scheduledPage + 1);
+const goToNextSchedulePage = async () => {
+    await renderScheduledTableContent(store.reviewScheduledProblems, store.scheduledPage + 1);
     setRecordOperationHandlers();
+    setNoteHandlers();
 }
 
 const goToPrevCompletedPage = () => {
     renderCompletedTableContent(store.completedProblems, store.completedPage - 1);
     setRecordOperationHandlers();
+    setNoteHandlers();
 }
 
 const goToNextCompletedPage = () => {
     renderCompletedTableContent(store.completedProblems, store.completedPage + 1);
     setRecordOperationHandlers();
+    setNoteHandlers();
 }
 
 const jumpToReviewPage = (event) => {
