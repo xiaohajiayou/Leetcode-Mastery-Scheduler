@@ -1,10 +1,17 @@
 # Changelog
 
-# Changelog
-## [0.1.2] - 2025-04-01
+## [0.1.3] - 2025-04-02
+
+### Added
+- Add note writing and export features to enhance the learning experience and allow users to better organize their knowledge (#5)
+  新增笔记撰写和导出功能，提升学习体验，帮助用户更好地整理知识（#5）
+
 ### Fixed
-- incorrect state judgment && error lastreview time (#27)
-  错误的状态判断以及错误的上次复习时间 (#27)
+- Fix the issue where LeetCode URLs were incorrectly matched, leading to errors in question identification (#31)
+  修复LeetCode URL错误匹配问题，避免题目识别出错（#31）
+
+- Fix the issue where the S value in the FSRS algorithm was not updated due to incorrect matching, ensuring accurate data for training (#27)
+  修复因错误匹配导致FSRS算法中S值未更新问题，确保训练数据准确（#27）
 
 
 

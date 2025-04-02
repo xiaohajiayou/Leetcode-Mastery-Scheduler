@@ -38,7 +38,7 @@
     
 4.  You can complete your review by ticking the box in the plugin's `popup` window, or you can click into the problem page and complete the review via the `rate it` button.
     
-5.  Open the problem list to see all the problems in your current review plan.
+5.  Open the question list, view all the questions in the current review plan, write notes, and export notes as Markdown.
     
 6.  Happy problem-solving! The key to mastering things quickly is to avoid forgetting!
 # 🚀 用法
@@ -46,7 +46,7 @@
 2. 插件主页自动评估每道题的可检索性优先级（能够回忆起来的概率），用户可根据时间安排，灵活调整每日的复习量。
 3. FSRS算法允许休息和提前突击复习，其算法会随时间流逝，自动推理整体题目的回忆概率，动态调整下一次复习时间，以适应你的学习节奏。 
 4. 可在插件的`popup`弹窗中打勾完成复习；也可点击进入题目页面，通过`rate`按钮完成复习。
-5. 打开题目列表，查看当前复习规划的所有题目
+5. 打开题目列表，查看当前复习规划的所有题目，撰写笔记，导出笔记为Markdown
 6. 刷题快乐，速成的本质在于不要遗忘!
 
 ![alt text](https://s2.loli.net/2025/02/20/CrmZewAQlWUNuc4.gif)
@@ -81,27 +81,26 @@
 | 监控提醒   | ✅ 已完成  | bilibili、youtube       |
 | url添加力扣题目   | ✅ 已完成  | 配合 IDE 刷题，工位摸鱼专用      |
 | url添加自定义卡片   | ✅ 已完成  | 用于记录面试手撕题、其他刷题网站用户暂时替代方案      |
+| 提供笔记功能       | ✅ 已完成  | 题目列表中新增笔记按钮，支持导出所有笔记为Markdown     | 
 | 收集Anki fsrs 训练数据       | ✅ 已完成  | 待用于测试fsrs官方端口训练       | 
 | 接入Anki fsrs官方训练端口       | ❌ 待完成  | 待评估可行性（用户可拟合出最适合自己的记忆曲线）       | 
 | 不同网站题目数据源切换   | ❌ 待完成  | 待完成（目前仅支持力扣国际站和中国站，待兼容洛谷等）       |
 | 兼容火狐       | ❌ 待完成  | 待完成       | 
-| 提供笔记功能       | ❌ 待完成  | 待评估可行性（浏览器存储数据上限可能无法支持）       | 
-
 | 兼容`ctrl + enter`       | ❌ 待完成  | 目前优先级较低       |
 
 
 # 📝 Next Steps
-| Task/Feature                | Status     | Remarks                                                                 |
-|-----------------------------|------------|-------------------------------------------------------------------------|
-| Multi-device cloud sync     | ✅ Completed | Edge, Chrome                                                            |
-| Monitoring reminders        | ✅ Completed | Bilibili, YouTube                                                       |
-| Add LeetCode URL            | ✅ Completed | For use with IDE for problem-solving, perfect for stealth studying at work |
-| Add custom card URL         | ✅ Completed | recording interview problems, serves as a temporary solution for other problem-solving websites |
-| Switch data sources for different websites | ❌ Pending  | Pending completion (currently only supports LeetCode Global and China, pending compatibility with Luogu, etc.) |
-| Firefox compatibility       | ❌ Pending  | Pending feasibility assessment                                           |
-| Provide note-taking feature | ❌ Pending  | Pending feasibility assessment (browser storage data limits may not support) |
-| Integrate with Anki fsrs official training port | ❌ Pending  | Pending feasibility assessment (users can fit their own optimal memory curve) |
-| Compatibility with `Ctrl + Enter` | ❌ Pending  | Currently lower priority                                                |
+| Task/Feature          | Status     | Notes                              |
+|-----------------------|------------|------------------------------------|
+| Multi-device data cloud sync | ✅ Completed | Edge, Chrome                     |
+| Monitor reminder      | ✅ Completed | bilibili, youtube                 |
+| URL add LeetCode problems | ✅ Completed | For brushing questions with IDE, dedicated to working position entertainment |
+| URL add custom cards  | ✅ Completed | For recording interview hand-torn problems, alternative solution for other question brushing websites |
+| Provide note-taking feature | ✅ Completed | Add note button in question list, support exporting all notes as Markdown |
+| Collect Anki fsrs training data | ✅ Completed | Pending for testing fsrs official port training |
+| Integrate Anki fsrs official training port | ❌ Pending | To be assessed for feasibility (users can fit their own optimal memory curve) |
+| Switch between different website question data sources | ❌ Pending | To be completed (currently only supports LeetCode international and Chinese stations, to be compatible with Luogu, etc.) |
+| Compatibility with Firefox | ❌ Pending | To be completed                   |
 
 
 
