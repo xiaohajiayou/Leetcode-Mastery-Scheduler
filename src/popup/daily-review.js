@@ -12,6 +12,7 @@ import {handleAddProblem} from "./script/submission.js"
 import Swal from 'sweetalert2';
 // 导入 getAllRevlogs 函数
 import { getAllRevlogs, exportRevlogsToCSV } from './util/fsrs.js';
+import { getRevlogCount, optimizeParameters } from './service/fsrsService.js';
 
 // 在文件开头添加
 const LAST_AVERAGE_KEY = 'lastRetrievabilityAverage';
@@ -783,6 +784,94 @@ function initializeAddProblem() {
     }
 }
 
+// 显示弹窗函数
+function showModal(title, content) {
+    Swal.fire({
+        title: title,
+        html: content,
+        background: '#1d2e3d',
+        color: '#ffffff',
+        confirmButtonColor: '#4a9d9c',
+        width: '600px'
+    });
+}
+
+// 初始化FSRS参数优化卡片
+async function initializeFSRSOptimization() {
+    try {
+        // 获取并显示复习记录数量
+        const count = await getRevlogCount();
+        const revlogCountElement = document.getElementById('revlogCount');
+        if (revlogCountElement) {
+            revlogCountElement.textContent = count;
+        }
+        
+        // 添加优化按钮点击事件
+        const optimizeParamsBtn = document.getElementById('optimizeParamsBtn');
+        if (optimizeParamsBtn) {
+            optimizeParamsBtn.addEventListener('click', async () => {
+                // 将originalText变量移到try块之外
+                const originalText = optimizeParamsBtn.textContent || '优化参数';
+                
+                try {
+                    // 显示加载中提示
+                    optimizeParamsBtn.disabled = true;
+                    optimizeParamsBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 优化中...';
+                    
+                    // 创建进度显示元素
+                    const progressContainer = document.createElement('div');
+                    progressContainer.className = 'progress mt-2';
+                    progressContainer.style.height = '5px';
+                    progressContainer.innerHTML = `
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                             role="progressbar" 
+                             style="width: 0%" 
+                             aria-valuenow="0" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                        </div>
+                    `;
+                    optimizeParamsBtn.parentNode.appendChild(progressContainer);
+                    
+                    // 进度回调函数
+                    const onProgress = (progress) => {
+                        console.log('Progress update:', progress);
+                        const percent = Math.round(progress.percent * 100);
+                        const progressBar = progressContainer.querySelector('.progress-bar');
+                        if (progressBar) {
+                            progressBar.style.width = `${percent}%`;
+                            progressBar.setAttribute('aria-valuenow', percent);
+                            progressBar.textContent = `${percent}%`;
+                        }
+                    };
+                    
+                    // 调用优化API
+                    const result = await optimizeParameters(onProgress);
+                    
+                    // 移除进度显示元素
+                    progressContainer.remove();
+                    
+                    // 显示结果弹窗
+                    showModal('FSRS参数优化结果', `
+                        <div style="max-height: 300px; overflow-y: auto;">
+                            <pre style="white-space: pre-wrap; word-break: break-all;">${JSON.stringify(result, null, 2)}</pre>
+                        </div>
+                    `);
+                } catch (error) {
+                    console.error('Error optimizing FSRS parameters:', error);
+                    showModal('错误', `优化参数时发生错误: ${error.message}`);
+                } finally {
+                    // 恢复按钮状态
+                    optimizeParamsBtn.disabled = false;
+                    optimizeParamsBtn.textContent = originalText;
+                }
+            });
+        }
+    } catch (error) {
+        console.error('Error initializing FSRS optimization:', error);
+    }
+}
+
 // 添加设置相关的初始化函数
 async function initializeOptions() {
     await loadConfigs();
@@ -818,7 +907,10 @@ async function initializeOptions() {
     if (reminderToggle) {
         reminderToggle.checked = store.isReminderEnabled || false;
     }
-
+    
+    // 初始化FSRS参数优化卡片
+    await initializeFSRSOptimization();
+    
     // 修改保存成功提示
     optionsForm.addEventListener('submit', async e => {
         e.preventDefault();
