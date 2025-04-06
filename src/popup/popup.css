@@ -1110,3 +1110,67 @@ td, th {
     text-decoration: underline;
     color: #afffff;
 }
+
+/* 图标按钮样式 */
+.btn-icon {
+    background: none;
+    border: none;
+    color: #4a9d9c;
+    font-size: 1em;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.btn-icon:hover {
+    background-color: rgba(74, 157, 156, 0.1);
+    color: #61dafb;
+    transform: translateY(-1px);
+}
+
+.btn-icon:active {
+    transform: translateY(0);
+}
+
+.btn-icon-sm {
+    width: 24px;
+    height: 24px;
+}
+
+/* 优化参数进度条样式 */
+.optimize-progress {
+    height: 3px !important;
+    background-color: rgba(74, 157, 156, 0.1) !important;
+    border-radius: 4px !important;
+    margin-top: 12px !important;
+    overflow: hidden !important;
+}
+
+.optimize-progress .progress-bar {
+    background: linear-gradient(90deg, #4a9d9c, #61dafb) !important;
+    transition: width 0.3s ease !important;
+}
+
+.optimize-progress .progress-bar-animated {
+    animation: progress-bar-stripes 1s linear infinite !important;
+}
+
+.optimize-progress .progress-bar-striped {
+    background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+    ) !important;
+    background-size: 1rem 1rem !important;
+}

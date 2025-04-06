@@ -524,24 +524,29 @@
                             <div style="display: flex; align-items: center; justify-content: space-between;">
                                 <div style="display: flex; align-items: center; gap: 12px;">
                                     <i class="fas fa-cogs" style="font-size: 0.95em; line-height: 1; position: relative; top: 7px;"></i>
-                                    <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">FSRS参数优化</h4>
+                                    <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">Fsrs Param Optim</h4>
                                 </div>
                                 <div style="display: flex; gap: 8px;">
-                                    <button id="exportRevlogsBtn" class="btn btn-sm btn-outline-secondary" style="font-size: 0.8em;">
-                                        导出记录
+                                    <button id="exportRevlogsBtn" class="btn btn-icon btn-icon-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="导出记录">
+                                        <i class="fas fa-file-export" style="font-size: 0.85em;"></i>
                                     </button>
-                                    <button id="optimizeParamsBtn" class="btn btn-sm btn-primary" style="font-size: 0.8em;">
-                                        优化参数
+                                    <button id="optimizeParamsBtn" class="btn btn-icon btn-icon-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="优化参数">
+                                        <i class="fas fa-magic" style="font-size: 0.85em;"></i>
                                     </button>
                                 </div>
                             </div>
                             
                             <div class="fsrs-info" style="padding: 8px; border-radius: 4px;">
-                                <small style="display: block; margin-bottom: 2px; font-size: 0.8em;">
-                                    当前复习记录数: <span id="revlogCount">0</span>
+
+                                <small style="display: block; margin-bottom: 2px; font-size: 0.8em;" class="reminder-tips">
+                                    Current review count: <span id="revlogCount_en">0</span>
                                 </small>
-                                <small style="display: block; font-size: 0.8em;">
-                                    点击按钮优化FSRS算法参数
+
+                                <small style="display: block; font-size: 0.8em;" class="reminder-tips">
+                                    Click to optimize FSRS parameters
+                                </small>
+                                <small style="display: block; font-size: 0.8em;" class="reminder-tips">
+                                    (Fit best parameters when you have enough data.)
                                 </small>
                             </div>
                         </div>

@@ -1,18 +1,18 @@
 import { FSRS, Rating, S_MIN, State, TypeConvert, createEmptyCard, dateDiffInDays, generatorParameters } from 'ts-fsrs';
+import localStorageDelegate from '../delegate/localStorageDelegate.js';
+import cloudStorageDelegate from '../delegate/cloudStorageDelegate.js';
+import { store } from '../store';
 
 // 1. 创建自定义参数
-const params = generatorParameters({
+export const defaultParams = generatorParameters({
     request_retention: 0.9,          // 期望记忆保持率 90%
     maximum_interval: 365,           // 最大间隔天数
     enable_fuzz: false,              // 禁用时间模糊化
     enable_short_term: false          // 启用短期记忆影响
 });
 
-// 2. 创建 FSRS 实例
-const fsrs = new FSRS(params);
-
-// 3. 评分映射（4个等级）
-const qualityToRating = (quality) => {
+// 2. 评分映射（4个等级）
+export const qualityToRating = (quality) => {
     switch(quality) {
         case 1: return Rating.Again;  // 完全不会
         case 2: return Rating.Hard;   // 有点难
@@ -22,127 +22,63 @@ const qualityToRating = (quality) => {
     }
 };
 
-// 4. 计算下次复习时间
-export const calculateNextReview = (problem, feedback) => {
+// 3. 获取本地FSRS参数
+export const getFSRSParams = async () => {
     try {
-        const now = new Date();
-        
-        // 确保有一个有效的 lastReview 日期
-        let lastReview;
-        if (problem.fsrsState && problem.fsrsState.lastReview) {
-            lastReview = new Date(problem.fsrsState.lastReview);
-        } else if (problem.submissionTime) {
-            lastReview = new Date(problem.submissionTime);
-        } else {
-            lastReview = new Date(now.getTime()); // 默认为昨天
+        const result = await localStorageDelegate.get('fsrs_params');
+        console.log('找到本地FSRS参数:', result);
+        if (!result) {
+            console.log('未找到本地FSRS参数，使用默认参数');
+            return defaultParams;
         }
         
-        // 检查日期是否有效
-        if (isNaN(lastReview.getTime())) {
-            lastReview = new Date(now.getTime()); // 如果无效，使用昨天
+        // 如果结果是字符串，尝试解析它
+        if (typeof result === 'string') {
+            try {
+                const localParams = JSON.parse(result);
+                console.log('获取到本地FSRS参数:', localParams);
+                return localParams;
+            } catch (e) {
+                console.error('解析本地FSRS参数失败:', e);
+                return defaultParams;
+            }
         }
-
-        // 如果没有 fsrsState，创建一个默认的
-        if (!problem.fsrsState) {
-            problem.fsrsState = createEmptyCard(lastReview, (card) => {
-                return {
-                    nextReview: +card.due,
-                    stability: card.stability,
-                    difficulty: card.difficulty,
-                    state: card.state,
-                    reviewCount: card.reps,
-                    lapses: card.lapses,
-                    lastReview: +lastReview  // 存储为时间戳
-                }
-            });
-        }
-        let card = problem.fsrsState;
         
- 
-        
-        // 确保 nextReview 有效
-        if (!card.nextReview || isNaN(card.nextReview)) {
-            card.nextReview = +lastReview; // 默认为一天后
-        }
-
-        const rating = qualityToRating(feedback.quality);
-        
-        // 确保所有参数都有有效值
-        const scheduledDays = Math.max(0, Math.floor((card.nextReview - card.lastReview) / (1000 * 60 * 60 * 24)));
-        const elapsedDays = Math.max(0, (now.getTime() - lastReview.getTime()) / (1000 * 60 * 60 * 24));
-        
-        const result = fsrs.next({
-            due: card.nextReview,
-            stability: card.stability,
-            difficulty: card.difficulty,
-            elapsed_days: elapsedDays,
-            scheduled_days: scheduledDays,
-            reps: card.reviewCount,
-            lapse_count: card.lapses,
-            state: card.state,
-            last_review: lastReview,  // 使用已经转换好的 Date 对象
-        }, now, rating);
-
-        return {
-            /**长期调度模式，ivl一定大于1d */
-            nextReview: +result.card.due,
-            stability: result.card.stability,
-            difficulty: result.card.difficulty,
-            state: result.card.state,
-            reviewCount: result.card.reps,
-            lapses: result.card.lapses
-        };
+        // 如果结果已经是对象，直接返回
+        return result;
     } catch (error) {
-        console.error('Error in calculateNextReview:', error);
-        const now = new Date(); // 在 catch 块中定义 now 变量
-        return {
-            nextReview: now.getTime() + (24 * 60 * 60 * 1000),
-            stability: problem.fsrsState.stability || S_MIN,
-            /** ref: https://github.com/open-spaced-repetition/ts-fsrs/blob/5eabd189d4740027ce1018cc968e67ca46c048a3/src/fsrs/default.ts#L20-L40 */
-            difficulty: problem.fsrsState.difficulty || params.w[4],
-            /** 长期调度下状态一定是New或Review */
-            state: problem.fsrsState.state || State.Review,
-            reviewCount: (problem.fsrsState.reviewCount || 0) + 1,
-            lapses: problem.fsrsState.lapses || 0
-        };
+        console.error('获取本地FSRS参数失败:', error);
+        return defaultParams;
     }
 };
 
-
-// 5. 更新问题状态
-export const updateProblemWithFSRS = (problem, feedback) => {
-    const now = Date.now();
-    const fsrsResult = calculateNextReview(problem, feedback);
-    
-    // 创建新的复习日志条目，只包含必要字段
-    const newRevlog = {
-        card_id: problem.index, // 使用问题索引作为卡片ID
-        review_time: now, // 复习时间（毫秒时间戳）
-        review_rating: qualityToRating(feedback.quality), // 复习评分 (1-4)
-        review_state: TypeConvert.state(problem.fsrsState ? problem.fsrsState?.state ?? State.New : 'New') // 复习状态 (0-3)
-    };
-    
-    // 将复习日志存储到单独的 localStorage 键中
-    saveRevlog(problem.index, newRevlog);
-    
-    // 更新问题状态（不修改原有结构）
-    problem.fsrsState = {
-        ...problem.fsrsState,
-        difficulty: fsrsResult.difficulty,
-        stability: fsrsResult.stability,
-        state: fsrsResult.state,
-        lastReview: now,
-        nextReview: fsrsResult.nextReview,
-        reviewCount: fsrsResult.reps,
-        lapses: fsrsResult.lapses,
-        quality: feedback.quality
-    };
-
-    problem.modificationTime = now;
-    return problem;
+// 4. 保存FSRS参数到本地存储
+export const saveFSRSParams = async (newParams) => {
+    try {
+        // 为参数添加时间戳
+        const paramsWithTimestamp = {
+            ...newParams,
+            timestamp: Date.now()
+        };
+        
+        // 保存到本地存储（字符串格式）
+        await localStorageDelegate.set('fsrs_params', JSON.stringify(paramsWithTimestamp));
+        console.log('FSRS参数已保存到本地存储');
+        
+        // 保存到云端存储（对象格式）
+        if (store.isCloudSyncEnabled) {
+            await cloudStorageDelegate.set('fsrs_params', paramsWithTimestamp);
+            console.log('FSRS参数已保存到云端存储');
+        }
+        
+        return true;
+    } catch (error) {
+        console.error('保存FSRS参数失败:', error);
+        return false;
+    }
 };
 
-// 保存单个复习日志
+// 5. 保存单个复习日志
 export const saveRevlog = async (cardId, revlog) => {
     try {
         // 从 localStorage 获取现有的复习日志
@@ -168,11 +104,16 @@ export const saveRevlog = async (cardId, revlog) => {
         // 添加新的复习日志
         existingRevlogs[cardId].push(revlog);
         
-        // 保存回 localStorage
+        // 保存到本地存储
         await new Promise((resolve) => {
             chrome.storage.local.set({ 'fsrs_revlogs': JSON.stringify(existingRevlogs) });
             resolve();
         });
+        
+        // 如果启用了云同步，同时保存到云端
+        if (store.isCloudSyncEnabled) {
+            await cloudStorageDelegate.set('fsrs_revlogs', existingRevlogs);
+        }
         
         return true;
     } catch (error) {
@@ -181,31 +122,46 @@ export const saveRevlog = async (cardId, revlog) => {
     }
 };
 
-// 获取所有复习日志
+// 6. 获取所有复习日志
 export const getAllRevlogs = async () => {
     try {
-        const revlogsStr = await new Promise((resolve) => {
+        let result;
+        
+        // 如果启用了云同步，优先从云端获取
+        if (store.isCloudSyncEnabled) {
+            result = await cloudStorageDelegate.get('fsrs_revlogs');
+            if (result && Object.keys(result).length > 0) {
+                console.log('从云端获取复习日志:', result);
+                return result;
+            }
+        }
+        
+        // 如果云端没有数据或未启用云同步，从本地获取
+        result = await new Promise((resolve) => {
             chrome.storage.local.get(['fsrs_revlogs'], (result) => {
                 resolve(result.fsrs_revlogs || '{}');
             });
         });
         
-        let allRevlogs;
-        try {
-            allRevlogs = JSON.parse(revlogsStr);
-        } catch (e) {
-            console.error('Error parsing revlogs:', e);
-            return {};
+        // 如果结果是字符串，尝试解析它
+        if (typeof result === 'string') {
+            try {
+                return JSON.parse(result);
+            } catch (e) {
+                console.error('Error parsing revlogs:', e);
+                return {};
+            }
         }
         
-        return allRevlogs;
+        // 如果结果已经是对象，直接返回
+        return result || {};
     } catch (error) {
         console.error('Error getting revlogs:', error);
         return {};
     }
 };
 
-// 导出复习日志为CSV格式
+// 7. 导出复习日志为CSV格式
 export const exportRevlogsToCSV = async () => {
     try {
         // 获取所有复习日志
