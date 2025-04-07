@@ -11,7 +11,8 @@ import {handleAddProblem} from "./script/submission.js"
 // 在文件顶部导入 SweetAlert2
 import Swal from 'sweetalert2';
 // 导入 getAllRevlogs 函数
-import { getAllRevlogs, exportRevlogsToCSV } from './util/fsrs.js';
+import { getAllRevlogs, exportRevlogsToCSV,saveFSRSParams } from './util/fsrs.js';
+import { getRevlogCount, optimizeParameters,updateFSRSInstance } from './service/fsrsService.js';
 
 // 在文件开头添加
 const LAST_AVERAGE_KEY = 'lastRetrievabilityAverage';
@@ -783,6 +784,310 @@ function initializeAddProblem() {
     }
 }
 
+// 显示弹窗函数
+function showModal(title, content, buttons = null) {
+    const modalOptions = {
+        title: title,
+        html: content,
+        background: '#1d2e3d',
+        color: '#ffffff',
+        confirmButtonColor: '#4a9d9c',
+        width: '600px'
+    };
+    
+    // 如果有自定义按钮，则使用自定义按钮
+    if (buttons && Array.isArray(buttons)) {
+        modalOptions.showConfirmButton = false;
+        modalOptions.showCloseButton = true;
+        modalOptions.html += `
+            <div class="d-flex justify-content-end mt-3">
+                ${buttons.map(btn => `
+                    <button class="${btn.className} ms-2" id="modal-btn-${btn.text}">
+                        ${btn.text}
+                    </button>
+                `).join('')}
+            </div>
+        `;
+        
+        // 使用SweetAlert2显示模态框
+        Swal.fire(modalOptions);
+        
+        // 为每个按钮添加点击事件 - 移到这里，在Swal.fire之后立即绑定
+        setTimeout(() => {
+            buttons.forEach(btn => {
+                const btnElement = document.getElementById(`modal-btn-${btn.text}`);
+                if (btnElement && btn.onClick) {
+                    btnElement.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        try {
+                            // 执行按钮点击事件处理程序
+                            await btn.onClick();
+                            // 关闭弹窗
+                            Swal.close();
+                        } catch (error) {
+                            console.error('按钮点击事件处理程序执行失败:', error);
+                        }
+                    });
+                }
+            });
+        }, 100); // 添加一个小延迟确保DOM已更新
+    } else {
+        // 如果没有自定义按钮，则使用默认按钮
+        modalOptions.showConfirmButton = true;
+        modalOptions.confirmButtonText = '确定';
+        
+        // 使用SweetAlert2显示模态框
+        Swal.fire(modalOptions);
+    }
+}
+
+// 初始化FSRS参数优化卡片
+async function initializeFSRSOptimization() {
+    try {
+        // 获取并显示复习记录数量
+        const count = await getRevlogCount();
+        const revlogCountElement = document.getElementById('revlogCount');
+        const revlogCountEnElement = document.getElementById('revlogCount_en');
+        if (revlogCountElement) {
+            revlogCountElement.textContent = count;
+        }
+        if (revlogCountEnElement) {
+            revlogCountEnElement.textContent = count;
+        }
+        
+        // 添加导出按钮点击事件
+        const exportRevlogsBtn = document.getElementById('exportRevlogsBtn');
+        if (exportRevlogsBtn) {
+            exportRevlogsBtn.addEventListener('click', async () => {
+                // 保存原始按钮内容
+                const originalContent = exportRevlogsBtn.innerHTML;
+                
+                try {
+                    // 显示加载中提示
+                    exportRevlogsBtn.disabled = true;
+                    exportRevlogsBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size: 0.85em;"></i>';
+                    
+                    // 导出CSV
+                    const csvContent = await exportRevlogsToCSV();
+                    
+                    // 创建下载链接
+                    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.setAttribute('href', url);
+                    link.setAttribute('download', `fsrs_revlogs_${new Date().toISOString().slice(0, 10)}.csv`);
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // 显示成功提示
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Export Success',
+                        html: `
+                            <div>
+                                已成功导出 ${count} 条复习记录
+                                <br>
+                                <small class="text-muted">
+                                    Successfully exported ${count} review records to CSV file
+                                </small>
+                            </div>
+                        `,
+                        background: '#1d2e3d',
+                        color: '#ffffff',
+                        toast: true,
+                        position: 'center-end',
+                        customClass: {
+                            popup: 'colored-toast'
+                        },
+                        confirmButtonColor: '#4a9d9c',
+                        confirmButtonText: 'OK'
+                    });
+                } catch (error) {
+                    console.error('Error exporting revlogs:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Export Failed',
+                        html: `
+                            <div>
+                                导出复习记录时发生错误
+                                <br>
+                                <small class="text-muted">
+                                    Error occurred while exporting review records:
+                                </small>
+                                <br>
+                                <small class="text-danger">
+                                    ${error.message}
+                                </small>
+                            </div>
+                        `,
+                        background: '#1d2e3d',
+                        color: '#ffffff',
+                        confirmButtonColor: '#4a9d9c',
+                        confirmButtonText: 'OK'
+                    });
+                } finally {
+                    // 恢复按钮状态
+                    exportRevlogsBtn.disabled = false;
+                    exportRevlogsBtn.innerHTML = originalContent;
+                }
+            });
+        }
+        
+        // 添加优化按钮点击事件
+        const optimizeParamsBtn = document.getElementById('optimizeParamsBtn');
+        if (optimizeParamsBtn) {
+            optimizeParamsBtn.addEventListener('click', async () => {
+                // 保存原始按钮内容
+                const originalContent = optimizeParamsBtn.innerHTML;
+                
+                // 创建进度显示元素
+                const progressContainer = document.createElement('div');
+                progressContainer.className = 'progress optimize-progress';
+                progressContainer.innerHTML = `
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                         role="progressbar" 
+                         style="width: 10%" 
+                         aria-valuenow="10" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                    </div>
+                `;
+                optimizeParamsBtn.parentNode.appendChild(progressContainer);
+
+                // 更改按钮状态
+                optimizeParamsBtn.disabled = true;
+                optimizeParamsBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size: 0.85em;"></i>';
+
+                try {
+                    // 进度回调函数
+                    const onProgress = (progress) => {
+                        console.log('Progress update:', progress);
+                        const percent = Math.round(progress.percent * 100);
+                        const progressBar = progressContainer.querySelector('.progress-bar');
+                        if (progressBar) {
+                            progressBar.style.width = `${percent}%`;
+                            progressBar.setAttribute('aria-valuenow', percent);
+                            progressBar.textContent = `${percent}%`;
+                        }
+                    };
+                    
+                    // 调用优化API
+                    const result = await optimizeParameters(onProgress);
+                    
+                    // 显示结果弹窗
+                    if (result && result.type === 'Success' && result.params) {
+                        // 生成唯一ID
+                        const detailId = `paramsDetail_${Date.now()}`;
+                        
+                        // 显示优化后的参数，并添加保存按钮
+                        const modalResult = await Swal.fire({
+                            title: 'SUCCESS',
+                            html: `
+                                <div>
+                                    <div class="alert alert-success">
+                                        <i class="fas fa-check-circle"></i> 参数优化完成！点击确认将自动保存并应用新参数。
+                                        <br>
+                                        <small >
+                                            Optimization done! Click OK to save and use the new settings.
+                                        </small>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-link text-info p-0" 
+                                                type="button" 
+                                                id="toggleDetail_${detailId}">
+                                            <i class="fas fa-chevron-right me-1"></i> 查看详细参数/View all parameters
+                                        </button>
+                                        <div id="${detailId}" class="mt-2 d-none">
+                                            <div class="bg-dark p-2 rounded" style="max-height: 200px; overflow-y: auto;">
+                                                <pre class="mb-0" style="color: #61dafb; white-space: pre-wrap; word-break: break-all;">${JSON.stringify(result.params, null, 2)}</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `,
+                            background: '#1d2e3d',
+                            color: '#ffffff',
+                            confirmButtonColor: '#4a9d9c',
+                            confirmButtonText: 'OK',
+                            showCloseButton: true,
+                            closeButtonHtml: '<i class="fas fa-times"></i>',
+                            didRender: () => {
+                                // 在弹窗渲染后绑定事件
+                                const toggleBtn = document.getElementById(`toggleDetail_${detailId}`);
+                                const detailDiv = document.getElementById(detailId);
+                                if (toggleBtn && detailDiv) {
+                                    toggleBtn.addEventListener('click', () => {
+                                        detailDiv.classList.toggle('d-none');
+                                        const icon = toggleBtn.querySelector('i');
+                                        if (icon) {
+                                            icon.classList.toggle('fa-chevron-right');
+                                            icon.classList.toggle('fa-chevron-down');
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                        if (modalResult.isConfirmed) {
+                            try {
+                                // 保存参数到本地存储
+                                await saveFSRSParams(result.params);
+                                // 更新FSRS实例
+                                await updateFSRSInstance(result.params);
+                                // 显示成功提示
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Save Success',
+                                    text: '参数已成功应用 /New settings applied.',
+                                    background: '#1d2e3d',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    color: '#ffffff',
+                                    toast: true,
+                                    position: 'center-end',
+                                    customClass: {
+                                        popup: 'colored-toast'
+                                    }
+                                });
+                            } catch (error) {
+                                console.error('Error saving FSRS parameters:', error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Save Failed',
+                                    text: `Error saving parameters: ${error.message}`,
+                                    background: '#1d2e3d',
+                                    color: '#ffffff',
+                                    confirmButtonColor: '#4a9d9c'
+                                });
+                            }
+                        }
+                    } else {
+                        // 显示其他类型的结果
+                        showModal('FSRS参数优化结果', `
+                            <div style="max-height: 300px; overflow-y: auto;">
+                                <pre style="white-space: pre-wrap; word-break: break-all;">${JSON.stringify(result, null, 2)}</pre>
+                            </div>
+                        `);
+                    }
+                } catch (error) {
+                    console.error('Error optimizing FSRS parameters:', error);
+                    showModal('Error', `Error optimizing parameters: ${error.message}`);
+                } finally {
+                    // 恢复按钮状态
+                    optimizeParamsBtn.disabled = false;
+                    optimizeParamsBtn.innerHTML = originalContent;
+                    // 移除进度条
+                    progressContainer.remove();
+                }
+            });
+        }
+    } catch (error) {
+        console.error('Error initializing FSRS optimization:', error);
+    }
+}
+
 // 添加设置相关的初始化函数
 async function initializeOptions() {
     await loadConfigs();
@@ -818,7 +1123,10 @@ async function initializeOptions() {
     if (reminderToggle) {
         reminderToggle.checked = store.isReminderEnabled || false;
     }
-
+    
+    // 初始化FSRS参数优化卡片
+    await initializeFSRSOptimization();
+    
     // 修改保存成功提示
     optionsForm.addEventListener('submit', async e => {
         e.preventDefault();
@@ -833,8 +1141,8 @@ async function initializeOptions() {
         // 使用 SweetAlert2 显示保存成功提示
         Swal.fire({
             icon: 'success',
-            title: '设置已保存',
-            text: '您的设置已成功更新',
+            title: 'Settings Saved',
+            text: 'Your settings have been successfully updated',
             showConfirmButton: false,
             timer: 1500,
             background: '#1d2e3d',

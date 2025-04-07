@@ -173,3 +173,71 @@ export const getCurrentRetrievability = (problem) => {
     const elapsedDays = dateDiffInDays(new Date(problem.fsrsState.lastReview), new Date());
     return forgetting_curve(elapsedDays, problem.fsrsState.stability);
 };
+
+export const mergeFSRSParams = (params1, params2) => {
+    if (params2 === undefined || params2 === null) return params1;
+    if (params1 === undefined || params1 === null) return params2;
+    
+    // 如果云端数据比本地数据新，使用云端数据
+    const timestamp1 = params1.timestamp || 0;
+    const timestamp2 = params2.timestamp || 0;
+    
+    // 返回较新的数据
+    const mergedParams = timestamp1 > timestamp2 ? params1 : params2;
+    
+    // 确保返回的数据包含最新的时间戳
+    mergedParams.timestamp = Date.now();
+    
+    return mergedParams;
+}
+
+export const mergeRevlogs = (revlogs1, revlogs2) => {
+    if (revlogs2 === undefined || revlogs2 === null) return revlogs1 || {};
+    if (revlogs1 === undefined || revlogs1 === null) return revlogs2 || {};
+    
+    // 确保 revlogs1 和 revlogs2 是对象
+    revlogs1 = typeof revlogs1 === 'object' ? revlogs1 : {};
+    revlogs2 = typeof revlogs2 === 'object' ? revlogs2 : {};
+    
+    // 合并复习日志
+    const mergedRevlogs = { ...revlogs1 };
+    
+    // 遍历第二个复习日志集合
+    Object.keys(revlogs2).forEach(cardId => {
+        if (!mergedRevlogs[cardId]) {
+            // 如果第一个集合没有该卡片的复习日志，直接使用第二个集合的
+            mergedRevlogs[cardId] = Array.isArray(revlogs2[cardId]) ? revlogs2[cardId] : [];
+        } else {
+            // 如果两个集合都有该卡片的复习日志，合并两边的日志
+            const logs2 = Array.isArray(revlogs2[cardId]) ? revlogs2[cardId] : [];
+            const logs1 = Array.isArray(mergedRevlogs[cardId]) ? mergedRevlogs[cardId] : [];
+            
+            // 创建一个Map来存储唯一的复习日志
+            const uniqueLogsMap = new Map();
+            
+            // 添加第一个集合的日志
+            logs1.forEach(log => {
+                if (log && typeof log === 'object') {
+                    const key = `${log.card_id}_${log.review_time}_${log.review_rating}`;
+                    uniqueLogsMap.set(key, log);
+                }
+            });
+            
+            // 添加第二个集合的日志
+            logs2.forEach(log => {
+                if (log && typeof log === 'object') {
+                    const key = `${log.card_id}_${log.review_time}_${log.review_rating}`;
+                    uniqueLogsMap.set(key, log);
+                }
+            });
+            
+            // 转换回数组并按时间排序
+            mergedRevlogs[cardId] = Array.from(uniqueLogsMap.values())
+                .sort((a, b) => b.review_time - a.review_time);
+        }
+    });
+    
+    return mergedRevlogs;
+}
+
+

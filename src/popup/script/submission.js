@@ -1,7 +1,7 @@
 import { getDifficultyBasedSteps, getSubmissionResult, isSubmissionSuccess, isSubmitButton, needReview, updateProblemUponSuccessSubmission } from "../util/utils";
 import { getAllProblems, createOrUpdateProblem, getCurrentProblemInfoFromLeetCodeByHref,getCurrentProblemInfoFromLeetCodeByUrl, syncProblems } from "../service/problemService";
 import { Problem } from "../entity/problem";
-import { updateProblemWithFSRS } from "../util/fsrs";
+import { updateProblemWithFSRS } from "../service/fsrsService";
 
 
 
@@ -226,7 +226,7 @@ export async function handleFeedbackSubmission(problem = null) {
             }
         }
         
-        problem = updateProblemWithFSRS(problem, feedback);
+        problem = await updateProblemWithFSRS(problem, feedback);
         await createOrUpdateProblem(problem);
 
         // 只有在页面提交时才显示成功提示

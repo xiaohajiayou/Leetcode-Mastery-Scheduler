@@ -8,6 +8,7 @@ import { registerAllHandlers } from "../handler/handlerRegister";
 import { hasOperationHistory } from "../service/operationHistoryService";
 import { loadConfigs } from "../service/configService";
 import { getLocalStorageData, setLocalStorageData } from "../../popup/delegate/localStorageDelegate";
+import { syncFSRSHistory } from "../service/fsrsService";
 
 /*
     Tag for problem records
@@ -422,6 +423,7 @@ export const renderAll = async () => {
     await loadConfigs();
     await renderSiteMode();
     await syncProblems();
+    // await syncFSRSHistory();
 
     // 创建笔记模态框
 
