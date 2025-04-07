@@ -178,6 +178,27 @@ export const addRecordButton = () => {
     
     // 添加到页面
     document.body.appendChild(button);
+
+    // 添加窗口大小变化监听器
+    window.addEventListener('resize', () => {
+        const buttonRect = button.getBoundingClientRect();
+        const maxRight = window.innerWidth - button.offsetWidth - 10;
+        const maxBottom = window.innerHeight - button.offsetHeight - 10;
+        
+        // 如果按钮超出可视区域，调整位置
+        if (parseInt(button.style.right) > maxRight) {
+            button.style.right = `${maxRight}px`;
+        }
+        if (parseInt(button.style.bottom) > maxBottom) {
+            button.style.bottom = `${maxBottom}px`;
+        }
+        
+        // 保存调整后的位置
+        localStorage.setItem('LMS_rateButtonPosition', JSON.stringify({
+            bottom: parseInt(button.style.bottom),
+            right: parseInt(button.style.right)
+        }));
+    });
 };
 
 
