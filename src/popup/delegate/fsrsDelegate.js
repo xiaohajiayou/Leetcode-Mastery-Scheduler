@@ -3,11 +3,14 @@ export const optimizeFSRSParams = async (csvContent, onProgress) => {
     try {
         const formData = new FormData();
         const csvBlob = new Blob([csvContent], { type: 'text/csv' });
+        // ref: https://github.com/ishiko732/fsrs-online-training/blob/73b3281e4c972bf965083dcfe61f087383b4a083/components/lib/tz.ts#L3-L4
+        // Chrome > 24, Edge > 12, Firefox > 29
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
         formData.append('file', csvBlob, 'revlog.csv');
         formData.append('sse', '1');
         formData.append('hour_offset', '4');
         formData.append('enable_short_term', '0');
-        formData.append('timezone', 'Asia/Shanghai');
+        formData.append('timezone', timeZone);
 
         const response = await fetch('https://ishiko732-fsrs-online-training.hf.space/api/train', {
             method: 'POST',
