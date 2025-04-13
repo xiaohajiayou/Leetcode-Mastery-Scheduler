@@ -83,24 +83,29 @@
 | url添加自定义卡片   | ✅ 已完成  | 用于记录面试手撕题、其他刷题网站用户暂时替代方案      |
 | 提供笔记功能       | ✅ 已完成  | 题目列表中新增笔记按钮，支持导出所有笔记为Markdown     | 
 | 收集Anki fsrs 训练数据       | ✅ 已完成  | 待用于测试fsrs官方端口训练       | 
-| 接入Anki fsrs官方训练端口       | ❌ 待完成  | 待评估可行性（用户可拟合出最适合自己的记忆曲线）       | 
+| 接入Anki fsrs官方训练端口       | ✅ 已完成  | 目前仅支持本地复习记录训练（云同步用户可能存在影响）       | 
+| 扩展webdev云同步服务       | ❌ 待完成  | 待接入坚果云       | 
+| 支持语言切换       | ❌ 待完成  | 待完成       | 
 | 不同网站题目数据源切换   | ❌ 待完成  | 待完成（目前仅支持力扣国际站和中国站，待兼容洛谷等）       |
 | 兼容火狐       | ❌ 待完成  | 待完成       | 
 | 兼容`ctrl + enter`       | ❌ 待完成  | 目前优先级较低       |
 
 
 # 📝 Next Steps
-| Task/Feature          | Status     | Notes                              |
-|-----------------------|------------|------------------------------------|
-| Multi-device data cloud sync | ✅ Completed | Edge, Chrome                     |
-| Monitor reminder      | ✅ Completed | bilibili, youtube                 |
-| URL add LeetCode problems | ✅ Completed | For brushing questions with IDE, dedicated to working position entertainment |
-| URL add custom cards  | ✅ Completed | For recording interview hand-torn problems, alternative solution for other question brushing websites |
-| Provide note-taking feature | ✅ Completed | Add note button in question list, support exporting all notes as Markdown |
-| Collect Anki fsrs training data | ✅ Completed | Pending for testing fsrs official port training |
-| Integrate Anki fsrs official training port | ❌ Pending | To be assessed for feasibility (users can fit their own optimal memory curve) |
-| Switch between different website question data sources | ❌ Pending | To be completed (currently only supports LeetCode international and Chinese stations, to be compatible with Luogu, etc.) |
-| Compatibility with Firefox | ❌ Pending | To be completed                   |
+| Task/Feature               | Status    | Remarks                                      |
+|----------------------------|-----------|----------------------------------------------|
+| Multi-device cloud sync     | ✳️  Completed | Edge, Chrome                                 |
+| Monitoring reminders       | ✳️  Completed | bilibili, youtube                            |
+| Add LeetCode URL           | ✳️  Completed | For IDE coding practice, perfect for working |
+| Add custom card URL        | ✳️  Completed | For recording interview problems, alternative for other coding websites |
+| Provide note-taking feature | ✳️  Completed | Add note button in problem list, support exporting all notes to Markdown |
+| Collect Anki FSRS training data | ✳️  Completed | To be used for testing FSRS official training endpoint |
+| Integrate Anki FSRS official training endpoint | ✳️  Completed | Currently supports training with local review records (may affect cloud sync users) |
+| Expand webdev cloud sync service | ❌  Pending   | To be integrated with Nutstore                 |
+| Support language switching  | ❌  Pending   | Pending completion                          |
+| Switch data sources for different websites | ❌  Pending   | Pending completion (currently only supports LeetCode international and Chinese sites, to be compatible with Luogu, etc.) |
+| Compatibility with Firefox | ❌  Pending   | Pending completion                          |
+| Compatibility with `ctrl + enter` | ❌  Pending   | Lower priority for now                       |
 
 
 
