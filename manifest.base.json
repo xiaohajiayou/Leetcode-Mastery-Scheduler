@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Leetcode Mastery Scheduler",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "author": "Hacode",
     "description": "Leetcode-Mastery-Scheduler tracks your LeetCode progress and prompt you to review based FSRS",
     "homepage_url": "https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler",

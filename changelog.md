@@ -1,18 +1,26 @@
 # Changelog
 
 
-
-## [0.1.4] - 2025-04-08
+### [0.1.5] - 2025-04-14
 ----------------------
 
-### Added
+#### Fixed
 
-*   新增本地 FSRS 算法参数优化，用户可以拟合最适合自己的记忆曲线。（#15）
-    
+- Fix the issue where the timezone was fixed in the FSRS parameter optimization commit (#38)
+- 修复fsrs参数优化提交中固定了时区的问题。（#38）
 
-### Fixed
+### [0.1.4] - 2025-04-08
+----------------------
 
-*   修复了在页面缩放时，rate 按钮消失的问题。（#32）
+#### Added
+
+- Add local FSRS algorithm parameter optimization, allowing users to fit the memory curve that best suits them (#15)
+- 新增本地 FSRS 算法参数优化，用户可以拟合最适合自己的记忆曲线。（#15）
+
+#### Fixed
+
+- Fix the issue where the rate button disappeared when the page was zoomed (#32)
+- 修复了在页面缩放时，rate 按钮消失的问题。（#32）
 
 
 

@@ -299,7 +299,6 @@ display: inline-block;  /* 确保渐变效果生效 */
 .retrievability-icon {
     margin-right: 10px;
     color: #4a9d9c;
-    animation: pulse 2s infinite;
 }
 
 .retrievability-value {
@@ -776,34 +775,54 @@ iframe {
     position: relative;
     overflow: hidden;
     padding: 0.35rem 0.8rem;
+    animation: starPulse 2s infinite;
 }
 
-.github-star-btn:hover {
-    background: #1a3244;
-    border-color: #61dafb;
-    box-shadow: 0 0 10px rgba(97, 218, 251, 0.5);
-    color: #61dafb;
-}
-
-.github-star-btn .btn-content {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    transition: all 0.3s ease;
-}
-
-.github-star-btn:hover .btn-content {
-    transform: translateX(2px);
+@keyframes starPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(97, 218, 251, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0);
+    }
 }
 
 .github-star-btn i {
     font-size: 0.875rem;
     color: #61dafb;
     transition: all 0.3s ease;
+    animation: starTwinkle 2s infinite;
+}
+
+@keyframes starTwinkle {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.github-star-btn:hover {
+    background: #1a3244;
+    border-color: #61dafb;
+    box-shadow: 0 0 15px rgba(97, 218, 251, 0.7);
+    color: #61dafb;
+    animation: none; /* 悬停时停止脉冲动画 */
 }
 
 .github-star-btn:hover i {
-    color: #61dafb;
+    animation: none; /* 悬停时停止星星闪烁动画 */
+    transform: scale(1.2);
 }
 
 .feedback-btn-review {
