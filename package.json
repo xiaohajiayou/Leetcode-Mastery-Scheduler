@@ -9,10 +9,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "manifest:dev": "cross-env NODE_ENV=dev node ./deploy/generate-manifest.js",
-    "manifest:prod": "cross-env NODE_ENV=prod node ./deploy/generate-manifest.js",
-    "release:dev": "npm run build && npm run manifest:dev && node ./deploy/zip.js",
-    "release:prod": "npm run build && npm run manifest:prod && node ./deploy/zip.js",
+    "manifest:dev": "cross-env NODE_ENV=development node ./deploy/generate-manifest.js",
+    "manifest:prod": "cross-env NODE_ENV=production node ./deploy/generate-manifest.js",
+    "release:dev": "cross-env NODE_ENV=development npm run build && npm run manifest:dev && node ./deploy/zip.js",
+    "release:prod": "cross-env NODE_ENV=production npm run build && npm run manifest:prod && node ./deploy/zip.js",
     "clear": "node ./deploy/clear.js",
     "deploy:dev": "npm run clear && npm run release:dev && node ./deploy/unzip.js",
     "deploy:prod": "npm run clear && npm run release:prod && node ./deploy/unzip.js"
@@ -23,7 +23,7 @@
   },
   "keywords": [],
   "author": "Haolin Zhong",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler"
   },
