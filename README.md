@@ -84,7 +84,7 @@
 | 提供笔记功能       | ✅ 已完成  | 题目列表中新增笔记按钮，支持导出所有笔记为Markdown     | 
 | 收集Anki fsrs 训练数据       | ✅ 已完成  | 待用于测试fsrs官方端口训练       | 
 | 接入Anki fsrs官方训练端口       | ✅ 已完成  | 目前仅支持本地复习记录训练（云同步用户可能存在影响）       | 
-| 扩展webdev云同步服务       | ❌ 待完成  | 待接入坚果云       | 
+| 扩展webdav云同步服务       | ❌ 待完成  | 待接入坚果云       | 
 | 支持语言切换       | ❌ 待完成  | 待完成       | 
 | 不同网站题目数据源切换   | ❌ 待完成  | 待完成（目前仅支持力扣国际站和中国站，待兼容洛谷等）       |
 | 兼容火狐       | ❌ 待完成  | 待完成       | 
@@ -101,7 +101,7 @@
 | Provide note-taking feature | ✳️  Completed | Add note button in problem list, support exporting all notes to Markdown |
 | Collect Anki FSRS training data | ✳️  Completed | To be used for testing FSRS official training endpoint |
 | Integrate Anki FSRS official training endpoint | ✳️  Completed | Currently supports training with local review records (may affect cloud sync users) |
-| Expand webdev cloud sync service | ❌  Pending   | To be integrated with Nutstore                 |
+| Expand webdav cloud sync service | ❌  Pending   | To be integrated with Nutstore                 |
 | Support language switching  | ❌  Pending   | Pending completion                          |
 | Switch data sources for different websites | ❌  Pending   | Pending completion (currently only supports LeetCode international and Chinese sites, to be compatible with Luogu, etc.) |
 | Compatibility with Firefox | ❌  Pending   | Pending completion                          |

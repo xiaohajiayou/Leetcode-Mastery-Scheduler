@@ -164,28 +164,28 @@
                 <!-- footer -->
                 <div class="footer">
                     <!-- GitHub Star -->
-                    <!-- 先放一个占位符 -->
-                    <div id="github-star-container" 
-                    data-bs-toggle="tooltip" 
-                    data-bs-placement="top" 
-                    title="A star from you would make our day! 🌟">
-                        <a href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler" 
+                    <a href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler" 
                         target="_blank" 
-                        style="text-decoration: none; display: inline-block; margin-right: 15px;">
-                            <img alt="GitHub" 
-                                src="https://img.shields.io/badge/GitHub-%20Star%20Us-color%3D%2523%234a9d9c?style=flat&color=%234a9d9c
-                                " 
-                                height="20"
-                                style="margin: 0; vertical-align: middle;">
-                        </a>
-                    </div>
+                        style="text-decoration: none;"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="🌟 Star us please! / 点个星星吧！求求了~"
+                    >
+                        <button type="button" class="btn custom-btn github-star-btn">
+                            <div class="btn-content">
+                                <i class="fas fa-star"></i>
+                                <span>Star Us</span>
+                            </div>
+                        </button>
+                    </a>
 
-                    <!-- 将 GitHub iframe 加载逻辑放在单独的脚本文件中 -->
-                    
                     <!-- 反馈按钮 -->
                     <a href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler/issues" 
                         target="_blank" 
                         style="text-decoration: none;"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="💡 Report issue"
                     >
                         <button type="button" class="btn custom-btn feedback-btn-review">
                             <div class="btn-content">
@@ -402,15 +402,21 @@
                     <div id="github-problems" 
                     data-bs-toggle="tooltip" 
                     data-bs-placement="top" 
-                    title="A star from you would make our day! 🌟">
+                    >
+
                         <a href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler" 
                         target="_blank" 
-                        style="text-decoration: none; display: inline-block; margin-right: 15px;">
-                            <img alt="GitHub" 
-                                src="https://img.shields.io/badge/GitHub-%20Star%20Us-color%3D%2523%234a9d9c?style=flat&color=%234a9d9c
-                                " 
-                                height="20"
-                                style="margin: 0; vertical-align: middle;">
+                        style="text-decoration: none;"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top" 
+                        title="🌟 Star us please! / 点个星星吧！求求了~"
+                    >
+                        <button type="button" class="btn custom-btn github-star-btn">
+                            <div class="btn-content">
+                                <i class="fas fa-star"></i>
+                                <span>Star Us</span>
+                            </div>
+                        </button>
                         </a>
                     </div>
                     
@@ -607,7 +613,6 @@
     <script type="text/javascript" src="lib/fontawesome.js"></script>
     <script src="dist/popup.js"></script>
     
-    <!-- 直接引用外部脚本文件 -->
-    <script src="dist/loadGithubStar.js"></script>
+
 </body>
 </html>

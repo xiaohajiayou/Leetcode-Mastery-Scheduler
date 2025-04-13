@@ -757,15 +757,53 @@ iframe {
 
 #github-star-container {
     display: flex;
-    align-items: center;  /* 垂直居中对齐 */
-    height: 30px;        /* 固定高度，与按钮一致 */
+    align-items: center;
+    height: 30px;
 }
 
-/* 确保 GitHub Star 按钮的样式 */
+/* GitHub Star 按钮样式 */
 .github-star-btn {
+    font-size: 0.875rem;
+    font-family: 'Courier Prime', monospace;
+    background: #1d2e3d;
+    border: 1px solid rgba(97, 218, 251, 0.3);
+    color: #61dafb;
+    border-radius: 6px;
     display: flex;
     align-items: center;
-    height: 100%;        /* 使其填满容器高度 */
+    gap: 0.6rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    padding: 0.35rem 0.8rem;
+}
+
+.github-star-btn:hover {
+    background: #1a3244;
+    border-color: #61dafb;
+    box-shadow: 0 0 10px rgba(97, 218, 251, 0.5);
+    color: #61dafb;
+}
+
+.github-star-btn .btn-content {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.3s ease;
+}
+
+.github-star-btn:hover .btn-content {
+    transform: translateX(2px);
+}
+
+.github-star-btn i {
+    font-size: 0.875rem;
+    color: #61dafb;
+    transition: all 0.3s ease;
+}
+
+.github-star-btn:hover i {
+    color: #61dafb;
 }
 
 .feedback-btn-review {
