@@ -595,6 +595,46 @@
                             </div>
                         </div>
 
+                        <!-- 坚果云 WebDAV 配置 -->
+                        <div class="option-card" style="padding: 12px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <i class="fas fa-cloud" style="font-size: 0.95em; line-height: 1; position: relative; top: 7px;"></i>
+                                    <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">Nutstore Backup</h4>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input custom-switch" type="checkbox" id="webdavToggle">
+                                </div>
+                            </div>
+                            
+                            <div id="webdavSettings" style="display: none; margin-top: 10px;">
+                                <div style="margin-bottom: 8px;">
+                                    <label style="font-size: 0.85em; margin-bottom: 4px;">Nutstore Email</label>
+                                    <input type="email" id="webdavUsername" class="form-control" placeholder="your@email.com" style="font-size: 0.85em;">
+                                </div>
+                                
+                                <div style="margin-bottom: 8px;">
+                                    <label style="font-size: 0.85em; margin-bottom: 4px;">App Password</label>
+                                    <input type="password" id="webdavPassword" class="form-control" placeholder="Application password" style="font-size: 0.85em;">
+                                    <small style="font-size: 0.75em; color: #888;">Get from Nutstore Account Settings → Security → Add App Password</small>
+                                </div>
+                                
+                                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                                    <button id="testWebdav" class="btn btn-sm btn-primary" style="font-size: 0.85em;">
+                                        <i class="fas fa-check"></i> Test Connection
+                                    </button>
+                                    <button id="backupNow" class="btn btn-sm btn-success" style="font-size: 0.85em;" disabled>
+                                        <i class="fas fa-upload"></i> Backup Now
+                                    </button>
+                                    <button id="restoreData" class="btn btn-sm btn-warning" style="font-size: 0.85em;" disabled>
+                                        <i class="fas fa-download"></i> Restore
+                                    </button>
+                                </div>
+                                
+                                <div id="webdavStatus" style="margin-top: 8px; font-size: 0.8em;"></div>
+                            </div>
+                        </div>
+
 
 
                         <!-- 保存按钮 -->

@@ -1,3 +1,5 @@
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
 console.log('Background service worker started');
 
 // 默认配置
@@ -265,3 +267,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return true; // 保持消息通道开放
     }
 });
+/******/ })()
+;
+//# sourceMappingURL=background.js.map

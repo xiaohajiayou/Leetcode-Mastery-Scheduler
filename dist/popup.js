@@ -1,28 +1,24 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./src/popup/popup.css":
-/*!*******************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./src/popup/popup.css ***!
-  \*******************************************************************/
+/***/ 699:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(537);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(645);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(667);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
 // Imports
 
 
 
-var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%2361dafb%27/%3e%3c/svg%3e */ "data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%2361dafb%27/%3e%3c/svg%3e"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(131), __webpack_require__.b);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 // Module
@@ -327,7 +323,6 @@ display: inline-block;  /* 确保渐变效果生效 */
 .retrievability-icon {
     margin-right: 10px;
     color: #4a9d9c;
-    animation: pulse 2s infinite;
 }
 
 .retrievability-value {
@@ -486,6 +481,171 @@ display: inline-block;  /* 确保渐变效果生效 */
     opacity: 1;
 }
 
+
+.add-problem-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.empty-state {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #4a9d9c;
+    font-size: 0.9em;
+    opacity: 0.8;
+    font-style: italic;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.empty-state i {
+    font-size: 1em;
+    color: #ffd700;  /* 给灯泡图标一个金色 */
+}
+
+
+
+.add-problem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px dashed rgba(74, 157, 156, 0.5);
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    color: #4a9d9c;
+    opacity: 0.8;
+}
+
+.add-problem-content {
+    display: flex;
+    align-items: center;
+}
+
+.add-problem i {
+    font-size: 0.8em;
+}
+
+
+/* 悬停效果 */
+.add-problem:hover {
+    background: rgba(74, 157, 156, 0.1);
+    border-style: solid;
+    opacity: 1;
+}
+
+/* 添加虚线分隔 */
+.add-problem-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(74, 157, 156, 0.3),
+        transparent
+    );
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: #1d2e3d;
+    border-radius: 8px;
+    padding: 16px;          /* 减小内边距 */
+    width: 280px;           /* 固定更小的宽度 */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(97, 218, 251, 0.2);
+    animation: modalFadeIn 0.3s ease;
+}
+
+.modal-content h3 {
+    color: #61dafb;
+    margin-bottom: 12px;    /* 减小标题下方间距 */
+    font-size: 1em;         /* 减小标题字体 */
+}
+
+.form-group {
+    margin-bottom: 12px;    /* 减小表单组间距 */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 4px;     /* 减小标签下方间距 */
+    color: #e9ecef;
+    font-size: 0.85em;      /* 减小标签字体 */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 6px 8px;       /* 减小输入框内边距 */
+    border: 1px solid rgba(97, 218, 251, 0.3);
+    border-radius: 4px;
+    background: rgba(29, 46, 61, 0.8);
+    color: #e9ecef;
+    font-size: 0.85em;      /* 减小输入框字体 */
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;               /* 减小按钮间距 */
+    margin-top: 12px;       /* 减小按钮组上方间距 */
+}
+
+.button-group button {
+    padding: 4px 12px;      /* 减小按钮内边距 */
+    border-radius: 4px;
+    font-size: 0.85em;      /* 减小按钮字体 */
+}
+
+/* 自定义按钮样式 */
+.custom-btn {
+    border: 1px solid;
+}
+
+.btn-outline-warning {
+    border-color: #ffc107;
+    color: #ffc107;
+}
+
+.btn-outline-warning:hover {
+    background: rgba(255, 193, 7, 0.1);
+}
+
+.btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background: rgba(108, 117, 125, 0.1);
+}
+
+
+
+
+
+
 /* 视图容器样式 */
 .view {
     display: none;
@@ -541,35 +701,7 @@ display: inline-block;  /* 确保渐变效果生效 */
     padding: 20px 0;
 }
 
-.option-card {
-    background: #1d2e3d;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
 
-.option-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(74, 157, 156, 0.2);
-}
-
-.option-card i {
-    font-size: 2em;
-    color: #4a9d9c;
-    margin-bottom: 15px;
-}
-
-.option-card h4 {
-    color: #fff;
-    margin-bottom: 10px;
-}
-
-.option-card p {
-    color: #888;
-    font-size: 0.9em;
-}
 
 /* 导航标签样式 */
 #problemListView .nav-tabs {
@@ -632,6 +764,106 @@ iframe {
     border-color: #e0e0e0;
     color: #e0e0e0;
 }
+
+
+.footer {
+    background: linear-gradient(to bottom, rgba(29, 46, 61, 0.8) 0%, #1d2e3d 100%);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;           /* 按钮之间的间距 */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+    padding: 8px 0;  /* 添加上下内边距 */
+}
+
+#github-star-container {
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+/* GitHub Star 按钮样式 */
+.github-star-btn {
+    font-size: 0.875rem;
+    font-family: 'Courier Prime', monospace;
+    background: #1d2e3d;
+    border: 1px solid rgba(97, 218, 251, 0.3);
+    color: #61dafb;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    padding: 0.35rem 0.8rem;
+    animation: starPulse 2s infinite;
+}
+
+@keyframes starPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(97, 218, 251, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0);
+    }
+}
+
+.github-star-btn i {
+    font-size: 0.875rem;
+    color: #61dafb;
+    transition: all 0.3s ease;
+    animation: starTwinkle 2s infinite;
+}
+
+@keyframes starTwinkle {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.github-star-btn:hover {
+    background: #1a3244;
+    border-color: #61dafb;
+    box-shadow: 0 0 15px rgba(97, 218, 251, 0.7);
+    color: #61dafb;
+    animation: none; /* 悬停时停止脉冲动画 */
+}
+
+.github-star-btn:hover i {
+    animation: none; /* 悬停时停止星星闪烁动画 */
+    transform: scale(1.2);
+}
+
+.feedback-btn-review {
+    padding: 0.35rem 0.8rem !important;  /* 减小按钮内边距 */
+    font-size: 0.8rem !important;  /* 稍微减小字体 */
+    min-height: 28px;  /* 设置最小高度 */
+    padding: 0 12px;     /* 水平内边距 */
+}
+
+.feedback-btn-review .btn-content {
+    gap: 0.4rem !important;  /* 减小图标和文字间距 */
+}
+
+.feedback-btn-review i {
+    font-size: 0.8rem !important;  /* 减小图标大小 */
+}
+
 
 .page-input {
     background-color: transparent;
@@ -801,7 +1033,6 @@ td, th {
     padding: 20px;
     text-align: center;
     transition: all 0.3s ease;
-    margin-bottom: 20px;
 }
 
 .option-card:hover {
@@ -835,13 +1066,20 @@ td, th {
 
 .sync-tips {
     margin-top: 10px;
-    font-size: 0.8em;
+    font-size: 1.0em;
     color: #888;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-
+.reminder-tips {
+    margin-top: 10px;
+    font-size: 1.0em;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 .save-section {
     grid-column: 1 / -1;
     text-align: center;
@@ -923,17 +1161,107 @@ td, th {
 
 .colored-toast .swal2-success-ring {
     border-color: #4a9d9c !important;
-}`, "",{"version":3,"sources":["webpack://./src/popup/popup.css"],"names":[],"mappings":"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","sourcesContent":["body {\n    background-color: #0D1F2D; /* 深色背景 */\n    background-size: cover; /* 背景覆盖 */\n    color: #ffffff; /* 白色字体 */\n    font-family: 'Raleway', sans-serif;\n    position: relative;\n}\n/* 导航栏样式 */\n.nav-bar {\n    background-color: #0D1F2D;\n\n    display: flex;\n    flex-direction: column;  /* 改为纵向排列 */\n    align-items: center;     /* 水平居中 */\n    border-bottom: 1px solid #4a9d9c;\n}\n\n.nav-row {\n    display: flex;\n    justify-content: center;  /* 内容居中 */\n    align-items: center;\n    margin: 0;  /* 移除外边距 */\n    padding: 2px 0;  /* 减小上下内边距 */\n    line-height: 1;  /* 减小行高 */\n    margin-top: -5px;\n}\n\n/* 标题行样式 */\n.nav-title {\ncolor: #FF3D3D;\nfont-weight: 900;  /* 更粗的字体 */\nfont-size: 1.2em;  /* 更大的字号 */\ntext-transform: uppercase;  /* 转换为大写 */\nletter-spacing: 2px;  /* 字母间距 */\ntext-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  /* 添加阴影效果 */\nfont-family: 'Arial Black', Gadget, sans-serif;  /* 更粗重的字体 */\nmargin-top: 5px;\npadding: 5px 10px;  /* 添加内边距 */\nbackground: linear-gradient(180deg, #ff6b6b 0%, #FF3D3D 100%);  /* 渐变色 */\n-webkit-background-clip: text;  /* 使渐变色应用到文字 */\n-webkit-text-fill-color: transparent;  /* 使文字透明以显示背景 */\ndisplay: inline-block;  /* 确保渐变效果生效 */\n}\n\n/* 专门为标题容器添加类 */\n.nav-row.title-row {\n    margin: 0;\n    padding: 0;\n    line-height: 1;\n}\n\n/* 特别处理第二个标题行 */\n.nav-row.title-row + .nav-row.title-row {\n    margin-top: -10px;  /* 调整这个值来控制两行标题间的间距 */\n}\n\n/* 网站信息行样式 */\n.nav-site {\n    color: #4a9d9c;\n    font-size: 0.9em;\n    padding: 2px 8px;\n    border-radius: 4px;\n    background-color: rgba(74, 157, 156, 0.1);\n}\n\n/* 导航按钮行样式 */\n.nav-btn {\n    background: none;\n    border: none;\n    color: #888;\n    padding: 5px 15px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    font-size: 1em;\n    position: relative;\n}\n\n.nav-btn:hover {\n    color: #fff;\n}\n\n.nav-btn.active {\n    color: #fff;\n}\n\n.nav-btn.active::after {\n    content: '';\n    position: absolute;\n    bottom: -5px;\n    left: 50%;\n    transform: translateX(-50%);\n    width: 20px;\n    height: 2px;\n    background-color: #4a9d9c;\n    border-radius: 2px;\n}\n\n.nav-right {\n    display: flex;\n    gap: 10px;\n}\n\n/* 开关按钮样式 */\n.switch-btn {\n    background-color: #2a2b30;\n    border: 1px solid #3a3b40;\n    color: #888;\n    padding: 5px 15px;\n    border-radius: 4px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n}\n\n.switch-btn:hover {\n    background-color: #3a3b40;\n    color: #fff;\n}\n\n\n.text-date {\n    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */\n    font-size: 1em; /* 修改字体大小 */\n    align-items: center;\n    gap: 2px;\n}\n.text-muted {\n    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */\n    font-size: 0.8em; /* 修改字体大小 */\n    display: flex;\n    align-items: center;\n    gap: 5px;\n}\n\n\n\n.review-card {\n    background-color: #1d2e3d; /* 卡片背景 */\n    border-radius: 15px;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    padding: 10px;\n    margin: 20px 0;\n    transition: transform 0.2s;\n    \n}\n\n        .review-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px #4a9d9c;\n}\n\n.problem-title {\n    font-family: 'Press Start 2P', cursive;\n    font-size: 0.9em;\n    color: #ffffff; /* 白色字体 */\n}\n\n\n\n.difficulty-Easy {\n    color: #4a9d9c;\n}\n\n.difficulty-Medium {\n    color: #f0b215;\n}\n\n.difficulty-Hard {\n    color: #FF3D3D;\n}\n\n.progress {\n    height: 8px;\n    margin-top: 10px;\n}\n\n.btn-review {\n\n    border: none;\n    color: #e0e0e0;\n    font-size: 1.5em;\n    border-radius: 50%;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    font-weight: 500;\n    position: relative;\n    z-index: 1;\n    pointer-events: auto !important;\n}\n\n\n.btn-review:hover {\n    color: #afffff;\n    transform: translateY(-1px);\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n\n.btn-review:active {\n    transform: translateY(0);\n}\n\n.btn-review:disabled {\n\n    color: white;\n    opacity: 0.8;\n    cursor: not-allowed;\n}\n\n.btn-review.btn-lg {\n    font-size: 1.1em;\n    padding: 10px 24px;\n}\n\n.review-card .btn-review,\n.container .btn-review {\n    pointer-events: auto !important;\n    cursor: pointer !important;\n}\n\n.review-card.reviewed {\n    opacity: 0.6;\n}\n\n.header-section {\n    position: relative;\n    border-radius: 15px;\n    overflow: hidden;\n    background-color: #1d2e3d;\n    border: 1px solid rgba(74, 157, 156, 0.1);  /* 降低边框透明度 */\n    box-shadow: 0 0 8px rgba(74, 157, 156, 0.1);  /* 降低阴影透明度 */\n    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n    padding: 10px;\n    margin: 10px 15px;\n}\n\n.header-section:hover {\n    border-color: rgba(74, 157, 156, 0.2);  /* 降低悬停时边框透明度 */\n    box-shadow: \n        0 0 12px rgba(74, 157, 156, 0.15),  /* 降低外阴影透明度 */\n        inset 0 0 8px rgba(74, 157, 156, 0.05);  /* 降低内阴影透明度 */\n    transform: translateY(-1px);\n}\n\n.header-section::before {\n    content: '';\n    position: absolute;\n    top: -1px;\n    left: -1px;\n    right: -1px;\n    bottom: -1px;\n    border-radius: 15px;\n    background: linear-gradient(45deg, \n        rgba(74, 157, 156, 0.05),  /* 降低渐变透明度 */\n        rgba(74, 157, 156, 0.1),\n        rgba(74, 157, 156, 0.05)\n    );\n    z-index: -1;\n    opacity: 0;\n    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n}\n\n.header-section:hover::before {\n    opacity: 1;\n}\n\n.completion-circle {\n    width: 120px;\n    height: 120px;\n    border-radius: 50%;\n    background: conic-gradient(#afffff var(--percentage), #3a3a4d var(--percentage)); /* 使用深色作为背景 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin: 0 auto;\n    transition: background 0.5s ease; /* 背景渐变动画 */\n}\n\n.inner-circle {\n    width: 100px;\n    height: 100px;\n    background: #1d2e3d; /* 内圈背景 */\n    border-radius: 50%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 1.5em;\n    font-weight: bold;\n    color: #FF3D3D; /* 内圈字体颜色 */\n    transition: transform 0.5s ease; /* 内圈缩放动画 */\n}\n\n.retrievability {\n    font-size: 1.0em;\n    color: #ffffff; /* 白色字体 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.retrievability-icon {\n    margin-right: 10px;\n    color: #4a9d9c;\n    animation: pulse 2s infinite;\n}\n\n.retrievability-value {\n    font-weight: bold;\n    margin-left: 10px;\n    color: #4a9d9c; /* Green color for good retrievability */\n    transition: color 0.3s;\n}\n\n.retrievability-value.low {\n    color: #FF3D3D; /* Red color for low retrievability */\n}\n\n.trend-icon {\n    margin-left: 10px;\n    font-size: 1.5em;\n    transition: transform 0.3s;\n}\n\n.trend-up {\n    color: #4a9d9c; /* Green for upward trend */\n}\n\n.trend-down {\n    color: #FF3D3D; /* Red for downward trend */\n}\n\n.low-memory-warning {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    display: none;\n    z-index: 0;\n}\n\n.low-memory-warning.active {\n    display: flex;\n}\n\n.card-limit-input input[type=\"number\"]::-webkit-inner-spin-button,\n.card-limit-input input[type=\"number\"]::-webkit-outer-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n}\n\n.card-limit-input input[type=\"number\"] {\n    -moz-appearance: textfield;\n    background: #3a3a4d; /* 输入框背景 */\n    color: #ffffff; /* 输入框字体颜色 */\n    width: 40px;\n    height: 40px;\n    text-align: center;\n    font-size: 1.2em;\n    padding: 5px;\n    border: 2px solid #0D6E6E; /* 输入框边框颜色 */\n    border-radius: 8px;\n    margin: 0 10px;\n}\n\n.gear-button {\n    background: none;\n    border: none;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    padding: 5px;\n    position: relative;\n    width: 40px;\n    height: 40px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.gear-button .fa-gear {\n    font-size: 1.8em;\n    color: #0D6E6E; /* 齿轮图标颜色 */\n    transition: all 0.3s ease;\n}\n\n.gear-button .direction-icon {\n    position: absolute;\n    font-size: 1em;\n    color: #e2c027;\n    background-color: #fff;\n    border-radius: 50%;\n    width: 16px;\n    height: 16px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.3s ease;\n    left: 50%;\n    top: 50%;\n    transform: translate(-50%, -50%);\n    box-shadow: 0 1px 3px rgba(0,0,0,0.2);\n    font-weight: bold;\n}\n\n/* 悬停效果 */\n.gear-button:hover .fa-gear {\n    color: #4a9d9c; /* 悬停时齿轮图标颜色 */\n    filter: drop-shadow(0 0 2px rgba(255, 152, 0, 0.5));\n}\n\n.gear-button:hover .direction-icon {\n    color: #000;\n    background-color: #fff;\n    box-shadow: 0 2px 4px rgba(0,0,0,0.3);\n    transform: translate(-50%, -50%) scale(1.1);\n}\n\n/* 点击动画 */\n.gear-button.left:active {\n    transform: rotate(-45deg);\n}\n\n.gear-button.right:active {\n    transform: rotate(45deg);\n}\n\n.card-limit-input {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 5px;\n    margin-top: 10px;\n}\n\n.card-limit-label {\n    font-size: 1.1em;\n    color: #ffffff; /* 白色字体 */\n    margin-right: 5px;\n}\n\n/* 工具提示 */\n.gear-button::after {\n    content: attr(data-tooltip);\n    position: absolute;\n    bottom: -25px;\n    left: 50%;\n    transform: translateX(-50%);\n    background-color: rgba(0, 0, 0, 0.8);\n    color: white;\n    padding: 4px 8px;\n    border-radius: 4px;\n    font-size: 0.8em;\n    opacity: 0;\n    transition: opacity 0.3s ease;\n    pointer-events: none;\n    white-space: nowrap;\n}\n\n.gear-button:hover::after {\n    opacity: 1;\n}\n\n/* 视图容器样式 */\n.view {\n    display: none;\n    transition: opacity 0.3s ease;\n}\n\n.view.active {\n    display: block;\n}\n\n/* 题目列表页面样式 */\n.problem-list-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 20px;\n}\n\n.search-bar {\n    position: relative;\n    width: 300px;\n}\n\n.search-input {\n    width: 100%;\n    padding: 8px 35px 8px 15px;\n    border: none;\n    border-radius: 20px;\n    background: #2a2b30;\n    color: #fff;\n}\n\n.search-icon {\n    position: absolute;\n    right: 15px;\n    top: 50%;\n    transform: translateY(-50%);\n    color: #888;\n}\n\n.problem-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));\n    gap: 20px;\n    padding: 20px 0;\n}\n\n/* 更多选项页面样式 */\n.options-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));\n    gap: 20px;\n    padding: 20px 0;\n}\n\n.option-card {\n    background: #1d2e3d;\n    padding: 20px;\n    border-radius: 15px;\n    text-align: center;\n    transition: all 0.3s ease;\n    cursor: pointer;\n}\n\n.option-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px rgba(74, 157, 156, 0.2);\n}\n\n.option-card i {\n    font-size: 2em;\n    color: #4a9d9c;\n    margin-bottom: 15px;\n}\n\n.option-card h4 {\n    color: #fff;\n    margin-bottom: 10px;\n}\n\n.option-card p {\n    color: #888;\n    font-size: 0.9em;\n}\n\n/* 导航标签样式 */\n#problemListView .nav-tabs {\n    border-bottom: 1px solid #4a9d9c;\n\n}\n\n#problemListView .nav-tabs .nav-link {\n    color: #888;\n    border: none;\n    background: none;\n\n\n    transition: all 0.3s ease;\n}\n\n#problemListView .nav-tabs .nav-link:hover {\n    color: #fff;\n}\n\n#problemListView .nav-tabs .nav-link.active {\n    color: #4a9d9c;\n    background: none;\n    border-bottom: 2px solid #4a9d9c;\n}\n\n/* 确保tab内容区域正确显示 */\n#problemListView .tab-content {\n    display: flex;\n}\n\n#problemListView .tab-pane {\n    transition: opacity 0.3s ease;\n}\n\n#problemListView .tab-pane.active {\n    opacity: 1;\n}\n\n\n\n\n\niframe {\n    overflow: hidden;\n    border: 0;\n}\n\n.custom-btn {\n    border-color: #0D6E6E;\n    color: #4a9d9c;\n}\n\n.custom-btn:hover {\n    border-color: rgba(235, 173, 129, 1);\n    background-color: rgba(235, 173, 129, 1);\n}\n\n.custom-btn:disabled {\n    border-color: #e0e0e0;\n    color: #e0e0e0;\n}\n\n.page-input {\n    background-color: transparent;\n    color: #e0e0e0;\n    border: 1px solid #e0e0e0;\n    border-radius: 4px;\n    text-align: center;\n    font-size: 0.875rem;  /* 相当于 Bootstrap 的 sm 大小 */\n    margin-left: 5px !important; \n    margin-right: 5px !important;\n}\n\n.page-input:focus {\n    outline: none;\n    border-color: #afffff;\n    box-shadow: 0 0 5px rgba(74, 157, 156, 0.5);\n}\n\n.multifont {\n    font-family: 'Courier Prime', 'Noto Sans SC', sans-serif;\n}\n\na {\n    color: chocolate;\n}\n\n.custom-tooltip {\n    --bs-tooltip-bg: var(--bd-violet-bg);\n    --bs-tooltip-color: var(--bs-white);\n}\n\n/* 题目列表样式 */\n#problemListView {\n    padding: 5px;\n}\n\n.problem-list-header {\n    margin-bottom: 15px;\n}\n\n.nav-tabs {\n    border-bottom: 1px solid #dee2e6;\n}\n\n.nav-tabs .nav-link {\n    margin-bottom: -1px;\n    color: #495057;\n    border: 1px solid transparent;\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem;\n}\n\n.nav-tabs .nav-link.active {\n    color: #495057;\n    background-color: #fff;\n    border-color: #dee2e6 #dee2e6 #fff;\n}\n\n.tab-content {\n    padding: 10px;\n    background-color: #fff;\n    border: 1px solid #dee2e6;\n    border-top: none;\n}\n\n.tab-pane {\n    display: none;\n}\n.tab-pane.active {\n    display: block;\n}\n\n\n\n/* 确保switch容器不会阻挡点击事件 */\n#switch-area {\n    pointer-events: auto;\n    position: relative;\n    z-index: 100;\n}\n\n\n\n\n\n\n/* 自定义表格样式 */\n.table {\n    width: 100%;\n    table-layout: fixed;\n    word-wrap: break-word;\n\n\n    --bs-table-border-color: #afffff !important;       /* 边框颜色 */\n\n    --bs-table-hover-color: #f56464 !important;        /* 悬停文字颜色 */\n    --bs-table-hover-bg: #ebe3e3 !important;          /* 悬停背景颜色 */\n    border: none !important;              /* 移除表格外边框 */\n    border-collapse: collapse !important;  /* 确保边框合并 */\n}\n\n\ntd, th {\n    padding: 4px !important;\n}\n\n.table {\n    margin-bottom: 0;\n    min-width: auto !important;\n}\n\n/* 确保表格容器有正确的宽度和溢出处理 */\n.table-responsive {\n    width: 100%;\n    overflow-x: hidden;\n}\n\n\n\n/* 专门设置表头样式 */\n.table thead,\n.table > thead{\n    border: none !important;              \n    background: linear-gradient(to right, #0D6E6E, #4a9d9c) !important;  \n}\n\n/* 确保表头单元格没有背景色 */\n.table thead tr,\n.table thead th {\n    background: transparent !important;    /* 确保tr和th是透明的 */\n    border: none !important;              \n    color: #ffffff !important;            /* 表头文字颜色 */\n}\n\n\n\n\n/* 记忆概率指示器样式 */\n.memory-indicator {\n    display: inline-flex;\n    align-items: center;\n    padding: 4px 8px;\n    border-radius: 12px;\n    transition: all 0.3s ease;\n}\n\n.memory-indicator:hover {\n    background-color: rgba(255, 255, 255, 0.1);\n    transform: scale(1.05);\n}\n\n.memory-indicator i {\n    font-size: 1.1em;\n}\n\n/* 颜色类 */\n.text-success { color: #4caf50 !important; }\n.text-warning { color: #ff9800 !important; }\n.text-danger { color: #f44336 !important; }\n\n\n\n/* 设置卡片样式调整 */\n.option-card {\n    background-color: #1d2e3d;\n    border-radius: 10px;\n    padding: 20px;\n    text-align: center;\n    transition: all 0.3s ease;\n    margin-bottom: 20px;\n}\n\n.option-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px rgba(74, 157, 156, 0.2);\n}\n\n.option-card i {\n    font-size: 2em;\n    color: #4a9d9c;\n    margin-bottom: 15px;\n}\n\n.option-card h4 {\n    color: #fff;\n    margin-bottom: 15px;\n}\n\n.option-card p {\n    color: #888;\n    font-size: 0.9em;\n}\n\n/* 表单控件样式 */\n.form-select {\n    background-color: #0D1F2D;\n    color: #fff;\n    border: 1px solid #4a9d9c;\n    margin-top: 10px;\n}\n\n.sync-tips {\n    margin-top: 10px;\n    font-size: 0.8em;\n    color: #888;\n    display: flex;\n    flex-direction: column;\n    gap: 5px;\n}\n\n.save-section {\n    grid-column: 1 / -1;\n    text-align: center;\n    margin-top: 20px;\n}\n\n/* 开关按钮样式 */\n.form-check-input.custom-switch {\n    background-color: #0D1F2D !important;\n    border-color: #4a9d9c !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    transition: all 0.3s ease;\n    cursor: pointer !important;\n    pointer-events: auto !important;\n    opacity: 1;\n    z-index: 100;\n    position: relative;\n    outline: none !important;\n    /* 自定义滑块圆圈颜色为亮蓝色 */\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e\") !important;\n}\n\n/* 选中状态下的样式 */\n.form-check-input.custom-switch:checked {\n    background-color: #0D6E6E !important;\n    border-color: #0D6E6E !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    /* 选中状态下保持相同的蓝色圆圈 */\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e\") !important;\n}\n\n/* 悬停状态加强发光效果 */\n.form-check-input.custom-switch:hover {\n    box-shadow: 0 0 15px rgba(97, 218, 251, 0.9);\n}\n\n/* 焦点状态 */\n.form-check-input.custom-switch:focus {\n    background-color: inherit !important;  /* 继承当前状态的背景色 */\n    border-color: #4a9d9c !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    outline: none !important;\n}\n\n/* 选中且焦点状态 */\n.form-check-input.custom-switch:checked:focus {\n    background-color: #4a9d9c !important;\n}\n\n\n\n\n\n/* SweetAlert2 自定义样式 */\n.colored-toast.swal2-icon-success {\n    background-color: #1d2e3d !important;\n    border: 1px solid #4a9d9c !important;\n}\n\n.colored-toast .swal2-title {\n    color: #ffffff !important;\n    font-size: 1em !important;\n}\n\n.colored-toast .swal2-close {\n    color: #4a9d9c !important;\n}\n\n.colored-toast .swal2-html-container {\n    color: #888 !important;\n    font-size: 0.9em !important;\n}\n\n/* 成功图标颜色 */\n.colored-toast .swal2-success-line-tip,\n.colored-toast .swal2-success-line-long {\n    background-color: #4a9d9c !important;\n}\n\n.colored-toast .swal2-success-ring {\n    border-color: #4a9d9c !important;\n}"],"sourceRoot":""}]);
+}
+
+/* 更新概要样式 */
+.update-badge {
+    background-color: #FF3D3D;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.update-summary {
+    background-color: rgba(74, 157, 156, 0.1);
+    border-radius: 4px;
+    padding: 3px 0 !important;
+    margin-bottom: 8px !important;
+}
+
+.update-summary a {
+    color: #4a9d9c;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.update-summary a:hover {
+    text-decoration: underline;
+    color: #afffff;
+}
+
+/* 图标按钮样式 */
+.btn-icon {
+    background: none;
+    border: none;
+    color: #4a9d9c;
+    font-size: 1em;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.btn-icon:hover {
+    background-color: rgba(74, 157, 156, 0.1);
+    color: #61dafb;
+    transform: translateY(-1px);
+}
+
+.btn-icon:active {
+    transform: translateY(0);
+}
+
+.btn-icon-sm {
+    width: 24px;
+    height: 24px;
+}
+
+/* 优化参数进度条样式 */
+.optimize-progress {
+    height: 3px !important;
+    background-color: rgba(74, 157, 156, 0.1) !important;
+    border-radius: 4px !important;
+    margin-top: 12px !important;
+    overflow: hidden !important;
+}
+
+.optimize-progress .progress-bar {
+    background: linear-gradient(90deg, #4a9d9c, #61dafb) !important;
+    transition: width 0.3s ease !important;
+}
+
+.optimize-progress .progress-bar-animated {
+    animation: progress-bar-stripes 1s linear infinite !important;
+}
+
+.optimize-progress .progress-bar-striped {
+    background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+    ) !important;
+    background-size: 1rem 1rem !important;
+}`, "",{"version":3,"sources":["webpack://./src/popup/popup.css"],"names":[],"mappings":"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","sourcesContent":["body {\n    background-color: #0D1F2D; /* 深色背景 */\n    background-size: cover; /* 背景覆盖 */\n    color: #ffffff; /* 白色字体 */\n    font-family: 'Raleway', sans-serif;\n    position: relative;\n}\n/* 导航栏样式 */\n.nav-bar {\n    background-color: #0D1F2D;\n\n    display: flex;\n    flex-direction: column;  /* 改为纵向排列 */\n    align-items: center;     /* 水平居中 */\n    border-bottom: 1px solid #4a9d9c;\n}\n\n.nav-row {\n    display: flex;\n    justify-content: center;  /* 内容居中 */\n    align-items: center;\n    margin: 0;  /* 移除外边距 */\n    padding: 2px 0;  /* 减小上下内边距 */\n    line-height: 1;  /* 减小行高 */\n    margin-top: -5px;\n}\n\n/* 标题行样式 */\n.nav-title {\ncolor: #FF3D3D;\nfont-weight: 900;  /* 更粗的字体 */\nfont-size: 1.2em;  /* 更大的字号 */\ntext-transform: uppercase;  /* 转换为大写 */\nletter-spacing: 2px;  /* 字母间距 */\ntext-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  /* 添加阴影效果 */\nfont-family: 'Arial Black', Gadget, sans-serif;  /* 更粗重的字体 */\nmargin-top: 5px;\npadding: 5px 10px;  /* 添加内边距 */\nbackground: linear-gradient(180deg, #ff6b6b 0%, #FF3D3D 100%);  /* 渐变色 */\n-webkit-background-clip: text;  /* 使渐变色应用到文字 */\n-webkit-text-fill-color: transparent;  /* 使文字透明以显示背景 */\ndisplay: inline-block;  /* 确保渐变效果生效 */\n}\n\n/* 专门为标题容器添加类 */\n.nav-row.title-row {\n    margin: 0;\n    padding: 0;\n    line-height: 1;\n}\n\n/* 特别处理第二个标题行 */\n.nav-row.title-row + .nav-row.title-row {\n    margin-top: -10px;  /* 调整这个值来控制两行标题间的间距 */\n}\n\n/* 网站信息行样式 */\n.nav-site {\n    color: #4a9d9c;\n    font-size: 0.9em;\n    padding: 2px 8px;\n    border-radius: 4px;\n    background-color: rgba(74, 157, 156, 0.1);\n}\n\n/* 导航按钮行样式 */\n.nav-btn {\n    background: none;\n    border: none;\n    color: #888;\n    padding: 5px 15px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    font-size: 1em;\n    position: relative;\n}\n\n.nav-btn:hover {\n    color: #fff;\n}\n\n.nav-btn.active {\n    color: #fff;\n}\n\n.nav-btn.active::after {\n    content: '';\n    position: absolute;\n    bottom: -5px;\n    left: 50%;\n    transform: translateX(-50%);\n    width: 20px;\n    height: 2px;\n    background-color: #4a9d9c;\n    border-radius: 2px;\n}\n\n.nav-right {\n    display: flex;\n    gap: 10px;\n}\n\n/* 开关按钮样式 */\n.switch-btn {\n    background-color: #2a2b30;\n    border: 1px solid #3a3b40;\n    color: #888;\n    padding: 5px 15px;\n    border-radius: 4px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n}\n\n.switch-btn:hover {\n    background-color: #3a3b40;\n    color: #fff;\n}\n\n\n.text-date {\n    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */\n    font-size: 1em; /* 修改字体大小 */\n    align-items: center;\n    gap: 2px;\n}\n.text-muted {\n    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */\n    font-size: 0.8em; /* 修改字体大小 */\n    display: flex;\n    align-items: center;\n    gap: 5px;\n}\n\n\n\n.review-card {\n    background-color: #1d2e3d; /* 卡片背景 */\n    border-radius: 15px;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    padding: 10px;\n    margin: 20px 0;\n    transition: transform 0.2s;\n    \n}\n\n        .review-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px #4a9d9c;\n}\n\n.problem-title {\n    font-family: 'Press Start 2P', cursive;\n    font-size: 0.9em;\n    color: #ffffff; /* 白色字体 */\n}\n\n\n\n.difficulty-Easy {\n    color: #4a9d9c;\n}\n\n.difficulty-Medium {\n    color: #f0b215;\n}\n\n.difficulty-Hard {\n    color: #FF3D3D;\n}\n\n.progress {\n    height: 8px;\n    margin-top: 10px;\n}\n\n.btn-review {\n\n    border: none;\n    color: #e0e0e0;\n    font-size: 1.5em;\n    border-radius: 50%;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    font-weight: 500;\n    position: relative;\n    z-index: 1;\n    pointer-events: auto !important;\n}\n\n\n.btn-review:hover {\n    color: #afffff;\n    transform: translateY(-1px);\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n\n.btn-review:active {\n    transform: translateY(0);\n}\n\n.btn-review:disabled {\n\n    color: white;\n    opacity: 0.8;\n    cursor: not-allowed;\n}\n\n.btn-review.btn-lg {\n    font-size: 1.1em;\n    padding: 10px 24px;\n}\n\n.review-card .btn-review,\n.container .btn-review {\n    pointer-events: auto !important;\n    cursor: pointer !important;\n}\n\n.review-card.reviewed {\n    opacity: 0.6;\n}\n\n.header-section {\n    position: relative;\n    border-radius: 15px;\n    overflow: hidden;\n    background-color: #1d2e3d;\n    border: 1px solid rgba(74, 157, 156, 0.1);  /* 降低边框透明度 */\n    box-shadow: 0 0 8px rgba(74, 157, 156, 0.1);  /* 降低阴影透明度 */\n    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n    padding: 10px;\n    margin: 10px 15px;\n}\n\n.header-section:hover {\n    border-color: rgba(74, 157, 156, 0.2);  /* 降低悬停时边框透明度 */\n    box-shadow: \n        0 0 12px rgba(74, 157, 156, 0.15),  /* 降低外阴影透明度 */\n        inset 0 0 8px rgba(74, 157, 156, 0.05);  /* 降低内阴影透明度 */\n    transform: translateY(-1px);\n}\n\n.header-section::before {\n    content: '';\n    position: absolute;\n    top: -1px;\n    left: -1px;\n    right: -1px;\n    bottom: -1px;\n    border-radius: 15px;\n    background: linear-gradient(45deg, \n        rgba(74, 157, 156, 0.05),  /* 降低渐变透明度 */\n        rgba(74, 157, 156, 0.1),\n        rgba(74, 157, 156, 0.05)\n    );\n    z-index: -1;\n    opacity: 0;\n    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n}\n\n.header-section:hover::before {\n    opacity: 1;\n}\n\n.completion-circle {\n    width: 120px;\n    height: 120px;\n    border-radius: 50%;\n    background: conic-gradient(#afffff var(--percentage), #3a3a4d var(--percentage)); /* 使用深色作为背景 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin: 0 auto;\n    transition: background 0.5s ease; /* 背景渐变动画 */\n}\n\n.inner-circle {\n    width: 100px;\n    height: 100px;\n    background: #1d2e3d; /* 内圈背景 */\n    border-radius: 50%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 1.5em;\n    font-weight: bold;\n    color: #FF3D3D; /* 内圈字体颜色 */\n    transition: transform 0.5s ease; /* 内圈缩放动画 */\n}\n\n.retrievability {\n    font-size: 1.0em;\n    color: #ffffff; /* 白色字体 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.retrievability-icon {\n    margin-right: 10px;\n    color: #4a9d9c;\n}\n\n.retrievability-value {\n    font-weight: bold;\n    margin-left: 10px;\n    color: #4a9d9c; /* Green color for good retrievability */\n    transition: color 0.3s;\n}\n\n.retrievability-value.low {\n    color: #FF3D3D; /* Red color for low retrievability */\n}\n\n.trend-icon {\n    margin-left: 10px;\n    font-size: 1.5em;\n    transition: transform 0.3s;\n}\n\n.trend-up {\n    color: #4a9d9c; /* Green for upward trend */\n}\n\n.trend-down {\n    color: #FF3D3D; /* Red for downward trend */\n}\n\n.low-memory-warning {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    display: none;\n    z-index: 0;\n}\n\n.low-memory-warning.active {\n    display: flex;\n}\n\n.card-limit-input input[type=\"number\"]::-webkit-inner-spin-button,\n.card-limit-input input[type=\"number\"]::-webkit-outer-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n}\n\n.card-limit-input input[type=\"number\"] {\n    -moz-appearance: textfield;\n    background: #3a3a4d; /* 输入框背景 */\n    color: #ffffff; /* 输入框字体颜色 */\n    width: 40px;\n    height: 40px;\n    text-align: center;\n    font-size: 1.2em;\n    padding: 5px;\n    border: 2px solid #0D6E6E; /* 输入框边框颜色 */\n    border-radius: 8px;\n    margin: 0 10px;\n}\n\n.gear-button {\n    background: none;\n    border: none;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    padding: 5px;\n    position: relative;\n    width: 40px;\n    height: 40px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.gear-button .fa-gear {\n    font-size: 1.8em;\n    color: #0D6E6E; /* 齿轮图标颜色 */\n    transition: all 0.3s ease;\n}\n\n.gear-button .direction-icon {\n    position: absolute;\n    font-size: 1em;\n    color: #e2c027;\n    background-color: #fff;\n    border-radius: 50%;\n    width: 16px;\n    height: 16px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.3s ease;\n    left: 50%;\n    top: 50%;\n    transform: translate(-50%, -50%);\n    box-shadow: 0 1px 3px rgba(0,0,0,0.2);\n    font-weight: bold;\n}\n\n/* 悬停效果 */\n.gear-button:hover .fa-gear {\n    color: #4a9d9c; /* 悬停时齿轮图标颜色 */\n    filter: drop-shadow(0 0 2px rgba(255, 152, 0, 0.5));\n}\n\n.gear-button:hover .direction-icon {\n    color: #000;\n    background-color: #fff;\n    box-shadow: 0 2px 4px rgba(0,0,0,0.3);\n    transform: translate(-50%, -50%) scale(1.1);\n}\n\n/* 点击动画 */\n.gear-button.left:active {\n    transform: rotate(-45deg);\n}\n\n.gear-button.right:active {\n    transform: rotate(45deg);\n}\n\n.card-limit-input {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 5px;\n    margin-top: 10px;\n}\n\n.card-limit-label {\n    font-size: 1.1em;\n    color: #ffffff; /* 白色字体 */\n    margin-right: 5px;\n}\n\n/* 工具提示 */\n.gear-button::after {\n    content: attr(data-tooltip);\n    position: absolute;\n    bottom: -25px;\n    left: 50%;\n    transform: translateX(-50%);\n    background-color: rgba(0, 0, 0, 0.8);\n    color: white;\n    padding: 4px 8px;\n    border-radius: 4px;\n    font-size: 0.8em;\n    opacity: 0;\n    transition: opacity 0.3s ease;\n    pointer-events: none;\n    white-space: nowrap;\n}\n\n.gear-button:hover::after {\n    opacity: 1;\n}\n\n\n.add-problem-wrapper {\n    display: flex;\n    justify-content: center;\n}\n\n.empty-state {\n    text-align: center;\n    margin-top: 15px;\n    margin-bottom: 5px;\n    color: #4a9d9c;\n    font-size: 0.9em;\n    opacity: 0.8;\n    font-style: italic;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 8px;\n}\n\n.empty-state i {\n    font-size: 1em;\n    color: #ffd700;  /* 给灯泡图标一个金色 */\n}\n\n\n\n.add-problem {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    background: transparent;\n    border: 1px dashed rgba(74, 157, 156, 0.5);\n    width: 30px;\n    height: 30px;\n    border-radius: 8px;\n    color: #4a9d9c;\n    opacity: 0.8;\n}\n\n.add-problem-content {\n    display: flex;\n    align-items: center;\n}\n\n.add-problem i {\n    font-size: 0.8em;\n}\n\n\n/* 悬停效果 */\n.add-problem:hover {\n    background: rgba(74, 157, 156, 0.1);\n    border-style: solid;\n    opacity: 1;\n}\n\n/* 添加虚线分隔 */\n.add-problem-wrapper::before {\n    content: '';\n    position: absolute;\n    top: -8px;\n    left: 10%;\n    right: 10%;\n    height: 1px;\n    background: linear-gradient(\n        to right,\n        transparent,\n        rgba(74, 157, 156, 0.3),\n        transparent\n    );\n}\n.modal {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    background: rgba(0, 0, 0, 0.5);\n    z-index: 1000;\n    backdrop-filter: blur(4px);\n}\n\n.modal-content {\n    background: #1d2e3d;\n    border-radius: 8px;\n    padding: 16px;          /* 减小内边距 */\n    width: 280px;           /* 固定更小的宽度 */\n    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);\n    border: 1px solid rgba(97, 218, 251, 0.2);\n    animation: modalFadeIn 0.3s ease;\n}\n\n.modal-content h3 {\n    color: #61dafb;\n    margin-bottom: 12px;    /* 减小标题下方间距 */\n    font-size: 1em;         /* 减小标题字体 */\n}\n\n.form-group {\n    margin-bottom: 12px;    /* 减小表单组间距 */\n}\n\n.form-group label {\n    display: block;\n    margin-bottom: 4px;     /* 减小标签下方间距 */\n    color: #e9ecef;\n    font-size: 0.85em;      /* 减小标签字体 */\n}\n\n.form-group input {\n    width: 100%;\n    padding: 6px 8px;       /* 减小输入框内边距 */\n    border: 1px solid rgba(97, 218, 251, 0.3);\n    border-radius: 4px;\n    background: rgba(29, 46, 61, 0.8);\n    color: #e9ecef;\n    font-size: 0.85em;      /* 减小输入框字体 */\n}\n\n.button-group {\n    display: flex;\n    justify-content: flex-end;\n    gap: 8px;               /* 减小按钮间距 */\n    margin-top: 12px;       /* 减小按钮组上方间距 */\n}\n\n.button-group button {\n    padding: 4px 12px;      /* 减小按钮内边距 */\n    border-radius: 4px;\n    font-size: 0.85em;      /* 减小按钮字体 */\n}\n\n/* 自定义按钮样式 */\n.custom-btn {\n    border: 1px solid;\n}\n\n.btn-outline-warning {\n    border-color: #ffc107;\n    color: #ffc107;\n}\n\n.btn-outline-warning:hover {\n    background: rgba(255, 193, 7, 0.1);\n}\n\n.btn-outline-secondary {\n    border-color: #6c757d;\n    color: #6c757d;\n}\n\n.btn-outline-secondary:hover {\n    background: rgba(108, 117, 125, 0.1);\n}\n\n\n\n\n\n\n/* 视图容器样式 */\n.view {\n    display: none;\n    transition: opacity 0.3s ease;\n}\n\n.view.active {\n    display: block;\n}\n\n/* 题目列表页面样式 */\n.problem-list-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 20px;\n}\n\n.search-bar {\n    position: relative;\n    width: 300px;\n}\n\n.search-input {\n    width: 100%;\n    padding: 8px 35px 8px 15px;\n    border: none;\n    border-radius: 20px;\n    background: #2a2b30;\n    color: #fff;\n}\n\n.search-icon {\n    position: absolute;\n    right: 15px;\n    top: 50%;\n    transform: translateY(-50%);\n    color: #888;\n}\n\n.problem-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));\n    gap: 20px;\n    padding: 20px 0;\n}\n\n/* 更多选项页面样式 */\n.options-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));\n    gap: 20px;\n    padding: 20px 0;\n}\n\n\n\n/* 导航标签样式 */\n#problemListView .nav-tabs {\n    border-bottom: 1px solid #4a9d9c;\n\n}\n\n#problemListView .nav-tabs .nav-link {\n    color: #888;\n    border: none;\n    background: none;\n\n\n    transition: all 0.3s ease;\n}\n\n#problemListView .nav-tabs .nav-link:hover {\n    color: #fff;\n}\n\n#problemListView .nav-tabs .nav-link.active {\n    color: #4a9d9c;\n    background: none;\n    border-bottom: 2px solid #4a9d9c;\n}\n\n/* 确保tab内容区域正确显示 */\n#problemListView .tab-content {\n    display: flex;\n}\n\n#problemListView .tab-pane {\n    transition: opacity 0.3s ease;\n}\n\n#problemListView .tab-pane.active {\n    opacity: 1;\n}\n\n\n\n\n\niframe {\n    overflow: hidden;\n    border: 0;\n}\n\n.custom-btn {\n    border-color: #0D6E6E;\n    color: #4a9d9c;\n}\n\n.custom-btn:hover {\n    border-color: rgba(235, 173, 129, 1);\n    background-color: rgba(235, 173, 129, 1);\n}\n\n.custom-btn:disabled {\n    border-color: #e0e0e0;\n    color: #e0e0e0;\n}\n\n\n.footer {\n    background: linear-gradient(to bottom, rgba(29, 46, 61, 0.8) 0%, #1d2e3d 100%);\n    backdrop-filter: blur(5px);\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 12px;           /* 按钮之间的间距 */\n    border-top: 1px solid rgba(255, 255, 255, 0.1);\n    margin-top: auto;\n    padding: 8px 0;  /* 添加上下内边距 */\n}\n\n#github-star-container {\n    display: flex;\n    align-items: center;\n    height: 30px;\n}\n\n/* GitHub Star 按钮样式 */\n.github-star-btn {\n    font-size: 0.875rem;\n    font-family: 'Courier Prime', monospace;\n    background: #1d2e3d;\n    border: 1px solid rgba(97, 218, 251, 0.3);\n    color: #61dafb;\n    border-radius: 6px;\n    display: flex;\n    align-items: center;\n    gap: 0.6rem;\n    transition: all 0.3s ease;\n    position: relative;\n    overflow: hidden;\n    padding: 0.35rem 0.8rem;\n    animation: starPulse 2s infinite;\n}\n\n@keyframes starPulse {\n    0% {\n        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0.4);\n    }\n    70% {\n        box-shadow: 0 0 0 10px rgba(97, 218, 251, 0);\n    }\n    100% {\n        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0);\n    }\n}\n\n.github-star-btn i {\n    font-size: 0.875rem;\n    color: #61dafb;\n    transition: all 0.3s ease;\n    animation: starTwinkle 2s infinite;\n}\n\n@keyframes starTwinkle {\n    0% {\n        transform: scale(1);\n        opacity: 1;\n    }\n    50% {\n        transform: scale(1.2);\n        opacity: 0.8;\n    }\n    100% {\n        transform: scale(1);\n        opacity: 1;\n    }\n}\n\n.github-star-btn:hover {\n    background: #1a3244;\n    border-color: #61dafb;\n    box-shadow: 0 0 15px rgba(97, 218, 251, 0.7);\n    color: #61dafb;\n    animation: none; /* 悬停时停止脉冲动画 */\n}\n\n.github-star-btn:hover i {\n    animation: none; /* 悬停时停止星星闪烁动画 */\n    transform: scale(1.2);\n}\n\n.feedback-btn-review {\n    padding: 0.35rem 0.8rem !important;  /* 减小按钮内边距 */\n    font-size: 0.8rem !important;  /* 稍微减小字体 */\n    min-height: 28px;  /* 设置最小高度 */\n    padding: 0 12px;     /* 水平内边距 */\n}\n\n.feedback-btn-review .btn-content {\n    gap: 0.4rem !important;  /* 减小图标和文字间距 */\n}\n\n.feedback-btn-review i {\n    font-size: 0.8rem !important;  /* 减小图标大小 */\n}\n\n\n.page-input {\n    background-color: transparent;\n    color: #e0e0e0;\n    border: 1px solid #e0e0e0;\n    border-radius: 4px;\n    text-align: center;\n    font-size: 0.875rem;  /* 相当于 Bootstrap 的 sm 大小 */\n    margin-left: 5px !important; \n    margin-right: 5px !important;\n}\n\n.page-input:focus {\n    outline: none;\n    border-color: #afffff;\n    box-shadow: 0 0 5px rgba(74, 157, 156, 0.5);\n}\n\n.multifont {\n    font-family: 'Courier Prime', 'Noto Sans SC', sans-serif;\n}\n\na {\n    color: chocolate;\n}\n\n.custom-tooltip {\n    --bs-tooltip-bg: var(--bd-violet-bg);\n    --bs-tooltip-color: var(--bs-white);\n}\n\n/* 题目列表样式 */\n#problemListView {\n    padding: 5px;\n}\n\n.problem-list-header {\n    margin-bottom: 15px;\n}\n\n.nav-tabs {\n    border-bottom: 1px solid #dee2e6;\n}\n\n.nav-tabs .nav-link {\n    margin-bottom: -1px;\n    color: #495057;\n    border: 1px solid transparent;\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem;\n}\n\n.nav-tabs .nav-link.active {\n    color: #495057;\n    background-color: #fff;\n    border-color: #dee2e6 #dee2e6 #fff;\n}\n\n.tab-content {\n    padding: 10px;\n    background-color: #fff;\n    border: 1px solid #dee2e6;\n    border-top: none;\n}\n\n.tab-pane {\n    display: none;\n}\n.tab-pane.active {\n    display: block;\n}\n\n\n\n/* 确保switch容器不会阻挡点击事件 */\n#switch-area {\n    pointer-events: auto;\n    position: relative;\n    z-index: 100;\n}\n\n\n\n\n\n\n/* 自定义表格样式 */\n.table {\n    width: 100%;\n    table-layout: fixed;\n    word-wrap: break-word;\n\n\n    --bs-table-border-color: #afffff !important;       /* 边框颜色 */\n\n    --bs-table-hover-color: #f56464 !important;        /* 悬停文字颜色 */\n    --bs-table-hover-bg: #ebe3e3 !important;          /* 悬停背景颜色 */\n    border: none !important;              /* 移除表格外边框 */\n    border-collapse: collapse !important;  /* 确保边框合并 */\n}\n\n\ntd, th {\n    padding: 4px !important;\n}\n\n.table {\n    margin-bottom: 0;\n    min-width: auto !important;\n}\n\n/* 确保表格容器有正确的宽度和溢出处理 */\n.table-responsive {\n    width: 100%;\n    overflow-x: hidden;\n}\n\n\n\n/* 专门设置表头样式 */\n.table thead,\n.table > thead{\n    border: none !important;              \n    background: linear-gradient(to right, #0D6E6E, #4a9d9c) !important;  \n}\n\n/* 确保表头单元格没有背景色 */\n.table thead tr,\n.table thead th {\n    background: transparent !important;    /* 确保tr和th是透明的 */\n    border: none !important;              \n    color: #ffffff !important;            /* 表头文字颜色 */\n}\n\n\n\n\n/* 记忆概率指示器样式 */\n.memory-indicator {\n    display: inline-flex;\n    align-items: center;\n    padding: 4px 8px;\n    border-radius: 12px;\n    transition: all 0.3s ease;\n}\n\n.memory-indicator:hover {\n    background-color: rgba(255, 255, 255, 0.1);\n    transform: scale(1.05);\n}\n\n.memory-indicator i {\n    font-size: 1.1em;\n}\n\n/* 颜色类 */\n.text-success { color: #4caf50 !important; }\n.text-warning { color: #ff9800 !important; }\n.text-danger { color: #f44336 !important; }\n\n\n\n/* 设置卡片样式调整 */\n.option-card {\n    background-color: #1d2e3d;\n    border-radius: 10px;\n    padding: 20px;\n    text-align: center;\n    transition: all 0.3s ease;\n}\n\n.option-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px rgba(74, 157, 156, 0.2);\n}\n\n.option-card i {\n    font-size: 2em;\n    color: #4a9d9c;\n    margin-bottom: 15px;\n}\n\n.option-card h4 {\n    color: #fff;\n    margin-bottom: 15px;\n}\n\n.option-card p {\n    color: #888;\n    font-size: 0.9em;\n}\n\n/* 表单控件样式 */\n.form-select {\n    background-color: #0D1F2D;\n    color: #fff;\n    border: 1px solid #4a9d9c;\n    margin-top: 10px;\n}\n\n.sync-tips {\n    margin-top: 10px;\n    font-size: 1.0em;\n    color: #888;\n    display: flex;\n    flex-direction: column;\n    gap: 5px;\n}\n.reminder-tips {\n    margin-top: 10px;\n    font-size: 1.0em;\n    color: #888;\n    display: flex;\n    flex-direction: column;\n    gap: 5px;\n}\n.save-section {\n    grid-column: 1 / -1;\n    text-align: center;\n    margin-top: 20px;\n}\n\n/* 开关按钮样式 */\n.form-check-input.custom-switch {\n    background-color: #0D1F2D !important;\n    border-color: #4a9d9c !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    transition: all 0.3s ease;\n    cursor: pointer !important;\n    pointer-events: auto !important;\n    opacity: 1;\n    z-index: 100;\n    position: relative;\n    outline: none !important;\n    /* 自定义滑块圆圈颜色为亮蓝色 */\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e\") !important;\n}\n\n/* 选中状态下的样式 */\n.form-check-input.custom-switch:checked {\n    background-color: #0D6E6E !important;\n    border-color: #0D6E6E !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    /* 选中状态下保持相同的蓝色圆圈 */\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e\") !important;\n}\n\n/* 悬停状态加强发光效果 */\n.form-check-input.custom-switch:hover {\n    box-shadow: 0 0 15px rgba(97, 218, 251, 0.9);\n}\n\n/* 焦点状态 */\n.form-check-input.custom-switch:focus {\n    background-color: inherit !important;  /* 继承当前状态的背景色 */\n    border-color: #4a9d9c !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    outline: none !important;\n}\n\n/* 选中且焦点状态 */\n.form-check-input.custom-switch:checked:focus {\n    background-color: #4a9d9c !important;\n}\n\n\n\n\n\n/* SweetAlert2 自定义样式 */\n.colored-toast.swal2-icon-success {\n    background-color: #1d2e3d !important;\n    border: 1px solid #4a9d9c !important;\n}\n\n.colored-toast .swal2-title {\n    color: #ffffff !important;\n    font-size: 1em !important;\n}\n\n.colored-toast .swal2-close {\n    color: #4a9d9c !important;\n}\n\n.colored-toast .swal2-html-container {\n    color: #888 !important;\n    font-size: 0.9em !important;\n}\n\n/* 成功图标颜色 */\n.colored-toast .swal2-success-line-tip,\n.colored-toast .swal2-success-line-long {\n    background-color: #4a9d9c !important;\n}\n\n.colored-toast .swal2-success-ring {\n    border-color: #4a9d9c !important;\n}\n\n/* 更新概要样式 */\n.update-badge {\n    background-color: #FF3D3D;\n    color: white;\n    padding: 2px 5px;\n    border-radius: 3px;\n    font-size: 0.8em;\n    margin-right: 5px;\n    font-weight: bold;\n}\n\n.update-summary {\n    background-color: rgba(74, 157, 156, 0.1);\n    border-radius: 4px;\n    padding: 3px 0 !important;\n    margin-bottom: 8px !important;\n}\n\n.update-summary a {\n    color: #4a9d9c;\n    text-decoration: none;\n    margin-left: 5px;\n}\n\n.update-summary a:hover {\n    text-decoration: underline;\n    color: #afffff;\n}\n\n/* 图标按钮样式 */\n.btn-icon {\n    background: none;\n    border: none;\n    color: #4a9d9c;\n    font-size: 1em;\n    width: 28px;\n    height: 28px;\n    border-radius: 6px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    background-color: transparent;\n}\n\n.btn-icon:hover {\n    background-color: rgba(74, 157, 156, 0.1);\n    color: #61dafb;\n    transform: translateY(-1px);\n}\n\n.btn-icon:active {\n    transform: translateY(0);\n}\n\n.btn-icon-sm {\n    width: 24px;\n    height: 24px;\n}\n\n/* 优化参数进度条样式 */\n.optimize-progress {\n    height: 3px !important;\n    background-color: rgba(74, 157, 156, 0.1) !important;\n    border-radius: 4px !important;\n    margin-top: 12px !important;\n    overflow: hidden !important;\n}\n\n.optimize-progress .progress-bar {\n    background: linear-gradient(90deg, #4a9d9c, #61dafb) !important;\n    transition: width 0.3s ease !important;\n}\n\n.optimize-progress .progress-bar-animated {\n    animation: progress-bar-stripes 1s linear infinite !important;\n}\n\n.optimize-progress .progress-bar-striped {\n    background-image: linear-gradient(\n        45deg,\n        rgba(255, 255, 255, 0.15) 25%,\n        transparent 25%,\n        transparent 50%,\n        rgba(255, 255, 255, 0.15) 50%,\n        rgba(255, 255, 255, 0.15) 75%,\n        transparent 75%,\n        transparent\n    ) !important;\n    background-size: 1rem 1rem !important;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/runtime/api.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
-  \*****************************************************/
+/***/ 645:
 /***/ ((module) => {
 
 "use strict";
@@ -1025,10 +1353,7 @@ module.exports = function (cssWithMappingToString) {
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/runtime/getUrl.js":
-/*!********************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/getUrl.js ***!
-  \********************************************************/
+/***/ 667:
 /***/ ((module) => {
 
 "use strict";
@@ -1061,10 +1386,7 @@ module.exports = function (url, options) {
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/runtime/sourceMaps.js":
-/*!************************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/sourceMaps.js ***!
-  \************************************************************/
+/***/ 537:
 /***/ ((module) => {
 
 "use strict";
@@ -1087,30 +1409,23 @@ module.exports = function (item) {
 
 /***/ }),
 
-/***/ "./src/popup/popup.css":
-/*!*****************************!*\
-  !*** ./src/popup/popup.css ***!
-  \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ 823:
+/***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(379);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(795);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(569);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(565);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(216);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(589);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_popup_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./popup.css */ "./node_modules/css-loader/dist/cjs.js!./src/popup/popup.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_popup_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(699);
 
       
       
@@ -1132,20 +1447,17 @@ options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWi
 options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
 options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_popup_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_popup_css__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z, options);
 
 
 
 
-       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_popup_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_popup_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_popup_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+       /* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_popup_css__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z && _node_modules_css_loader_dist_cjs_js_popup_css__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z.locals ? _node_modules_css_loader_dist_cjs_js_popup_css__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z.locals : undefined);
 
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
-  \****************************************************************************/
+/***/ 379:
 /***/ ((module) => {
 
 "use strict";
@@ -1236,10 +1548,7 @@ module.exports = function (list, options) {
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/runtime/insertBySelector.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/insertBySelector.js ***!
-  \********************************************************************/
+/***/ 569:
 /***/ ((module) => {
 
 "use strict";
@@ -1280,10 +1589,7 @@ module.exports = insertBySelector;
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/runtime/insertStyleElement.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/insertStyleElement.js ***!
-  \**********************************************************************/
+/***/ 216:
 /***/ ((module) => {
 
 "use strict";
@@ -1300,10 +1606,7 @@ module.exports = insertStyleElement;
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js ***!
-  \**********************************************************************************/
+/***/ 565:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1320,10 +1623,7 @@ module.exports = setAttributesWithoutAttributes;
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/runtime/styleDomAPI.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/styleDomAPI.js ***!
-  \***************************************************************/
+/***/ 795:
 /***/ ((module) => {
 
 "use strict";
@@ -1391,10 +1691,7 @@ module.exports = domAPI;
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/runtime/styleTagTransform.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/styleTagTransform.js ***!
-  \*********************************************************************/
+/***/ 589:
 /***/ ((module) => {
 
 "use strict";
@@ -1415,10 +1712,7 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
-/***/ "./node_modules/sweetalert2/dist/sweetalert2.all.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/sweetalert2/dist/sweetalert2.all.js ***!
-  \**********************************************************/
+/***/ 455:
 /***/ (function(module) {
 
 /*!
@@ -6022,1582 +6316,36 @@ if (typeof this !== 'undefined' && this.Sweetalert2){this.swal = this.sweetAlert
 
 /***/ }),
 
-/***/ "./src/popup/daily-review.js":
-/*!***********************************!*\
-  !*** ./src/popup/daily-review.js ***!
-  \***********************************/
+/***/ 877:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   changeCardLimit: () => (/* binding */ changeCardLimit),
-/* harmony export */   initializeReviewPage: () => (/* binding */ initializeReviewPage),
-/* harmony export */   updateCardDisplay: () => (/* binding */ updateCardDisplay),
-/* harmony export */   updateCardLimitDisplay: () => (/* binding */ updateCardLimitDisplay)
-/* harmony export */ });
-/* harmony import */ var _view_view_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./view/view.js */ "./src/popup/view/view.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./src/popup/store.js");
-/* harmony import */ var _service_problemService_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./service/problemService.js */ "./src/popup/service/problemService.js");
-/* harmony import */ var _util_utils_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./util/utils.js */ "./src/popup/util/utils.js");
-/* harmony import */ var _script_submission_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./script/submission.js */ "./src/popup/script/submission.js");
-/* harmony import */ var _popup_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./popup.css */ "./src/popup/popup.css");
-/* harmony import */ var _service_configService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./service/configService */ "./src/popup/service/configService.js");
-/* harmony import */ var _util_doms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./util/doms */ "./src/popup/util/doms.js");
-/* harmony import */ var _util_sort__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./util/sort */ "./src/popup/util/sort.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_9__);
 
-
-
-
-
-
-
-
-
-
-// 在文件顶部导入 SweetAlert2
-
-
-// 模拟数据
-const mockReviewData = {
-    totalProblems: 8,
-    completedProblems: 3,
-    problems: [
-        {
-            index: "1",
-            name: "Two Sum",
-            difficulty: "Easy",
-            lastReview: "3 days ago",
-            nextReview: "in 2 days",
-            retrievability: 0.92,
-            proficiency: 2,
-            maxProficiency: 5
-        },
-        {
-            index: "3",
-            name: "Longest Substring Without Repeating Characters",
-            difficulty: "Medium",
-            lastReview: "7 days ago",
-            nextReview: "in 4 days",
-            retrievability: 0.88,
-            proficiency: 3,
-            maxProficiency: 5
-        },
-        {
-            index: "23",
-            name: "Merge k Sorted Lists",
-            difficulty: "Hard",
-            lastReview: "14 days ago",
-            nextReview: "in 7 days",
-            retrievability: 0.99,
-            proficiency: 1,
-            maxProficiency: 5
-        },
-        {
-            index: "53",
-            name: "Maximum Subarray",
-            difficulty: "Medium",
-            lastReview: "5 days ago",
-            nextReview: "in 3 days",
-            retrievability: 0.90,
-            proficiency: 2,
-            maxProficiency: 5
-        },
-        {
-            index: "70",
-            name: "Climbing Stairs",
-            difficulty: "Easy",
-            lastReview: "4 days ago",
-            nextReview: "in 2 days",
-            retrievability: 0.95,
-            proficiency: 4,
-            maxProficiency: 5
-        },
-        {
-            index: "121",
-            name: "Best Time to Buy and Sell Stock",
-            difficulty: "Easy",
-            lastReview: "6 days ago",
-            nextReview: "in 3 days",
-            retrievability: 0.87,
-            proficiency: 3,
-            maxProficiency: 5
-        },
-        {
-            index: "200",
-            name: "Number of Islands",
-            difficulty: "Medium",
-            lastReview: "8 days ago",
-            nextReview: "in 5 days",
-            retrievability: 0.89,
-            proficiency: 2,
-            maxProficiency: 5
-        },
-        {
-            index: "295",
-            name: "Find Median from Data Stream",
-            difficulty: "Hard",
-            lastReview: "10 days ago",
-            nextReview: "in 6 days",
-            retrievability: 0.84,
-            proficiency: 1,
-            maxProficiency: 5
-        }
-    ]
-};
-
-// 判断是否是今天需要复习的题目
-function isReviewDueToday(problem) {
-    if (!problem.fsrsState?.nextReview) {
-        console.log('题目没有下次复习时间:', problem.name);
-        return false;
-    }
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    const nextReview = new Date(problem.fsrsState.nextReview);
-    nextReview.setHours(0, 0, 0, 0);
-    
-    const isDue = nextReview <= today;
-    
-    console.log('复习时间检查:', {
-        problemName: problem.name,
-        nextReview: nextReview.toISOString(),
-        today: today.toISOString(),
-        isDue: isDue
-    });
-    
-    return isDue;
-}
-
-function isReviewedToday(problem) {
-    if (!problem.fsrsState?.lastReview) return false;
-    
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    const lastReview = new Date(problem.fsrsState.lastReview);
-    lastReview.setHours(0, 0, 0, 0);
-    
-    return lastReview.getTime() === today.getTime();
-}
-
-async function loadDailyReviewData() {
-    const problems = Object.values(await (0,_service_problemService_js__WEBPACK_IMPORTED_MODULE_2__.getAllProblems)()).filter(p => p.isDeleted !== true);
-    _store__WEBPACK_IMPORTED_MODULE_1__.daily_store.reviewScheduledProblems = problems
-    .sort((a, b) => {
-        const retrievabilityA = (0,_util_utils_js__WEBPACK_IMPORTED_MODULE_3__.getCurrentRetrievability)(a);
-        const retrievabilityB = (0,_util_utils_js__WEBPACK_IMPORTED_MODULE_3__.getCurrentRetrievability)(b);
-        return retrievabilityA - retrievabilityB; // 升序排序，最小值在前
-    });
-
-    // 获取今天已复习和待复习的题目
-    _store__WEBPACK_IMPORTED_MODULE_1__.daily_store.dailyReviewProblems = _store__WEBPACK_IMPORTED_MODULE_1__.daily_store.reviewScheduledProblems
-        .filter(problem => isReviewedToday(problem) || isReviewDueToday(problem))
-        .sort((a, b) => {
-            // 首先按照是否已复习排序（已复习的排在前面）
-            const aReviewed = isReviewedToday(a);
-            const bReviewed = isReviewedToday(b);
-            if (aReviewed !== bReviewed) {
-                return bReviewed ? 1 : -1;
-            }
-            // 如果复习状态相同，则按可检索性排序
-            const retrievabilityA = (0,_util_utils_js__WEBPACK_IMPORTED_MODULE_3__.getCurrentRetrievability)(a);
-            const retrievabilityB = (0,_util_utils_js__WEBPACK_IMPORTED_MODULE_3__.getCurrentRetrievability)(b);
-            return retrievabilityA - retrievabilityB;
-        });
-
-
-    console.log('总题目数:', problems.length);
-    console.log('今日待复习题目数:', _store__WEBPACK_IMPORTED_MODULE_1__.daily_store.dailyReviewProblems.length);
-    
-    // 添加调试日志
-    _store__WEBPACK_IMPORTED_MODULE_1__.daily_store.dailyReviewProblems.forEach(problem => {
-        const isReviewed = isReviewedToday(problem);
-        const isDue = isReviewDueToday(problem);
-        console.log('题目状态:', {
-            name: problem.name,
-            lastReview: problem.fsrsState?.lastReview,
-            nextReview: problem.fsrsState?.nextReview,
-            isReviewedToday: isReviewed,
-            isDueToday: isDue,
-            retrievability: (0,_util_utils_js__WEBPACK_IMPORTED_MODULE_3__.getCurrentRetrievability)(problem)
-        });
-    });
-}
-// 假设昨天的平均记忆质量
-let yesterdayRetrievabilityAverage = 0.00;
-
-// 计算可检索性均值
-function calculateRetrievabilityAverage() {
-    const problems = _store__WEBPACK_IMPORTED_MODULE_1__.daily_store.reviewScheduledProblems;
-    if (!problems || problems.length === 0) return 0;
-    
-    const totalRetrievability = problems.reduce((sum, problem) => {
-        const retrievability = (0,_util_utils_js__WEBPACK_IMPORTED_MODULE_3__.getCurrentRetrievability)(problem);
-        return sum + retrievability;
-    }, 0);
-    
-    return (totalRetrievability / problems.length).toFixed(2);
-}
-
-
-// 更新顶部统计信息
-function updateStats() {
-    console.log('更新统计信息');
-    // 计算今日已复习的题目数量
-    const completedCount = _store__WEBPACK_IMPORTED_MODULE_1__.daily_store.dailyReviewProblems.filter(problem => 
-        isReviewedToday(problem)
-    ).length;
-
-    // 获取当前显示的卡片数量
-    const cardLimit = parseInt(document.getElementById('cardLimit').value, 10)|| _store__WEBPACK_IMPORTED_MODULE_1__.store.defaultCardLimit || 1;
-    console.log('当前卡片限制值:', {
-        rawValue: document.getElementById('cardLimit').value,
-        parsedCardLimit: cardLimit,
-        element: document.getElementById('cardLimit')
-    });
-
-    // 更新显示的已复习数量
-    document.getElementById('completedCount').textContent = completedCount;
-    document.getElementById('totalCount').textContent = cardLimit; // 使用当前的卡片数量
-
-    // 更新进度条
-    const completionRate = cardLimit > 0 ? Math.round((completedCount / cardLimit) * 100) : 0;
-    updateProgressCircle(completionRate);
-    document.getElementById('completionRate').textContent = `${completionRate}%`;
-    // document.querySelector('.completion-circle').style.setProperty('--percentage', `${completionRate}%`);
-    // 更新可检索性均值
-    const retrievabilityAverage = calculateRetrievabilityAverage();
-    const retrievabilityElement = document.getElementById('retrievabilityAverage');
-    retrievabilityElement.textContent = retrievabilityAverage;
-
-    // 更新趋势图标
-    const trendIcon = document.getElementById('trendIcon');
-    if (retrievabilityAverage > yesterdayRetrievabilityAverage) {
-        trendIcon.className = 'fas fa-arrow-up trend-icon trend-up';
-    } else if (retrievabilityAverage < yesterdayRetrievabilityAverage) {
-        trendIcon.className = 'fas fa-arrow-down trend-icon trend-down';
-    } else {
-        trendIcon.className = '';
-    }
-
-    // 根据可检索性均值调整颜色和背景提示
-    const lowMemoryWarning = document.getElementById('lowMemoryWarning');
-    if (retrievabilityAverage < 0.90) {
-        retrievabilityElement.classList.add('low');
-        lowMemoryWarning.classList.add('active');
-    } else {
-        retrievabilityElement.classList.remove('low');
-        lowMemoryWarning.classList.remove('active');
-    }
-    updateCardLimitDisplay(); // 这里也添加一次调用
-}
-
-function updateProgressCircle(completionRate) {
-    const progressCircle = document.querySelector('.completion-circle');
-    const radius = 54; // 圆的半径
-    const circumference = 2 * Math.PI * radius; // 圆的周长
-
-    // 计算偏移量
-    const offset = circumference - (completionRate / 100) * circumference;
-    progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-    progressCircle.style.strokeDashoffset = offset;
-
-    // 更新显示的百分比
-    // document.getElementById('completionRate').textContent = `${completionRate}%`;
-    document.querySelector('.completion-circle').style.setProperty('--percentage', `${completionRate}%`);
-
-    // 添加动画效果
-    const innerCircle = document.querySelector('.inner-circle');
-    innerCircle.style.transform = `scale(1.1)`; // 放大内圈
-    setTimeout(() => {
-        innerCircle.style.transform = `scale(1)`; // 恢复原状
-    }, 500); // 动画持续时间
-}
-
-
-
-// 更新卡片显示
-function updateCardDisplay() {
-    console.log('更新卡片显示');
-    
-    // 重置已复习的问题数量
-    // mockReviewData.completedProblems = 0; // 重置已复习数量
-    updateStats(); // 更新统计信息，传递当前显示的卡片数量
-
-    createReviewCards(); // 创建新的卡片
-}
-
-// 更新卡片限制和显示
-function updateCardLimitDisplay() {
-    const input = document.getElementById('cardLimit');
-    const totalDisplay = document.querySelector('.total-problems');
-    const totalProblems = _store__WEBPACK_IMPORTED_MODULE_1__.daily_store.dailyReviewProblems?.length || 0;
-    
-    // 更新最大值和总数显示
-    input.max = Math.max(totalProblems, 1);
-    totalDisplay.textContent = `/ ${totalProblems}`;
-    
-    // 使用保存的默认值或回退到3
-    let currentValue = _store__WEBPACK_IMPORTED_MODULE_1__.store.defaultCardLimit || 1;
-    if (currentValue > totalProblems && totalProblems > 0) {
-        currentValue = totalProblems;
-    }
-    input.value = currentValue;
-    
-    // 禁用条件
-    if (totalProblems === 0) {
-        input.value = 0;
-        input.disabled = true;
-        totalDisplay.textContent = "/ 0";
-    } else {
-        input.disabled = false;
-    }
-
-    console.log('更新卡片限制显示:', {
-        currentValue: input.value,
-        max: input.max,
-        totalProblems
-    });
-}
-// 改变卡片数量
-// 所有功能函数
-async function changeCardLimit(delta) {
-    console.log('执行 changeCardLimit, delta:', delta);
-    const input = document.getElementById('cardLimit');
-    const currentValue = parseInt(input.value, 10);
-    const newValue = currentValue + delta;
-    const maxValue = _store__WEBPACK_IMPORTED_MODULE_1__.daily_store.dailyReviewProblems?.length || 0;
-    
-    if (newValue >= 1 && newValue <= maxValue) {
-        input.value = newValue;
-        await (0,_service_configService__WEBPACK_IMPORTED_MODULE_6__.setDefaultCardLimit)(newValue);
-        _store__WEBPACK_IMPORTED_MODULE_1__.store.defaultCardLimit = newValue;
-        updateCardDisplay();
-    }
-}
-
-
-// 标记题目为已复习
-async function markAsReviewed(button, problem) {
-    console.log('执行 markAsReviewed', button, problem);
-    
-    const card = button.closest('.review-card');
-    if (!card) {
-        console.log('未找到对应的卡片');
-        return;
-    }
-
-    console.log('找到卡片，开始更新状态');
-    
-    // 更换图标并更改样式
-    const icon = button.querySelector('i');
-    icon.classList.remove('fa-check-circle');
-    icon.classList.add('fa-circle-check');
-    icon.style.color = '#0D6E6E';
-    
-    // 禁用按钮
-    button.disabled = true;
-    card.style.opacity = '0.4';
-
-    // 更新问题状态
-    // if (problem && problem.fsrsState) {
-    //     problem.fsrsState.lastReview = Date.now();
-    //     problem.fsrsState.reviewCount = (problem.fsrsState.reviewCount || 0) + 1;
-    //     这里可以添加保存到存储的逻辑
-    //     await updateProblem(problem);
-    // }
-
-    // 更新统计信息
-    updateStats();
-    console.log('更新完成');
-}
-
-// 标记所有题目为已复习
-function markAllAsReviewed() {
-    console.log('执行 markAllAsReviewed');
-    const buttons = document.querySelectorAll('.review-card .btn-review:not(:disabled)');
-    console.log('找到未禁用的按钮数量:', buttons.length);
-    buttons.forEach(button => markAsReviewed(button));
-}
-
-// 创建题目卡片时的事件绑定
-function createReviewCards() {
-    console.log('开始创建卡片');
-    const reviewList = document.getElementById('reviewList');
-    const template = document.getElementById('reviewCardTemplate');
-    const cardLimit = parseInt(document.getElementById('cardLimit').value, 10);
-
-    reviewList.innerHTML = '';
-
-    const problems = _store__WEBPACK_IMPORTED_MODULE_1__.daily_store.dailyReviewProblems || [];
-    problems.slice(0, cardLimit).forEach((problem, index) => {
-        const cardNode = template.content.cloneNode(true);
-        const card = cardNode.querySelector('.review-card');
-        
-        // 安全地访问 fsrsState
-        const fsrsState = problem.fsrsState || {};
-
-        
-        // 设置题目信息
-        const problemName = card.querySelector('.problem-name');
-        problemName.textContent = problem.name || 'unknown';
-        
-        // 设置难度和复习信息
-        const difficultySpan = card.querySelector('.difficulty');
-        const level = problem.level || 'Unknown';
-        difficultySpan.textContent = level;
-        // 使用现有的 CSS 类
-        difficultySpan.classList.add(`difficulty-${level}`);
-
-        // 设置可检索性
-        const retrievability = (0,_util_utils_js__WEBPACK_IMPORTED_MODULE_3__.getCurrentRetrievability)(problem);
-        const retrievabilitySpan = card.querySelector('.retrievability');
-        retrievabilitySpan.textContent = `${retrievability.toFixed(2)}`;
-        retrievabilitySpan.classList.add(retrievability < 0.9 ? 'text-danger' : 'text-success');
-        
-        
-        // 设置下次复习时间
-        const nextReviewTips = fsrsState.nextReview 
-            ? (() => {
-                const daysUntilReview = Math.ceil((new Date(fsrsState.nextReview) - new Date()) / (1000 * 60 * 60 * 24));
-                if (daysUntilReview > 0) {
-                    return `${daysUntilReview} day${daysUntilReview > 1 ? 's' : ''} Review`;
-                } else {
-                    const daysOverdue = Math.abs(daysUntilReview);
-                    return `  ${daysOverdue} day${daysOverdue > 1 ? 's' : ''} Delay`;
-                }
-            })()
-            : 'Not scheduled';
-        card.querySelector('.next-review').textContent = nextReviewTips;
-
-        // 格式化上次复习时间
-        const lastReviewText = fsrsState.lastReview 
-        ? new Date(fsrsState.lastReview).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        })
-        : 'Never reviewed';
-
-        // 格式化上次复习时间
-        const nextReviewText = fsrsState.nextReview 
-        ? new Date(fsrsState.nextReview).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        })
-        : 'Never reviewed';
-
-
-
-        // 设置hover提示
-        const tooltipContent = [
-            `Last Review: ${lastReviewText}`,
-            `Next Review: ${nextReviewText}`,
-            problem.url ? 'Click to open problem' : ''
-        ].filter(Boolean).join('\n');
-        
-        card.title = tooltipContent;
-
-        // 检查今日是否已复习
-        const isReviewedToday = fsrsState.lastReview && 
-            new Date(fsrsState.lastReview).toDateString() === new Date().toDateString();
-
-        // 设置按钮状态
-        const reviewButton = card.querySelector('.btn-review');
-        if (reviewButton) {
-            if (isReviewedToday) {
-                const icon = reviewButton.querySelector('i');
-                icon.classList.remove('fa-check-circle');
-                icon.classList.add('fa-circle-check');
-                icon.style.color = '#0D6E6E';
-                reviewButton.disabled = true;
-                card.style.opacity = '0.4';
-            }
-
-            reviewButton.onclick = async function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('复习按钮被点击');
-
-                const updatedProblem = await (0,_script_submission_js__WEBPACK_IMPORTED_MODULE_4__.handleFeedbackSubmission)(problem);
-                if (updatedProblem) {
-                    markAsReviewed(this, updatedProblem);
-                }
-                // markAsReviewed(this, problem); // 修改这里，传入按钮元素和问题对象
-            };
-        }
-
-        // 添加题目链接功能
-        if (problem.url) {
-            card.style.cursor = 'pointer';
-            card.onclick = function(e) {
-                if (!e.target.closest('.btn-review')) {
-                    window.open(problem.url, '_blank');
-                }
-            };
-        }
-
-        reviewList.appendChild(cardNode);
-    });
-}
-
-
-
-
-
-// 设置当前日期
-function setCurrentDate() {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const today = new Date().toLocaleDateString('en-US', options);
-    document.getElementById('currentDate').textContent = today;
-}
-
-// 页面切换功能
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM加载完成,开始初始化页面切换功能');
-    
-    // 检查是否找到导航按钮
-    const navButtons = document.querySelectorAll('.nav-btn');
-    console.log('找到导航按钮数量:', navButtons.length);
-    
-    // 检查是否找到视图
-    const views = document.querySelectorAll('.view');
-    console.log('找到视图数量:', views.length);
-    
-    // 打印所有视图的ID
-    views.forEach(view => console.log('视图ID:', view.id));
-    
-    navButtons.forEach((button, index) => {
-        console.log(`为第 ${index + 1} 个按钮绑定点击事件:`, button.textContent);
-        
-        button.addEventListener('click', async function(e) {
-            e.preventDefault(); // 阻止默认行为
-            e.stopPropagation(); // 阻止事件冒泡
-            
-            console.log('按钮被点击:', this.textContent);
-            
-            // 移除所有按钮的激活状态
-            navButtons.forEach(btn => btn.classList.remove('active'));
-            // 添加当前按钮的激活状态
-            this.classList.add('active');
-            
-            // 获取目标视图
-            const targetView = this.textContent.trim();
-            console.log('目标视图:', targetView);
-            
-            let viewId;
-            switch(targetView) {
-                case '复习':
-                    viewId = 'reviewView';
-                    await initializeReviewPage();
-                    break;
-                case '题目列表':
-                    viewId = 'problemListView';
-                    await loadProblemList(); // 加载题目列表
-                    // renderAll();
-                    break;
-                case '更多':
-                    viewId = 'moreView';
-                    break;
-            }
-            
-            console.log('切换到视图ID:', viewId);
-            
-            // 切换视图
-            views.forEach(view => {
-                console.log('检查视图:', view.id);
-                if(view.id === viewId) {
-                    view.classList.add('active');
-                    view.style.display = 'block';
-                    console.log('激活视图:', view.id);
-                } else {
-                    view.classList.remove('active');
-                    view.style.display = 'none';
-                    console.log('隐藏视图:', view.id);
-                }
-            });
-        });
-    });
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  M: () => (/* binding */ initializeReviewPage)
 });
 
-// 确保在页面完全加载后也执行一次检查
-window.onload = function() {
-    console.log('页面完全加载完成，检查导航功能是否正常初始化');
-    const navButtons = document.querySelectorAll('.nav-btn');
-    console.log('页面加载完成后的导航按钮数量:', navButtons.length);
-};
+// UNUSED EXPORTS: changeCardLimit, initializeFeedbackButton, updateCardDisplay, updateCardLimitDisplay
 
-// 加载题目列表
-// function loadProblemList() {
-//     const problemList = document.getElementById('problemList');
-//     if(!problemList.children.length) { // 只在第一次加载
-//         mockReviewData.problems.forEach(problem => {
-//             const problemCard = createProblemCard(problem);
-//             problemList.appendChild(problemCard);
-//         });
-//     }
-// }
+// EXTERNAL MODULE: ./src/popup/view/view.js + 7 modules
+var view = __webpack_require__(876);
+// EXTERNAL MODULE: ./src/popup/service/problemService.js + 1 modules
+var problemService = __webpack_require__(820);
+// EXTERNAL MODULE: ./src/popup/util/utils.js
+var utils = __webpack_require__(384);
+// EXTERNAL MODULE: ./src/popup/entity/problem.js
+var entity_problem = __webpack_require__(875);
+// EXTERNAL MODULE: ./src/popup/service/fsrsService.js
+var fsrsService = __webpack_require__(990);
+;// CONCATENATED MODULE: ./src/popup/script/submission.js
 
-// 创建题目卡片
-function createProblemCard(problem) {
-    const card = document.createElement('div');
-    card.className = 'problem-card';
-    card.innerHTML = `
-        <h4>${problem.index}. ${problem.name}</h4>
-        <div class="problem-info">
-            <span class="difficulty-${problem.difficulty}">${problem.difficulty}</span>
-            <span class="last-review">上次复习: ${problem.lastReview}</span>
-        </div>
-        <div class="problem-stats">
-            <div class="stat">
-                <i class="fas fa-brain"></i>
-                <span>${problem.retrievability.toFixed(2)}</span>
-            </div>
-            <div class="stat">
-                <i class="fas fa-chart-line"></i>
-                <span>${problem.proficiency}/${problem.maxProficiency}</span>
-            </div>
-        </div>
-    `;
-    return card;
-}
 
-async function loadProblemList() {
-    await (0,_view_view_js__WEBPACK_IMPORTED_MODULE_0__.renderAll)();
-}
 
 
 
-// 添加设置相关的初始化函数
-async function initializeOptions() {
-    await (0,_service_configService__WEBPACK_IMPORTED_MODULE_6__.loadConfigs)();
 
-    const optionsForm = document.getElementById('optionsForm');
-    if (!optionsForm) return; // 如果找不到表单元素，直接返回
-    
-    // 初始化题目排序选择器
-    const problemSorterSelect = document.getElementById('problemSorterSelect');
-    if (problemSorterSelect) {
-        const problemSorterMetaArr = _util_sort__WEBPACK_IMPORTED_MODULE_8__.problemSorterArr.map(sorter => ({
-            id: (0,_util_sort__WEBPACK_IMPORTED_MODULE_8__.idOf)(sorter), 
-            text: (0,_util_sort__WEBPACK_IMPORTED_MODULE_8__.descriptionOf)(sorter)
-        }));
 
-        problemSorterMetaArr.forEach(sorterMeta => {
-            const optionElement = document.createElement('option');
-            optionElement.value = sorterMeta.id;
-            optionElement.textContent = sorterMeta.text;
-            problemSorterSelect.append(optionElement);
-        });
-    }
-
-    // 初始化云同步开关
-    const syncToggle = document.getElementById('syncToggle');
-    if (syncToggle) {
-        syncToggle.checked = _store__WEBPACK_IMPORTED_MODULE_1__.store.isCloudSyncEnabled || false;
-    }
-    // 初始化默认卡片数量
-    // const defaultCardLimitInput = document.getElementById('defaultCardLimit');
-    // if (defaultCardLimitInput) {
-    //     defaultCardLimitInput.value = store.defaultCardLimit || 1;
-    // }
-
-    // 修改保存成功提示
-    optionsForm.addEventListener('submit', async e => {
-        e.preventDefault();
-        const selectedSorterId = problemSorterSelect.value;
-        const isCloudSyncEnabled = syncToggle.checked;
-        // const defaultCardLimit = parseInt(defaultCardLimitInput.value, 10);
-
-        await (0,_service_configService__WEBPACK_IMPORTED_MODULE_6__.setProblemSorter)(Number(selectedSorterId));
-        await (0,_service_configService__WEBPACK_IMPORTED_MODULE_6__.setCloudSyncEnabled)(isCloudSyncEnabled);
-        // await setDefaultCardLimit(defaultCardLimit);
-        // // 更新当前显示的卡片数量
-        // const cardLimitInput = document.getElementById('cardLimit');
-        // if (cardLimitInput) {
-        //     cardLimitInput.value = defaultCardLimit;
-        //     updateCardDisplay(); // 更新卡片显示
-        // }
-        // 使用 SweetAlert2 显示保存成功提示
-        sweetalert2__WEBPACK_IMPORTED_MODULE_9___default().fire({
-            icon: 'success',
-            title: '设置已保存',
-            text: '您的设置已成功更新',
-            showConfirmButton: false,
-            timer: 1500,
-            background: '#1d2e3d',
-            color: '#ffffff',
-            toast: true,
-            position: 'center-end',
-            customClass: {
-                popup: 'colored-toast'
-            }
-        });
-    });
-}
-
-
-
-// 初始化函数
-async function initializeReviewPage() {
-    console.log('初始化复习页面');
-    // 首先加载配置
-    await (0,_service_configService__WEBPACK_IMPORTED_MODULE_6__.loadConfigs)();
-    console.log('加载的默认卡片数量:', _store__WEBPACK_IMPORTED_MODULE_1__.store.defaultCardLimit);
-    await loadDailyReviewData(); // 加载真实数据
-    const gearButtons = document.querySelectorAll('.gear-button');
-    gearButtons.forEach(button => {
-        button.replaceWith(button.cloneNode(true));
-    });
-    
-    
-    // 绑定齿轮按钮事件
-    document.querySelectorAll('.gear-button').forEach(button => {
-        button.addEventListener('click', function() {
-            console.log('齿轮按钮被点击');
-            const delta = this.classList.contains('left') ? -1 : 1;
-            changeCardLimit(delta);
-        });
-    });
-
-    // 绑定卡片数量输入框变化事件
-    const cardLimitInput = document.getElementById('cardLimit');
-    cardLimitInput.addEventListener('change', function() {
-        console.log('卡片数量改变');
-        updateCardDisplay();
-    });
-
-    // 初始化显示
-    setCurrentDate();
-    updateStats();
-    updateCardLimitDisplay();
-    createReviewCards();
-}
-
-// 确保在页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', async function() {
-    console.log('DOM加载完成');
-    await initializeReviewPage();
-    // 添加设置初始化
-    await initializeOptions();
-});
-
-// 以防万一，也添加 window.onload
-window.onload = function() {
-    console.log('页面完全加载完成');
-    if (!document.querySelector('.review-card')) {
-        console.log('卡片未创建，重新初始化');
-        setCurrentDate();
-        updateStats();
-        updateCardLimitDisplay();
-        createReviewCards();
-    }
-
-};
-
-
-/***/ }),
-
-/***/ "./src/popup/delegate/cloudStorageDelegate.js":
-/*!****************************************************!*\
-  !*** ./src/popup/delegate/cloudStorageDelegate.js ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _util_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/utils */ "./src/popup/util/utils.js");
-/* harmony import */ var _storageDelegate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./storageDelegate */ "./src/popup/delegate/storageDelegate.js");
-
-
-
-
-const getCloudStorageData = async (key) => {
-    return new Promise((resolve, reject) => {
-        chrome.storage.sync.get(key, (result) => {
-            if (result === undefined || result[key] === undefined) {
-                reject(key);
-            } else {
-                resolve(result[key]);
-            }
-        })
-    }).catch((key) => {
-        console.log(`get sync storage data failed for key = ${key}`);
-    });
-}
-
-const setCloudStorageData = async (key, val) => {
-
-    console.log("set to cloud");
-    console.log([key, val]);
-
-    return new Promise((resolve) => {
-        chrome.storage.sync.set({ [key]: val });
-        resolve();
-    }).catch(e => console.log(e));
-}
-
-const batchSetCloudStorageDate = async (object) => {
-    return new Promise((resolve) => {
-        chrome.storage.sync.set(object);
-        resolve();
-    }).catch(e => console.log(e));
-}
-
-const batchGetCloudStorageDate = async (keyArr) => {
-    return new Promise((resolve, reject) => {
-        chrome.storage.sync.get(keyArr, (result) => {
-            if (result === undefined) {
-                reject(key);
-            } else {
-                resolve(result);
-            }
-        })
-    }).catch(e => {
-        console.log(console.log(e));
-    });
-}
-
-/**
- * sharding
- */
-
-const shardCount = 20;
-
-const hashKeyToShardIdx = (key) => {
-    const hash = (0,_util_utils__WEBPACK_IMPORTED_MODULE_0__.simpleStringHash)(key);
-    const shardIndex = (hash % shardCount + shardCount) % shardCount;
-    return shardIndex;
-}
-
-const isJsonObj = (obj) => {
-    return Object.getPrototypeOf(obj) === Object.prototype;
-}
-
-const shardedSetCloudStorageData = async (key, val) => {
-    // val should be a JSON object
-    if (!isJsonObj(val)) {
-        throw "shardedSet only supports JSON type val";
-    }
-    const shardedVal = {};
-    const objectKeys = Object.keys(val);
-    Array.prototype.forEach.call(objectKeys, (objKey) => {
-        const shardedIdx = hashKeyToShardIdx(objKey);
-        const shardedKey = `${key}#${shardedIdx}`;
-        if (!(shardedKey in shardedVal)) {
-            shardedVal[shardedKey] = {};
-        }
-        shardedVal[shardedKey][objKey] = val[objKey];
-    })
-    
-    console.log("set shareded data to cloud:");
-    console.log(shardedVal);
-
-    await batchSetCloudStorageDate(shardedVal);
-}
-
-const shardedGetCloudStorageData = async (key) => {
-    const shardedKeyArr = [];
-    for (let i = 0; i < shardCount; i++) {
-        shardedKeyArr.push(`${key}#${i}`);
-    }
-
-    const vals = await batchGetCloudStorageDate(shardedKeyArr);    
-    const res = {};
-
-    if (vals === undefined) return res;
-    for (const shardKey in vals) {
-        Object.assign(res, vals[shardKey]);
-    } 
-    console.log(`get ${key} sharded from cloud`)
-    console.log(res);
-    return res;
-}
-
-class CloudStorageDelegate extends _storageDelegate__WEBPACK_IMPORTED_MODULE_1__.StorageDelegate {
-    constructor(){
-        super();
-        this.get = shardedGetCloudStorageData;
-        this.set = shardedSetCloudStorageData;
-    }
-}
-
-const cloudStorageDelegate = new CloudStorageDelegate();
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (cloudStorageDelegate);
-
-/***/ }),
-
-/***/ "./src/popup/delegate/leetCodeDelegate.js":
-/*!************************************************!*\
-  !*** ./src/popup/delegate/leetCodeDelegate.js ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getProblemInfo: () => (/* binding */ getProblemInfo),
-/* harmony export */   queryProblemInfo: () => (/* binding */ queryProblemInfo)
-/* harmony export */ });
-const user_agent =
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36";
-const params = {
-    operationName: "questionTitle",
-    variables: { titleSlug: "" }
-};
-const headers = {
-    'User-Agent': user_agent,
-    'Connection': 'keep-alive',
-    'Content-Type': 'application/json',
-    'Referer': "",
-};
-
-const queryProblemInfo = async (slug, site) => {
-    const baseUrl = `https://leetcode.${site}`;
-    params.variables.titleSlug = slug;
-    params.query = `query questionTitle($titleSlug: String!) {
-        question(titleSlug: $titleSlug) {
-          questionFrontendId
-          ${site === "cn" ? "translatedTitle" : "title"}
-          difficulty
-        }
-      }`
-    headers.Referer = `${baseUrl}/problems/${slug}`
-
-    const requestOptions = {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(params),
-        timeout: 10000
-    };
-
-    const response = await fetch(`${baseUrl}/graphql`, requestOptions);
-    const content = await response.json();
-
-    return content.data.question;
-}
-
-/*
-    Extract basic problem information
-*/
-const getProblemInfo = async () => {
-    let problemUrl = window.location.href;
-
-    const match = problemUrl.match(/(com|cn)(\/|$)/);
-    console.log(`current site is ${match[1]}`);
-    const site = match ? match[1] : "com";
-
-    const possible_suffix = ["/submissions/", "/description/", "/discussion/", "/solutions/"];
-    for (const suffix of possible_suffix) {
-        if (problemUrl.includes(suffix)) {
-            problemUrl = problemUrl.substring(0, problemUrl.lastIndexOf(suffix) + 1);
-            break;
-        }
-    }
-
-    const problemSlug = problemUrl.split("/").splice(-2)[0];
-
-    const question = await queryProblemInfo(problemSlug, site);
-
-    return {
-        problemIndex: question.questionFrontendId,
-        problemName: `${question.questionFrontendId}. ${site === "cn" ? question.translatedTitle : question.title}`,
-        problemLevel: question.difficulty,
-        problemUrl
-    };
-}
-
-
-/***/ }),
-
-/***/ "./src/popup/delegate/localStorageDelegate.js":
-/*!****************************************************!*\
-  !*** ./src/popup/delegate/localStorageDelegate.js ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   getLocalStorageData: () => (/* binding */ getLocalStorageData),
-/* harmony export */   setLocalStorageData: () => (/* binding */ setLocalStorageData)
-/* harmony export */ });
-/* harmony import */ var _storageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storageDelegate */ "./src/popup/delegate/storageDelegate.js");
-
-
-const getLocalStorageData = async (key) => {
-    return new Promise((resolve, reject) => {
-        chrome.storage.local.get(key, (result) => {
-            if (result === undefined || result[key] === undefined) {
-                reject(key);
-            } else {
-                resolve(result[key]);
-            }
-        })
-    }).catch((key) => {
-        console.log(`get local storage data failed for key = ${key}`);
-    });
-}
-
-const setLocalStorageData = async (key, val) => {
-    return new Promise((resolve) => {
-        chrome.storage.local.set({ [key]: val });
-        resolve();
-    }).catch(e => console.log(e));
-}
-
-class LocalStorageDelegate extends _storageDelegate__WEBPACK_IMPORTED_MODULE_0__.StorageDelegate {
-    constructor(){
-        super();
-        this.get = getLocalStorageData;
-        this.set = setLocalStorageData;
-    }
-}
-
-const localStorageDelegate = new LocalStorageDelegate();
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (localStorageDelegate);
-
-/***/ }),
-
-/***/ "./src/popup/delegate/storageDelegate.js":
-/*!***********************************************!*\
-  !*** ./src/popup/delegate/storageDelegate.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   StorageDelegate: () => (/* binding */ StorageDelegate)
-/* harmony export */ });
-class StorageDelegate {
-    constructor(){
-        this.get = async (key) => null;
-        this.set = async (key, val) => {};
-    }
-}
-
-
-
-/***/ }),
-
-/***/ "./src/popup/entity/operationHistory.js":
-/*!**********************************************!*\
-  !*** ./src/popup/entity/operationHistory.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   OPS_TYPE: () => (/* binding */ OPS_TYPE),
-/* harmony export */   OperationHistory: () => (/* binding */ OperationHistory)
-/* harmony export */ });
-class OperationHistory {
-    constructor(before, isInCnMode, type, time) {
-        this.before = before;
-        this.isInCnMode = isInCnMode;
-        this.type = type;
-        this.time = time;
-    }
-}
-
-const OPS_TYPE = Object.freeze({
-    MASTER: "mark as mastered",
-    RESET: "reset progress",
-    DELETE: "delete record"
-});
-
-/***/ }),
-
-/***/ "./src/popup/entity/problem.js":
-/*!*************************************!*\
-  !*** ./src/popup/entity/problem.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Problem: () => (/* binding */ Problem),
-/* harmony export */   copy: () => (/* binding */ copy),
-/* harmony export */   getDeletedProblem: () => (/* binding */ getDeletedProblem)
-/* harmony export */ });
-class Problem {
-    constructor(index, name, level, url, submissionTime, proficiency, modificationTime) {
-        this.index = index;
-        this.name = name;
-        this.level = level;
-        this.url = url;
-        this.submissionTime = submissionTime;
-        this.proficiency = proficiency;
-        this.modificationTime = modificationTime;
-        this.isDeleted = false;
-
-        // 更新 FSRS 状态结构
-        this.fsrsState = {
-            difficulty: null,        // 用户反馈的难度 (1-5)
-            quality: null,           // 答题质量 (1-5)
-            lastReview: null,        // 上次复习时间
-            nextReview: null,        // 下次复习时间
-            reviewCount: 0,          // 复习次数
-            stability: 0,            // 记忆稳定性
-            state: 'New',           // FSRS 状态
-            lapses: 0               // 遗忘次数
-        };
-    }
-};
-
-const getDeletedProblem = (problemId) => {
-    const deletedProblem = new Problem(problemId, '', '', '', 0, 0, Date.now());
-    deletedProblem.isDeleted = true;
-    return deletedProblem;
-}
-
-const copy = (p) => {
-    const newProblem = new Problem(
-        p.index, 
-        p.name, 
-        p.level, 
-        p.url, 
-        p.submissionTime, 
-        p.proficiency, 
-        p.modificationTime
-    );
-    
-    // 复制 isDeleted 状态
-    newProblem.isDeleted = p.isDeleted;
-    
-    // 深拷贝 fsrsState 对象
-    // 深拷贝 fsrsState 对象，兼容旧版本
-    newProblem.fsrsState = {
-        difficulty: p.fsrsState ? p.fsrsState.difficulty : null,
-        quality: p.fsrsState ? p.fsrsState.quality : null,
-        lastReview: p.fsrsState ? p.fsrsState.lastReview : null,
-        nextReview: p.fsrsState ? p.fsrsState.nextReview : null,
-        reviewCount: p.fsrsState ? p.fsrsState.reviewCount : 0,
-        stability: p.fsrsState ? p.fsrsState.stability : 0,
-        state: p.fsrsState ? p.fsrsState.state : 'New',
-        lapses: p.fsrsState ? p.fsrsState.lapses : 0
-    };
-    
-    return newProblem;
-}
-
-/***/ }),
-
-/***/ "./src/popup/handler/configJumpHandler.js":
-/*!************************************************!*\
-  !*** ./src/popup/handler/configJumpHandler.js ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   setConfigJumpHandlers: () => (/* binding */ setConfigJumpHandlers)
-/* harmony export */ });
-/* harmony import */ var _util_doms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/doms */ "./src/popup/util/doms.js");
-
-
-const setConfigJumpHandlers = () => {
-    if (_util_doms__WEBPACK_IMPORTED_MODULE_0__.configButtonDOMs !== undefined) {
-        Array.prototype.forEach.call(_util_doms__WEBPACK_IMPORTED_MODULE_0__.configButtonDOMs, (btn) => btn.onclick = async (e) => {
-            chrome.runtime.openOptionsPage();
-        });
-    }
-}
-
-/***/ }),
-
-/***/ "./src/popup/handler/handlerRegister.js":
-/*!**********************************************!*\
-  !*** ./src/popup/handler/handlerRegister.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   registerAllHandlers: () => (/* binding */ registerAllHandlers)
-/* harmony export */ });
-/* harmony import */ var _configJumpHandler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./configJumpHandler */ "./src/popup/handler/configJumpHandler.js");
-/* harmony import */ var _modeSwitchHandler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modeSwitchHandler */ "./src/popup/handler/modeSwitchHandler.js");
-/* harmony import */ var _pageJumpHandler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pageJumpHandler */ "./src/popup/handler/pageJumpHandler.js");
-/* harmony import */ var _popupUnloadHandler__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./popupUnloadHandler */ "./src/popup/handler/popupUnloadHandler.js");
-/* harmony import */ var _recordOperationHandler__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./recordOperationHandler */ "./src/popup/handler/recordOperationHandler.js");
-
-
-
-
-
-
-const registerAllHandlers = () => {
-    (0,_pageJumpHandler__WEBPACK_IMPORTED_MODULE_2__.setPageJumpHandlers)();
-    (0,_modeSwitchHandler__WEBPACK_IMPORTED_MODULE_1__.setModeSwitchHandlers)();
-    (0,_recordOperationHandler__WEBPACK_IMPORTED_MODULE_4__.setRecordOperationHandlers)();
-    (0,_configJumpHandler__WEBPACK_IMPORTED_MODULE_0__.setConfigJumpHandlers)();
-    (0,_popupUnloadHandler__WEBPACK_IMPORTED_MODULE_3__.setPopupUnloadHandler)();
-}
-
-/***/ }),
-
-/***/ "./src/popup/handler/modeSwitchHandler.js":
-/*!************************************************!*\
-  !*** ./src/popup/handler/modeSwitchHandler.js ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   setModeSwitchHandlers: () => (/* binding */ setModeSwitchHandlers),
-/* harmony export */   switchMode: () => (/* binding */ switchMode)
-/* harmony export */ });
-/* harmony import */ var _service_modeService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service/modeService */ "./src/popup/service/modeService.js");
-/* harmony import */ var _util_doms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/doms */ "./src/popup/util/doms.js");
-/* harmony import */ var _view_view__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../view/view */ "./src/popup/view/view.js");
-/* harmony import */ var _daily_review__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../daily-review */ "./src/popup/daily-review.js");
-
-
-
-
-
-const switchMode = async () => {
-    await (0,_service_modeService__WEBPACK_IMPORTED_MODULE_0__.toggleMode)();
-    await (0,_view_view__WEBPACK_IMPORTED_MODULE_2__.renderAll)();
-    // 更新每日复习视图
-    await (0,_daily_review__WEBPACK_IMPORTED_MODULE_3__.initializeReviewPage)();
-}
-
-const setModeSwitchHandlers = () => {
-    _util_doms__WEBPACK_IMPORTED_MODULE_1__.switchButtonDOM.onclick = switchMode;
-}
-
-/***/ }),
-
-/***/ "./src/popup/handler/pageJumpHandler.js":
-/*!**********************************************!*\
-  !*** ./src/popup/handler/pageJumpHandler.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   setPageJumpHandlers: () => (/* binding */ setPageJumpHandlers)
-/* harmony export */ });
-/* harmony import */ var _util_doms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/doms */ "./src/popup/util/doms.js");
-/* harmony import */ var _view_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../view/view */ "./src/popup/view/view.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/popup/store.js");
-/* harmony import */ var _recordOperationHandler__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./recordOperationHandler */ "./src/popup/handler/recordOperationHandler.js");
-
-
-
-
-
-const goToPrevReviewPage = () => {
-    (0,_view_view__WEBPACK_IMPORTED_MODULE_1__.renderReviewTableContent)(_store__WEBPACK_IMPORTED_MODULE_2__.store.needReviewProblems, _store__WEBPACK_IMPORTED_MODULE_2__.store.toReviewPage - 1);
-    (0,_recordOperationHandler__WEBPACK_IMPORTED_MODULE_3__.setRecordOperationHandlers)();
-}
-const goToNextReviewPage = () => {
-    ;(0,_view_view__WEBPACK_IMPORTED_MODULE_1__.renderReviewTableContent)(_store__WEBPACK_IMPORTED_MODULE_2__.store.needReviewProblems, _store__WEBPACK_IMPORTED_MODULE_2__.store.toReviewPage + 1);
-    (0,_recordOperationHandler__WEBPACK_IMPORTED_MODULE_3__.setRecordOperationHandlers)();
-}
-const goToPrevSchedulePage = () => {
-    ;(0,_view_view__WEBPACK_IMPORTED_MODULE_1__.renderScheduledTableContent)(_store__WEBPACK_IMPORTED_MODULE_2__.store.reviewScheduledProblems, _store__WEBPACK_IMPORTED_MODULE_2__.store.scheduledPage - 1);
-    (0,_recordOperationHandler__WEBPACK_IMPORTED_MODULE_3__.setRecordOperationHandlers)();
-}
-
-const goToNextSchedulePage = () => {
-    ;(0,_view_view__WEBPACK_IMPORTED_MODULE_1__.renderScheduledTableContent)(_store__WEBPACK_IMPORTED_MODULE_2__.store.reviewScheduledProblems, _store__WEBPACK_IMPORTED_MODULE_2__.store.scheduledPage + 1);
-    (0,_recordOperationHandler__WEBPACK_IMPORTED_MODULE_3__.setRecordOperationHandlers)();
-}
-
-const goToPrevCompletedPage = () => {
-    ;(0,_view_view__WEBPACK_IMPORTED_MODULE_1__.renderCompletedTableContent)(_store__WEBPACK_IMPORTED_MODULE_2__.store.completedProblems, _store__WEBPACK_IMPORTED_MODULE_2__.store.completedPage - 1);
-    (0,_recordOperationHandler__WEBPACK_IMPORTED_MODULE_3__.setRecordOperationHandlers)();
-}
-
-const goToNextCompletedPage = () => {
-    ;(0,_view_view__WEBPACK_IMPORTED_MODULE_1__.renderCompletedTableContent)(_store__WEBPACK_IMPORTED_MODULE_2__.store.completedProblems, _store__WEBPACK_IMPORTED_MODULE_2__.store.completedPage + 1);
-    (0,_recordOperationHandler__WEBPACK_IMPORTED_MODULE_3__.setRecordOperationHandlers)();
-}
-
-const jumpToReviewPage = (event) => {
-    if (event.keyCode !== 13) return;
-    let page = parseInt(event.target.value);
-    if (isNaN(page) || !Number.isInteger(page)) {
-        _util_doms__WEBPACK_IMPORTED_MODULE_0__.input0DOM.classList.add("is-invalid");
-        return;
-    }
-    _util_doms__WEBPACK_IMPORTED_MODULE_0__.input0DOM.classList.remove("is-invalid");
-    if (page === _store__WEBPACK_IMPORTED_MODULE_2__.store.toReviewPage) return;
-    (0,_view_view__WEBPACK_IMPORTED_MODULE_1__.renderReviewTableContent)(_store__WEBPACK_IMPORTED_MODULE_2__.store.needReviewProblems, page);
-    (0,_recordOperationHandler__WEBPACK_IMPORTED_MODULE_3__.setRecordOperationHandlers)();
-}
-
-const jumpToSchedulePage = (event) => {
-    if (event.keyCode !== 13) return;
-    let page = parseInt(event.target.value);
-    if (isNaN(page) || !Number.isInteger(page)) {
-        _util_doms__WEBPACK_IMPORTED_MODULE_0__.input1DOM.classList.add("is-invalid");
-        return;
-    }
-    _util_doms__WEBPACK_IMPORTED_MODULE_0__.input1DOM.classList.remove("is-invalid");
-    if (page === _store__WEBPACK_IMPORTED_MODULE_2__.store.scheduledPage) return;
-    update_schedule_table_content(_store__WEBPACK_IMPORTED_MODULE_2__.store.reviewScheduledProblems, page);
-    (0,_recordOperationHandler__WEBPACK_IMPORTED_MODULE_3__.setRecordOperationHandlers)();
-}
-
-const jumpToCompletedPage = (event) => {
-    if (event.keyCode !== 13) return;
-    let page = parseInt(event.target.value);
-    if (isNaN(page) || !Number.isInteger(page)) {
-        _util_doms__WEBPACK_IMPORTED_MODULE_0__.input2DOM.classList.add("is-invalid");
-        return;
-    }
-    _util_doms__WEBPACK_IMPORTED_MODULE_0__.input2DOM.classList.remove("is-invalid");
-    if (page === _store__WEBPACK_IMPORTED_MODULE_2__.store.completedPage) return;
-    (0,_view_view__WEBPACK_IMPORTED_MODULE_1__.renderCompletedTableContent)(_store__WEBPACK_IMPORTED_MODULE_2__.store.needReviewProblems, page);
-    (0,_recordOperationHandler__WEBPACK_IMPORTED_MODULE_3__.setRecordOperationHandlers)();
-}
-
-const setPageJumpHandlers = () => {
-    // prevButton0DOM.onclick = goToPrevReviewPage;
-    // nextButton0DOM.onclick = goToNextReviewPage;
-    _util_doms__WEBPACK_IMPORTED_MODULE_0__.prevButton1DOM.onclick = goToPrevSchedulePage;
-    _util_doms__WEBPACK_IMPORTED_MODULE_0__.nextButton1DOM.onclick = goToNextSchedulePage;
-    // prevButton2DOM.onclick = goToPrevCompletedPage;
-    // nextButton2DOM.onclick = goToNextCompletedPage;
-    
-    // input0DOM.onkeydown = jumpToReviewPage;
-    _util_doms__WEBPACK_IMPORTED_MODULE_0__.input1DOM.onkeydown = jumpToSchedulePage;
-    // input2DOM.onkeydown = jumpToCompletedPage;
-}
-
-/***/ }),
-
-/***/ "./src/popup/handler/popupUnloadHandler.js":
-/*!*************************************************!*\
-  !*** ./src/popup/handler/popupUnloadHandler.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   setPopupUnloadHandler: () => (/* binding */ setPopupUnloadHandler)
-/* harmony export */ });
-/* harmony import */ var _service_problemService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service/problemService */ "./src/popup/service/problemService.js");
-/* harmony import */ var _util_doms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/doms */ "./src/popup/util/doms.js");
-
-
-
-
-const setPopupUnloadHandler = () => {
-    if (_util_doms__WEBPACK_IMPORTED_MODULE_1__.popupPageDOM !== undefined) {
-        
-        _util_doms__WEBPACK_IMPORTED_MODULE_1__.popupPageDOM.addEventListener('unload', async () => {    
-            await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_0__.syncProblems)();
-        })
-    }
-}
-
-/***/ }),
-
-/***/ "./src/popup/handler/recordOperationHandler.js":
-/*!*****************************************************!*\
-  !*** ./src/popup/handler/recordOperationHandler.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   setRecordOperationHandlers: () => (/* binding */ setRecordOperationHandlers)
-/* harmony export */ });
-/* harmony import */ var _util_doms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/doms */ "./src/popup/util/doms.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/popup/store.js");
-/* harmony import */ var _service_problemService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../service/problemService */ "./src/popup/service/problemService.js");
-/* harmony import */ var _view_view__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../view/view */ "./src/popup/view/view.js");
-/* harmony import */ var _service_operationHistoryService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../service/operationHistoryService */ "./src/popup/service/operationHistoryService.js");
-
-
-
-
-
-
-const initTooltips = () => {
-    _store__WEBPACK_IMPORTED_MODULE_1__.store.tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    _store__WEBPACK_IMPORTED_MODULE_1__.store.tooltipList = [..._store__WEBPACK_IMPORTED_MODULE_1__.store.tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-}
-
-const hide_all_tooltips = () => {
-    _store__WEBPACK_IMPORTED_MODULE_1__.store.tooltipList.forEach(tooltip => tooltip._hideModalHandler());
-}
-
-const setRecordOperationHandlers = () => {
-
-    initTooltips();
-
-    if (_util_doms__WEBPACK_IMPORTED_MODULE_0__.checkButtonDOMs !== undefined) {
-        Array.prototype.forEach.call(_util_doms__WEBPACK_IMPORTED_MODULE_0__.checkButtonDOMs, (btn) => btn.onclick = async (event) => {
-            hide_all_tooltips();
-            await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_2__.markProblemAsMastered)(event.target.dataset.id);
-            await (0,_view_view__WEBPACK_IMPORTED_MODULE_3__.renderAll)();
-        });
-    }
-
-    if (_util_doms__WEBPACK_IMPORTED_MODULE_0__.deleteButtonDOMs !== undefined) {
-        Array.prototype.forEach.call(_util_doms__WEBPACK_IMPORTED_MODULE_0__.deleteButtonDOMs, (btn) => btn.onclick = async (event) => {
-            hide_all_tooltips();
-            await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_2__.deleteProblem)(event.target.dataset.id);
-            await (0,_view_view__WEBPACK_IMPORTED_MODULE_3__.renderAll)();
-        });
-    }
-
-    if (_util_doms__WEBPACK_IMPORTED_MODULE_0__.resetButtonDOMs !== undefined) {
-        Array.prototype.forEach.call(_util_doms__WEBPACK_IMPORTED_MODULE_0__.resetButtonDOMs, (btn) => btn.onclick = async (event) => {
-            hide_all_tooltips();
-            await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_2__.resetProblem)(event.target.dataset.id);
-            await (0,_view_view__WEBPACK_IMPORTED_MODULE_3__.renderAll)();
-        });
-    }
-
-    if (_util_doms__WEBPACK_IMPORTED_MODULE_0__.undoButtonDOMs !== undefined) {
-        Array.prototype.forEach.call(_util_doms__WEBPACK_IMPORTED_MODULE_0__.undoButtonDOMs, (btn) => btn.onclick = async () => {
-            hide_all_tooltips();
-            await (0,_service_operationHistoryService__WEBPACK_IMPORTED_MODULE_4__.undoLatestOperation)();
-            await (0,_view_view__WEBPACK_IMPORTED_MODULE_3__.renderAll)();
-        });
-    }
-}
-
-/***/ }),
-
-/***/ "./src/popup/popup.js":
-/*!****************************!*\
-  !*** ./src/popup/popup.js ***!
-  \****************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _popup_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./popup.css */ "./src/popup/popup.css");
-/* harmony import */ var _view_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./view/view.js */ "./src/popup/view/view.js");
-
-
-
-console.log("Hello Leetcode-Mastery-Scheduler!");
-await (0,_view_view_js__WEBPACK_IMPORTED_MODULE_1__.renderAll)();
-__webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } }, 1);
-
-/***/ }),
-
-/***/ "./src/popup/script/submission.js":
-/*!****************************************!*\
-  !*** ./src/popup/script/submission.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   addRecordButton: () => (/* binding */ addRecordButton),
-/* harmony export */   handleFeedbackSubmission: () => (/* binding */ handleFeedbackSubmission),
-/* harmony export */   submissionListener: () => (/* binding */ submissionListener)
-/* harmony export */ });
-/* harmony import */ var _util_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/utils */ "./src/popup/util/utils.js");
-/* harmony import */ var _service_problemService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../service/problemService */ "./src/popup/service/problemService.js");
-/* harmony import */ var _entity_problem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../entity/problem */ "./src/popup/entity/problem.js");
-/* harmony import */ var _util_fsrs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/fsrs */ "./src/popup/util/fsrs.js");
-
-
-
-
-/* 
-    monitorSubmissionResult will repeateadly check for the submission result.
-*/
-const monitorSubmissionResult = () => {
-
-    let submissionResult;
-    let maxRetry = 10;
-    const retryInterval = 1000;
-
-    const functionId = setInterval(async () => {
-
-        if (maxRetry <= 0) {
-            clearInterval(functionId);
-            return;
-        }
-
-        submissionResult = (0,_util_utils__WEBPACK_IMPORTED_MODULE_0__.getSubmissionResult)();
-
-        if (submissionResult === undefined || submissionResult.length === 0) {
-            maxRetry--;
-            return;
-        }
-
-        clearInterval(functionId);
-        let isSuccess = (0,_util_utils__WEBPACK_IMPORTED_MODULE_0__.isSubmissionSuccess)(submissionResult);
-
-        if (!isSuccess) return;
-
-        const { problemIndex, problemName, problemLevel, problemUrl } = await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.getCurrentProblemInfoFromLeetCode)();
-        await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.syncProblems)();   // prior to fetch local problem data, sync local problem data with cloud
-        const problems = await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.getAllProblems)();
-        let problem = problems[problemIndex];
-        
-        if (problem && problem.isDeleted !== true) {
-            const reviewNeeded = (0,_util_utils__WEBPACK_IMPORTED_MODULE_0__.needReview)(problem);
-            if (reviewNeeded) {
-                await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.createOrUpdateProblem)((0,_util_utils__WEBPACK_IMPORTED_MODULE_0__.updateProblemUponSuccessSubmission)(problem));
-            }
-        } else {
-            problem = new _entity_problem__WEBPACK_IMPORTED_MODULE_2__.Problem(problemIndex, problemName, problemLevel, problemUrl, Date.now(), (0,_util_utils__WEBPACK_IMPORTED_MODULE_0__.getDifficultyBasedSteps)(problemLevel)[0], Date.now());
-            await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.createOrUpdateProblem)(problem);
-        }
-        await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.syncProblems)(); // after problem updated, sync to cloud
-
-        console.log("Submission successfully tracked!");
-
-    }, retryInterval)
-};
-
-const submissionListener = (event) => {
-
-    const element = event.target;
-    
-    const filterConditions = [
-        (0,_util_utils__WEBPACK_IMPORTED_MODULE_0__.isSubmitButton)(element),
-        element.parentElement && (0,_util_utils__WEBPACK_IMPORTED_MODULE_0__.isSubmitButton)(element.parentElement),
-        element.parentElement && element.parentElement.parentElement && (0,_util_utils__WEBPACK_IMPORTED_MODULE_0__.isSubmitButton)(element.parentElement.parentElement),
-    ]
-
-    const isSubmission = filterConditions.reduce((prev, curr) => prev || curr);
-
-    if (isSubmission) {
-        monitorSubmissionResult();
-    }
-
-};
 
 
 
@@ -7609,47 +6357,198 @@ const addRecordButton = () => {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            padding: 12px 20px;
+            padding: 8px 12px;  /* 减小内边距 */
             background: #2563eb;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;  /* 稍微减小圆角 */
             cursor: pointer;
-            font-size: 14px;
-            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.2);
-            transition: all 0.2s ease;
+            font-size: 13px;  /* 减小字体大小 */
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+            transition: background 0.2s ease, box-shadow 0.2s ease;
             z-index: 9999;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            line-height: 1;
         }
         
         .Leetcode-Mastery-Scheduler-record-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
+        }
+        
+        .Leetcode-Mastery-Scheduler-record-btn.dragging {
+            opacity: 0.8;
+            cursor: grabbing;
+            transition: none;
+        }
+        
+        .Leetcode-Mastery-Scheduler-record-btn .drag-handle {
+            display: inline-block;
+            margin-right: 6px;  /* 减小间距 */
+            cursor: grab;
+            opacity: 0.7;
+            font-size: 12px;  /* 减小拖动手柄大小 */
+        }
+        
+        .Leetcode-Mastery-Scheduler-record-btn .drag-handle:hover {
+            opacity: 1;
+        }
+        
+        .Leetcode-Mastery-Scheduler-record-btn .reset-position {
+            margin-left: 6px;  /* 减小间距 */
+            opacity: 0.7;
+            cursor: pointer;
+            font-size: 12px;  /* 减小重置按钮大小 */
+        }
+        
+        .Leetcode-Mastery-Scheduler-record-btn .reset-position:hover {
+            opacity: 1;
+        }
+        
+        .Leetcode-Mastery-Scheduler-record-btn .star-icon {
+            margin-right: 4px;
+            font-size: 11px;
         }
     `;
     document.head.appendChild(style);
 
+    // 从localStorage获取保存的位置
+    const savedPosition = JSON.parse(localStorage.getItem('LMS_rateButtonPosition') || '{"bottom": 20, "right": 20}');
+    
     // 创建按钮
     const button = document.createElement('button');
     button.className = 'Leetcode-Mastery-Scheduler-record-btn';
-    button.textContent = '记录难度';
+    button.innerHTML = `
+        <span class="drag-handle">⋮</span>
+        <i class="fas fa-star star-icon"></i>Rate
+        <span class="reset-position" title="Reset position">↺</span>
+    `;
+    
+    // 设置保存的位置
+    button.style.bottom = `${savedPosition.bottom}px`;
+    button.style.right = `${savedPosition.right}px`;
     
     // 添加点击事件
-    button.addEventListener('click', async () => {
+    button.addEventListener('click', async (e) => {
+        // 如果点击的是拖动手柄或重置按钮，不触发评分
+        if (e.target.classList.contains('drag-handle') || e.target.classList.contains('reset-position')) {
+            return;
+        }
+        
         const result = await handleFeedbackSubmission();
         if (result) {
             console.log("Submission successfully tracked!");
             console.log("难度记录成功！");
         }
     });
-
+    
+    // 重置位置
+    const resetButton = button.querySelector('.reset-position');
+    resetButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        button.style.bottom = '20px';
+        button.style.right = '20px';
+        localStorage.setItem('LMS_rateButtonPosition', JSON.stringify({bottom: 20, right: 20}));
+    });
+    
+    // 添加拖拽功能
+    let isDragging = false;
+    let startX, startY, startBottom, startRight;
+    
+    const dragHandle = button.querySelector('.drag-handle');
+    
+    // 鼠标按下事件
+    const onMouseDown = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        isDragging = true;
+        button.classList.add('dragging');
+        
+        // 记录初始位置
+        startX = e.clientX;
+        startY = e.clientY;
+        startBottom = parseInt(getComputedStyle(button).bottom);
+        startRight = parseInt(getComputedStyle(button).right);
+        
+        // 添加鼠标移动和松开事件
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    };
+    
+    // 鼠标移动事件
+    const onMouseMove = (e) => {
+        if (!isDragging) return;
+        
+        // 计算新位置
+        const deltaX = startX - e.clientX;
+        const deltaY = e.clientY - startY;  // 修正垂直方向
+        
+        const newRight = Math.max(10, startRight + deltaX);
+        const newBottom = Math.max(10, startBottom - deltaY);
+        
+        // 确保按钮不会超出屏幕
+        const maxRight = window.innerWidth - button.offsetWidth - 10;
+        const maxBottom = window.innerHeight - button.offsetHeight - 10;
+        
+        button.style.right = `${Math.min(newRight, maxRight)}px`;
+        button.style.bottom = `${Math.min(newBottom, maxBottom)}px`;
+    };
+    
+    // 鼠标松开事件
+    const onMouseUp = () => {
+        if (!isDragging) return;
+        
+        isDragging = false;
+        button.classList.remove('dragging');
+        
+        // 保存新位置到localStorage
+        localStorage.setItem('LMS_rateButtonPosition', JSON.stringify({
+            bottom: parseInt(button.style.bottom),
+            right: parseInt(button.style.right)
+        }));
+        
+        // 移除事件监听器
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+    };
+    
+    // 添加事件监听器
+    dragHandle.addEventListener('mousedown', onMouseDown);
+    
     // 添加到页面
     document.body.appendChild(button);
+
+    // 添加窗口大小变化监听器
+    window.addEventListener('resize', () => {
+        const buttonRect = button.getBoundingClientRect();
+        const maxRight = window.innerWidth - button.offsetWidth - 10;
+        const maxBottom = window.innerHeight - button.offsetHeight - 10;
+        
+        // 如果按钮超出可视区域，调整位置
+        if (parseInt(button.style.right) > maxRight) {
+            button.style.right = `${maxRight}px`;
+        }
+        if (parseInt(button.style.bottom) > maxBottom) {
+            button.style.bottom = `${maxBottom}px`;
+        }
+        
+        // 保存调整后的位置
+        localStorage.setItem('LMS_rateButtonPosition', JSON.stringify({
+            bottom: parseInt(button.style.bottom),
+            right: parseInt(button.style.right)
+        }));
+    });
 };
 
 
 // 抽取成通用的处理函数
 async function handleFeedbackSubmission(problem = null) {
     try {
+        // 记录是否为页面提交
+        const isPageSubmission = !problem;
+        
         // 显示难度反馈弹窗
         const feedback = await showDifficultyFeedbackDialog().catch(error => {
             console.log(error);  // "用户取消评分"
@@ -7661,28 +6560,50 @@ async function handleFeedbackSubmission(problem = null) {
             return null;
         }
 
-        // 如果没有传入 problem，说明是新提交，需要获取题目信息
+        // 如果没有传入 problem，说明是页面提交，需要获取题目信息
         if (!problem) {
-            await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.syncProblems)();   // 同步云端数据
-            const { problemIndex, problemName, problemLevel, problemUrl } = await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.getCurrentProblemInfoFromLeetCode)();
-            const problems = await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.getAllProblems)();
+            await (0,problemService/* syncProblems */.xd)();   // 同步云端数据
+            const { problemIndex, problemName, problemLevel, problemUrl } = await (0,problemService/* getCurrentProblemInfoFromLeetCodeByHref */.cp)();
+            const problems = await (0,problemService/* getAllProblems */.kT)();
             problem = problems[problemIndex];
             
-            if (problem && problem.isDeleted !== true) {
-                problem = (0,_util_fsrs__WEBPACK_IMPORTED_MODULE_3__.updateProblemWithFSRS)(problem, feedback);
-                await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.createOrUpdateProblem)((0,_util_utils__WEBPACK_IMPORTED_MODULE_0__.updateProblemUponSuccessSubmission)(problem));
-            } else {
-                problem = new _entity_problem__WEBPACK_IMPORTED_MODULE_2__.Problem(problemIndex, problemName, problemLevel, problemUrl, Date.now(), (0,_util_utils__WEBPACK_IMPORTED_MODULE_0__.getDifficultyBasedSteps)(problemLevel)[0], Date.now());
-                problem = (0,_util_fsrs__WEBPACK_IMPORTED_MODULE_3__.updateProblemWithFSRS)(problem, feedback);
-                await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.createOrUpdateProblem)(problem);
+            if (!problem || problem.isDeleted == true) {
+                problem = new entity_problem/* Problem */.tc(problemIndex, problemName, problemLevel, problemUrl, Date.now(), (0,utils/* getDifficultyBasedSteps */.tL)(problemLevel)[0], Date.now());
             }
-        } else {
-            // 如果传入了 problem，说明是复习
-            problem = (0,_util_fsrs__WEBPACK_IMPORTED_MODULE_3__.updateProblemWithFSRS)(problem, feedback);
-            await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.createOrUpdateProblem)(problem);
+        }
+        
+        // 检查上次复习时间是否是今天，如果是则不允许再次复习
+        if (problem.fsrsState && problem.fsrsState.lastReview) {
+            const lastReviewDate = new Date(problem.fsrsState.lastReview);
+            const today = new Date();
+            
+            // 比较年、月、日是否相同（考虑时区影响）
+            if (lastReviewDate.getFullYear() === today.getFullYear() &&
+                lastReviewDate.getMonth() === today.getMonth() &&
+                lastReviewDate.getDate() === today.getDate()) {
+                
+                // 显示双语警告提示
+                showToast("今天已经复习过这道题了，请明天再来！\nYou've already reviewed this problem today. Please come back tomorrow!", "warning");
+                return null;
+            }
+        }
+        
+        problem = await (0,fsrsService/* updateProblemWithFSRS */.Gq)(problem, feedback);
+        await (0,problemService/* createOrUpdateProblem */.qu)(problem);
+
+        // 只有在页面提交时才显示成功提示
+        if (isPageSubmission) {
+            // 计算下次复习时间与今天的天数差
+            const nextReviewDate = new Date(problem.fsrsState.nextReview);
+            const today = new Date();
+            const diffTime = nextReviewDate.getTime() - today.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            // 显示复习成功提示，包含下次复习时间
+            showToast(`复习成功！下次复习时间：${nextReviewDate.toLocaleDateString()}（${diffDays}天后）\nReview successful! Next review: ${nextReviewDate.toLocaleDateString()} (in ${diffDays} days)`, "success");
         }
 
-        await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.syncProblems)(); // 同步到云端
+        await (0,problemService/* syncProblems */.xd)(); // 同步到云端
         console.log("提交成功！");
         return problem;
     } catch (error) {
@@ -7691,7 +6612,109 @@ async function handleFeedbackSubmission(problem = null) {
     }
 }
 
-
+// 添加一个更醒目的提示框函数，支持不同类型的提示
+function showToast(message, type = "info", duration = 4000) {
+    // 检查是否已存在toast样式
+    if (!document.getElementById('lms-toast-style')) {
+        const style = document.createElement('style');
+        style.id = 'lms-toast-style';
+        style.textContent = `
+            .lms-toast {
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 12px 24px;
+                border-radius: 4px;
+                z-index: 10000;
+                font-size: 14px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                animation: lms-toast-in 0.3s ease;
+                max-width: 80%;
+                text-align: center;
+                white-space: pre-line;
+                font-weight: 500;
+            }
+            
+            .lms-toast-info {
+                background-color: #1890ff;
+                color: white;
+                border-left: 4px solid #096dd9;
+            }
+            
+            .lms-toast-success {
+                background-color: #52c41a;
+                color: white;
+                border-left: 4px solid #389e0d;
+            }
+            
+            .lms-toast-warning {
+                background-color: #ffd666;
+                color: #874d00;
+                border-left: 4px solid #faad14;
+                font-weight: bold;
+            }
+            
+            .lms-toast-error {
+                background-color: #ff4d4f;
+                color: white;
+                border-left: 4px solid #cf1322;
+                font-weight: bold;
+            }
+            
+            @keyframes lms-toast-in {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, 0);
+                }
+            }
+            
+            .lms-toast-icon {
+                margin-right: 8px;
+                font-weight: bold;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // 移除可能存在的旧提示
+    const existingToast = document.querySelector('.lms-toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+    
+    const toast = document.createElement('div');
+    toast.className = `lms-toast lms-toast-${type}`;
+    
+    // 添加图标
+    let icon = '';
+    switch(type) {
+        case 'info': icon = 'ℹ️'; break;
+        case 'success': icon = '✅'; break;
+        case 'warning': icon = '⚠️'; break;
+        case 'error': icon = '❌'; break;
+    }
+    
+    toast.innerHTML = `<span class="lms-toast-icon">${icon}</span>${message}`;
+    document.body.appendChild(toast);
+    
+    // 添加点击关闭功能
+    toast.addEventListener('click', () => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    });
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+}
 
 // 6. 显示评分对话框
 const showDifficultyFeedbackDialog = () => {
@@ -7705,12 +6728,12 @@ const showDifficultyFeedbackDialog = () => {
         dialog.className = 'feedback-dialog';
         dialog.innerHTML = `
             <button class="close-button">&times;</button>
-            <h3>这道题对你来说难度如何？</h3>
+            <h3>How difficult was this problem for you?</h3>
             <div class="quality-buttons">
-                <button data-quality="1">完全不会</button>
-                <button data-quality="2">有点难</button>
-                <button data-quality="3">正常</button>
-                <button data-quality="4">简单</button>
+                <button data-quality="1">Very Hard</button>
+                <button data-quality="2">Hard</button>
+                <button data-quality="3">Medium</button>
+                <button data-quality="4">Easy</button>
             </div>
         `;
         // 点击遮罩层关闭
@@ -7852,36 +6875,2049 @@ const addDialogStyles = () => {
     document.head.appendChild(style);
 };
 
+
+
+
+
+
+// 处理新建题目 - 设置为今天待复习
+async function handleAddProblem(url) {
+    try {
+        await (0,problemService/* syncProblems */.xd)();  // 同步云端数据
+        const problems = await (0,problemService/* getAllProblems */.kT)();
+        
+        // 使用新的API获取题目信息
+        const problemInfo = await (0,problemService/* getCurrentProblemInfoFromLeetCodeByUrl */.Oo)(url);
+        
+        const { problemIndex, problemName, problemLevel, problemUrl } = problemInfo;
+        
+        // 检查是否已存在
+        if (problems[problemIndex] && !problems[problemIndex].isDeleted) {
+            throw new Error('Duplicate problem name exists.');
+        }
+        
+        const now = Date.now();
+        // 创建新问题
+        const problem = new entity_problem/* Problem */.tc(
+            problemIndex,
+            problemName,
+            problemLevel,
+            problemUrl,
+            now,    // createTime
+            0,      // nextStep
+            null    // lastReviewTime
+        );
+        
+        // 设置初始状态
+        problem.proficiency = 0;
+        problem.isDeleted = false;
+        problem.modificationTime = now;
+        
+        // 设置初始 FSRS 状态 - 设置 nextReview 为今天
+        problem.fsrsState = {
+            difficulty: null,
+            stability: null,
+            state: 'New',
+            lastReview: null,
+            nextReview: now,    // 设置为当前时间，使其显示在今天的待复习列表中
+            reviewCount: 0,
+            lapses: 0,
+            quality: null
+        };
+        
+        await (0,problemService/* createOrUpdateProblem */.qu)(problem);
+        await (0,problemService/* syncProblems */.xd)();
+        
+        return problem;
+    } catch (error) {
+        console.error('Failed to add card:', error);
+        throw error;
+    }
+}
+
+// 处理添加空白卡片
+async function handleAddBlankProblem(name, level, customUrl = '') {
+    try {
+        await (0,problemService/* syncProblems */.xd)();  // 同步云端数据
+        const problems = await (0,problemService/* getAllProblems */.kT)();
+        
+        // 获取当前自定义题目的数量，用于生成递增的索引
+        const customProblems = Object.values(problems).filter(p => 
+            p.index && p.index.startsWith('custom_') && !p.isDeleted);
+        const customCount = customProblems.length + 1;
+        
+        // 生成有规律的索引: custom_年月日_序号
+        const today = new Date();
+        const dateStr = `${today.getFullYear()}${String(today.getMonth() + 1).padStart(2, '0')}${String(today.getDate()).padStart(2, '0')}`;
+        const customIndex = `custom_${dateStr}_${String(customCount).padStart(3, '0')}`;
+        
+        // 检查名称是否已存在
+        const existingProblem = Object.values(problems).find(p => 
+            p.name === name && !p.isDeleted);
+        
+        if (existingProblem) {
+            throw new Error('Duplicate problem name exists.');
+        }
+        
+        const now = Date.now();
+        // 创建新问题，在名称前添加索引前缀
+        const formattedName = `Ext-${customCount}. ${name}`;
+        
+        const problem = new entity_problem/* Problem */.tc(
+            customIndex,
+            formattedName,  // 名称前添加索引前缀
+            level,
+            customUrl,
+            now,    // createTime
+            0,      // nextStep
+            null    // lastReviewTime
+        );
+        
+        // 设置初始状态
+        problem.proficiency = 0;
+        problem.isDeleted = false;
+        problem.modificationTime = now;
+        problem.isCustom = true;  // 标记为自定义题目
+        
+        // 设置初始 FSRS 状态 - 设置 nextReview 为今天
+        problem.fsrsState = {
+            difficulty: null,
+            stability: null,
+            state: 'New',
+            lastReview: null,
+            nextReview: now,    // 设置为当前时间，使其显示在今天的待复习列表中
+            reviewCount: 0,
+            lapses: 0,
+            quality: null
+        };
+        
+        await (0,problemService/* createOrUpdateProblem */.qu)(problem);
+        await (0,problemService/* syncProblems */.xd)();
+        
+        return problem;
+    } catch (error) {
+        console.error('Failed to add blank card:', error);
+        throw error;
+    }
+}
+
+
+// EXTERNAL MODULE: ./src/popup/popup.css
+var popup = __webpack_require__(823);
+// EXTERNAL MODULE: ./src/popup/service/configService.js
+var configService = __webpack_require__(970);
+// EXTERNAL MODULE: ./src/popup/store.js
+var store = __webpack_require__(214);
+// EXTERNAL MODULE: ./src/popup/util/doms.js
+var doms = __webpack_require__(422);
+// EXTERNAL MODULE: ./src/popup/util/sort.js
+var sort = __webpack_require__(192);
+// EXTERNAL MODULE: ./node_modules/sweetalert2/dist/sweetalert2.all.js
+var sweetalert2_all = __webpack_require__(455);
+var sweetalert2_all_default = /*#__PURE__*/__webpack_require__.n(sweetalert2_all);
+// EXTERNAL MODULE: ./src/popup/util/fsrs.js
+var fsrs = __webpack_require__(878);
+;// CONCATENATED MODULE: ./src/popup/daily-review.js
+
+
+
+
+
+
+
+
+
+
+// 在文件顶部导入 SweetAlert2
+
+// 导入 getAllRevlogs 函数
+
+
+
+// 在文件开头添加
+const LAST_AVERAGE_KEY = 'lastRetrievabilityAverage';
+const LAST_UPDATE_TIME_KEY = 'lastUpdateTime';
+let yesterdayRetrievabilityAverage = 0.00;
+
+
+
+async function loadProblemList() {
+    await (0,view/* renderAll */.xy)();
+}
+
+
+// 获取上次存储的平均值和时间
+function loadLastAverageData() {
+    const lastData = {
+        average: parseFloat(localStorage.getItem(LAST_AVERAGE_KEY)) || 0.00,
+        timestamp: parseInt(localStorage.getItem(LAST_UPDATE_TIME_KEY)) || 0
+    };
+    return lastData;
+}
+
+async function loadDailyReviewData() {
+    const problems = Object.values(await (0,problemService/* getAllProblems */.kT)()).filter(p => p.isDeleted !== true);
+    store/* daily_store */.S.reviewScheduledProblems = problems
+    .sort((a, b) => {
+        const retrievabilityA = (0,utils/* getCurrentRetrievability */.zV)(a);
+        const retrievabilityB = (0,utils/* getCurrentRetrievability */.zV)(b);
+        return retrievabilityA - retrievabilityB; // 升序排序，最小值在前
+    });
+
+    // 获取今天已复习和待复习的题目
+    store/* daily_store */.S.dailyReviewProblems = store/* daily_store */.S.reviewScheduledProblems
+        .filter(problem => isReviewedToday(problem) || isReviewDueToday(problem))
+        .sort((a, b) => {
+            // 首先按照是否已复习排序（已复习的排在前面）
+            const aReviewed = isReviewedToday(a);
+            const bReviewed = isReviewedToday(b);
+            if (aReviewed !== bReviewed) {
+                return bReviewed ? 1 : -1;
+            }
+            // 如果复习状态相同，则按可检索性排序
+            const retrievabilityA = (0,utils/* getCurrentRetrievability */.zV)(a);
+            const retrievabilityB = (0,utils/* getCurrentRetrievability */.zV)(b);
+            return retrievabilityA - retrievabilityB;
+        });
+
+
+    console.log('总题目数:', problems.length);
+    console.log('今日待复习题目数:', store/* daily_store */.S.dailyReviewProblems.length);
+    
+    // 添加调试日志
+    store/* daily_store */.S.dailyReviewProblems.forEach(problem => {
+        const isReviewed = isReviewedToday(problem);
+        const isDue = isReviewDueToday(problem);
+        console.log('题目状态:', {
+            name: problem.name,
+            lastReview: problem.fsrsState?.lastReview,
+            nextReview: problem.fsrsState?.nextReview,
+            isReviewedToday: isReviewed,
+            isDueToday: isDue,
+            retrievability: (0,utils/* getCurrentRetrievability */.zV)(problem)
+        });
+    });
+}
+
+// 存储当前的平均值和时间
+function saveCurrentAverageData(average) {
+    localStorage.setItem(LAST_AVERAGE_KEY, average.toString());
+    localStorage.setItem(LAST_UPDATE_TIME_KEY, Date.now().toString());
+}
+
+// 设置当前日期
+function setCurrentDate() {
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const today = new Date().toLocaleDateString('en-US', options);
+    document.getElementById('currentDate').textContent = today;
+}
+
+
+// 判断是否是今天需要复习的题目
+function isReviewDueToday(problem) {
+    if (!problem.fsrsState?.nextReview) {
+        console.log('题目没有下次复习时间:', problem.name);
+        return false;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const nextReview = new Date(problem.fsrsState.nextReview);
+    nextReview.setHours(0, 0, 0, 0);
+    
+    const isDue = nextReview <= today;
+    
+    console.log('复习时间检查:', {
+        problemName: problem.name,
+        nextReview: nextReview.toISOString(),
+        today: today.toISOString(),
+        isDue: isDue
+    });
+    
+    return isDue;
+}
+
+function isReviewedToday(problem) {
+    if (!problem.fsrsState?.lastReview) return false;
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const lastReview = new Date(problem.fsrsState.lastReview);
+    lastReview.setHours(0, 0, 0, 0);
+    
+    return lastReview.getTime() === today.getTime();
+}
+
+
+
+
+// 计算可检索性均值
+function calculateRetrievabilityAverage() {
+    const problems = store/* daily_store */.S.reviewScheduledProblems;
+    if (!problems || problems.length === 0) return 0;
+    
+    const totalRetrievability = problems.reduce((sum, problem) => {
+        const retrievability = (0,utils/* getCurrentRetrievability */.zV)(problem);
+        return sum + retrievability;
+    }, 0);
+    
+    return Number((totalRetrievability / problems.length).toFixed(2));
+}
+
+
+// 更新顶部统计信息
+function updateStats() {
+    console.log('更新统计信息');
+    // 设置默认值
+    let completedCount = 0;
+    let totalProblems = 0;
+    // 添加空值检查
+    if (!store/* daily_store */.S || !store/* daily_store */.S.dailyReviewProblems) {
+        console.log('daily_store 或 dailyReviewProblems 为空:', {
+            daily_store: store/* daily_store */.S,
+            problems: store/* daily_store */.S?.dailyReviewProblems
+        });
+
+        
+        // 更新显示
+        document.getElementById('completedCount').textContent = completedCount;
+        document.getElementById('totalCount').textContent = totalProblems;
+        document.getElementById('completionRate').textContent = '0%';
+        updateProgressCircle(0);
+        return;
+    }
+
+
+
+    // 获取当前显示的卡片数量
+    let cardLimit = parseInt(document.getElementById('cardLimit').value, 10)|| store/* store */.h.defaultCardLimit || 1;
+    console.log('当前卡片限制值:', {
+        rawValue: document.getElementById('cardLimit').value,
+        parsedCardLimit: cardLimit,
+        element: document.getElementById('cardLimit')
+    });
+
+
+
+    // 计算今日已复习的题目数量
+    completedCount = store/* daily_store */.S.dailyReviewProblems.filter(problem => 
+        isReviewedToday(problem)
+    ).length;
+
+    
+    totalProblems = store/* daily_store */.S.dailyReviewProblems?.length || 0;
+    if (cardLimit > totalProblems) {
+        cardLimit = totalProblems;
+    }
+
+    // 添加空状态提示
+    const addProblemWrapper = document.querySelector('.add-problem-wrapper');
+    // 先移除可能存在的空状态提示
+    const existingEmptyState = document.querySelector('.empty-state');
+    if (existingEmptyState) {
+        existingEmptyState.remove();
+    }
+    
+    if (totalProblems === 0 || cardLimit === 0) {
+        const emptyState = document.createElement('div');
+        emptyState.className = 'empty-state';
+        emptyState.innerHTML = `
+
+        <i class="fas fa-lightbulb"></i>
+            Time to learn something new!
+        `;
+        addProblemWrapper.insertAdjacentElement('beforebegin', emptyState);
+    }
+
+    
+    // 更新显示的已复习数量
+    document.getElementById('completedCount').textContent = completedCount;
+    document.getElementById('totalCount').textContent = cardLimit; // 使用当前的卡片数量
+
+    // 更新进度条
+    const completionRate = cardLimit > 0 ? Math.round((completedCount / cardLimit) * 100) : 0;
+    updateProgressCircle(completionRate);
+    document.getElementById('completionRate').textContent = `${completionRate}%`;
+    // document.querySelector('.completion-circle').style.setProperty('--percentage', `${completionRate}%`);
+    // 计算当前的可检索性均值，并确保是数字类型
+    const currentRetrievabilityAverage = parseFloat(calculateRetrievabilityAverage()) || 0;
+    console.log('当前可检索性均值:', {
+        raw: calculateRetrievabilityAverage(),
+        parsed: currentRetrievabilityAverage,
+        type: typeof currentRetrievabilityAverage
+    });
+    const retrievabilityElement = document.getElementById('retrievabilityAverage');
+    retrievabilityElement.textContent = currentRetrievabilityAverage;
+
+
+    // 获取上次存储的数据
+    const lastData = loadLastAverageData();
+    const hoursSinceLastUpdate = (Date.now() - lastData.timestamp) / (1000 * 60 * 60);
+    
+    // 如果超过24小时，更新存储的数据
+    if (hoursSinceLastUpdate >= 24) {
+        console.log('距离上次更新已超过24小时:', {
+            hoursSinceLastUpdate: hoursSinceLastUpdate.toFixed(2) + '小时',
+            lastUpdateTime: new Date(lastData.timestamp).toLocaleString(),
+            lastAverage: lastData.average.toFixed(2),
+            currentAverage: currentRetrievabilityAverage.toFixed(2)
+        });
+        
+        yesterdayRetrievabilityAverage = lastData.average;
+        saveCurrentAverageData(currentRetrievabilityAverage);
+        
+        console.log('已更新存储数据:', {
+            newYesterdayAverage: yesterdayRetrievabilityAverage.toFixed(2),
+            savedCurrentAverage: currentRetrievabilityAverage.toFixed(2),
+            saveTime: new Date().toLocaleString()
+        });
+    } else {
+        console.log('距离上次更新未超过24小时:', {
+            hoursSinceLastUpdate: hoursSinceLastUpdate.toFixed(2) + '小时',
+            lastUpdateTime: new Date(lastData.timestamp).toLocaleString(),
+            usingLastAverage: lastData.average.toFixed(2)
+        });
+        yesterdayRetrievabilityAverage = lastData.average;
+    }
+
+    // 更新趋势图标
+    const trendIcon = document.getElementById('trendIcon');
+    if (currentRetrievabilityAverage > yesterdayRetrievabilityAverage) {
+        trendIcon.className = 'fas fa-arrow-up trend-icon trend-up';
+    } else if (currentRetrievabilityAverage < yesterdayRetrievabilityAverage) {
+        trendIcon.className = 'fas fa-arrow-down trend-icon trend-down';
+    } else {
+        trendIcon.className = '';
+    }
+
+    // 根据可检索性均值调整颜色和背景提示
+    const lowMemoryWarning = document.getElementById('lowMemoryWarning');
+    if (currentRetrievabilityAverage < 0.90) {
+        retrievabilityElement.classList.add('low');
+        lowMemoryWarning.classList.add('active');
+    } else {
+        retrievabilityElement.classList.remove('low');
+        lowMemoryWarning.classList.remove('active');
+    }
+    updateCardLimitDisplay(); // 这里也添加一次调用
+}
+
+function updateProgressCircle(completionRate) {
+    const progressCircle = document.querySelector('.completion-circle');
+    const radius = 54; // 圆的半径
+    const circumference = 2 * Math.PI * radius; // 圆的周长
+
+    // 计算偏移量
+    const offset = circumference - (completionRate / 100) * circumference;
+    progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+    progressCircle.style.strokeDashoffset = offset;
+
+    // 更新显示的百分比
+    // document.getElementById('completionRate').textContent = `${completionRate}%`;
+    document.querySelector('.completion-circle').style.setProperty('--percentage', `${completionRate}%`);
+
+    // 添加动画效果
+    const innerCircle = document.querySelector('.inner-circle');
+    innerCircle.style.transform = `scale(1.1)`; // 放大内圈
+    setTimeout(() => {
+        innerCircle.style.transform = `scale(1)`; // 恢复原状
+    }, 500); // 动画持续时间
+}
+
+
+
+
+// 更新卡片限制和显示
+function updateCardLimitDisplay() {
+    const input = document.getElementById('cardLimit');
+    const totalDisplay = document.querySelector('.total-problems');
+    const totalProblems = store/* daily_store */.S.dailyReviewProblems?.length || 0;
+    
+    // 更新最大值和总数显示
+    input.max = Math.max(totalProblems, 1);
+    totalDisplay.textContent = `/ ${totalProblems}`;
+    
+    // 使用保存的默认值或回退到3
+    let currentValue = store/* store */.h.defaultCardLimit || 1;
+    if (currentValue > totalProblems && totalProblems > 0) {
+        currentValue = totalProblems;
+        // store.defaultCardLimit = totalProblems;
+        // setDefaultCardLimit(totalProblems);
+    }
+    input.value = currentValue;
+    
+    // 禁用条件
+    if (totalProblems === 0) {
+        input.value = 0;
+        input.disabled = true;
+        totalDisplay.textContent = "/ 0";
+    } else {
+        input.disabled = false;
+    }
+
+    console.log('更新卡片限制显示:', {
+        currentValue: input.value,
+        max: input.max,
+        totalProblems
+    });
+}
+
+// 更新卡片显示
+function updateCardDisplay() {
+    console.log('更新卡片显示');
+    
+    updateStats(); // 更新统计信息，传递当前显示的卡片数量
+
+    
+    createReviewCards(); // 创建新的卡片
+}
+
+
+
+
+// 改变卡片数量
+// 所有功能函数
+async function changeCardLimit(delta) {
+    console.log('执行 changeCardLimit, delta:', delta);
+    const input = document.getElementById('cardLimit');
+    const currentValue = parseInt(input.value, 10);
+    const newValue = currentValue + delta;
+    const maxValue = store/* daily_store */.S.dailyReviewProblems?.length || 0;
+    
+    if (newValue >= 1 && newValue <= maxValue) {
+        input.value = newValue;
+        await (0,configService/* setDefaultCardLimit */.FO)(newValue);
+        store/* store */.h.defaultCardLimit = newValue;
+        updateCardDisplay();
+    }
+}
+
+
+
+
+// 标记题目为已复习
+async function markAsReviewed(button, problem) {
+    console.log('执行 markAsReviewed', button, problem);
+    
+    const card = button.closest('.review-card');
+    if (!card) {
+        console.log('未找到对应的卡片');
+        return;
+    }
+
+    console.log('找到卡片，开始更新状态');
+    
+    // 更换图标并更改样式
+    const icon = button.querySelector('i');
+    icon.classList.remove('fa-check-circle');
+    icon.classList.add('fa-circle-check');
+    icon.style.color = '#0D6E6E';
+    
+    // 禁用按钮
+    button.disabled = true;
+    card.style.opacity = '0.4';
+
+
+
+    // 更新统计信息
+    updateCardDisplay();
+    console.log('更新完成');
+}
+
+
+// 创建题目卡片时的事件绑定
+function createReviewCards() {
+    console.log('开始创建卡片');
+    const reviewList = document.getElementById('reviewList');
+    const template = document.getElementById('reviewCardTemplate');
+    const cardLimit = parseInt(document.getElementById('cardLimit').value, 10);
+
+    reviewList.innerHTML = '';
+
+    const problems = store/* daily_store */.S.dailyReviewProblems || [];
+    problems.slice(0, cardLimit).forEach((problem, index) => {
+        const cardNode = template.content.cloneNode(true);
+        const card = cardNode.querySelector('.review-card');
+        
+        // 安全地访问 fsrsState
+        const fsrsState = problem.fsrsState || {};
+
+        
+        // 设置题目信息
+        const problemName = card.querySelector('.problem-name');
+        problemName.textContent = problem.name || 'unknown';
+        
+        // 设置难度和复习信息
+        const difficultySpan = card.querySelector('.difficulty');
+        const level = problem.level || 'Unknown';
+        difficultySpan.textContent = level;
+        // 使用现有的 CSS 类
+        difficultySpan.classList.add(`difficulty-${level}`);
+
+        // 设置可检索性
+        const retrievability = (0,utils/* getCurrentRetrievability */.zV)(problem);
+        const retrievabilitySpan = card.querySelector('.retrievability');
+        retrievabilitySpan.textContent = `${retrievability.toFixed(1)}`;
+        retrievabilitySpan.classList.add(retrievability < 0.9 ? 'text-danger' : 'text-success');
+        
+        
+        // 设置下次复习时间
+        const nextReviewTips = fsrsState.nextReview 
+            ? (() => {
+                const nextReviewDate = new Date(fsrsState.nextReview);
+                const now = new Date();
+                
+                // 获取当前日期和下次复习日期（不含时间）
+                const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                const reviewDay = new Date(nextReviewDate.getFullYear(), nextReviewDate.getMonth(), nextReviewDate.getDate());
+                
+                // 计算日期差（天数）
+                const diffTime = reviewDay.getTime() - today.getTime();
+                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+                
+                if (diffDays < 0) {
+                    // 已经过了计划复习日期
+                    const daysOverdue = Math.abs(diffDays);
+                    return `Delay by ${daysOverdue} day${daysOverdue > 1 ? 's' : ''}`;
+                } else if (diffDays === 0) {
+                    // 今天需要复习
+                    return 'Review today';
+                } else if (diffDays === 1) {
+                    // 明天需要复习
+                    return 'Review tomorrow';
+                } else {
+                    // x天后复习
+                    return `Review in ${diffDays} days`;
+                }
+            })()
+            : 'Not scheduled';
+        card.querySelector('.next-review').textContent = nextReviewTips;
+
+        // 格式化上次复习时间
+        const lastReviewText = fsrsState.lastReview 
+        ? new Date(fsrsState.lastReview).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        })
+        : 'Never reviewed';
+
+        // 格式化上次复习时间
+        const nextReviewText = fsrsState.nextReview 
+        ? new Date(fsrsState.nextReview).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        })
+        : 'Never reviewed';
+
+
+
+        // 设置hover提示
+        const tooltipContent = [
+            `Last Review: ${lastReviewText}`,
+            `Next Review: ${nextReviewText}`,
+            problem.url ? 'Click to open problem' : ''
+        ].filter(Boolean).join('\n');
+        
+        card.title = tooltipContent;
+
+        // 检查今日是否已复习
+        const isReviewedToday = fsrsState.lastReview && 
+            new Date(fsrsState.lastReview).toDateString() === new Date().toDateString();
+
+        // 设置按钮状态
+        const reviewButton = card.querySelector('.btn-review');
+        if (reviewButton) {
+            if (isReviewedToday) {
+                const icon = reviewButton.querySelector('i');
+                icon.classList.remove('fa-check-circle');
+                icon.classList.add('fa-circle-check');
+                icon.style.color = '#0D6E6E';
+                reviewButton.disabled = true;
+                card.style.opacity = '0.4';
+            }
+
+            reviewButton.onclick = async function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('复习按钮被点击');
+
+                const updatedProblem = await handleFeedbackSubmission(problem);
+                if (updatedProblem) {
+                    markAsReviewed(this, updatedProblem);
+                }
+                // markAsReviewed(this, problem); // 修改这里，传入按钮元素和问题对象
+            };
+        }
+
+        // 添加题目链接功能
+        if (problem.url) {
+            card.style.cursor = 'pointer';
+            card.onclick = function(e) {
+                if (!e.target.closest('.btn-review')) {
+                    window.open(problem.url, '_blank');
+                }
+            };
+        }
+
+        reviewList.appendChild(cardNode);
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// 显示/隐藏添加题目弹窗
+function toggleAddProblemDialog(show) {
+    const dialog = document.getElementById('addProblemDialog');
+    if (!dialog) return;
+    
+    if (show) {
+        dialog.style.display = 'block';
+    } else {
+        dialog.style.display = 'none';
+        
+        // 清除所有输入字段
+        const problemUrl = document.getElementById('problemUrl');
+        const problemName = document.getElementById('problemName');
+        const customUrl = document.getElementById('customUrl');
+        
+        if (problemUrl) problemUrl.value = '';
+        if (problemName) problemName.value = '';
+        if (customUrl) customUrl.value = '';
+        
+        // 重置选项卡到默认状态
+        const urlTabButton = document.getElementById('urlTabButton');
+        const manualTabButton = document.getElementById('manualTabButton');
+        const urlTab = document.getElementById('urlTab');
+        const manualTab = document.getElementById('manualTab');
+        
+        if (urlTabButton && manualTabButton && urlTab && manualTab) {
+            urlTabButton.classList.add('active');
+            manualTabButton.classList.remove('active');
+            urlTab.classList.add('active');
+            manualTab.classList.remove('active');
+        }
+    }
+}
+
+
+
+// 初始化添加题目功能
+function initializeAddProblem() {
+    const addButton = document.querySelector('.gear-button.add-problem');
+    if (!addButton) return;
+
+    // 添加选项卡切换样式
+    const style = document.createElement('style');
+    style.textContent = `
+        .tab-container {
+            margin-bottom: 15px;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid #3a4a5c;
+            margin-bottom: 15px;
+        }
+        
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 8px 15px;
+            color: #a0aec0;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-button.active {
+            color: #4a9d9c;
+            border-bottom: 2px solid #4a9d9c;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* 修复弹窗背景色 - 使用更强的选择器 */
+        #addProblemDialog .modal-content {
+            background-color: #1d2e3d !important;
+            color: #ffffff !important;
+        }
+        
+        #addProblemDialog .tab-content,
+        #addProblemDialog .form-group {
+            background-color: #1d2e3d !important;
+            color: #ffffff !important;
+        }
+        
+        #addProblemDialog input.form-control, 
+        #addProblemDialog select.form-control {
+            background-color: #2d3e4d !important;
+            color: #ffffff !important;
+            border: 1px solid #3a4a5c !important;
+        }
+        
+        #addProblemDialog input.form-control::placeholder {
+            color: #8096a8 !important;
+        }
+        
+        #addProblemDialog label {
+            color: #a0aec0 !important;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 点击添加按钮显示弹窗
+    addButton.addEventListener('click', () => {
+        toggleAddProblemDialog(true);
+    });
+
+    // 选项卡切换功能
+    const urlTabButton = document.getElementById('urlTabButton');
+    const manualTabButton = document.getElementById('manualTabButton');
+    const urlTab = document.getElementById('urlTab');
+    const manualTab = document.getElementById('manualTab');
+
+    if (urlTabButton && manualTabButton) {
+        urlTabButton.addEventListener('click', () => {
+            urlTabButton.classList.add('active');
+            manualTabButton.classList.remove('active');
+            urlTab.classList.add('active');
+            manualTab.classList.remove('active');
+        });
+
+        manualTabButton.addEventListener('click', () => {
+            manualTabButton.classList.add('active');
+            urlTabButton.classList.remove('active');
+            manualTab.classList.add('active');
+            urlTab.classList.remove('active');
+        });
+    }
+
+    // 取消按钮
+    const cancelButton = document.getElementById('cancelAdd');
+    if (cancelButton) {
+        cancelButton.addEventListener('click', () => {
+            toggleAddProblemDialog(false);
+        });
+    }
+
+    // 确认添加按钮
+    const confirmButton = document.getElementById('confirmAdd');
+    if (confirmButton) {
+        confirmButton.addEventListener('click', async () => {
+            try {
+                let result;
+                
+                // 判断当前激活的是哪个选项卡
+                if (urlTab.classList.contains('active')) {
+                    // 从URL添加
+                    const url = document.getElementById('problemUrl').value.trim();
+                    if (!url) {
+                        throw new Error('Please enter a valid problem URL.');
+                    }
+                    result = await handleAddProblem(url);
+                } else {
+                    // 创建空白卡片
+                    const name = document.getElementById('problemName').value.trim();
+                    const level = document.getElementById('problemLevel').value;
+                    const customUrl = document.getElementById('customUrl').value.trim();
+                    
+                    if (!name) {
+                        throw new Error('Please enter the problem name.');
+                    }
+                    
+                    if (!level) {
+                        throw new Error('Please select a difficulty level.');
+                    }
+                    
+                    // 如果提供了URL，检查其格式是否有效
+                    if (customUrl && !customUrl.match(/^https?:\/\/.+/)) {
+                        throw new Error('Please enter a valid URL starting with http:// or https://');
+                    }
+                    
+                    result = await handleAddBlankProblem(name, level, customUrl);
+                }
+                
+                toggleAddProblemDialog(false);
+                await loadDailyReviewData();
+                updateCardDisplay();
+                
+                // 显示成功提示
+                sweetalert2_all_default().fire({
+                    icon: 'success',
+                    title: 'SUCCESS',
+                    text: 'Problem added to review list.',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    background: '#1d2e3d',
+                    color: '#ffffff',
+                    toast: true,
+                    position: 'center-end',
+                    customClass: {
+                        popup: 'colored-toast'
+                    }
+                });
+            } catch (error) {
+                // 显示错误提示
+                sweetalert2_all_default().fire({
+                    icon: 'error',
+                    title: 'ADD FAIL',
+                    text: error.message,
+                    background: '#1d2e3d',
+                    color: '#ffffff',
+                    confirmButtonColor: '#4a9d9c'
+                });
+            }
+        });
+    }
+
+    // 点击弹窗外部关闭弹窗
+    const dialog = document.getElementById('addProblemDialog');
+    if (dialog) {
+        dialog.addEventListener('click', (e) => {
+            if (e.target === dialog) {
+                toggleAddProblemDialog(false);
+            }
+        });
+    }
+}
+
+// 显示弹窗函数
+function showModal(title, content, buttons = null) {
+    const modalOptions = {
+        title: title,
+        html: content,
+        background: '#1d2e3d',
+        color: '#ffffff',
+        confirmButtonColor: '#4a9d9c',
+        width: '600px'
+    };
+    
+    // 如果有自定义按钮，则使用自定义按钮
+    if (buttons && Array.isArray(buttons)) {
+        modalOptions.showConfirmButton = false;
+        modalOptions.showCloseButton = true;
+        modalOptions.html += `
+            <div class="d-flex justify-content-end mt-3">
+                ${buttons.map(btn => `
+                    <button class="${btn.className} ms-2" id="modal-btn-${btn.text}">
+                        ${btn.text}
+                    </button>
+                `).join('')}
+            </div>
+        `;
+        
+        // 使用SweetAlert2显示模态框
+        sweetalert2_all_default().fire(modalOptions);
+        
+        // 为每个按钮添加点击事件 - 移到这里，在Swal.fire之后立即绑定
+        setTimeout(() => {
+            buttons.forEach(btn => {
+                const btnElement = document.getElementById(`modal-btn-${btn.text}`);
+                if (btnElement && btn.onClick) {
+                    btnElement.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        try {
+                            // 执行按钮点击事件处理程序
+                            await btn.onClick();
+                            // 关闭弹窗
+                            sweetalert2_all_default().close();
+                        } catch (error) {
+                            console.error('按钮点击事件处理程序执行失败:', error);
+                        }
+                    });
+                }
+            });
+        }, 100); // 添加一个小延迟确保DOM已更新
+    } else {
+        // 如果没有自定义按钮，则使用默认按钮
+        modalOptions.showConfirmButton = true;
+        modalOptions.confirmButtonText = '确定';
+        
+        // 使用SweetAlert2显示模态框
+        sweetalert2_all_default().fire(modalOptions);
+    }
+}
+
+// 初始化FSRS参数优化卡片
+async function initializeFSRSOptimization() {
+    try {
+        // 获取并显示复习记录数量
+        const count = await (0,fsrsService/* getRevlogCount */.E_)();
+        const revlogCountElement = document.getElementById('revlogCount');
+        const revlogCountEnElement = document.getElementById('revlogCount_en');
+        if (revlogCountElement) {
+            revlogCountElement.textContent = count;
+        }
+        if (revlogCountEnElement) {
+            revlogCountEnElement.textContent = count;
+        }
+        
+        // 添加导出按钮点击事件
+        const exportRevlogsBtn = document.getElementById('exportRevlogsBtn');
+        if (exportRevlogsBtn) {
+            exportRevlogsBtn.addEventListener('click', async () => {
+                // 保存原始按钮内容
+                const originalContent = exportRevlogsBtn.innerHTML;
+                
+                try {
+                    // 显示加载中提示
+                    exportRevlogsBtn.disabled = true;
+                    exportRevlogsBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size: 0.85em;"></i>';
+                    
+                    // 导出CSV
+                    const csvContent = await (0,fsrs/* exportRevlogsToCSV */.Z9)();
+                    
+                    // 创建下载链接
+                    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.setAttribute('href', url);
+                    link.setAttribute('download', `fsrs_revlogs_${new Date().toISOString().slice(0, 10)}.csv`);
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // 显示成功提示
+                    sweetalert2_all_default().fire({
+                        icon: 'success',
+                        title: 'Export Success',
+                        html: `
+                            <div>
+                                已成功导出 ${count} 条复习记录
+                                <br>
+                                <small class="text-muted">
+                                    Successfully exported ${count} review records to CSV file
+                                </small>
+                            </div>
+                        `,
+                        background: '#1d2e3d',
+                        color: '#ffffff',
+                        toast: true,
+                        position: 'center-end',
+                        customClass: {
+                            popup: 'colored-toast'
+                        },
+                        confirmButtonColor: '#4a9d9c',
+                        confirmButtonText: 'OK'
+                    });
+                } catch (error) {
+                    console.error('Error exporting revlogs:', error);
+                    sweetalert2_all_default().fire({
+                        icon: 'error',
+                        title: 'Export Failed',
+                        html: `
+                            <div>
+                                导出复习记录时发生错误
+                                <br>
+                                <small class="text-muted">
+                                    Error occurred while exporting review records:
+                                </small>
+                                <br>
+                                <small class="text-danger">
+                                    ${error.message}
+                                </small>
+                            </div>
+                        `,
+                        background: '#1d2e3d',
+                        color: '#ffffff',
+                        confirmButtonColor: '#4a9d9c',
+                        confirmButtonText: 'OK'
+                    });
+                } finally {
+                    // 恢复按钮状态
+                    exportRevlogsBtn.disabled = false;
+                    exportRevlogsBtn.innerHTML = originalContent;
+                }
+            });
+        }
+        
+        // 添加优化按钮点击事件
+        const optimizeParamsBtn = document.getElementById('optimizeParamsBtn');
+        if (optimizeParamsBtn) {
+            optimizeParamsBtn.addEventListener('click', async () => {
+                // 保存原始按钮内容
+                const originalContent = optimizeParamsBtn.innerHTML;
+                
+                // 创建进度显示元素
+                const progressContainer = document.createElement('div');
+                progressContainer.className = 'progress optimize-progress';
+                progressContainer.innerHTML = `
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                         role="progressbar" 
+                         style="width: 10%" 
+                         aria-valuenow="10" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                    </div>
+                `;
+                optimizeParamsBtn.parentNode.appendChild(progressContainer);
+
+                // 更改按钮状态
+                optimizeParamsBtn.disabled = true;
+                optimizeParamsBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size: 0.85em;"></i>';
+
+                try {
+                    // 进度回调函数
+                    const onProgress = (progress) => {
+                        console.log('Progress update:', progress);
+                        const percent = Math.round(progress.percent * 100);
+                        const progressBar = progressContainer.querySelector('.progress-bar');
+                        if (progressBar) {
+                            progressBar.style.width = `${percent}%`;
+                            progressBar.setAttribute('aria-valuenow', percent);
+                            progressBar.textContent = `${percent}%`;
+                        }
+                    };
+                    
+                    // 调用优化API
+                    const result = await (0,fsrsService/* optimizeParameters */.GY)(onProgress);
+                    
+                    // 显示结果弹窗
+                    if (result && result.type === 'Success' && result.params) {
+                        // 生成唯一ID
+                        const detailId = `paramsDetail_${Date.now()}`;
+                        
+                        // 显示优化后的参数，并添加保存按钮
+                        const modalResult = await sweetalert2_all_default().fire({
+                            title: 'SUCCESS',
+                            html: `
+                                <div>
+                                    <div class="alert alert-success">
+                                        <i class="fas fa-check-circle"></i> 参数优化完成！点击确认将自动保存并应用新参数。
+                                        <br>
+                                        <small >
+                                            Optimization done! Click OK to save and use the new settings.
+                                        </small>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-link text-info p-0" 
+                                                type="button" 
+                                                id="toggleDetail_${detailId}">
+                                            <i class="fas fa-chevron-right me-1"></i> 查看详细参数/View all parameters
+                                        </button>
+                                        <div id="${detailId}" class="mt-2 d-none">
+                                            <div class="bg-dark p-2 rounded" style="max-height: 200px; overflow-y: auto;">
+                                                <pre class="mb-0" style="color: #61dafb; white-space: pre-wrap; word-break: break-all;">${JSON.stringify(result.params, null, 2)}</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `,
+                            background: '#1d2e3d',
+                            color: '#ffffff',
+                            confirmButtonColor: '#4a9d9c',
+                            confirmButtonText: 'OK',
+                            showCloseButton: true,
+                            closeButtonHtml: '<i class="fas fa-times"></i>',
+                            didRender: () => {
+                                // 在弹窗渲染后绑定事件
+                                const toggleBtn = document.getElementById(`toggleDetail_${detailId}`);
+                                const detailDiv = document.getElementById(detailId);
+                                if (toggleBtn && detailDiv) {
+                                    toggleBtn.addEventListener('click', () => {
+                                        detailDiv.classList.toggle('d-none');
+                                        const icon = toggleBtn.querySelector('i');
+                                        if (icon) {
+                                            icon.classList.toggle('fa-chevron-right');
+                                            icon.classList.toggle('fa-chevron-down');
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                        if (modalResult.isConfirmed) {
+                            try {
+                                // 保存参数到本地存储
+                                await (0,fsrs/* saveFSRSParams */._L)(result.params);
+                                // 更新FSRS实例
+                                await (0,fsrsService/* updateFSRSInstance */.wM)(result.params);
+                                // 显示成功提示
+                                sweetalert2_all_default().fire({
+                                    icon: 'success',
+                                    title: 'Save Success',
+                                    text: '参数已成功应用 /New settings applied.',
+                                    background: '#1d2e3d',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    color: '#ffffff',
+                                    toast: true,
+                                    position: 'center-end',
+                                    customClass: {
+                                        popup: 'colored-toast'
+                                    }
+                                });
+                            } catch (error) {
+                                console.error('Error saving FSRS parameters:', error);
+                                sweetalert2_all_default().fire({
+                                    icon: 'error',
+                                    title: 'Save Failed',
+                                    text: `Error saving parameters: ${error.message}`,
+                                    background: '#1d2e3d',
+                                    color: '#ffffff',
+                                    confirmButtonColor: '#4a9d9c'
+                                });
+                            }
+                        }
+                    } else {
+                        // 显示其他类型的结果
+                        showModal('FSRS参数优化结果', `
+                            <div style="max-height: 300px; overflow-y: auto;">
+                                <pre style="white-space: pre-wrap; word-break: break-all;">${JSON.stringify(result, null, 2)}</pre>
+                            </div>
+                        `);
+                    }
+                } catch (error) {
+                    console.error('Error optimizing FSRS parameters:', error);
+                    showModal('Error', `Error optimizing parameters: ${error.message}`);
+                } finally {
+                    // 恢复按钮状态
+                    optimizeParamsBtn.disabled = false;
+                    optimizeParamsBtn.innerHTML = originalContent;
+                    // 移除进度条
+                    progressContainer.remove();
+                }
+            });
+        }
+    } catch (error) {
+        console.error('Error initializing FSRS optimization:', error);
+    }
+}
+
+// 添加设置相关的初始化函数
+async function initializeOptions() {
+    await (0,configService/* loadConfigs */.O1)();
+
+    const optionsForm = document.getElementById('optionsForm');
+    if (!optionsForm) return; // 如果找不到表单元素，直接返回
+    
+    // 初始化题目排序选择器
+    const problemSorterSelect = document.getElementById('problemSorterSelect');
+    if (problemSorterSelect) {
+        const problemSorterMetaArr = sort/* problemSorterArr */.vH.map(sorter => ({
+            id: (0,sort/* idOf */.jD)(sorter), 
+            text: (0,sort/* descriptionOf */.U9)(sorter)
+        }));
+
+        problemSorterMetaArr.forEach(sorterMeta => {
+            const optionElement = document.createElement('option');
+            optionElement.value = sorterMeta.id;
+            optionElement.textContent = sorterMeta.text;
+            problemSorterSelect.append(optionElement);
+        });
+    }
+
+    // 初始化云同步开关
+    const syncToggle = document.getElementById('syncToggle');
+    if (syncToggle) {
+        syncToggle.checked = store/* store */.h.isCloudSyncEnabled || false;
+    }
+
+
+    // 初始化提醒开关和配置
+    const reminderToggle = document.getElementById('reminderToggle');
+    const reminderSettings = document.getElementById('reminderSettings');
+    const reminderInterval = document.getElementById('reminderInterval');
+    const reminderStartTime = document.getElementById('reminderStartTime');
+    const reminderEndTime = document.getElementById('reminderEndTime');
+    const testNotificationBtn = document.getElementById('testNotification');
+    
+    if (reminderToggle) {
+        // 加载提醒设置
+        chrome.storage.local.get([
+            'reminderEnabled',
+            'reminderInterval',
+            'reminderStartTime',
+            'reminderEndTime',
+            'reminderDays'
+        ]).then(config => {
+            reminderToggle.checked = config.reminderEnabled || false;
+            if (reminderInterval) reminderInterval.value = config.reminderInterval || 60;
+            if (reminderStartTime) reminderStartTime.value = config.reminderStartTime || '09:00';
+            if (reminderEndTime) reminderEndTime.value = config.reminderEndTime || '22:00';
+            
+            // 加载星期选择
+            const reminderDays = config.reminderDays || [1, 2, 3, 4, 5, 6, 0];
+            for (let i = 0; i <= 6; i++) {
+                const dayCheckbox = document.getElementById(`day${i}`);
+                if (dayCheckbox) {
+                    dayCheckbox.checked = reminderDays.includes(i);
+                }
+            }
+            
+            // 显示/隐藏设置
+            if (reminderSettings) {
+                reminderSettings.style.display = reminderToggle.checked ? 'block' : 'none';
+            }
+        });
+        
+        // 切换显示/隐藏
+        reminderToggle.addEventListener('change', () => {
+            if (reminderSettings) {
+                reminderSettings.style.display = reminderToggle.checked ? 'block' : 'none';
+            }
+        });
+        
+        // 测试通知按钮
+        if (testNotificationBtn) {
+            testNotificationBtn.addEventListener('click', async () => {
+                try {
+                    const response = await chrome.runtime.sendMessage({ action: 'testNotification' });
+                    if (response && response.success) {
+                        // 显示成功反馈
+                        sweetalert2_all_default().fire({
+                            icon: 'success',
+                            title: 'Test Successful',
+                            text: 'Check your desktop for the notification!',
+                            timer: 2000,
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end'
+                        });
+                    } else {
+                        // 显示错误
+                        sweetalert2_all_default().fire({
+                            icon: 'error',
+                            title: 'Test Failed',
+                            text: response?.message || 'Could not send notification',
+                            timer: 3000,
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end'
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error sending test notification:', error);
+                    sweetalert2_all_default().fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Failed to send test notification',
+                        timer: 3000,
+                        showConfirmButton: false,
+                        toast: true,
+                        position: 'top-end'
+                    });
+                }
+            });
+        }
+    }
+    
+    // 初始化FSRS参数优化卡片
+    await initializeFSRSOptimization();
+    
+    // 修改保存成功提示
+    optionsForm.addEventListener('submit', async e => {
+        e.preventDefault();
+        const selectedSorterId = problemSorterSelect.value;
+        const isCloudSyncEnabled = syncToggle.checked;
+        const isReminderEnabled = reminderToggle.checked;
+
+        await (0,configService/* setProblemSorter */.Kr)(Number(selectedSorterId));
+        await (0,configService/* setCloudSyncEnabled */.sS)(isCloudSyncEnabled);
+        await (0,configService/* setReminderEnabled */.EQ)(isReminderEnabled);
+        
+        // 保存提醒详细设置
+        if (reminderToggle) {
+            const selectedDays = [];
+            for (let i = 0; i <= 6; i++) {
+                const dayCheckbox = document.getElementById(`day${i}`);
+                if (dayCheckbox && dayCheckbox.checked) {
+                    selectedDays.push(i);
+                }
+            }
+            
+            await chrome.storage.local.set({
+                reminderEnabled: isReminderEnabled,
+                reminderInterval: parseInt(reminderInterval?.value || 60),
+                reminderStartTime: reminderStartTime?.value || '09:00',
+                reminderEndTime: reminderEndTime?.value || '22:00',
+                reminderDays: selectedDays
+            });
+        }
+
+        // 使用 SweetAlert2 显示保存成功提示
+        sweetalert2_all_default().fire({
+            icon: 'success',
+            title: 'Settings Saved',
+            text: 'Your settings have been successfully updated',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#1d2e3d',
+            color: '#ffffff',
+            toast: true,
+            position: 'center-end',
+            customClass: {
+                popup: 'colored-toast'
+            }
+        });
+    });
+}
+
+
+
+// 初始化函数
+async function initializeReviewPage() {
+    console.log('初始化复习页面');
+    // 首先加载配置
+    await (0,configService/* loadConfigs */.O1)();
+    console.log('加载的默认卡片数量:', store/* store */.h.defaultCardLimit);
+    await loadDailyReviewData(); // 加载真实数据
+    const gearButtons = document.querySelectorAll('.gear-button');
+    gearButtons.forEach(button => {
+        button.replaceWith(button.cloneNode(true));
+    });
+    
+    
+    // 绑定齿轮按钮事件
+    document.querySelectorAll('.gear-button').forEach(button => {
+        button.addEventListener('click', function() {
+            console.log('齿轮按钮被点击');
+            const delta = this.classList.contains('left') ? -1 : 1;
+            changeCardLimit(delta);
+        });
+    });
+
+    // 绑定卡片数量输入框变化事件
+    const cardLimitInput = document.getElementById('cardLimit');
+    cardLimitInput.addEventListener('change', function() {
+        console.log('卡片数量改变');
+        updateCardDisplay();
+    });
+
+    // 初始化显示
+    setCurrentDate();
+    updateStats();
+    // updateCardLimitDisplay();
+    createReviewCards();
+    initializeAddProblem();
+}
+
+function initializeFeedbackButton() {
+    const button = document.querySelector('.feedback-btn');  // 使用新的类名
+    if (!button) return;
+
+    button.addEventListener('mouseenter', function() {
+        this.style.background = '#1a3244';
+        this.style.borderColor = '#61dafb';
+        this.style.boxShadow = '0 0 10px rgba(97, 218, 251, 0.5)';
+        this.style.color = '#61dafb';
+        this.querySelector('.btn-content').style.transform = 'translateX(2px)';
+        this.querySelector('i').style.color = '#61dafb';
+    });
+
+    button.addEventListener('mouseleave', function() {
+        this.style.background = '#1d2e3d';
+        this.style.borderColor = 'rgba(97, 218, 251, 0.3)';
+        this.style.boxShadow = 'none';
+        this.style.color = '#61dafb';
+        this.querySelector('.btn-content').style.transform = 'translateX(0)';
+        this.querySelector('i').style.color = '#61dafb';
+    });
+    const buttonReview = document.querySelector('.feedback-btn-review');  // 使用新的类名
+    if (!buttonReview) return;
+
+    buttonReview.addEventListener('mouseenter', function() {
+        this.style.background = '#1a3244';
+        this.style.borderColor = '#61dafb';
+        this.style.boxShadow = '0 0 10px rgba(97, 218, 251, 0.5)';
+        this.style.color = '#61dafb';
+        this.querySelector('.btn-content').style.transform = 'translateX(2px)';
+        this.querySelector('i').style.color = '#61dafb';
+    });
+
+    buttonReview.addEventListener('mouseleave', function() {
+        this.style.background = '#1d2e3d';
+        this.style.borderColor = 'rgba(97, 218, 251, 0.3)';
+        this.style.boxShadow = 'none';
+        this.style.color = '#61dafb';
+        this.querySelector('.btn-content').style.transform = 'translateX(0)';
+        this.querySelector('i').style.color = '#61dafb';
+    });
+}
+
+
+
+// 页面切换功能
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('DOM加载完成,开始初始化复习页面和切换绑定');
+    await initializeReviewPage();
+    // 添加设置初始化
+    initializeFeedbackButton();
+    
+    
+    // 检查是否找到导航按钮
+    const navButtons = document.querySelectorAll('.nav-btn');
+    console.log('找到导航按钮数量:', navButtons.length);
+    
+    // 检查是否找到视图
+    const views = document.querySelectorAll('.view');
+    console.log('找到视图数量:', views.length);
+    
+    // 打印所有视图的ID
+    views.forEach(view => console.log('视图ID:', view.id));
+    
+    navButtons.forEach((button, index) => {
+        console.log(`为第 ${index + 1} 个按钮绑定点击事件:`, button.textContent);
+        
+        button.addEventListener('click', async function(e) {
+            e.preventDefault(); // 阻止默认行为
+            e.stopPropagation(); // 阻止事件冒泡
+            
+            console.log('按钮被点击:', this.textContent);
+            
+            // 移除所有按钮的激活状态
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            // 添加当前按钮的激活状态
+            this.classList.add('active');
+            
+            // 获取目标视图
+            const targetView = this.textContent.trim();
+            console.log('目标视图:', targetView);
+            
+            let viewId;
+            switch(targetView) {
+                case 'Review':
+                    viewId = 'reviewView';
+                    await initializeReviewPage();
+                    break;
+                case 'Problems':
+                    viewId = 'problemListView';
+                    await loadProblemList(); // 加载题目列表
+                    initializeFeedbackButton();
+                    // renderAll();
+                    break;
+                case 'Settings':
+                    viewId = 'moreView';
+                    await initializeOptions();
+                    break;
+            }
+            
+            console.log('切换到视图ID:', viewId);
+            
+            // 切换视图
+            views.forEach(view => {
+                console.log('检查视图:', view.id);
+                if(view.id === viewId) {
+                    view.classList.add('active');
+                    view.style.display = 'block';
+                    console.log('激活视图:', view.id);
+                } else {
+                    view.classList.remove('active');
+                    view.style.display = 'none';
+                    console.log('隐藏视图:', view.id);
+                }
+            });
+        });
+    });
+
+    // 调试 revlogs
+    try {
+        console.log('===== 开始调试 revlogs =====');
+        const allRevlogs = await (0,fsrs/* getAllRevlogs */.c8)();
+        console.log('所有复习日志:', allRevlogs);
+        
+        // 计算总复习次数
+        let totalReviews = 0;
+        Object.keys(allRevlogs).forEach(cardId => {
+            totalReviews += allRevlogs[cardId]?.length || 0;
+        });
+        console.log(`总复习次数: ${totalReviews}`);
+        
+        // 导出 CSV 并打印
+        const csvContent = await (0,fsrs/* exportRevlogsToCSV */.Z9)();
+        console.log('CSV 格式的复习日志:');
+        console.log(csvContent);
+        console.log('===== 结束调试 revlogs =====');
+    } catch (error) {
+        console.error('调试 revlogs 时出错:', error);
+    }
+});
+
+
+
+
+
+
+
+
+// 以防万一，也添加 window.onload
+window.onload = function() {
+    console.log('页面完全加载完成');
+    if (!document.querySelector('.review-card')) {
+        console.log('卡片未创建，重新初始化');
+        setCurrentDate();
+        updateStats();
+        updateCardLimitDisplay();
+        createReviewCards();
+    }
+    
+
+};
+
+
 /***/ }),
 
-/***/ "./src/popup/service/configService.js":
-/*!********************************************!*\
-  !*** ./src/popup/service/configService.js ***!
-  \********************************************/
+/***/ 188:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getDefaultCardLimit: () => (/* binding */ getDefaultCardLimit),
-/* harmony export */   getProblemSorter: () => (/* binding */ getProblemSorter),
-/* harmony export */   getReviewIntervals: () => (/* binding */ getReviewIntervals),
-/* harmony export */   isCloudSyncEnabled: () => (/* binding */ isCloudSyncEnabled),
-/* harmony export */   loadCloudSyncConfig: () => (/* binding */ loadCloudSyncConfig),
-/* harmony export */   loadConfigs: () => (/* binding */ loadConfigs),
-/* harmony export */   loadDefaultCardLimit: () => (/* binding */ loadDefaultCardLimit),
-/* harmony export */   loadProblemSorter: () => (/* binding */ loadProblemSorter),
-/* harmony export */   loadReviewIntervals: () => (/* binding */ loadReviewIntervals),
-/* harmony export */   setCloudSyncEnabled: () => (/* binding */ setCloudSyncEnabled),
-/* harmony export */   setDefaultCardLimit: () => (/* binding */ setDefaultCardLimit),
-/* harmony export */   setProblemSorter: () => (/* binding */ setProblemSorter),
-/* harmony export */   setReviewIntervals: () => (/* binding */ setReviewIntervals),
-/* harmony export */   switchCloudSyncEnabled: () => (/* binding */ switchCloudSyncEnabled)
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../delegate/localStorageDelegate */ "./src/popup/delegate/localStorageDelegate.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/popup/store.js");
-/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/keys */ "./src/popup/util/keys.js");
-/* harmony import */ var _util_sort__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/sort */ "./src/popup/util/sort.js");
+/* harmony import */ var _util_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(384);
+/* harmony import */ var _storageDelegate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(648);
+
+
+
+
+const getCloudStorageData = async (key) => {
+    return new Promise((resolve, reject) => {
+        chrome.storage.sync.get(key, (result) => {
+            if (result === undefined || result[key] === undefined) {
+                reject(key);
+            } else {
+                resolve(result[key]);
+            }
+        })
+    }).catch((key) => {
+        console.log(`get sync storage data failed for key = ${key}`);
+    });
+}
+
+const setCloudStorageData = async (key, val) => {
+
+    console.log("set to cloud");
+    console.log([key, val]);
+
+    return new Promise((resolve) => {
+        chrome.storage.sync.set({ [key]: val });
+        resolve();
+    }).catch(e => console.log(e));
+}
+
+const batchSetCloudStorageDate = async (object) => {
+    return new Promise((resolve) => {
+        chrome.storage.sync.set(object);
+        resolve();
+    }).catch(e => console.log(e));
+}
+
+const batchGetCloudStorageDate = async (keyArr) => {
+    return new Promise((resolve, reject) => {
+        chrome.storage.sync.get(keyArr, (result) => {
+            if (result === undefined) {
+                reject(key);
+            } else {
+                resolve(result);
+            }
+        })
+    }).catch(e => {
+        console.log(console.log(e));
+    });
+}
+
+/**
+ * sharding
+ */
+
+const shardCount = 20;
+
+const hashKeyToShardIdx = (key) => {
+    const hash = (0,_util_utils__WEBPACK_IMPORTED_MODULE_0__/* .simpleStringHash */ .zJ)(key);
+    const shardIndex = (hash % shardCount + shardCount) % shardCount;
+    return shardIndex;
+}
+
+const isJsonObj = (obj) => {
+    return Object.getPrototypeOf(obj) === Object.prototype;
+}
+
+const shardedSetCloudStorageData = async (key, val) => {
+    // val should be a JSON object
+    if (!isJsonObj(val)) {
+        throw "shardedSet only supports JSON type val";
+    }
+    const shardedVal = {};
+    const objectKeys = Object.keys(val);
+    Array.prototype.forEach.call(objectKeys, (objKey) => {
+        const shardedIdx = hashKeyToShardIdx(objKey);
+        const shardedKey = `${key}#${shardedIdx}`;
+        if (!(shardedKey in shardedVal)) {
+            shardedVal[shardedKey] = {};
+        }
+        shardedVal[shardedKey][objKey] = val[objKey];
+    })
+    
+    console.log("set shareded data to cloud:");
+    console.log(shardedVal);
+
+    await batchSetCloudStorageDate(shardedVal);
+}
+
+const shardedGetCloudStorageData = async (key) => {
+    const shardedKeyArr = [];
+    for (let i = 0; i < shardCount; i++) {
+        shardedKeyArr.push(`${key}#${i}`);
+    }
+
+    const vals = await batchGetCloudStorageDate(shardedKeyArr);    
+    const res = {};
+
+    if (vals === undefined) return res;
+    for (const shardKey in vals) {
+        Object.assign(res, vals[shardKey]);
+    } 
+    console.log(`get ${key} sharded from cloud`)
+    console.log(res);
+    return res;
+}
+
+class CloudStorageDelegate extends _storageDelegate__WEBPACK_IMPORTED_MODULE_1__/* .StorageDelegate */ .i {
+    constructor(){
+        super();
+        this.get = shardedGetCloudStorageData;
+        this.set = shardedSetCloudStorageData;
+    }
+}
+
+const cloudStorageDelegate = new CloudStorageDelegate();
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (cloudStorageDelegate);
+
+/***/ }),
+
+/***/ 453:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   N: () => (/* binding */ optimizeFSRSParams)
+/* harmony export */ });
+// FSRS参数优化相关的API请求处理
+const optimizeFSRSParams = async (csvContent, onProgress) => {
+    try {
+        const formData = new FormData();
+        const csvBlob = new Blob([csvContent], { type: 'text/csv' });
+        // ref: https://github.com/ishiko732/fsrs-online-training/blob/73b3281e4c972bf965083dcfe61f087383b4a083/components/lib/tz.ts#L3-L4
+        // Chrome > 24, Edge > 12, Firefox > 29
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        formData.append('file', csvBlob, 'revlog.csv');
+        formData.append('sse', '1');
+        formData.append('hour_offset', '4');
+        formData.append('enable_short_term', '0');
+        formData.append('timezone', timeZone);
+
+        const response = await fetch('https://ishiko732-fsrs-online-training.hf.space/api/train', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // 手动解析SSE响应
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let result = null;
+        let lastProgress = null;
+        let doneParams = null;
+        
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            
+            const chunk = decoder.decode(value, { stream: true });
+            const lines = chunk.split('\n');
+            
+            // 处理SSE响应
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                
+                // 处理事件类型
+                if (line.startsWith('event: ')) {
+                    const eventType = line.substring(7);
+                    console.log('事件类型:', eventType);
+                    
+                    // 查找下一个data行
+                    let dataLine = '';
+                    for (let j = i + 1; j < lines.length; j++) {
+                        if (lines[j].startsWith('data: ')) {
+                            dataLine = lines[j];
+                            break;
+                        }
+                    }
+                    
+                    if (dataLine) {
+                        try {
+                            const data = JSON.parse(dataLine.substring(6));
+                            
+                            // 处理进度信息
+                            if (eventType === 'progress') {
+                                lastProgress = data;
+                                // 如果提供了进度回调函数，则调用它
+                                if (onProgress) {
+                                    onProgress(data);
+                                }
+                            }
+                            
+                            // 处理完成事件
+                            if (eventType === 'done') {
+                                doneParams = data;
+                                console.log('捕获到done事件中的参数:', doneParams);
+                            }
+                            
+                            // 处理训练结果
+                            if (eventType === 'info' && data.type === 'Train') {
+                                result = data;
+                            }
+                        } catch (e) {
+                            console.warn('Error parsing SSE data:', e, dataLine);
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 优先返回done标签中的参数
+        if (doneParams) {
+            return doneParams;
+        }
+        
+        // 如果没有获取到done参数，但有进度信息，则返回进度信息
+        if (!result && lastProgress) {
+            result = {
+                type: 'Progress',
+                progress: lastProgress
+            };
+        }
+        
+        return result || { type: 'Error', message: 'No result received' };
+    } catch (error) {
+        console.error('Error optimizing FSRS parameters:', error);
+        throw error;
+    }
+}; 
+
+/***/ }),
+
+/***/ 891:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Cy: () => (/* binding */ getLocalStorageData),
+/* harmony export */   ZP: () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   qy: () => (/* binding */ setLocalStorageData)
+/* harmony export */ });
+/* harmony import */ var _storageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(648);
+
+
+const getLocalStorageData = async (key) => {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(key, (result) => {
+            if (result === undefined || result[key] === undefined) {
+                reject(key);
+            } else {
+                resolve(result[key]);
+            }
+        })
+    }).catch((key) => {
+        console.log(`get local storage data failed for key = ${key}`);
+    });
+}
+
+const setLocalStorageData = async (key, val) => {
+    return new Promise((resolve) => {
+        chrome.storage.local.set({ [key]: val });
+        resolve();
+    }).catch(e => console.log(e));
+}
+
+class LocalStorageDelegate extends _storageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .StorageDelegate */ .i {
+    constructor(){
+        super();
+        this.get = getLocalStorageData;
+        this.set = setLocalStorageData;
+    }
+}
+
+const localStorageDelegate = new LocalStorageDelegate();
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (localStorageDelegate);
+
+/***/ }),
+
+/***/ 648:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   i: () => (/* binding */ StorageDelegate)
+/* harmony export */ });
+class StorageDelegate {
+    constructor(){
+        this.get = async (key) => null;
+        this.set = async (key, val) => {};
+    }
+}
+
+
+
+/***/ }),
+
+/***/ 196:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   P: () => (/* binding */ OperationHistory),
+/* harmony export */   Z: () => (/* binding */ OPS_TYPE)
+/* harmony export */ });
+class OperationHistory {
+    constructor(before, isInCnMode, type, time) {
+        this.before = before;
+        this.isInCnMode = isInCnMode;
+        this.type = type;
+        this.time = time;
+    }
+}
+
+const OPS_TYPE = Object.freeze({
+    MASTER: "mark as mastered",
+    RESET: "reset progress",
+    DELETE: "delete record"
+});
+
+/***/ }),
+
+/***/ 875:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   JG: () => (/* binding */ copy),
+/* harmony export */   tc: () => (/* binding */ Problem)
+/* harmony export */ });
+/* unused harmony export getDeletedProblem */
+class Problem {
+    constructor(index, name, level, url, submissionTime, proficiency, modificationTime) {
+        this.index = index;
+        this.name = name;
+        this.level = level;
+        this.url = url;
+        this.submissionTime = submissionTime;
+        this.proficiency = proficiency;
+        this.modificationTime = modificationTime;
+        this.isDeleted = false;
+
+        // 更新 FSRS 状态结构
+        this.fsrsState = {
+            difficulty: null,        // 用户反馈的难度 (1-5)
+            quality: null,           // 答题质量 (1-5)
+            lastReview: null,        // 上次复习时间
+            nextReview: null,        // 下次复习时间
+            reviewCount: 0,          // 复习次数
+            stability: 0,            // 记忆稳定性
+            state: 'New',           // FSRS 状态
+            lapses: 0               // 遗忘次数
+        };
+    }
+};
+
+const getDeletedProblem = (problemId) => {
+    const deletedProblem = new Problem(problemId, '', '', '', 0, 0, Date.now());
+    deletedProblem.isDeleted = true;
+    return deletedProblem;
+}
+
+const copy = (p) => {
+    const newProblem = new Problem(
+        p.index, 
+        p.name, 
+        p.level, 
+        p.url, 
+        p.submissionTime, 
+        p.proficiency, 
+        p.modificationTime
+    );
+    
+    // 复制 isDeleted 状态
+    newProblem.isDeleted = p.isDeleted;
+    
+    // 深拷贝 fsrsState 对象
+    // 深拷贝 fsrsState 对象，兼容旧版本
+    newProblem.fsrsState = {
+        difficulty: p.fsrsState ? p.fsrsState.difficulty : null,
+        quality: p.fsrsState ? p.fsrsState.quality : null,
+        lastReview: p.fsrsState ? p.fsrsState.lastReview : null,
+        nextReview: p.fsrsState ? p.fsrsState.nextReview : null,
+        reviewCount: p.fsrsState ? p.fsrsState.reviewCount : 0,
+        stability: p.fsrsState ? p.fsrsState.stability : 0,
+        state: p.fsrsState ? p.fsrsState.state : 'New',
+        lapses: p.fsrsState ? p.fsrsState.lapses : 0
+    };
+    
+    return newProblem;
+}
+
+/***/ }),
+
+/***/ 14:
+/***/ ((module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+/* harmony import */ var _popup_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(823);
+/* harmony import */ var _view_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(876);
+
+
+
+console.log("Hello Leetcode-Mastery-Scheduler!");
+await (0,_view_view_js__WEBPACK_IMPORTED_MODULE_1__/* .renderAll */ .xy)();
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } }, 1);
+
+/***/ }),
+
+/***/ 970:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EQ: () => (/* binding */ setReminderEnabled),
+/* harmony export */   FO: () => (/* binding */ setDefaultCardLimit),
+/* harmony export */   Kr: () => (/* binding */ setProblemSorter),
+/* harmony export */   O1: () => (/* binding */ loadConfigs),
+/* harmony export */   sS: () => (/* binding */ setCloudSyncEnabled)
+/* harmony export */ });
+/* unused harmony exports getReviewIntervals, setReviewIntervals, loadReviewIntervals, getProblemSorter, loadProblemSorter, isCloudSyncEnabled, switchCloudSyncEnabled, loadCloudSyncConfig, getDefaultCardLimit, loadDefaultCardLimit, isReminderEnabled, loadReminderConfig */
+/* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(891);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(214);
+/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(134);
+/* harmony import */ var _util_sort__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(192);
 
 
 
@@ -7890,46 +8926,46 @@ __webpack_require__.r(__webpack_exports__);
 // configurable review intervals (to be integrated)
 
 const getReviewIntervals = async () => {
-    return await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.getLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.REVIEW_INTV_KEY);
+    return await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .REVIEW_INTV_KEY */ .FB);
 }
 
 const setReviewIntervals = async (customIntv) => {
     if (customIntv == null || customIntv == undefined) return;
-    const {easyIntv, mediumIntv, hardIntv} = _store__WEBPACK_IMPORTED_MODULE_1__.store;
+    const {easyIntv, mediumIntv, hardIntv} = store;
     customIntv.easyIntv = customIntv.easyIntv || easyIntv;
     customIntv.mediumIntv = customIntv.mediumIntv || mediumIntv;
     customIntv.hardIntv = customIntv.hardIntv || hardIntv;
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.setLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.REVIEW_INTV_KEY, customIntv);
+    await setLocalStorageData(REVIEW_INTV_KEY, customIntv);
 }
 
 const loadReviewIntervals = async () => {
     const customIntv = await getReviewIntervals();
     if (customIntv !== undefined) {
-        Object.assign(_store__WEBPACK_IMPORTED_MODULE_1__.store, customIntv);
+        Object.assign(_store__WEBPACK_IMPORTED_MODULE_1__/* .store */ .h, customIntv);
     }
 }
 
 
 // configurable problem sort by
 const getProblemSorter = async () => {
-    return await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.getLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.PROBLEM_SORT_BY_KEY);
+    return await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .PROBLEM_SORT_BY_KEY */ .ql);
 }
 
 const setProblemSorter = async (sorterId) => {
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.setLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.PROBLEM_SORT_BY_KEY, sorterId);
+    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .PROBLEM_SORT_BY_KEY */ .ql, sorterId);
 }
 
 const loadProblemSorter = async () => {
-    const sorterId = await getProblemSorter() | (0,_util_sort__WEBPACK_IMPORTED_MODULE_3__.idOf)(_util_sort__WEBPACK_IMPORTED_MODULE_3__.problemSorters.sortByReviewTimeAsc);
-    _store__WEBPACK_IMPORTED_MODULE_1__.store.problemSortBy = (0,_util_sort__WEBPACK_IMPORTED_MODULE_3__.getSorterById)(sorterId);
+    const sorterId = await getProblemSorter() | (0,_util_sort__WEBPACK_IMPORTED_MODULE_2__/* .idOf */ .jD)(_util_sort__WEBPACK_IMPORTED_MODULE_2__/* .problemSorters */ .SL.sortByReviewTimeAsc);
+    _store__WEBPACK_IMPORTED_MODULE_1__/* .store */ .h.problemSortBy = (0,_util_sort__WEBPACK_IMPORTED_MODULE_2__/* .getSorterById */ .HF)(sorterId);
 }
 
 
 
 // config cloud sync
 const isCloudSyncEnabled = async () => {
-    const configs = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.getLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.CONFIG_KEY);
-    const isEnabled = configs !== undefined ? configs[_util_keys__WEBPACK_IMPORTED_MODULE_2__.CONFIG_INNER_KEY_ENABLE_CLOUD] : false;
+    const configs = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .CONFIG_KEY */ .fR);
+    const isEnabled = configs !== undefined ? configs[_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .CONFIG_INNER_KEY_ENABLE_CLOUD */ .$z] : false;
     if (isEnabled === undefined) {
         isEnabled = false;
     }
@@ -7937,77 +8973,359 @@ const isCloudSyncEnabled = async () => {
 }
 
 const switchCloudSyncEnabled = async () => {
-    const configs = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.getLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.CONFIG_KEY);
-    const isEnabled = configs[_util_keys__WEBPACK_IMPORTED_MODULE_2__.CONFIG_INNER_KEY_ENABLE_CLOUD];
+    const configs = await getLocalStorageData(CONFIG_KEY);
+    const isEnabled = configs[CONFIG_INNER_KEY_ENABLE_CLOUD];
     if (isEnabled === undefined) {
         isEnabled = false;
     }
-    configs[_util_keys__WEBPACK_IMPORTED_MODULE_2__.CONFIG_INNER_KEY_ENABLE_CLOUD] = !isEnabled;
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.setLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.CONFIG_KEY, configs);
+    configs[CONFIG_INNER_KEY_ENABLE_CLOUD] = !isEnabled;
+    await setLocalStorageData(CONFIG_KEY, configs);
 }
 
 const setCloudSyncEnabled = async (isEnabled) => {
-    const configs = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.getLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.CONFIG_KEY) || {
+    const configs = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .CONFIG_KEY */ .fR) || {
         CONFIG_INNER_KEY_ENABLE_CLOUD: false
     };
-    configs[_util_keys__WEBPACK_IMPORTED_MODULE_2__.CONFIG_INNER_KEY_ENABLE_CLOUD] = isEnabled;
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.setLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.CONFIG_KEY, configs);
+    configs[_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .CONFIG_INNER_KEY_ENABLE_CLOUD */ .$z] = isEnabled;
+    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .CONFIG_KEY */ .fR, configs);
 }
 
 
 const loadCloudSyncConfig = async () => {
-    _store__WEBPACK_IMPORTED_MODULE_1__.store.isCloudSyncEnabled = await isCloudSyncEnabled();
+    _store__WEBPACK_IMPORTED_MODULE_1__/* .store */ .h.isCloudSyncEnabled = await isCloudSyncEnabled();
 }
 
 // 获取默认卡片数量
 const getDefaultCardLimit = async () => {
-    const limit = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.getLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_CARD_LIMIT_KEY);
-    return limit !== undefined ? limit : _util_keys__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_CARD_LIMIT_VALUE;
+    const limit = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .DEFAULT_CARD_LIMIT_KEY */ .hr);
+    return limit !== undefined ? limit : _util_keys__WEBPACK_IMPORTED_MODULE_3__/* .DEFAULT_CARD_LIMIT_VALUE */ .pD;
 }
 
 // 设置默认卡片数量
 const setDefaultCardLimit = async (limit) => {
     if (limit == null || limit == undefined) return;
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.setLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_CARD_LIMIT_KEY, limit);
+    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .DEFAULT_CARD_LIMIT_KEY */ .hr, limit);
 }
 
 // 加载默认卡片数量到 store
 const loadDefaultCardLimit = async () => {
-    _store__WEBPACK_IMPORTED_MODULE_1__.store.defaultCardLimit = await getDefaultCardLimit();
+    _store__WEBPACK_IMPORTED_MODULE_1__/* .store */ .h.defaultCardLimit = await getDefaultCardLimit();
 }
 
+// 添加新的配置项和方法
+async function setReminderEnabled(enabled) {
+    await chrome.storage.local.set({ reminderEnabled: enabled });
+}
 
+async function isReminderEnabled() {
+    const { reminderEnabled } = await chrome.storage.local.get('reminderEnabled');
+    return reminderEnabled || false;
+}
+// 添加加载提醒设置到 store 的函数
+const loadReminderConfig = async () => {
+    _store__WEBPACK_IMPORTED_MODULE_1__/* .store */ .h.isReminderEnabled = await isReminderEnabled();
+}
+
+// 更新 loadConfigs 函数
 const loadConfigs = async () => {
     await loadReviewIntervals();
     await loadProblemSorter();
     await loadCloudSyncConfig();
-    await loadDefaultCardLimit();  // 添加这一行
+    await loadDefaultCardLimit();
+    await loadReminderConfig();  // 添加这一行
 }
 
 /***/ }),
 
-/***/ "./src/popup/service/modeService.js":
-/*!******************************************!*\
-  !*** ./src/popup/service/modeService.js ***!
-  \******************************************/
+/***/ 990:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   isInCnMode: () => (/* binding */ isInCnMode),
-/* harmony export */   toggleMode: () => (/* binding */ toggleMode)
+/* harmony export */   E_: () => (/* binding */ getRevlogCount),
+/* harmony export */   GY: () => (/* binding */ optimizeParameters),
+/* harmony export */   Gq: () => (/* binding */ updateProblemWithFSRS),
+/* harmony export */   wM: () => (/* binding */ updateFSRSInstance)
 /* harmony export */ });
-/* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../delegate/localStorageDelegate */ "./src/popup/delegate/localStorageDelegate.js");
-/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/keys */ "./src/popup/util/keys.js");
+/* unused harmony exports getFSRSInstance, calculateNextReview, syncFSRSHistory, syncFSRSParams, syncRevlogs */
+/* harmony import */ var ts_fsrs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61);
+/* harmony import */ var _util_fsrs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(878);
+/* harmony import */ var _delegate_fsrsDelegate_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(453);
+/* harmony import */ var _util_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(384);
+/* harmony import */ var _delegate_localStorageDelegate_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(891);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(214);
+
+
+
+
+
+
+
+
+
+
+// 创建FSRS实例
+let fsrsInstance = null;
+
+// 获取FSRS实例
+const getFSRSInstance = async () => {
+    if (fsrsInstance) {
+        return fsrsInstance;
+    }
+    
+    // 获取本地参数
+    const localParams = await (0,_util_fsrs_js__WEBPACK_IMPORTED_MODULE_1__/* .getFSRSParams */ .JF)();
+    
+    // 创建新的FSRS实例
+    fsrsInstance = new ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .FSRS */ .Ke(localParams);
+    console.log('创建新的FSRS实例，参数:', localParams);
+    
+    return fsrsInstance;
+};
+
+// 更新FSRS实例
+const updateFSRSInstance = async (newParams) => {
+    // 创建新的FSRS实例
+    fsrsInstance = new ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .FSRS */ .Ke(newParams);
+    console.log('更新FSRS实例，新参数:', newParams);
+    
+    return fsrsInstance;
+};
+
+// 计算下次复习时间
+const calculateNextReview = async (problem, feedback) => {
+    try {
+        const now = new Date();
+        
+        // 确保有一个有效的 lastReview 日期
+        let lastReview;
+        if (problem.fsrsState && problem.fsrsState.lastReview) {
+            lastReview = new Date(problem.fsrsState.lastReview);
+        } else if (problem.submissionTime) {
+            lastReview = new Date(problem.submissionTime);
+        } else {
+            lastReview = new Date(now.getTime()); // 默认为昨天
+        }
+        
+        // 检查日期是否有效
+        if (isNaN(lastReview.getTime())) {
+            lastReview = new Date(now.getTime()); // 如果无效，使用昨天
+        }
+
+        // 如果没有 fsrsState，创建一个默认的
+        if (!problem.fsrsState) {
+            problem.fsrsState = (0,ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .createEmptyCard */ .tl)(lastReview, (card) => {
+                return {
+                    nextReview: +card.due,
+                    stability: card.stability,
+                    difficulty: card.difficulty,
+                    state: card.state,
+                    reviewCount: card.reps,
+                    lapses: card.lapses,
+                    lastReview: +lastReview  // 存储为时间戳
+                }
+            });
+        }
+        let card = problem.fsrsState;
+        
+        // 确保 nextReview 有效
+        if (!card.nextReview || isNaN(card.nextReview)) {
+            card.nextReview = +lastReview; // 默认为一天后
+        }
+
+        const rating = (0,_util_fsrs_js__WEBPACK_IMPORTED_MODULE_1__/* .qualityToRating */ .uY)(feedback.quality);
+        
+        // 确保所有参数都有有效值
+        const scheduledDays = Math.max(0, Math.floor((card.nextReview - card.lastReview) / (1000 * 60 * 60 * 24)));
+        const elapsedDays = Math.max(0, (now.getTime() - lastReview.getTime()) / (1000 * 60 * 60 * 24));
+        
+        // 获取FSRS实例
+        const fsrs = await getFSRSInstance();
+        
+        const result = fsrs.next({
+            due: card.nextReview,
+            stability: card.stability,
+            difficulty: card.difficulty,
+            elapsed_days: elapsedDays,
+            scheduled_days: scheduledDays,
+            reps: card.reviewCount,
+            lapse_count: card.lapses,
+            state: card.state,
+            last_review: lastReview,  // 使用已经转换好的 Date 对象
+        }, now, rating);
+
+        return {
+            /**长期调度模式，ivl一定大于1d */
+            nextReview: +result.card.due,
+            stability: result.card.stability,
+            difficulty: result.card.difficulty,
+            state: result.card.state,
+            reviewCount: result.card.reps,
+            lapses: result.card.lapses
+        };
+    } catch (error) {
+        console.error('Error in calculateNextReview:', error);
+        const now = new Date(); // 在 catch 块中定义 now 变量
+        return {
+            nextReview: now.getTime() + (24 * 60 * 60 * 1000),
+            stability: problem.fsrsState.stability || ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .S_MIN */ .sH,
+            /** ref: https://github.com/open-spaced-repetition/ts-fsrs/blob/5eabd189d4740027ce1018cc968e67ca46c048a3/src/fsrs/default.ts#L20-L40 */
+            difficulty: problem.fsrsState.difficulty || _util_fsrs_js__WEBPACK_IMPORTED_MODULE_1__/* .defaultParams */ .Tb.w[4],
+            /** 长期调度下状态一定是New或Review */
+            state: problem.fsrsState.state || ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .State */ .ZM.Review,
+            reviewCount: (problem.fsrsState.reviewCount || 0) + 1,
+            lapses: problem.fsrsState.lapses || 0
+        };
+    }
+};
+
+// 更新问题状态
+const updateProblemWithFSRS = async (problem, feedback) => {
+    const now = Date.now();
+    const fsrsResult = await calculateNextReview(problem, feedback);
+    
+    // 创建新的复习日志条目，只包含必要字段
+    const newRevlog = {
+        card_id: problem.index, // 使用问题索引作为卡片ID
+        review_time: now, // 复习时间（毫秒时间戳）
+        review_rating: (0,_util_fsrs_js__WEBPACK_IMPORTED_MODULE_1__/* .qualityToRating */ .uY)(feedback.quality), // 复习评分 (1-4)
+        review_state: ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .TypeConvert */ .mc.state(problem.fsrsState ? problem.fsrsState?.state ?? ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .State */ .ZM.New : 'New') // 复习状态 (0-3)
+    };
+    
+    // 将复习日志存储到单独的 localStorage 键中
+    await (0,_util_fsrs_js__WEBPACK_IMPORTED_MODULE_1__/* .saveRevlog */ .Vd)(problem.index, newRevlog);
+    
+    // 更新问题状态（不修改原有结构）
+    problem.fsrsState = {
+        ...problem.fsrsState,
+        difficulty: fsrsResult.difficulty,
+        stability: fsrsResult.stability,
+        state: fsrsResult.state,
+        lastReview: now,
+        nextReview: fsrsResult.nextReview,
+        reviewCount: fsrsResult.reps,
+        lapses: fsrsResult.lapses,
+        quality: feedback.quality
+    };
+
+    problem.modificationTime = now;
+    return problem;
+};
+
+// 获取复习记录数量
+const getRevlogCount = async () => {
+    try {
+        const allRevlogs = await (0,_util_fsrs_js__WEBPACK_IMPORTED_MODULE_1__/* .getAllRevlogs */ .c8)();
+        let totalCount = 0;
+        
+        // 计算所有卡片的复习记录总数
+        Object.values(allRevlogs).forEach(cardRevlogs => {
+            totalCount += cardRevlogs.length;
+        });
+        
+        return totalCount;
+    } catch (error) {
+        console.error('Error getting revlog count:', error);
+        return 0;
+    }
+};
+
+// 优化FSRS参数
+const optimizeParameters = async (onProgress) => {
+    try {
+        // 获取并导出CSV格式的复习记录
+        const csvContent = await (0,_util_fsrs_js__WEBPACK_IMPORTED_MODULE_1__/* .exportRevlogsToCSV */ .Z9)();
+        
+        // 调用API进行参数优化
+        const result = await (0,_delegate_fsrsDelegate_js__WEBPACK_IMPORTED_MODULE_5__/* .optimizeFSRSParams */ .N)(csvContent, onProgress);
+        
+        // 检查结果是否包含params字段（来自done标签）
+        if (result && result.params) {
+            console.log('获取到优化后的FSRS参数:', result.params);
+            
+            // 不再自动保存参数，而是返回结果供用户确认
+            return {
+                type: 'Success',
+                params: result.params,
+                metrics: result.metrics || {}
+            };
+        }
+        
+        // 如果是进度信息
+        if (result && result.type === 'Progress') {
+            return result;
+        }
+        
+        // 如果是训练结果
+        if (result && result.type === 'Train') {
+            return {
+                type: 'Train',
+                message: '训练完成，但未获取到完整参数'
+            };
+        }
+        
+        // 其他情况
+        return result;
+    } catch (error) {
+        console.error('Error optimizing parameters:', error);
+        throw error;
+    }
+};
+
+// 同步FSRS历史记录
+const syncFSRSHistory = async () => {
+    try {
+        // 检查是否启用了云同步
+        if (!store.isCloudSyncEnabled) {
+            console.log('云同步未启用，跳过FSRS历史记录同步');
+            return;
+        }
+
+        // 同步FSRS参数和复习日志
+        await syncFSRSParams();
+        await syncRevlogs();
+        
+        // 更新FSRS实例
+        const updatedParams = await getFSRSParams();
+        await updateFSRSInstance(updatedParams);
+        
+        console.log('FSRS历史记录同步完成');
+    } catch (error) {
+        console.error('同步FSRS历史记录失败:', error);
+    }
+}; 
+
+
+const syncFSRSParams = async () => {
+    if (!store.isCloudSyncEnabled) return;
+    await syncLocalAndCloudStorage('fsrs_params', mergeFSRSParams);
+}
+
+const syncRevlogs = async () => {
+    if (!store.isCloudSyncEnabled) return;
+    await syncLocalAndCloudStorage('fsrs_revlogs', mergeRevlogs);
+}
+
+/***/ }),
+
+/***/ 733:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   B: () => (/* binding */ isInCnMode),
+/* harmony export */   b: () => (/* binding */ toggleMode)
+/* harmony export */ });
+/* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(891);
+/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(134);
 
 
 
 const isInCnMode = async () => {
-    let cnMode = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.getLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_1__.CN_MODE);
+    let cnMode = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_1__/* .CN_MODE */ .dw);
     console.log(`current cnMode is ${cnMode}`);
     if (cnMode === undefined) {
-        await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.setLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_1__.CN_MODE, false);
+        await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_1__/* .CN_MODE */ .dw, false);
         cnMode = false;
     }
     return cnMode;
@@ -8016,32 +9334,28 @@ const isInCnMode = async () => {
 const toggleMode = async () => {
     const cnMode = await isInCnMode();
     console.log(`got current cnMode before toggle}`);
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__.setLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_1__.CN_MODE, !cnMode);
+    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_1__/* .CN_MODE */ .dw, !cnMode);
     console.log("cnMode toggled");
 }
 
 /***/ }),
 
-/***/ "./src/popup/service/operationHistoryService.js":
-/*!******************************************************!*\
-  !*** ./src/popup/service/operationHistoryService.js ***!
-  \******************************************************/
+/***/ 809:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   addNewOperationHistory: () => (/* binding */ addNewOperationHistory),
-/* harmony export */   hasOperationHistory: () => (/* binding */ hasOperationHistory),
-/* harmony export */   popLatestOperationHistory: () => (/* binding */ popLatestOperationHistory),
-/* harmony export */   undoLatestOperation: () => (/* binding */ undoLatestOperation)
+/* harmony export */   $j: () => (/* binding */ hasOperationHistory),
+/* harmony export */   Z_: () => (/* binding */ undoLatestOperation),
+/* harmony export */   xH: () => (/* binding */ addNewOperationHistory)
 /* harmony export */ });
-/* harmony import */ var _entity_operationHistory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../entity/operationHistory */ "./src/popup/entity/operationHistory.js");
-/* harmony import */ var _modeService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modeService */ "./src/popup/service/modeService.js");
-/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/keys */ "./src/popup/util/keys.js");
-/* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../delegate/localStorageDelegate */ "./src/popup/delegate/localStorageDelegate.js");
-/* harmony import */ var _problemService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./problemService */ "./src/popup/service/problemService.js");
-/* harmony import */ var _entity_problem__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../entity/problem */ "./src/popup/entity/problem.js");
+/* unused harmony export popLatestOperationHistory */
+/* harmony import */ var _entity_operationHistory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(196);
+/* harmony import */ var _modeService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(733);
+/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(134);
+/* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(891);
+/* harmony import */ var _problemService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(820);
+/* harmony import */ var _entity_problem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(875);
 
 
 
@@ -8052,10 +9366,10 @@ __webpack_require__.r(__webpack_exports__);
 const CACHE_SIZE = 10;
 
 const addNewOperationHistory = async (before, type, time) => {
-    const snapShot = (0,_entity_problem__WEBPACK_IMPORTED_MODULE_5__.copy)(before);
+    const snapShot = (0,_entity_problem__WEBPACK_IMPORTED_MODULE_4__/* .copy */ .JG)(before);
     snapShot.isDeleted = false;
-    const newOperationHistory = new _entity_operationHistory__WEBPACK_IMPORTED_MODULE_0__.OperationHistory(snapShot, await (0,_modeService__WEBPACK_IMPORTED_MODULE_1__.isInCnMode)(), type, time);
-    let opsHistory = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__.getLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.OPS_HISTORY_KEY);
+    const newOperationHistory = new _entity_operationHistory__WEBPACK_IMPORTED_MODULE_0__/* .OperationHistory */ .P(snapShot, await (0,_modeService__WEBPACK_IMPORTED_MODULE_1__/* .isInCnMode */ .B)(), type, time);
+    let opsHistory = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_2__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_5__/* .OPS_HISTORY_KEY */ .I2);
     if (opsHistory === undefined) {
         opsHistory = [];
     }
@@ -8063,17 +9377,17 @@ const addNewOperationHistory = async (before, type, time) => {
         opsHistory.shift();
     }
     opsHistory.push(newOperationHistory);
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__.setLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.OPS_HISTORY_KEY, opsHistory);
+    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_2__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_5__/* .OPS_HISTORY_KEY */ .I2, opsHistory);
 }
 
 const popLatestOperationHistory = async () => {
-    const opsHistory = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__.getLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.OPS_HISTORY_KEY);
+    const opsHistory = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_2__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_5__/* .OPS_HISTORY_KEY */ .I2);
     if (opsHistory === undefined || opsHistory.length === 0) {
         return undefined;
     }
 
     const latestOpsHistory = opsHistory.pop();
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__.setLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.OPS_HISTORY_KEY, opsHistory);
+    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_2__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_5__/* .OPS_HISTORY_KEY */ .I2, opsHistory);
     return latestOpsHistory;
 }
 
@@ -8085,51 +9399,145 @@ const undoLatestOperation = async () => {
     const { before: problemBefore, isInCnMode } = operationHistory;
     problemBefore.modificationTime = Date.now();    // need to update the mod time to make this latest change to override cloud data
 
-    const problems = await (0,_problemService__WEBPACK_IMPORTED_MODULE_4__.getProblemsByMode)(isInCnMode);
+    const problems = await (0,_problemService__WEBPACK_IMPORTED_MODULE_3__/* .getProblemsByMode */ .JW)(isInCnMode);
     problems[problemBefore.index] = problemBefore;
-    await (0,_problemService__WEBPACK_IMPORTED_MODULE_4__.setProblemsByMode)(problems, isInCnMode);
+    await (0,_problemService__WEBPACK_IMPORTED_MODULE_3__/* .setProblemsByMode */ .Ur)(problems, isInCnMode);
 }
 
 const hasOperationHistory = async () => {
-    const opsHistory = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__.getLocalStorageData)(_util_keys__WEBPACK_IMPORTED_MODULE_2__.OPS_HISTORY_KEY);
+    const opsHistory = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_2__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_5__/* .OPS_HISTORY_KEY */ .I2);
     return opsHistory !== undefined && opsHistory.length > 0;
 }
 
 /***/ }),
 
-/***/ "./src/popup/service/problemService.js":
-/*!*********************************************!*\
-  !*** ./src/popup/service/problemService.js ***!
-  \*********************************************/
+/***/ 820:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createOrUpdateProblem: () => (/* binding */ createOrUpdateProblem),
-/* harmony export */   deleteProblem: () => (/* binding */ deleteProblem),
-/* harmony export */   getAllProblems: () => (/* binding */ getAllProblems),
-/* harmony export */   getAllProblemsInCloud: () => (/* binding */ getAllProblemsInCloud),
-/* harmony export */   getCurrentProblemInfoFromLeetCode: () => (/* binding */ getCurrentProblemInfoFromLeetCode),
-/* harmony export */   getProblemsByMode: () => (/* binding */ getProblemsByMode),
-/* harmony export */   markProblemAsMastered: () => (/* binding */ markProblemAsMastered),
-/* harmony export */   resetProblem: () => (/* binding */ resetProblem),
-/* harmony export */   setProblems: () => (/* binding */ setProblems),
-/* harmony export */   setProblemsByMode: () => (/* binding */ setProblemsByMode),
-/* harmony export */   setProblemsToCloud: () => (/* binding */ setProblemsToCloud),
-/* harmony export */   syncProblems: () => (/* binding */ syncProblems)
-/* harmony export */ });
-/* harmony import */ var _delegate_leetCodeDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../delegate/leetCodeDelegate */ "./src/popup/delegate/leetCodeDelegate.js");
-/* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../delegate/localStorageDelegate */ "./src/popup/delegate/localStorageDelegate.js");
-/* harmony import */ var _operationHistoryService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./operationHistoryService */ "./src/popup/service/operationHistoryService.js");
-/* harmony import */ var _entity_operationHistory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../entity/operationHistory */ "./src/popup/entity/operationHistory.js");
-/* harmony import */ var _util_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/constants */ "./src/popup/util/constants.js");
-/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../util/keys */ "./src/popup/util/keys.js");
-/* harmony import */ var _modeService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modeService */ "./src/popup/service/modeService.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../store */ "./src/popup/store.js");
-/* harmony import */ var _util_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../util/utils */ "./src/popup/util/utils.js");
-/* harmony import */ var _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../delegate/cloudStorageDelegate */ "./src/popup/delegate/cloudStorageDelegate.js");
-/* harmony import */ var _entity_problem__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../entity/problem */ "./src/popup/entity/problem.js");
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  qu: () => (/* binding */ createOrUpdateProblem),
+  aG: () => (/* binding */ deleteProblem),
+  kT: () => (/* binding */ getAllProblems),
+  cp: () => (/* binding */ getCurrentProblemInfoFromLeetCodeByHref),
+  Oo: () => (/* binding */ getCurrentProblemInfoFromLeetCodeByUrl),
+  JW: () => (/* binding */ getProblemsByMode),
+  Vv: () => (/* binding */ markProblemAsMastered),
+  wB: () => (/* binding */ resetProblem),
+  Ur: () => (/* binding */ setProblemsByMode),
+  xd: () => (/* binding */ syncProblems)
+});
+
+// UNUSED EXPORTS: getAllProblemsInCloud, setProblems, setProblemsToCloud
+
+;// CONCATENATED MODULE: ./src/popup/delegate/leetCodeDelegate.js
+const user_agent =
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36";
+const params = {
+    operationName: "questionTitle",
+    variables: { titleSlug: "" }
+};
+const headers = {
+    'User-Agent': user_agent,
+    'Connection': 'keep-alive',
+    'Content-Type': 'application/json',
+    'Referer': "",
+};
+
+const queryProblemInfo = async (slug, site) => {
+    const baseUrl = `https://leetcode.${site}`;
+    params.variables.titleSlug = slug;
+    params.query = `query questionTitle($titleSlug: String!) {
+        question(titleSlug: $titleSlug) {
+          questionFrontendId
+          ${site === "cn" ? "translatedTitle" : "title"}
+          difficulty
+        }
+      }`
+    headers.Referer = `${baseUrl}/problems/${slug}`
+
+    const requestOptions = {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(params),
+        timeout: 10000
+    };
+
+    const response = await fetch(`${baseUrl}/graphql`, requestOptions);
+    const content = await response.json();
+
+    return content.data.question;
+}
+
+// 从URL获取站点和题目标识
+function extractProblemInfo(url) {
+    const match = url.match(/(com|cn)(\/|$)/);
+    const site = match ? match[1] : "com";
+    console.log(`site is ${site}`);
+
+    let cleanUrl = url;
+    const possible_suffix = ["/submissions/", "/description/", "/discussion/", "/solutions/"];
+    for (const suffix of possible_suffix) {
+        if (cleanUrl.includes(suffix)) {
+            cleanUrl = cleanUrl.substring(0, cleanUrl.lastIndexOf(suffix) + 1);
+            break;
+        }
+    }
+
+    const problemSlug = cleanUrl.split("/").splice(-2)[0];
+    return { site, problemSlug, cleanUrl };
+}
+
+// 基础的获取题目信息函数
+const getProblemInfo = async (url) => {
+    const { site, problemSlug, cleanUrl } = extractProblemInfo(url);
+    
+    const question = await queryProblemInfo(problemSlug, site);
+
+    return {
+        problemIndex: question.questionFrontendId,
+        problemName: `${question.questionFrontendId}. ${site === "cn" ? question.translatedTitle : question.title}`,
+        problemLevel: question.difficulty,
+        problemUrl: cleanUrl
+    };
+}
+
+// 从当前页面URL获取题目信息
+const getProblemInfoByHref = async () => {
+    const currentUrl = window.location.href;
+    return await getProblemInfo(currentUrl);
+}
+
+// 从指定URL获取题目信息
+const getProblemInfoByUrl = async (url) => {
+    if (!url.includes('leetcode.com/problems/') && !url.includes('leetcode.cn/problems/')) {
+        throw new Error('请输入有效的 LeetCode 题目链接');
+    }
+    return await getProblemInfo(url);
+}
+
+
+// EXTERNAL MODULE: ./src/popup/delegate/localStorageDelegate.js
+var localStorageDelegate = __webpack_require__(891);
+// EXTERNAL MODULE: ./src/popup/service/operationHistoryService.js
+var operationHistoryService = __webpack_require__(809);
+// EXTERNAL MODULE: ./src/popup/entity/operationHistory.js
+var operationHistory = __webpack_require__(196);
+// EXTERNAL MODULE: ./src/popup/util/constants.js
+var constants = __webpack_require__(497);
+// EXTERNAL MODULE: ./src/popup/util/keys.js
+var keys = __webpack_require__(134);
+// EXTERNAL MODULE: ./src/popup/service/modeService.js
+var modeService = __webpack_require__(733);
+// EXTERNAL MODULE: ./src/popup/store.js
+var store = __webpack_require__(214);
+// EXTERNAL MODULE: ./src/popup/util/utils.js
+var utils = __webpack_require__(384);
+// EXTERNAL MODULE: ./src/popup/delegate/cloudStorageDelegate.js
+var delegate_cloudStorageDelegate = __webpack_require__(188);
+;// CONCATENATED MODULE: ./src/popup/service/problemService.js
 
 
 
@@ -8143,47 +9551,54 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const getAllProblems = async () => {
-    let cnMode = await (0,_modeService__WEBPACK_IMPORTED_MODULE_6__.isInCnMode)();
-    const queryKey = cnMode ? _util_keys__WEBPACK_IMPORTED_MODULE_5__.CN_PROBLEM_KEY : _util_keys__WEBPACK_IMPORTED_MODULE_5__.PROBLEM_KEY;
-    let problems = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_1__.getLocalStorageData)(queryKey);
+    let cnMode = await (0,modeService/* isInCnMode */.B)();
+    const queryKey = cnMode ? keys/* CN_PROBLEM_KEY */.Q$ : keys/* PROBLEM_KEY */.y0;
+    let problems = await (0,localStorageDelegate/* getLocalStorageData */.Cy)(queryKey);
     if (problems === undefined) problems = {};
     return problems;
 }
 
 const getAllProblemsInCloud = async () => {
-    let cnMode = await (0,_modeService__WEBPACK_IMPORTED_MODULE_6__.isInCnMode)();
-    const queryKey = cnMode ? _util_keys__WEBPACK_IMPORTED_MODULE_5__.CN_PROBLEM_KEY : _util_keys__WEBPACK_IMPORTED_MODULE_5__.PROBLEM_KEY;
-    let problems = await _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_9__["default"].get(queryKey);
+    let cnMode = await isInCnMode();
+    const queryKey = cnMode ? CN_PROBLEM_KEY : PROBLEM_KEY;
+    let problems = await cloudStorageDelegate.get(queryKey);
     if (problems === undefined) problems = {};
     return problems;
 }
 
 const getProblemsByMode = async (useCnMode) => {
-    const queryKey = useCnMode ? _util_keys__WEBPACK_IMPORTED_MODULE_5__.CN_PROBLEM_KEY : _util_keys__WEBPACK_IMPORTED_MODULE_5__.PROBLEM_KEY;
-    let problems = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_1__.getLocalStorageData)(queryKey);
+    const queryKey = useCnMode ? keys/* CN_PROBLEM_KEY */.Q$ : keys/* PROBLEM_KEY */.y0;
+    let problems = await (0,localStorageDelegate/* getLocalStorageData */.Cy)(queryKey);
     if (problems === undefined) problems = {};
     return problems;
 }
 
-const getCurrentProblemInfoFromLeetCode = async () => {
-    return await (0,_delegate_leetCodeDelegate__WEBPACK_IMPORTED_MODULE_0__.getProblemInfo)();
+// 从当前页面获取题目信息
+const getCurrentProblemInfoFromLeetCodeByHref = async () => {
+    return await getProblemInfoByHref();
 }
 
+// 从指定URL获取题目信息
+const getCurrentProblemInfoFromLeetCodeByUrl = async (url) => {
+    return await getProblemInfoByUrl(url);
+}
+
+
 const setProblems = async (problems) => {
-    let cnMode = await (0,_modeService__WEBPACK_IMPORTED_MODULE_6__.isInCnMode)();
-    const key = cnMode ? _util_keys__WEBPACK_IMPORTED_MODULE_5__.CN_PROBLEM_KEY : _util_keys__WEBPACK_IMPORTED_MODULE_5__.PROBLEM_KEY;
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_1__.setLocalStorageData)(key, problems);
+    let cnMode = await (0,modeService/* isInCnMode */.B)();
+    const key = cnMode ? keys/* CN_PROBLEM_KEY */.Q$ : keys/* PROBLEM_KEY */.y0;
+    await (0,localStorageDelegate/* setLocalStorageData */.qy)(key, problems);
 }
 
 const setProblemsToCloud = async (problems) => {
-    let cnMode = await (0,_modeService__WEBPACK_IMPORTED_MODULE_6__.isInCnMode)();
-    const key = cnMode ? _util_keys__WEBPACK_IMPORTED_MODULE_5__.CN_PROBLEM_KEY : _util_keys__WEBPACK_IMPORTED_MODULE_5__.PROBLEM_KEY;
-    await _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_9__["default"].set(key, problems);
+    let cnMode = await isInCnMode();
+    const key = cnMode ? CN_PROBLEM_KEY : PROBLEM_KEY;
+    await cloudStorageDelegate.set(key, problems);
 }
 
 const setProblemsByMode = async (problems, useCnMode) => {
-    const key = useCnMode ? _util_keys__WEBPACK_IMPORTED_MODULE_5__.CN_PROBLEM_KEY : _util_keys__WEBPACK_IMPORTED_MODULE_5__.PROBLEM_KEY;
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_1__.setLocalStorageData)(key, problems);
+    const key = useCnMode ? keys/* CN_PROBLEM_KEY */.Q$ : keys/* PROBLEM_KEY */.y0;
+    await (0,localStorageDelegate/* setLocalStorageData */.qy)(key, problems);
 }
 
 const createOrUpdateProblem = async (problem) => {
@@ -8197,9 +9612,9 @@ const markProblemAsMastered = async (problemId) => {
     let problems = await getAllProblems();
     let problem = problems[problemId];
 
-    await (0,_operationHistoryService__WEBPACK_IMPORTED_MODULE_2__.addNewOperationHistory)(problem, _entity_operationHistory__WEBPACK_IMPORTED_MODULE_3__.OPS_TYPE.MASTER, Date.now());
+    await (0,operationHistoryService/* addNewOperationHistory */.xH)(problem, operationHistory/* OPS_TYPE */.Z.MASTER, Date.now());
 
-    problem.proficiency = _util_constants__WEBPACK_IMPORTED_MODULE_4__.forggettingCurve.length;
+    problem.proficiency = constants/* forggettingCurve */.mq.length;
     problem.modificationTime = Date.now();
 
     problems[problemId] = problem;
@@ -8216,7 +9631,7 @@ const deleteProblem = async (problemId) => {
     if (problem) {
         problem.isDeleted = true;
         problem.modificationTime = Date.now();
-        await (0,_operationHistoryService__WEBPACK_IMPORTED_MODULE_2__.addNewOperationHistory)(problem, _entity_operationHistory__WEBPACK_IMPORTED_MODULE_3__.OPS_TYPE.DELETE, Date.now());
+        await (0,operationHistoryService/* addNewOperationHistory */.xH)(problem, operationHistory/* OPS_TYPE */.Z.DELETE, Date.now());
         problems[problemId] = problem;
         await setProblems(problems);
     }
@@ -8230,7 +9645,7 @@ const resetProblem = async (problemId) => {
     problem.submissionTime = Date.now() - 24 * 60 * 60 * 1000;
     problem.modificationTime = Date.now();
 
-    await (0,_operationHistoryService__WEBPACK_IMPORTED_MODULE_2__.addNewOperationHistory)(problem, _entity_operationHistory__WEBPACK_IMPORTED_MODULE_3__.OPS_TYPE.RESET, Date.now());
+    await (0,operationHistoryService/* addNewOperationHistory */.xH)(problem, operationHistory/* OPS_TYPE */.Z.RESET, Date.now());
 
     problems[problemId] = problem;
 
@@ -8238,27 +9653,23 @@ const resetProblem = async (problemId) => {
 };
 
 const syncProblems = async () => {
-    if (!_store__WEBPACK_IMPORTED_MODULE_7__.store.isCloudSyncEnabled) return;
-    let cnMode = await (0,_modeService__WEBPACK_IMPORTED_MODULE_6__.isInCnMode)();
-    const key = cnMode ? _util_keys__WEBPACK_IMPORTED_MODULE_5__.CN_PROBLEM_KEY : _util_keys__WEBPACK_IMPORTED_MODULE_5__.PROBLEM_KEY;
-    await (0,_util_utils__WEBPACK_IMPORTED_MODULE_8__.syncLocalAndCloudStorage)(key, _util_utils__WEBPACK_IMPORTED_MODULE_8__.mergeProblems); 
+    if (!store/* store */.h.isCloudSyncEnabled) return;
+    let cnMode = await (0,modeService/* isInCnMode */.B)();
+    const key = cnMode ? keys/* CN_PROBLEM_KEY */.Q$ : keys/* PROBLEM_KEY */.y0;
+    await (0,utils/* syncLocalAndCloudStorage */.gV)(key, utils/* mergeProblems */.bK); 
 }
 
 /***/ }),
 
-/***/ "./src/popup/store.js":
-/*!****************************!*\
-  !*** ./src/popup/store.js ***!
-  \****************************/
+/***/ 214:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   daily_store: () => (/* binding */ daily_store),
-/* harmony export */   store: () => (/* binding */ store)
+/* harmony export */   S: () => (/* binding */ daily_store),
+/* harmony export */   h: () => (/* binding */ store)
 /* harmony export */ });
-/* harmony import */ var _util_sort__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util/sort */ "./src/popup/util/sort.js");
+/* harmony import */ var _util_sort__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(192);
 
 
 const store = {
@@ -8276,9 +9687,10 @@ const store = {
     easyIntv: [1, 3],
     mediumIntv: [1, 3, 4],
     hardIntv: [0, 1, 2, 3, 4],
-    problemSortBy: _util_sort__WEBPACK_IMPORTED_MODULE_0__.problemSorters.sortByReviewTimeAsc,
+    problemSortBy: _util_sort__WEBPACK_IMPORTED_MODULE_0__/* .problemSorters */ .SL.sortByReviewTimeAsc,
     isCloudSyncEnabled: false,
-    defaultCardLimit: 3
+    defaultCardLimit: 1,
+    isReminderEnabled: false
 }
 
 const daily_store = {
@@ -8289,32 +9701,18 @@ const daily_store = {
 
 /***/ }),
 
-/***/ "./src/popup/util/constants.js":
-/*!*************************************!*\
-  !*** ./src/popup/util/constants.js ***!
-  \*************************************/
+/***/ 497:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   CN_LABLE: () => (/* binding */ CN_LABLE),
-/* harmony export */   COMPILE_ERROR_AND_TLE_CLASSNAME: () => (/* binding */ COMPILE_ERROR_AND_TLE_CLASSNAME),
-/* harmony export */   COMPILE_ERROR_AND_TLE_CLASSNAME_CN: () => (/* binding */ COMPILE_ERROR_AND_TLE_CLASSNAME_CN),
-/* harmony export */   COMPILE_ERROR_AND_TLE_CLASSNAME_NEW: () => (/* binding */ COMPILE_ERROR_AND_TLE_CLASSNAME_NEW),
-/* harmony export */   GL_LABLE: () => (/* binding */ GL_LABLE),
-/* harmony export */   PAGE_SIZE: () => (/* binding */ PAGE_SIZE),
-/* harmony export */   SUBMIT_BUTTON_ATTRIBUTE_NAME: () => (/* binding */ SUBMIT_BUTTON_ATTRIBUTE_NAME),
-/* harmony export */   SUBMIT_BUTTON_ATTRIBUTE_VALUE: () => (/* binding */ SUBMIT_BUTTON_ATTRIBUTE_VALUE),
-/* harmony export */   SUCCESS_CLASSNAME: () => (/* binding */ SUCCESS_CLASSNAME),
-/* harmony export */   SUCCESS_CLASSNAME_CN: () => (/* binding */ SUCCESS_CLASSNAME_CN),
-/* harmony export */   SUCCESS_CLASSNAME_NEW: () => (/* binding */ SUCCESS_CLASSNAME_NEW),
-/* harmony export */   WRONG_ANSWER_CLASSNAME: () => (/* binding */ WRONG_ANSWER_CLASSNAME),
-/* harmony export */   WRONG_ANSWER_CLASSNAME_CN: () => (/* binding */ WRONG_ANSWER_CLASSNAME_CN),
-/* harmony export */   WRONG_ANSWER_CLASSNAME_NEW: () => (/* binding */ WRONG_ANSWER_CLASSNAME_NEW),
-/* harmony export */   forggettingCurve: () => (/* binding */ forggettingCurve),
-/* harmony export */   months: () => (/* binding */ months)
+/* harmony export */   Hj: () => (/* binding */ GL_LABLE),
+/* harmony export */   IV: () => (/* binding */ PAGE_SIZE),
+/* harmony export */   e7: () => (/* binding */ months),
+/* harmony export */   mq: () => (/* binding */ forggettingCurve),
+/* harmony export */   zY: () => (/* binding */ CN_LABLE)
 /* harmony export */ });
+/* unused harmony exports SUBMIT_BUTTON_ATTRIBUTE_NAME, SUBMIT_BUTTON_ATTRIBUTE_VALUE, SUCCESS_CLASSNAME_CN, WRONG_ANSWER_CLASSNAME_CN, COMPILE_ERROR_AND_TLE_CLASSNAME_CN, SUCCESS_CLASSNAME, WRONG_ANSWER_CLASSNAME, COMPILE_ERROR_AND_TLE_CLASSNAME, SUCCESS_CLASSNAME_NEW, WRONG_ANSWER_CLASSNAME_NEW, COMPILE_ERROR_AND_TLE_CLASSNAME_NEW */
 const forggettingCurve = [
     1 * 24 * 60,    // 1 day
     2 * 24 * 60,    // 2 day
@@ -8353,40 +9751,26 @@ const COMPILE_ERROR_AND_TLE_CLASSNAME_NEW = "mr-1 flex-1 whitespace-nowrap text-
 
 /***/ }),
 
-/***/ "./src/popup/util/doms.js":
-/*!********************************!*\
-  !*** ./src/popup/util/doms.js ***!
-  \********************************/
+/***/ 422:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   checkButtonDOMs: () => (/* binding */ checkButtonDOMs),
-/* harmony export */   completedTableDOM: () => (/* binding */ completedTableDOM),
-/* harmony export */   configButtonDOMs: () => (/* binding */ configButtonDOMs),
-/* harmony export */   deleteButtonDOMs: () => (/* binding */ deleteButtonDOMs),
-/* harmony export */   input0DOM: () => (/* binding */ input0DOM),
-/* harmony export */   input1DOM: () => (/* binding */ input1DOM),
-/* harmony export */   input2DOM: () => (/* binding */ input2DOM),
-/* harmony export */   inputLabel0DOM: () => (/* binding */ inputLabel0DOM),
-/* harmony export */   inputLabel1DOM: () => (/* binding */ inputLabel1DOM),
-/* harmony export */   inputLabel2DOM: () => (/* binding */ inputLabel2DOM),
-/* harmony export */   needReviewTableDOM: () => (/* binding */ needReviewTableDOM),
-/* harmony export */   nextButton0DOM: () => (/* binding */ nextButton0DOM),
-/* harmony export */   nextButton1DOM: () => (/* binding */ nextButton1DOM),
-/* harmony export */   nextButton2DOM: () => (/* binding */ nextButton2DOM),
-/* harmony export */   noReviewTableDOM: () => (/* binding */ noReviewTableDOM),
-/* harmony export */   optionPageFeedbackMsgDOM: () => (/* binding */ optionPageFeedbackMsgDOM),
-/* harmony export */   popupPageDOM: () => (/* binding */ popupPageDOM),
-/* harmony export */   prevButton0DOM: () => (/* binding */ prevButton0DOM),
-/* harmony export */   prevButton1DOM: () => (/* binding */ prevButton1DOM),
-/* harmony export */   prevButton2DOM: () => (/* binding */ prevButton2DOM),
-/* harmony export */   resetButtonDOMs: () => (/* binding */ resetButtonDOMs),
-/* harmony export */   siteLabelDOM: () => (/* binding */ siteLabelDOM),
-/* harmony export */   switchButtonDOM: () => (/* binding */ switchButtonDOM),
-/* harmony export */   undoButtonDOMs: () => (/* binding */ undoButtonDOMs)
+/* harmony export */   $0: () => (/* binding */ configButtonDOMs),
+/* harmony export */   J8: () => (/* binding */ switchButtonDOM),
+/* harmony export */   R4: () => (/* binding */ deleteButtonDOMs),
+/* harmony export */   Tv: () => (/* binding */ resetButtonDOMs),
+/* harmony export */   WA: () => (/* binding */ prevButton1DOM),
+/* harmony export */   Y1: () => (/* binding */ popupPageDOM),
+/* harmony export */   _p: () => (/* binding */ input1DOM),
+/* harmony export */   aJ: () => (/* binding */ inputLabel1DOM),
+/* harmony export */   bE: () => (/* binding */ nextButton1DOM),
+/* harmony export */   dt: () => (/* binding */ undoButtonDOMs),
+/* harmony export */   hO: () => (/* binding */ noReviewTableDOM),
+/* harmony export */   r2: () => (/* binding */ siteLabelDOM),
+/* harmony export */   uV: () => (/* binding */ checkButtonDOMs)
 /* harmony export */ });
+/* unused harmony exports input0DOM, inputLabel0DOM, prevButton0DOM, nextButton0DOM, input2DOM, inputLabel2DOM, prevButton2DOM, nextButton2DOM, needReviewTableDOM, completedTableDOM, optionPageFeedbackMsgDOM */
 const input0DOM = document.getElementById("pageInput0");
 const inputLabel0DOM = document.getElementById("pageInputLabel0");
 const prevButton0DOM = document.getElementById("prevButton0");
@@ -8421,180 +9805,231 @@ const popupPageDOM = document.defaultView;
 
 /***/ }),
 
-/***/ "./src/popup/util/fsrs.js":
-/*!********************************!*\
-  !*** ./src/popup/util/fsrs.js ***!
-  \********************************/
+/***/ 878:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   calculateNextReview: () => (/* binding */ calculateNextReview),
-/* harmony export */   updateProblemWithFSRS: () => (/* binding */ updateProblemWithFSRS)
+/* harmony export */   JF: () => (/* binding */ getFSRSParams),
+/* harmony export */   Tb: () => (/* binding */ defaultParams),
+/* harmony export */   Vd: () => (/* binding */ saveRevlog),
+/* harmony export */   Z9: () => (/* binding */ exportRevlogsToCSV),
+/* harmony export */   _L: () => (/* binding */ saveFSRSParams),
+/* harmony export */   c8: () => (/* binding */ getAllRevlogs),
+/* harmony export */   uY: () => (/* binding */ qualityToRating)
 /* harmony export */ });
-/* harmony import */ var ts_fsrs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ts-fsrs */ "./node_modules/ts-fsrs/dist/index.mjs");
+/* harmony import */ var ts_fsrs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61);
+/* harmony import */ var _delegate_localStorageDelegate_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(891);
+/* harmony import */ var _delegate_cloudStorageDelegate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(188);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(214);
+
+
+
 
 
 // 1. 创建自定义参数
-const params = (0,ts_fsrs__WEBPACK_IMPORTED_MODULE_0__.generatorParameters)({
+const defaultParams = (0,ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .generatorParameters */ .EI)({
     request_retention: 0.9,          // 期望记忆保持率 90%
     maximum_interval: 365,           // 最大间隔天数
     enable_fuzz: false,              // 禁用时间模糊化
     enable_short_term: false          // 启用短期记忆影响
 });
 
-// 2. 创建 FSRS 实例
-const fsrs = new ts_fsrs__WEBPACK_IMPORTED_MODULE_0__.FSRS(params);
-
-// 3. 评分映射（4个等级）
+// 2. 评分映射（4个等级）
 const qualityToRating = (quality) => {
     switch(quality) {
-        case 1: return ts_fsrs__WEBPACK_IMPORTED_MODULE_0__.Rating.Again;  // 完全不会
-        case 2: return ts_fsrs__WEBPACK_IMPORTED_MODULE_0__.Rating.Hard;   // 有点难
-        case 3: return ts_fsrs__WEBPACK_IMPORTED_MODULE_0__.Rating.Good;   // 正常
-        case 4: return ts_fsrs__WEBPACK_IMPORTED_MODULE_0__.Rating.Easy;   // 简单
-        default: return ts_fsrs__WEBPACK_IMPORTED_MODULE_0__.Rating.Good;
+        case 1: return ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .Rating */ .iG.Again;  // 完全不会
+        case 2: return ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .Rating */ .iG.Hard;   // 有点难
+        case 3: return ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .Rating */ .iG.Good;   // 正常
+        case 4: return ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .Rating */ .iG.Easy;   // 简单
+        default: return ts_fsrs__WEBPACK_IMPORTED_MODULE_0__/* .Rating */ .iG.Good;
     }
 };
 
-// 4. 计算下次复习时间
-const calculateNextReview = (problem, feedback) => {
+// 3. 获取本地FSRS参数
+const getFSRSParams = async () => {
     try {
-        const now = new Date();
-
-        // 如果没有 fsrsState，创建一个默认的
-        if (!problem.fsrsState) {
-            problem.fsrsState = {
-                difficulty: null,
-                quality: null,
-                lastReview: problem.submissionTime || now.getTime(),
-                nextReview: null,
-                reviewCount: 0,
-                stability: 0,
-                state: 'New',
-                lapses: 0
-            };
-        }
-
-        const lastReview = problem.fsrsState.lastReview 
-            ? new Date(problem.fsrsState.lastReview)
-            : new Date(problem.submissionTime || now.getTime());
-
-        let card = (0,ts_fsrs__WEBPACK_IMPORTED_MODULE_0__.createEmptyCard)(lastReview);
-        
-        if (problem.fsrsState.state !== 'New') {
-            card = {
-                ...card,
-                state: problem.fsrsState.state,
-                stability: problem.fsrsState.stability || 0,
-                difficulty: problem.fsrsState.difficulty || 0,
-                reps: problem.fsrsState.reviewCount || 0,
-                lapses: problem.fsrsState.lapses || 0,
-                // 添加时间相关字段
-                elapsed_days: problem.fsrsState.lastReview 
-                    ? (now - new Date(problem.fsrsState.lastReview)) / (24 * 60 * 60 * 1000)
-                    : 0,
-                scheduled_days: problem.fsrsState.nextReview 
-                    ? (new Date(problem.fsrsState.nextReview) - new Date(problem.fsrsState.lastReview)) / (24 * 60 * 60 * 1000)
-                    : 0
-            };
+        const result = await _delegate_localStorageDelegate_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .ZP.get('fsrs_params');
+        console.log('找到本地FSRS参数:', result);
+        if (!result) {
+            console.log('未找到本地FSRS参数，使用默认参数');
+            return defaultParams;
         }
         
-        const rating = qualityToRating(feedback.quality);
-        const scheduling_cards = fsrs.repeat(card, now);
-        const result = scheduling_cards[rating];
-
-        if (!result || !result.card) {
-            console.error('FSRS calculation failed:', result);
-            // 默认间隔
-            const defaultDays = {
-                [ts_fsrs__WEBPACK_IMPORTED_MODULE_0__.Rating.Again]: 1,
-                [ts_fsrs__WEBPACK_IMPORTED_MODULE_0__.Rating.Hard]: 3,
-                [ts_fsrs__WEBPACK_IMPORTED_MODULE_0__.Rating.Good]: 7,
-                [ts_fsrs__WEBPACK_IMPORTED_MODULE_0__.Rating.Easy]: 14
-            }[rating] || 1;
-
-            return {
-                nextReview: now.getTime() + (defaultDays * 24 * 60 * 60 * 1000),
-                stability: card.stability,
-                difficulty: card.difficulty,
-                state: card.state,
-                reps: card.reps + 1,
-                lapses: card.lapses
-            };
+        // 如果结果是字符串，尝试解析它
+        if (typeof result === 'string') {
+            try {
+                const localParams = JSON.parse(result);
+                console.log('获取到本地FSRS参数:', localParams);
+                return localParams;
+            } catch (e) {
+                console.error('解析本地FSRS参数失败:', e);
+                return defaultParams;
+            }
         }
-
-        // 确保间隔至少为1天
-        const nextReviewTime = Math.max(
-            result.card.due.getTime(),
-            now.getTime() + (24 * 60 * 60 * 1000)
-        );
-
-        return {
-            nextReview: nextReviewTime,
-            stability: result.card.stability,
-            difficulty: result.card.difficulty,
-            state: result.card.state,
-            reps: result.card.reps,
-            lapses: result.card.lapses
-        };
+        
+        // 如果结果已经是对象，直接返回
+        return result;
     } catch (error) {
-        console.error('Error in calculateNextReview:', error);
-        return {
-            nextReview: now.getTime() + (24 * 60 * 60 * 1000),
-            stability: problem.fsrsState.stability || 0,
-            difficulty: problem.fsrsState.difficulty || 0,
-            state: problem.fsrsState.state || 'New',
-            reps: (problem.fsrsState.reviewCount || 0) + 1,
-            lapses: problem.fsrsState.lapses || 0
-        };
+        console.error('获取本地FSRS参数失败:', error);
+        return defaultParams;
     }
 };
 
-// 5. 更新问题状态
-const updateProblemWithFSRS = (problem, feedback) => {
-    const now = Date.now();
-    const fsrsResult = calculateNextReview(problem, feedback);
+// 4. 保存FSRS参数到本地存储
+const saveFSRSParams = async (newParams) => {
+    try {
+        // 为参数添加时间戳
+        const paramsWithTimestamp = {
+            ...newParams,
+            timestamp: Date.now()
+        };
+        
+        // 保存到本地存储（字符串格式）
+        await _delegate_localStorageDelegate_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .ZP.set('fsrs_params', JSON.stringify(paramsWithTimestamp));
+        console.log('FSRS参数已保存到本地存储');
+        
+        // 保存到云端存储（对象格式）
+        if (_store__WEBPACK_IMPORTED_MODULE_3__/* .store */ .h.isCloudSyncEnabled) {
+            await _delegate_cloudStorageDelegate_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z.set('fsrs_params', paramsWithTimestamp);
+            console.log('FSRS参数已保存到云端存储');
+        }
+        
+        return true;
+    } catch (error) {
+        console.error('保存FSRS参数失败:', error);
+        return false;
+    }
+};
 
-    problem.fsrsState = {
-        ...problem.fsrsState,
-        difficulty: fsrsResult.difficulty,
-        stability: fsrsResult.stability,
-        state: fsrsResult.state,
-        lastReview: now,
-        nextReview: fsrsResult.nextReview,
-        reviewCount: fsrsResult.reps,
-        lapses: fsrsResult.lapses,
-        quality: feedback.quality
-    };
+// 5. 保存单个复习日志
+const saveRevlog = async (cardId, revlog) => {
+    try {
+        // 从 localStorage 获取现有的复习日志
+        const existingRevlogsStr = await new Promise((resolve) => {
+            chrome.storage.local.get(['fsrs_revlogs'], (result) => {
+                resolve(result.fsrs_revlogs || '{}');
+            });
+        });
+        
+        let existingRevlogs;
+        try {
+            existingRevlogs = JSON.parse(existingRevlogsStr);
+        } catch (e) {
+            console.error('Error parsing revlogs:', e);
+            existingRevlogs = {};
+        }
+        
+        // 确保该卡片的日志数组存在
+        if (!existingRevlogs[cardId]) {
+            existingRevlogs[cardId] = [];
+        }
+        
+        // 添加新的复习日志
+        existingRevlogs[cardId].push(revlog);
+        
+        // 保存到本地存储
+        await new Promise((resolve) => {
+            chrome.storage.local.set({ 'fsrs_revlogs': JSON.stringify(existingRevlogs) });
+            resolve();
+        });
+        
+        // 如果启用了云同步，同时保存到云端
+        if (_store__WEBPACK_IMPORTED_MODULE_3__/* .store */ .h.isCloudSyncEnabled) {
+            await _delegate_cloudStorageDelegate_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z.set('fsrs_revlogs', existingRevlogs);
+        }
+        
+        return true;
+    } catch (error) {
+        console.error('Error saving revlog:', error);
+        return false;
+    }
+};
 
-    problem.modificationTime = now;
-    return problem;
+// 6. 获取所有复习日志
+const getAllRevlogs = async () => {
+    try {
+        let result;
+        
+        // 如果启用了云同步，优先从云端获取
+        if (_store__WEBPACK_IMPORTED_MODULE_3__/* .store */ .h.isCloudSyncEnabled) {
+            result = await _delegate_cloudStorageDelegate_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z.get('fsrs_revlogs');
+            if (result && Object.keys(result).length > 0) {
+                console.log('从云端获取复习日志:', result);
+                return result;
+            }
+        }
+        
+        // 如果云端没有数据或未启用云同步，从本地获取
+        result = await new Promise((resolve) => {
+            chrome.storage.local.get(['fsrs_revlogs'], (result) => {
+                resolve(result.fsrs_revlogs || '{}');
+            });
+        });
+        
+        // 如果结果是字符串，尝试解析它
+        if (typeof result === 'string') {
+            try {
+                return JSON.parse(result);
+            } catch (e) {
+                console.error('Error parsing revlogs:', e);
+                return {};
+            }
+        }
+        
+        // 如果结果已经是对象，直接返回
+        return result || {};
+    } catch (error) {
+        console.error('Error getting revlogs:', error);
+        return {};
+    }
+};
+
+// 7. 导出复习日志为CSV格式
+const exportRevlogsToCSV = async () => {
+    try {
+        // 获取所有复习日志
+        const allRevlogs = await getAllRevlogs();
+        
+        // CSV 头部 - 只包含必要字段
+        const csvHeader = 'card_id,review_time,review_rating,review_state\n';
+        
+        // 收集所有卡片的复习日志
+        let csvContent = csvHeader;
+        
+        Object.keys(allRevlogs).forEach(cardId => {
+            const cardRevlogs = allRevlogs[cardId] || [];
+            cardRevlogs.forEach(log => {
+                // 只导出必要字段
+                csvContent += `${log.card_id},${log.review_time},${log.review_rating},${log.review_state}\n`;
+            });
+        });
+        
+        return csvContent;
+    } catch (error) {
+        console.error('Error exporting revlogs to CSV:', error);
+        return '';
+    }
 };
 
 
 /***/ }),
 
-/***/ "./src/popup/util/keys.js":
-/*!********************************!*\
-  !*** ./src/popup/util/keys.js ***!
-  \********************************/
+/***/ 134:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   CN_MODE: () => (/* binding */ CN_MODE),
-/* harmony export */   CN_PROBLEM_KEY: () => (/* binding */ CN_PROBLEM_KEY),
-/* harmony export */   CONFIG_INNER_KEY_ENABLE_CLOUD: () => (/* binding */ CONFIG_INNER_KEY_ENABLE_CLOUD),
-/* harmony export */   CONFIG_KEY: () => (/* binding */ CONFIG_KEY),
-/* harmony export */   DEFAULT_CARD_LIMIT_KEY: () => (/* binding */ DEFAULT_CARD_LIMIT_KEY),
-/* harmony export */   DEFAULT_CARD_LIMIT_VALUE: () => (/* binding */ DEFAULT_CARD_LIMIT_VALUE),
-/* harmony export */   OPS_HISTORY_KEY: () => (/* binding */ OPS_HISTORY_KEY),
-/* harmony export */   PROBLEM_KEY: () => (/* binding */ PROBLEM_KEY),
-/* harmony export */   PROBLEM_SORT_BY_KEY: () => (/* binding */ PROBLEM_SORT_BY_KEY),
-/* harmony export */   REVIEW_INTV_KEY: () => (/* binding */ REVIEW_INTV_KEY)
+/* harmony export */   $z: () => (/* binding */ CONFIG_INNER_KEY_ENABLE_CLOUD),
+/* harmony export */   FB: () => (/* binding */ REVIEW_INTV_KEY),
+/* harmony export */   I2: () => (/* binding */ OPS_HISTORY_KEY),
+/* harmony export */   Q$: () => (/* binding */ CN_PROBLEM_KEY),
+/* harmony export */   dw: () => (/* binding */ CN_MODE),
+/* harmony export */   fR: () => (/* binding */ CONFIG_KEY),
+/* harmony export */   hr: () => (/* binding */ DEFAULT_CARD_LIMIT_KEY),
+/* harmony export */   pD: () => (/* binding */ DEFAULT_CARD_LIMIT_VALUE),
+/* harmony export */   ql: () => (/* binding */ PROBLEM_SORT_BY_KEY),
+/* harmony export */   y0: () => (/* binding */ PROBLEM_KEY)
 /* harmony export */ });
 const CN_MODE = 'cn_mode';
 const CN_PROBLEM_KEY = 'cn_records';
@@ -8610,22 +10045,18 @@ const DEFAULT_CARD_LIMIT_VALUE = 3;
 
 /***/ }),
 
-/***/ "./src/popup/util/sort.js":
-/*!********************************!*\
-  !*** ./src/popup/util/sort.js ***!
-  \********************************/
+/***/ 192:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   descriptionOf: () => (/* binding */ descriptionOf),
-/* harmony export */   getSorterById: () => (/* binding */ getSorterById),
-/* harmony export */   idOf: () => (/* binding */ idOf),
-/* harmony export */   problemSorterArr: () => (/* binding */ problemSorterArr),
-/* harmony export */   problemSorters: () => (/* binding */ problemSorters)
+/* harmony export */   HF: () => (/* binding */ getSorterById),
+/* harmony export */   SL: () => (/* binding */ problemSorters),
+/* harmony export */   U9: () => (/* binding */ descriptionOf),
+/* harmony export */   jD: () => (/* binding */ idOf),
+/* harmony export */   vH: () => (/* binding */ problemSorterArr)
 /* harmony export */ });
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/popup/util/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(384);
 
 
 const reverse = (sorter) => {
@@ -8633,11 +10064,11 @@ const reverse = (sorter) => {
 }
 
 const problemReviewTimeComparator = (p1, p2) => {
-    return (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getNextReviewTime)(p1).valueOf() - (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getNextReviewTime)(p2).valueOf();
+    return (0,_utils__WEBPACK_IMPORTED_MODULE_0__/* .getNextReviewTime */ .xt)(p1).valueOf() - (0,_utils__WEBPACK_IMPORTED_MODULE_0__/* .getNextReviewTime */ .xt)(p2).valueOf();
 }
 
 const problemDelayTimeComparator = (p1, p2) => {
-    return (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getDelayedHours)(p2).valueOf() - (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getDelayedHours)(p1).valueOf();
+    return (0,_utils__WEBPACK_IMPORTED_MODULE_0__/* .getDelayedHours */ .J1)(p2).valueOf() - (0,_utils__WEBPACK_IMPORTED_MODULE_0__/* .getDelayedHours */ .J1)(p1).valueOf();
 }
 
 // functions used to sort problems
@@ -8687,51 +10118,44 @@ const descriptionOf = (sorter) => {
 
 /***/ }),
 
-/***/ "./src/popup/util/utils.js":
-/*!*********************************!*\
-  !*** ./src/popup/util/utils.js ***!
-  \*********************************/
+/***/ 384:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   calculatePageNum: () => (/* binding */ calculatePageNum),
-/* harmony export */   getCurrentRetrievability: () => (/* binding */ getCurrentRetrievability),
-/* harmony export */   getDelayedHours: () => (/* binding */ getDelayedHours),
-/* harmony export */   getDifficultyBasedSteps: () => (/* binding */ getDifficultyBasedSteps),
-/* harmony export */   getLevelColor: () => (/* binding */ getLevelColor),
-/* harmony export */   getNextReviewTime: () => (/* binding */ getNextReviewTime),
-/* harmony export */   getSubmissionResult: () => (/* binding */ getSubmissionResult),
-/* harmony export */   isCompleted: () => (/* binding */ isCompleted),
-/* harmony export */   isSubmissionSuccess: () => (/* binding */ isSubmissionSuccess),
-/* harmony export */   isSubmitButton: () => (/* binding */ isSubmitButton),
-/* harmony export */   mergeProblem: () => (/* binding */ mergeProblem),
-/* harmony export */   mergeProblems: () => (/* binding */ mergeProblems),
-/* harmony export */   needReview: () => (/* binding */ needReview),
-/* harmony export */   scheduledReview: () => (/* binding */ scheduledReview),
-/* harmony export */   simpleStringHash: () => (/* binding */ simpleStringHash),
-/* harmony export */   syncLocalAndCloudStorage: () => (/* binding */ syncLocalAndCloudStorage),
-/* harmony export */   syncStorage: () => (/* binding */ syncStorage),
-/* harmony export */   updateProblemUponSuccessSubmission: () => (/* binding */ updateProblemUponSuccessSubmission)
+/* harmony export */   Hj: () => (/* binding */ needReview),
+/* harmony export */   J1: () => (/* binding */ getDelayedHours),
+/* harmony export */   PN: () => (/* binding */ isCompleted),
+/* harmony export */   PO: () => (/* binding */ scheduledReview),
+/* harmony export */   bK: () => (/* binding */ mergeProblems),
+/* harmony export */   gV: () => (/* binding */ syncLocalAndCloudStorage),
+/* harmony export */   qB: () => (/* binding */ getLevelColor),
+/* harmony export */   tL: () => (/* binding */ getDifficultyBasedSteps),
+/* harmony export */   vV: () => (/* binding */ calculatePageNum),
+/* harmony export */   xt: () => (/* binding */ getNextReviewTime),
+/* harmony export */   zJ: () => (/* binding */ simpleStringHash),
+/* harmony export */   zV: () => (/* binding */ getCurrentRetrievability)
 /* harmony export */ });
-/* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../delegate/localStorageDelegate */ "./src/popup/delegate/localStorageDelegate.js");
-/* harmony import */ var _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../delegate/cloudStorageDelegate */ "./src/popup/delegate/cloudStorageDelegate.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/popup/store.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./src/popup/util/constants.js");
+/* unused harmony exports isSubmitButton, getSubmissionResult, isSubmissionSuccess, updateProblemUponSuccessSubmission, mergeProblem, syncStorage, mergeFSRSParams, mergeRevlogs */
+/* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(891);
+/* harmony import */ var _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(188);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(214);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(497);
+/* harmony import */ var ts_fsrs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(61);
+
 
 
 
 
 
 const needReview = (problem) => {
-    if (problem.proficiency >= _constants__WEBPACK_IMPORTED_MODULE_3__.forggettingCurve.length) {
+    if (problem.proficiency >= _constants__WEBPACK_IMPORTED_MODULE_4__/* .forggettingCurve */ .mq.length) {
         return false;
     }
 
     const currentTime = Date.now();
     const timeDiffInMinute = (currentTime - problem.submissionTime) / (1000 * 60);
-    return timeDiffInMinute >= _constants__WEBPACK_IMPORTED_MODULE_3__.forggettingCurve[problem.proficiency];
+    return timeDiffInMinute >= _constants__WEBPACK_IMPORTED_MODULE_4__/* .forggettingCurve */ .mq[problem.proficiency];
 };
 
 const scheduledReview = (problem) => {
@@ -8744,7 +10168,7 @@ const isCompleted = (problem) => {
 };
 
 const calculatePageNum = (problems) => {
-    return Math.max(Math.ceil(problems.length / _constants__WEBPACK_IMPORTED_MODULE_3__.PAGE_SIZE), 1);;
+    return Math.max(Math.ceil(problems.length / _constants__WEBPACK_IMPORTED_MODULE_4__/* .PAGE_SIZE */ .IV), 1);;
 }
 
 const getLevelColor = (level) => {
@@ -8768,7 +10192,7 @@ const getNextReviewTime = (problem) => {
         date = new Date(problem.fsrsState.nextReview);
     } else {
         // 否则使用旧的计算方式（向后兼容）
-        date = new Date(problem.submissionTime + _constants__WEBPACK_IMPORTED_MODULE_3__.forggettingCurve[problem.proficiency] * 60 * 1000);
+        date = new Date(problem.submissionTime + _constants__WEBPACK_IMPORTED_MODULE_4__/* .forggettingCurve */ .mq[problem.proficiency] * 60 * 1000);
     }
     
     return date;
@@ -8782,34 +10206,34 @@ const getDelayedHours = (problem) => {
 
 const getDifficultyBasedSteps = (diffculty) => {
     if (diffculty === "Easy") {
-        return _store__WEBPACK_IMPORTED_MODULE_2__.store.easyIntv;
+        return _store__WEBPACK_IMPORTED_MODULE_2__/* .store */ .h.easyIntv;
     } else if (diffculty === "Medium") {
-        return _store__WEBPACK_IMPORTED_MODULE_2__.store.mediumIntv;
+        return _store__WEBPACK_IMPORTED_MODULE_2__/* .store */ .h.mediumIntv;
     } else {
-        return _store__WEBPACK_IMPORTED_MODULE_2__.store.hardIntv;
+        return _store__WEBPACK_IMPORTED_MODULE_2__/* .store */ .h.hardIntv;
     }
 }
 
 const isSubmitButton = (element) => {
-    return element.getAttribute(_constants__WEBPACK_IMPORTED_MODULE_3__.SUBMIT_BUTTON_ATTRIBUTE_NAME) === _constants__WEBPACK_IMPORTED_MODULE_3__.SUBMIT_BUTTON_ATTRIBUTE_VALUE;
+    return element.getAttribute(SUBMIT_BUTTON_ATTRIBUTE_NAME) === SUBMIT_BUTTON_ATTRIBUTE_VALUE;
 }
 
 const getSubmissionResult = () => {
-    return document.getElementsByClassName(_constants__WEBPACK_IMPORTED_MODULE_3__.SUCCESS_CLASSNAME_CN)[0] ||
-    document.getElementsByClassName(_constants__WEBPACK_IMPORTED_MODULE_3__.WRONG_ANSWER_CLASSNAME_CN)[0] ||
-    document.getElementsByClassName(_constants__WEBPACK_IMPORTED_MODULE_3__.COMPILE_ERROR_AND_TLE_CLASSNAME_CN)[0] ||
-    document.getElementsByClassName(_constants__WEBPACK_IMPORTED_MODULE_3__.SUCCESS_CLASSNAME)[0] ||
-    document.getElementsByClassName(_constants__WEBPACK_IMPORTED_MODULE_3__.WRONG_ANSWER_CLASSNAME)[0] ||
-    document.getElementsByClassName(_constants__WEBPACK_IMPORTED_MODULE_3__.COMPILE_ERROR_AND_TLE_CLASSNAME)[0] ||
-    document.getElementsByClassName(_constants__WEBPACK_IMPORTED_MODULE_3__.SUCCESS_CLASSNAME_NEW)[0] ||
-    document.getElementsByClassName(_constants__WEBPACK_IMPORTED_MODULE_3__.WRONG_ANSWER_CLASSNAME_NEW)[0] ||
-    document.getElementsByClassName(_constants__WEBPACK_IMPORTED_MODULE_3__.COMPILE_ERROR_AND_TLE_CLASSNAME_NEW)[0];
+    return document.getElementsByClassName(SUCCESS_CLASSNAME_CN)[0] ||
+    document.getElementsByClassName(WRONG_ANSWER_CLASSNAME_CN)[0] ||
+    document.getElementsByClassName(COMPILE_ERROR_AND_TLE_CLASSNAME_CN)[0] ||
+    document.getElementsByClassName(SUCCESS_CLASSNAME)[0] ||
+    document.getElementsByClassName(WRONG_ANSWER_CLASSNAME)[0] ||
+    document.getElementsByClassName(COMPILE_ERROR_AND_TLE_CLASSNAME)[0] ||
+    document.getElementsByClassName(SUCCESS_CLASSNAME_NEW)[0] ||
+    document.getElementsByClassName(WRONG_ANSWER_CLASSNAME_NEW)[0] ||
+    document.getElementsByClassName(COMPILE_ERROR_AND_TLE_CLASSNAME_NEW)[0];
 }
 
 const isSubmissionSuccess = (submissionResult) => {
-    return submissionResult.className.includes(_constants__WEBPACK_IMPORTED_MODULE_3__.SUCCESS_CLASSNAME_CN) ||
-    submissionResult.className.includes(_constants__WEBPACK_IMPORTED_MODULE_3__.SUCCESS_CLASSNAME_NEW) ||
-    submissionResult.className.includes(_constants__WEBPACK_IMPORTED_MODULE_3__.SUCCESS_CLASSNAME);
+    return submissionResult.className.includes(SUCCESS_CLASSNAME_CN) ||
+    submissionResult.className.includes(SUCCESS_CLASSNAME_NEW) ||
+    submissionResult.className.includes(SUCCESS_CLASSNAME);
 }
 
 const updateProblemUponSuccessSubmission = (problem) => {
@@ -8827,7 +10251,7 @@ const updateProblemUponSuccessSubmission = (problem) => {
         problem.proficiency = nextProficiencyIndex;
         // already completed all review
     } else {
-        problem.proficiency = _constants__WEBPACK_IMPORTED_MODULE_3__.forggettingCurve.length;
+        problem.proficiency = forggettingCurve.length;
     }
     problem.submissionTime = Date.now();
     problem.modificationTime = Date.now();
@@ -8857,7 +10281,7 @@ const mergeProblems = (ps1, ps2) => {
 }
 
 const syncStorage = async (sd1, sd2, key, merger) => {
-    if (!_store__WEBPACK_IMPORTED_MODULE_2__.store.isCloudSyncEnabled) return;
+    if (!_store__WEBPACK_IMPORTED_MODULE_2__/* .store */ .h.isCloudSyncEnabled) return;
     const data1 = await sd1.get(key) || {};
     const data2 = await sd2.get(key) || {};
     const merged = merger(data1, data2);
@@ -8871,7 +10295,7 @@ const syncStorage = async (sd1, sd2, key, merger) => {
 }
 
 const syncLocalAndCloudStorage = async (key, merger) => {
-    await syncStorage(_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__["default"], _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_1__["default"], key, merger);
+    await syncStorage(_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .ZP, _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, key, merger);
 }
 
 const simpleStringHash = (key) => {
@@ -8890,44 +10314,634 @@ const getCurrentRetrievability = (problem) => {
         return 1;
     }
     
-    const now = Date.now();
-    const elapsedDays = (now - problem.fsrsState.lastReview) / (24 * 60 * 60 * 1000);
-    return calculateRetrievability(problem.fsrsState.stability, elapsedDays);
+    const elapsedDays = (0,ts_fsrs__WEBPACK_IMPORTED_MODULE_3__/* .dateDiffInDays */ .LG)(new Date(problem.fsrsState.lastReview), new Date());
+    return (0,ts_fsrs__WEBPACK_IMPORTED_MODULE_3__/* .forgetting_curve */ .Un)(elapsedDays, problem.fsrsState.stability);
 };
 
-// 计算可检索性的辅助函数
-const calculateRetrievability = (stability, elapsedDays) => {
-    return Math.exp(Math.log(0.9) * elapsedDays / stability);
-};
+const mergeFSRSParams = (params1, params2) => {
+    if (params2 === undefined || params2 === null) return params1;
+    if (params1 === undefined || params1 === null) return params2;
+    
+    // 如果云端数据比本地数据新，使用云端数据
+    const timestamp1 = params1.timestamp || 0;
+    const timestamp2 = params2.timestamp || 0;
+    
+    // 返回较新的数据
+    const mergedParams = timestamp1 > timestamp2 ? params1 : params2;
+    
+    // 确保返回的数据包含最新的时间戳
+    mergedParams.timestamp = Date.now();
+    
+    return mergedParams;
+}
+
+const mergeRevlogs = (revlogs1, revlogs2) => {
+    if (revlogs2 === undefined || revlogs2 === null) return revlogs1 || {};
+    if (revlogs1 === undefined || revlogs1 === null) return revlogs2 || {};
+    
+    // 确保 revlogs1 和 revlogs2 是对象
+    revlogs1 = typeof revlogs1 === 'object' ? revlogs1 : {};
+    revlogs2 = typeof revlogs2 === 'object' ? revlogs2 : {};
+    
+    // 合并复习日志
+    const mergedRevlogs = { ...revlogs1 };
+    
+    // 遍历第二个复习日志集合
+    Object.keys(revlogs2).forEach(cardId => {
+        if (!mergedRevlogs[cardId]) {
+            // 如果第一个集合没有该卡片的复习日志，直接使用第二个集合的
+            mergedRevlogs[cardId] = Array.isArray(revlogs2[cardId]) ? revlogs2[cardId] : [];
+        } else {
+            // 如果两个集合都有该卡片的复习日志，合并两边的日志
+            const logs2 = Array.isArray(revlogs2[cardId]) ? revlogs2[cardId] : [];
+            const logs1 = Array.isArray(mergedRevlogs[cardId]) ? mergedRevlogs[cardId] : [];
+            
+            // 创建一个Map来存储唯一的复习日志
+            const uniqueLogsMap = new Map();
+            
+            // 添加第一个集合的日志
+            logs1.forEach(log => {
+                if (log && typeof log === 'object') {
+                    const key = `${log.card_id}_${log.review_time}_${log.review_rating}`;
+                    uniqueLogsMap.set(key, log);
+                }
+            });
+            
+            // 添加第二个集合的日志
+            logs2.forEach(log => {
+                if (log && typeof log === 'object') {
+                    const key = `${log.card_id}_${log.review_time}_${log.review_rating}`;
+                    uniqueLogsMap.set(key, log);
+                }
+            });
+            
+            // 转换回数组并按时间排序
+            mergedRevlogs[cardId] = Array.from(uniqueLogsMap.values())
+                .sort((a, b) => b.review_time - a.review_time);
+        }
+    });
+    
+    return mergedRevlogs;
+}
+
+
 
 
 /***/ }),
 
-/***/ "./src/popup/view/view.js":
-/*!********************************!*\
-  !*** ./src/popup/view/view.js ***!
-  \********************************/
+/***/ 876:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   renderAll: () => (/* binding */ renderAll),
-/* harmony export */   renderCompletedTableContent: () => (/* binding */ renderCompletedTableContent),
-/* harmony export */   renderReviewTableContent: () => (/* binding */ renderReviewTableContent),
-/* harmony export */   renderScheduledTableContent: () => (/* binding */ renderScheduledTableContent),
-/* harmony export */   renderSiteMode: () => (/* binding */ renderSiteMode),
-/* harmony export */   renderUndoButton: () => (/* binding */ renderUndoButton)
-/* harmony export */ });
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store */ "./src/popup/store.js");
-/* harmony import */ var _service_modeService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../service/modeService */ "./src/popup/service/modeService.js");
-/* harmony import */ var _service_problemService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../service/problemService */ "./src/popup/service/problemService.js");
-/* harmony import */ var _util_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/constants */ "./src/popup/util/constants.js");
-/* harmony import */ var _util_doms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/doms */ "./src/popup/util/doms.js");
-/* harmony import */ var _util_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../util/utils */ "./src/popup/util/utils.js");
-/* harmony import */ var _handler_handlerRegister__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../handler/handlerRegister */ "./src/popup/handler/handlerRegister.js");
-/* harmony import */ var _service_operationHistoryService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../service/operationHistoryService */ "./src/popup/service/operationHistoryService.js");
-/* harmony import */ var _service_configService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../service/configService */ "./src/popup/service/configService.js");
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  xy: () => (/* binding */ renderAll),
+  pX: () => (/* binding */ renderScheduledTableContent)
+});
+
+// UNUSED EXPORTS: renderCompletedTableContent, renderReviewTableContent, renderSiteMode, renderUndoButton
+
+// EXTERNAL MODULE: ./src/popup/store.js
+var popup_store = __webpack_require__(214);
+// EXTERNAL MODULE: ./src/popup/service/modeService.js
+var modeService = __webpack_require__(733);
+// EXTERNAL MODULE: ./src/popup/service/problemService.js + 1 modules
+var problemService = __webpack_require__(820);
+// EXTERNAL MODULE: ./src/popup/util/constants.js
+var constants = __webpack_require__(497);
+// EXTERNAL MODULE: ./src/popup/util/doms.js
+var doms = __webpack_require__(422);
+// EXTERNAL MODULE: ./src/popup/util/utils.js
+var utils = __webpack_require__(384);
+;// CONCATENATED MODULE: ./src/popup/handler/configJumpHandler.js
+
+
+const setConfigJumpHandlers = () => {
+    if (doms/* configButtonDOMs */.$0 !== undefined) {
+        Array.prototype.forEach.call(doms/* configButtonDOMs */.$0, (btn) => btn.onclick = async (e) => {
+            chrome.runtime.openOptionsPage();
+        });
+    }
+}
+// EXTERNAL MODULE: ./src/popup/daily-review.js + 1 modules
+var daily_review = __webpack_require__(877);
+;// CONCATENATED MODULE: ./src/popup/handler/modeSwitchHandler.js
+
+
+
+
+
+const switchMode = async () => {
+    await (0,modeService/* toggleMode */.b)();
+    await renderAll();
+    // 更新每日复习视图
+    await (0,daily_review/* initializeReviewPage */.M)();
+}
+
+const setModeSwitchHandlers = () => {
+    doms/* switchButtonDOM */.J8.onclick = switchMode;
+}
+// EXTERNAL MODULE: ./src/popup/service/operationHistoryService.js
+var operationHistoryService = __webpack_require__(809);
+;// CONCATENATED MODULE: ./src/popup/handler/recordOperationHandler.js
+
+
+
+
+
+
+const initTooltips = () => {
+    popup_store/* store */.h.tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    popup_store/* store */.h.tooltipList = [...popup_store/* store */.h.tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+}
+
+const hide_all_tooltips = () => {
+    popup_store/* store */.h.tooltipList.forEach(tooltip => tooltip._hideModalHandler());
+}
+
+const recordOperationHandler_setRecordOperationHandlers = () => {
+
+    initTooltips();
+
+    if (doms/* checkButtonDOMs */.uV !== undefined) {
+        Array.prototype.forEach.call(doms/* checkButtonDOMs */.uV, (btn) => btn.onclick = async (event) => {
+            hide_all_tooltips();
+            await (0,problemService/* markProblemAsMastered */.Vv)(event.target.dataset.id);
+            await renderAll();
+        });
+    }
+
+    if (doms/* deleteButtonDOMs */.R4 !== undefined) {
+        Array.prototype.forEach.call(doms/* deleteButtonDOMs */.R4, (btn) => btn.onclick = async (event) => {
+            hide_all_tooltips();
+            await (0,problemService/* deleteProblem */.aG)(event.target.dataset.id);
+            await renderAll();
+        });
+    }
+
+    if (doms/* resetButtonDOMs */.Tv !== undefined) {
+        Array.prototype.forEach.call(doms/* resetButtonDOMs */.Tv, (btn) => btn.onclick = async (event) => {
+            hide_all_tooltips();
+            await (0,problemService/* resetProblem */.wB)(event.target.dataset.id);
+            await renderAll();
+        });
+    }
+
+    if (doms/* undoButtonDOMs */.dt !== undefined) {
+        Array.prototype.forEach.call(doms/* undoButtonDOMs */.dt, (btn) => btn.onclick = async () => {
+            hide_all_tooltips();
+            await (0,operationHistoryService/* undoLatestOperation */.Z_)();
+            await renderAll();
+        });
+    }
+}
+// EXTERNAL MODULE: ./src/popup/delegate/localStorageDelegate.js
+var localStorageDelegate = __webpack_require__(891);
+;// CONCATENATED MODULE: ./src/popup/handler/noteHandler.js
+
+
+
+
+
+// 获取所有笔记
+const getAllNotes = async () => {
+    try {
+        const notes = await (0,localStorageDelegate/* getLocalStorageData */.Cy)("notes");
+        return notes || {};
+    } catch (e) {
+        console.error("获取笔记数据失败", e);
+        return {}; // 返回空对象而不是抛出错误
+    }
+};
+
+// 同步笔记到存储
+const syncNotes = async (notes) => {
+    if (!notes) {
+        notes = await getAllNotes();
+    }
+    await (0,localStorageDelegate/* setLocalStorageData */.qy)("notes", notes);
+    return notes;
+};
+
+// 注册笔记相关事件处理
+const noteHandler_setNoteHandlers = () => {
+    console.log("注册笔记处理程序");
+    
+    // 使用事件委托来处理笔记按钮点击
+    document.removeEventListener('click', handleNoteButtonClick); // 先移除之前的监听器，避免重复
+    document.addEventListener('click', handleNoteButtonClick);
+    
+    // 注册保存笔记按钮事件
+    const saveNoteBtn = document.getElementById('saveNoteBtn');
+    if (saveNoteBtn) {
+        console.log("找到保存按钮");
+        saveNoteBtn.addEventListener('click', saveNote);
+    } else {
+        console.error("找不到保存按钮");
+    }
+    
+    // 注册取消按钮事件
+    const cancelBtns = document.querySelectorAll('[data-bs-dismiss="modal"]');
+    if (cancelBtns.length > 0) {
+        console.log("找到取消按钮");
+        cancelBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 关闭模态框
+                const noteModal = document.getElementById('noteModal');
+                if (noteModal) {
+                    noteModal.style.display = 'none';
+                    noteModal.classList.remove('show');
+                }
+            });
+        });
+    } else {
+        console.error("找不到取消按钮");
+    }
+    
+    // 注册导出笔记按钮事件
+    const exportNotesBtn = document.getElementById('exportNotesBtn');
+    if (exportNotesBtn) {
+        console.log("找到导出按钮");
+        exportNotesBtn.addEventListener('click', exportAllNotes);
+    } else {
+        console.error("找不到导出按钮");
+    }
+    
+    // 初始化工具提示
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+}
+
+// 单独定义处理函数，便于移除
+const handleNoteButtonClick = (e) => {
+    const noteButton = e.target.closest('.note-btn-mark');
+    if (noteButton) {
+        console.log("点击了笔记按钮", noteButton);
+        console.log("按钮元素:", noteButton);
+        console.log("data-id属性:", noteButton.getAttribute('data-id'));
+        
+        const problemIndex = noteButton.getAttribute('data-id');
+        if (problemIndex) {
+            openNoteModal(problemIndex);
+        } else {
+            console.error("笔记按钮没有 data-id 属性");
+        }
+    }
+};
+
+// 打开笔记模态框
+const openNoteModal = async (problemIndex) => {
+    try {
+        console.log("打开笔记模态框，问题索引:", problemIndex);
+        
+        // 使用 getAllProblems 获取问题数据
+        const problems = await (0,problemService/* getAllProblems */.kT)();
+        const problem = problems[problemIndex];
+        
+        // 如果没有找到问题数据
+        if (!problem) {
+            console.error("找不到问题数据:", problemIndex);
+            return;
+        }
+        
+        // 获取笔记数据
+        const notes = await getAllNotes();
+        const noteData = notes[problemIndex];
+        
+        console.log("问题数据:", problem);
+        
+        // 使用自定义方式打开模态框
+        const noteModal = document.getElementById('noteModal');
+        if (!noteModal) {
+            console.error("找不到模态框元素");
+            return;
+        }
+        
+        // 显示模态框
+        noteModal.style.display = 'block';
+        noteModal.classList.add('show');
+        
+        // 设置问题索引到隐藏字段
+        const problemIndexInput = document.getElementById('problemIndex');
+        if (problemIndexInput) {
+            problemIndexInput.value = problemIndex;
+        } else {
+            console.error("找不到问题索引输入框");
+        }
+        
+        // 设置问题名称 - 使用 innerHTML 直接设置
+        const problemNameContainer = document.querySelector('.modal-body .mb-3:first-of-type');
+        if (problemNameContainer) {
+            // 如果有自定义名称，优先使用自定义名称
+            const customName = noteData && typeof noteData === 'object' ? noteData.customName : undefined;
+            const problemName = customName || problem.name || "未知问题";
+            
+            problemNameContainer.innerHTML = `
+                <label for="noteProblemName" class="form-label">问题名称 (Problem Name)</label>
+                <input type="text" class="form-control" id="noteProblemName" value="${problemName}" placeholder="${problem.name || '未知问题'}" style="color: #000 !important; background-color: #fff !important;">
+            `;
+            console.log("重新创建了问题名称输入框，值为:", problemName);
+        } else {
+            console.error("找不到问题名称容器");
+        }
+        
+        // 设置笔记内容
+        const noteContentTextarea = document.getElementById('noteContent');
+        if (noteContentTextarea) {
+            noteContentTextarea.value = noteData ? (typeof noteData === 'object' ? noteData.content : noteData) : '';
+        } else {
+            console.error("找不到笔记内容文本框");
+        }
+        
+        // 设置焦点到文本区域
+        setTimeout(() => {
+            if (document.getElementById('noteContent')) {
+                document.getElementById('noteContent').focus();
+            }
+        }, 100);
+    } catch (e) {
+        console.error("打开笔记模态框失败", e);
+        alert("打开笔记失败，请查看控制台获取详细错误信息");
+    }
+}
+
+// 保存笔记
+const saveNote = async () => {
+    try {
+        const problemIndex = document.getElementById('problemIndex').value;
+        const problemNameInput = document.getElementById('noteProblemName');
+        const noteContent = document.getElementById('noteContent').value;
+        
+        // 获取用户输入的问题名称，如果输入框为空则使用占位符
+        let problemName = "";
+        if (problemNameInput) {
+            problemName = problemNameInput.value.trim() || problemNameInput.getAttribute('placeholder') || "";
+        }
+        
+        console.log("保存笔记，问题索引:", problemIndex);
+        console.log("保存笔记，问题名称:", problemName);
+        
+        const notes = await getAllNotes();
+        
+        // 使用 getAllProblems 获取问题数据
+        const problems = await (0,problemService/* getAllProblems */.kT)();
+        const problem = problems[problemIndex];
+        
+        if (!problem) {
+            console.error("找不到问题数据:", problemIndex);
+            return;
+        }
+        
+        console.log("原问题名称:", problem.name);
+        
+        // 如果笔记为空，则删除该条目
+        if (noteContent.trim() === '') {
+            delete notes[problemIndex];
+        } else {
+            // 保存笔记内容和用户输入的问题名称
+            notes[problemIndex] = {
+                content: noteContent,
+                customName: problemName !== problem.name ? problemName : undefined
+            };
+        }
+        
+        // 保存到本地存储
+        await syncNotes(notes);
+        
+        // 清除焦点
+        document.activeElement?.blur();
+        
+        // 关闭模态框
+        const noteModal = document.getElementById('noteModal');
+        noteModal.style.display = 'none';
+        noteModal.classList.remove('show');
+        
+        // 获取最新的问题数据
+        const allProblems = await (0,problemService/* getAllProblems */.kT)();
+        
+        // 先销毁所有现有的工具提示
+        const existingTooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        existingTooltips.forEach(el => {
+            const tooltip = bootstrap.Tooltip.getInstance(el);
+            if (tooltip) {
+                tooltip.dispose();
+            }
+        });
+        
+        // 刷新表格以更新笔记图标和问题名称
+        await renderScheduledTableContent(popup_store/* store */.h.reviewScheduledProblems, popup_store/* store */.h.scheduledPage);
+
+        // 重新初始化工具提示
+        setTimeout(() => {
+            // 确保先销毁所有可能存在的工具提示实例
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            tooltipTriggerList.forEach(el => {
+                // 创建新的工具提示实例
+                new bootstrap.Tooltip(el, {
+                    trigger: 'hover',  // 只在悬停时显示
+                    container: 'body', // 将工具提示附加到 body
+                    boundary: 'window' // 确保工具提示不会超出窗口边界
+                });
+            });
+            
+            // 重新注册事件监听器
+            noteHandler_setNoteHandlers();
+        }, 200); // 增加延迟时间确保 DOM 完全更新
+        
+        console.log("笔记已保存");
+    } catch (e) {
+        console.error("保存笔记失败", e);
+        alert("保存笔记失败，请查看控制台获取详细错误信息");
+    }
+}
+
+// 导出所有笔记
+const exportAllNotes = async () => {
+    try {
+        // 使用 getAllProblems 获取问题数据
+        const problems = await (0,problemService/* getAllProblems */.kT)();
+        const notes = await getAllNotes();
+        let notesContent = "# LeetCode Mastery Scheduler notes\n\n";
+        notesContent += "开源仓库链接/repo url: https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler" + "\n\n";
+
+        // 筛选有笔记的问题
+        const problemIndicesWithNotes = Object.keys(notes).filter(index => 
+            problems[index] && !problems[index].isDeleted && 
+            (typeof notes[index] === 'string' ? notes[index].trim().length > 0 : 
+             (notes[index].content && notes[index].content.trim().length > 0))
+        );
+        
+        if (problemIndicesWithNotes.length === 0) {
+            alert("没有找到任何笔记！");
+            return;
+        }
+        
+        // 按问题名称排序
+        problemIndicesWithNotes.sort((a, b) => 
+            (problems[a].name || "").localeCompare(problems[b].name || "")
+        );
+        
+        // 生成markdown格式的笔记内容
+        problemIndicesWithNotes.forEach(index => {
+            const problem = problems[index];
+            const noteData = notes[index];
+            const noteContent = typeof noteData === 'string' ? noteData : noteData.content;
+            const problemName = (typeof noteData === 'object' && noteData.customName) || problem.name || "未命名问题";
+            
+            notesContent += `## ${problemName}\n\n`;
+            notesContent += `- 难度: ${problem.level || '未知'}\n`;
+            notesContent += `- 链接: ${problem.url || '#'}\n\n`;
+            notesContent += `### 笔记\n\n${noteContent}\n\n---\n\n`;
+        });
+        
+        // 创建下载链接
+        const blob = new Blob([notesContent], { type: 'text/markdown' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `leetcode_notes_${new Date().toISOString().slice(0, 10)}.md`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        console.log("笔记已导出");
+    } catch (e) {
+        console.error("导出笔记失败", e);
+        alert("导出笔记失败，请查看控制台获取详细错误信息");
+    }
+} 
+;// CONCATENATED MODULE: ./src/popup/handler/pageJumpHandler.js
+
+
+
+
+
+
+const goToPrevReviewPage = () => {
+    renderReviewTableContent(store.needReviewProblems, store.toReviewPage - 1);
+    setRecordOperationHandlers();
+    setNoteHandlers();
+}
+const goToNextReviewPage = () => {
+    renderReviewTableContent(store.needReviewProblems, store.toReviewPage + 1);
+    setRecordOperationHandlers();
+    setNoteHandlers();
+}
+const goToPrevSchedulePage = async () => {
+    await renderScheduledTableContent(popup_store/* store */.h.reviewScheduledProblems, popup_store/* store */.h.scheduledPage - 1);
+    recordOperationHandler_setRecordOperationHandlers();
+    noteHandler_setNoteHandlers();
+}
+
+const goToNextSchedulePage = async () => {
+    await renderScheduledTableContent(popup_store/* store */.h.reviewScheduledProblems, popup_store/* store */.h.scheduledPage + 1);
+    recordOperationHandler_setRecordOperationHandlers();
+    noteHandler_setNoteHandlers();
+}
+
+const goToPrevCompletedPage = () => {
+    renderCompletedTableContent(store.completedProblems, store.completedPage - 1);
+    setRecordOperationHandlers();
+    setNoteHandlers();
+}
+
+const goToNextCompletedPage = () => {
+    renderCompletedTableContent(store.completedProblems, store.completedPage + 1);
+    setRecordOperationHandlers();
+    setNoteHandlers();
+}
+
+const jumpToReviewPage = (event) => {
+    if (event.keyCode !== 13) return;
+    let page = parseInt(event.target.value);
+    if (isNaN(page) || !Number.isInteger(page)) {
+        input0DOM.classList.add("is-invalid");
+        return;
+    }
+    input0DOM.classList.remove("is-invalid");
+    if (page === store.toReviewPage) return;
+    renderReviewTableContent(store.needReviewProblems, page);
+    setRecordOperationHandlers();
+}
+
+const jumpToSchedulePage = (event) => {
+    if (event.keyCode !== 13) return;
+    let page = parseInt(event.target.value);
+    if (isNaN(page) || !Number.isInteger(page)) {
+        doms/* input1DOM */._p.classList.add("is-invalid");
+        return;
+    }
+    doms/* input1DOM */._p.classList.remove("is-invalid");
+    if (page === popup_store/* store */.h.scheduledPage) return;
+    renderScheduledTableContent(popup_store/* store */.h.reviewScheduledProblems, page);
+    recordOperationHandler_setRecordOperationHandlers();
+}
+
+const jumpToCompletedPage = (event) => {
+    if (event.keyCode !== 13) return;
+    let page = parseInt(event.target.value);
+    if (isNaN(page) || !Number.isInteger(page)) {
+        input2DOM.classList.add("is-invalid");
+        return;
+    }
+    input2DOM.classList.remove("is-invalid");
+    if (page === store.completedPage) return;
+    renderCompletedTableContent(store.needReviewProblems, page);
+    setRecordOperationHandlers();
+}
+
+const setPageJumpHandlers = () => {
+    // prevButton0DOM.onclick = goToPrevReviewPage;
+    // nextButton0DOM.onclick = goToNextReviewPage;
+    doms/* prevButton1DOM */.WA.onclick = goToPrevSchedulePage;
+    doms/* nextButton1DOM */.bE.onclick = goToNextSchedulePage;
+    // prevButton2DOM.onclick = goToPrevCompletedPage;
+    // nextButton2DOM.onclick = goToNextCompletedPage;
+    
+    // input0DOM.onkeydown = jumpToReviewPage;
+    doms/* input1DOM */._p.onkeydown = jumpToSchedulePage;
+    // input2DOM.onkeydown = jumpToCompletedPage;
+}
+;// CONCATENATED MODULE: ./src/popup/handler/popupUnloadHandler.js
+
+
+
+
+const setPopupUnloadHandler = () => {
+    if (doms/* popupPageDOM */.Y1 !== undefined) {
+        
+        doms/* popupPageDOM */.Y1.addEventListener('unload', async () => {    
+            await (0,problemService/* syncProblems */.xd)();
+        })
+    }
+}
+;// CONCATENATED MODULE: ./src/popup/handler/handlerRegister.js
+
+
+
+
+
+
+
+const registerAllHandlers = () => {
+    setPageJumpHandlers();
+    setModeSwitchHandlers();
+    recordOperationHandler_setRecordOperationHandlers();
+    setConfigJumpHandlers();
+    setPopupUnloadHandler();
+    noteHandler_setNoteHandlers();
+}
+// EXTERNAL MODULE: ./src/popup/service/configService.js
+var configService = __webpack_require__(970);
+// EXTERNAL MODULE: ./src/popup/service/fsrsService.js
+var fsrsService = __webpack_require__(990);
+;// CONCATENATED MODULE: ./src/popup/view/view.js
+
+
 
 
 
@@ -8942,16 +10956,16 @@ __webpack_require__.r(__webpack_exports__);
     Tag for problem records
 */
 const getProblemUrlCell = (problem, width) => {
-    const levelColor = (0,_util_utils__WEBPACK_IMPORTED_MODULE_5__.getLevelColor)(problem.level);
-    return `<td style="width: ${width || 45}%;  min-width: 60px; max-width: 0;">
+    const levelColor = (0,utils/* getLevelColor */.qB)(problem.level);
+    return `<td style="width: ${width || 45}%;  min-width: 60px; max-width: 0; overflow: hidden;">\
         <a target="_blank" 
            href=${problem.url}
            data-bs-toggle="tooltip" 
            data-bs-placement="top" 
            title="${problem.name} (${problem.level})"
-           style="text-decoration: none; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-            <small style="color: ${levelColor}; font-size: 0.95em;">${problem.name}</small>
-        </a>
+           style="text-decoration: none; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">\
+            <small style="color: ${levelColor}; font-size: 0.95em;">${problem.name}</small>\
+        </a>\
     </td>`;
 };
 
@@ -8959,7 +10973,7 @@ const getProblemUrlCell = (problem, width) => {
 
 // 新增：生成可检索性单元格的函数
 const getRetrievabilityCell = (problem) => {
-    const retrievability = (0,_util_utils__WEBPACK_IMPORTED_MODULE_5__.getCurrentRetrievability)(problem);
+    const retrievability = (0,utils/* getCurrentRetrievability */.zV)(problem);
     const probability = (retrievability * 100).toFixed(1); // 保留一位小数
     const exactValue = retrievability.toFixed(5);  // 保留五位小数
     
@@ -8974,7 +10988,7 @@ const getRetrievabilityCell = (problem) => {
     }
 
     return `\
-    <td style="width: 10%; vertical-align: middle; text-align: center;">\
+    <td style="width: 15%; vertical-align: middle; text-align: center;">\
         <div class="memory-indicator d-flex justify-content-center align-items-center" 
              data-bs-toggle="tooltip" 
              data-bs-placement="top" 
@@ -8997,12 +11011,19 @@ const getResetButtonTag = (problem) => `<small class="fa-solid fa-arrows-rotate 
                                             data-bs-toggle="tooltip" data-bs-title="🔄 Reset progress" data-bs-placement="left"\
                                             style="color: #d2691e;" data-id=${problem.index}> </small>`;
 
+const getNoteButtonTag = (problem, notes) => {
+    const hasNote = notes[problem.index] && notes[problem.index].content.trim().length > 0;
+    return `<small class="fa-regular ${hasNote ? 'fa-file-lines' : 'fa-file'} fa-2xs mt-2 mb-0 note-btn-mark"\ 
+                data-bs-toggle="tooltip" data-bs-title="${hasNote ? '📝 查看/编辑笔记 (View/Edit Note)' : '📝 添加笔记 (Add Note)'}" data-bs-placement="left"\
+                style="color: ${hasNote ? '#4682b4' : '#808080'}; margin-left: 8px; cursor: pointer;" data-id="${problem.index}"> </small>`;
+}
+
 const createReviewProblemRecord = (problem) => {
     const htmlTag =
         `\
     <tr>\
         ${getProblemUrlCell(problem)}\
-        <td><small>${(0,_util_utils__WEBPACK_IMPORTED_MODULE_5__.getDelayedHours)(problem)} hour(s)</small></td>\
+        <td><small>${getDelayedHours(problem)} hour(s)</small></td>\
         ${getRetrievabilityCell(problem)}\
         <td style="text-align: center; vertical-align:middle">\
             ${getCheckButtonTag(problem)}\
@@ -9015,16 +11036,26 @@ const createReviewProblemRecord = (problem) => {
     ;
 }
 
-const createScheduleProblemRecord = (problem) => {
-    const nextReviewDate = (0,_util_utils__WEBPACK_IMPORTED_MODULE_5__.getNextReviewTime)(problem);
+const createScheduleProblemRecord = async (problem) => {
+    const nextReviewDate = (0,utils/* getNextReviewTime */.xt)(problem);
+    
+    // 获取笔记数据
+    let notes = {};
+    try {
+        notes = await (0,localStorageDelegate/* getLocalStorageData */.Cy)("notes") || {};
+    } catch (e) {
+        console.error("获取笔记数据失败", e);
+    }
+    
     const htmlTag =
         `\
     <tr style="vertical-align:middle">\
-        ${getProblemUrlCell(problem)}\
-        <td style="text-align: center; width: 25%; padding: 0;"><small data-bs-toggle="tooltip" data-bs-placement="top" title="${formatFullDate(nextReviewDate)}">${formatDateTime(nextReviewDate)}</small></td>\
+        ${getProblemUrlCell(problem, 45)}\
+        <td style="text-align: center; width: 20%; padding: 0;"><small data-bs-toggle="tooltip" data-bs-placement="top" title="${formatFullDate(nextReviewDate)}">${formatDateTime(nextReviewDate)}</small></td>\
         ${getRetrievabilityCell(problem)}\
-        <td style="width: 15%; text-align: center; vertical-align:middle">\
+        <td style="width: 20%; text-align: center; vertical-align:middle">\
             ${getDeleteButtonTag(problem)}\
+            ${getNoteButtonTag(problem, notes)}\
         </td>\
     </tr>\
     `;
@@ -9034,7 +11065,7 @@ const createScheduleProblemRecord = (problem) => {
 // 添加一个日期格式化辅助函数
 const formatDateTime = (date) => {
     const pad = (n) => n < 10 ? `0${n}` : n;
-    return `${_util_constants__WEBPACK_IMPORTED_MODULE_3__.months[date.getMonth()]} ${date.getDate()}`;
+    return `${constants/* months */.e7[date.getMonth()]} ${date.getDate()}`;
 }
 // 添加一个完整日期格式化函数
 const formatFullDate = (date) => {
@@ -9066,25 +11097,114 @@ const createCompletedProblemRecord = (problem) => {
     ;
 }
 
-const renderReviewTableContent = (problems, page) => {
+// 添加笔记模态框HTML
+const renderNoteModal = () => {
+    // 检查是否已经存在模态框
+    if (document.getElementById('noteModal')) {
+        console.log("笔记模态框已存在，不再创建");
+        return; // 如果已存在，不再创建
+    }
+    
+    console.log("开始创建笔记模态框");
+    
+    const modalHTML = `
+    <div class="modal" id="noteModal" tabindex="-1" role="dialog" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noteModalLabel">Problem Note</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="problemIndex">
+                    <div class="mb-3">
+                        <label for="problemName" class="form-label">问题名称 (Problem Name)</label>
+                        <input type="text" class="form-control" id="problemName" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="noteContent" class="form-label">笔记内容 (Note Content)</label>
+                        <textarea class="form-control" id="noteContent" rows="6" placeholder="在这里输入笔记内容... (Enter your notes here...)"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveNoteBtn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>`;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // 添加模态框样式
+    const style = document.createElement('style');
+    style.textContent = `
+        .modal.show {
+            display: block !important;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        #problemName, #noteContent {
+            color: #000 !important;
+            background-color: #fff !important;
+        }
+        #problemName::placeholder {
+            color: #555 !important;
+            opacity: 1 !important;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    console.log("笔记模态框已创建，检查元素:");
+    console.log("问题名称输入框:", document.getElementById('problemName'));
+    console.log("笔记内容文本框:", document.getElementById('noteContent'));
+}
+
+
+
+// 添加一个全局函数用于初始化所有 tooltip
+const initializeTooltips = () => {
+    // 先移除所有现有的 tooltip 元素
+    document.querySelectorAll('.tooltip').forEach(el => {
+        el.remove();
+    });
+    
+    // 销毁所有现有的 tooltip 实例
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+        const tooltip = bootstrap.Tooltip.getInstance(el);
+        if (tooltip) {
+            tooltip.dispose();
+        }
+    });
+    
+    // 初始化新的 tooltip
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+        new bootstrap.Tooltip(el, {
+            trigger: 'hover focus', // 只在悬停或获取焦点时显示
+            container: 'body',      // 将 tooltip 附加到 body
+            boundary: 'window'      // 确保 tooltip 不超出窗口
+        });
+    });
+};
+
+const view_renderReviewTableContent = (problems, page) => {
     /* validation */
-    console.log(_store__WEBPACK_IMPORTED_MODULE_0__.store.toReviewMaxPage);
-    if (page > _store__WEBPACK_IMPORTED_MODULE_0__.store.toReviewMaxPage || page < 1) {
-        _util_doms__WEBPACK_IMPORTED_MODULE_4__.input0DOM.classList.add("is-invalid");
+    console.log(store.toReviewMaxPage);
+    if (page > store.toReviewMaxPage || page < 1) {
+        input0DOM.classList.add("is-invalid");
         return;
     }
-    _util_doms__WEBPACK_IMPORTED_MODULE_4__.input0DOM.classList.remove("is-invalid");
+    input0DOM.classList.remove("is-invalid");
 
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.toReviewPage = page;
+    store.toReviewPage = page;
 
     /* update pagination elements */
-    _util_doms__WEBPACK_IMPORTED_MODULE_4__.input0DOM.value = page;
-    _util_doms__WEBPACK_IMPORTED_MODULE_4__.inputLabel0DOM.innerText = `/${_store__WEBPACK_IMPORTED_MODULE_0__.store.toReviewMaxPage}`;
+    input0DOM.value = page;
+    inputLabel0DOM.innerText = `/${store.toReviewMaxPage}`;
 
-    if (page === 1) _util_doms__WEBPACK_IMPORTED_MODULE_4__.prevButton0DOM.setAttribute("disabled", "disabled");
-    if (page !== 1) _util_doms__WEBPACK_IMPORTED_MODULE_4__.prevButton0DOM.removeAttribute("disabled");
-    if (page === _store__WEBPACK_IMPORTED_MODULE_0__.store.toReviewMaxPage) _util_doms__WEBPACK_IMPORTED_MODULE_4__.nextButton0DOM.setAttribute("disabled", "disabled");
-    if (page !== _store__WEBPACK_IMPORTED_MODULE_0__.store.toReviewMaxPage) _util_doms__WEBPACK_IMPORTED_MODULE_4__.nextButton0DOM.removeAttribute("disabled");
+    if (page === 1) prevButton0DOM.setAttribute("disabled", "disabled");
+    if (page !== 1) prevButton0DOM.removeAttribute("disabled");
+    if (page === store.toReviewMaxPage) nextButton0DOM.setAttribute("disabled", "disabled");
+    if (page !== store.toReviewMaxPage) nextButton0DOM.removeAttribute("disabled");
 
     let content_html =
         '\
@@ -9099,7 +11219,7 @@ const renderReviewTableContent = (problems, page) => {
     <tbody>\
     ';
 
-    problems = problems.slice((page - 1) * _util_constants__WEBPACK_IMPORTED_MODULE_3__.PAGE_SIZE, page * _util_constants__WEBPACK_IMPORTED_MODULE_3__.PAGE_SIZE);
+    problems = problems.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
     let keys = Object.keys(problems);
     for (const i of keys) {
@@ -9107,74 +11227,92 @@ const renderReviewTableContent = (problems, page) => {
     }
     content_html += `</tbody>`
 
-    _util_doms__WEBPACK_IMPORTED_MODULE_4__.needReviewTableDOM.innerHTML = content_html;
+    needReviewTableDOM.innerHTML = content_html;
 }
 
-const renderScheduledTableContent = (problems, page) => {
+const renderScheduledTableContent = async (problems, page) => {
     /* validation */
-    if (page > _store__WEBPACK_IMPORTED_MODULE_0__.store.scheduledMaxPage || page < 1) {
-        _util_doms__WEBPACK_IMPORTED_MODULE_4__.input1DOM.classList.add("is-invalid");
+    if (page > popup_store/* store */.h.scheduledMaxPage || page < 1) {
+        doms/* input1DOM */._p.classList.add("is-invalid");
         return;
     }
-    _util_doms__WEBPACK_IMPORTED_MODULE_4__.input1DOM.classList.remove("is-invalid");
+    doms/* input1DOM */._p.classList.remove("is-invalid");
 
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.scheduledPage = page;
+    popup_store/* store */.h.scheduledPage = page;
 
     /* update pagination elements */
-    _util_doms__WEBPACK_IMPORTED_MODULE_4__.input1DOM.value = page;
-    _util_doms__WEBPACK_IMPORTED_MODULE_4__.inputLabel1DOM.innerText = `/${_store__WEBPACK_IMPORTED_MODULE_0__.store.scheduledMaxPage}`;
+    doms/* input1DOM */._p.value = page;
+    doms/* inputLabel1DOM */.aJ.innerText = `/${popup_store/* store */.h.scheduledMaxPage}`;
 
-    if (page === 1) _util_doms__WEBPACK_IMPORTED_MODULE_4__.prevButton1DOM.setAttribute("disabled", "disabled");
-    if (page !== 1) _util_doms__WEBPACK_IMPORTED_MODULE_4__.prevButton1DOM.removeAttribute("disabled");
-    if (page === _store__WEBPACK_IMPORTED_MODULE_0__.store.scheduledMaxPage) _util_doms__WEBPACK_IMPORTED_MODULE_4__.nextButton1DOM.setAttribute("disabled", "disabled");
-    if (page !== _store__WEBPACK_IMPORTED_MODULE_0__.store.scheduledMaxPage) _util_doms__WEBPACK_IMPORTED_MODULE_4__.nextButton1DOM.removeAttribute("disabled");
-
+    if (page === 1) doms/* prevButton1DOM */.WA.setAttribute("disabled", "disabled");
+    if (page !== 1) doms/* prevButton1DOM */.WA.removeAttribute("disabled");
+    if (page === popup_store/* store */.h.scheduledMaxPage) doms/* nextButton1DOM */.bE.setAttribute("disabled", "disabled");
+    if (page !== popup_store/* store */.h.scheduledMaxPage) doms/* nextButton1DOM */.bE.removeAttribute("disabled");
 
     let content_html =
         '\
     <thead>\
         <tr style="font-size: smaller">\
-            <th class="text-center" style="width: 40%">Problem</th>\
+            <th class="text-center" style="width: 35%">Problem</th>\
             <th class="text-center" style="width: 25%">Review</th>\
-            <th class="text-center" style="width: 25%">Recall</th>\
-            <th class="text-center" style="width: 10%"></th>\
+            <th class="text-center" style="width: 20%">Recall</th>\
+            <th class="text-center" style="width: 20%">Action</th>\
         </tr>\
     </thead>\
     <tbody>\
     ';
 
-    problems = problems.slice((page - 1) * _util_constants__WEBPACK_IMPORTED_MODULE_3__.PAGE_SIZE, page * _util_constants__WEBPACK_IMPORTED_MODULE_3__.PAGE_SIZE);
+    // if (!Array.isArray(problems)) {
+    //     problems = Object.values(problems);
+    // }
+    // problems为store.reviewScheduledProblems,即滤除了delete的题目
+    problems = problems.slice((page - 1) * constants/* PAGE_SIZE */.IV, page * constants/* PAGE_SIZE */.IV);
 
     let keys = Object.keys(problems);
+    
+    // 获取笔记数据
+    let notes = {};
+    try {
+        notes = await (0,localStorageDelegate/* getLocalStorageData */.Cy)("notes") || {};
+    } catch (e) {
+        console.error("获取笔记数据失败", e);
+    }
 
     for (const i of keys) {
-        content_html += createScheduleProblemRecord(problems[i]) + '\n';
+        const problem = problems[i];
+        // 使用 createScheduleProblemRecord 函数创建问题记录
+        content_html += await createScheduleProblemRecord(problem);
     }
 
     content_html += `</tbody>`
 
-    _util_doms__WEBPACK_IMPORTED_MODULE_4__.noReviewTableDOM.innerHTML = content_html;
+    doms/* noReviewTableDOM */.hO.innerHTML = content_html;
+    
+    // 初始化 tooltip
+    setTimeout(() => {
+        initializeTooltips();
+    }, 100);
 }
 
-const renderCompletedTableContent = (problems, page) => {
+const view_renderCompletedTableContent = (problems, page) => {
 
     /* validation */
-    if (page > _store__WEBPACK_IMPORTED_MODULE_0__.store.completedMaxPage || page < 1) {
-        _util_doms__WEBPACK_IMPORTED_MODULE_4__.input2DOM.classList.add("is-invalid");
+    if (page > store.completedMaxPage || page < 1) {
+        input2DOM.classList.add("is-invalid");
         return;
     }
-    _util_doms__WEBPACK_IMPORTED_MODULE_4__.input2DOM.classList.remove("is-invalid");
+    input2DOM.classList.remove("is-invalid");
 
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.completedPage = page;
+    store.completedPage = page;
 
     /* update pagination elements */
-    _util_doms__WEBPACK_IMPORTED_MODULE_4__.input2DOM.value = page;
-    _util_doms__WEBPACK_IMPORTED_MODULE_4__.inputLabel2DOM.innerText = `/${_store__WEBPACK_IMPORTED_MODULE_0__.store.completedMaxPage}`;
+    input2DOM.value = page;
+    inputLabel2DOM.innerText = `/${store.completedMaxPage}`;
 
-    if (page === 1) _util_doms__WEBPACK_IMPORTED_MODULE_4__.prevButton2DOM.setAttribute("disabled", "disabled");
-    if (page !== 1) _util_doms__WEBPACK_IMPORTED_MODULE_4__.prevButton2DOM.removeAttribute("disabled");
-    if (page === _store__WEBPACK_IMPORTED_MODULE_0__.store.completedMaxPage) _util_doms__WEBPACK_IMPORTED_MODULE_4__.nextButton2DOM.setAttribute("disabled", "disabled");
-    if (page !== _store__WEBPACK_IMPORTED_MODULE_0__.store.completedMaxPage) _util_doms__WEBPACK_IMPORTED_MODULE_4__.nextButton2DOM.removeAttribute("disabled");
+    if (page === 1) prevButton2DOM.setAttribute("disabled", "disabled");
+    if (page !== 1) prevButton2DOM.removeAttribute("disabled");
+    if (page === store.completedMaxPage) nextButton2DOM.setAttribute("disabled", "disabled");
+    if (page !== store.completedMaxPage) nextButton2DOM.removeAttribute("disabled");
 
     let content_html =
         '\
@@ -9188,7 +11326,7 @@ const renderCompletedTableContent = (problems, page) => {
     <tbody>\
     ';
 
-    problems = problems.slice((page - 1) * _util_constants__WEBPACK_IMPORTED_MODULE_3__.PAGE_SIZE, page * _util_constants__WEBPACK_IMPORTED_MODULE_3__.PAGE_SIZE);
+    problems = problems.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
     let keys = Object.keys(problems);
     for (const i of keys) {
@@ -9196,88 +11334,112 @@ const renderCompletedTableContent = (problems, page) => {
     }
 
     content_html += `</tbody>`
-    _util_doms__WEBPACK_IMPORTED_MODULE_4__.completedTableDOM.innerHTML = content_html;
+    completedTableDOM.innerHTML = content_html;
+    
+    // 初始化 tooltip
+    setTimeout(() => {
+        initializeTooltips();
+    }, 100);
 }
 
 const renderSiteMode = async () => {
-    let cnMode = await (0,_service_modeService__WEBPACK_IMPORTED_MODULE_1__.isInCnMode)();
+    let cnMode = await (0,modeService/* isInCnMode */.B)();
     if (cnMode) {
-        _util_doms__WEBPACK_IMPORTED_MODULE_4__.switchButtonDOM.setAttribute("checked", "checked");
-        _util_doms__WEBPACK_IMPORTED_MODULE_4__.siteLabelDOM.innerHTML = _util_constants__WEBPACK_IMPORTED_MODULE_3__.CN_LABLE;
+        doms/* switchButtonDOM */.J8.setAttribute("checked", "checked");
+        doms/* siteLabelDOM */.r2.innerHTML = constants/* CN_LABLE */.zY;
     } else {
-        _util_doms__WEBPACK_IMPORTED_MODULE_4__.switchButtonDOM.removeAttribute("checked");
-        _util_doms__WEBPACK_IMPORTED_MODULE_4__.siteLabelDOM.innerHTML = _util_constants__WEBPACK_IMPORTED_MODULE_3__.GL_LABLE;
+        doms/* switchButtonDOM */.J8.removeAttribute("checked");
+        doms/* siteLabelDOM */.r2.innerHTML = constants/* GL_LABLE */.Hj;
     }
 }
 
 const renderUndoButton = async () => {
-    if (await (0,_service_operationHistoryService__WEBPACK_IMPORTED_MODULE_7__.hasOperationHistory)()) {
-        Array.prototype.forEach.call(_util_doms__WEBPACK_IMPORTED_MODULE_4__.undoButtonDOMs, btn => btn.removeAttribute("disabled"));
+    if (await (0,operationHistoryService/* hasOperationHistory */.$j)()) {
+        Array.prototype.forEach.call(doms/* undoButtonDOMs */.dt, btn => btn.removeAttribute("disabled"));
     } else {
-        Array.prototype.forEach.call(_util_doms__WEBPACK_IMPORTED_MODULE_4__.undoButtonDOMs, btn => btn.setAttribute("disabled", "disabled"));
+        Array.prototype.forEach.call(doms/* undoButtonDOMs */.dt, btn => btn.setAttribute("disabled", "disabled"));
     }
 } 
 
 const renderAll = async () => {
-    await (0,_service_configService__WEBPACK_IMPORTED_MODULE_8__.loadConfigs)();
+    await (0,configService/* loadConfigs */.O1)();
     await renderSiteMode();
-    await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_2__.syncProblems)();
+    await (0,problemService/* syncProblems */.xd)();
+    // await syncFSRSHistory();
 
-    const problems = Object.values(await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_2__.getAllProblems)()).filter(p => p.isDeleted !== true);
+    // 创建笔记模态框
+
+    
+
+
+    const problems = Object.values(await (0,problemService/* getAllProblems */.kT)()).filter(p => p.isDeleted !== true);
     console.log('Filtering and sorting problems...');
     
     // 过滤不同类型的问题
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.needReviewProblems = problems.filter(_util_utils__WEBPACK_IMPORTED_MODULE_5__.needReview);
+    popup_store/* store */.h.needReviewProblems = problems.filter(utils/* needReview */.Hj);
     console.log('Need Review Problems:', {
-        count: _store__WEBPACK_IMPORTED_MODULE_0__.store.needReviewProblems.length,
-        problems: _store__WEBPACK_IMPORTED_MODULE_0__.store.needReviewProblems
+        count: popup_store/* store */.h.needReviewProblems.length,
+        problems: popup_store/* store */.h.needReviewProblems
     });
 
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.reviewScheduledProblems = problems.filter(_util_utils__WEBPACK_IMPORTED_MODULE_5__.scheduledReview);
+    popup_store/* store */.h.reviewScheduledProblems = problems.filter(utils/* scheduledReview */.PO);
     console.log('Scheduled Review Problems:', {
-        count: _store__WEBPACK_IMPORTED_MODULE_0__.store.reviewScheduledProblems.length,
-        problems: _store__WEBPACK_IMPORTED_MODULE_0__.store.reviewScheduledProblems
+        count: popup_store/* store */.h.reviewScheduledProblems.length,
+        problems: popup_store/* store */.h.reviewScheduledProblems
     });
 
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.completedProblems = problems.filter(_util_utils__WEBPACK_IMPORTED_MODULE_5__.isCompleted);
+    popup_store/* store */.h.completedProblems = problems.filter(utils/* isCompleted */.PN);
     console.log('Completed Problems:', {
-        count: _store__WEBPACK_IMPORTED_MODULE_0__.store.completedProblems.length,
-        problems: _store__WEBPACK_IMPORTED_MODULE_0__.store.completedProblems
+        count: popup_store/* store */.h.completedProblems.length,
+        problems: popup_store/* store */.h.completedProblems
     });
 
     // 计算页数
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.toReviewMaxPage = (0,_util_utils__WEBPACK_IMPORTED_MODULE_5__.calculatePageNum)(_store__WEBPACK_IMPORTED_MODULE_0__.store.needReviewProblems);
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.scheduledMaxPage = (0,_util_utils__WEBPACK_IMPORTED_MODULE_5__.calculatePageNum)(_store__WEBPACK_IMPORTED_MODULE_0__.store.reviewScheduledProblems);
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.completedMaxPage = (0,_util_utils__WEBPACK_IMPORTED_MODULE_5__.calculatePageNum)(_store__WEBPACK_IMPORTED_MODULE_0__.store.completedProblems);
+    popup_store/* store */.h.toReviewMaxPage = (0,utils/* calculatePageNum */.vV)(popup_store/* store */.h.needReviewProblems);
+    popup_store/* store */.h.scheduledMaxPage = (0,utils/* calculatePageNum */.vV)(popup_store/* store */.h.reviewScheduledProblems);
+    popup_store/* store */.h.completedMaxPage = (0,utils/* calculatePageNum */.vV)(popup_store/* store */.h.completedProblems);
     console.log('Page Counts:', {
-        toReview: _store__WEBPACK_IMPORTED_MODULE_0__.store.toReviewMaxPage,
-        scheduled: _store__WEBPACK_IMPORTED_MODULE_0__.store.scheduledMaxPage,
-        completed: _store__WEBPACK_IMPORTED_MODULE_0__.store.completedMaxPage
+        toReview: popup_store/* store */.h.toReviewMaxPage,
+        scheduled: popup_store/* store */.h.scheduledMaxPage,
+        completed: popup_store/* store */.h.completedMaxPage
     });
 
     // 排序
-    console.log('Sorting by:', _store__WEBPACK_IMPORTED_MODULE_0__.store.problemSortBy);
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.needReviewProblems.sort(_store__WEBPACK_IMPORTED_MODULE_0__.store.problemSortBy);
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.reviewScheduledProblems.sort(_store__WEBPACK_IMPORTED_MODULE_0__.store.problemSortBy);
-    _store__WEBPACK_IMPORTED_MODULE_0__.store.completedProblems.sort(_store__WEBPACK_IMPORTED_MODULE_0__.store.problemSortBy);
+    console.log('Sorting by:', popup_store/* store */.h.problemSortBy);
+    popup_store/* store */.h.needReviewProblems.sort(popup_store/* store */.h.problemSortBy);
+    popup_store/* store */.h.reviewScheduledProblems.sort(popup_store/* store */.h.problemSortBy);
+    popup_store/* store */.h.completedProblems.sort(popup_store/* store */.h.problemSortBy);
     
     console.log('Filtering and sorting completed.');
 
     // renderReviewTableContent(store.needReviewProblems, 1);
-    renderScheduledTableContent(_store__WEBPACK_IMPORTED_MODULE_0__.store.reviewScheduledProblems, 1);
+    await renderScheduledTableContent(popup_store/* store */.h.reviewScheduledProblems, 1);
     // renderCompletedTableContent(store.completedProblems, 1);
     await renderUndoButton();
+    renderNoteModal();
 
-    (0,_handler_handlerRegister__WEBPACK_IMPORTED_MODULE_6__.registerAllHandlers)();
+    registerAllHandlers();
+    
+    // 初始化所有 tooltip
+    setTimeout(() => {
+        initializeTooltips();
+    }, 200);
+    
+    // 添加全局点击事件监听器，点击页面任何地方时隐藏所有 tooltip
+    document.addEventListener('click', (e) => {
+        // 如果点击的不是 tooltip 触发元素，则隐藏所有 tooltip
+        if (!e.target.hasAttribute('data-bs-toggle') || e.target.getAttribute('data-bs-toggle') !== 'tooltip') {
+            document.querySelectorAll('.tooltip').forEach(el => {
+                el.remove();
+            });
+        }
+    });
 }
 
 
 /***/ }),
 
-/***/ "data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%2361dafb%27/%3e%3c/svg%3e":
-/*!*********************************************************************************************************************************************************!*\
-  !*** data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%2361dafb%27/%3e%3c/svg%3e ***!
-  \*********************************************************************************************************************************************************/
+/***/ 131:
 /***/ ((module) => {
 
 "use strict";
@@ -9285,48 +11447,23 @@ module.exports = "data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%
 
 /***/ }),
 
-/***/ "./node_modules/ts-fsrs/dist/index.mjs":
-/*!*********************************************!*\
-  !*** ./node_modules/ts-fsrs/dist/index.mjs ***!
-  \*********************************************/
+/***/ 61:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   AbstractScheduler: () => (/* binding */ H),
-/* harmony export */   DECAY: () => (/* binding */ R),
-/* harmony export */   DefaultInitSeedStrategy: () => (/* binding */ D),
-/* harmony export */   FACTOR: () => (/* binding */ $),
-/* harmony export */   FSRS: () => (/* binding */ V),
-/* harmony export */   FSRSAlgorithm: () => (/* binding */ Y),
-/* harmony export */   FSRSVersion: () => (/* binding */ j),
-/* harmony export */   GenSeedStrategyWithCardId: () => (/* binding */ Z),
-/* harmony export */   Grades: () => (/* binding */ T),
-/* harmony export */   Rating: () => (/* binding */ d),
-/* harmony export */   State: () => (/* binding */ u),
-/* harmony export */   StrategyMode: () => (/* binding */ x),
-/* harmony export */   TypeConvert: () => (/* binding */ h),
-/* harmony export */   clamp: () => (/* binding */ p),
-/* harmony export */   createEmptyCard: () => (/* binding */ v),
-/* harmony export */   dateDiffInDays: () => (/* binding */ q),
-/* harmony export */   date_diff: () => (/* binding */ N),
-/* harmony export */   date_scheduler: () => (/* binding */ I),
-/* harmony export */   default_enable_fuzz: () => (/* binding */ G),
-/* harmony export */   default_enable_short_term: () => (/* binding */ k),
-/* harmony export */   default_maximum_interval: () => (/* binding */ A),
-/* harmony export */   default_request_retention: () => (/* binding */ F),
-/* harmony export */   default_w: () => (/* binding */ L),
-/* harmony export */   fixDate: () => (/* binding */ y),
-/* harmony export */   fixRating: () => (/* binding */ W),
-/* harmony export */   fixState: () => (/* binding */ B),
-/* harmony export */   formatDate: () => (/* binding */ C),
-/* harmony export */   fsrs: () => (/* binding */ et),
-/* harmony export */   generatorParameters: () => (/* binding */ M),
-/* harmony export */   get_fuzz_range: () => (/* binding */ U),
-/* harmony export */   show_diff_message: () => (/* binding */ z)
+/* harmony export */   EI: () => (/* binding */ $),
+/* harmony export */   Ke: () => (/* binding */ W),
+/* harmony export */   LG: () => (/* binding */ z),
+/* harmony export */   Un: () => (/* binding */ O),
+/* harmony export */   ZM: () => (/* binding */ c),
+/* harmony export */   iG: () => (/* binding */ l),
+/* harmony export */   mc: () => (/* binding */ h),
+/* harmony export */   sH: () => (/* binding */ _),
+/* harmony export */   tl: () => (/* binding */ x)
 /* harmony export */ });
-var u=(r=>(r[r.New=0]="New",r[r.Learning=1]="Learning",r[r.Review=2]="Review",r[r.Relearning=3]="Relearning",r))(u||{}),d=(r=>(r[r.Manual=0]="Manual",r[r.Again=1]="Again",r[r.Hard=2]="Hard",r[r.Good=3]="Good",r[r.Easy=4]="Easy",r))(d||{});class h{static card(t){return{...t,state:h.state(t.state),due:h.time(t.due),last_review:t.last_review?h.time(t.last_review):void 0}}static rating(t){if(typeof t=="string"){const e=t.charAt(0).toUpperCase(),i=t.slice(1).toLowerCase(),a=d[`${e}${i}`];if(a===void 0)throw new Error(`Invalid rating:[${t}]`);return a}else if(typeof t=="number")return t;throw new Error(`Invalid rating:[${t}]`)}static state(t){if(typeof t=="string"){const e=t.charAt(0).toUpperCase(),i=t.slice(1).toLowerCase(),a=u[`${e}${i}`];if(a===void 0)throw new Error(`Invalid state:[${t}]`);return a}else if(typeof t=="number")return t;throw new Error(`Invalid state:[${t}]`)}static time(t){if(typeof t=="object"&&t instanceof Date)return t;if(typeof t=="string"){const e=Date.parse(t);if(isNaN(e))throw new Error(`Invalid date:[${t}]`);return new Date(e)}else if(typeof t=="number")return new Date(t);throw new Error(`Invalid date:[${t}]`)}static review_log(t){return{...t,due:h.time(t.due),rating:h.rating(t.rating),state:h.state(t.state),review:h.time(t.review)}}}const F=.9,A=36500,L=[.40255,1.18385,3.173,15.69105,7.1949,.5345,1.4604,.0046,1.54575,.1192,1.01925,1.9395,.11,.29605,2.2698,.2315,2.9898,.51655,.6621],G=!1,k=!0,j="v4.6.0 using FSRS-5.0",M=r=>{let t=L;return r?.w&&(r.w.length===19?t=r?.w:r.w.length===17&&(t=r?.w.concat([0,0]),t[4]=+(t[5]*2+t[4]).toFixed(8),t[5]=+(Math.log(t[5]*3+1)/3).toFixed(8),t[6]=+(t[6]+.5).toFixed(8),console.debug("[FSRS V5]auto fill w to 19 length"))),{request_retention:r?.request_retention||F,maximum_interval:r?.maximum_interval||A,w:t,enable_fuzz:r?.enable_fuzz??G,enable_short_term:r?.enable_short_term??k}};function v(r,t){const e={due:r?h.time(r):new Date,stability:0,difficulty:0,elapsed_days:0,scheduled_days:0,reps:0,lapses:0,state:u.New,last_review:void 0};return t&&typeof t=="function"?t(e):e}Date.prototype.scheduler=function(r,t){return I(this,r,t)},Date.prototype.diff=function(r,t){return N(this,r,t)},Date.prototype.format=function(){return C(this)},Date.prototype.dueFormat=function(r,t,e){return z(this,r,t,e)};function I(r,t,e){return new Date(e?y(r).getTime()+t*24*60*60*1e3:y(r).getTime()+t*60*1e3)}function N(r,t,e){if(!r||!t)throw new Error("Invalid date");const i=y(r).getTime()-y(t).getTime();let a=0;switch(e){case"days":a=Math.floor(i/(24*60*60*1e3));break;case"minutes":a=Math.floor(i/(60*1e3));break}return a}function C(r){const t=y(r),e=t.getFullYear(),i=t.getMonth()+1,a=t.getDate(),s=t.getHours(),n=t.getMinutes(),l=t.getSeconds();return`${e}-${w(i)}-${w(a)} ${w(s)}:${w(n)}:${w(l)}`}function w(r){return r<10?`0${r}`:`${r}`}const S=[60,60,24,31,12],E=["second","min","hour","day","month","year"];function z(r,t,e,i=E){r=y(r),t=y(t),i.length!==E.length&&(i=E);let a=r.getTime()-t.getTime(),s;for(a/=1e3,s=0;s<S.length&&!(a<S[s]);s++)a/=S[s];return`${Math.floor(a)}${e?i[s]:""}`}function y(r){return h.time(r)}function B(r){return h.state(r)}function W(r){return h.rating(r)}const T=[d.Again,d.Hard,d.Good,d.Easy],J=[{start:2.5,end:7,factor:.15},{start:7,end:20,factor:.1},{start:20,end:1/0,factor:.05}];function U(r,t,e){let i=1;for(const n of J)i+=n.factor*Math.max(Math.min(r,n.end)-n.start,0);r=Math.min(r,e);let a=Math.max(2,Math.round(r-i));const s=Math.min(Math.round(r+i),e);return r>t&&(a=Math.max(a,t+1)),a=Math.min(a,s),{min_ivl:a,max_ivl:s}}function p(r,t,e){return Math.min(Math.max(r,t),e)}function q(r,t){const e=Date.UTC(r.getUTCFullYear(),r.getUTCMonth(),r.getUTCDate()),i=Date.UTC(t.getUTCFullYear(),t.getUTCMonth(),t.getUTCDate());return Math.floor((i-e)/864e5)}class K{c;s0;s1;s2;constructor(t){const e=Q();this.c=1,this.s0=e(" "),this.s1=e(" "),this.s2=e(" "),t==null&&(t=+new Date),this.s0-=e(t),this.s0<0&&(this.s0+=1),this.s1-=e(t),this.s1<0&&(this.s1+=1),this.s2-=e(t),this.s2<0&&(this.s2+=1)}next(){const t=2091639*this.s0+this.c*23283064365386963e-26;return this.s0=this.s1,this.s1=this.s2,this.s2=t-(this.c=t|0),this.s2}set state(t){this.c=t.c,this.s0=t.s0,this.s1=t.s1,this.s2=t.s2}get state(){return{c:this.c,s0:this.s0,s1:this.s1,s2:this.s2}}}function Q(){let r=4022871197;return function(t){t=String(t);for(let e=0;e<t.length;e++){r+=t.charCodeAt(e);let i=.02519603282416938*r;r=i>>>0,i-=r,i*=r,r=i>>>0,i-=r,r+=i*4294967296}return(r>>>0)*23283064365386963e-26}}function X(r){const t=new K(r),e=()=>t.next();return e.int32=()=>t.next()*4294967296|0,e.double=()=>e()+(e()*2097152|0)*11102230246251565e-32,e.state=()=>t.state,e.importState=i=>(t.state=i,e),e}const R=-.5,$=19/81;class Y{param;intervalModifier;_seed;constructor(t){this.param=new Proxy(M(t),this.params_handler_proxy()),this.intervalModifier=this.calculate_interval_modifier(this.param.request_retention)}get interval_modifier(){return this.intervalModifier}set seed(t){this._seed=t}calculate_interval_modifier(t){if(t<=0||t>1)throw new Error("Requested retention rate should be in the range (0,1]");return+((Math.pow(t,1/R)-1)/$).toFixed(8)}get parameters(){return this.param}set parameters(t){this.update_parameters(t)}params_handler_proxy(){const t=this;return{set:function(e,i,a){return i==="request_retention"&&Number.isFinite(a)&&(t.intervalModifier=t.calculate_interval_modifier(Number(a))),Reflect.set(e,i,a),!0}}}update_parameters(t){const e=M(t);for(const i in e)if(i in this.param){const a=i;this.param[a]=e[a]}}init_stability(t){return Math.max(this.param.w[t-1],.1)}init_difficulty(t){return this.constrain_difficulty(this.param.w[4]-Math.exp((t-1)*this.param.w[5])+1)}apply_fuzz(t,e){if(!this.param.enable_fuzz||t<2.5)return Math.round(t);const i=X(this._seed)(),{min_ivl:a,max_ivl:s}=U(t,e,this.param.maximum_interval);return Math.floor(i*(s-a+1)+a)}next_interval(t,e){const i=Math.min(Math.max(1,Math.round(t*this.intervalModifier)),this.param.maximum_interval);return this.apply_fuzz(i,e)}linear_damping(t,e){return+(t*(10-e)/9).toFixed(8)}next_difficulty(t,e){const i=-this.param.w[6]*(e-3),a=t+this.linear_damping(i,t);return this.constrain_difficulty(this.mean_reversion(this.init_difficulty(d.Easy),a))}constrain_difficulty(t){return Math.min(Math.max(+t.toFixed(8),1),10)}mean_reversion(t,e){return+(this.param.w[7]*t+(1-this.param.w[7])*e).toFixed(8)}next_recall_stability(t,e,i,a){const s=d.Hard===a?this.param.w[15]:1,n=d.Easy===a?this.param.w[16]:1;return+p(e*(1+Math.exp(this.param.w[8])*(11-t)*Math.pow(e,-this.param.w[9])*(Math.exp((1-i)*this.param.w[10])-1)*s*n),.01,36500).toFixed(8)}next_forget_stability(t,e,i){return+p(this.param.w[11]*Math.pow(t,-this.param.w[12])*(Math.pow(e+1,this.param.w[13])-1)*Math.exp((1-i)*this.param.w[14]),.01,36500).toFixed(8)}next_short_term_stability(t,e){return+p(t*Math.exp(this.param.w[17]*(e-3+this.param.w[18])),.01,36500).toFixed(8)}forgetting_curve(t,e){return+Math.pow(1+$*t/e,R).toFixed(8)}next_state(t,e,i){const{difficulty:a,stability:s}=t??{difficulty:0,stability:0};if(e<0)throw new Error(`Invalid delta_t "${e}"`);if(i<0||i>4)throw new Error(`Invalid grade "${i}"`);if(a===0&&s===0)return{difficulty:this.init_difficulty(i),stability:this.init_stability(i)};if(i===0)return{difficulty:a,stability:s};if(a<1||s<.01)throw new Error(`Invalid memory state { difficulty: ${a}, stability: ${s} }`);const n=this.forgetting_curve(e,s),l=this.next_recall_stability(a,s,n,i),o=this.next_forget_stability(a,s,n),c=this.next_short_term_stability(s,i);let f=l;if(i===1){let[_,g]=[0,0];this.param.enable_short_term&&(_=this.param.w[17],g=this.param.w[18]);const m=s/Math.exp(_*g);f=p(m,.01,o)}return e===0&&this.param.enable_short_term&&(f=c),{difficulty:this.next_difficulty(a,i),stability:f}}}function D(){const r=this.review_time.getTime(),t=this.current.reps,e=this.current.difficulty*this.current.stability;return`${r}_${t}_${e}`}function Z(r){return function(){const t=Reflect.get(this.current,r)??0,e=this.current.reps;return String(t+e||0)}}var x=(r=>(r.SCHEDULER="Scheduler",r.SEED="Seed",r))(x||{});class H{last;current;review_time;next=new Map;algorithm;initSeedStrategy;constructor(t,e,i,a={seed:D}){this.algorithm=i,this.initSeedStrategy=a.seed.bind(this),this.last=h.card(t),this.current=h.card(t),this.review_time=h.time(e),this.init()}init(){const{state:t,last_review:e}=this.current;let i=0;t!==u.New&&e&&(i=q(e,this.review_time)),this.current.last_review=this.review_time,this.current.elapsed_days=i,this.current.reps+=1,this.algorithm.seed=this.initSeedStrategy()}preview(){return{[d.Again]:this.review(d.Again),[d.Hard]:this.review(d.Hard),[d.Good]:this.review(d.Good),[d.Easy]:this.review(d.Easy),[Symbol.iterator]:this.previewIterator.bind(this)}}*previewIterator(){for(const t of T)yield this.review(t)}review(t){const{state:e}=this.last;let i;switch(e){case u.New:i=this.newState(t);break;case u.Learning:case u.Relearning:i=this.learningState(t);break;case u.Review:i=this.reviewState(t);break}if(i)return i;throw new Error("Invalid grade")}buildLog(t){const{last_review:e,due:i,elapsed_days:a}=this.last;return{rating:t,state:this.current.state,due:e||i,stability:this.current.stability,difficulty:this.current.difficulty,elapsed_days:this.current.elapsed_days,last_elapsed_days:a,scheduled_days:this.current.scheduled_days,review:this.review_time}}}class O extends H{newState(t){const e=this.next.get(t);if(e)return e;const i=h.card(this.current);switch(i.difficulty=this.algorithm.init_difficulty(t),i.stability=this.algorithm.init_stability(t),t){case d.Again:i.scheduled_days=0,i.due=this.review_time.scheduler(1),i.state=u.Learning;break;case d.Hard:i.scheduled_days=0,i.due=this.review_time.scheduler(5),i.state=u.Learning;break;case d.Good:i.scheduled_days=0,i.due=this.review_time.scheduler(10),i.state=u.Learning;break;case d.Easy:{const s=this.algorithm.next_interval(i.stability,this.current.elapsed_days);i.scheduled_days=s,i.due=this.review_time.scheduler(s,!0),i.state=u.Review;break}default:throw new Error("Invalid grade")}const a={card:i,log:this.buildLog(t)};return this.next.set(t,a),a}learningState(t){const e=this.next.get(t);if(e)return e;const{state:i,difficulty:a,stability:s}=this.last,n=h.card(this.current),l=this.current.elapsed_days;switch(n.difficulty=this.algorithm.next_difficulty(a,t),n.stability=this.algorithm.next_short_term_stability(s,t),t){case d.Again:{n.scheduled_days=0,n.due=this.review_time.scheduler(5,!1),n.state=i;break}case d.Hard:{n.scheduled_days=0,n.due=this.review_time.scheduler(10),n.state=i;break}case d.Good:{const c=this.algorithm.next_interval(n.stability,l);n.scheduled_days=c,n.due=this.review_time.scheduler(c,!0),n.state=u.Review;break}case d.Easy:{const c=this.algorithm.next_short_term_stability(s,d.Good),f=this.algorithm.next_interval(c,l),_=Math.max(this.algorithm.next_interval(n.stability,l),f+1);n.scheduled_days=_,n.due=this.review_time.scheduler(_,!0),n.state=u.Review;break}default:throw new Error("Invalid grade")}const o={card:n,log:this.buildLog(t)};return this.next.set(t,o),o}reviewState(t){const e=this.next.get(t);if(e)return e;const i=this.current.elapsed_days,{difficulty:a,stability:s}=this.last,n=this.algorithm.forgetting_curve(i,s),l=h.card(this.current),o=h.card(this.current),c=h.card(this.current),f=h.card(this.current);this.next_ds(l,o,c,f,a,s,n),this.next_interval(l,o,c,f,i),this.next_state(l,o,c,f),l.lapses+=1;const _={card:l,log:this.buildLog(d.Again)},g={card:o,log:super.buildLog(d.Hard)},m={card:c,log:super.buildLog(d.Good)},b={card:f,log:super.buildLog(d.Easy)};return this.next.set(d.Again,_),this.next.set(d.Hard,g),this.next.set(d.Good,m),this.next.set(d.Easy,b),this.next.get(t)}next_ds(t,e,i,a,s,n,l){t.difficulty=this.algorithm.next_difficulty(s,d.Again);const o=n/Math.exp(this.algorithm.parameters.w[17]*this.algorithm.parameters.w[18]);t.stability=Math.min(+o.toFixed(8),this.algorithm.next_forget_stability(s,n,l)),e.difficulty=this.algorithm.next_difficulty(s,d.Hard),e.stability=this.algorithm.next_recall_stability(s,n,l,d.Hard),i.difficulty=this.algorithm.next_difficulty(s,d.Good),i.stability=this.algorithm.next_recall_stability(s,n,l,d.Good),a.difficulty=this.algorithm.next_difficulty(s,d.Easy),a.stability=this.algorithm.next_recall_stability(s,n,l,d.Easy)}next_interval(t,e,i,a,s){let n,l;n=this.algorithm.next_interval(e.stability,s),l=this.algorithm.next_interval(i.stability,s),n=Math.min(n,l),l=Math.max(l,n+1);const o=Math.max(this.algorithm.next_interval(a.stability,s),l+1);t.scheduled_days=0,t.due=this.review_time.scheduler(5),e.scheduled_days=n,e.due=this.review_time.scheduler(n,!0),i.scheduled_days=l,i.due=this.review_time.scheduler(l,!0),a.scheduled_days=o,a.due=this.review_time.scheduler(o,!0)}next_state(t,e,i,a){t.state=u.Relearning,e.state=u.Review,i.state=u.Review,a.state=u.Review}}class P extends H{newState(t){const e=this.next.get(t);if(e)return e;this.current.scheduled_days=0,this.current.elapsed_days=0;const i=h.card(this.current),a=h.card(this.current),s=h.card(this.current),n=h.card(this.current);this.init_ds(i,a,s,n);const l=0;return this.next_interval(i,a,s,n,l),this.next_state(i,a,s,n),this.update_next(i,a,s,n),this.next.get(t)}init_ds(t,e,i,a){t.difficulty=this.algorithm.init_difficulty(d.Again),t.stability=this.algorithm.init_stability(d.Again),e.difficulty=this.algorithm.init_difficulty(d.Hard),e.stability=this.algorithm.init_stability(d.Hard),i.difficulty=this.algorithm.init_difficulty(d.Good),i.stability=this.algorithm.init_stability(d.Good),a.difficulty=this.algorithm.init_difficulty(d.Easy),a.stability=this.algorithm.init_stability(d.Easy)}learningState(t){return this.reviewState(t)}reviewState(t){const e=this.next.get(t);if(e)return e;const i=this.current.elapsed_days,{difficulty:a,stability:s}=this.last,n=this.algorithm.forgetting_curve(i,s),l=h.card(this.current),o=h.card(this.current),c=h.card(this.current),f=h.card(this.current);return this.next_ds(l,o,c,f,a,s,n),this.next_interval(l,o,c,f,i),this.next_state(l,o,c,f),l.lapses+=1,this.update_next(l,o,c,f),this.next.get(t)}next_ds(t,e,i,a,s,n,l){t.difficulty=this.algorithm.next_difficulty(s,d.Again),t.stability=Math.min(n,this.algorithm.next_forget_stability(s,n,l)),e.difficulty=this.algorithm.next_difficulty(s,d.Hard),e.stability=this.algorithm.next_recall_stability(s,n,l,d.Hard),i.difficulty=this.algorithm.next_difficulty(s,d.Good),i.stability=this.algorithm.next_recall_stability(s,n,l,d.Good),a.difficulty=this.algorithm.next_difficulty(s,d.Easy),a.stability=this.algorithm.next_recall_stability(s,n,l,d.Easy)}next_interval(t,e,i,a,s){let n,l,o,c;n=this.algorithm.next_interval(t.stability,s),l=this.algorithm.next_interval(e.stability,s),o=this.algorithm.next_interval(i.stability,s),c=this.algorithm.next_interval(a.stability,s),n=Math.min(n,l),l=Math.max(l,n+1),o=Math.max(o,l+1),c=Math.max(c,o+1),t.scheduled_days=n,t.due=this.review_time.scheduler(n,!0),e.scheduled_days=l,e.due=this.review_time.scheduler(l,!0),i.scheduled_days=o,i.due=this.review_time.scheduler(o,!0),a.scheduled_days=c,a.due=this.review_time.scheduler(c,!0)}next_state(t,e,i,a){t.state=u.Review,e.state=u.Review,i.state=u.Review,a.state=u.Review}update_next(t,e,i,a){const s={card:t,log:this.buildLog(d.Again)},n={card:e,log:super.buildLog(d.Hard)},l={card:i,log:super.buildLog(d.Good)},o={card:a,log:super.buildLog(d.Easy)};this.next.set(d.Again,s),this.next.set(d.Hard,n),this.next.set(d.Good,l),this.next.set(d.Easy,o)}}class tt{fsrs;constructor(t){this.fsrs=t}replay(t,e,i){return this.fsrs.next(t,e,i)}handleManualRating(t,e,i,a,s,n,l){if(typeof e>"u")throw new Error("reschedule: state is required for manual rating");let o,c;if(e===u.New)o={rating:d.Manual,state:e,due:l??i,stability:t.stability,difficulty:t.difficulty,elapsed_days:a,last_elapsed_days:t.elapsed_days,scheduled_days:t.scheduled_days,review:i},c=v(i),c.last_review=i;else{if(typeof l>"u")throw new Error("reschedule: due is required for manual rating");const f=l.diff(i,"days");o={rating:d.Manual,state:t.state,due:t.last_review||t.due,stability:t.stability,difficulty:t.difficulty,elapsed_days:a,last_elapsed_days:t.elapsed_days,scheduled_days:t.scheduled_days,review:i},c={...t,state:e,due:l,last_review:i,stability:s||t.stability,difficulty:n||t.difficulty,elapsed_days:a,scheduled_days:f,reps:t.reps+1}}return{card:c,log:o}}reschedule(t,e){const i=[];let a=v(t.due);for(const s of e){let n;if(s.review=h.time(s.review),s.rating===d.Manual){let l=0;a.state!==u.New&&a.last_review&&(l=s.review.diff(a.last_review,"days")),n=this.handleManualRating(a,s.state,s.review,l,s.stability,s.difficulty,s.due?h.time(s.due):void 0)}else n=this.replay(a,s.review,s.rating);i.push(n),a=n.card}return i}calculateManualRecord(t,e,i,a){if(!i)return null;const{card:s,log:n}=i,l=h.card(t);return l.due.getTime()===s.due.getTime()?null:(l.scheduled_days=s.due.diff(l.due,"days"),this.handleManualRating(l,s.state,h.time(e),n.elapsed_days,a?s.stability:void 0,a?s.difficulty:void 0,s.due))}}class V extends Y{strategyHandler=new Map;Scheduler;constructor(t){super(t);const{enable_short_term:e}=this.parameters;this.Scheduler=e?O:P}params_handler_proxy(){const t=this;return{set:function(e,i,a){return i==="request_retention"&&Number.isFinite(a)?t.intervalModifier=t.calculate_interval_modifier(Number(a)):i==="enable_short_term"&&(t.Scheduler=a===!0?O:P),Reflect.set(e,i,a),!0}}}useStrategy(t,e){return this.strategyHandler.set(t,e),this}clearStrategy(t){return t?this.strategyHandler.delete(t):this.strategyHandler.clear(),this}getScheduler(t,e){const i=this.strategyHandler.get(x.SEED),a=this.strategyHandler.get(x.SCHEDULER)||this.Scheduler,s=i||D;return new a(t,e,this,{seed:s})}repeat(t,e,i){const a=this.getScheduler(t,e).preview();return i&&typeof i=="function"?i(a):a}next(t,e,i,a){const s=this.getScheduler(t,e),n=h.rating(i);if(n===d.Manual)throw new Error("Cannot review a manual rating");const l=s.review(n);return a&&typeof a=="function"?a(l):l}get_retrievability(t,e,i=!0){const a=h.card(t);e=e?h.time(e):new Date;const s=a.state!==u.New?Math.max(e.diff(a.last_review,"days"),0):0,n=a.state!==u.New?this.forgetting_curve(s,+a.stability.toFixed(8)):0;return i?`${(n*100).toFixed(2)}%`:n}rollback(t,e,i){const a=h.card(t),s=h.review_log(e);if(s.rating===d.Manual)throw new Error("Cannot rollback a manual rating");let n,l,o;switch(s.state){case u.New:n=s.due,l=void 0,o=0;break;case u.Learning:case u.Relearning:case u.Review:n=s.review,l=s.due,o=a.lapses-(s.rating===d.Again&&s.state===u.Review?1:0);break}const c={...a,due:n,stability:s.stability,difficulty:s.difficulty,elapsed_days:s.last_elapsed_days,scheduled_days:s.scheduled_days,reps:Math.max(0,a.reps-1),lapses:Math.max(0,o),state:s.state,last_review:l};return i&&typeof i=="function"?i(c):c}forget(t,e,i=!1,a){const s=h.card(t);e=h.time(e);const n=s.state===u.New?0:e.diff(s.last_review,"days"),l={rating:d.Manual,state:s.state,due:s.due,stability:s.stability,difficulty:s.difficulty,elapsed_days:0,last_elapsed_days:s.elapsed_days,scheduled_days:n,review:e},o={card:{...s,due:e,stability:0,difficulty:0,elapsed_days:0,scheduled_days:0,reps:i?0:s.reps,lapses:i?0:s.lapses,state:u.New,last_review:s.last_review},log:l};return a&&typeof a=="function"?a(o):o}reschedule(t,e=[],i={}){const{recordLogHandler:a,reviewsOrderBy:s,skipManual:n=!0,now:l=new Date,update_memory_state:o=!1}=i;s&&typeof s=="function"&&e.sort(s),n&&(e=e.filter(b=>b.rating!==d.Manual));const c=new tt(this),f=c.reschedule(i.first_card||v(),e),_=f.length,g=h.card(t),m=c.calculateManualRecord(g,l,_?f[_-1]:void 0,o);return a&&typeof a=="function"?{collections:f.map(a),reschedule_item:m?a(m):null}:{collections:f,reschedule_item:m}}}const et=r=>new V(r||{});
+/* unused harmony exports AbstractScheduler, CLAMP_PARAMETERS, DECAY, DefaultInitSeedStrategy, FACTOR, FSRSAlgorithm, FSRSVersion, GenSeedStrategyWithCardId, Grades, INIT_S_MAX, StrategyMode, clamp, date_diff, date_scheduler, default_enable_fuzz, default_enable_short_term, default_maximum_interval, default_request_retention, default_w, fixDate, fixRating, fixState, formatDate, fsrs, get_fuzz_range, show_diff_message */
+var c=(s=>(s[s.New=0]="New",s[s.Learning=1]="Learning",s[s.Review=2]="Review",s[s.Relearning=3]="Relearning",s))(c||{}),l=(s=>(s[s.Manual=0]="Manual",s[s.Again=1]="Again",s[s.Hard=2]="Hard",s[s.Good=3]="Good",s[s.Easy=4]="Easy",s))(l||{});class h{static card(t){return{...t,state:h.state(t.state),due:h.time(t.due),last_review:t.last_review?h.time(t.last_review):void 0}}static rating(t){if(typeof t=="string"){const e=t.charAt(0).toUpperCase(),i=t.slice(1).toLowerCase(),a=l[`${e}${i}`];if(a===void 0)throw new Error(`Invalid rating:[${t}]`);return a}else if(typeof t=="number")return t;throw new Error(`Invalid rating:[${t}]`)}static state(t){if(typeof t=="string"){const e=t.charAt(0).toUpperCase(),i=t.slice(1).toLowerCase(),a=c[`${e}${i}`];if(a===void 0)throw new Error(`Invalid state:[${t}]`);return a}else if(typeof t=="number")return t;throw new Error(`Invalid state:[${t}]`)}static time(t){if(typeof t=="object"&&t instanceof Date)return t;if(typeof t=="string"){const e=Date.parse(t);if(isNaN(e))throw new Error(`Invalid date:[${t}]`);return new Date(e)}else if(typeof t=="number")return new Date(t);throw new Error(`Invalid date:[${t}]`)}static review_log(t){return{...t,due:h.time(t.due),rating:h.rating(t.rating),state:h.state(t.state),review:h.time(t.review)}}}const X="4.7.0";Date.prototype.scheduler=function(s,t){return L(this,s,t)},Date.prototype.diff=function(s,t){return I(this,s,t)},Date.prototype.format=function(){return G(this)},Date.prototype.dueFormat=function(s,t,e){return N(this,s,t,e)};function L(s,t,e){return new Date(e?h.time(s).getTime()+t*24*60*60*1e3:h.time(s).getTime()+t*60*1e3)}function I(s,t,e){if(!s||!t)throw new Error("Invalid date");const i=h.time(s).getTime()-h.time(t).getTime();let a=0;switch(e){case"days":a=Math.floor(i/(24*60*60*1e3));break;case"minutes":a=Math.floor(i/(60*1e3));break}return a}function G(s){const t=h.time(s),e=t.getFullYear(),i=t.getMonth()+1,a=t.getDate(),r=t.getHours(),n=t.getMinutes(),d=t.getSeconds();return`${e}-${p(i)}-${p(a)} ${p(r)}:${p(n)}:${p(d)}`}function p(s){return s<10?`0${s}`:`${s}`}const S=[60,60,24,31,12],E=["second","min","hour","day","month","year"];function N(s,t,e,i=E){s=h.time(s),t=h.time(t),i.length!==E.length&&(i=E);let a=s.getTime()-t.getTime(),r;for(a/=1e3,r=0;r<S.length&&!(a<S[r]);r++)a/=S[r];return`${Math.floor(a)}${e?i[r]:""}`}function J(s){return h.time(s)}function K(s){return h.state(s)}function Q(s){return h.rating(s)}const k=[l.Again,l.Hard,l.Good,l.Easy],Z=[{start:2.5,end:7,factor:.15},{start:7,end:20,factor:.1},{start:20,end:1/0,factor:.05}];function C(s,t,e){let i=1;for(const n of Z)i+=n.factor*Math.max(Math.min(s,n.end)-n.start,0);s=Math.min(s,e);let a=Math.max(2,Math.round(s-i));const r=Math.min(Math.round(s+i),e);return s>t&&(a=Math.max(a,t+1)),a=Math.min(a,r),{min_ivl:a,max_ivl:r}}function m(s,t,e){return Math.min(Math.max(s,t),e)}function z(s,t){const e=Date.UTC(s.getUTCFullYear(),s.getUTCMonth(),s.getUTCDate()),i=Date.UTC(t.getUTCFullYear(),t.getUTCMonth(),t.getUTCDate());return Math.floor((i-e)/864e5)}const T=.9,U=36500,q=[.40255,1.18385,3.173,15.69105,7.1949,.5345,1.4604,.0046,1.54575,.1192,1.01925,1.9395,.11,.29605,2.2698,.2315,2.9898,.51655,.6621],P=!1,Y=!0,tt=(/* unused pure expression or super */ null && (`v${X} using FSRS-5.0`)),_=.01,v=100,R=[[_,v],[_,v],[_,v],[_,v],[1,10],[.001,4],[.001,4],[.001,.75],[0,4.5],[0,.8],[.001,3.5],[.001,5],[.001,.25],[.001,.9],[0,4],[0,1],[1,6],[0,2],[0,2]],$=s=>{let t=q;return s?.w&&(s.w.length===19?t=s?.w:s.w.length===17&&(t=s?.w.concat([0,0]),t[4]=+(t[5]*2+t[4]).toFixed(8),t[5]=+(Math.log(t[5]*3+1)/3).toFixed(8),t[6]=+(t[6]+.5).toFixed(8),console.debug("[FSRS V5]auto fill w to 19 length"))),t=t.map((e,i)=>m(e,R[i][0],R[i][1])),{request_retention:s?.request_retention||T,maximum_interval:s?.maximum_interval||U,w:t,enable_fuzz:s?.enable_fuzz??P,enable_short_term:s?.enable_short_term??Y}};function x(s,t){const e={due:s?h.time(s):new Date,stability:0,difficulty:0,elapsed_days:0,scheduled_days:0,reps:0,lapses:0,state:c.New,last_review:void 0};return t&&typeof t=="function"?t(e):e}class et{c;s0;s1;s2;constructor(t){const e=it();this.c=1,this.s0=e(" "),this.s1=e(" "),this.s2=e(" "),t==null&&(t=+new Date),this.s0-=e(t),this.s0<0&&(this.s0+=1),this.s1-=e(t),this.s1<0&&(this.s1+=1),this.s2-=e(t),this.s2<0&&(this.s2+=1)}next(){const t=2091639*this.s0+this.c*23283064365386963e-26;return this.s0=this.s1,this.s1=this.s2,this.s2=t-(this.c=t|0),this.s2}set state(t){this.c=t.c,this.s0=t.s0,this.s1=t.s1,this.s2=t.s2}get state(){return{c:this.c,s0:this.s0,s1:this.s1,s2:this.s2}}}function it(){let s=4022871197;return function(t){t=String(t);for(let e=0;e<t.length;e++){s+=t.charCodeAt(e);let i=.02519603282416938*s;s=i>>>0,i-=s,i*=s,s=i>>>0,i-=s,s+=i*4294967296}return(s>>>0)*23283064365386963e-26}}function at(s){const t=new et(s),e=()=>t.next();return e.int32=()=>t.next()*4294967296|0,e.double=()=>e()+(e()*2097152|0)*11102230246251565e-32,e.state=()=>t.state,e.importState=i=>(t.state=i,e),e}const D=-.5,H=19/81;function O(s,t){return+Math.pow(1+H*s/t,D).toFixed(8)}class V{param;intervalModifier;_seed;constructor(t){this.param=new Proxy($(t),this.params_handler_proxy()),this.intervalModifier=this.calculate_interval_modifier(this.param.request_retention)}get interval_modifier(){return this.intervalModifier}set seed(t){this._seed=t}calculate_interval_modifier(t){if(t<=0||t>1)throw new Error("Requested retention rate should be in the range (0,1]");return+((Math.pow(t,1/D)-1)/H).toFixed(8)}get parameters(){return this.param}set parameters(t){this.update_parameters(t)}params_handler_proxy(){const t=this;return{set:function(e,i,a){return i==="request_retention"&&Number.isFinite(a)&&(t.intervalModifier=t.calculate_interval_modifier(Number(a))),Reflect.set(e,i,a),!0}}}update_parameters(t){const e=$(t);for(const i in e)if(i in this.param){const a=i;this.param[a]=e[a]}}init_stability(t){return Math.max(this.param.w[t-1],.1)}init_difficulty(t){return this.constrain_difficulty(this.param.w[4]-Math.exp((t-1)*this.param.w[5])+1)}apply_fuzz(t,e){if(!this.param.enable_fuzz||t<2.5)return Math.round(t);const i=at(this._seed)(),{min_ivl:a,max_ivl:r}=C(t,e,this.param.maximum_interval);return Math.floor(i*(r-a+1)+a)}next_interval(t,e){const i=Math.min(Math.max(1,Math.round(t*this.intervalModifier)),this.param.maximum_interval);return this.apply_fuzz(i,e)}linear_damping(t,e){return+(t*(10-e)/9).toFixed(8)}next_difficulty(t,e){const i=-this.param.w[6]*(e-3),a=t+this.linear_damping(i,t);return this.constrain_difficulty(this.mean_reversion(this.init_difficulty(l.Easy),a))}constrain_difficulty(t){return Math.min(Math.max(+t.toFixed(8),1),10)}mean_reversion(t,e){return+(this.param.w[7]*t+(1-this.param.w[7])*e).toFixed(8)}next_recall_stability(t,e,i,a){const r=l.Hard===a?this.param.w[15]:1,n=l.Easy===a?this.param.w[16]:1;return+m(e*(1+Math.exp(this.param.w[8])*(11-t)*Math.pow(e,-this.param.w[9])*(Math.exp((1-i)*this.param.w[10])-1)*r*n),_,36500).toFixed(8)}next_forget_stability(t,e,i){return+m(this.param.w[11]*Math.pow(t,-this.param.w[12])*(Math.pow(e+1,this.param.w[13])-1)*Math.exp((1-i)*this.param.w[14]),_,36500).toFixed(8)}next_short_term_stability(t,e){return+m(t*Math.exp(this.param.w[17]*(e-3+this.param.w[18])),_,36500).toFixed(8)}forgetting_curve=O;next_state(t,e,i){const{difficulty:a,stability:r}=t??{difficulty:0,stability:0};if(e<0)throw new Error(`Invalid delta_t "${e}"`);if(i<0||i>4)throw new Error(`Invalid grade "${i}"`);if(a===0&&r===0)return{difficulty:this.init_difficulty(i),stability:this.init_stability(i)};if(i===0)return{difficulty:a,stability:r};if(a<1||r<_)throw new Error(`Invalid memory state { difficulty: ${a}, stability: ${r} }`);const n=this.forgetting_curve(e,r),d=this.next_recall_stability(a,r,n,i),u=this.next_forget_stability(a,r,n),o=this.next_short_term_stability(r,i);let f=d;if(i===1){let[y,w]=[0,0];this.param.enable_short_term&&(y=this.param.w[17],w=this.param.w[18]);const g=r/Math.exp(y*w);f=m(+g.toFixed(8),_,u)}return e===0&&this.param.enable_short_term&&(f=o),{difficulty:this.next_difficulty(a,i),stability:f}}}function A(){const s=this.review_time.getTime(),t=this.current.reps,e=this.current.difficulty*this.current.stability;return`${s}_${t}_${e}`}function rt(s){return function(){const t=Reflect.get(this.current,s)??0,e=this.current.reps;return String(t+e||0)}}var b=(s=>(s.SCHEDULER="Scheduler",s.SEED="Seed",s))(b||{});class F{last;current;review_time;next=new Map;algorithm;initSeedStrategy;constructor(t,e,i,a={seed:A}){this.algorithm=i,this.initSeedStrategy=a.seed.bind(this),this.last=h.card(t),this.current=h.card(t),this.review_time=h.time(e),this.init()}init(){const{state:t,last_review:e}=this.current;let i=0;t!==c.New&&e&&(i=z(e,this.review_time)),this.current.last_review=this.review_time,this.current.elapsed_days=i,this.current.reps+=1,this.algorithm.seed=this.initSeedStrategy()}preview(){return{[l.Again]:this.review(l.Again),[l.Hard]:this.review(l.Hard),[l.Good]:this.review(l.Good),[l.Easy]:this.review(l.Easy),[Symbol.iterator]:this.previewIterator.bind(this)}}*previewIterator(){for(const t of k)yield this.review(t)}review(t){const{state:e}=this.last;let i;switch(e){case c.New:i=this.newState(t);break;case c.Learning:case c.Relearning:i=this.learningState(t);break;case c.Review:i=this.reviewState(t);break}if(i)return i;throw new Error("Invalid grade")}buildLog(t){const{last_review:e,due:i,elapsed_days:a}=this.last;return{rating:t,state:this.current.state,due:e||i,stability:this.current.stability,difficulty:this.current.difficulty,elapsed_days:this.current.elapsed_days,last_elapsed_days:a,scheduled_days:this.current.scheduled_days,review:this.review_time}}}class j extends F{newState(t){const e=this.next.get(t);if(e)return e;const i=h.card(this.current);switch(i.difficulty=this.algorithm.init_difficulty(t),i.stability=this.algorithm.init_stability(t),t){case l.Again:i.scheduled_days=0,i.due=this.review_time.scheduler(1),i.state=c.Learning;break;case l.Hard:i.scheduled_days=0,i.due=this.review_time.scheduler(5),i.state=c.Learning;break;case l.Good:i.scheduled_days=0,i.due=this.review_time.scheduler(10),i.state=c.Learning;break;case l.Easy:{const r=this.algorithm.next_interval(i.stability,this.current.elapsed_days);i.scheduled_days=r,i.due=this.review_time.scheduler(r,!0),i.state=c.Review;break}default:throw new Error("Invalid grade")}const a={card:i,log:this.buildLog(t)};return this.next.set(t,a),a}learningState(t){const e=this.next.get(t);if(e)return e;const{state:i,difficulty:a,stability:r}=this.last,n=h.card(this.current),d=this.current.elapsed_days;switch(n.difficulty=this.algorithm.next_difficulty(a,t),n.stability=this.algorithm.next_short_term_stability(r,t),t){case l.Again:{n.scheduled_days=0,n.due=this.review_time.scheduler(5,!1),n.state=i;break}case l.Hard:{n.scheduled_days=0,n.due=this.review_time.scheduler(10),n.state=i;break}case l.Good:{const o=this.algorithm.next_interval(n.stability,d);n.scheduled_days=o,n.due=this.review_time.scheduler(o,!0),n.state=c.Review;break}case l.Easy:{const o=this.algorithm.next_short_term_stability(r,l.Good),f=this.algorithm.next_interval(o,d),y=Math.max(this.algorithm.next_interval(n.stability,d),f+1);n.scheduled_days=y,n.due=this.review_time.scheduler(y,!0),n.state=c.Review;break}default:throw new Error("Invalid grade")}const u={card:n,log:this.buildLog(t)};return this.next.set(t,u),u}reviewState(t){const e=this.next.get(t);if(e)return e;const i=this.current.elapsed_days,{difficulty:a,stability:r}=this.last,n=this.algorithm.forgetting_curve(i,r),d=h.card(this.current),u=h.card(this.current),o=h.card(this.current),f=h.card(this.current);this.next_ds(d,u,o,f,a,r,n),this.next_interval(d,u,o,f,i),this.next_state(d,u,o,f),d.lapses+=1;const y={card:d,log:this.buildLog(l.Again)},w={card:u,log:super.buildLog(l.Hard)},g={card:o,log:super.buildLog(l.Good)},M={card:f,log:super.buildLog(l.Easy)};return this.next.set(l.Again,y),this.next.set(l.Hard,w),this.next.set(l.Good,g),this.next.set(l.Easy,M),this.next.get(t)}next_ds(t,e,i,a,r,n,d){t.difficulty=this.algorithm.next_difficulty(r,l.Again);const u=n/Math.exp(this.algorithm.parameters.w[17]*this.algorithm.parameters.w[18]),o=this.algorithm.next_forget_stability(r,n,d);t.stability=m(+u.toFixed(8),_,o),e.difficulty=this.algorithm.next_difficulty(r,l.Hard),e.stability=this.algorithm.next_recall_stability(r,n,d,l.Hard),i.difficulty=this.algorithm.next_difficulty(r,l.Good),i.stability=this.algorithm.next_recall_stability(r,n,d,l.Good),a.difficulty=this.algorithm.next_difficulty(r,l.Easy),a.stability=this.algorithm.next_recall_stability(r,n,d,l.Easy)}next_interval(t,e,i,a,r){let n,d;n=this.algorithm.next_interval(e.stability,r),d=this.algorithm.next_interval(i.stability,r),n=Math.min(n,d),d=Math.max(d,n+1);const u=Math.max(this.algorithm.next_interval(a.stability,r),d+1);t.scheduled_days=0,t.due=this.review_time.scheduler(5),e.scheduled_days=n,e.due=this.review_time.scheduler(n,!0),i.scheduled_days=d,i.due=this.review_time.scheduler(d,!0),a.scheduled_days=u,a.due=this.review_time.scheduler(u,!0)}next_state(t,e,i,a){t.state=c.Relearning,e.state=c.Review,i.state=c.Review,a.state=c.Review}}class B extends F{newState(t){const e=this.next.get(t);if(e)return e;this.current.scheduled_days=0,this.current.elapsed_days=0;const i=h.card(this.current),a=h.card(this.current),r=h.card(this.current),n=h.card(this.current);return this.init_ds(i,a,r,n),this.next_interval(i,a,r,n,0),this.next_state(i,a,r,n),this.update_next(i,a,r,n),this.next.get(t)}init_ds(t,e,i,a){t.difficulty=this.algorithm.init_difficulty(l.Again),t.stability=this.algorithm.init_stability(l.Again),e.difficulty=this.algorithm.init_difficulty(l.Hard),e.stability=this.algorithm.init_stability(l.Hard),i.difficulty=this.algorithm.init_difficulty(l.Good),i.stability=this.algorithm.init_stability(l.Good),a.difficulty=this.algorithm.init_difficulty(l.Easy),a.stability=this.algorithm.init_stability(l.Easy)}learningState(t){return this.reviewState(t)}reviewState(t){const e=this.next.get(t);if(e)return e;const i=this.current.elapsed_days,{difficulty:a,stability:r}=this.last,n=this.algorithm.forgetting_curve(i,r),d=h.card(this.current),u=h.card(this.current),o=h.card(this.current),f=h.card(this.current);return this.next_ds(d,u,o,f,a,r,n),this.next_interval(d,u,o,f,i),this.next_state(d,u,o,f),d.lapses+=1,this.update_next(d,u,o,f),this.next.get(t)}next_ds(t,e,i,a,r,n,d){t.difficulty=this.algorithm.next_difficulty(r,l.Again);const u=this.algorithm.next_forget_stability(r,n,d);t.stability=m(n,_,u),e.difficulty=this.algorithm.next_difficulty(r,l.Hard),e.stability=this.algorithm.next_recall_stability(r,n,d,l.Hard),i.difficulty=this.algorithm.next_difficulty(r,l.Good),i.stability=this.algorithm.next_recall_stability(r,n,d,l.Good),a.difficulty=this.algorithm.next_difficulty(r,l.Easy),a.stability=this.algorithm.next_recall_stability(r,n,d,l.Easy)}next_interval(t,e,i,a,r){let n,d,u,o;n=this.algorithm.next_interval(t.stability,r),d=this.algorithm.next_interval(e.stability,r),u=this.algorithm.next_interval(i.stability,r),o=this.algorithm.next_interval(a.stability,r),n=Math.min(n,d),d=Math.max(d,n+1),u=Math.max(u,d+1),o=Math.max(o,u+1),t.scheduled_days=n,t.due=this.review_time.scheduler(n,!0),e.scheduled_days=d,e.due=this.review_time.scheduler(d,!0),i.scheduled_days=u,i.due=this.review_time.scheduler(u,!0),a.scheduled_days=o,a.due=this.review_time.scheduler(o,!0)}next_state(t,e,i,a){t.state=c.Review,e.state=c.Review,i.state=c.Review,a.state=c.Review}update_next(t,e,i,a){const r={card:t,log:this.buildLog(l.Again)},n={card:e,log:super.buildLog(l.Hard)},d={card:i,log:super.buildLog(l.Good)},u={card:a,log:super.buildLog(l.Easy)};this.next.set(l.Again,r),this.next.set(l.Hard,n),this.next.set(l.Good,d),this.next.set(l.Easy,u)}}class st{fsrs;constructor(t){this.fsrs=t}replay(t,e,i){return this.fsrs.next(t,e,i)}handleManualRating(t,e,i,a,r,n,d){if(typeof e>"u")throw new Error("reschedule: state is required for manual rating");let u,o;if(e===c.New)u={rating:l.Manual,state:e,due:d??i,stability:t.stability,difficulty:t.difficulty,elapsed_days:a,last_elapsed_days:t.elapsed_days,scheduled_days:t.scheduled_days,review:i},o=x(i),o.last_review=i;else{if(typeof d>"u")throw new Error("reschedule: due is required for manual rating");const f=d.diff(i,"days");u={rating:l.Manual,state:t.state,due:t.last_review||t.due,stability:t.stability,difficulty:t.difficulty,elapsed_days:a,last_elapsed_days:t.elapsed_days,scheduled_days:t.scheduled_days,review:i},o={...t,state:e,due:d,last_review:i,stability:r||t.stability,difficulty:n||t.difficulty,elapsed_days:a,scheduled_days:f,reps:t.reps+1}}return{card:o,log:u}}reschedule(t,e){const i=[];let a=x(t.due);for(const r of e){let n;if(r.review=h.time(r.review),r.rating===l.Manual){let d=0;a.state!==c.New&&a.last_review&&(d=r.review.diff(a.last_review,"days")),n=this.handleManualRating(a,r.state,r.review,d,r.stability,r.difficulty,r.due?h.time(r.due):void 0)}else n=this.replay(a,r.review,r.rating);i.push(n),a=n.card}return i}calculateManualRecord(t,e,i,a){if(!i)return null;const{card:r,log:n}=i,d=h.card(t);return d.due.getTime()===r.due.getTime()?null:(d.scheduled_days=r.due.diff(d.due,"days"),this.handleManualRating(d,r.state,h.time(e),n.elapsed_days,a?r.stability:void 0,a?r.difficulty:void 0,r.due))}}class W extends V{strategyHandler=new Map;Scheduler;constructor(t){super(t);const{enable_short_term:e}=this.parameters;this.Scheduler=e?j:B}params_handler_proxy(){const t=this;return{set:function(e,i,a){return i==="request_retention"&&Number.isFinite(a)?t.intervalModifier=t.calculate_interval_modifier(Number(a)):i==="enable_short_term"&&(t.Scheduler=a===!0?j:B),Reflect.set(e,i,a),!0}}}useStrategy(t,e){return this.strategyHandler.set(t,e),this}clearStrategy(t){return t?this.strategyHandler.delete(t):this.strategyHandler.clear(),this}getScheduler(t,e){const i=this.strategyHandler.get(b.SEED),a=this.strategyHandler.get(b.SCHEDULER)||this.Scheduler,r=i||A;return new a(t,e,this,{seed:r})}repeat(t,e,i){const a=this.getScheduler(t,e).preview();return i&&typeof i=="function"?i(a):a}next(t,e,i,a){const r=this.getScheduler(t,e),n=h.rating(i);if(n===l.Manual)throw new Error("Cannot review a manual rating");const d=r.review(n);return a&&typeof a=="function"?a(d):d}get_retrievability(t,e,i=!0){const a=h.card(t);e=e?h.time(e):new Date;const r=a.state!==c.New?Math.max(e.diff(a.last_review,"days"),0):0,n=a.state!==c.New?this.forgetting_curve(r,+a.stability.toFixed(8)):0;return i?`${(n*100).toFixed(2)}%`:n}rollback(t,e,i){const a=h.card(t),r=h.review_log(e);if(r.rating===l.Manual)throw new Error("Cannot rollback a manual rating");let n,d,u;switch(r.state){case c.New:n=r.due,d=void 0,u=0;break;case c.Learning:case c.Relearning:case c.Review:n=r.review,d=r.due,u=a.lapses-(r.rating===l.Again&&r.state===c.Review?1:0);break}const o={...a,due:n,stability:r.stability,difficulty:r.difficulty,elapsed_days:r.last_elapsed_days,scheduled_days:r.scheduled_days,reps:Math.max(0,a.reps-1),lapses:Math.max(0,u),state:r.state,last_review:d};return i&&typeof i=="function"?i(o):o}forget(t,e,i=!1,a){const r=h.card(t);e=h.time(e);const n=r.state===c.New?0:e.diff(r.last_review,"days"),d={rating:l.Manual,state:r.state,due:r.due,stability:r.stability,difficulty:r.difficulty,elapsed_days:0,last_elapsed_days:r.elapsed_days,scheduled_days:n,review:e},u={card:{...r,due:e,stability:0,difficulty:0,elapsed_days:0,scheduled_days:0,reps:i?0:r.reps,lapses:i?0:r.lapses,state:c.New,last_review:r.last_review},log:d};return a&&typeof a=="function"?a(u):u}reschedule(t,e=[],i={}){const{recordLogHandler:a,reviewsOrderBy:r,skipManual:n=!0,now:d=new Date,update_memory_state:u=!1}=i;r&&typeof r=="function"&&e.sort(r),n&&(e=e.filter(M=>M.rating!==l.Manual));const o=new st(this),f=o.reschedule(i.first_card||x(),e),y=f.length,w=h.card(t),g=o.calculateManualRecord(w,d,y?f[y-1]:void 0,u);return a&&typeof a=="function"?{collections:f.map(a),reschedule_item:g?a(g):null}:{collections:f,reschedule_item:g}}}const nt=s=>new W(s||{});
 //# sourceMappingURL=index.mjs.map
 
 
@@ -9460,17 +11597,6 @@ var u=(r=>(r[r.New=0]="New",r[r.Learning=1]="Learning",r[r.Review=2]="Review",r[
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
 /******/ 		__webpack_require__.b = document.baseURI || self.location.href;
@@ -9479,7 +11605,7 @@ var u=(r=>(r[r.New=0]="New",r[r.Learning=1]="Learning",r[r.Review=2]="Review",r[
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"popup": 0
+/******/ 			42: 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -9507,8 +11633,8 @@ var u=(r=>(r[r.New=0]="New",r[r.Learning=1]="Learning",r[r.Review=2]="Review",r[
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module used 'module' so it can't be inlined
-/******/ 	__webpack_require__("./src/popup/popup.js");
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/popup/daily-review.js");
+/******/ 	__webpack_require__(14);
+/******/ 	var __webpack_exports__ = __webpack_require__(877);
 /******/ 	
 /******/ })()
 ;

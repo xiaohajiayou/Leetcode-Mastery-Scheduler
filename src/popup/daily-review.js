@@ -1393,6 +1393,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 case 'Settings':
                     viewId = 'moreView';
                     await initializeOptions();
+                    await initializeWebDAV();
                     break;
             }
             
