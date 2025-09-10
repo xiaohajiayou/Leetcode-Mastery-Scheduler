@@ -1,5 +1,25 @@
 # Changelog
 
+### [0.1.6] - 2025-09-10
+----------------------
+
+#### Added
+
+- Desktop notification reminders with customizable intervals (30min - 4hours)
+- Configurable active hours and days for reminders
+- Test notification button to verify functionality
+- Smart reminder logic that checks task completion status
+- 桌面通知提醒，支持自定义间隔（30分钟-4小时）
+- 可配置提醒的活动时段和日期
+- 测试通知按钮，验证功能是否正常
+- 智能提醒逻辑，检查任务完成状态
+
+#### Fixed
+
+- Resolved Microsoft Edge Store policy violation (1.2.2)
+- Fixed notification display issues with unique IDs
+- 解决Microsoft Edge商店政策违规问题（1.2.2）
+- 修复通知显示问题，使用唯一ID避免冲突
 
 ### [0.1.5] - 2025-04-14
 ----------------------

@@ -1118,10 +1118,92 @@ async function initializeOptions() {
     }
 
 
-    // 初始化提醒开关
+    // 初始化提醒开关和配置
     const reminderToggle = document.getElementById('reminderToggle');
+    const reminderSettings = document.getElementById('reminderSettings');
+    const reminderInterval = document.getElementById('reminderInterval');
+    const reminderStartTime = document.getElementById('reminderStartTime');
+    const reminderEndTime = document.getElementById('reminderEndTime');
+    const testNotificationBtn = document.getElementById('testNotification');
+    
     if (reminderToggle) {
-        reminderToggle.checked = store.isReminderEnabled || false;
+        // 加载提醒设置
+        chrome.storage.local.get([
+            'reminderEnabled',
+            'reminderInterval',
+            'reminderStartTime',
+            'reminderEndTime',
+            'reminderDays'
+        ]).then(config => {
+            reminderToggle.checked = config.reminderEnabled || false;
+            if (reminderInterval) reminderInterval.value = config.reminderInterval || 60;
+            if (reminderStartTime) reminderStartTime.value = config.reminderStartTime || '09:00';
+            if (reminderEndTime) reminderEndTime.value = config.reminderEndTime || '22:00';
+            
+            // 加载星期选择
+            const reminderDays = config.reminderDays || [1, 2, 3, 4, 5, 6, 0];
+            for (let i = 0; i <= 6; i++) {
+                const dayCheckbox = document.getElementById(`day${i}`);
+                if (dayCheckbox) {
+                    dayCheckbox.checked = reminderDays.includes(i);
+                }
+            }
+            
+            // 显示/隐藏设置
+            if (reminderSettings) {
+                reminderSettings.style.display = reminderToggle.checked ? 'block' : 'none';
+            }
+        });
+        
+        // 切换显示/隐藏
+        reminderToggle.addEventListener('change', () => {
+            if (reminderSettings) {
+                reminderSettings.style.display = reminderToggle.checked ? 'block' : 'none';
+            }
+        });
+        
+        // 测试通知按钮
+        if (testNotificationBtn) {
+            testNotificationBtn.addEventListener('click', async () => {
+                try {
+                    const response = await chrome.runtime.sendMessage({ action: 'testNotification' });
+                    if (response && response.success) {
+                        // 显示成功反馈
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Test Successful',
+                            text: 'Check your desktop for the notification!',
+                            timer: 2000,
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end'
+                        });
+                    } else {
+                        // 显示错误
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Test Failed',
+                            text: response?.message || 'Could not send notification',
+                            timer: 3000,
+                            showConfirmButton: false,
+                            toast: true,
+                            position: 'top-end'
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error sending test notification:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Failed to send test notification',
+                        timer: 3000,
+                        showConfirmButton: false,
+                        toast: true,
+                        position: 'top-end'
+                    });
+                }
+            });
+        }
     }
     
     // 初始化FSRS参数优化卡片
@@ -1137,6 +1219,25 @@ async function initializeOptions() {
         await setProblemSorter(Number(selectedSorterId));
         await setCloudSyncEnabled(isCloudSyncEnabled);
         await setReminderEnabled(isReminderEnabled);
+        
+        // 保存提醒详细设置
+        if (reminderToggle) {
+            const selectedDays = [];
+            for (let i = 0; i <= 6; i++) {
+                const dayCheckbox = document.getElementById(`day${i}`);
+                if (dayCheckbox && dayCheckbox.checked) {
+                    selectedDays.push(i);
+                }
+            }
+            
+            await chrome.storage.local.set({
+                reminderEnabled: isReminderEnabled,
+                reminderInterval: parseInt(reminderInterval?.value || 60),
+                reminderStartTime: reminderStartTime?.value || '09:00',
+                reminderEndTime: reminderEndTime?.value || '22:00',
+                reminderDays: selectedDays
+            });
+        }
 
         // 使用 SweetAlert2 显示保存成功提示
         Swal.fire({

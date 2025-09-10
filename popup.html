@@ -357,11 +357,11 @@
                     <small>
                         <div>
                             <span class="update-badge">NEW!</span> 
-                            支持通过复习记录优化fsrs算法参数。 / Support Optimize FSRS parameters.
+                            桌面通知提醒，更安全合规 / Desktop notifications for review reminders, safer and compliant.
                         </div>
                         <div>
                             <a target="_blank" href="https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler/blob/main/changelog.md">
-                                View full changelog now(V0.1.5)
+                                View full changelog now(V0.1.6)
                             </a>
                         </div>
                     </small>
@@ -512,16 +512,54 @@
                             <div style="display: flex; align-items: center; justify-content: space-between;">
                                 <div style="display: flex; align-items: center; gap: 12px;">
                                     <i class="fas fa-bell" style="font-size: 0.95em; line-height: 1; position: relative; top: 7px;"></i>
-                                    <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">Active Reminder</h4>
+                                    <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">Review Reminder</h4>
                                 </div>
                                 <div class="form-check form-switch">
                                     <input class="form-check-input custom-switch" type="checkbox" id="reminderToggle">
                                 </div>
                             </div>
                             
-                            <div class="reminder-tips" style="padding: 8px; border-radius: 4px;">
-                                <small style="display: block; margin-bottom: 2px; font-size: 0.8em;">1. Enable to receive reminders</small>
-                                <small style="display: block; font-size: 0.8em;">2. Disable to stop all pop-up reminders</small>
+                            <div id="reminderSettings" style="display: none; margin-top: 10px;">
+                                <div style="margin-bottom: 8px;">
+                                    <label style="font-size: 0.85em; margin-bottom: 4px;">Reminder Interval</label>
+                                    <select id="reminderInterval" class="form-select form-control" style="font-size: 0.85em;">
+                                        <option value="30">Every 30 minutes</option>
+                                        <option value="60" selected>Every 1 hour</option>
+                                        <option value="120">Every 2 hours</option>
+                                        <option value="180">Every 3 hours</option>
+                                        <option value="240">Every 4 hours</option>
+                                    </select>
+                                </div>
+                                
+                                <div style="margin-bottom: 8px;">
+                                    <label style="font-size: 0.85em; margin-bottom: 4px;">Active Hours</label>
+                                    <div style="display: flex; gap: 8px; align-items: center;">
+                                        <input type="time" id="reminderStartTime" class="form-control" value="09:00" style="font-size: 0.85em;">
+                                        <span style="font-size: 0.85em;">to</span>
+                                        <input type="time" id="reminderEndTime" class="form-control" value="22:00" style="font-size: 0.85em;">
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-bottom: 8px;">
+                                    <label style="font-size: 0.85em; margin-bottom: 4px;">Active Days</label>
+                                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; font-size: 0.8em;">
+                                        <label><input type="checkbox" id="day1" value="1" checked> Mon</label>
+                                        <label><input type="checkbox" id="day2" value="2" checked> Tue</label>
+                                        <label><input type="checkbox" id="day3" value="3" checked> Wed</label>
+                                        <label><input type="checkbox" id="day4" value="4" checked> Thu</label>
+                                        <label><input type="checkbox" id="day5" value="5" checked> Fri</label>
+                                        <label><input type="checkbox" id="day6" value="6" checked> Sat</label>
+                                        <label><input type="checkbox" id="day0" value="0" checked> Sun</label>
+                                    </div>
+                                </div>
+                                
+                                <button type="button" id="testNotification" class="btn btn-sm btn-outline-info" style="width: 100%; font-size: 0.85em;">
+                                    <i class="fas fa-bell"></i> Test Notification
+                                </button>
+                            </div>
+                            
+                            <div class="reminder-tips" style="padding: 8px; border-radius: 4px; margin-top: 8px;">
+                                <small style="display: block; font-size: 0.8em;">Desktop notifications for review reminders</small>
                             </div>
                         </div>
                         

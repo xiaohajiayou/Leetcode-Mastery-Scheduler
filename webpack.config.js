@@ -1,8 +1,7 @@
 // module.exports = {
 //     entry: {
 //         popup: './src/popup/popup.js',
-//         options: './src/popup/options.js',
-//         leetcode: './src/popup/script/leetcode.js',
+// //         leetcode: './src/popup/script/leetcode.js',
 //         leetcodecn: './src/popup/script/leetcodecn.js'
 //     },
 //     output: {
@@ -34,10 +33,9 @@ module.exports = {
             ],
             filename: 'popup.js'
         },
-        options: './src/popup/options.js',
         leetcode: './src/popup/script/leetcode.js',
         leetcodecn: './src/popup/script/leetcodecn.js',
-        reminder: './src/content-scripts/reminder.js',
+        background: './src/background/background.js',
     },
     output: {
         filename: '[name].js',
