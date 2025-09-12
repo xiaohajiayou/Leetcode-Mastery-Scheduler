@@ -31,9 +31,13 @@ class SyncManager {
         // 加载WebDAV配置
         const webdavLoaded = await webdavService.loadConfig();
         
-        // 启动时执行一次同步
+        // 启动时异步执行一次同步，不阻塞初始化
         if (webdavLoaded || store.isCloudSyncEnabled) {
-            await this.performSync();
+            setTimeout(() => {
+                this.performSync().catch(error => {
+                    console.error('Initial sync failed:', error);
+                });
+            }, 1000); // 延迟1秒执行，让UI先加载完成
         }
         
         // 启动自动同步

@@ -422,7 +422,8 @@ export const renderUndoButton = async () => {
 export const renderAll = async () => {
     await loadConfigs();
     await renderSiteMode();
-    await syncProblems();
+    // 不要在每次 renderAll 时都同步，这会干扰防抖同步
+    // await syncProblems();
     // await syncFSRSHistory();
 
     // 创建笔记模态框

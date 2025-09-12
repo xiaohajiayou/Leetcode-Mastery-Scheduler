@@ -9,7 +9,9 @@ class WebDAVService {
         this.username = null;
         this.password = null;
         this.isConfigured = false;
+        this.isAuthenticated = false; // 添加认证状态
         this.folderPath = '/LeetcodeMasteryScheduler/'; // 坚果云中的存储路径
+        this.onAuthStatusChange = null; // 认证状态变更回调
     }
 
     /**
@@ -25,14 +27,24 @@ class WebDAVService {
         this.username = config.username;
         this.password = config.password;
         
+        // 先保存配置（即使验证失败也保存）
+        await this.saveConfig(config);
+        this.isConfigured = true;
+        
         // 验证连接
         const isValid = await this.testConnection();
+        this.isAuthenticated = isValid;
+        
         if (isValid) {
-            this.isConfigured = true;
-            // 保存配置到本地（密码需要加密）
-            await this.saveConfig(config);
             // 确保文件夹存在
             await this.ensureFolderExists();
+            if (this.onAuthStatusChange) {
+                this.onAuthStatusChange(true);
+            }
+        } else {
+            if (this.onAuthStatusChange) {
+                this.onAuthStatusChange(false);
+            }
         }
         return isValid;
     }
@@ -55,7 +67,7 @@ class WebDAVService {
     }
 
     /**
-     * 发送 WebDAV 请求
+     * 发送 WebDAV 请求（通过 background script）
      */
     async request(method, path, options = {}) {
         const url = `${this.baseUrl}${path}`;
@@ -66,16 +78,50 @@ class WebDAVService {
             'Content-Type': 'application/xml; charset=utf-8'
         };
         
-        const response = await fetch(url, {
-            method,
-            headers: {
-                ...defaultHeaders,
-                ...options.headers
-            },
-            body: options.body
+        // 通过 background script 发送请求以避免 CORS 问题
+        const response = await chrome.runtime.sendMessage({
+            action: 'webdavRequest',
+            params: {
+                method,
+                url,
+                headers: {
+                    ...defaultHeaders,
+                    ...options.headers
+                },
+                body: options.body
+            }
         });
         
-        return response;
+        if (!response.success) {
+            throw new Error(response.error || 'WebDAV request failed');
+        }
+        
+        // 模拟 Response 对象的接口
+        // response.data 包含 {ok, status, statusText, data, headers}
+        // 其中 response.data.data 是实际的响应内容
+        return {
+            ok: response.data.ok,
+            status: response.data.status,
+            statusText: response.data.statusText,
+            data: response.data.data,  // 直接暴露 data 属性
+            text: async () => {
+                // 如果数据是对象，转换为字符串
+                if (typeof response.data.data === 'object') {
+                    return JSON.stringify(response.data.data);
+                }
+                return response.data.data;
+            },
+            json: async () => {
+                if (typeof response.data.data === 'string') {
+                    try {
+                        return JSON.parse(response.data.data);
+                    } catch {
+                        throw new Error('Invalid JSON response');
+                    }
+                }
+                return response.data.data;
+            }
+        };
     }
 
     /**
@@ -152,8 +198,19 @@ class WebDAVService {
             });
             
             if (response.ok) {
-                const text = await response.text();
-                return JSON.parse(text);
+                // 尝试直接使用 data 属性（如果已经是解析后的数据）
+                if (response.data !== undefined) {
+                    if (typeof response.data === 'string') {
+                        try {
+                            return JSON.parse(response.data);
+                        } catch {
+                            return response.data;
+                        }
+                    }
+                    return response.data;
+                }
+                // 否则使用 json() 方法
+                return await response.json();
             } else if (response.status === 404) {
                 return null; // 文件不存在
             } else {
@@ -181,9 +238,15 @@ class WebDAVService {
             });
             
             if (response.ok) {
-                const text = await response.text();
+                // 获取 XML 文本
+                let xmlText;
+                if (response.data !== undefined) {
+                    xmlText = typeof response.data === 'object' ? JSON.stringify(response.data) : response.data;
+                } else {
+                    xmlText = await response.text();
+                }
                 // 解析 XML 响应获取文件列表
-                return this.parseFileList(text);
+                return this.parseFileList(xmlText);
             } else {
                 throw new Error(`List files failed: ${response.status}`);
             }
@@ -262,15 +325,46 @@ class WebDAVService {
      * 从本地存储加载配置
      */
     async loadConfig() {
-        const result = await chrome.storage.local.get('webdavConfig');
-        if (result.webdavConfig && result.webdavConfig.enabled) {
-            const config = result.webdavConfig;
-            await this.configure({
-                username: config.username,
-                password: atob(config.password), // Base64 解码密码
-                serverUrl: config.serverUrl
-            });
-            return true;
+        try {
+            const result = await chrome.storage.local.get('webdavConfig');
+            if (result.webdavConfig && result.webdavConfig.enabled) {
+                const config = result.webdavConfig;
+                
+                // 直接设置配置，不测试连接（避免网络问题导致配置丢失）
+                this.baseUrl = config.serverUrl || 'https://dav.jianguoyun.com/dav';
+                this.username = config.username;
+                this.password = atob(config.password); // Base64 解码密码
+                this.isConfigured = true;
+                this.isAuthenticated = false; // 添加认证状态标识
+                
+                // 异步测试连接，更新认证状态
+                this.testConnection().then(isValid => {
+                    this.isAuthenticated = isValid;
+                    if (!isValid) {
+                        console.warn('WebDAV authentication failed - need to login');
+                        // 触发认证状态变更事件
+                        if (this.onAuthStatusChange) {
+                            this.onAuthStatusChange(false);
+                        }
+                    } else {
+                        // 连接成功，确保文件夹存在
+                        this.ensureFolderExists().catch(console.error);
+                        if (this.onAuthStatusChange) {
+                            this.onAuthStatusChange(true);
+                        }
+                    }
+                }).catch(error => {
+                    console.error('WebDAV connection test error:', error);
+                    this.isAuthenticated = false;
+                    if (this.onAuthStatusChange) {
+                        this.onAuthStatusChange(false);
+                    }
+                });
+                
+                return true;
+            }
+        } catch (error) {
+            console.error('Error loading WebDAV config:', error);
         }
         return false;
     }

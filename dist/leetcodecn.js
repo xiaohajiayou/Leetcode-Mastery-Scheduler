@@ -1520,7 +1520,7 @@ __webpack_require__.d(__webpack_exports__, {
   xd: () => (/* binding */ syncProblems)
 });
 
-// UNUSED EXPORTS: deleteProblem, getAllProblemsInCloud, getCurrentProblemInfoFromLeetCodeByUrl, getProblemsByMode, markProblemAsMastered, resetProblem, setProblems, setProblemsByMode, setProblemsToCloud
+// UNUSED EXPORTS: batchUpdateProblems, deleteProblem, getAllProblemsInCloud, getCurrentProblemInfoFromLeetCodeByUrl, getProblemsByMode, markProblemAsMastered, resetProblem, setProblems, setProblemsByMode, setProblemsToCloud
 
 ;// CONCATENATED MODULE: ./src/popup/delegate/leetCodeDelegate.js
 const user_agent =
@@ -1625,7 +1625,13 @@ var store = __webpack_require__(214);
 var utils = __webpack_require__(384);
 // EXTERNAL MODULE: ./src/popup/delegate/cloudStorageDelegate.js
 var delegate_cloudStorageDelegate = __webpack_require__(188);
+// EXTERNAL MODULE: ./src/popup/service/webdavService.js
+var webdavService = __webpack_require__(6);
+// EXTERNAL MODULE: ./src/popup/service/syncManager.js
+var service_syncManager = __webpack_require__(584);
 ;// CONCATENATED MODULE: ./src/popup/service/problemService.js
+
+
 
 
 
@@ -1694,6 +1700,9 @@ const createOrUpdateProblem = async (problem) => {
     const problems = await getAllProblems();
     problems[problem.index] = problem;
     await setProblems(problems);
+    
+    // 触发同步
+    service_syncManager/* syncManager */.D.debouncedSync(problem.index);
 }
 
 const markProblemAsMastered = async (problemId) => {
@@ -1708,6 +1717,9 @@ const markProblemAsMastered = async (problemId) => {
     problems[problemId] = problem;
 
     await setProblems(problems);
+    
+    // 触发同步
+    syncManager.debouncedSync(problemId);
 };
 
 const deleteProblem = async (problemId) => {
@@ -1722,6 +1734,9 @@ const deleteProblem = async (problemId) => {
         await addNewOperationHistory(problem, OPS_TYPE.DELETE, Date.now());
         problems[problemId] = problem;
         await setProblems(problems);
+        
+        // 触发同步
+        syncManager.debouncedSync(problemId);
     }
 };
 
@@ -1738,14 +1753,975 @@ const resetProblem = async (problemId) => {
     problems[problemId] = problem;
 
     await setProblems(problems);
+    
+    // 触发同步
+    syncManager.debouncedSync(problemId);
 };
 
 const syncProblems = async () => {
-    if (!store/* store */.h.isCloudSyncEnabled) return;
-    let cnMode = await (0,modeService/* isInCnMode */.B)();
-    const key = cnMode ? keys/* CN_PROBLEM_KEY */.Q$ : keys/* PROBLEM_KEY */.y0;
-    await (0,utils/* syncLocalAndCloudStorage */.gV)(key, utils/* mergeProblems */.bK); 
+    // 使用新的同步管理器
+    await service_syncManager/* syncManager */.D.performSync();
 }
+
+/**
+ * 批量更新问题（用于批量操作）
+ */
+const batchUpdateProblems = async (updates) => {
+    const problems = await getAllProblems();
+    
+    for (const update of updates) {
+        if (problems[update.id]) {
+            problems[update.id] = {
+                ...problems[update.id],
+                ...update.data,
+                modificationTime: Date.now()
+            };
+        }
+    }
+    
+    await setProblems(problems);
+    
+    // 批量操作立即同步
+    await syncManager.immediateSync();
+}
+
+/***/ }),
+
+/***/ 584:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   D: () => (/* binding */ syncManager)
+/* harmony export */ });
+/* harmony import */ var _webdavService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+/* harmony import */ var _problemService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(820);
+/* harmony import */ var _modeService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(733);
+/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(134);
+/* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(891);
+/* harmony import */ var _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(188);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(214);
+/**
+ * Sync Manager for coordinating data synchronization between local, Chrome Sync, and WebDAV
+ */
+
+
+
+
+
+
+
+
+
+class SyncManager {
+    constructor() {
+        this.syncTimer = null;
+        this.syncQueue = new Set();
+        this.SYNC_DELAY = 2000; // 2秒防抖
+        this.AUTO_SYNC_INTERVAL = 5 * 60 * 1000; // 5分钟自动同步
+        this.isSyncing = false;
+        this.lastSyncTime = null;
+        this.syncStatus = 'idle'; // idle, syncing, success, error
+        this.syncListeners = new Set();
+        this.conflictResolver = null;
+        this.autoSyncTimer = null;
+    }
+
+    /**
+     * 初始化同步管理器
+     */
+    async initialize() {
+        // 加载WebDAV配置
+        const webdavLoaded = await _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.loadConfig();
+        
+        // 启动时执行一次同步
+        if (webdavLoaded || _store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
+            await this.performSync();
+        }
+        
+        // 启动自动同步
+        this.startAutoSync();
+        
+        // 监听窗口关闭事件
+        window.addEventListener('beforeunload', async (e) => {
+            if (this.hasPendingChanges()) {
+                e.preventDefault();
+                await this.immediateSync();
+            }
+        });
+    }
+
+    /**
+     * 启动自动同步
+     */
+    startAutoSync() {
+        this.stopAutoSync();
+        this.autoSyncTimer = setInterval(() => {
+            this.performSync();
+        }, this.AUTO_SYNC_INTERVAL);
+    }
+
+    /**
+     * 停止自动同步
+     */
+    stopAutoSync() {
+        if (this.autoSyncTimer) {
+            clearInterval(this.autoSyncTimer);
+            this.autoSyncTimer = null;
+        }
+    }
+
+    /**
+     * 添加同步状态监听器
+     */
+    addSyncListener(listener) {
+        this.syncListeners.add(listener);
+    }
+
+    /**
+     * 移除同步状态监听器
+     */
+    removeSyncListener(listener) {
+        this.syncListeners.delete(listener);
+    }
+
+    /**
+     * 通知同步状态变化
+     */
+    notifySyncStatusChange(status, data = {}) {
+        this.syncStatus = status;
+        this.syncListeners.forEach(listener => {
+            try {
+                listener({ status, ...data });
+            } catch (error) {
+                console.error('Sync listener error:', error);
+            }
+        });
+    }
+
+    /**
+     * 设置冲突解决器
+     */
+    setConflictResolver(resolver) {
+        this.conflictResolver = resolver;
+    }
+
+    /**
+     * 防抖同步
+     */
+    debouncedSync(problemId = null) {
+        if (problemId) {
+            this.syncQueue.add(problemId);
+        }
+        
+        clearTimeout(this.syncTimer);
+        this.syncTimer = setTimeout(() => {
+            this.performSync();
+        }, this.SYNC_DELAY);
+    }
+
+    /**
+     * 立即同步
+     */
+    async immediateSync() {
+        clearTimeout(this.syncTimer);
+        await this.performSync();
+    }
+
+    /**
+     * 检查是否有待同步的更改
+     */
+    hasPendingChanges() {
+        return this.syncQueue.size > 0 || this.syncTimer !== null;
+    }
+
+    /**
+     * 执行同步
+     */
+    async performSync() {
+        if (this.isSyncing) return;
+        
+        // 检查是否有任何同步方式启用
+        if (!_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured && !_store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
+            return;
+        }
+        
+        this.isSyncing = true;
+        this.notifySyncStatusChange('syncing');
+        
+        try {
+            const cnMode = await (0,_modeService__WEBPACK_IMPORTED_MODULE_2__/* .isInCnMode */ .B)();
+            const key = cnMode ? _util_keys__WEBPACK_IMPORTED_MODULE_6__/* .CN_PROBLEM_KEY */ .Q$ : _util_keys__WEBPACK_IMPORTED_MODULE_6__/* .PROBLEM_KEY */ .y0;
+            
+            // 1. 获取本地数据
+            const localData = await this.getLocalData(key);
+            
+            // 2. 获取所有云端数据（Chrome Sync + WebDAV）
+            const cloudData = await this.getAllCloudData(key);
+            
+            // 3. 合并数据
+            const mergedData = await this.mergeAllData(localData, cloudData);
+            
+            // 4. 处理冲突
+            if (mergedData.conflicts.length > 0) {
+                await this.handleConflicts(mergedData.conflicts);
+            }
+            
+            // 5. 保存合并后的数据到所有位置
+            await this.saveDataEverywhere(key, mergedData.problems);
+            
+            // 6. 清空同步队列
+            this.syncQueue.clear();
+            this.lastSyncTime = new Date().toISOString();
+            
+            this.notifySyncStatusChange('success', { 
+                syncedCount: Object.keys(mergedData.problems).length 
+            });
+        } catch (error) {
+            console.error('Sync failed:', error);
+            this.notifySyncStatusChange('error', { error: error.message });
+            this.handleSyncError(error);
+        } finally {
+            this.isSyncing = false;
+        }
+    }
+
+    /**
+     * 获取本地数据
+     */
+    async getLocalData(key) {
+        const data = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__/* .getLocalStorageData */ .Cy)(key);
+        return data || {};
+    }
+
+    /**
+     * 获取所有云端数据
+     */
+    async getAllCloudData(key) {
+        const cloudData = {
+            chromeSync: null,
+            webdav: null
+        };
+        
+        // 获取Chrome Sync数据
+        if (_store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
+            try {
+                cloudData.chromeSync = await _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get(key);
+            } catch (error) {
+                console.warn('Failed to get Chrome Sync data:', error);
+            }
+        }
+        
+        // 获取WebDAV数据
+        if (_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured) {
+            try {
+                const webdavData = await _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.downloadData('problems_sync.json');
+                if (webdavData && webdavData.problems) {
+                    cloudData.webdav = webdavData.problems;
+                }
+            } catch (error) {
+                console.warn('Failed to get WebDAV data:', error);
+            }
+        }
+        
+        return cloudData;
+    }
+
+    /**
+     * 合并所有数据源
+     */
+    async mergeAllData(localData, cloudData) {
+        const merged = new Map();
+        const conflicts = [];
+        const allProblems = {};
+        
+        // 收集所有数据源
+        const dataSources = [
+            { name: 'local', data: localData },
+            { name: 'chromeSync', data: cloudData.chromeSync },
+            { name: 'webdav', data: cloudData.webdav }
+        ].filter(source => source.data);
+        
+        // 收集所有问题ID
+        const allIds = new Set();
+        dataSources.forEach(source => {
+            if (source.data) {
+                Object.keys(source.data).forEach(id => allIds.add(id));
+            }
+        });
+        
+        // 对每个问题进行合并
+        for (const id of allIds) {
+            const versions = dataSources
+                .filter(source => source.data && source.data[id])
+                .map(source => ({
+                    source: source.name,
+                    problem: source.data[id]
+                }));
+            
+            if (versions.length === 0) continue;
+            
+            if (versions.length === 1) {
+                // 只有一个版本，直接使用
+                merged.set(id, versions[0].problem);
+            } else {
+                // 多个版本，需要合并
+                const mergedProblem = this.mergeSingleProblem(versions);
+                if (mergedProblem.hasConflict) {
+                    conflicts.push({
+                        id,
+                        versions: versions
+                    });
+                } else {
+                    merged.set(id, mergedProblem.data);
+                }
+            }
+        }
+        
+        // 转换为对象格式
+        merged.forEach((value, key) => {
+            allProblems[key] = value;
+        });
+        
+        return {
+            problems: allProblems,
+            conflicts
+        };
+    }
+
+    /**
+     * 合并单个问题的多个版本
+     */
+    mergeSingleProblem(versions) {
+        // 找出最新修改的版本
+        let latestVersion = versions[0];
+        let latestTime = this.getModificationTime(versions[0].problem);
+        
+        for (let i = 1; i < versions.length; i++) {
+            const time = this.getModificationTime(versions[i].problem);
+            if (time > latestTime) {
+                latestTime = time;
+                latestVersion = versions[i];
+            }
+        }
+        
+        // 检查是否有冲突（相同时间但不同内容）
+        const hasConflict = versions.some(v => {
+            const time = this.getModificationTime(v.problem);
+            return time === latestTime && 
+                   JSON.stringify(v.problem) !== JSON.stringify(latestVersion.problem);
+        });
+        
+        // 特殊字段合并
+        const mergedProblem = { ...latestVersion.problem };
+        
+        // 合并笔记（保留最长的）
+        versions.forEach(v => {
+            if (v.problem.note && v.problem.note.length > (mergedProblem.note || '').length) {
+                mergedProblem.note = v.problem.note;
+            }
+        });
+        
+        // 合并复习记录（合并所有记录）
+        const allReviews = new Set();
+        versions.forEach(v => {
+            if (v.problem.reviews && Array.isArray(v.problem.reviews)) {
+                v.problem.reviews.forEach(review => {
+                    allReviews.add(JSON.stringify(review));
+                });
+            }
+        });
+        if (allReviews.size > 0) {
+            mergedProblem.reviews = Array.from(allReviews).map(r => JSON.parse(r));
+        }
+        
+        return {
+            hasConflict,
+            data: mergedProblem
+        };
+    }
+
+    /**
+     * 获取问题的修改时间
+     */
+    getModificationTime(problem) {
+        return problem.modificationTime || 
+               problem.lastModified || 
+               problem.submissionTime || 
+               0;
+    }
+
+    /**
+     * 处理冲突
+     */
+    async handleConflicts(conflicts) {
+        if (!this.conflictResolver) {
+            console.warn('No conflict resolver set, using latest version');
+            return;
+        }
+        
+        for (const conflict of conflicts) {
+            try {
+                const resolved = await this.conflictResolver(conflict);
+                if (resolved) {
+                    // 更新解决后的数据
+                    conflict.resolved = resolved;
+                }
+            } catch (error) {
+                console.error('Conflict resolution failed:', error);
+            }
+        }
+    }
+
+    /**
+     * 保存数据到所有位置
+     */
+    async saveDataEverywhere(key, problems) {
+        const savePromises = [];
+        
+        // 保存到本地
+        savePromises.push((0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__/* .setLocalStorageData */ .qy)(key, problems));
+        
+        // 保存到Chrome Sync
+        if (_store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
+            savePromises.push(_delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.set(key, problems).catch(error => {
+                console.warn('Failed to save to Chrome Sync:', error);
+            }));
+        }
+        
+        // 保存到WebDAV
+        if (_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured) {
+            const syncData = {
+                version: '2.0',
+                lastSync: new Date().toISOString(),
+                deviceId: await this.getDeviceId(),
+                problems: problems,
+                metadata: {
+                    totalProblems: Object.keys(problems).length,
+                    lastModified: new Date().toISOString(),
+                    syncVersion: 1
+                }
+            };
+            
+            savePromises.push(
+                _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.uploadData('problems_sync.json', syncData).catch(error => {
+                    console.warn('Failed to save to WebDAV:', error);
+                })
+            );
+        }
+        
+        await Promise.all(savePromises);
+    }
+
+    /**
+     * 获取设备ID
+     */
+    async getDeviceId() {
+        let deviceId = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__/* .getLocalStorageData */ .Cy)('deviceId');
+        if (!deviceId) {
+            deviceId = `device-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__/* .setLocalStorageData */ .qy)('deviceId', deviceId);
+        }
+        return deviceId;
+    }
+
+    /**
+     * 处理同步错误
+     */
+    handleSyncError(error) {
+        // 记录错误
+        console.error('Sync error:', error);
+        
+        // 可以在这里添加错误重试逻辑
+        // 或者通知用户同步失败
+    }
+
+    /**
+     * 增量同步（性能优化）
+     */
+    async incrementalSync() {
+        if (!this.lastSyncTime) {
+            // 首次同步，执行完整同步
+            return this.performSync();
+        }
+        
+        const cnMode = await (0,_modeService__WEBPACK_IMPORTED_MODULE_2__/* .isInCnMode */ .B)();
+        const key = cnMode ? _util_keys__WEBPACK_IMPORTED_MODULE_6__/* .CN_PROBLEM_KEY */ .Q$ : _util_keys__WEBPACK_IMPORTED_MODULE_6__/* .PROBLEM_KEY */ .y0;
+        
+        // 获取自上次同步以来的更改
+        const changes = await this.getChangesSince(this.lastSyncTime);
+        
+        if (changes.length === 0) return;
+        
+        // 只同步变化的数据
+        const syncData = {
+            changes: changes,
+            lastSyncTime: new Date().toISOString(),
+            deviceId: await this.getDeviceId()
+        };
+        
+        if (_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured) {
+            await _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.uploadData('incremental.json', syncData);
+        }
+    }
+
+    /**
+     * 获取指定时间后的更改
+     */
+    async getChangesSince(timestamp) {
+        const problems = await (0,_problemService__WEBPACK_IMPORTED_MODULE_1__/* .getAllProblems */ .kT)();
+        const changes = [];
+        
+        Object.entries(problems).forEach(([id, problem]) => {
+            const modTime = this.getModificationTime(problem);
+            if (modTime > new Date(timestamp).getTime()) {
+                changes.push({
+                    id,
+                    problem,
+                    timestamp: modTime
+                });
+            }
+        });
+        
+        return changes;
+    }
+}
+
+// 导出单例
+const syncManager = new SyncManager();
+
+/***/ }),
+
+/***/ 6:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   i: () => (/* binding */ webdavService)
+/* harmony export */ });
+/**
+ * WebDAV Service for Nutstore (坚果云) Integration
+ * Provides unlimited cloud storage for LeetCode problem data
+ */
+
+class WebDAVService {
+    constructor() {
+        this.baseUrl = null;
+        this.username = null;
+        this.password = null;
+        this.isConfigured = false;
+        this.folderPath = '/LeetcodeMasteryScheduler/'; // 坚果云中的存储路径
+    }
+
+    /**
+     * 配置坚果云 WebDAV 连接
+     * @param {Object} config - 配置对象
+     * @param {string} config.username - 坚果云账号邮箱
+     * @param {string} config.password - 应用授权密码（非账号密码）
+     * @param {string} [config.serverUrl] - WebDAV 服务器地址，默认为坚果云
+     */
+    async configure(config) {
+        // 坚果云 WebDAV 地址：https://dav.jianguoyun.com/dav/
+        this.baseUrl = config.serverUrl || 'https://dav.jianguoyun.com/dav';
+        this.username = config.username;
+        this.password = config.password;
+        
+        // 验证连接
+        const isValid = await this.testConnection();
+        if (isValid) {
+            this.isConfigured = true;
+            // 保存配置到本地（密码需要加密）
+            await this.saveConfig(config);
+            // 确保文件夹存在
+            await this.ensureFolderExists();
+        }
+        return isValid;
+    }
+
+    /**
+     * 测试 WebDAV 连接
+     */
+    async testConnection() {
+        try {
+            const response = await this.request('PROPFIND', '/', {
+                headers: {
+                    'Depth': '0'
+                }
+            });
+            return response.ok;
+        } catch (error) {
+            console.error('WebDAV connection test failed:', error);
+            return false;
+        }
+    }
+
+    /**
+     * 发送 WebDAV 请求
+     */
+    async request(method, path, options = {}) {
+        const url = `${this.baseUrl}${path}`;
+        const auth = btoa(`${this.username}:${this.password}`);
+        
+        const defaultHeaders = {
+            'Authorization': `Basic ${auth}`,
+            'Content-Type': 'application/xml; charset=utf-8'
+        };
+        
+        const response = await fetch(url, {
+            method,
+            headers: {
+                ...defaultHeaders,
+                ...options.headers
+            },
+            body: options.body
+        });
+        
+        return response;
+    }
+
+    /**
+     * 确保存储文件夹存在
+     */
+    async ensureFolderExists() {
+        try {
+            // 检查文件夹是否存在
+            const response = await this.request('PROPFIND', this.folderPath, {
+                headers: {
+                    'Depth': '0'
+                }
+            });
+            
+            if (!response.ok && response.status === 404) {
+                // 创建文件夹
+                await this.request('MKCOL', this.folderPath);
+                console.log('Created folder:', this.folderPath);
+            }
+        } catch (error) {
+            console.error('Error ensuring folder exists:', error);
+        }
+    }
+
+    /**
+     * 上传数据到坚果云
+     * @param {string} filename - 文件名
+     * @param {Object} data - 要保存的数据
+     */
+    async uploadData(filename, data) {
+        if (!this.isConfigured) {
+            throw new Error('WebDAV not configured');
+        }
+        
+        const path = `${this.folderPath}${filename}`;
+        const jsonData = JSON.stringify(data, null, 2);
+        
+        try {
+            const response = await this.request('PUT', path, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            });
+            
+            if (response.ok || response.status === 201 || response.status === 204) {
+                console.log(`Data uploaded to ${path}`);
+                return true;
+            } else {
+                throw new Error(`Upload failed: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error uploading data:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 从坚果云下载数据
+     * @param {string} filename - 文件名
+     */
+    async downloadData(filename) {
+        if (!this.isConfigured) {
+            throw new Error('WebDAV not configured');
+        }
+        
+        const path = `${this.folderPath}${filename}`;
+        
+        try {
+            const response = await this.request('GET', path, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                const text = await response.text();
+                return JSON.parse(text);
+            } else if (response.status === 404) {
+                return null; // 文件不存在
+            } else {
+                throw new Error(`Download failed: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error downloading data:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 列出文件夹中的所有文件
+     */
+    async listFiles() {
+        if (!this.isConfigured) {
+            throw new Error('WebDAV not configured');
+        }
+        
+        try {
+            const response = await this.request('PROPFIND', this.folderPath, {
+                headers: {
+                    'Depth': '1'
+                }
+            });
+            
+            if (response.ok) {
+                const text = await response.text();
+                // 解析 XML 响应获取文件列表
+                return this.parseFileList(text);
+            } else {
+                throw new Error(`List files failed: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error listing files:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 解析 PROPFIND 响应中的文件列表
+     */
+    parseFileList(xmlText) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(xmlText, 'text/xml');
+        const responses = doc.getElementsByTagNameNS('DAV:', 'response');
+        
+        const files = [];
+        for (let i = 1; i < responses.length; i++) { // Skip first (folder itself)
+            const response = responses[i];
+            const href = response.getElementsByTagNameNS('DAV:', 'href')[0]?.textContent;
+            const displayName = response.getElementsByTagNameNS('DAV:', 'displayname')[0]?.textContent;
+            const lastModified = response.getElementsByTagNameNS('DAV:', 'getlastmodified')[0]?.textContent;
+            const contentLength = response.getElementsByTagNameNS('DAV:', 'getcontentlength')[0]?.textContent;
+            
+            if (href && displayName) {
+                files.push({
+                    name: displayName,
+                    path: href,
+                    lastModified: lastModified ? new Date(lastModified) : null,
+                    size: contentLength ? parseInt(contentLength) : 0
+                });
+            }
+        }
+        
+        return files;
+    }
+
+    /**
+     * 删除文件
+     */
+    async deleteFile(filename) {
+        if (!this.isConfigured) {
+            throw new Error('WebDAV not configured');
+        }
+        
+        const path = `${this.folderPath}${filename}`;
+        
+        try {
+            const response = await this.request('DELETE', path);
+            return response.ok || response.status === 204;
+        } catch (error) {
+            console.error('Error deleting file:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 保存配置到本地存储（加密敏感信息）
+     */
+    async saveConfig(config) {
+        // 简单的 Base64 编码，实际使用应该用更安全的加密方式
+        const encryptedConfig = {
+            username: config.username,
+            password: btoa(config.password), // Base64 编码密码
+            serverUrl: config.serverUrl || 'https://dav.jianguoyun.com/dav',
+            enabled: true
+        };
+        
+        await chrome.storage.local.set({
+            webdavConfig: encryptedConfig
+        });
+    }
+
+    /**
+     * 从本地存储加载配置
+     */
+    async loadConfig() {
+        const result = await chrome.storage.local.get('webdavConfig');
+        if (result.webdavConfig && result.webdavConfig.enabled) {
+            const config = result.webdavConfig;
+            await this.configure({
+                username: config.username,
+                password: atob(config.password), // Base64 解码密码
+                serverUrl: config.serverUrl
+            });
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 清除配置
+     */
+    async clearConfig() {
+        this.baseUrl = null;
+        this.username = null;
+        this.password = null;
+        this.isConfigured = false;
+        
+        await chrome.storage.local.remove('webdavConfig');
+    }
+
+    /**
+     * 备份所有问题数据到坚果云
+     */
+    async backupProblems(problems) {
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const filename = `problems_backup_${timestamp}.json`;
+        
+        const backupData = {
+            version: '1.0',
+            timestamp: new Date().toISOString(),
+            problemCount: problems.length,
+            problems: problems
+        };
+        
+        await this.uploadData(filename, backupData);
+        
+        // 保持最近的备份记录
+        await this.maintainBackupHistory();
+        
+        return filename;
+    }
+
+    /**
+     * 恢复问题数据
+     */
+    async restoreProblems(filename) {
+        const data = await this.downloadData(filename);
+        if (data && data.problems) {
+            return data.problems;
+        }
+        throw new Error('Invalid backup file');
+    }
+
+    /**
+     * 获取所有备份文件列表
+     */
+    async getBackupList() {
+        const files = await this.listFiles();
+        return files.filter(file => 
+            file.name.startsWith('problems_backup_') && 
+            file.name.endsWith('.json')
+        ).sort((a, b) => b.lastModified - a.lastModified);
+    }
+
+    /**
+     * 维护备份历史（保留最近10个备份）
+     */
+    async maintainBackupHistory() {
+        const backups = await this.getBackupList();
+        if (backups.length > 10) {
+            // 删除旧的备份
+            for (let i = 10; i < backups.length; i++) {
+                await this.deleteFile(backups[i].name);
+            }
+        }
+    }
+
+    /**
+     * 同步数据（上传当前数据并下载最新数据）
+     */
+    async syncData(localProblems, lastSyncTime) {
+        const syncFilename = 'problems_sync.json';
+        
+        // 下载云端数据
+        const cloudData = await this.downloadData(syncFilename);
+        
+        if (!cloudData) {
+            // 云端没有数据，上传本地数据
+            await this.uploadData(syncFilename, {
+                lastSync: new Date().toISOString(),
+                problems: localProblems
+            });
+            return { problems: localProblems, conflicts: [] };
+        }
+        
+        // 合并数据（简单策略：以最新修改时间为准）
+        const mergedData = this.mergeProblems(localProblems, cloudData.problems);
+        
+        // 上传合并后的数据
+        await this.uploadData(syncFilename, {
+            lastSync: new Date().toISOString(),
+            problems: mergedData.problems
+        });
+        
+        return mergedData;
+    }
+
+    /**
+     * 合并本地和云端的问题数据
+     */
+    mergeProblems(localProblems, cloudProblems) {
+        const merged = new Map();
+        const conflicts = [];
+        
+        // 添加所有云端问题
+        cloudProblems.forEach(problem => {
+            merged.set(problem.id || problem.name, problem);
+        });
+        
+        // 合并本地问题
+        localProblems.forEach(problem => {
+            const key = problem.id || problem.name;
+            const cloudProblem = merged.get(key);
+            
+            if (!cloudProblem) {
+                // 只在本地存在
+                merged.set(key, problem);
+            } else {
+                // 比较修改时间，保留最新的
+                const localTime = new Date(problem.lastModified || 0).getTime();
+                const cloudTime = new Date(cloudProblem.lastModified || 0).getTime();
+                
+                if (localTime > cloudTime) {
+                    merged.set(key, problem);
+                } else if (localTime < cloudTime) {
+                    // 云端更新，保持云端版本
+                } else if (JSON.stringify(problem) !== JSON.stringify(cloudProblem)) {
+                    // 时间相同但内容不同，记录冲突
+                    conflicts.push({
+                        problemId: key,
+                        local: problem,
+                        cloud: cloudProblem
+                    });
+                }
+            }
+        });
+        
+        return {
+            problems: Array.from(merged.values()),
+            conflicts
+        };
+    }
+}
+
+// 导出单例
+const webdavService = new WebDAVService();
 
 /***/ }),
 
@@ -2145,13 +3121,11 @@ const descriptionOf = (sorter) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   J1: () => (/* binding */ getDelayedHours),
-/* harmony export */   bK: () => (/* binding */ mergeProblems),
-/* harmony export */   gV: () => (/* binding */ syncLocalAndCloudStorage),
 /* harmony export */   tL: () => (/* binding */ getDifficultyBasedSteps),
 /* harmony export */   xt: () => (/* binding */ getNextReviewTime),
 /* harmony export */   zJ: () => (/* binding */ simpleStringHash)
 /* harmony export */ });
-/* unused harmony exports needReview, scheduledReview, isCompleted, calculatePageNum, getLevelColor, isSubmitButton, getSubmissionResult, isSubmissionSuccess, updateProblemUponSuccessSubmission, mergeProblem, syncStorage, getCurrentRetrievability, mergeFSRSParams, mergeRevlogs */
+/* unused harmony exports needReview, scheduledReview, isCompleted, calculatePageNum, getLevelColor, isSubmitButton, getSubmissionResult, isSubmissionSuccess, updateProblemUponSuccessSubmission, mergeProblem, mergeProblems, syncStorage, syncLocalAndCloudStorage, getCurrentRetrievability, mergeFSRSParams, mergeRevlogs */
 /* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(891);
 /* harmony import */ var _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(188);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(214);
@@ -2296,7 +3270,7 @@ const mergeProblems = (ps1, ps2) => {
 }
 
 const syncStorage = async (sd1, sd2, key, merger) => {
-    if (!_store__WEBPACK_IMPORTED_MODULE_2__/* .store */ .h.isCloudSyncEnabled) return;
+    if (!store.isCloudSyncEnabled) return;
     const data1 = await sd1.get(key) || {};
     const data2 = await sd2.get(key) || {};
     const merged = merger(data1, data2);
@@ -2310,7 +3284,7 @@ const syncStorage = async (sd1, sd2, key, merger) => {
 }
 
 const syncLocalAndCloudStorage = async (key, merger) => {
-    await syncStorage(_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .ZP, _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, key, merger);
+    await syncStorage(localStorageDelegate, cloudStorageDelegate, key, merger);
 }
 
 const simpleStringHash = (key) => {

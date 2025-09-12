@@ -51,7 +51,6 @@ function zipFoldersAndFiles(folders, files, targetZip) {
 const foldersToZip = ['dist', 'assets', 'lib'];
 const filesToZip = [
     'popup.html',
-    'options.html',
     'LICENSE',
     'manifest.json',
     'PRIVACY POLICY.md',

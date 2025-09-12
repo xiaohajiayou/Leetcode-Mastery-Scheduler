@@ -203,10 +203,11 @@ export const addRecordButton = () => {
 
 
 // 抽取成通用的处理函数
-export async function handleFeedbackSubmission(problem = null) {
+export async function handleFeedbackSubmission(problem = null, fromPopup = false) {
     try {
-        // 记录是否为页面提交
-        const isPageSubmission = !problem;
+        // 记录是否为页面提交（在 LeetCode 页面上点击 Rate 按钮）
+        // 只有当没有传入 problem 且不是从 popup 调用时，才是页面提交
+        const isPageSubmission = !problem && !fromPopup;
         
         // 显示难度反馈弹窗
         const feedback = await showDifficultyFeedbackDialog().catch(error => {
@@ -226,13 +227,16 @@ export async function handleFeedbackSubmission(problem = null) {
             const problems = await getAllProblems();
             problem = problems[problemIndex];
             
+            // 如果是新题目，创建新的 problem 对象
             if (!problem || problem.isDeleted == true) {
                 problem = new Problem(problemIndex, problemName, problemLevel, problemUrl, Date.now(), getDifficultyBasedSteps(problemLevel)[0], Date.now());
+                // 新题目标记，跳过今日复习检查
+                problem.isNewProblem = true;
             }
         }
         
-        // 检查上次复习时间是否是今天，如果是则不允许再次复习
-        if (problem.fsrsState && problem.fsrsState.lastReview) {
+        // 检查上次复习时间是否是今天，如果是则不允许再次复习（新题目跳过此检查）
+        if (!problem.isNewProblem && problem.fsrsState && problem.fsrsState.lastReview) {
             const lastReviewDate = new Date(problem.fsrsState.lastReview);
             const today = new Date();
             
@@ -246,6 +250,9 @@ export async function handleFeedbackSubmission(problem = null) {
                 return null;
             }
         }
+        
+        // 清除新题目标记
+        delete problem.isNewProblem;
         
         problem = await updateProblemWithFSRS(problem, feedback);
         await createOrUpdateProblem(problem);

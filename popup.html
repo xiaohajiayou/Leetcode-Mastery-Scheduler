@@ -10,6 +10,12 @@
 </head>
 
 <body style="width: 300px; height: 500px; overflow-y: auto;">
+    <!-- 同步状态指示器 (默认隐藏) -->
+    <div id="syncIndicator" class="sync-indicator" style="display: none;">
+        <i class="fas fa-sync" id="syncIcon"></i>
+        <span id="syncStatus">Synced</span>
+    </div>
+    
     <div class="low-memory-warning" id="lowMemoryWarning"></div>
     <!-- 添加导航栏 -->
     <div class="nav-bar">
@@ -507,6 +513,53 @@
                             </div>
                         </div>
 
+                        <!-- 坚果云 WebDAV 设置 -->
+                        <div class="option-card" style="padding: 12px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <i class="fas fa-database" style="font-size: 0.95em; line-height: 1; position: relative; top: 7px;"></i>
+                                    <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">Nutstore Backup</h4>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input custom-switch" type="checkbox" id="webdavToggle">
+                                </div>
+                            </div>
+                            
+                            <div id="webdavSettings" style="display: none; margin-top: 10px;">
+                                <div style="margin-bottom: 8px;">
+                                    <input type="email" id="webdavUsername" class="form-control" placeholder="坚果云账号邮箱" style="font-size: 0.85em;">
+                                </div>
+                                <div style="margin-bottom: 8px;">
+                                    <input type="password" id="webdavPassword" class="form-control" placeholder="应用授权密码(非登录密码)" style="font-size: 0.85em;">
+                                </div>
+                                <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+                                    <button type="button" id="testWebdav" class="webdav-btn webdav-btn-vertical" style="flex: 1;" title="测试坚果云连接">
+                                        <i class="fas fa-check"></i>
+                                        <span>Test</span>
+                                    </button>
+                                    <button type="button" id="backupNow" class="webdav-btn webdav-btn-vertical" style="flex: 1;" title="立即备份数据到坚果云">
+                                        <i class="fas fa-upload"></i>
+                                        <span>Backup</span>
+                                    </button>
+                                    <button type="button" id="restoreData" class="webdav-btn webdav-btn-vertical" style="flex: 1;" title="从坚果云恢复备份数据">
+                                        <i class="fas fa-download"></i>
+                                        <span>Restore</span>
+                                    </button>
+                                    <button type="button" id="logoutWebdav" class="webdav-btn webdav-btn-vertical webdav-btn-logout" style="flex: 1;" title="退出坚果云账号">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        <span>Logout</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="webdav-tips" style="padding: 8px; border-radius: 4px; margin-top: 8px;">
+                                <small style="display: block; font-size: 0.8em;">Unlimited storage via Nutstore WebDAV</small>
+                                <small style="display: block; font-size: 0.8em;">
+                                    <a href="https://www.jianguoyun.com/d/account#safe" target="_blank">Get app password →</a>
+                                </small>
+                            </div>
+                        </div>
+
                         <!-- 主动提醒设置 -->
                         <div class="option-card" style="padding: 12px;">
                             <div style="display: flex; align-items: center; justify-content: space-between;">
@@ -592,46 +645,6 @@
                                 <small style="display: block; font-size: 0.8em;" class="reminder-tips">
                                     (Fit best parameters when you have enough data.)
                                 </small>
-                            </div>
-                        </div>
-
-                        <!-- 坚果云 WebDAV 配置 -->
-                        <div class="option-card" style="padding: 12px;">
-                            <div style="display: flex; align-items: center; justify-content: space-between;">
-                                <div style="display: flex; align-items: center; gap: 12px;">
-                                    <i class="fas fa-cloud" style="font-size: 0.95em; line-height: 1; position: relative; top: 7px;"></i>
-                                    <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">Nutstore Backup</h4>
-                                </div>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input custom-switch" type="checkbox" id="webdavToggle">
-                                </div>
-                            </div>
-                            
-                            <div id="webdavSettings" style="display: none; margin-top: 10px;">
-                                <div style="margin-bottom: 8px;">
-                                    <label style="font-size: 0.85em; margin-bottom: 4px;">Nutstore Email</label>
-                                    <input type="email" id="webdavUsername" class="form-control" placeholder="your@email.com" style="font-size: 0.85em;">
-                                </div>
-                                
-                                <div style="margin-bottom: 8px;">
-                                    <label style="font-size: 0.85em; margin-bottom: 4px;">App Password</label>
-                                    <input type="password" id="webdavPassword" class="form-control" placeholder="Application password" style="font-size: 0.85em;">
-                                    <small style="font-size: 0.75em; color: #888;">Get from Nutstore Account Settings → Security → Add App Password</small>
-                                </div>
-                                
-                                <div style="display: flex; gap: 8px; margin-top: 10px;">
-                                    <button id="testWebdav" class="btn btn-sm btn-primary" style="font-size: 0.85em;">
-                                        <i class="fas fa-check"></i> Test Connection
-                                    </button>
-                                    <button id="backupNow" class="btn btn-sm btn-success" style="font-size: 0.85em;" disabled>
-                                        <i class="fas fa-upload"></i> Backup Now
-                                    </button>
-                                    <button id="restoreData" class="btn btn-sm btn-warning" style="font-size: 0.85em;" disabled>
-                                        <i class="fas fa-download"></i> Restore
-                                    </button>
-                                </div>
-                                
-                                <div id="webdavStatus" style="margin-top: 8px; font-size: 0.8em;"></div>
                             </div>
                         </div>
 

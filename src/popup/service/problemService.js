@@ -9,6 +9,8 @@ import { store } from "../store";
 import { mergeProblems, syncLocalAndCloudStorage } from "../util/utils";
 import cloudStorageDelegate from "../delegate/cloudStorageDelegate";
 import { copy, getDeletedProblem } from "../entity/problem";
+import { webdavService } from "./webdavService";
+import { syncManager } from "./syncManager";
 
 export const getAllProblems = async () => {
     let cnMode = await isInCnMode();
@@ -66,6 +68,9 @@ export const createOrUpdateProblem = async (problem) => {
     const problems = await getAllProblems();
     problems[problem.index] = problem;
     await setProblems(problems);
+    
+    // 触发同步
+    syncManager.debouncedSync(problem.index);
 }
 
 export const markProblemAsMastered = async (problemId) => {
@@ -80,6 +85,9 @@ export const markProblemAsMastered = async (problemId) => {
     problems[problemId] = problem;
 
     await setProblems(problems);
+    
+    // 触发同步
+    syncManager.debouncedSync(problemId);
 };
 
 export const deleteProblem = async (problemId) => {
@@ -94,6 +102,9 @@ export const deleteProblem = async (problemId) => {
         await addNewOperationHistory(problem, OPS_TYPE.DELETE, Date.now());
         problems[problemId] = problem;
         await setProblems(problems);
+        
+        // 触发同步
+        syncManager.debouncedSync(problemId);
     }
 };
 
@@ -110,11 +121,34 @@ export const resetProblem = async (problemId) => {
     problems[problemId] = problem;
 
     await setProblems(problems);
+    
+    // 触发同步
+    syncManager.debouncedSync(problemId);
 };
 
 export const syncProblems = async () => {
-    if (!store.isCloudSyncEnabled) return;
-    let cnMode = await isInCnMode();
-    const key = cnMode ? CN_PROBLEM_KEY : PROBLEM_KEY;
-    await syncLocalAndCloudStorage(key, mergeProblems); 
+    // 使用新的同步管理器
+    await syncManager.performSync();
+}
+
+/**
+ * 批量更新问题（用于批量操作）
+ */
+export const batchUpdateProblems = async (updates) => {
+    const problems = await getAllProblems();
+    
+    for (const update of updates) {
+        if (problems[update.id]) {
+            problems[update.id] = {
+                ...problems[update.id],
+                ...update.data,
+                modificationTime: Date.now()
+            };
+        }
+    }
+    
+    await setProblems(problems);
+    
+    // 批量操作立即同步
+    await syncManager.immediateSync();
 }

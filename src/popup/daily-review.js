@@ -1,5 +1,7 @@
 import { renderAll } from './view/view.js';
 import { getAllProblems, syncProblems } from "./service/problemService.js";
+import { isInCnMode } from "./service/modeService.js";
+import { setLocalStorageData } from "./delegate/localStorageDelegate.js";
 import { getLevelColor,getCurrentRetrievability } from './util/utils.js';
 import { handleFeedbackSubmission, handleAddBlankProblem } from './script/submission.js';
 import './popup.css';
@@ -13,6 +15,9 @@ import Swal from 'sweetalert2';
 // 导入 getAllRevlogs 函数
 import { getAllRevlogs, exportRevlogsToCSV,saveFSRSParams } from './util/fsrs.js';
 import { getRevlogCount, optimizeParameters,updateFSRSInstance } from './service/fsrsService.js';
+import { webdavService } from './service/webdavService.js';
+import { syncManager } from './service/syncManager.js';
+import { conflictResolver } from './component/conflictResolver.js';
 
 // 在文件开头添加
 const LAST_AVERAGE_KEY = 'lastRetrievabilityAverage';
@@ -529,7 +534,7 @@ function createReviewCards() {
                 e.stopPropagation();
                 console.log('复习按钮被点击');
 
-                const updatedProblem = await handleFeedbackSubmission(problem);
+                const updatedProblem = await handleFeedbackSubmission(problem, true);
                 if (updatedProblem) {
                     markAsReviewed(this, updatedProblem);
                 }
@@ -841,6 +846,151 @@ function showModal(title, content, buttons = null) {
     }
 }
 
+// 初始化同步状态指示器
+function initializeSyncStatusIndicator() {
+    // 防止重复初始化
+    if (syncStatusIndicatorInitialized) {
+        console.log('Sync status indicator already initialized, skipping');
+        return;
+    }
+    
+    const syncIndicator = document.getElementById('syncIndicator');
+    const syncIcon = document.getElementById('syncIcon');
+    const syncStatus = document.getElementById('syncStatus');
+    
+    if (!syncIndicator || !syncIcon || !syncStatus) return;
+    
+    // 只有在启用了同步功能时才显示
+    const showIndicator = webdavService.isConfigured || store.isCloudSyncEnabled;
+    if (showIndicator) {
+        syncIndicator.style.display = 'flex';
+        
+        // 根据认证状态设置初始显示
+        if (webdavService.isConfigured && !webdavService.isAuthenticated) {
+            syncIndicator.className = 'sync-indicator warning';
+            syncStatus.textContent = 'Login Required';
+        } else {
+            syncIndicator.className = 'sync-indicator';
+            syncStatus.textContent = 'Synced';
+        }
+    } else {
+        syncIndicator.style.display = 'none';
+        return;
+    }
+    
+    // 监听认证状态变化
+    webdavService.onAuthStatusChange = (isAuthenticated) => {
+        if (!isAuthenticated) {
+            syncIndicator.className = 'sync-indicator warning';
+            syncStatus.textContent = 'Login Required';
+        } else {
+            syncIndicator.className = 'sync-indicator';
+            syncStatus.textContent = 'Synced';
+            
+            // 认证成功后立即触发一次完整同步，确保本地数据上传到云端
+            setTimeout(() => {
+                syncManager.immediateSync().then(() => {
+                    console.log('Initial sync completed after authentication');
+                }).catch(error => {
+                    console.error('Initial sync failed after authentication:', error);
+                });
+            }, 500); // 延迟500ms确保认证完全完成
+        }
+    };
+    
+    // 添加同步状态监听器
+    syncManager.addSyncListener((event) => {
+        console.log('Sync event received in daily-review:', event);
+        switch (event.status) {
+            case 'syncing':
+                syncIndicator.className = 'sync-indicator syncing';
+                syncStatus.textContent = 'Syncing...';
+                console.log('Sync status: syncing');
+                break;
+            case 'success':
+                syncIndicator.className = 'sync-indicator success';
+                syncStatus.textContent = 'Synced';
+                // 同步成功后自动刷新当前视图
+                console.log('Sync success - checking active tab for refresh');
+                const activeTab = document.querySelector('.nav-btn.active');
+                console.log('Active tab found:', activeTab ? activeTab.textContent : 'none');
+                if (activeTab && activeTab.textContent.includes('Review')) {
+                    console.log('Refreshing Review page data');
+                    // 强制重新初始化整个review页面
+                    initializeReviewPage().then(() => {
+                        console.log('Review page re-initialized after sync');
+                    }).catch(error => {
+                        console.error('Failed to re-initialize review page:', error);
+                    });
+                } else if (activeTab && activeTab.textContent.includes('Problems')) {
+                    console.log('Refreshing Problems page data');
+                    loadProblemList();
+                }
+                // 3秒后恢复正常状态
+                setTimeout(() => {
+                    syncIndicator.className = 'sync-indicator';
+                    syncStatus.textContent = 'Synced';
+                }, 3000);
+                break;
+            case 'error':
+                syncIndicator.className = 'sync-indicator error';
+                syncStatus.textContent = 'Sync Error';
+                console.log('Sync error:', event.error);
+                // 5秒后恢复正常状态
+                setTimeout(() => {
+                    syncIndicator.className = 'sync-indicator';
+                    syncStatus.textContent = 'Synced';
+                }, 5000);
+                break;
+            default:
+                syncIndicator.className = 'sync-indicator';
+                syncStatus.textContent = 'Synced';
+        }
+    });
+    
+    // 点击同步指示器的行为
+    syncIndicator.addEventListener('click', async () => {
+        // 如果未认证，跳转到设置页面
+        if (webdavService.isConfigured && !webdavService.isAuthenticated) {
+            const tabs = document.querySelectorAll('.nav-btn');
+            const contents = document.querySelectorAll('[id$="View"]');
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            const settingsTab = Array.from(tabs).find(t => t.textContent.includes('Settings'));
+            const settingsContent = document.getElementById('settingsView');
+            if (settingsTab && settingsContent) {
+                settingsTab.classList.add('active');
+                settingsContent.classList.add('active');
+                
+                // 滚动到WebDAV设置部分
+                const webdavToggle = document.getElementById('webdavToggle');
+                if (webdavToggle) {
+                    webdavToggle.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        } else {
+            // 已认证，执行同步
+            await syncManager.immediateSync();
+            // 同步完成后刷新当前视图
+            const activeTab = document.querySelector('.nav-btn.active');
+            if (activeTab && activeTab.textContent.includes('Review')) {
+                console.log('Manual sync completed, re-initializing review page');
+                await initializeReviewPage();
+            } else if (activeTab && activeTab.textContent.includes('Problems')) {
+                await loadProblemList();
+            }
+        }
+    });
+    
+    // 添加提示
+    syncIndicator.title = webdavService.isAuthenticated ? 'Click to sync now' : 'Click to login';
+    
+    // 标记已初始化
+    syncStatusIndicatorInitialized = true;
+    console.log('Sync status indicator initialized');
+}
+
 // 初始化FSRS参数优化卡片
 async function initializeFSRSOptimization() {
     try {
@@ -1088,8 +1238,410 @@ async function initializeFSRSOptimization() {
     }
 }
 
+// 标记是否已初始化
+let webdavInitialized = false;
+let syncManagerInitialized = false;
+let syncStatusIndicatorInitialized = false;
+
+// 初始化坚果云 WebDAV
+async function initializeWebDAV() {
+    const webdavToggle = document.getElementById('webdavToggle');
+    const webdavSettings = document.getElementById('webdavSettings');
+    const webdavUsername = document.getElementById('webdavUsername');
+    const webdavPassword = document.getElementById('webdavPassword');
+    const testWebdavBtn = document.getElementById('testWebdav');
+    const backupNowBtn = document.getElementById('backupNow');
+    const restoreDataBtn = document.getElementById('restoreData');
+    const logoutWebdavBtn = document.getElementById('logoutWebdav');
+    
+    if (!webdavToggle) return;
+    
+    // 如果已经初始化过，直接返回
+    if (webdavInitialized) {
+        return;
+    }
+    webdavInitialized = true;
+    
+    // 只初始化一次同步管理器
+    if (!syncManagerInitialized) {
+        syncManager.setConflictResolver(async (conflict) => {
+            return await conflictResolver.resolveConflict(conflict);
+        });
+        
+        // 设置同步状态监听器
+        initializeSyncStatusIndicator();
+        
+        // 异步初始化同步管理器，不阻塞UI
+        setTimeout(() => {
+            syncManager.initialize().then(() => {
+                console.log('Sync manager initialized');
+            });
+        }, 100);
+        
+        syncManagerInitialized = true;
+    }
+    
+    // 快速加载已保存的配置
+    const hasConfig = await webdavService.loadConfig();
+    webdavToggle.checked = hasConfig;
+    
+    if (hasConfig) {
+        webdavSettings.style.display = 'block';
+        // 显示已配置的用户名和密码
+        const config = await chrome.storage.local.get('webdavConfig');
+        if (config.webdavConfig) {
+            webdavUsername.value = config.webdavConfig.username;
+            // 解码并显示密码
+            webdavPassword.value = atob(config.webdavConfig.password);
+        }
+    }
+    
+    // 切换显示/隐藏
+    webdavToggle.addEventListener('change', () => {
+        webdavSettings.style.display = webdavToggle.checked ? 'block' : 'none';
+        if (!webdavToggle.checked) {
+            // 禁用时清除配置
+            webdavService.clearConfig();
+            // 更新同步指示器
+            const syncIndicator = document.getElementById('syncIndicator');
+            if (syncIndicator) {
+                syncIndicator.style.display = 'none';
+            }
+        }
+    });
+    
+    // 自动保存用户名和密码
+    let saveTimer = null;
+    const autoSaveCredentials = async () => {
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(async () => {
+            const username = webdavUsername.value.trim();
+            const password = webdavPassword.value.trim();
+            
+            if (username && password) {
+                // 自动保存并测试连接
+                try {
+                    const isValid = await webdavService.configure({
+                        username,
+                        password
+                    });
+                    // 更新同步指示器
+                    initializeSyncStatusIndicator();
+                    
+                    // 如果是首次成功连接，立即同步本地数据
+                    if (isValid) {
+                        setTimeout(() => {
+                            syncManager.immediateSync().then(() => {
+                                console.log('Auto-save sync completed');
+                            }).catch(error => {
+                                console.error('Auto-save sync failed:', error);
+                            });
+                        }, 1000);
+                    }
+                } catch (error) {
+                    console.error('Auto-save failed:', error);
+                }
+            }
+        }, 1000); // 输入停止1秒后自动保存
+    };
+    
+    if (webdavUsername) {
+        webdavUsername.addEventListener('input', autoSaveCredentials);
+    }
+    
+    if (webdavPassword) {
+        webdavPassword.addEventListener('input', autoSaveCredentials);
+    }
+    
+    // 测试连接
+    if (testWebdavBtn) {
+        testWebdavBtn.addEventListener('click', async () => {
+            const username = webdavUsername.value.trim();
+            const password = webdavPassword.value.trim();
+            
+            if (!username || !password) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Missing Info',
+                    text: 'Please enter username and password',
+                    timer: 2000
+                });
+                return;
+            }
+            
+            testWebdavBtn.disabled = true;
+            testWebdavBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Testing...</span>';
+            
+            try {
+                const isValid = await webdavService.configure({
+                    username,
+                    password
+                });
+                
+                if (isValid) {
+                    // 配置成功后显示同步指示器
+                    const syncIndicator = document.getElementById('syncIndicator');
+                    if (syncIndicator) {
+                        syncIndicator.style.display = 'flex';
+                        initializeSyncStatusIndicator();
+                    }
+                    
+                    // 立即触发一次同步，上传本地数据到云端
+                    setTimeout(() => {
+                        syncManager.immediateSync().then(() => {
+                            console.log('Manual test sync completed');
+                        }).catch(error => {
+                            console.error('Manual test sync failed:', error);
+                        });
+                    }, 1000); // 延迟1秒确保UI更新完成
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Connected!',
+                        text: 'Successfully connected to Nutstore. Syncing local data...',
+                        timer: 3000
+                    });
+                } else {
+                    throw new Error('Connection failed');
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Connection Failed',
+                    text: 'Please check your credentials',
+                    timer: 3000
+                });
+            } finally {
+                testWebdavBtn.disabled = false;
+                testWebdavBtn.innerHTML = '<i class="fas fa-check"></i><span>Test</span>';
+            }
+        });
+    }
+    
+    // 立即备份
+    if (backupNowBtn) {
+        backupNowBtn.addEventListener('click', async () => {
+            if (!webdavService.isConfigured) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Not Configured',
+                    text: 'Please configure WebDAV first',
+                    timer: 2000
+                });
+                return;
+            }
+            
+            backupNowBtn.disabled = true;
+            backupNowBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Backing up...</span>';
+            
+            try {
+                const problems = await getAllProblems();
+                const filename = await webdavService.backupProblems(Object.values(problems));
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Backup Complete',
+                    text: `Saved ${Object.keys(problems).length} problems to Nutstore`,
+                    timer: 2000
+                });
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Backup Failed',
+                    text: error.message,
+                    timer: 3000
+                });
+            } finally {
+                backupNowBtn.disabled = false;
+                backupNowBtn.innerHTML = '<i class="fas fa-upload"></i><span>Backup</span>';
+            }
+        });
+    }
+    
+    // 恢复数据
+    if (restoreDataBtn) {
+        restoreDataBtn.addEventListener('click', async () => {
+            if (!webdavService.isConfigured) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Not Configured',
+                    text: 'Please configure WebDAV first',
+                    timer: 2000
+                });
+                return;
+            }
+            
+            try {
+                // 获取备份列表
+                const backups = await webdavService.getBackupList();
+                
+                if (backups.length === 0) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'No Backups',
+                        text: 'No backup files found in Nutstore',
+                        timer: 2000
+                    });
+                    return;
+                }
+                
+                // 按时间排序，最新的在前
+                backups.sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
+                
+                // 默认选择最新的备份
+                const latestBackup = backups[0];
+                
+                // 显示备份列表，让用户确认或选择其他
+                const backupOptions = {};
+                backups.forEach((backup, index) => {
+                    const date = new Date(backup.lastModified);
+                    const isLatest = index === 0;
+                    backupOptions[backup.name] = `${date.toLocaleString()}${isLatest ? ' (Latest)' : ''}`;
+                });
+                
+                const { value: selectedBackup } = await Swal.fire({
+                    title: 'Restore from Backup',
+                    html: `
+                        <div style="text-align: left; margin-bottom: 10px;">
+                            <strong>Latest backup:</strong><br>
+                            ${new Date(latestBackup.lastModified).toLocaleString()}
+                        </div>
+                    `,
+                    input: 'select',
+                    inputOptions: backupOptions,
+                    inputValue: latestBackup.name, // 默认选中最新的
+                    showCancelButton: true,
+                    confirmButtonText: 'Restore',
+                    cancelButtonText: 'Cancel'
+                });
+                
+                if (selectedBackup) {
+                    // 确认恢复
+                    const { isConfirmed } = await Swal.fire({
+                        title: 'Confirm Restore',
+                        text: 'This will replace all current data. Continue?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, restore',
+                        cancelButtonText: 'Cancel'
+                    });
+                    
+                    if (isConfirmed) {
+                        restoreDataBtn.disabled = true;
+                        restoreDataBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Restoring...</span>';
+                        
+                        const problemsArray = await webdavService.restoreProblems(selectedBackup);
+                        
+                        // 转换为对象格式并保存
+                        const problemsObj = {};
+                        problemsArray.forEach(problem => {
+                            if (problem.index) {
+                                problemsObj[problem.index] = problem;
+                            }
+                        });
+                        
+                        // 根据当前模式保存
+                        const cnMode = await isInCnMode();
+                        const key = cnMode ? 'cnProblems' : 'problems';
+                        await setLocalStorageData(key, problemsObj);
+                        
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Restore Complete',
+                            text: `Restored ${Object.keys(problemsObj).length} problems from backup`,
+                            timer: 2000
+                        }).then(() => {
+                            // 刷新页面
+                            window.location.reload();
+                        });
+                    }
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Restore Failed',
+                    text: error.message,
+                    timer: 3000
+                });
+            } finally {
+                restoreDataBtn.disabled = false;
+                restoreDataBtn.innerHTML = '<i class="fas fa-download"></i><span>Restore</span>';
+            }
+        });
+    }
+    
+    // 登出按钮
+    if (logoutWebdavBtn) {
+        logoutWebdavBtn.addEventListener('click', async () => {
+            const result = await Swal.fire({
+                title: 'Logout from Nutstore?',
+                text: 'Your saved credentials will be removed',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, logout',
+                cancelButtonText: 'Cancel'
+            });
+            
+            if (result.isConfirmed) {
+                // 清除配置
+                await webdavService.clearConfig();
+                
+                // 清空输入框
+                webdavUsername.value = '';
+                webdavPassword.value = '';
+                
+                // 隐藏同步指示器
+                const syncIndicator = document.getElementById('syncIndicator');
+                if (syncIndicator) {
+                    syncIndicator.style.display = 'none';
+                }
+                
+                // 取消勾选
+                webdavToggle.checked = false;
+                webdavSettings.style.display = 'none';
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Logged Out',
+                    text: 'Successfully logged out from Nutstore',
+                    timer: 2000
+                });
+            }
+        });
+    }
+}
+
+// 标记选项是否已初始化
+let optionsInitialized = false;
+
+// 快速更新选项显示
+function updateOptionsDisplay() {
+    const problemSorterSelect = document.getElementById('problemSorterSelect');
+    if (problemSorterSelect && store.problemSorter) {
+        problemSorterSelect.value = store.problemSorter;
+    }
+    
+    const defaultCardLimitInput = document.getElementById('defaultCardLimit');
+    if (defaultCardLimitInput && store.defaultCardLimit) {
+        defaultCardLimitInput.value = store.defaultCardLimit;
+    }
+    
+    const reminderToggle = document.getElementById('reminderToggle');
+    if (reminderToggle) {
+        reminderToggle.checked = store.reminderEnabled || false;
+    }
+}
+
 // 添加设置相关的初始化函数
 async function initializeOptions() {
+    // 如果已经初始化过，只更新显示
+    if (optionsInitialized) {
+        updateOptionsDisplay();
+        return;
+    }
+    
     await loadConfigs();
 
     const optionsForm = document.getElementById('optionsForm');
@@ -1117,6 +1669,9 @@ async function initializeOptions() {
         syncToggle.checked = store.isCloudSyncEnabled || false;
     }
 
+
+    // 初始化坚果云 WebDAV 设置
+    await initializeWebDAV();
 
     // 初始化提醒开关和配置
     const reminderToggle = document.getElementById('reminderToggle');
@@ -1210,6 +1765,9 @@ async function initializeOptions() {
     await initializeFSRSOptimization();
     
     // 修改保存成功提示
+    // 标记已初始化
+    optionsInitialized = true;
+    
     optionsForm.addEventListener('submit', async e => {
         e.preventDefault();
         const selectedSorterId = problemSorterSelect.value;
@@ -1392,8 +1950,13 @@ document.addEventListener('DOMContentLoaded', async function() {
                     break;
                 case 'Settings':
                     viewId = 'moreView';
-                    await initializeOptions();
-                    await initializeWebDAV();
+                    // 并行初始化，不阻塞UI
+                    Promise.all([
+                        initializeOptions(),
+                        initializeWebDAV()
+                    ]).catch(error => {
+                        console.error('Settings initialization error:', error);
+                    });
                     break;
             }
             

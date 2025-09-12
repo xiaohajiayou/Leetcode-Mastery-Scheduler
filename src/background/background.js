@@ -264,4 +264,47 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
         return true; // 保持消息通道开放
     }
+    
+    // 处理 WebDAV 请求
+    if (request.action === 'webdavRequest') {
+        handleWebDAVRequest(request.params)
+            .then(response => sendResponse({ success: true, data: response }))
+            .catch(error => sendResponse({ success: false, error: error.message }));
+        return true; // 保持消息通道开放用于异步响应
+    }
 });
+
+// 处理 WebDAV 请求的函数
+async function handleWebDAVRequest(params) {
+    const { method, url, headers, body } = params;
+    
+    try {
+        const response = await fetch(url, {
+            method: method,
+            headers: headers,
+            body: body
+        });
+        
+        const contentType = response.headers.get('content-type');
+        let data;
+        
+        if (contentType && contentType.includes('application/json')) {
+            data = await response.json();
+        } else if (contentType && contentType.includes('text')) {
+            data = await response.text();
+        } else {
+            data = await response.text();
+        }
+        
+        return {
+            ok: response.ok,
+            status: response.status,
+            statusText: response.statusText,
+            data: data,
+            headers: Object.fromEntries(response.headers.entries())
+        };
+    } catch (error) {
+        console.error('WebDAV request failed:', error);
+        throw error;
+    }
+}

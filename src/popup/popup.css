@@ -1,3 +1,66 @@
+/* 同步状态指示器样式 */
+.sync-indicator {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 3px 6px;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    z-index: 100;
+    font-size: 11px;
+    color: #666;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.sync-indicator:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.sync-indicator #syncIcon {
+    font-size: 12px;
+    color: #4CAF50;
+}
+
+.sync-indicator.syncing #syncIcon {
+    animation: spin 1s linear infinite;
+    color: #2196F3;
+}
+
+.sync-indicator.error {
+    background: rgba(255, 235, 238, 0.95);
+}
+
+.sync-indicator.error #syncIcon {
+    color: #f44336;
+}
+
+.sync-indicator.success #syncIcon {
+    color: #4CAF50;
+}
+
+.sync-indicator.warning {
+    background: rgba(255, 243, 224, 0.95);
+}
+
+.sync-indicator.warning #syncIcon {
+    color: #ff9800;
+}
+
+.sync-indicator.warning #syncStatus {
+    color: #ff9800;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
 body {
     background-color: #0D1F2D; /* 深色背景 */
     background-size: cover; /* 背景覆盖 */
@@ -616,6 +679,76 @@ display: inline-block;  /* 确保渐变效果生效 */
 .btn-outline-secondary:hover {
     background: rgba(108, 117, 125, 0.1);
 }
+
+/* WebDAV按钮样式 - 统一设计系统 */
+.webdav-btn {
+    padding: 4px 8px;
+    font-size: 0.75em;
+    border: 1px solid rgba(74, 157, 156, 0.3);
+    background: rgba(29, 46, 61, 0.5);
+    color: #4a9d9c;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.webdav-btn:hover {
+    background: rgba(74, 157, 156, 0.1);
+    border-color: rgba(74, 157, 156, 0.5);
+    color: #61dafb;
+}
+
+.webdav-btn:active {
+    transform: scale(0.98);
+}
+
+.webdav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.webdav-btn i {
+    margin-right: 3px;
+    font-size: 0.85em;
+    vertical-align: middle;
+}
+
+/* 垂直布局按钮样式 */
+.webdav-btn-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 8px;
+    gap: 5px;
+    position: relative;
+}
+
+.webdav-btn-vertical i {
+    margin-right: 0;
+    font-size: 1.3em;
+}
+
+.webdav-btn-vertical span {
+    font-size: 0.95em;
+    line-height: 1;
+    font-weight: 600;
+}
+
+/* 退出按钮特殊样式 */
+.webdav-btn-logout {
+    border-color: rgba(74, 157, 156, 0.2);
+    color: rgba(156, 163, 175, 0.8);
+}
+
+.webdav-btn-logout:hover {
+    background: rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: rgba(239, 68, 68, 0.8);
+}
+
 
 
 

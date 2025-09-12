@@ -22,7 +22,51 @@ var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `body {
+___CSS_LOADER_EXPORT___.push([module.id, `/* 同步状态指示器样式 */
+.sync-indicator {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 4px 8px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    z-index: 1000;
+    font-size: 12px;
+    color: #333;
+}
+
+.sync-indicator #syncIcon {
+    font-size: 12px;
+    color: #4CAF50;
+}
+
+.sync-indicator.syncing #syncIcon {
+    animation: spin 1s linear infinite;
+    color: #2196F3;
+}
+
+.sync-indicator.error {
+    background: rgba(255, 235, 238, 0.95);
+}
+
+.sync-indicator.error #syncIcon {
+    color: #f44336;
+}
+
+.sync-indicator.success #syncIcon {
+    color: #4CAF50;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+body {
     background-color: #0D1F2D; /* 深色背景 */
     background-size: cover; /* 背景覆盖 */
     color: #ffffff; /* 白色字体 */
@@ -1254,7 +1298,7 @@ td, th {
         transparent
     ) !important;
     background-size: 1rem 1rem !important;
-}`, "",{"version":3,"sources":["webpack://./src/popup/popup.css"],"names":[],"mappings":"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","sourcesContent":["body {\n    background-color: #0D1F2D; /* 深色背景 */\n    background-size: cover; /* 背景覆盖 */\n    color: #ffffff; /* 白色字体 */\n    font-family: 'Raleway', sans-serif;\n    position: relative;\n}\n/* 导航栏样式 */\n.nav-bar {\n    background-color: #0D1F2D;\n\n    display: flex;\n    flex-direction: column;  /* 改为纵向排列 */\n    align-items: center;     /* 水平居中 */\n    border-bottom: 1px solid #4a9d9c;\n}\n\n.nav-row {\n    display: flex;\n    justify-content: center;  /* 内容居中 */\n    align-items: center;\n    margin: 0;  /* 移除外边距 */\n    padding: 2px 0;  /* 减小上下内边距 */\n    line-height: 1;  /* 减小行高 */\n    margin-top: -5px;\n}\n\n/* 标题行样式 */\n.nav-title {\ncolor: #FF3D3D;\nfont-weight: 900;  /* 更粗的字体 */\nfont-size: 1.2em;  /* 更大的字号 */\ntext-transform: uppercase;  /* 转换为大写 */\nletter-spacing: 2px;  /* 字母间距 */\ntext-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  /* 添加阴影效果 */\nfont-family: 'Arial Black', Gadget, sans-serif;  /* 更粗重的字体 */\nmargin-top: 5px;\npadding: 5px 10px;  /* 添加内边距 */\nbackground: linear-gradient(180deg, #ff6b6b 0%, #FF3D3D 100%);  /* 渐变色 */\n-webkit-background-clip: text;  /* 使渐变色应用到文字 */\n-webkit-text-fill-color: transparent;  /* 使文字透明以显示背景 */\ndisplay: inline-block;  /* 确保渐变效果生效 */\n}\n\n/* 专门为标题容器添加类 */\n.nav-row.title-row {\n    margin: 0;\n    padding: 0;\n    line-height: 1;\n}\n\n/* 特别处理第二个标题行 */\n.nav-row.title-row + .nav-row.title-row {\n    margin-top: -10px;  /* 调整这个值来控制两行标题间的间距 */\n}\n\n/* 网站信息行样式 */\n.nav-site {\n    color: #4a9d9c;\n    font-size: 0.9em;\n    padding: 2px 8px;\n    border-radius: 4px;\n    background-color: rgba(74, 157, 156, 0.1);\n}\n\n/* 导航按钮行样式 */\n.nav-btn {\n    background: none;\n    border: none;\n    color: #888;\n    padding: 5px 15px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    font-size: 1em;\n    position: relative;\n}\n\n.nav-btn:hover {\n    color: #fff;\n}\n\n.nav-btn.active {\n    color: #fff;\n}\n\n.nav-btn.active::after {\n    content: '';\n    position: absolute;\n    bottom: -5px;\n    left: 50%;\n    transform: translateX(-50%);\n    width: 20px;\n    height: 2px;\n    background-color: #4a9d9c;\n    border-radius: 2px;\n}\n\n.nav-right {\n    display: flex;\n    gap: 10px;\n}\n\n/* 开关按钮样式 */\n.switch-btn {\n    background-color: #2a2b30;\n    border: 1px solid #3a3b40;\n    color: #888;\n    padding: 5px 15px;\n    border-radius: 4px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n}\n\n.switch-btn:hover {\n    background-color: #3a3b40;\n    color: #fff;\n}\n\n\n.text-date {\n    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */\n    font-size: 1em; /* 修改字体大小 */\n    align-items: center;\n    gap: 2px;\n}\n.text-muted {\n    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */\n    font-size: 0.8em; /* 修改字体大小 */\n    display: flex;\n    align-items: center;\n    gap: 5px;\n}\n\n\n\n.review-card {\n    background-color: #1d2e3d; /* 卡片背景 */\n    border-radius: 15px;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    padding: 10px;\n    margin: 20px 0;\n    transition: transform 0.2s;\n    \n}\n\n        .review-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px #4a9d9c;\n}\n\n.problem-title {\n    font-family: 'Press Start 2P', cursive;\n    font-size: 0.9em;\n    color: #ffffff; /* 白色字体 */\n}\n\n\n\n.difficulty-Easy {\n    color: #4a9d9c;\n}\n\n.difficulty-Medium {\n    color: #f0b215;\n}\n\n.difficulty-Hard {\n    color: #FF3D3D;\n}\n\n.progress {\n    height: 8px;\n    margin-top: 10px;\n}\n\n.btn-review {\n\n    border: none;\n    color: #e0e0e0;\n    font-size: 1.5em;\n    border-radius: 50%;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    font-weight: 500;\n    position: relative;\n    z-index: 1;\n    pointer-events: auto !important;\n}\n\n\n.btn-review:hover {\n    color: #afffff;\n    transform: translateY(-1px);\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n\n.btn-review:active {\n    transform: translateY(0);\n}\n\n.btn-review:disabled {\n\n    color: white;\n    opacity: 0.8;\n    cursor: not-allowed;\n}\n\n.btn-review.btn-lg {\n    font-size: 1.1em;\n    padding: 10px 24px;\n}\n\n.review-card .btn-review,\n.container .btn-review {\n    pointer-events: auto !important;\n    cursor: pointer !important;\n}\n\n.review-card.reviewed {\n    opacity: 0.6;\n}\n\n.header-section {\n    position: relative;\n    border-radius: 15px;\n    overflow: hidden;\n    background-color: #1d2e3d;\n    border: 1px solid rgba(74, 157, 156, 0.1);  /* 降低边框透明度 */\n    box-shadow: 0 0 8px rgba(74, 157, 156, 0.1);  /* 降低阴影透明度 */\n    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n    padding: 10px;\n    margin: 10px 15px;\n}\n\n.header-section:hover {\n    border-color: rgba(74, 157, 156, 0.2);  /* 降低悬停时边框透明度 */\n    box-shadow: \n        0 0 12px rgba(74, 157, 156, 0.15),  /* 降低外阴影透明度 */\n        inset 0 0 8px rgba(74, 157, 156, 0.05);  /* 降低内阴影透明度 */\n    transform: translateY(-1px);\n}\n\n.header-section::before {\n    content: '';\n    position: absolute;\n    top: -1px;\n    left: -1px;\n    right: -1px;\n    bottom: -1px;\n    border-radius: 15px;\n    background: linear-gradient(45deg, \n        rgba(74, 157, 156, 0.05),  /* 降低渐变透明度 */\n        rgba(74, 157, 156, 0.1),\n        rgba(74, 157, 156, 0.05)\n    );\n    z-index: -1;\n    opacity: 0;\n    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n}\n\n.header-section:hover::before {\n    opacity: 1;\n}\n\n.completion-circle {\n    width: 120px;\n    height: 120px;\n    border-radius: 50%;\n    background: conic-gradient(#afffff var(--percentage), #3a3a4d var(--percentage)); /* 使用深色作为背景 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin: 0 auto;\n    transition: background 0.5s ease; /* 背景渐变动画 */\n}\n\n.inner-circle {\n    width: 100px;\n    height: 100px;\n    background: #1d2e3d; /* 内圈背景 */\n    border-radius: 50%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 1.5em;\n    font-weight: bold;\n    color: #FF3D3D; /* 内圈字体颜色 */\n    transition: transform 0.5s ease; /* 内圈缩放动画 */\n}\n\n.retrievability {\n    font-size: 1.0em;\n    color: #ffffff; /* 白色字体 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.retrievability-icon {\n    margin-right: 10px;\n    color: #4a9d9c;\n}\n\n.retrievability-value {\n    font-weight: bold;\n    margin-left: 10px;\n    color: #4a9d9c; /* Green color for good retrievability */\n    transition: color 0.3s;\n}\n\n.retrievability-value.low {\n    color: #FF3D3D; /* Red color for low retrievability */\n}\n\n.trend-icon {\n    margin-left: 10px;\n    font-size: 1.5em;\n    transition: transform 0.3s;\n}\n\n.trend-up {\n    color: #4a9d9c; /* Green for upward trend */\n}\n\n.trend-down {\n    color: #FF3D3D; /* Red for downward trend */\n}\n\n.low-memory-warning {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    display: none;\n    z-index: 0;\n}\n\n.low-memory-warning.active {\n    display: flex;\n}\n\n.card-limit-input input[type=\"number\"]::-webkit-inner-spin-button,\n.card-limit-input input[type=\"number\"]::-webkit-outer-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n}\n\n.card-limit-input input[type=\"number\"] {\n    -moz-appearance: textfield;\n    background: #3a3a4d; /* 输入框背景 */\n    color: #ffffff; /* 输入框字体颜色 */\n    width: 40px;\n    height: 40px;\n    text-align: center;\n    font-size: 1.2em;\n    padding: 5px;\n    border: 2px solid #0D6E6E; /* 输入框边框颜色 */\n    border-radius: 8px;\n    margin: 0 10px;\n}\n\n.gear-button {\n    background: none;\n    border: none;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    padding: 5px;\n    position: relative;\n    width: 40px;\n    height: 40px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.gear-button .fa-gear {\n    font-size: 1.8em;\n    color: #0D6E6E; /* 齿轮图标颜色 */\n    transition: all 0.3s ease;\n}\n\n.gear-button .direction-icon {\n    position: absolute;\n    font-size: 1em;\n    color: #e2c027;\n    background-color: #fff;\n    border-radius: 50%;\n    width: 16px;\n    height: 16px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.3s ease;\n    left: 50%;\n    top: 50%;\n    transform: translate(-50%, -50%);\n    box-shadow: 0 1px 3px rgba(0,0,0,0.2);\n    font-weight: bold;\n}\n\n/* 悬停效果 */\n.gear-button:hover .fa-gear {\n    color: #4a9d9c; /* 悬停时齿轮图标颜色 */\n    filter: drop-shadow(0 0 2px rgba(255, 152, 0, 0.5));\n}\n\n.gear-button:hover .direction-icon {\n    color: #000;\n    background-color: #fff;\n    box-shadow: 0 2px 4px rgba(0,0,0,0.3);\n    transform: translate(-50%, -50%) scale(1.1);\n}\n\n/* 点击动画 */\n.gear-button.left:active {\n    transform: rotate(-45deg);\n}\n\n.gear-button.right:active {\n    transform: rotate(45deg);\n}\n\n.card-limit-input {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 5px;\n    margin-top: 10px;\n}\n\n.card-limit-label {\n    font-size: 1.1em;\n    color: #ffffff; /* 白色字体 */\n    margin-right: 5px;\n}\n\n/* 工具提示 */\n.gear-button::after {\n    content: attr(data-tooltip);\n    position: absolute;\n    bottom: -25px;\n    left: 50%;\n    transform: translateX(-50%);\n    background-color: rgba(0, 0, 0, 0.8);\n    color: white;\n    padding: 4px 8px;\n    border-radius: 4px;\n    font-size: 0.8em;\n    opacity: 0;\n    transition: opacity 0.3s ease;\n    pointer-events: none;\n    white-space: nowrap;\n}\n\n.gear-button:hover::after {\n    opacity: 1;\n}\n\n\n.add-problem-wrapper {\n    display: flex;\n    justify-content: center;\n}\n\n.empty-state {\n    text-align: center;\n    margin-top: 15px;\n    margin-bottom: 5px;\n    color: #4a9d9c;\n    font-size: 0.9em;\n    opacity: 0.8;\n    font-style: italic;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 8px;\n}\n\n.empty-state i {\n    font-size: 1em;\n    color: #ffd700;  /* 给灯泡图标一个金色 */\n}\n\n\n\n.add-problem {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    background: transparent;\n    border: 1px dashed rgba(74, 157, 156, 0.5);\n    width: 30px;\n    height: 30px;\n    border-radius: 8px;\n    color: #4a9d9c;\n    opacity: 0.8;\n}\n\n.add-problem-content {\n    display: flex;\n    align-items: center;\n}\n\n.add-problem i {\n    font-size: 0.8em;\n}\n\n\n/* 悬停效果 */\n.add-problem:hover {\n    background: rgba(74, 157, 156, 0.1);\n    border-style: solid;\n    opacity: 1;\n}\n\n/* 添加虚线分隔 */\n.add-problem-wrapper::before {\n    content: '';\n    position: absolute;\n    top: -8px;\n    left: 10%;\n    right: 10%;\n    height: 1px;\n    background: linear-gradient(\n        to right,\n        transparent,\n        rgba(74, 157, 156, 0.3),\n        transparent\n    );\n}\n.modal {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    background: rgba(0, 0, 0, 0.5);\n    z-index: 1000;\n    backdrop-filter: blur(4px);\n}\n\n.modal-content {\n    background: #1d2e3d;\n    border-radius: 8px;\n    padding: 16px;          /* 减小内边距 */\n    width: 280px;           /* 固定更小的宽度 */\n    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);\n    border: 1px solid rgba(97, 218, 251, 0.2);\n    animation: modalFadeIn 0.3s ease;\n}\n\n.modal-content h3 {\n    color: #61dafb;\n    margin-bottom: 12px;    /* 减小标题下方间距 */\n    font-size: 1em;         /* 减小标题字体 */\n}\n\n.form-group {\n    margin-bottom: 12px;    /* 减小表单组间距 */\n}\n\n.form-group label {\n    display: block;\n    margin-bottom: 4px;     /* 减小标签下方间距 */\n    color: #e9ecef;\n    font-size: 0.85em;      /* 减小标签字体 */\n}\n\n.form-group input {\n    width: 100%;\n    padding: 6px 8px;       /* 减小输入框内边距 */\n    border: 1px solid rgba(97, 218, 251, 0.3);\n    border-radius: 4px;\n    background: rgba(29, 46, 61, 0.8);\n    color: #e9ecef;\n    font-size: 0.85em;      /* 减小输入框字体 */\n}\n\n.button-group {\n    display: flex;\n    justify-content: flex-end;\n    gap: 8px;               /* 减小按钮间距 */\n    margin-top: 12px;       /* 减小按钮组上方间距 */\n}\n\n.button-group button {\n    padding: 4px 12px;      /* 减小按钮内边距 */\n    border-radius: 4px;\n    font-size: 0.85em;      /* 减小按钮字体 */\n}\n\n/* 自定义按钮样式 */\n.custom-btn {\n    border: 1px solid;\n}\n\n.btn-outline-warning {\n    border-color: #ffc107;\n    color: #ffc107;\n}\n\n.btn-outline-warning:hover {\n    background: rgba(255, 193, 7, 0.1);\n}\n\n.btn-outline-secondary {\n    border-color: #6c757d;\n    color: #6c757d;\n}\n\n.btn-outline-secondary:hover {\n    background: rgba(108, 117, 125, 0.1);\n}\n\n\n\n\n\n\n/* 视图容器样式 */\n.view {\n    display: none;\n    transition: opacity 0.3s ease;\n}\n\n.view.active {\n    display: block;\n}\n\n/* 题目列表页面样式 */\n.problem-list-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 20px;\n}\n\n.search-bar {\n    position: relative;\n    width: 300px;\n}\n\n.search-input {\n    width: 100%;\n    padding: 8px 35px 8px 15px;\n    border: none;\n    border-radius: 20px;\n    background: #2a2b30;\n    color: #fff;\n}\n\n.search-icon {\n    position: absolute;\n    right: 15px;\n    top: 50%;\n    transform: translateY(-50%);\n    color: #888;\n}\n\n.problem-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));\n    gap: 20px;\n    padding: 20px 0;\n}\n\n/* 更多选项页面样式 */\n.options-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));\n    gap: 20px;\n    padding: 20px 0;\n}\n\n\n\n/* 导航标签样式 */\n#problemListView .nav-tabs {\n    border-bottom: 1px solid #4a9d9c;\n\n}\n\n#problemListView .nav-tabs .nav-link {\n    color: #888;\n    border: none;\n    background: none;\n\n\n    transition: all 0.3s ease;\n}\n\n#problemListView .nav-tabs .nav-link:hover {\n    color: #fff;\n}\n\n#problemListView .nav-tabs .nav-link.active {\n    color: #4a9d9c;\n    background: none;\n    border-bottom: 2px solid #4a9d9c;\n}\n\n/* 确保tab内容区域正确显示 */\n#problemListView .tab-content {\n    display: flex;\n}\n\n#problemListView .tab-pane {\n    transition: opacity 0.3s ease;\n}\n\n#problemListView .tab-pane.active {\n    opacity: 1;\n}\n\n\n\n\n\niframe {\n    overflow: hidden;\n    border: 0;\n}\n\n.custom-btn {\n    border-color: #0D6E6E;\n    color: #4a9d9c;\n}\n\n.custom-btn:hover {\n    border-color: rgba(235, 173, 129, 1);\n    background-color: rgba(235, 173, 129, 1);\n}\n\n.custom-btn:disabled {\n    border-color: #e0e0e0;\n    color: #e0e0e0;\n}\n\n\n.footer {\n    background: linear-gradient(to bottom, rgba(29, 46, 61, 0.8) 0%, #1d2e3d 100%);\n    backdrop-filter: blur(5px);\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 12px;           /* 按钮之间的间距 */\n    border-top: 1px solid rgba(255, 255, 255, 0.1);\n    margin-top: auto;\n    padding: 8px 0;  /* 添加上下内边距 */\n}\n\n#github-star-container {\n    display: flex;\n    align-items: center;\n    height: 30px;\n}\n\n/* GitHub Star 按钮样式 */\n.github-star-btn {\n    font-size: 0.875rem;\n    font-family: 'Courier Prime', monospace;\n    background: #1d2e3d;\n    border: 1px solid rgba(97, 218, 251, 0.3);\n    color: #61dafb;\n    border-radius: 6px;\n    display: flex;\n    align-items: center;\n    gap: 0.6rem;\n    transition: all 0.3s ease;\n    position: relative;\n    overflow: hidden;\n    padding: 0.35rem 0.8rem;\n    animation: starPulse 2s infinite;\n}\n\n@keyframes starPulse {\n    0% {\n        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0.4);\n    }\n    70% {\n        box-shadow: 0 0 0 10px rgba(97, 218, 251, 0);\n    }\n    100% {\n        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0);\n    }\n}\n\n.github-star-btn i {\n    font-size: 0.875rem;\n    color: #61dafb;\n    transition: all 0.3s ease;\n    animation: starTwinkle 2s infinite;\n}\n\n@keyframes starTwinkle {\n    0% {\n        transform: scale(1);\n        opacity: 1;\n    }\n    50% {\n        transform: scale(1.2);\n        opacity: 0.8;\n    }\n    100% {\n        transform: scale(1);\n        opacity: 1;\n    }\n}\n\n.github-star-btn:hover {\n    background: #1a3244;\n    border-color: #61dafb;\n    box-shadow: 0 0 15px rgba(97, 218, 251, 0.7);\n    color: #61dafb;\n    animation: none; /* 悬停时停止脉冲动画 */\n}\n\n.github-star-btn:hover i {\n    animation: none; /* 悬停时停止星星闪烁动画 */\n    transform: scale(1.2);\n}\n\n.feedback-btn-review {\n    padding: 0.35rem 0.8rem !important;  /* 减小按钮内边距 */\n    font-size: 0.8rem !important;  /* 稍微减小字体 */\n    min-height: 28px;  /* 设置最小高度 */\n    padding: 0 12px;     /* 水平内边距 */\n}\n\n.feedback-btn-review .btn-content {\n    gap: 0.4rem !important;  /* 减小图标和文字间距 */\n}\n\n.feedback-btn-review i {\n    font-size: 0.8rem !important;  /* 减小图标大小 */\n}\n\n\n.page-input {\n    background-color: transparent;\n    color: #e0e0e0;\n    border: 1px solid #e0e0e0;\n    border-radius: 4px;\n    text-align: center;\n    font-size: 0.875rem;  /* 相当于 Bootstrap 的 sm 大小 */\n    margin-left: 5px !important; \n    margin-right: 5px !important;\n}\n\n.page-input:focus {\n    outline: none;\n    border-color: #afffff;\n    box-shadow: 0 0 5px rgba(74, 157, 156, 0.5);\n}\n\n.multifont {\n    font-family: 'Courier Prime', 'Noto Sans SC', sans-serif;\n}\n\na {\n    color: chocolate;\n}\n\n.custom-tooltip {\n    --bs-tooltip-bg: var(--bd-violet-bg);\n    --bs-tooltip-color: var(--bs-white);\n}\n\n/* 题目列表样式 */\n#problemListView {\n    padding: 5px;\n}\n\n.problem-list-header {\n    margin-bottom: 15px;\n}\n\n.nav-tabs {\n    border-bottom: 1px solid #dee2e6;\n}\n\n.nav-tabs .nav-link {\n    margin-bottom: -1px;\n    color: #495057;\n    border: 1px solid transparent;\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem;\n}\n\n.nav-tabs .nav-link.active {\n    color: #495057;\n    background-color: #fff;\n    border-color: #dee2e6 #dee2e6 #fff;\n}\n\n.tab-content {\n    padding: 10px;\n    background-color: #fff;\n    border: 1px solid #dee2e6;\n    border-top: none;\n}\n\n.tab-pane {\n    display: none;\n}\n.tab-pane.active {\n    display: block;\n}\n\n\n\n/* 确保switch容器不会阻挡点击事件 */\n#switch-area {\n    pointer-events: auto;\n    position: relative;\n    z-index: 100;\n}\n\n\n\n\n\n\n/* 自定义表格样式 */\n.table {\n    width: 100%;\n    table-layout: fixed;\n    word-wrap: break-word;\n\n\n    --bs-table-border-color: #afffff !important;       /* 边框颜色 */\n\n    --bs-table-hover-color: #f56464 !important;        /* 悬停文字颜色 */\n    --bs-table-hover-bg: #ebe3e3 !important;          /* 悬停背景颜色 */\n    border: none !important;              /* 移除表格外边框 */\n    border-collapse: collapse !important;  /* 确保边框合并 */\n}\n\n\ntd, th {\n    padding: 4px !important;\n}\n\n.table {\n    margin-bottom: 0;\n    min-width: auto !important;\n}\n\n/* 确保表格容器有正确的宽度和溢出处理 */\n.table-responsive {\n    width: 100%;\n    overflow-x: hidden;\n}\n\n\n\n/* 专门设置表头样式 */\n.table thead,\n.table > thead{\n    border: none !important;              \n    background: linear-gradient(to right, #0D6E6E, #4a9d9c) !important;  \n}\n\n/* 确保表头单元格没有背景色 */\n.table thead tr,\n.table thead th {\n    background: transparent !important;    /* 确保tr和th是透明的 */\n    border: none !important;              \n    color: #ffffff !important;            /* 表头文字颜色 */\n}\n\n\n\n\n/* 记忆概率指示器样式 */\n.memory-indicator {\n    display: inline-flex;\n    align-items: center;\n    padding: 4px 8px;\n    border-radius: 12px;\n    transition: all 0.3s ease;\n}\n\n.memory-indicator:hover {\n    background-color: rgba(255, 255, 255, 0.1);\n    transform: scale(1.05);\n}\n\n.memory-indicator i {\n    font-size: 1.1em;\n}\n\n/* 颜色类 */\n.text-success { color: #4caf50 !important; }\n.text-warning { color: #ff9800 !important; }\n.text-danger { color: #f44336 !important; }\n\n\n\n/* 设置卡片样式调整 */\n.option-card {\n    background-color: #1d2e3d;\n    border-radius: 10px;\n    padding: 20px;\n    text-align: center;\n    transition: all 0.3s ease;\n}\n\n.option-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px rgba(74, 157, 156, 0.2);\n}\n\n.option-card i {\n    font-size: 2em;\n    color: #4a9d9c;\n    margin-bottom: 15px;\n}\n\n.option-card h4 {\n    color: #fff;\n    margin-bottom: 15px;\n}\n\n.option-card p {\n    color: #888;\n    font-size: 0.9em;\n}\n\n/* 表单控件样式 */\n.form-select {\n    background-color: #0D1F2D;\n    color: #fff;\n    border: 1px solid #4a9d9c;\n    margin-top: 10px;\n}\n\n.sync-tips {\n    margin-top: 10px;\n    font-size: 1.0em;\n    color: #888;\n    display: flex;\n    flex-direction: column;\n    gap: 5px;\n}\n.reminder-tips {\n    margin-top: 10px;\n    font-size: 1.0em;\n    color: #888;\n    display: flex;\n    flex-direction: column;\n    gap: 5px;\n}\n.save-section {\n    grid-column: 1 / -1;\n    text-align: center;\n    margin-top: 20px;\n}\n\n/* 开关按钮样式 */\n.form-check-input.custom-switch {\n    background-color: #0D1F2D !important;\n    border-color: #4a9d9c !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    transition: all 0.3s ease;\n    cursor: pointer !important;\n    pointer-events: auto !important;\n    opacity: 1;\n    z-index: 100;\n    position: relative;\n    outline: none !important;\n    /* 自定义滑块圆圈颜色为亮蓝色 */\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e\") !important;\n}\n\n/* 选中状态下的样式 */\n.form-check-input.custom-switch:checked {\n    background-color: #0D6E6E !important;\n    border-color: #0D6E6E !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    /* 选中状态下保持相同的蓝色圆圈 */\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e\") !important;\n}\n\n/* 悬停状态加强发光效果 */\n.form-check-input.custom-switch:hover {\n    box-shadow: 0 0 15px rgba(97, 218, 251, 0.9);\n}\n\n/* 焦点状态 */\n.form-check-input.custom-switch:focus {\n    background-color: inherit !important;  /* 继承当前状态的背景色 */\n    border-color: #4a9d9c !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    outline: none !important;\n}\n\n/* 选中且焦点状态 */\n.form-check-input.custom-switch:checked:focus {\n    background-color: #4a9d9c !important;\n}\n\n\n\n\n\n/* SweetAlert2 自定义样式 */\n.colored-toast.swal2-icon-success {\n    background-color: #1d2e3d !important;\n    border: 1px solid #4a9d9c !important;\n}\n\n.colored-toast .swal2-title {\n    color: #ffffff !important;\n    font-size: 1em !important;\n}\n\n.colored-toast .swal2-close {\n    color: #4a9d9c !important;\n}\n\n.colored-toast .swal2-html-container {\n    color: #888 !important;\n    font-size: 0.9em !important;\n}\n\n/* 成功图标颜色 */\n.colored-toast .swal2-success-line-tip,\n.colored-toast .swal2-success-line-long {\n    background-color: #4a9d9c !important;\n}\n\n.colored-toast .swal2-success-ring {\n    border-color: #4a9d9c !important;\n}\n\n/* 更新概要样式 */\n.update-badge {\n    background-color: #FF3D3D;\n    color: white;\n    padding: 2px 5px;\n    border-radius: 3px;\n    font-size: 0.8em;\n    margin-right: 5px;\n    font-weight: bold;\n}\n\n.update-summary {\n    background-color: rgba(74, 157, 156, 0.1);\n    border-radius: 4px;\n    padding: 3px 0 !important;\n    margin-bottom: 8px !important;\n}\n\n.update-summary a {\n    color: #4a9d9c;\n    text-decoration: none;\n    margin-left: 5px;\n}\n\n.update-summary a:hover {\n    text-decoration: underline;\n    color: #afffff;\n}\n\n/* 图标按钮样式 */\n.btn-icon {\n    background: none;\n    border: none;\n    color: #4a9d9c;\n    font-size: 1em;\n    width: 28px;\n    height: 28px;\n    border-radius: 6px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    background-color: transparent;\n}\n\n.btn-icon:hover {\n    background-color: rgba(74, 157, 156, 0.1);\n    color: #61dafb;\n    transform: translateY(-1px);\n}\n\n.btn-icon:active {\n    transform: translateY(0);\n}\n\n.btn-icon-sm {\n    width: 24px;\n    height: 24px;\n}\n\n/* 优化参数进度条样式 */\n.optimize-progress {\n    height: 3px !important;\n    background-color: rgba(74, 157, 156, 0.1) !important;\n    border-radius: 4px !important;\n    margin-top: 12px !important;\n    overflow: hidden !important;\n}\n\n.optimize-progress .progress-bar {\n    background: linear-gradient(90deg, #4a9d9c, #61dafb) !important;\n    transition: width 0.3s ease !important;\n}\n\n.optimize-progress .progress-bar-animated {\n    animation: progress-bar-stripes 1s linear infinite !important;\n}\n\n.optimize-progress .progress-bar-striped {\n    background-image: linear-gradient(\n        45deg,\n        rgba(255, 255, 255, 0.15) 25%,\n        transparent 25%,\n        transparent 50%,\n        rgba(255, 255, 255, 0.15) 50%,\n        rgba(255, 255, 255, 0.15) 75%,\n        transparent 75%,\n        transparent\n    ) !important;\n    background-size: 1rem 1rem !important;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/popup/popup.css"],"names":[],"mappings":"AAAA,cAAc;AACd;IACI,eAAe;IACf,SAAS;IACT,WAAW;IACX,aAAa;IACb,mBAAmB;IACnB,QAAQ;IACR,oCAAoC;IACpC,gBAAgB;IAChB,mBAAmB;IACnB,qCAAqC;IACrC,aAAa;IACb,eAAe;IACf,WAAW;AACf;;AAEA;IACI,eAAe;IACf,cAAc;AAClB;;AAEA;IACI,kCAAkC;IAClC,cAAc;AAClB;;AAEA;IACI,qCAAqC;AACzC;;AAEA;IACI,cAAc;AAClB;;AAEA;IACI,cAAc;AAClB;;AAEA;IACI,OAAO,uBAAuB,EAAE;IAChC,KAAK,yBAAyB,EAAE;AACpC;;AAEA;IACI,yBAAyB,EAAE,SAAS;IACpC,sBAAsB,EAAE,SAAS;IACjC,cAAc,EAAE,SAAS;IACzB,kCAAkC;IAClC,kBAAkB;AACtB;AACA,UAAU;AACV;IACI,yBAAyB;;IAEzB,aAAa;IACb,sBAAsB,GAAG,WAAW;IACpC,mBAAmB,MAAM,SAAS;IAClC,gCAAgC;AACpC;;AAEA;IACI,aAAa;IACb,uBAAuB,GAAG,SAAS;IACnC,mBAAmB;IACnB,SAAS,GAAG,UAAU;IACtB,cAAc,GAAG,YAAY;IAC7B,cAAc,GAAG,SAAS;IAC1B,gBAAgB;AACpB;;AAEA,UAAU;AACV;AACA,cAAc;AACd,gBAAgB,GAAG,UAAU;AAC7B,gBAAgB,GAAG,UAAU;AAC7B,yBAAyB,GAAG,UAAU;AACtC,mBAAmB,GAAG,SAAS;AAC/B,2CAA2C,GAAG,WAAW;AACzD,8CAA8C,GAAG,WAAW;AAC5D,eAAe;AACf,iBAAiB,GAAG,UAAU;AAC9B,6DAA6D,GAAG,QAAQ;AACxE,6BAA6B,GAAG,cAAc;AAC9C,oCAAoC,GAAG,eAAe;AACtD,qBAAqB,GAAG,aAAa;AACrC;;AAEA,eAAe;AACf;IACI,SAAS;IACT,UAAU;IACV,cAAc;AAClB;;AAEA,eAAe;AACf;IACI,iBAAiB,GAAG,qBAAqB;AAC7C;;AAEA,YAAY;AACZ;IACI,cAAc;IACd,gBAAgB;IAChB,gBAAgB;IAChB,kBAAkB;IAClB,yCAAyC;AAC7C;;AAEA,YAAY;AACZ;IACI,gBAAgB;IAChB,YAAY;IACZ,WAAW;IACX,iBAAiB;IACjB,eAAe;IACf,yBAAyB;IACzB,cAAc;IACd,kBAAkB;AACtB;;AAEA;IACI,WAAW;AACf;;AAEA;IACI,WAAW;AACf;;AAEA;IACI,WAAW;IACX,kBAAkB;IAClB,YAAY;IACZ,SAAS;IACT,2BAA2B;IAC3B,WAAW;IACX,WAAW;IACX,yBAAyB;IACzB,kBAAkB;AACtB;;AAEA;IACI,aAAa;IACb,SAAS;AACb;;AAEA,WAAW;AACX;IACI,yBAAyB;IACzB,yBAAyB;IACzB,WAAW;IACX,iBAAiB;IACjB,kBAAkB;IAClB,eAAe;IACf,yBAAyB;AAC7B;;AAEA;IACI,yBAAyB;IACzB,WAAW;AACf;;;AAGA;IACI,yBAAyB,EAAE,8BAA8B;IACzD,cAAc,EAAE,WAAW;IAC3B,mBAAmB;IACnB,QAAQ;AACZ;AACA;IACI,yBAAyB,EAAE,8BAA8B;IACzD,gBAAgB,EAAE,WAAW;IAC7B,aAAa;IACb,mBAAmB;IACnB,QAAQ;AACZ;;;;AAIA;IACI,yBAAyB,EAAE,SAAS;IACpC,mBAAmB;IACnB,yCAAyC;IACzC,aAAa;IACb,cAAc;IACd,0BAA0B;;AAE9B;;QAEQ;IACJ,2BAA2B;IAC3B,8BAA8B;AAClC;;AAEA;IACI,sCAAsC;IACtC,gBAAgB;IAChB,cAAc,EAAE,SAAS;AAC7B;;;;AAIA;IACI,cAAc;AAClB;;AAEA;IACI,cAAc;AAClB;;AAEA;IACI,cAAc;AAClB;;AAEA;IACI,WAAW;IACX,gBAAgB;AACpB;;AAEA;;IAEI,YAAY;IACZ,cAAc;IACd,gBAAgB;IAChB,kBAAkB;IAClB,eAAe;IACf,yBAAyB;IACzB,gBAAgB;IAChB,kBAAkB;IAClB,UAAU;IACV,+BAA+B;AACnC;;;AAGA;IACI,cAAc;IACd,2BAA2B;IAC3B,wCAAwC;AAC5C;;AAEA;IACI,wBAAwB;AAC5B;;AAEA;;IAEI,YAAY;IACZ,YAAY;IACZ,mBAAmB;AACvB;;AAEA;IACI,gBAAgB;IAChB,kBAAkB;AACtB;;AAEA;;IAEI,+BAA+B;IAC/B,0BAA0B;AAC9B;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,kBAAkB;IAClB,mBAAmB;IACnB,gBAAgB;IAChB,yBAAyB;IACzB,yCAAyC,GAAG,YAAY;IACxD,2CAA2C,GAAG,YAAY;IAC1D,iDAAiD;IACjD,aAAa;IACb,iBAAiB;AACrB;;AAEA;IACI,qCAAqC,GAAG,eAAe;IACvD;;8CAE0C,GAAG,aAAa;IAC1D,2BAA2B;AAC/B;;AAEA;IACI,WAAW;IACX,kBAAkB;IAClB,SAAS;IACT,UAAU;IACV,WAAW;IACX,YAAY;IACZ,mBAAmB;IACnB;;;;KAIC;IACD,WAAW;IACX,UAAU;IACV,qDAAqD;AACzD;;AAEA;IACI,UAAU;AACd;;AAEA;IACI,YAAY;IACZ,aAAa;IACb,kBAAkB;IAClB,gFAAgF,EAAE,aAAa;IAC/F,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,cAAc;IACd,gCAAgC,EAAE,WAAW;AACjD;;AAEA;IACI,YAAY;IACZ,aAAa;IACb,mBAAmB,EAAE,SAAS;IAC9B,kBAAkB;IAClB,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,gBAAgB;IAChB,iBAAiB;IACjB,cAAc,EAAE,WAAW;IAC3B,+BAA+B,EAAE,WAAW;AAChD;;AAEA;IACI,gBAAgB;IAChB,cAAc,EAAE,SAAS;IACzB,aAAa;IACb,mBAAmB;IACnB,uBAAuB;AAC3B;;AAEA;IACI,kBAAkB;IAClB,cAAc;AAClB;;AAEA;IACI,iBAAiB;IACjB,iBAAiB;IACjB,cAAc,EAAE,wCAAwC;IACxD,sBAAsB;AAC1B;;AAEA;IACI,cAAc,EAAE,qCAAqC;AACzD;;AAEA;IACI,iBAAiB;IACjB,gBAAgB;IAChB,0BAA0B;AAC9B;;AAEA;IACI,cAAc,EAAE,2BAA2B;AAC/C;;AAEA;IACI,cAAc,EAAE,2BAA2B;AAC/C;;AAEA;IACI,kBAAkB;IAClB,MAAM;IACN,OAAO;IACP,WAAW;IACX,YAAY;IACZ,aAAa;IACb,UAAU;AACd;;AAEA;IACI,aAAa;AACjB;;AAEA;;IAEI,wBAAwB;IACxB,SAAS;AACb;;AAEA;IACI,0BAA0B;IAC1B,mBAAmB,EAAE,UAAU;IAC/B,cAAc,EAAE,YAAY;IAC5B,WAAW;IACX,YAAY;IACZ,kBAAkB;IAClB,gBAAgB;IAChB,YAAY;IACZ,yBAAyB,EAAE,YAAY;IACvC,kBAAkB;IAClB,cAAc;AAClB;;AAEA;IACI,gBAAgB;IAChB,YAAY;IACZ,eAAe;IACf,yBAAyB;IACzB,YAAY;IACZ,kBAAkB;IAClB,WAAW;IACX,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,uBAAuB;AAC3B;;AAEA;IACI,gBAAgB;IAChB,cAAc,EAAE,WAAW;IAC3B,yBAAyB;AAC7B;;AAEA;IACI,kBAAkB;IAClB,cAAc;IACd,cAAc;IACd,sBAAsB;IACtB,kBAAkB;IAClB,WAAW;IACX,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,yBAAyB;IACzB,SAAS;IACT,QAAQ;IACR,gCAAgC;IAChC,qCAAqC;IACrC,iBAAiB;AACrB;;AAEA,SAAS;AACT;IACI,cAAc,EAAE,cAAc;IAC9B,mDAAmD;AACvD;;AAEA;IACI,WAAW;IACX,sBAAsB;IACtB,qCAAqC;IACrC,2CAA2C;AAC/C;;AAEA,SAAS;AACT;IACI,yBAAyB;AAC7B;;AAEA;IACI,wBAAwB;AAC5B;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,QAAQ;IACR,gBAAgB;AACpB;;AAEA;IACI,gBAAgB;IAChB,cAAc,EAAE,SAAS;IACzB,iBAAiB;AACrB;;AAEA,SAAS;AACT;IACI,2BAA2B;IAC3B,kBAAkB;IAClB,aAAa;IACb,SAAS;IACT,2BAA2B;IAC3B,oCAAoC;IACpC,YAAY;IACZ,gBAAgB;IAChB,kBAAkB;IAClB,gBAAgB;IAChB,UAAU;IACV,6BAA6B;IAC7B,oBAAoB;IACpB,mBAAmB;AACvB;;AAEA;IACI,UAAU;AACd;;;AAGA;IACI,aAAa;IACb,uBAAuB;AAC3B;;AAEA;IACI,kBAAkB;IAClB,gBAAgB;IAChB,kBAAkB;IAClB,cAAc;IACd,gBAAgB;IAChB,YAAY;IACZ,kBAAkB;IAClB,mBAAmB;IACnB,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,QAAQ;AACZ;;AAEA;IACI,cAAc;IACd,cAAc,GAAG,cAAc;AACnC;;;;AAIA;IACI,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,uBAAuB;IACvB,0CAA0C;IAC1C,WAAW;IACX,YAAY;IACZ,kBAAkB;IAClB,cAAc;IACd,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,mBAAmB;AACvB;;AAEA;IACI,gBAAgB;AACpB;;;AAGA,SAAS;AACT;IACI,mCAAmC;IACnC,mBAAmB;IACnB,UAAU;AACd;;AAEA,WAAW;AACX;IACI,WAAW;IACX,kBAAkB;IAClB,SAAS;IACT,SAAS;IACT,UAAU;IACV,WAAW;IACX;;;;;KAKC;AACL;AACA;IACI,eAAe;IACf,MAAM;IACN,OAAO;IACP,QAAQ;IACR,SAAS;IACT,aAAa;IACb,uBAAuB;IACvB,mBAAmB;IACnB,8BAA8B;IAC9B,aAAa;IACb,0BAA0B;AAC9B;;AAEA;IACI,mBAAmB;IACnB,kBAAkB;IAClB,aAAa,WAAW,UAAU;IAClC,YAAY,YAAY,YAAY;IACpC,yCAAyC;IACzC,yCAAyC;IACzC,gCAAgC;AACpC;;AAEA;IACI,cAAc;IACd,mBAAmB,KAAK,aAAa;IACrC,cAAc,UAAU,WAAW;AACvC;;AAEA;IACI,mBAAmB,KAAK,YAAY;AACxC;;AAEA;IACI,cAAc;IACd,kBAAkB,MAAM,aAAa;IACrC,cAAc;IACd,iBAAiB,OAAO,WAAW;AACvC;;AAEA;IACI,WAAW;IACX,gBAAgB,QAAQ,aAAa;IACrC,yCAAyC;IACzC,kBAAkB;IAClB,iCAAiC;IACjC,cAAc;IACd,iBAAiB,OAAO,YAAY;AACxC;;AAEA;IACI,aAAa;IACb,yBAAyB;IACzB,QAAQ,gBAAgB,WAAW;IACnC,gBAAgB,QAAQ,cAAc;AAC1C;;AAEA;IACI,iBAAiB,OAAO,YAAY;IACpC,kBAAkB;IAClB,iBAAiB,OAAO,WAAW;AACvC;;AAEA,YAAY;AACZ;IACI,iBAAiB;AACrB;;AAEA;IACI,qBAAqB;IACrB,cAAc;AAClB;;AAEA;IACI,kCAAkC;AACtC;;AAEA;IACI,qBAAqB;IACrB,cAAc;AAClB;;AAEA;IACI,oCAAoC;AACxC;;;;;;;AAOA,WAAW;AACX;IACI,aAAa;IACb,6BAA6B;AACjC;;AAEA;IACI,cAAc;AAClB;;AAEA,aAAa;AACb;IACI,aAAa;IACb,8BAA8B;IAC9B,mBAAmB;IACnB,mBAAmB;AACvB;;AAEA;IACI,kBAAkB;IAClB,YAAY;AAChB;;AAEA;IACI,WAAW;IACX,0BAA0B;IAC1B,YAAY;IACZ,mBAAmB;IACnB,mBAAmB;IACnB,WAAW;AACf;;AAEA;IACI,kBAAkB;IAClB,WAAW;IACX,QAAQ;IACR,2BAA2B;IAC3B,WAAW;AACf;;AAEA;IACI,aAAa;IACb,4DAA4D;IAC5D,SAAS;IACT,eAAe;AACnB;;AAEA,aAAa;AACb;IACI,aAAa;IACb,4DAA4D;IAC5D,SAAS;IACT,eAAe;AACnB;;;;AAIA,WAAW;AACX;IACI,gCAAgC;;AAEpC;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,gBAAgB;;;IAGhB,yBAAyB;AAC7B;;AAEA;IACI,WAAW;AACf;;AAEA;IACI,cAAc;IACd,gBAAgB;IAChB,gCAAgC;AACpC;;AAEA,kBAAkB;AAClB;IACI,aAAa;AACjB;;AAEA;IACI,6BAA6B;AACjC;;AAEA;IACI,UAAU;AACd;;;;;;AAMA;IACI,gBAAgB;IAChB,SAAS;AACb;;AAEA;IACI,qBAAqB;IACrB,cAAc;AAClB;;AAEA;IACI,oCAAoC;IACpC,wCAAwC;AAC5C;;AAEA;IACI,qBAAqB;IACrB,cAAc;AAClB;;;AAGA;IACI,8EAA8E;IAC9E,0BAA0B;IAC1B,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,SAAS,YAAY,YAAY;IACjC,8CAA8C;IAC9C,gBAAgB;IAChB,cAAc,GAAG,YAAY;AACjC;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,YAAY;AAChB;;AAEA,qBAAqB;AACrB;IACI,mBAAmB;IACnB,uCAAuC;IACvC,mBAAmB;IACnB,yCAAyC;IACzC,cAAc;IACd,kBAAkB;IAClB,aAAa;IACb,mBAAmB;IACnB,WAAW;IACX,yBAAyB;IACzB,kBAAkB;IAClB,gBAAgB;IAChB,uBAAuB;IACvB,gCAAgC;AACpC;;AAEA;IACI;QACI,2CAA2C;IAC/C;IACA;QACI,4CAA4C;IAChD;IACA;QACI,yCAAyC;IAC7C;AACJ;;AAEA;IACI,mBAAmB;IACnB,cAAc;IACd,yBAAyB;IACzB,kCAAkC;AACtC;;AAEA;IACI;QACI,mBAAmB;QACnB,UAAU;IACd;IACA;QACI,qBAAqB;QACrB,YAAY;IAChB;IACA;QACI,mBAAmB;QACnB,UAAU;IACd;AACJ;;AAEA;IACI,mBAAmB;IACnB,qBAAqB;IACrB,4CAA4C;IAC5C,cAAc;IACd,eAAe,EAAE,cAAc;AACnC;;AAEA;IACI,eAAe,EAAE,gBAAgB;IACjC,qBAAqB;AACzB;;AAEA;IACI,kCAAkC,GAAG,YAAY;IACjD,4BAA4B,GAAG,WAAW;IAC1C,gBAAgB,GAAG,WAAW;IAC9B,eAAe,MAAM,UAAU;AACnC;;AAEA;IACI,sBAAsB,GAAG,cAAc;AAC3C;;AAEA;IACI,4BAA4B,GAAG,WAAW;AAC9C;;;AAGA;IACI,6BAA6B;IAC7B,cAAc;IACd,yBAAyB;IACzB,kBAAkB;IAClB,kBAAkB;IAClB,mBAAmB,GAAG,0BAA0B;IAChD,2BAA2B;IAC3B,4BAA4B;AAChC;;AAEA;IACI,aAAa;IACb,qBAAqB;IACrB,2CAA2C;AAC/C;;AAEA;IACI,wDAAwD;AAC5D;;AAEA;IACI,gBAAgB;AACpB;;AAEA;IACI,oCAAoC;IACpC,mCAAmC;AACvC;;AAEA,WAAW;AACX;IACI,YAAY;AAChB;;AAEA;IACI,mBAAmB;AACvB;;AAEA;IACI,gCAAgC;AACpC;;AAEA;IACI,mBAAmB;IACnB,cAAc;IACd,6BAA6B;IAC7B,+BAA+B;IAC/B,gCAAgC;AACpC;;AAEA;IACI,cAAc;IACd,sBAAsB;IACtB,kCAAkC;AACtC;;AAEA;IACI,aAAa;IACb,sBAAsB;IACtB,yBAAyB;IACzB,gBAAgB;AACpB;;AAEA;IACI,aAAa;AACjB;AACA;IACI,cAAc;AAClB;;;;AAIA,uBAAuB;AACvB;IACI,oBAAoB;IACpB,kBAAkB;IAClB,YAAY;AAChB;;;;;;;AAOA,YAAY;AACZ;IACI,WAAW;IACX,mBAAmB;IACnB,qBAAqB;;;IAGrB,2CAA2C,QAAQ,SAAS;;IAE5D,0CAA0C,SAAS,WAAW;IAC9D,uCAAuC,WAAW,WAAW;IAC7D,uBAAuB,eAAe,YAAY;IAClD,oCAAoC,GAAG,WAAW;AACtD;;;AAGA;IACI,uBAAuB;AAC3B;;AAEA;IACI,gBAAgB;IAChB,0BAA0B;AAC9B;;AAEA,sBAAsB;AACtB;IACI,WAAW;IACX,kBAAkB;AACtB;;;;AAIA,aAAa;AACb;;IAEI,uBAAuB;IACvB,kEAAkE;AACtE;;AAEA,iBAAiB;AACjB;;IAEI,kCAAkC,KAAK,gBAAgB;IACvD,uBAAuB;IACvB,yBAAyB,aAAa,WAAW;AACrD;;;;;AAKA,cAAc;AACd;IACI,oBAAoB;IACpB,mBAAmB;IACnB,gBAAgB;IAChB,mBAAmB;IACnB,yBAAyB;AAC7B;;AAEA;IACI,0CAA0C;IAC1C,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;AACpB;;AAEA,QAAQ;AACR,gBAAgB,yBAAyB,EAAE;AAC3C,gBAAgB,yBAAyB,EAAE;AAC3C,eAAe,yBAAyB,EAAE;;;;AAI1C,aAAa;AACb;IACI,yBAAyB;IACzB,mBAAmB;IACnB,aAAa;IACb,kBAAkB;IAClB,yBAAyB;AAC7B;;AAEA;IACI,2BAA2B;IAC3B,8CAA8C;AAClD;;AAEA;IACI,cAAc;IACd,cAAc;IACd,mBAAmB;AACvB;;AAEA;IACI,WAAW;IACX,mBAAmB;AACvB;;AAEA;IACI,WAAW;IACX,gBAAgB;AACpB;;AAEA,WAAW;AACX;IACI,yBAAyB;IACzB,WAAW;IACX,yBAAyB;IACzB,gBAAgB;AACpB;;AAEA;IACI,gBAAgB;IAChB,gBAAgB;IAChB,WAAW;IACX,aAAa;IACb,sBAAsB;IACtB,QAAQ;AACZ;AACA;IACI,gBAAgB;IAChB,gBAAgB;IAChB,WAAW;IACX,aAAa;IACb,sBAAsB;IACtB,QAAQ;AACZ;AACA;IACI,mBAAmB;IACnB,kBAAkB;IAClB,gBAAgB;AACpB;;AAEA,WAAW;AACX;IACI,oCAAoC;IACpC,gCAAgC;IAChC,4CAA4C;IAC5C,yBAAyB;IACzB,0BAA0B;IAC1B,+BAA+B;IAC/B,UAAU;IACV,YAAY;IACZ,kBAAkB;IAClB,wBAAwB;IACxB,kBAAkB;IAClB,oEAAqK;AACzK;;AAEA,aAAa;AACb;IACI,oCAAoC;IACpC,gCAAgC;IAChC,4CAA4C;IAC5C,mBAAmB;IACnB,oEAAqK;AACzK;;AAEA,eAAe;AACf;IACI,4CAA4C;AAChD;;AAEA,SAAS;AACT;IACI,oCAAoC,GAAG,eAAe;IACtD,gCAAgC;IAChC,4CAA4C;IAC5C,wBAAwB;AAC5B;;AAEA,YAAY;AACZ;IACI,oCAAoC;AACxC;;;;;;AAMA,sBAAsB;AACtB;IACI,oCAAoC;IACpC,oCAAoC;AACxC;;AAEA;IACI,yBAAyB;IACzB,yBAAyB;AAC7B;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;IACI,sBAAsB;IACtB,2BAA2B;AAC/B;;AAEA,WAAW;AACX;;IAEI,oCAAoC;AACxC;;AAEA;IACI,gCAAgC;AACpC;;AAEA,WAAW;AACX;IACI,yBAAyB;IACzB,YAAY;IACZ,gBAAgB;IAChB,kBAAkB;IAClB,gBAAgB;IAChB,iBAAiB;IACjB,iBAAiB;AACrB;;AAEA;IACI,yCAAyC;IACzC,kBAAkB;IAClB,yBAAyB;IACzB,6BAA6B;AACjC;;AAEA;IACI,cAAc;IACd,qBAAqB;IACrB,gBAAgB;AACpB;;AAEA;IACI,0BAA0B;IAC1B,cAAc;AAClB;;AAEA,WAAW;AACX;IACI,gBAAgB;IAChB,YAAY;IACZ,cAAc;IACd,cAAc;IACd,WAAW;IACX,YAAY;IACZ,kBAAkB;IAClB,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,eAAe;IACf,yBAAyB;IACzB,6BAA6B;AACjC;;AAEA;IACI,yCAAyC;IACzC,cAAc;IACd,2BAA2B;AAC/B;;AAEA;IACI,wBAAwB;AAC5B;;AAEA;IACI,WAAW;IACX,YAAY;AAChB;;AAEA,cAAc;AACd;IACI,sBAAsB;IACtB,oDAAoD;IACpD,6BAA6B;IAC7B,2BAA2B;IAC3B,2BAA2B;AAC/B;;AAEA;IACI,+DAA+D;IAC/D,sCAAsC;AAC1C;;AAEA;IACI,6DAA6D;AACjE;;AAEA;IACI;;;;;;;;;gBASY;IACZ,qCAAqC;AACzC","sourcesContent":["/* 同步状态指示器样式 */\n.sync-indicator {\n    position: fixed;\n    top: 10px;\n    right: 10px;\n    display: flex;\n    align-items: center;\n    gap: 5px;\n    background: rgba(255, 255, 255, 0.9);\n    padding: 4px 8px;\n    border-radius: 12px;\n    box-shadow: 0 1px 3px rgba(0,0,0,0.2);\n    z-index: 1000;\n    font-size: 12px;\n    color: #333;\n}\n\n.sync-indicator #syncIcon {\n    font-size: 12px;\n    color: #4CAF50;\n}\n\n.sync-indicator.syncing #syncIcon {\n    animation: spin 1s linear infinite;\n    color: #2196F3;\n}\n\n.sync-indicator.error {\n    background: rgba(255, 235, 238, 0.95);\n}\n\n.sync-indicator.error #syncIcon {\n    color: #f44336;\n}\n\n.sync-indicator.success #syncIcon {\n    color: #4CAF50;\n}\n\n@keyframes spin {\n    from { transform: rotate(0deg); }\n    to { transform: rotate(360deg); }\n}\n\nbody {\n    background-color: #0D1F2D; /* 深色背景 */\n    background-size: cover; /* 背景覆盖 */\n    color: #ffffff; /* 白色字体 */\n    font-family: 'Raleway', sans-serif;\n    position: relative;\n}\n/* 导航栏样式 */\n.nav-bar {\n    background-color: #0D1F2D;\n\n    display: flex;\n    flex-direction: column;  /* 改为纵向排列 */\n    align-items: center;     /* 水平居中 */\n    border-bottom: 1px solid #4a9d9c;\n}\n\n.nav-row {\n    display: flex;\n    justify-content: center;  /* 内容居中 */\n    align-items: center;\n    margin: 0;  /* 移除外边距 */\n    padding: 2px 0;  /* 减小上下内边距 */\n    line-height: 1;  /* 减小行高 */\n    margin-top: -5px;\n}\n\n/* 标题行样式 */\n.nav-title {\ncolor: #FF3D3D;\nfont-weight: 900;  /* 更粗的字体 */\nfont-size: 1.2em;  /* 更大的字号 */\ntext-transform: uppercase;  /* 转换为大写 */\nletter-spacing: 2px;  /* 字母间距 */\ntext-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  /* 添加阴影效果 */\nfont-family: 'Arial Black', Gadget, sans-serif;  /* 更粗重的字体 */\nmargin-top: 5px;\npadding: 5px 10px;  /* 添加内边距 */\nbackground: linear-gradient(180deg, #ff6b6b 0%, #FF3D3D 100%);  /* 渐变色 */\n-webkit-background-clip: text;  /* 使渐变色应用到文字 */\n-webkit-text-fill-color: transparent;  /* 使文字透明以显示背景 */\ndisplay: inline-block;  /* 确保渐变效果生效 */\n}\n\n/* 专门为标题容器添加类 */\n.nav-row.title-row {\n    margin: 0;\n    padding: 0;\n    line-height: 1;\n}\n\n/* 特别处理第二个标题行 */\n.nav-row.title-row + .nav-row.title-row {\n    margin-top: -10px;  /* 调整这个值来控制两行标题间的间距 */\n}\n\n/* 网站信息行样式 */\n.nav-site {\n    color: #4a9d9c;\n    font-size: 0.9em;\n    padding: 2px 8px;\n    border-radius: 4px;\n    background-color: rgba(74, 157, 156, 0.1);\n}\n\n/* 导航按钮行样式 */\n.nav-btn {\n    background: none;\n    border: none;\n    color: #888;\n    padding: 5px 15px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    font-size: 1em;\n    position: relative;\n}\n\n.nav-btn:hover {\n    color: #fff;\n}\n\n.nav-btn.active {\n    color: #fff;\n}\n\n.nav-btn.active::after {\n    content: '';\n    position: absolute;\n    bottom: -5px;\n    left: 50%;\n    transform: translateX(-50%);\n    width: 20px;\n    height: 2px;\n    background-color: #4a9d9c;\n    border-radius: 2px;\n}\n\n.nav-right {\n    display: flex;\n    gap: 10px;\n}\n\n/* 开关按钮样式 */\n.switch-btn {\n    background-color: #2a2b30;\n    border: 1px solid #3a3b40;\n    color: #888;\n    padding: 5px 15px;\n    border-radius: 4px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n}\n\n.switch-btn:hover {\n    background-color: #3a3b40;\n    color: #fff;\n}\n\n\n.text-date {\n    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */\n    font-size: 1em; /* 修改字体大小 */\n    align-items: center;\n    gap: 2px;\n}\n.text-muted {\n    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */\n    font-size: 0.8em; /* 修改字体大小 */\n    display: flex;\n    align-items: center;\n    gap: 5px;\n}\n\n\n\n.review-card {\n    background-color: #1d2e3d; /* 卡片背景 */\n    border-radius: 15px;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    padding: 10px;\n    margin: 20px 0;\n    transition: transform 0.2s;\n    \n}\n\n        .review-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px #4a9d9c;\n}\n\n.problem-title {\n    font-family: 'Press Start 2P', cursive;\n    font-size: 0.9em;\n    color: #ffffff; /* 白色字体 */\n}\n\n\n\n.difficulty-Easy {\n    color: #4a9d9c;\n}\n\n.difficulty-Medium {\n    color: #f0b215;\n}\n\n.difficulty-Hard {\n    color: #FF3D3D;\n}\n\n.progress {\n    height: 8px;\n    margin-top: 10px;\n}\n\n.btn-review {\n\n    border: none;\n    color: #e0e0e0;\n    font-size: 1.5em;\n    border-radius: 50%;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    font-weight: 500;\n    position: relative;\n    z-index: 1;\n    pointer-events: auto !important;\n}\n\n\n.btn-review:hover {\n    color: #afffff;\n    transform: translateY(-1px);\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n\n.btn-review:active {\n    transform: translateY(0);\n}\n\n.btn-review:disabled {\n\n    color: white;\n    opacity: 0.8;\n    cursor: not-allowed;\n}\n\n.btn-review.btn-lg {\n    font-size: 1.1em;\n    padding: 10px 24px;\n}\n\n.review-card .btn-review,\n.container .btn-review {\n    pointer-events: auto !important;\n    cursor: pointer !important;\n}\n\n.review-card.reviewed {\n    opacity: 0.6;\n}\n\n.header-section {\n    position: relative;\n    border-radius: 15px;\n    overflow: hidden;\n    background-color: #1d2e3d;\n    border: 1px solid rgba(74, 157, 156, 0.1);  /* 降低边框透明度 */\n    box-shadow: 0 0 8px rgba(74, 157, 156, 0.1);  /* 降低阴影透明度 */\n    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n    padding: 10px;\n    margin: 10px 15px;\n}\n\n.header-section:hover {\n    border-color: rgba(74, 157, 156, 0.2);  /* 降低悬停时边框透明度 */\n    box-shadow: \n        0 0 12px rgba(74, 157, 156, 0.15),  /* 降低外阴影透明度 */\n        inset 0 0 8px rgba(74, 157, 156, 0.05);  /* 降低内阴影透明度 */\n    transform: translateY(-1px);\n}\n\n.header-section::before {\n    content: '';\n    position: absolute;\n    top: -1px;\n    left: -1px;\n    right: -1px;\n    bottom: -1px;\n    border-radius: 15px;\n    background: linear-gradient(45deg, \n        rgba(74, 157, 156, 0.05),  /* 降低渐变透明度 */\n        rgba(74, 157, 156, 0.1),\n        rgba(74, 157, 156, 0.05)\n    );\n    z-index: -1;\n    opacity: 0;\n    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n}\n\n.header-section:hover::before {\n    opacity: 1;\n}\n\n.completion-circle {\n    width: 120px;\n    height: 120px;\n    border-radius: 50%;\n    background: conic-gradient(#afffff var(--percentage), #3a3a4d var(--percentage)); /* 使用深色作为背景 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin: 0 auto;\n    transition: background 0.5s ease; /* 背景渐变动画 */\n}\n\n.inner-circle {\n    width: 100px;\n    height: 100px;\n    background: #1d2e3d; /* 内圈背景 */\n    border-radius: 50%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 1.5em;\n    font-weight: bold;\n    color: #FF3D3D; /* 内圈字体颜色 */\n    transition: transform 0.5s ease; /* 内圈缩放动画 */\n}\n\n.retrievability {\n    font-size: 1.0em;\n    color: #ffffff; /* 白色字体 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.retrievability-icon {\n    margin-right: 10px;\n    color: #4a9d9c;\n}\n\n.retrievability-value {\n    font-weight: bold;\n    margin-left: 10px;\n    color: #4a9d9c; /* Green color for good retrievability */\n    transition: color 0.3s;\n}\n\n.retrievability-value.low {\n    color: #FF3D3D; /* Red color for low retrievability */\n}\n\n.trend-icon {\n    margin-left: 10px;\n    font-size: 1.5em;\n    transition: transform 0.3s;\n}\n\n.trend-up {\n    color: #4a9d9c; /* Green for upward trend */\n}\n\n.trend-down {\n    color: #FF3D3D; /* Red for downward trend */\n}\n\n.low-memory-warning {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    display: none;\n    z-index: 0;\n}\n\n.low-memory-warning.active {\n    display: flex;\n}\n\n.card-limit-input input[type=\"number\"]::-webkit-inner-spin-button,\n.card-limit-input input[type=\"number\"]::-webkit-outer-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n}\n\n.card-limit-input input[type=\"number\"] {\n    -moz-appearance: textfield;\n    background: #3a3a4d; /* 输入框背景 */\n    color: #ffffff; /* 输入框字体颜色 */\n    width: 40px;\n    height: 40px;\n    text-align: center;\n    font-size: 1.2em;\n    padding: 5px;\n    border: 2px solid #0D6E6E; /* 输入框边框颜色 */\n    border-radius: 8px;\n    margin: 0 10px;\n}\n\n.gear-button {\n    background: none;\n    border: none;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    padding: 5px;\n    position: relative;\n    width: 40px;\n    height: 40px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.gear-button .fa-gear {\n    font-size: 1.8em;\n    color: #0D6E6E; /* 齿轮图标颜色 */\n    transition: all 0.3s ease;\n}\n\n.gear-button .direction-icon {\n    position: absolute;\n    font-size: 1em;\n    color: #e2c027;\n    background-color: #fff;\n    border-radius: 50%;\n    width: 16px;\n    height: 16px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.3s ease;\n    left: 50%;\n    top: 50%;\n    transform: translate(-50%, -50%);\n    box-shadow: 0 1px 3px rgba(0,0,0,0.2);\n    font-weight: bold;\n}\n\n/* 悬停效果 */\n.gear-button:hover .fa-gear {\n    color: #4a9d9c; /* 悬停时齿轮图标颜色 */\n    filter: drop-shadow(0 0 2px rgba(255, 152, 0, 0.5));\n}\n\n.gear-button:hover .direction-icon {\n    color: #000;\n    background-color: #fff;\n    box-shadow: 0 2px 4px rgba(0,0,0,0.3);\n    transform: translate(-50%, -50%) scale(1.1);\n}\n\n/* 点击动画 */\n.gear-button.left:active {\n    transform: rotate(-45deg);\n}\n\n.gear-button.right:active {\n    transform: rotate(45deg);\n}\n\n.card-limit-input {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 5px;\n    margin-top: 10px;\n}\n\n.card-limit-label {\n    font-size: 1.1em;\n    color: #ffffff; /* 白色字体 */\n    margin-right: 5px;\n}\n\n/* 工具提示 */\n.gear-button::after {\n    content: attr(data-tooltip);\n    position: absolute;\n    bottom: -25px;\n    left: 50%;\n    transform: translateX(-50%);\n    background-color: rgba(0, 0, 0, 0.8);\n    color: white;\n    padding: 4px 8px;\n    border-radius: 4px;\n    font-size: 0.8em;\n    opacity: 0;\n    transition: opacity 0.3s ease;\n    pointer-events: none;\n    white-space: nowrap;\n}\n\n.gear-button:hover::after {\n    opacity: 1;\n}\n\n\n.add-problem-wrapper {\n    display: flex;\n    justify-content: center;\n}\n\n.empty-state {\n    text-align: center;\n    margin-top: 15px;\n    margin-bottom: 5px;\n    color: #4a9d9c;\n    font-size: 0.9em;\n    opacity: 0.8;\n    font-style: italic;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 8px;\n}\n\n.empty-state i {\n    font-size: 1em;\n    color: #ffd700;  /* 给灯泡图标一个金色 */\n}\n\n\n\n.add-problem {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    background: transparent;\n    border: 1px dashed rgba(74, 157, 156, 0.5);\n    width: 30px;\n    height: 30px;\n    border-radius: 8px;\n    color: #4a9d9c;\n    opacity: 0.8;\n}\n\n.add-problem-content {\n    display: flex;\n    align-items: center;\n}\n\n.add-problem i {\n    font-size: 0.8em;\n}\n\n\n/* 悬停效果 */\n.add-problem:hover {\n    background: rgba(74, 157, 156, 0.1);\n    border-style: solid;\n    opacity: 1;\n}\n\n/* 添加虚线分隔 */\n.add-problem-wrapper::before {\n    content: '';\n    position: absolute;\n    top: -8px;\n    left: 10%;\n    right: 10%;\n    height: 1px;\n    background: linear-gradient(\n        to right,\n        transparent,\n        rgba(74, 157, 156, 0.3),\n        transparent\n    );\n}\n.modal {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    background: rgba(0, 0, 0, 0.5);\n    z-index: 1000;\n    backdrop-filter: blur(4px);\n}\n\n.modal-content {\n    background: #1d2e3d;\n    border-radius: 8px;\n    padding: 16px;          /* 减小内边距 */\n    width: 280px;           /* 固定更小的宽度 */\n    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);\n    border: 1px solid rgba(97, 218, 251, 0.2);\n    animation: modalFadeIn 0.3s ease;\n}\n\n.modal-content h3 {\n    color: #61dafb;\n    margin-bottom: 12px;    /* 减小标题下方间距 */\n    font-size: 1em;         /* 减小标题字体 */\n}\n\n.form-group {\n    margin-bottom: 12px;    /* 减小表单组间距 */\n}\n\n.form-group label {\n    display: block;\n    margin-bottom: 4px;     /* 减小标签下方间距 */\n    color: #e9ecef;\n    font-size: 0.85em;      /* 减小标签字体 */\n}\n\n.form-group input {\n    width: 100%;\n    padding: 6px 8px;       /* 减小输入框内边距 */\n    border: 1px solid rgba(97, 218, 251, 0.3);\n    border-radius: 4px;\n    background: rgba(29, 46, 61, 0.8);\n    color: #e9ecef;\n    font-size: 0.85em;      /* 减小输入框字体 */\n}\n\n.button-group {\n    display: flex;\n    justify-content: flex-end;\n    gap: 8px;               /* 减小按钮间距 */\n    margin-top: 12px;       /* 减小按钮组上方间距 */\n}\n\n.button-group button {\n    padding: 4px 12px;      /* 减小按钮内边距 */\n    border-radius: 4px;\n    font-size: 0.85em;      /* 减小按钮字体 */\n}\n\n/* 自定义按钮样式 */\n.custom-btn {\n    border: 1px solid;\n}\n\n.btn-outline-warning {\n    border-color: #ffc107;\n    color: #ffc107;\n}\n\n.btn-outline-warning:hover {\n    background: rgba(255, 193, 7, 0.1);\n}\n\n.btn-outline-secondary {\n    border-color: #6c757d;\n    color: #6c757d;\n}\n\n.btn-outline-secondary:hover {\n    background: rgba(108, 117, 125, 0.1);\n}\n\n\n\n\n\n\n/* 视图容器样式 */\n.view {\n    display: none;\n    transition: opacity 0.3s ease;\n}\n\n.view.active {\n    display: block;\n}\n\n/* 题目列表页面样式 */\n.problem-list-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 20px;\n}\n\n.search-bar {\n    position: relative;\n    width: 300px;\n}\n\n.search-input {\n    width: 100%;\n    padding: 8px 35px 8px 15px;\n    border: none;\n    border-radius: 20px;\n    background: #2a2b30;\n    color: #fff;\n}\n\n.search-icon {\n    position: absolute;\n    right: 15px;\n    top: 50%;\n    transform: translateY(-50%);\n    color: #888;\n}\n\n.problem-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));\n    gap: 20px;\n    padding: 20px 0;\n}\n\n/* 更多选项页面样式 */\n.options-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));\n    gap: 20px;\n    padding: 20px 0;\n}\n\n\n\n/* 导航标签样式 */\n#problemListView .nav-tabs {\n    border-bottom: 1px solid #4a9d9c;\n\n}\n\n#problemListView .nav-tabs .nav-link {\n    color: #888;\n    border: none;\n    background: none;\n\n\n    transition: all 0.3s ease;\n}\n\n#problemListView .nav-tabs .nav-link:hover {\n    color: #fff;\n}\n\n#problemListView .nav-tabs .nav-link.active {\n    color: #4a9d9c;\n    background: none;\n    border-bottom: 2px solid #4a9d9c;\n}\n\n/* 确保tab内容区域正确显示 */\n#problemListView .tab-content {\n    display: flex;\n}\n\n#problemListView .tab-pane {\n    transition: opacity 0.3s ease;\n}\n\n#problemListView .tab-pane.active {\n    opacity: 1;\n}\n\n\n\n\n\niframe {\n    overflow: hidden;\n    border: 0;\n}\n\n.custom-btn {\n    border-color: #0D6E6E;\n    color: #4a9d9c;\n}\n\n.custom-btn:hover {\n    border-color: rgba(235, 173, 129, 1);\n    background-color: rgba(235, 173, 129, 1);\n}\n\n.custom-btn:disabled {\n    border-color: #e0e0e0;\n    color: #e0e0e0;\n}\n\n\n.footer {\n    background: linear-gradient(to bottom, rgba(29, 46, 61, 0.8) 0%, #1d2e3d 100%);\n    backdrop-filter: blur(5px);\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 12px;           /* 按钮之间的间距 */\n    border-top: 1px solid rgba(255, 255, 255, 0.1);\n    margin-top: auto;\n    padding: 8px 0;  /* 添加上下内边距 */\n}\n\n#github-star-container {\n    display: flex;\n    align-items: center;\n    height: 30px;\n}\n\n/* GitHub Star 按钮样式 */\n.github-star-btn {\n    font-size: 0.875rem;\n    font-family: 'Courier Prime', monospace;\n    background: #1d2e3d;\n    border: 1px solid rgba(97, 218, 251, 0.3);\n    color: #61dafb;\n    border-radius: 6px;\n    display: flex;\n    align-items: center;\n    gap: 0.6rem;\n    transition: all 0.3s ease;\n    position: relative;\n    overflow: hidden;\n    padding: 0.35rem 0.8rem;\n    animation: starPulse 2s infinite;\n}\n\n@keyframes starPulse {\n    0% {\n        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0.4);\n    }\n    70% {\n        box-shadow: 0 0 0 10px rgba(97, 218, 251, 0);\n    }\n    100% {\n        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0);\n    }\n}\n\n.github-star-btn i {\n    font-size: 0.875rem;\n    color: #61dafb;\n    transition: all 0.3s ease;\n    animation: starTwinkle 2s infinite;\n}\n\n@keyframes starTwinkle {\n    0% {\n        transform: scale(1);\n        opacity: 1;\n    }\n    50% {\n        transform: scale(1.2);\n        opacity: 0.8;\n    }\n    100% {\n        transform: scale(1);\n        opacity: 1;\n    }\n}\n\n.github-star-btn:hover {\n    background: #1a3244;\n    border-color: #61dafb;\n    box-shadow: 0 0 15px rgba(97, 218, 251, 0.7);\n    color: #61dafb;\n    animation: none; /* 悬停时停止脉冲动画 */\n}\n\n.github-star-btn:hover i {\n    animation: none; /* 悬停时停止星星闪烁动画 */\n    transform: scale(1.2);\n}\n\n.feedback-btn-review {\n    padding: 0.35rem 0.8rem !important;  /* 减小按钮内边距 */\n    font-size: 0.8rem !important;  /* 稍微减小字体 */\n    min-height: 28px;  /* 设置最小高度 */\n    padding: 0 12px;     /* 水平内边距 */\n}\n\n.feedback-btn-review .btn-content {\n    gap: 0.4rem !important;  /* 减小图标和文字间距 */\n}\n\n.feedback-btn-review i {\n    font-size: 0.8rem !important;  /* 减小图标大小 */\n}\n\n\n.page-input {\n    background-color: transparent;\n    color: #e0e0e0;\n    border: 1px solid #e0e0e0;\n    border-radius: 4px;\n    text-align: center;\n    font-size: 0.875rem;  /* 相当于 Bootstrap 的 sm 大小 */\n    margin-left: 5px !important; \n    margin-right: 5px !important;\n}\n\n.page-input:focus {\n    outline: none;\n    border-color: #afffff;\n    box-shadow: 0 0 5px rgba(74, 157, 156, 0.5);\n}\n\n.multifont {\n    font-family: 'Courier Prime', 'Noto Sans SC', sans-serif;\n}\n\na {\n    color: chocolate;\n}\n\n.custom-tooltip {\n    --bs-tooltip-bg: var(--bd-violet-bg);\n    --bs-tooltip-color: var(--bs-white);\n}\n\n/* 题目列表样式 */\n#problemListView {\n    padding: 5px;\n}\n\n.problem-list-header {\n    margin-bottom: 15px;\n}\n\n.nav-tabs {\n    border-bottom: 1px solid #dee2e6;\n}\n\n.nav-tabs .nav-link {\n    margin-bottom: -1px;\n    color: #495057;\n    border: 1px solid transparent;\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem;\n}\n\n.nav-tabs .nav-link.active {\n    color: #495057;\n    background-color: #fff;\n    border-color: #dee2e6 #dee2e6 #fff;\n}\n\n.tab-content {\n    padding: 10px;\n    background-color: #fff;\n    border: 1px solid #dee2e6;\n    border-top: none;\n}\n\n.tab-pane {\n    display: none;\n}\n.tab-pane.active {\n    display: block;\n}\n\n\n\n/* 确保switch容器不会阻挡点击事件 */\n#switch-area {\n    pointer-events: auto;\n    position: relative;\n    z-index: 100;\n}\n\n\n\n\n\n\n/* 自定义表格样式 */\n.table {\n    width: 100%;\n    table-layout: fixed;\n    word-wrap: break-word;\n\n\n    --bs-table-border-color: #afffff !important;       /* 边框颜色 */\n\n    --bs-table-hover-color: #f56464 !important;        /* 悬停文字颜色 */\n    --bs-table-hover-bg: #ebe3e3 !important;          /* 悬停背景颜色 */\n    border: none !important;              /* 移除表格外边框 */\n    border-collapse: collapse !important;  /* 确保边框合并 */\n}\n\n\ntd, th {\n    padding: 4px !important;\n}\n\n.table {\n    margin-bottom: 0;\n    min-width: auto !important;\n}\n\n/* 确保表格容器有正确的宽度和溢出处理 */\n.table-responsive {\n    width: 100%;\n    overflow-x: hidden;\n}\n\n\n\n/* 专门设置表头样式 */\n.table thead,\n.table > thead{\n    border: none !important;              \n    background: linear-gradient(to right, #0D6E6E, #4a9d9c) !important;  \n}\n\n/* 确保表头单元格没有背景色 */\n.table thead tr,\n.table thead th {\n    background: transparent !important;    /* 确保tr和th是透明的 */\n    border: none !important;              \n    color: #ffffff !important;            /* 表头文字颜色 */\n}\n\n\n\n\n/* 记忆概率指示器样式 */\n.memory-indicator {\n    display: inline-flex;\n    align-items: center;\n    padding: 4px 8px;\n    border-radius: 12px;\n    transition: all 0.3s ease;\n}\n\n.memory-indicator:hover {\n    background-color: rgba(255, 255, 255, 0.1);\n    transform: scale(1.05);\n}\n\n.memory-indicator i {\n    font-size: 1.1em;\n}\n\n/* 颜色类 */\n.text-success { color: #4caf50 !important; }\n.text-warning { color: #ff9800 !important; }\n.text-danger { color: #f44336 !important; }\n\n\n\n/* 设置卡片样式调整 */\n.option-card {\n    background-color: #1d2e3d;\n    border-radius: 10px;\n    padding: 20px;\n    text-align: center;\n    transition: all 0.3s ease;\n}\n\n.option-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px rgba(74, 157, 156, 0.2);\n}\n\n.option-card i {\n    font-size: 2em;\n    color: #4a9d9c;\n    margin-bottom: 15px;\n}\n\n.option-card h4 {\n    color: #fff;\n    margin-bottom: 15px;\n}\n\n.option-card p {\n    color: #888;\n    font-size: 0.9em;\n}\n\n/* 表单控件样式 */\n.form-select {\n    background-color: #0D1F2D;\n    color: #fff;\n    border: 1px solid #4a9d9c;\n    margin-top: 10px;\n}\n\n.sync-tips {\n    margin-top: 10px;\n    font-size: 1.0em;\n    color: #888;\n    display: flex;\n    flex-direction: column;\n    gap: 5px;\n}\n.reminder-tips {\n    margin-top: 10px;\n    font-size: 1.0em;\n    color: #888;\n    display: flex;\n    flex-direction: column;\n    gap: 5px;\n}\n.save-section {\n    grid-column: 1 / -1;\n    text-align: center;\n    margin-top: 20px;\n}\n\n/* 开关按钮样式 */\n.form-check-input.custom-switch {\n    background-color: #0D1F2D !important;\n    border-color: #4a9d9c !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    transition: all 0.3s ease;\n    cursor: pointer !important;\n    pointer-events: auto !important;\n    opacity: 1;\n    z-index: 100;\n    position: relative;\n    outline: none !important;\n    /* 自定义滑块圆圈颜色为亮蓝色 */\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e\") !important;\n}\n\n/* 选中状态下的样式 */\n.form-check-input.custom-switch:checked {\n    background-color: #0D6E6E !important;\n    border-color: #0D6E6E !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    /* 选中状态下保持相同的蓝色圆圈 */\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e\") !important;\n}\n\n/* 悬停状态加强发光效果 */\n.form-check-input.custom-switch:hover {\n    box-shadow: 0 0 15px rgba(97, 218, 251, 0.9);\n}\n\n/* 焦点状态 */\n.form-check-input.custom-switch:focus {\n    background-color: inherit !important;  /* 继承当前状态的背景色 */\n    border-color: #4a9d9c !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    outline: none !important;\n}\n\n/* 选中且焦点状态 */\n.form-check-input.custom-switch:checked:focus {\n    background-color: #4a9d9c !important;\n}\n\n\n\n\n\n/* SweetAlert2 自定义样式 */\n.colored-toast.swal2-icon-success {\n    background-color: #1d2e3d !important;\n    border: 1px solid #4a9d9c !important;\n}\n\n.colored-toast .swal2-title {\n    color: #ffffff !important;\n    font-size: 1em !important;\n}\n\n.colored-toast .swal2-close {\n    color: #4a9d9c !important;\n}\n\n.colored-toast .swal2-html-container {\n    color: #888 !important;\n    font-size: 0.9em !important;\n}\n\n/* 成功图标颜色 */\n.colored-toast .swal2-success-line-tip,\n.colored-toast .swal2-success-line-long {\n    background-color: #4a9d9c !important;\n}\n\n.colored-toast .swal2-success-ring {\n    border-color: #4a9d9c !important;\n}\n\n/* 更新概要样式 */\n.update-badge {\n    background-color: #FF3D3D;\n    color: white;\n    padding: 2px 5px;\n    border-radius: 3px;\n    font-size: 0.8em;\n    margin-right: 5px;\n    font-weight: bold;\n}\n\n.update-summary {\n    background-color: rgba(74, 157, 156, 0.1);\n    border-radius: 4px;\n    padding: 3px 0 !important;\n    margin-bottom: 8px !important;\n}\n\n.update-summary a {\n    color: #4a9d9c;\n    text-decoration: none;\n    margin-left: 5px;\n}\n\n.update-summary a:hover {\n    text-decoration: underline;\n    color: #afffff;\n}\n\n/* 图标按钮样式 */\n.btn-icon {\n    background: none;\n    border: none;\n    color: #4a9d9c;\n    font-size: 1em;\n    width: 28px;\n    height: 28px;\n    border-radius: 6px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    background-color: transparent;\n}\n\n.btn-icon:hover {\n    background-color: rgba(74, 157, 156, 0.1);\n    color: #61dafb;\n    transform: translateY(-1px);\n}\n\n.btn-icon:active {\n    transform: translateY(0);\n}\n\n.btn-icon-sm {\n    width: 24px;\n    height: 24px;\n}\n\n/* 优化参数进度条样式 */\n.optimize-progress {\n    height: 3px !important;\n    background-color: rgba(74, 157, 156, 0.1) !important;\n    border-radius: 4px !important;\n    margin-top: 12px !important;\n    overflow: hidden !important;\n}\n\n.optimize-progress .progress-bar {\n    background: linear-gradient(90deg, #4a9d9c, #61dafb) !important;\n    transition: width 0.3s ease !important;\n}\n\n.optimize-progress .progress-bar-animated {\n    animation: progress-bar-stripes 1s linear infinite !important;\n}\n\n.optimize-progress .progress-bar-striped {\n    background-image: linear-gradient(\n        45deg,\n        rgba(255, 255, 255, 0.15) 25%,\n        transparent 25%,\n        transparent 50%,\n        rgba(255, 255, 255, 0.15) 50%,\n        rgba(255, 255, 255, 0.15) 75%,\n        transparent 75%,\n        transparent\n    ) !important;\n    background-size: 1rem 1rem !important;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6316,7 +6360,7 @@ if (typeof this !== 'undefined' && this.Sweetalert2){this.swal = this.sweetAlert
 
 /***/ }),
 
-/***/ 877:
+/***/ 906:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -7017,6 +7061,359 @@ var sweetalert2_all = __webpack_require__(455);
 var sweetalert2_all_default = /*#__PURE__*/__webpack_require__.n(sweetalert2_all);
 // EXTERNAL MODULE: ./src/popup/util/fsrs.js
 var fsrs = __webpack_require__(878);
+// EXTERNAL MODULE: ./src/popup/service/webdavService.js
+var webdavService = __webpack_require__(6);
+// EXTERNAL MODULE: ./src/popup/service/syncManager.js
+var syncManager = __webpack_require__(584);
+;// CONCATENATED MODULE: ./src/popup/component/conflictResolver.js
+/**
+ * Conflict Resolver Component for handling sync conflicts
+ */
+
+
+
+class ConflictResolver {
+    constructor() {
+        this.pendingConflicts = [];
+    }
+
+    /**
+     * 解决单个冲突
+     */
+    async resolveConflict(conflict) {
+        const localProblem = conflict.versions.find(v => v.source === 'local').problem;
+        const cloudProblem = conflict.versions.find(v => v.source !== 'local')?.problem;
+        
+        if (!cloudProblem) {
+            // 没有云端版本，使用本地版本
+            return localProblem;
+        }
+        
+        const localTime = new Date(localProblem.modificationTime || 0);
+        const cloudTime = new Date(cloudProblem.modificationTime || 0);
+        
+        const result = await sweetalert2_all_default().fire({
+            title: 'Data Conflict Detected',
+            html: this.buildConflictHTML(localProblem, cloudProblem, localTime, cloudTime),
+            showCancelButton: true,
+            confirmButtonText: 'Use Cloud Version',
+            cancelButtonText: 'Use Local Version',
+            showDenyButton: true,
+            denyButtonText: 'Merge Manually',
+            customClass: {
+                container: 'conflict-resolver-container',
+                popup: 'conflict-resolver-popup'
+            }
+        });
+        
+        if (result.isConfirmed) {
+            return cloudProblem;
+        } else if (result.isDenied) {
+            return await this.manualMerge(localProblem, cloudProblem);
+        } else {
+            return localProblem;
+        }
+    }
+
+    /**
+     * 构建冲突显示HTML
+     */
+    buildConflictHTML(localProblem, cloudProblem, localTime, cloudTime) {
+        const formatDate = (date) => {
+            return date.toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        };
+        
+        return `
+            <div class="conflict-details">
+                <h4>Problem: ${localProblem.name || localProblem.title || 'Unknown'}</h4>
+                <div class="conflict-comparison">
+                    <div class="conflict-version">
+                        <h5>Local Version</h5>
+                        <p>Modified: ${formatDate(localTime)}</p>
+                        <p>Proficiency: ${localProblem.proficiency || 0}</p>
+                        ${localProblem.note ? `<p>Has notes: Yes</p>` : ''}
+                        ${localProblem.fsrsState ? `<p>Next Review: ${new Date(localProblem.fsrsState.nextReview).toLocaleDateString()}</p>` : ''}
+                    </div>
+                    <div class="conflict-version">
+                        <h5>Cloud Version</h5>
+                        <p>Modified: ${formatDate(cloudTime)}</p>
+                        <p>Proficiency: ${cloudProblem.proficiency || 0}</p>
+                        ${cloudProblem.note ? `<p>Has notes: Yes</p>` : ''}
+                        ${cloudProblem.fsrsState ? `<p>Next Review: ${new Date(cloudProblem.fsrsState.nextReview).toLocaleDateString()}</p>` : ''}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * 手动合并冲突
+     */
+    async manualMerge(localProblem, cloudProblem) {
+        const result = await sweetalert2_all_default().fire({
+            title: 'Manual Merge',
+            html: this.buildManualMergeHTML(localProblem, cloudProblem),
+            showCancelButton: true,
+            confirmButtonText: 'Save Merged Version',
+            cancelButtonText: 'Cancel',
+            preConfirm: () => {
+                return this.collectMergeChoices();
+            }
+        });
+        
+        if (result.isConfirmed && result.value) {
+            return this.applyMergeChoices(localProblem, cloudProblem, result.value);
+        }
+        
+        // 默认返回本地版本
+        return localProblem;
+    }
+
+    /**
+     * 构建手动合并HTML
+     */
+    buildManualMergeHTML(localProblem, cloudProblem) {
+        return `
+            <div class="manual-merge-container">
+                <h4>Choose which values to keep:</h4>
+                <div class="merge-field">
+                    <label>Proficiency Level:</label>
+                    <select id="merge-proficiency">
+                        <option value="local">Local (${localProblem.proficiency || 0})</option>
+                        <option value="cloud">Cloud (${cloudProblem.proficiency || 0})</option>
+                        <option value="max">Use Higher Value</option>
+                    </select>
+                </div>
+                <div class="merge-field">
+                    <label>Notes:</label>
+                    <select id="merge-note">
+                        <option value="local">Local${localProblem.note ? ' (has content)' : ' (empty)'}</option>
+                        <option value="cloud">Cloud${cloudProblem.note ? ' (has content)' : ' (empty)'}</option>
+                        <option value="longest">Use Longer Note</option>
+                        <option value="combine">Combine Both</option>
+                    </select>
+                </div>
+                <div class="merge-field">
+                    <label>FSRS State:</label>
+                    <select id="merge-fsrs">
+                        <option value="local">Local${localProblem.fsrsState ? ' (active)' : ' (none)'}</option>
+                        <option value="cloud">Cloud${cloudProblem.fsrsState ? ' (active)' : ' (none)'}</option>
+                        <option value="latest">Use Most Recent</option>
+                    </select>
+                </div>
+                <div class="merge-field">
+                    <label>Reviews:</label>
+                    <select id="merge-reviews">
+                        <option value="local">Local Only</option>
+                        <option value="cloud">Cloud Only</option>
+                        <option value="combine">Combine All</option>
+                    </select>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * 收集合并选择
+     */
+    collectMergeChoices() {
+        return {
+            proficiency: document.getElementById('merge-proficiency').value,
+            note: document.getElementById('merge-note').value,
+            fsrs: document.getElementById('merge-fsrs').value,
+            reviews: document.getElementById('merge-reviews').value
+        };
+    }
+
+    /**
+     * 应用合并选择
+     */
+    applyMergeChoices(localProblem, cloudProblem, choices) {
+        const merged = { ...localProblem };
+        
+        // 合并 proficiency
+        if (choices.proficiency === 'cloud') {
+            merged.proficiency = cloudProblem.proficiency;
+        } else if (choices.proficiency === 'max') {
+            merged.proficiency = Math.max(
+                localProblem.proficiency || 0,
+                cloudProblem.proficiency || 0
+            );
+        }
+        
+        // 合并 note
+        if (choices.note === 'cloud') {
+            merged.note = cloudProblem.note;
+        } else if (choices.note === 'longest') {
+            const localNote = localProblem.note || '';
+            const cloudNote = cloudProblem.note || '';
+            merged.note = localNote.length > cloudNote.length ? localNote : cloudNote;
+        } else if (choices.note === 'combine') {
+            const localNote = localProblem.note || '';
+            const cloudNote = cloudProblem.note || '';
+            if (localNote && cloudNote && localNote !== cloudNote) {
+                merged.note = `${localNote}\n\n--- Cloud Version ---\n\n${cloudNote}`;
+            } else {
+                merged.note = localNote || cloudNote;
+            }
+        }
+        
+        // 合并 FSRS state
+        if (choices.fsrs === 'cloud') {
+            merged.fsrsState = cloudProblem.fsrsState;
+        } else if (choices.fsrs === 'latest') {
+            const localTime = localProblem.fsrsState?.lastReview || 0;
+            const cloudTime = cloudProblem.fsrsState?.lastReview || 0;
+            merged.fsrsState = localTime > cloudTime ? localProblem.fsrsState : cloudProblem.fsrsState;
+        }
+        
+        // 合并 reviews
+        if (choices.reviews === 'cloud') {
+            merged.reviews = cloudProblem.reviews;
+        } else if (choices.reviews === 'combine') {
+            const allReviews = new Map();
+            
+            // 添加本地reviews
+            if (localProblem.reviews && Array.isArray(localProblem.reviews)) {
+                localProblem.reviews.forEach(review => {
+                    const key = `${review.date}-${review.rating}`;
+                    allReviews.set(key, review);
+                });
+            }
+            
+            // 添加云端reviews
+            if (cloudProblem.reviews && Array.isArray(cloudProblem.reviews)) {
+                cloudProblem.reviews.forEach(review => {
+                    const key = `${review.date}-${review.rating}`;
+                    allReviews.set(key, review);
+                });
+            }
+            
+            merged.reviews = Array.from(allReviews.values());
+        }
+        
+        // 更新修改时间
+        merged.modificationTime = Date.now();
+        
+        return merged;
+    }
+
+    /**
+     * 批量解决冲突
+     */
+    async resolveMultipleConflicts(conflicts) {
+        const resolved = [];
+        
+        for (const conflict of conflicts) {
+            const resolvedProblem = await this.resolveConflict(conflict);
+            resolved.push({
+                id: conflict.id,
+                problem: resolvedProblem
+            });
+        }
+        
+        return resolved;
+    }
+
+    /**
+     * 自动解决冲突（使用默认策略）
+     */
+    autoResolveConflict(conflict) {
+        const versions = conflict.versions;
+        
+        // 默认策略：使用最新修改的版本
+        let latest = versions[0];
+        let latestTime = latest.problem.modificationTime || 0;
+        
+        for (const version of versions) {
+            const time = version.problem.modificationTime || 0;
+            if (time > latestTime) {
+                latest = version;
+                latestTime = time;
+            }
+        }
+        
+        return latest.problem;
+    }
+}
+
+// 添加样式
+const style = document.createElement('style');
+style.textContent = `
+    .conflict-resolver-container {
+        z-index: 10000;
+    }
+    
+    .conflict-resolver-popup {
+        max-width: 600px;
+    }
+    
+    .conflict-details {
+        text-align: left;
+    }
+    
+    .conflict-comparison {
+        display: flex;
+        gap: 20px;
+        margin-top: 15px;
+    }
+    
+    .conflict-version {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: #f9f9f9;
+    }
+    
+    .conflict-version h5 {
+        margin-top: 0;
+        color: #333;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    
+    .conflict-version p {
+        margin: 5px 0;
+        font-size: 12px;
+        color: #666;
+    }
+    
+    .manual-merge-container {
+        text-align: left;
+    }
+    
+    .merge-field {
+        margin: 15px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .merge-field label {
+        flex: 0 0 120px;
+        font-weight: bold;
+        font-size: 13px;
+    }
+    
+    .merge-field select {
+        flex: 1;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        font-size: 13px;
+    }
+`;
+document.head.appendChild(style);
+
+// 导出单例
+const conflictResolver = new ConflictResolver();
 ;// CONCATENATED MODULE: ./src/popup/daily-review.js
 
 
@@ -7031,6 +7428,9 @@ var fsrs = __webpack_require__(878);
 // 在文件顶部导入 SweetAlert2
 
 // 导入 getAllRevlogs 函数
+
+
+
 
 
 
@@ -7861,6 +8261,54 @@ function showModal(title, content, buttons = null) {
     }
 }
 
+// 初始化同步状态指示器
+function initializeSyncStatusIndicator() {
+    const syncIndicator = document.getElementById('syncIndicator');
+    const syncIcon = document.getElementById('syncIcon');
+    const syncStatus = document.getElementById('syncStatus');
+    
+    if (!syncIndicator || !syncIcon || !syncStatus) return;
+    
+    // 添加同步状态监听器
+    syncManager/* syncManager */.D.addSyncListener((event) => {
+        switch (event.status) {
+            case 'syncing':
+                syncIndicator.className = 'sync-indicator syncing';
+                syncStatus.textContent = 'Syncing...';
+                break;
+            case 'success':
+                syncIndicator.className = 'sync-indicator success';
+                syncStatus.textContent = 'Synced';
+                // 3秒后恢复正常状态
+                setTimeout(() => {
+                    syncIndicator.className = 'sync-indicator';
+                    syncStatus.textContent = 'Synced';
+                }, 3000);
+                break;
+            case 'error':
+                syncIndicator.className = 'sync-indicator error';
+                syncStatus.textContent = 'Sync Error';
+                // 5秒后恢复正常状态
+                setTimeout(() => {
+                    syncIndicator.className = 'sync-indicator';
+                    syncStatus.textContent = 'Synced';
+                }, 5000);
+                break;
+            default:
+                syncIndicator.className = 'sync-indicator';
+                syncStatus.textContent = 'Synced';
+        }
+    });
+    
+    // 点击同步指示器手动触发同步
+    syncIndicator.addEventListener('click', async () => {
+        await syncManager/* syncManager */.D.immediateSync();
+    });
+    
+    // 添加提示
+    syncIndicator.title = 'Click to sync now';
+}
+
 // 初始化FSRS参数优化卡片
 async function initializeFSRSOptimization() {
     try {
@@ -8108,6 +8556,229 @@ async function initializeFSRSOptimization() {
     }
 }
 
+// 初始化坚果云 WebDAV
+async function initializeWebDAV() {
+    const webdavToggle = document.getElementById('webdavToggle');
+    const webdavSettings = document.getElementById('webdavSettings');
+    const webdavUsername = document.getElementById('webdavUsername');
+    const webdavPassword = document.getElementById('webdavPassword');
+    const testWebdavBtn = document.getElementById('testWebdav');
+    const backupNowBtn = document.getElementById('backupNow');
+    const restoreDataBtn = document.getElementById('restoreData');
+    
+    if (!webdavToggle) return;
+    
+    // 初始化同步管理器
+    syncManager/* syncManager */.D.setConflictResolver(async (conflict) => {
+        return await conflictResolver.resolveConflict(conflict);
+    });
+    
+    // 设置同步状态监听器
+    initializeSyncStatusIndicator();
+    
+    await syncManager/* syncManager */.D.initialize();
+    
+    // 尝试加载已保存的配置
+    const hasConfig = await webdavService/* webdavService */.i.loadConfig();
+    webdavToggle.checked = hasConfig;
+    
+    if (hasConfig) {
+        webdavSettings.style.display = 'block';
+        // 显示已配置的用户名（不显示密码）
+        const config = await chrome.storage.local.get('webdavConfig');
+        if (config.webdavConfig) {
+            webdavUsername.value = config.webdavConfig.username;
+        }
+    }
+    
+    // 切换显示/隐藏
+    webdavToggle.addEventListener('change', () => {
+        webdavSettings.style.display = webdavToggle.checked ? 'block' : 'none';
+        if (!webdavToggle.checked) {
+            // 禁用时清除配置
+            webdavService/* webdavService */.i.clearConfig();
+        }
+    });
+    
+    // 测试连接
+    if (testWebdavBtn) {
+        testWebdavBtn.addEventListener('click', async () => {
+            const username = webdavUsername.value.trim();
+            const password = webdavPassword.value.trim();
+            
+            if (!username || !password) {
+                sweetalert2_all_default().fire({
+                    icon: 'error',
+                    title: 'Missing Info',
+                    text: 'Please enter username and password',
+                    timer: 2000
+                });
+                return;
+            }
+            
+            testWebdavBtn.disabled = true;
+            testWebdavBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
+            
+            try {
+                const isValid = await webdavService/* webdavService */.i.configure({
+                    username,
+                    password
+                });
+                
+                if (isValid) {
+                    sweetalert2_all_default().fire({
+                        icon: 'success',
+                        title: 'Connected!',
+                        text: 'Successfully connected to Nutstore',
+                        timer: 2000
+                    });
+                } else {
+                    throw new Error('Connection failed');
+                }
+            } catch (error) {
+                sweetalert2_all_default().fire({
+                    icon: 'error',
+                    title: 'Connection Failed',
+                    text: 'Please check your credentials',
+                    timer: 3000
+                });
+            } finally {
+                testWebdavBtn.disabled = false;
+                testWebdavBtn.innerHTML = '<i class="fas fa-check"></i> Test';
+            }
+        });
+    }
+    
+    // 立即备份
+    if (backupNowBtn) {
+        backupNowBtn.addEventListener('click', async () => {
+            if (!webdavService/* webdavService */.i.isConfigured) {
+                sweetalert2_all_default().fire({
+                    icon: 'warning',
+                    title: 'Not Configured',
+                    text: 'Please configure WebDAV first',
+                    timer: 2000
+                });
+                return;
+            }
+            
+            backupNowBtn.disabled = true;
+            backupNowBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Backing up...';
+            
+            try {
+                const problems = await (0,problemService/* getAllProblems */.kT)();
+                const filename = await webdavService/* webdavService */.i.backupProblems(Object.values(problems));
+                
+                sweetalert2_all_default().fire({
+                    icon: 'success',
+                    title: 'Backup Complete',
+                    text: `Saved ${Object.keys(problems).length} problems to Nutstore`,
+                    timer: 2000
+                });
+            } catch (error) {
+                sweetalert2_all_default().fire({
+                    icon: 'error',
+                    title: 'Backup Failed',
+                    text: error.message,
+                    timer: 3000
+                });
+            } finally {
+                backupNowBtn.disabled = false;
+                backupNowBtn.innerHTML = '<i class="fas fa-upload"></i> Backup';
+            }
+        });
+    }
+    
+    // 恢复数据
+    if (restoreDataBtn) {
+        restoreDataBtn.addEventListener('click', async () => {
+            if (!webdavService/* webdavService */.i.isConfigured) {
+                sweetalert2_all_default().fire({
+                    icon: 'warning',
+                    title: 'Not Configured',
+                    text: 'Please configure WebDAV first',
+                    timer: 2000
+                });
+                return;
+            }
+            
+            try {
+                // 获取备份列表
+                const backups = await webdavService/* webdavService */.i.getBackupList();
+                
+                if (backups.length === 0) {
+                    sweetalert2_all_default().fire({
+                        icon: 'info',
+                        title: 'No Backups',
+                        text: 'No backup files found in Nutstore',
+                        timer: 2000
+                    });
+                    return;
+                }
+                
+                // 让用户选择要恢复的备份
+                const options = backups.map(backup => ({
+                    value: backup.name,
+                    text: `${backup.name} (${new Date(backup.lastModified).toLocaleString()})`
+                }));
+                
+                const { value: selectedBackup } = await sweetalert2_all_default().fire({
+                    title: 'Select Backup to Restore',
+                    input: 'select',
+                    inputOptions: options.reduce((obj, opt) => {
+                        obj[opt.value] = opt.text;
+                        return obj;
+                    }, {}),
+                    inputPlaceholder: 'Select a backup',
+                    showCancelButton: true
+                });
+                
+                if (selectedBackup) {
+                    // 确认恢复
+                    const { isConfirmed } = await sweetalert2_all_default().fire({
+                        title: 'Confirm Restore',
+                        text: 'This will replace all current data. Continue?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, restore',
+                        cancelButtonText: 'Cancel'
+                    });
+                    
+                    if (isConfirmed) {
+                        restoreDataBtn.disabled = true;
+                        restoreDataBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Restoring...';
+                        
+                        const problems = await webdavService/* webdavService */.i.restoreProblems(selectedBackup);
+                        
+                        // 保存到本地存储
+                        await chrome.storage.local.set({ problems });
+                        
+                        sweetalert2_all_default().fire({
+                            icon: 'success',
+                            title: 'Restore Complete',
+                            text: `Restored ${problems.length} problems from backup`,
+                            timer: 2000
+                        }).then(() => {
+                            // 刷新页面
+                            window.location.reload();
+                        });
+                    }
+                }
+            } catch (error) {
+                sweetalert2_all_default().fire({
+                    icon: 'error',
+                    title: 'Restore Failed',
+                    text: error.message,
+                    timer: 3000
+                });
+            } finally {
+                restoreDataBtn.disabled = false;
+                restoreDataBtn.innerHTML = '<i class="fas fa-download"></i> Restore';
+            }
+        });
+    }
+}
+
 // 添加设置相关的初始化函数
 async function initializeOptions() {
     await (0,configService/* loadConfigs */.O1)();
@@ -8137,6 +8808,9 @@ async function initializeOptions() {
         syncToggle.checked = store/* store */.h.isCloudSyncEnabled || false;
     }
 
+
+    // 初始化坚果云 WebDAV 设置
+    await initializeWebDAV();
 
     // 初始化提醒开关和配置
     const reminderToggle = document.getElementById('reminderToggle');
@@ -9430,7 +10104,7 @@ __webpack_require__.d(__webpack_exports__, {
   xd: () => (/* binding */ syncProblems)
 });
 
-// UNUSED EXPORTS: getAllProblemsInCloud, setProblems, setProblemsToCloud
+// UNUSED EXPORTS: batchUpdateProblems, getAllProblemsInCloud, setProblems, setProblemsToCloud
 
 ;// CONCATENATED MODULE: ./src/popup/delegate/leetCodeDelegate.js
 const user_agent =
@@ -9537,7 +10211,13 @@ var store = __webpack_require__(214);
 var utils = __webpack_require__(384);
 // EXTERNAL MODULE: ./src/popup/delegate/cloudStorageDelegate.js
 var delegate_cloudStorageDelegate = __webpack_require__(188);
+// EXTERNAL MODULE: ./src/popup/service/webdavService.js
+var webdavService = __webpack_require__(6);
+// EXTERNAL MODULE: ./src/popup/service/syncManager.js
+var service_syncManager = __webpack_require__(584);
 ;// CONCATENATED MODULE: ./src/popup/service/problemService.js
+
+
 
 
 
@@ -9606,6 +10286,9 @@ const createOrUpdateProblem = async (problem) => {
     const problems = await getAllProblems();
     problems[problem.index] = problem;
     await setProblems(problems);
+    
+    // 触发同步
+    service_syncManager/* syncManager */.D.debouncedSync(problem.index);
 }
 
 const markProblemAsMastered = async (problemId) => {
@@ -9620,6 +10303,9 @@ const markProblemAsMastered = async (problemId) => {
     problems[problemId] = problem;
 
     await setProblems(problems);
+    
+    // 触发同步
+    service_syncManager/* syncManager */.D.debouncedSync(problemId);
 };
 
 const deleteProblem = async (problemId) => {
@@ -9634,6 +10320,9 @@ const deleteProblem = async (problemId) => {
         await (0,operationHistoryService/* addNewOperationHistory */.xH)(problem, operationHistory/* OPS_TYPE */.Z.DELETE, Date.now());
         problems[problemId] = problem;
         await setProblems(problems);
+        
+        // 触发同步
+        service_syncManager/* syncManager */.D.debouncedSync(problemId);
     }
 };
 
@@ -9650,14 +10339,977 @@ const resetProblem = async (problemId) => {
     problems[problemId] = problem;
 
     await setProblems(problems);
+    
+    // 触发同步
+    service_syncManager/* syncManager */.D.debouncedSync(problemId);
 };
 
 const syncProblems = async () => {
-    if (!store/* store */.h.isCloudSyncEnabled) return;
-    let cnMode = await (0,modeService/* isInCnMode */.B)();
-    const key = cnMode ? keys/* CN_PROBLEM_KEY */.Q$ : keys/* PROBLEM_KEY */.y0;
-    await (0,utils/* syncLocalAndCloudStorage */.gV)(key, utils/* mergeProblems */.bK); 
+    // 使用新的同步管理器
+    await service_syncManager/* syncManager */.D.performSync();
 }
+
+/**
+ * 批量更新问题（用于批量操作）
+ */
+const batchUpdateProblems = async (updates) => {
+    const problems = await getAllProblems();
+    
+    for (const update of updates) {
+        if (problems[update.id]) {
+            problems[update.id] = {
+                ...problems[update.id],
+                ...update.data,
+                modificationTime: Date.now()
+            };
+        }
+    }
+    
+    await setProblems(problems);
+    
+    // 批量操作立即同步
+    await syncManager.immediateSync();
+}
+
+/***/ }),
+
+/***/ 584:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   D: () => (/* binding */ syncManager)
+/* harmony export */ });
+/* harmony import */ var _webdavService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+/* harmony import */ var _problemService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(820);
+/* harmony import */ var _modeService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(733);
+/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(134);
+/* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(891);
+/* harmony import */ var _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(188);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(214);
+/**
+ * Sync Manager for coordinating data synchronization between local, Chrome Sync, and WebDAV
+ */
+
+
+
+
+
+
+
+
+
+class SyncManager {
+    constructor() {
+        this.syncTimer = null;
+        this.syncQueue = new Set();
+        this.SYNC_DELAY = 2000; // 2秒防抖
+        this.AUTO_SYNC_INTERVAL = 5 * 60 * 1000; // 5分钟自动同步
+        this.isSyncing = false;
+        this.lastSyncTime = null;
+        this.syncStatus = 'idle'; // idle, syncing, success, error
+        this.syncListeners = new Set();
+        this.conflictResolver = null;
+        this.autoSyncTimer = null;
+    }
+
+    /**
+     * 初始化同步管理器
+     */
+    async initialize() {
+        // 加载WebDAV配置
+        const webdavLoaded = await _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.loadConfig();
+        
+        // 启动时执行一次同步
+        if (webdavLoaded || _store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
+            await this.performSync();
+        }
+        
+        // 启动自动同步
+        this.startAutoSync();
+        
+        // 监听窗口关闭事件
+        window.addEventListener('beforeunload', async (e) => {
+            if (this.hasPendingChanges()) {
+                e.preventDefault();
+                await this.immediateSync();
+            }
+        });
+    }
+
+    /**
+     * 启动自动同步
+     */
+    startAutoSync() {
+        this.stopAutoSync();
+        this.autoSyncTimer = setInterval(() => {
+            this.performSync();
+        }, this.AUTO_SYNC_INTERVAL);
+    }
+
+    /**
+     * 停止自动同步
+     */
+    stopAutoSync() {
+        if (this.autoSyncTimer) {
+            clearInterval(this.autoSyncTimer);
+            this.autoSyncTimer = null;
+        }
+    }
+
+    /**
+     * 添加同步状态监听器
+     */
+    addSyncListener(listener) {
+        this.syncListeners.add(listener);
+    }
+
+    /**
+     * 移除同步状态监听器
+     */
+    removeSyncListener(listener) {
+        this.syncListeners.delete(listener);
+    }
+
+    /**
+     * 通知同步状态变化
+     */
+    notifySyncStatusChange(status, data = {}) {
+        this.syncStatus = status;
+        this.syncListeners.forEach(listener => {
+            try {
+                listener({ status, ...data });
+            } catch (error) {
+                console.error('Sync listener error:', error);
+            }
+        });
+    }
+
+    /**
+     * 设置冲突解决器
+     */
+    setConflictResolver(resolver) {
+        this.conflictResolver = resolver;
+    }
+
+    /**
+     * 防抖同步
+     */
+    debouncedSync(problemId = null) {
+        if (problemId) {
+            this.syncQueue.add(problemId);
+        }
+        
+        clearTimeout(this.syncTimer);
+        this.syncTimer = setTimeout(() => {
+            this.performSync();
+        }, this.SYNC_DELAY);
+    }
+
+    /**
+     * 立即同步
+     */
+    async immediateSync() {
+        clearTimeout(this.syncTimer);
+        await this.performSync();
+    }
+
+    /**
+     * 检查是否有待同步的更改
+     */
+    hasPendingChanges() {
+        return this.syncQueue.size > 0 || this.syncTimer !== null;
+    }
+
+    /**
+     * 执行同步
+     */
+    async performSync() {
+        if (this.isSyncing) return;
+        
+        // 检查是否有任何同步方式启用
+        if (!_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured && !_store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
+            return;
+        }
+        
+        this.isSyncing = true;
+        this.notifySyncStatusChange('syncing');
+        
+        try {
+            const cnMode = await (0,_modeService__WEBPACK_IMPORTED_MODULE_2__/* .isInCnMode */ .B)();
+            const key = cnMode ? _util_keys__WEBPACK_IMPORTED_MODULE_6__/* .CN_PROBLEM_KEY */ .Q$ : _util_keys__WEBPACK_IMPORTED_MODULE_6__/* .PROBLEM_KEY */ .y0;
+            
+            // 1. 获取本地数据
+            const localData = await this.getLocalData(key);
+            
+            // 2. 获取所有云端数据（Chrome Sync + WebDAV）
+            const cloudData = await this.getAllCloudData(key);
+            
+            // 3. 合并数据
+            const mergedData = await this.mergeAllData(localData, cloudData);
+            
+            // 4. 处理冲突
+            if (mergedData.conflicts.length > 0) {
+                await this.handleConflicts(mergedData.conflicts);
+            }
+            
+            // 5. 保存合并后的数据到所有位置
+            await this.saveDataEverywhere(key, mergedData.problems);
+            
+            // 6. 清空同步队列
+            this.syncQueue.clear();
+            this.lastSyncTime = new Date().toISOString();
+            
+            this.notifySyncStatusChange('success', { 
+                syncedCount: Object.keys(mergedData.problems).length 
+            });
+        } catch (error) {
+            console.error('Sync failed:', error);
+            this.notifySyncStatusChange('error', { error: error.message });
+            this.handleSyncError(error);
+        } finally {
+            this.isSyncing = false;
+        }
+    }
+
+    /**
+     * 获取本地数据
+     */
+    async getLocalData(key) {
+        const data = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__/* .getLocalStorageData */ .Cy)(key);
+        return data || {};
+    }
+
+    /**
+     * 获取所有云端数据
+     */
+    async getAllCloudData(key) {
+        const cloudData = {
+            chromeSync: null,
+            webdav: null
+        };
+        
+        // 获取Chrome Sync数据
+        if (_store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
+            try {
+                cloudData.chromeSync = await _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.get(key);
+            } catch (error) {
+                console.warn('Failed to get Chrome Sync data:', error);
+            }
+        }
+        
+        // 获取WebDAV数据
+        if (_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured) {
+            try {
+                const webdavData = await _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.downloadData('problems_sync.json');
+                if (webdavData && webdavData.problems) {
+                    cloudData.webdav = webdavData.problems;
+                }
+            } catch (error) {
+                console.warn('Failed to get WebDAV data:', error);
+            }
+        }
+        
+        return cloudData;
+    }
+
+    /**
+     * 合并所有数据源
+     */
+    async mergeAllData(localData, cloudData) {
+        const merged = new Map();
+        const conflicts = [];
+        const allProblems = {};
+        
+        // 收集所有数据源
+        const dataSources = [
+            { name: 'local', data: localData },
+            { name: 'chromeSync', data: cloudData.chromeSync },
+            { name: 'webdav', data: cloudData.webdav }
+        ].filter(source => source.data);
+        
+        // 收集所有问题ID
+        const allIds = new Set();
+        dataSources.forEach(source => {
+            if (source.data) {
+                Object.keys(source.data).forEach(id => allIds.add(id));
+            }
+        });
+        
+        // 对每个问题进行合并
+        for (const id of allIds) {
+            const versions = dataSources
+                .filter(source => source.data && source.data[id])
+                .map(source => ({
+                    source: source.name,
+                    problem: source.data[id]
+                }));
+            
+            if (versions.length === 0) continue;
+            
+            if (versions.length === 1) {
+                // 只有一个版本，直接使用
+                merged.set(id, versions[0].problem);
+            } else {
+                // 多个版本，需要合并
+                const mergedProblem = this.mergeSingleProblem(versions);
+                if (mergedProblem.hasConflict) {
+                    conflicts.push({
+                        id,
+                        versions: versions
+                    });
+                } else {
+                    merged.set(id, mergedProblem.data);
+                }
+            }
+        }
+        
+        // 转换为对象格式
+        merged.forEach((value, key) => {
+            allProblems[key] = value;
+        });
+        
+        return {
+            problems: allProblems,
+            conflicts
+        };
+    }
+
+    /**
+     * 合并单个问题的多个版本
+     */
+    mergeSingleProblem(versions) {
+        // 找出最新修改的版本
+        let latestVersion = versions[0];
+        let latestTime = this.getModificationTime(versions[0].problem);
+        
+        for (let i = 1; i < versions.length; i++) {
+            const time = this.getModificationTime(versions[i].problem);
+            if (time > latestTime) {
+                latestTime = time;
+                latestVersion = versions[i];
+            }
+        }
+        
+        // 检查是否有冲突（相同时间但不同内容）
+        const hasConflict = versions.some(v => {
+            const time = this.getModificationTime(v.problem);
+            return time === latestTime && 
+                   JSON.stringify(v.problem) !== JSON.stringify(latestVersion.problem);
+        });
+        
+        // 特殊字段合并
+        const mergedProblem = { ...latestVersion.problem };
+        
+        // 合并笔记（保留最长的）
+        versions.forEach(v => {
+            if (v.problem.note && v.problem.note.length > (mergedProblem.note || '').length) {
+                mergedProblem.note = v.problem.note;
+            }
+        });
+        
+        // 合并复习记录（合并所有记录）
+        const allReviews = new Set();
+        versions.forEach(v => {
+            if (v.problem.reviews && Array.isArray(v.problem.reviews)) {
+                v.problem.reviews.forEach(review => {
+                    allReviews.add(JSON.stringify(review));
+                });
+            }
+        });
+        if (allReviews.size > 0) {
+            mergedProblem.reviews = Array.from(allReviews).map(r => JSON.parse(r));
+        }
+        
+        return {
+            hasConflict,
+            data: mergedProblem
+        };
+    }
+
+    /**
+     * 获取问题的修改时间
+     */
+    getModificationTime(problem) {
+        return problem.modificationTime || 
+               problem.lastModified || 
+               problem.submissionTime || 
+               0;
+    }
+
+    /**
+     * 处理冲突
+     */
+    async handleConflicts(conflicts) {
+        if (!this.conflictResolver) {
+            console.warn('No conflict resolver set, using latest version');
+            return;
+        }
+        
+        for (const conflict of conflicts) {
+            try {
+                const resolved = await this.conflictResolver(conflict);
+                if (resolved) {
+                    // 更新解决后的数据
+                    conflict.resolved = resolved;
+                }
+            } catch (error) {
+                console.error('Conflict resolution failed:', error);
+            }
+        }
+    }
+
+    /**
+     * 保存数据到所有位置
+     */
+    async saveDataEverywhere(key, problems) {
+        const savePromises = [];
+        
+        // 保存到本地
+        savePromises.push((0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__/* .setLocalStorageData */ .qy)(key, problems));
+        
+        // 保存到Chrome Sync
+        if (_store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
+            savePromises.push(_delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.set(key, problems).catch(error => {
+                console.warn('Failed to save to Chrome Sync:', error);
+            }));
+        }
+        
+        // 保存到WebDAV
+        if (_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured) {
+            const syncData = {
+                version: '2.0',
+                lastSync: new Date().toISOString(),
+                deviceId: await this.getDeviceId(),
+                problems: problems,
+                metadata: {
+                    totalProblems: Object.keys(problems).length,
+                    lastModified: new Date().toISOString(),
+                    syncVersion: 1
+                }
+            };
+            
+            savePromises.push(
+                _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.uploadData('problems_sync.json', syncData).catch(error => {
+                    console.warn('Failed to save to WebDAV:', error);
+                })
+            );
+        }
+        
+        await Promise.all(savePromises);
+    }
+
+    /**
+     * 获取设备ID
+     */
+    async getDeviceId() {
+        let deviceId = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__/* .getLocalStorageData */ .Cy)('deviceId');
+        if (!deviceId) {
+            deviceId = `device-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_3__/* .setLocalStorageData */ .qy)('deviceId', deviceId);
+        }
+        return deviceId;
+    }
+
+    /**
+     * 处理同步错误
+     */
+    handleSyncError(error) {
+        // 记录错误
+        console.error('Sync error:', error);
+        
+        // 可以在这里添加错误重试逻辑
+        // 或者通知用户同步失败
+    }
+
+    /**
+     * 增量同步（性能优化）
+     */
+    async incrementalSync() {
+        if (!this.lastSyncTime) {
+            // 首次同步，执行完整同步
+            return this.performSync();
+        }
+        
+        const cnMode = await (0,_modeService__WEBPACK_IMPORTED_MODULE_2__/* .isInCnMode */ .B)();
+        const key = cnMode ? _util_keys__WEBPACK_IMPORTED_MODULE_6__/* .CN_PROBLEM_KEY */ .Q$ : _util_keys__WEBPACK_IMPORTED_MODULE_6__/* .PROBLEM_KEY */ .y0;
+        
+        // 获取自上次同步以来的更改
+        const changes = await this.getChangesSince(this.lastSyncTime);
+        
+        if (changes.length === 0) return;
+        
+        // 只同步变化的数据
+        const syncData = {
+            changes: changes,
+            lastSyncTime: new Date().toISOString(),
+            deviceId: await this.getDeviceId()
+        };
+        
+        if (_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured) {
+            await _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.uploadData('incremental.json', syncData);
+        }
+    }
+
+    /**
+     * 获取指定时间后的更改
+     */
+    async getChangesSince(timestamp) {
+        const problems = await (0,_problemService__WEBPACK_IMPORTED_MODULE_1__/* .getAllProblems */ .kT)();
+        const changes = [];
+        
+        Object.entries(problems).forEach(([id, problem]) => {
+            const modTime = this.getModificationTime(problem);
+            if (modTime > new Date(timestamp).getTime()) {
+                changes.push({
+                    id,
+                    problem,
+                    timestamp: modTime
+                });
+            }
+        });
+        
+        return changes;
+    }
+}
+
+// 导出单例
+const syncManager = new SyncManager();
+
+/***/ }),
+
+/***/ 6:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   i: () => (/* binding */ webdavService)
+/* harmony export */ });
+/**
+ * WebDAV Service for Nutstore (坚果云) Integration
+ * Provides unlimited cloud storage for LeetCode problem data
+ */
+
+class WebDAVService {
+    constructor() {
+        this.baseUrl = null;
+        this.username = null;
+        this.password = null;
+        this.isConfigured = false;
+        this.folderPath = '/LeetcodeMasteryScheduler/'; // 坚果云中的存储路径
+    }
+
+    /**
+     * 配置坚果云 WebDAV 连接
+     * @param {Object} config - 配置对象
+     * @param {string} config.username - 坚果云账号邮箱
+     * @param {string} config.password - 应用授权密码（非账号密码）
+     * @param {string} [config.serverUrl] - WebDAV 服务器地址，默认为坚果云
+     */
+    async configure(config) {
+        // 坚果云 WebDAV 地址：https://dav.jianguoyun.com/dav/
+        this.baseUrl = config.serverUrl || 'https://dav.jianguoyun.com/dav';
+        this.username = config.username;
+        this.password = config.password;
+        
+        // 验证连接
+        const isValid = await this.testConnection();
+        if (isValid) {
+            this.isConfigured = true;
+            // 保存配置到本地（密码需要加密）
+            await this.saveConfig(config);
+            // 确保文件夹存在
+            await this.ensureFolderExists();
+        }
+        return isValid;
+    }
+
+    /**
+     * 测试 WebDAV 连接
+     */
+    async testConnection() {
+        try {
+            const response = await this.request('PROPFIND', '/', {
+                headers: {
+                    'Depth': '0'
+                }
+            });
+            return response.ok;
+        } catch (error) {
+            console.error('WebDAV connection test failed:', error);
+            return false;
+        }
+    }
+
+    /**
+     * 发送 WebDAV 请求
+     */
+    async request(method, path, options = {}) {
+        const url = `${this.baseUrl}${path}`;
+        const auth = btoa(`${this.username}:${this.password}`);
+        
+        const defaultHeaders = {
+            'Authorization': `Basic ${auth}`,
+            'Content-Type': 'application/xml; charset=utf-8'
+        };
+        
+        const response = await fetch(url, {
+            method,
+            headers: {
+                ...defaultHeaders,
+                ...options.headers
+            },
+            body: options.body
+        });
+        
+        return response;
+    }
+
+    /**
+     * 确保存储文件夹存在
+     */
+    async ensureFolderExists() {
+        try {
+            // 检查文件夹是否存在
+            const response = await this.request('PROPFIND', this.folderPath, {
+                headers: {
+                    'Depth': '0'
+                }
+            });
+            
+            if (!response.ok && response.status === 404) {
+                // 创建文件夹
+                await this.request('MKCOL', this.folderPath);
+                console.log('Created folder:', this.folderPath);
+            }
+        } catch (error) {
+            console.error('Error ensuring folder exists:', error);
+        }
+    }
+
+    /**
+     * 上传数据到坚果云
+     * @param {string} filename - 文件名
+     * @param {Object} data - 要保存的数据
+     */
+    async uploadData(filename, data) {
+        if (!this.isConfigured) {
+            throw new Error('WebDAV not configured');
+        }
+        
+        const path = `${this.folderPath}${filename}`;
+        const jsonData = JSON.stringify(data, null, 2);
+        
+        try {
+            const response = await this.request('PUT', path, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            });
+            
+            if (response.ok || response.status === 201 || response.status === 204) {
+                console.log(`Data uploaded to ${path}`);
+                return true;
+            } else {
+                throw new Error(`Upload failed: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error uploading data:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 从坚果云下载数据
+     * @param {string} filename - 文件名
+     */
+    async downloadData(filename) {
+        if (!this.isConfigured) {
+            throw new Error('WebDAV not configured');
+        }
+        
+        const path = `${this.folderPath}${filename}`;
+        
+        try {
+            const response = await this.request('GET', path, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                const text = await response.text();
+                return JSON.parse(text);
+            } else if (response.status === 404) {
+                return null; // 文件不存在
+            } else {
+                throw new Error(`Download failed: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error downloading data:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 列出文件夹中的所有文件
+     */
+    async listFiles() {
+        if (!this.isConfigured) {
+            throw new Error('WebDAV not configured');
+        }
+        
+        try {
+            const response = await this.request('PROPFIND', this.folderPath, {
+                headers: {
+                    'Depth': '1'
+                }
+            });
+            
+            if (response.ok) {
+                const text = await response.text();
+                // 解析 XML 响应获取文件列表
+                return this.parseFileList(text);
+            } else {
+                throw new Error(`List files failed: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error listing files:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 解析 PROPFIND 响应中的文件列表
+     */
+    parseFileList(xmlText) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(xmlText, 'text/xml');
+        const responses = doc.getElementsByTagNameNS('DAV:', 'response');
+        
+        const files = [];
+        for (let i = 1; i < responses.length; i++) { // Skip first (folder itself)
+            const response = responses[i];
+            const href = response.getElementsByTagNameNS('DAV:', 'href')[0]?.textContent;
+            const displayName = response.getElementsByTagNameNS('DAV:', 'displayname')[0]?.textContent;
+            const lastModified = response.getElementsByTagNameNS('DAV:', 'getlastmodified')[0]?.textContent;
+            const contentLength = response.getElementsByTagNameNS('DAV:', 'getcontentlength')[0]?.textContent;
+            
+            if (href && displayName) {
+                files.push({
+                    name: displayName,
+                    path: href,
+                    lastModified: lastModified ? new Date(lastModified) : null,
+                    size: contentLength ? parseInt(contentLength) : 0
+                });
+            }
+        }
+        
+        return files;
+    }
+
+    /**
+     * 删除文件
+     */
+    async deleteFile(filename) {
+        if (!this.isConfigured) {
+            throw new Error('WebDAV not configured');
+        }
+        
+        const path = `${this.folderPath}${filename}`;
+        
+        try {
+            const response = await this.request('DELETE', path);
+            return response.ok || response.status === 204;
+        } catch (error) {
+            console.error('Error deleting file:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * 保存配置到本地存储（加密敏感信息）
+     */
+    async saveConfig(config) {
+        // 简单的 Base64 编码，实际使用应该用更安全的加密方式
+        const encryptedConfig = {
+            username: config.username,
+            password: btoa(config.password), // Base64 编码密码
+            serverUrl: config.serverUrl || 'https://dav.jianguoyun.com/dav',
+            enabled: true
+        };
+        
+        await chrome.storage.local.set({
+            webdavConfig: encryptedConfig
+        });
+    }
+
+    /**
+     * 从本地存储加载配置
+     */
+    async loadConfig() {
+        const result = await chrome.storage.local.get('webdavConfig');
+        if (result.webdavConfig && result.webdavConfig.enabled) {
+            const config = result.webdavConfig;
+            await this.configure({
+                username: config.username,
+                password: atob(config.password), // Base64 解码密码
+                serverUrl: config.serverUrl
+            });
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 清除配置
+     */
+    async clearConfig() {
+        this.baseUrl = null;
+        this.username = null;
+        this.password = null;
+        this.isConfigured = false;
+        
+        await chrome.storage.local.remove('webdavConfig');
+    }
+
+    /**
+     * 备份所有问题数据到坚果云
+     */
+    async backupProblems(problems) {
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const filename = `problems_backup_${timestamp}.json`;
+        
+        const backupData = {
+            version: '1.0',
+            timestamp: new Date().toISOString(),
+            problemCount: problems.length,
+            problems: problems
+        };
+        
+        await this.uploadData(filename, backupData);
+        
+        // 保持最近的备份记录
+        await this.maintainBackupHistory();
+        
+        return filename;
+    }
+
+    /**
+     * 恢复问题数据
+     */
+    async restoreProblems(filename) {
+        const data = await this.downloadData(filename);
+        if (data && data.problems) {
+            return data.problems;
+        }
+        throw new Error('Invalid backup file');
+    }
+
+    /**
+     * 获取所有备份文件列表
+     */
+    async getBackupList() {
+        const files = await this.listFiles();
+        return files.filter(file => 
+            file.name.startsWith('problems_backup_') && 
+            file.name.endsWith('.json')
+        ).sort((a, b) => b.lastModified - a.lastModified);
+    }
+
+    /**
+     * 维护备份历史（保留最近10个备份）
+     */
+    async maintainBackupHistory() {
+        const backups = await this.getBackupList();
+        if (backups.length > 10) {
+            // 删除旧的备份
+            for (let i = 10; i < backups.length; i++) {
+                await this.deleteFile(backups[i].name);
+            }
+        }
+    }
+
+    /**
+     * 同步数据（上传当前数据并下载最新数据）
+     */
+    async syncData(localProblems, lastSyncTime) {
+        const syncFilename = 'problems_sync.json';
+        
+        // 下载云端数据
+        const cloudData = await this.downloadData(syncFilename);
+        
+        if (!cloudData) {
+            // 云端没有数据，上传本地数据
+            await this.uploadData(syncFilename, {
+                lastSync: new Date().toISOString(),
+                problems: localProblems
+            });
+            return { problems: localProblems, conflicts: [] };
+        }
+        
+        // 合并数据（简单策略：以最新修改时间为准）
+        const mergedData = this.mergeProblems(localProblems, cloudData.problems);
+        
+        // 上传合并后的数据
+        await this.uploadData(syncFilename, {
+            lastSync: new Date().toISOString(),
+            problems: mergedData.problems
+        });
+        
+        return mergedData;
+    }
+
+    /**
+     * 合并本地和云端的问题数据
+     */
+    mergeProblems(localProblems, cloudProblems) {
+        const merged = new Map();
+        const conflicts = [];
+        
+        // 添加所有云端问题
+        cloudProblems.forEach(problem => {
+            merged.set(problem.id || problem.name, problem);
+        });
+        
+        // 合并本地问题
+        localProblems.forEach(problem => {
+            const key = problem.id || problem.name;
+            const cloudProblem = merged.get(key);
+            
+            if (!cloudProblem) {
+                // 只在本地存在
+                merged.set(key, problem);
+            } else {
+                // 比较修改时间，保留最新的
+                const localTime = new Date(problem.lastModified || 0).getTime();
+                const cloudTime = new Date(cloudProblem.lastModified || 0).getTime();
+                
+                if (localTime > cloudTime) {
+                    merged.set(key, problem);
+                } else if (localTime < cloudTime) {
+                    // 云端更新，保持云端版本
+                } else if (JSON.stringify(problem) !== JSON.stringify(cloudProblem)) {
+                    // 时间相同但内容不同，记录冲突
+                    conflicts.push({
+                        problemId: key,
+                        local: problem,
+                        cloud: cloudProblem
+                    });
+                }
+            }
+        });
+        
+        return {
+            problems: Array.from(merged.values()),
+            conflicts
+        };
+    }
+}
+
+// 导出单例
+const webdavService = new WebDAVService();
 
 /***/ }),
 
@@ -10127,8 +11779,6 @@ const descriptionOf = (sorter) => {
 /* harmony export */   J1: () => (/* binding */ getDelayedHours),
 /* harmony export */   PN: () => (/* binding */ isCompleted),
 /* harmony export */   PO: () => (/* binding */ scheduledReview),
-/* harmony export */   bK: () => (/* binding */ mergeProblems),
-/* harmony export */   gV: () => (/* binding */ syncLocalAndCloudStorage),
 /* harmony export */   qB: () => (/* binding */ getLevelColor),
 /* harmony export */   tL: () => (/* binding */ getDifficultyBasedSteps),
 /* harmony export */   vV: () => (/* binding */ calculatePageNum),
@@ -10136,7 +11786,7 @@ const descriptionOf = (sorter) => {
 /* harmony export */   zJ: () => (/* binding */ simpleStringHash),
 /* harmony export */   zV: () => (/* binding */ getCurrentRetrievability)
 /* harmony export */ });
-/* unused harmony exports isSubmitButton, getSubmissionResult, isSubmissionSuccess, updateProblemUponSuccessSubmission, mergeProblem, syncStorage, mergeFSRSParams, mergeRevlogs */
+/* unused harmony exports isSubmitButton, getSubmissionResult, isSubmissionSuccess, updateProblemUponSuccessSubmission, mergeProblem, mergeProblems, syncStorage, syncLocalAndCloudStorage, mergeFSRSParams, mergeRevlogs */
 /* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(891);
 /* harmony import */ var _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(188);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(214);
@@ -10281,7 +11931,7 @@ const mergeProblems = (ps1, ps2) => {
 }
 
 const syncStorage = async (sd1, sd2, key, merger) => {
-    if (!_store__WEBPACK_IMPORTED_MODULE_2__/* .store */ .h.isCloudSyncEnabled) return;
+    if (!store.isCloudSyncEnabled) return;
     const data1 = await sd1.get(key) || {};
     const data2 = await sd2.get(key) || {};
     const merged = merger(data1, data2);
@@ -10295,7 +11945,7 @@ const syncStorage = async (sd1, sd2, key, merger) => {
 }
 
 const syncLocalAndCloudStorage = async (key, merger) => {
-    await syncStorage(_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .ZP, _delegate_cloudStorageDelegate__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, key, merger);
+    await syncStorage(localStorageDelegate, cloudStorageDelegate, key, merger);
 }
 
 const simpleStringHash = (key) => {
@@ -10424,8 +12074,8 @@ const setConfigJumpHandlers = () => {
         });
     }
 }
-// EXTERNAL MODULE: ./src/popup/daily-review.js + 1 modules
-var daily_review = __webpack_require__(877);
+// EXTERNAL MODULE: ./src/popup/daily-review.js + 2 modules
+var daily_review = __webpack_require__(906);
 ;// CONCATENATED MODULE: ./src/popup/handler/modeSwitchHandler.js
 
 
@@ -11634,7 +13284,7 @@ var c=(s=>(s[s.New=0]="New",s[s.Learning=1]="Learning",s[s.Review=2]="Review",s[
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module used 'module' so it can't be inlined
 /******/ 	__webpack_require__(14);
-/******/ 	var __webpack_exports__ = __webpack_require__(877);
+/******/ 	var __webpack_exports__ = __webpack_require__(906);
 /******/ 	
 /******/ })()
 ;
