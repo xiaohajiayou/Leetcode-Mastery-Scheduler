@@ -1,0 +1,50 @@
+{
+  "defaultConfig": {
+    "enableSync": true,
+    "syncInterval": 300000,
+    "dailyGoal": 10,
+    "reviewReminder": true,
+    "reminderTime": "09:00",
+    "theme": "light",
+    "language": "en",
+    "sortOrder": "reviewTimeAsc",
+    "pageSize": 10,
+    "enableFSRS": true,
+    "enableWebDAV": false,
+    "webdavUrl": "",
+    "webdavUsername": "",
+    "webdavPassword": ""
+  },
+  "userConfig": {
+    "enableSync": true,
+    "syncInterval": 600000,
+    "dailyGoal": 15,
+    "reviewReminder": true,
+    "reminderTime": "10:30",
+    "theme": "dark",
+    "language": "zh-CN",
+    "sortOrder": "delayHoursDesc",
+    "pageSize": 20,
+    "enableFSRS": true,
+    "enableWebDAV": true,
+    "webdavUrl": "https://dav.jianguoyun.com/dav/",
+    "webdavUsername": "user@example.com",
+    "webdavPassword": "encrypted_password_here"
+  },
+  "minimalConfig": {
+    "enableSync": false,
+    "dailyGoal": 5,
+    "enableFSRS": false
+  },
+  "invalidConfig": {
+    "enableSync": "yes",
+    "syncInterval": -1000,
+    "dailyGoal": "ten",
+    "reviewReminder": 1,
+    "reminderTime": "25:00",
+    "theme": "rainbow",
+    "language": "alien",
+    "sortOrder": "random",
+    "pageSize": 0
+  }
+}

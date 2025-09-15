@@ -1,0 +1,61 @@
+{
+  "defaultParams": {
+    "w": [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.29, 2.61],
+    "requestRetention": 0.9,
+    "maximumInterval": 365,
+    "easyBonus": 1.3,
+    "hardInterval": 1.2
+  },
+  "optimizedParams": {
+    "w": [0.35, 0.55, 2.1, 5.2, 4.5, 0.9, 0.82, 0.02, 1.4, 0.12, 0.9, 2.0, 0.04, 0.3, 1.2, 0.25, 2.5],
+    "requestRetention": 0.85,
+    "maximumInterval": 180,
+    "easyBonus": 1.2,
+    "hardInterval": 1.1
+  },
+  "reviewLogs": [
+    {
+      "problemId": "1",
+      "rating": 3,
+      "timestamp": 1704067200000,
+      "state": "New"
+    },
+    {
+      "problemId": "1",
+      "rating": 4,
+      "timestamp": 1704153600000,
+      "state": "Learning"
+    },
+    {
+      "problemId": "1",
+      "rating": 5,
+      "timestamp": 1704240000000,
+      "state": "Review"
+    },
+    {
+      "problemId": "2",
+      "rating": 2,
+      "timestamp": 1704067200000,
+      "state": "New"
+    },
+    {
+      "problemId": "2",
+      "rating": 3,
+      "timestamp": 1704153600000,
+      "state": "Learning"
+    }
+  ],
+  "grades": {
+    "Again": 1,
+    "Hard": 2,
+    "Good": 3,
+    "Easy": 4,
+    "Perfect": 5
+  },
+  "states": {
+    "New": 0,
+    "Learning": 1,
+    "Review": 2,
+    "Relearning": 3
+  }
+}

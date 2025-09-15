@@ -28,26 +28,36 @@
 
 ![alt text](https://s2.loli.net/2025/02/16/eNEV49CM8ABWdZ7.jpg)   
 
+
+
 # 🚀 Get Started
 
-1.  Install the LMS plugin. Initially, click the `rate` button at the bottom-right corner of the LeetCode/Li Kou page (you can drag it to a different position). Rate your mastery of the problem, and the algorithm will adjust your review schedule based on your rating.
-    
-2.  The plugin's homepage automatically assesses the retrievability priority of each problem (the probability of being able to recall it). You can flexibly adjust your daily review volume based on your schedule.
-    
-3.  The FSRS algorithm allows for breaks and cramming sessions. It will automatically infer the overall recall probability of the problems over time and dynamically adjust the next review time to fit your learning pace.
-    
-4.  You can complete your review by ticking the box in the plugin's `popup` window, or you can click into the problem page and complete the review via the `rate it` button.
-    
-5.  Open the question list, view all the questions in the current review plan, write notes, and export notes as Markdown.
-    
-6.  Happy problem-solving! The key to mastering things quickly is to avoid forgetting!
+1. **After Installation**: A `rate` button will appear at the bottom-right corner of LeetCode problem pages (draggable to adjust position). After solving a problem, click the button to rate your mastery level (1-5 points). The system will intelligently schedule reviews based on your rating.
+
+2. **Open Plugin Homepage**: Click the LMS icon in your browser toolbar to view today's problems for review. The system automatically calculates memory retention rate for each problem based on the forgetting curve, prioritizing problems you're likely to forget.
+
+3. **Flexible Review Volume**: Adjust your daily review count through the gear buttons on the plugin homepage to fit your schedule. The FSRS algorithm supports intermittent learning - it intelligently adjusts the review plan even after a few days' break.
+
+4. **Complete Reviews**: Choose either method:
+   - Click ✓ directly in the plugin popup to mark as reviewed
+   - Click the problem to enter LeetCode page and complete review via the `rate` button
+
+5. **Problem Management**: In the Problems tab, view all problems, add notes, search/filter, and export notes as Markdown files.
+
+6. **Cloud Sync** (Optional): Configure Nutstore WebDAV in Settings to enable multi-device data synchronization for reviewing anywhere, anytime.
+
+💡 **Core Concept: Transform knowledge from short-term to long-term memory through scientific spaced repetition!**
 # 🚀 用法
-1. 安装LMS插件. 初始在LeetCode / 力扣页面右下角点击`rate`按钮（可拖动位置），为题目掌握情况打分，算法参考打分情况实时调整复习计划。
-2. 插件主页自动评估每道题的可检索性优先级（能够回忆起来的概率），用户可根据时间安排，灵活调整每日的复习量。
-3. FSRS算法允许休息和提前突击复习，其算法会随时间流逝，自动推理整体题目的回忆概率，动态调整下一次复习时间，以适应你的学习节奏。 
-4. 可在插件的`popup`弹窗中打勾完成复习；也可点击进入题目页面，通过`rate`按钮完成复习。
-5. 打开题目列表，查看当前复习规划的所有题目，撰写笔记，导出笔记为Markdown
-6. 刷题快乐，速成的本质在于不要遗忘!
+1. **安装插件后**：在 LeetCode/力扣题目页面右下角会出现 `rate` 按钮（可拖动调整位置）。完成题目后点击按钮，为掌握程度评分（1-5分），系统会根据你的评分智能安排复习时间。
+2. **打开插件主页**：点击浏览器工具栏的 LMS 图标，查看今日待复习题目。系统根据遗忘曲线自动计算每道题的记忆保持率，优先展示容易遗忘的题目。
+3. **灵活调整复习量**：通过插件主页的齿轮按钮调整每日复习数量，适应你的时间安排。FSRS 算法支持间歇学习，即使中断几天也能智能调整复习计划。
+4. **完成复习**：两种方式任选其一：
+   - 在插件弹窗中直接点击 ✓ 标记已复习
+   - 点击题目进入 LeetCode 页面，通过 `rate` 按钮评分完成复习
+5. **题目管理**：在 Problems 标签页查看所有题目，支持添加笔记、搜索筛选、导出笔记为 Markdown 文件。
+6. **云同步**（可选）：Settings 中配置坚果云 WebDAV，实现多设备数据同步，随时随地复习。
+
+💡 **核心理念：通过科学的间隔重复，让知识从短期记忆转化为长期记忆！**
 
 ![alt text](https://s2.loli.net/2025/02/20/CrmZewAQlWUNuc4.gif)
 
@@ -55,7 +65,33 @@
 
 
     
+# 👥 加入社区 / Join Community
 
+### 🎯 一起刷题，无限进步！
+
+<table border="0">
+  <tr>
+    <td width="40%" valign="top">
+      <p>加入我们的学习社群，与志同道合的小伙伴一起：</p>
+      <ul>
+        <li>📅 <strong>每日打卡</strong> - 相互监督，保持学习节奏</li>
+        <li>💡 <strong>解题思路分享</strong> - 交流不同的解题方法和技巧</li>
+        <li>🔥 <strong>刷题计划</strong> - 制定和分享个性化的复习计划</li>
+        <li>📊 <strong>经验交流</strong> - 分享面试经验和刷题心得</li>
+        <li>🤝 <strong>互助答疑</strong> - 积极讨论本插件的新功能</li>
+      </ul>
+      <br/>
+      <div align="center">
+        <img src="https://media.giphy.com/media/IPbS5R4fSUl5S/giphy.gif" width="150" alt="coding together"/>
+        <p><strong>让我们一起征服算法，拿下Dream Offer！</strong> 💪</p>
+      </div>
+    </td>
+    <td width="40%" align="center" valign="middle">
+      <img src="https://s2.loli.net/2025/09/15/KeWpytMIRNnPlVx.png" width="300" alt="微信群二维码"/>
+      <p><i>扫码加好友，拉入社区微信群<br/>备注：LMS刷题</i></p>
+    </td>
+  </tr>
+</table>
 
 
     
@@ -84,7 +120,7 @@
 | 提供笔记功能       | ✅ 已完成  | 题目列表中新增笔记按钮，支持导出所有笔记为Markdown     | 
 | 收集Anki fsrs 训练数据       | ✅ 已完成  | 待用于测试fsrs官方端口训练       | 
 | 接入Anki fsrs官方训练端口       | ✅ 已完成  | 目前仅支持本地复习记录训练（云同步用户可能存在影响）       | 
-| 扩展webdav云同步服务       | ❌ 待完成  | 待接入坚果云       | 
+| 扩展webdav云同步服务       | ✅ 已完成  | 接入坚果云，无上限记录题目数据       | 
 | 支持语言切换       | ❌ 待完成  | 待完成       | 
 | 不同网站题目数据源切换   | ❌ 待完成  | 待完成（目前仅支持力扣国际站和中国站，待兼容洛谷等）       |
 | 兼容火狐       | ❌ 待完成  | 待完成       | 
@@ -101,11 +137,14 @@
 | Provide note-taking feature | ✳️  Completed | Add note button in problem list, support exporting all notes to Markdown |
 | Collect Anki FSRS training data | ✳️  Completed | To be used for testing FSRS official training endpoint |
 | Integrate Anki FSRS official training endpoint | ✳️  Completed | Currently supports training with local review records (may affect cloud sync users) |
-| Expand webdav cloud sync service | ❌  Pending   | To be integrated with Nutstore                 |
+| Expand webdav cloud sync service | ✳️  Completed  | integrated with Nutstore                 |
 | Support language switching  | ❌  Pending   | Pending completion                          |
 | Switch data sources for different websites | ❌  Pending   | Pending completion (currently only supports LeetCode international and Chinese sites, to be compatible with Luogu, etc.) |
 | Compatibility with Firefox | ❌  Pending   | Pending completion                          |
 | Compatibility with `ctrl + enter` | ❌  Pending   | Lower priority for now                       |
+
+
+
 
 
 
