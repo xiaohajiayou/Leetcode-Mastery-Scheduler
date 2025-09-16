@@ -2,7 +2,7 @@
  * Sync Manager for coordinating data synchronization between local, Chrome Sync, and WebDAV
  */
 
-import { webdavService } from './webdavService';
+import { webdavEnhancedService } from './webdavEnhancedService';
 import { getAllProblems, setProblems, getAllProblemsInCloud, setProblemsToCloud } from './problemService';
 import { isInCnMode } from './modeService';
 import { CN_PROBLEM_KEY, PROBLEM_KEY } from '../util/keys';
@@ -28,9 +28,10 @@ class SyncManager {
      * 初始化同步管理器
      */
     async initialize() {
-        // 加载WebDAV配置
-        const webdavLoaded = await webdavService.loadConfig();
-        
+        // 加载 WebDAV 配置
+        const webdavLoaded = await webdavEnhancedService.loadConfig();
+        this.activeWebdavService = webdavEnhancedService;
+
         // 启动时异步执行一次同步，不阻塞初始化
         if (webdavLoaded || store.isCloudSyncEnabled) {
             setTimeout(() => {
@@ -143,7 +144,7 @@ class SyncManager {
         if (this.isSyncing) return;
         
         // 检查是否有任何同步方式启用
-        if (!webdavService.isConfigured && !store.isCloudSyncEnabled) {
+        if (!webdavEnhancedService.isConfigured && !store.isCloudSyncEnabled) {
             return;
         }
         
@@ -214,9 +215,9 @@ class SyncManager {
         }
         
         // 获取WebDAV数据
-        if (webdavService.isConfigured) {
+        if (webdavEnhancedService.isConfigured) {
             try {
-                const webdavData = await webdavService.downloadData('problems_sync.json');
+                const webdavData = await webdavEnhancedService.downloadData('problems_sync.json');
                 if (webdavData && webdavData.problems) {
                     cloudData.webdav = webdavData.problems;
                 }
@@ -391,7 +392,7 @@ class SyncManager {
         }
         
         // 保存到WebDAV
-        if (webdavService.isConfigured) {
+        if (webdavEnhancedService.isConfigured) {
             const syncData = {
                 version: '2.0',
                 lastSync: new Date().toISOString(),
@@ -405,7 +406,7 @@ class SyncManager {
             };
             
             savePromises.push(
-                webdavService.uploadData('problems_sync.json', syncData).catch(error => {
+                webdavEnhancedService.uploadData('problems_sync.json', syncData).catch(error => {
                     console.warn('Failed to save to WebDAV:', error);
                 })
             );
@@ -461,8 +462,8 @@ class SyncManager {
             deviceId: await this.getDeviceId()
         };
         
-        if (webdavService.isConfigured) {
-            await webdavService.uploadData('incremental.json', syncData);
+        if (webdavEnhancedService.isConfigured) {
+            await webdavEnhancedService.uploadData('incremental.json', syncData);
         }
     }
 

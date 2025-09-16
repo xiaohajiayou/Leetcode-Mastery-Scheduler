@@ -393,28 +393,47 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-// 处理 WebDAV 请求的函数
+// 处理 WebDAV 请求的增强函数 - 支持超时和更好的错误处理
 async function handleWebDAVRequest(params) {
-    const { method, url, headers, body } = params;
-    
+    const { method, url, headers, body, timeout = 10000 } = params;
+
     try {
+        // 创建 AbortController 用于超时控制
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
+
         const response = await fetch(url, {
             method: method,
             headers: headers,
-            body: body
+            body: body,
+            signal: controller.signal,
+            // 忽略 SSL 证书错误（仅在开发环境）
+            mode: 'cors',
+            credentials: 'omit'
+        }).finally(() => {
+            clearTimeout(timeoutId);
         });
-        
+
         const contentType = response.headers.get('content-type');
         let data;
-        
-        if (contentType && contentType.includes('application/json')) {
-            data = await response.json();
-        } else if (contentType && contentType.includes('text')) {
-            data = await response.text();
+
+        // 根据内容类型解析响应
+        if (contentType) {
+            if (contentType.includes('application/json')) {
+                data = await response.json();
+            } else if (contentType.includes('application/xml') || contentType.includes('text/xml')) {
+                data = await response.text();
+            } else if (contentType.includes('text')) {
+                data = await response.text();
+            } else {
+                // 二进制数据或未知类型
+                data = await response.text();
+            }
         } else {
+            // 没有 Content-Type，尝试作为文本处理
             data = await response.text();
         }
-        
+
         return {
             ok: response.ok,
             status: response.status,
@@ -423,7 +442,33 @@ async function handleWebDAVRequest(params) {
             headers: Object.fromEntries(response.headers.entries())
         };
     } catch (error) {
-        console.error('WebDAV request failed:', error);
-        throw error;
+        // 提供更详细的错误信息
+        let errorMessage = error.message;
+        let errorType = 'unknown';
+
+        if (error.name === 'AbortError') {
+            errorMessage = `Request timeout after ${timeout}ms`;
+            errorType = 'timeout';
+        } else if (error.message.includes('Failed to fetch')) {
+            errorMessage = 'Network error - possibly blocked by firewall or CORS';
+            errorType = 'network';
+        } else if (error.message.includes('SSL') || error.message.includes('certificate')) {
+            errorMessage = 'SSL/TLS error - try using HTTP instead';
+            errorType = 'ssl';
+        }
+
+        console.error('WebDAV request failed:', {
+            url,
+            method,
+            error: errorMessage,
+            type: errorType,
+            originalError: error
+        });
+
+        // 抛出包含更多信息的错误
+        const enhancedError = new Error(errorMessage);
+        enhancedError.type = errorType;
+        enhancedError.originalError = error;
+        throw enhancedError;
     }
 }

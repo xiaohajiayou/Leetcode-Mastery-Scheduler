@@ -10,9 +10,10 @@ import { store, daily_store } from './store';
 import { descriptionOf, idOf, problemSorterArr } from "./util/sort";
 import { getAllRevlogs, exportRevlogsToCSV, saveFSRSParams } from './util/fsrs.js';
 import { getRevlogCount, optimizeParameters, updateFSRSInstance } from './service/fsrsService.js';
-import { webdavService } from './service/webdavService.js';
+import { webdavEnhancedService as webdavService } from './service/webdavEnhancedService.js';
 import { syncManager } from './service/syncManager.js';
 import { conflictResolver } from './component/conflictResolver.js';
+import Swal from 'sweetalert2';
 
 // 新增服务导入
 import {

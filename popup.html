@@ -524,7 +524,7 @@
                                     <input class="form-check-input custom-switch" type="checkbox" id="webdavToggle">
                                 </div>
                             </div>
-                            
+
                             <div id="webdavSettings" style="display: none; margin-top: 10px;">
                                 <div style="margin-bottom: 8px;">
                                     <input type="email" id="webdavUsername" class="form-control" placeholder="坚果云账号邮箱" style="font-size: 0.85em;">
@@ -532,6 +532,49 @@
                                 <div style="margin-bottom: 8px;">
                                     <input type="password" id="webdavPassword" class="form-control" placeholder="应用授权密码(非登录密码)" style="font-size: 0.85em;">
                                 </div>
+
+                                <!-- 连接模式选择 -->
+                                <div style="margin-bottom: 8px;">
+                                    <label style="font-size: 0.85em; margin-bottom: 4px; display: block;">连接模式:</label>
+                                    <div style="display: flex; gap: 10px; font-size: 0.85em; justify-content: center;">
+                                        <label style="display: flex; align-items: center; cursor: pointer;">
+                                            <input type="radio" name="webdavMode" value="auto" checked style="margin-right: 4px;">
+                                            <span>自动</span>
+                                        </label>
+                                        <label style="display: flex; align-items: center; cursor: pointer;">
+                                            <input type="radio" name="webdavMode" value="https" style="margin-right: 4px;">
+                                            <span>HTTPS</span>
+                                        </label>
+                                        <label style="display: flex; align-items: center; cursor: pointer;">
+                                            <input type="radio" name="webdavMode" value="http" style="margin-right: 4px;">
+                                            <span>HTTP</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- 高级设置折叠区 -->
+                                <details id="webdavAdvanced" style="margin-bottom: 8px;">
+                                    <summary style="cursor: pointer; font-size: 0.85em; margin-bottom: 8px;">高级设置</summary>
+                                    <div style="padding: 8px; background: rgba(0,0,0,0.05); border-radius: 4px;">
+                                        <div style="margin-bottom: 8px;">
+                                            <label style="display: flex; align-items: center; font-size: 0.85em;">
+                                                <input type="checkbox" id="webdavDisguise" checked style="margin-right: 6px;">
+                                                自动伪装请求方法
+                                            </label>
+                                        </div>
+                                        <div style="display: flex; gap: 8px; font-size: 0.85em;">
+                                            <div style="flex: 1;">
+                                                <label style="display: block; margin-bottom: 2px;">重试次数:</label>
+                                                <input type="number" id="webdavRetries" value="3" min="1" max="10" class="form-control" style="font-size: 0.85em;">
+                                            </div>
+                                            <div style="flex: 1;">
+                                                <label style="display: block; margin-bottom: 2px;">超时(秒):</label>
+                                                <input type="number" id="webdavTimeout" value="10" min="5" max="60" class="form-control" style="font-size: 0.85em;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </details>
+
                                 <div style="display: flex; gap: 6px; margin-bottom: 8px;">
                                     <button type="button" id="testWebdav" class="webdav-btn webdav-btn-vertical" style="flex: 1;" title="测试坚果云连接">
                                         <i class="fas fa-check"></i>
@@ -550,8 +593,13 @@
                                         <span>Logout</span>
                                     </button>
                                 </div>
+
+                                <!-- 连接状态显示 -->
+                                <div id="webdavStatus" style="display: none; padding: 6px; background: rgba(0,255,0,0.1); border-radius: 4px; font-size: 0.8em; margin-bottom: 8px;">
+                                    <span id="webdavStatusText">已连接</span>
+                                </div>
                             </div>
-                            
+
                             <div class="webdav-tips" style="padding: 8px; border-radius: 4px; margin-top: 8px;">
                                 <small style="display: block; font-size: 0.8em;">Unlimited storage via Nutstore WebDAV</small>
                                 <small style="display: block; font-size: 0.8em;">

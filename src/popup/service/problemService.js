@@ -9,7 +9,7 @@ import { store } from "../store";
 import { mergeProblems, syncLocalAndCloudStorage } from "../util/utils";
 import cloudStorageDelegate from "../delegate/cloudStorageDelegate";
 import { copy, getDeletedProblem } from "../entity/problem";
-import { webdavService } from "./webdavService";
+import { webdavEnhancedService as webdavService } from "./webdavEnhancedService";
 import { syncManager } from "./syncManager";
 
 export const getAllProblems = async () => {

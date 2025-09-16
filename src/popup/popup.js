@@ -1,7 +1,8 @@
 import './popup.css';
 import { renderAll } from './view/view.js';
 import { syncManager } from './service/syncManager.js';
-import { webdavService } from './service/webdavService.js';
+import { webdavEnhancedService } from './service/webdavEnhancedService.js';
+import { webdavEnhancedSettings } from './component/webdavEnhancedSettings.js';
 import { store } from './store.js';
 
 console.log("Hello Leetcode-Mastery-Scheduler!");
@@ -12,21 +13,24 @@ await renderAll();
 // 初始化同步管理器
 await syncManager.initialize();
 
+// 初始化增强版 WebDAV 设置
+await webdavEnhancedSettings.initialize();
+
 // 初始化同步状态指示器
 function initializeSyncStatusIndicator() {
     const syncIndicator = document.getElementById('syncIndicator');
-    
+
     if (!syncIndicator) return;
-    
-    // 只有在启用了同步功能时才显示
-    const showIndicator = webdavService.isConfigured || store.isCloudSyncEnabled;
+
+    // 检查 WebDAV 或云同步是否启用
+    const showIndicator = webdavEnhancedService.isConfigured || store.isCloudSyncEnabled;
     if (showIndicator) {
         syncIndicator.style.display = 'flex';
         
         // 根据认证状态显示不同的内容
-        const initialStatus = webdavService.isAuthenticated ? 'Synced' : 'Login Required';
-        const initialClass = webdavService.isAuthenticated ? 'sync-indicator' : 'sync-indicator warning';
-        
+        const initialStatus = webdavEnhancedService.isAuthenticated ? 'Synced' : 'Login Required';
+        const initialClass = webdavEnhancedService.isAuthenticated ? 'sync-indicator' : 'sync-indicator warning';
+
         syncIndicator.className = initialClass;
         syncIndicator.innerHTML = `
             <span id="syncIcon">🔄</span>
@@ -36,12 +40,12 @@ function initializeSyncStatusIndicator() {
         syncIndicator.style.display = 'none';
         return;
     }
-    
+
     const syncIcon = document.getElementById('syncIcon');
     const syncStatus = document.getElementById('syncStatus');
-    
-    // 监听认证状态变化
-    webdavService.onAuthStatusChange = (isAuthenticated) => {
+
+    // 监听两个服务的认证状态变化
+    const updateAuthStatus = (isAuthenticated) => {
         if (!isAuthenticated) {
             syncIndicator.className = 'sync-indicator warning';
             syncStatus.textContent = 'Login Required';
@@ -62,10 +66,13 @@ function initializeSyncStatusIndicator() {
         }
     };
     
+    // 监听认证状态变化
+    webdavEnhancedService.onAuthStatusChange = updateAuthStatus;
+
     // 添加同步状态监听器
     syncManager.addSyncListener((event) => {
-        // 如果未认证，不处理同步事件
-        if (!webdavService.isAuthenticated && webdavService.isConfigured) {
+        // 检查认证状态
+        if (!webdavEnhancedService.isAuthenticated && webdavEnhancedService.isConfigured) {
             return;
         }
         
@@ -102,7 +109,7 @@ function initializeSyncStatusIndicator() {
     
     // 点击同步指示器的行为
     syncIndicator.addEventListener('click', async () => {
-        if (!webdavService.isAuthenticated && webdavService.isConfigured) {
+        if (!webdavEnhancedService.isAuthenticated && webdavEnhancedService.isConfigured) {
             // 如果未认证，跳转到设置页面
             const tabs = document.querySelectorAll('.nav-btn');
             const contents = document.querySelectorAll('[id$="View"]');
@@ -122,7 +129,7 @@ function initializeSyncStatusIndicator() {
     });
     
     // 添加提示
-    syncIndicator.title = webdavService.isAuthenticated ? 'Click to sync now' : 'Click to open settings and login';
+    syncIndicator.title = webdavEnhancedService.isAuthenticated ? 'Click to sync now' : 'Click to open settings and login';
 }
 
 // 初始化同步指示器
