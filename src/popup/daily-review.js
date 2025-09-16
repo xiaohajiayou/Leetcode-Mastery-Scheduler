@@ -1106,20 +1106,59 @@ async function initializeWebDAV() {
 let optionsInitialized = false;
 
 // 快速更新选项显示
-function updateOptionsDisplay() {
+async function updateOptionsDisplay() {
     const problemSorterSelect = document.getElementById('problemSorterSelect');
     if (problemSorterSelect && store.problemSorter) {
         problemSorterSelect.value = store.problemSorter;
     }
-    
+
     const defaultCardLimitInput = document.getElementById('defaultCardLimit');
     if (defaultCardLimitInput && store.defaultCardLimit) {
         defaultCardLimitInput.value = store.defaultCardLimit;
     }
-    
+
+    // 更新提醒相关设置
+    const config = await chrome.storage.local.get([
+        'reminderEnabled',
+        'reminderInterval',
+        'reminderStartTime',
+        'reminderEndTime',
+        'reminderDays'
+    ]);
+
     const reminderToggle = document.getElementById('reminderToggle');
     if (reminderToggle) {
-        reminderToggle.checked = store.reminderEnabled || false;
+        reminderToggle.checked = config.reminderEnabled || false;
+
+        // 更新显示状态
+        const reminderSettings = document.getElementById('reminderSettings');
+        if (reminderSettings) {
+            reminderSettings.style.display = reminderToggle.checked ? 'block' : 'none';
+        }
+    }
+
+    const reminderInterval = document.getElementById('reminderInterval');
+    if (reminderInterval) {
+        reminderInterval.value = String(config.reminderInterval || 60);
+    }
+
+    const reminderStartTime = document.getElementById('reminderStartTime');
+    if (reminderStartTime) {
+        reminderStartTime.value = config.reminderStartTime || '09:00';
+    }
+
+    const reminderEndTime = document.getElementById('reminderEndTime');
+    if (reminderEndTime) {
+        reminderEndTime.value = config.reminderEndTime || '22:00';
+    }
+
+    // 更新星期选择
+    const reminderDays = config.reminderDays || [1, 2, 3, 4, 5, 6, 0];
+    for (let i = 0; i <= 6; i++) {
+        const dayCheckbox = document.getElementById(`day${i}`);
+        if (dayCheckbox) {
+            dayCheckbox.checked = reminderDays.includes(i);
+        }
     }
 }
 
@@ -1127,7 +1166,7 @@ function updateOptionsDisplay() {
 async function initializeOptions() {
     // 如果已经初始化过，只更新显示
     if (optionsInitialized) {
-        updateOptionsDisplay();
+        await updateOptionsDisplay();
         return;
     }
     
@@ -1180,7 +1219,11 @@ async function initializeOptions() {
             'reminderDays'
         ]).then(config => {
             reminderToggle.checked = config.reminderEnabled || false;
-            if (reminderInterval) reminderInterval.value = config.reminderInterval || 60;
+            // 使用字符串形式以正确显示 0.5
+            if (reminderInterval) {
+                const intervalValue = config.reminderInterval || 60;
+                reminderInterval.value = String(intervalValue);
+            }
             if (reminderStartTime) reminderStartTime.value = config.reminderStartTime || '09:00';
             if (reminderEndTime) reminderEndTime.value = config.reminderEndTime || '22:00';
             
@@ -1223,16 +1266,18 @@ async function initializeOptions() {
     
     optionsForm.addEventListener('submit', async e => {
         e.preventDefault();
-        const selectedSorterId = problemSorterSelect.value;
-        const isCloudSyncEnabled = syncToggle.checked;
-        const isReminderEnabled = reminderToggle.checked;
+        console.log('Settings form submitted');
 
-        await setProblemSorter(Number(selectedSorterId));
-        await setCloudSyncEnabled(isCloudSyncEnabled);
-        await setReminderEnabled(isReminderEnabled);
-        
-        // 保存提醒详细设置
-        if (reminderToggle) {
+        try {
+            const selectedSorterId = problemSorterSelect.value;
+            const isCloudSyncEnabled = syncToggle.checked;
+            const isReminderEnabled = reminderToggle.checked;
+
+            await setProblemSorter(Number(selectedSorterId));
+            await setCloudSyncEnabled(isCloudSyncEnabled);
+            await setReminderEnabled(isReminderEnabled);
+
+            // 保存提醒详细设置（包括提醒开关状态）
             const selectedDays = [];
             for (let i = 0; i <= 6; i++) {
                 const dayCheckbox = document.getElementById(`day${i}`);
@@ -1240,31 +1285,28 @@ async function initializeOptions() {
                     selectedDays.push(i);
                 }
             }
-            
+
+            // 获取当前的间隔值
+            const intervalValue = parseFloat(reminderInterval?.value || 60);
+            console.log('Saving reminder interval:', intervalValue);
+
+            // 始终保存所有提醒相关设置
             await chrome.storage.local.set({
                 reminderEnabled: isReminderEnabled,
-                reminderInterval: parseInt(reminderInterval?.value || 60),
+                reminderInterval: intervalValue,  // 使用 parseFloat 以支持 0.5
                 reminderStartTime: reminderStartTime?.value || '09:00',
                 reminderEndTime: reminderEndTime?.value || '22:00',
                 reminderDays: selectedDays
             });
-        }
 
-        // 使用 SweetAlert2 显示保存成功提示
-        Swal.fire({
-            icon: 'success',
-            title: 'Settings Saved',
-            text: 'Your settings have been successfully updated',
-            showConfirmButton: false,
-            timer: 1500,
-            background: '#1d2e3d',
-            color: '#ffffff',
-            toast: true,
-            position: 'center-end',
-            customClass: {
-                popup: 'colored-toast'
-            }
-        });
+            console.log('Settings saved successfully');
+
+            // 使用 notificationService 显示保存成功提示
+            showSuccess('Settings Saved', 'Your settings have been successfully updated');
+        } catch (error) {
+            console.error('Error saving settings:', error);
+            showError('Save Failed', 'Failed to save settings: ' + error.message);
+        }
     });
 }
 

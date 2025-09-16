@@ -1,11 +1,11 @@
-console.log('Background service worker started');
+console.log('Background service worker started - v2.0 with records support');
 
 // 默认配置
 const DEFAULT_SETTINGS = {
     reminderEnabled: false,
     reminderInterval: 60, // 默认60分钟
-    reminderStartTime: '09:00',
-    reminderEndTime: '22:00',
+    reminderStartTime: '00:00',
+    reminderEndTime: '23:59',
     reminderDays: [1, 2, 3, 4, 5, 6, 0] // 默认每天
 };
 
@@ -31,9 +31,15 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 // 监听存储变化
 chrome.storage.onChanged.addListener((changes, namespace) => {
-    if (namespace === 'local' && changes.reminderEnabled) {
-        console.log('Reminder setting changed:', changes.reminderEnabled.newValue);
-        setupAlarms();
+    if (namespace === 'local') {
+        // 监听提醒开关或间隔时间的变化
+        if (changes.reminderEnabled || changes.reminderInterval) {
+            console.log('Reminder settings changed:', {
+                enabled: changes.reminderEnabled?.newValue,
+                interval: changes.reminderInterval?.newValue
+            });
+            setupAlarms();
+        }
     }
 });
 
@@ -43,17 +49,20 @@ async function setupAlarms() {
         'reminderEnabled',
         'reminderInterval'
     ]);
-    
+
     // 清除现有闹钟
     await chrome.alarms.clear('dailyReminder');
-    
+
     if (reminderEnabled) {
+        const interval = parseFloat(reminderInterval) || 60;
+
         // 创建周期性闹钟
+        // 注意：Chrome要求periodInMinutes最小为1，但可以设置更小的值让Chrome自动调整
         chrome.alarms.create('dailyReminder', {
-            delayInMinutes: 1, // 1分钟后首次触发
-            periodInMinutes: reminderInterval || 60
+            delayInMinutes: interval === 0.5 ? 0.5 : 1, // 调试模式30秒后首次触发
+            periodInMinutes: interval
         });
-        console.log(`Reminder alarm set with interval: ${reminderInterval || 60} minutes`);
+        console.log(`Reminder alarm set with interval: ${interval} minutes`);
     } else {
         console.log('Reminder disabled, alarms cleared');
     }
@@ -62,12 +71,15 @@ async function setupAlarms() {
 // 监听闹钟
 chrome.alarms.onAlarm.addListener(async (alarm) => {
     if (alarm.name === 'dailyReminder') {
+        console.log(`[Alarm Triggered] ${new Date().toLocaleTimeString()} - Running reminder check`);
         await checkAndShowReminder();
     }
 });
 
 // 检查并显示提醒
 async function checkAndShowReminder() {
+    console.log('[checkAndShowReminder] Starting reminder check...');
+
     const settings = await chrome.storage.local.get([
         'reminderEnabled',
         'reminderStartTime',
@@ -112,21 +124,35 @@ async function checkAndShowReminder() {
     }
     
     // 获取待复习题目数量
-    const problems = await getReviewProblems();
+    console.log('[checkAndShowReminder] Calling getReviewProblems...');
+    let problems = [];
+    try {
+        problems = await getReviewProblems();
+        console.log('[checkAndShowReminder] getReviewProblems returned:', problems.length, 'problems');
+    } catch (error) {
+        console.error('[checkAndShowReminder] Error in getReviewProblems:', error);
+        problems = [];
+    }
     const reviewCount = problems.length;
-    
+
+    console.log(`[Reminder Check] ${new Date().toLocaleTimeString()}`);
+    console.log(`  - Reminder enabled: ${settings.reminderEnabled}`);
+    console.log(`  - Current day: ${currentDay}, allowed days: ${reminderDays}`);
+    console.log(`  - Current time: ${Math.floor(currentTime/60)}:${currentTime%60}, allowed: ${settings.reminderStartTime}-${settings.reminderEndTime}`);
+    console.log(`  - Problems need review: ${reviewCount}`);
+
     if (reviewCount > 0) {
-        console.log(`Found ${reviewCount} problems need review today`);
+        console.log(`[NOTIFICATION] Showing reminder for ${reviewCount} problems`);
         // 显示通知
         showNotification(reviewCount);
-        
+
         // 更新最后提醒时间
         await chrome.storage.local.set({
             lastReminderTime: now.getTime(),
             nextReminderDelay: 0
         });
     } else {
-        console.log('All problems for today have been reviewed!');
+        console.log('[NO NOTIFICATION] All problems reviewed or no problems due');
     }
 }
 
@@ -139,42 +165,113 @@ function parseTime(timeStr) {
 // 获取待复习题目（未完成的）
 async function getReviewProblems() {
     try {
-        const { problems } = await chrome.storage.local.get('problems');
-        if (!problems || !Array.isArray(problems)) {
+        // 获取所有存储数据来调试
+        const allData = await chrome.storage.local.get(null);
+        console.log('All storage keys:', Object.keys(allData));
+
+        // 检查 configs 中是否有题目数据
+        if (allData.configs) {
+            console.log('Configs exists, checking for problems inside configs...');
+            if (allData.configs.problems) {
+                console.log('Found problems in configs.problems:', Object.keys(allData.configs.problems).length, 'problems');
+            }
+            if (allData.configs.cnProblems) {
+                console.log('Found problems in configs.cnProblems:', Object.keys(allData.configs.cnProblems).length, 'problems');
+            }
+        }
+
+        // 获取题目数据，支持中英文模式
+        // 注意：实际存储使用的是 'records' 和 'cn_records'，不是 'problems'！
+        const data = await chrome.storage.local.get(['records', 'cn_records', 'cn_mode', 'currentMode', 'configs']);
+
+        // 先检查是否在 configs 中
+        let problemsData = {};
+        // 检查模式：cn_mode 或 currentMode
+        let currentMode = data.cn_mode || data.currentMode || 'en';
+        if (typeof currentMode === 'boolean') {
+            currentMode = currentMode ? 'cn' : 'en';
+        }
+
+        // 题目数据直接存储在 records 或 cn_records 中
+        const problemsKey = currentMode === 'cn' ? 'cn_records' : 'records';
+        problemsData = data[problemsKey] || {};
+
+        console.log(`Using key: ${problemsKey}, found ${Object.keys(problemsData).length} problems`);
+
+        // 如果当前模式没有数据，检查另一个模式
+        if (Object.keys(problemsData).length === 0) {
+            const otherKey = currentMode === 'cn' ? 'records' : 'cn_records';
+            const otherData = data[otherKey] || {};
+            if (Object.keys(otherData).length > 0) {
+                console.log(`Note: Found ${Object.keys(otherData).length} problems in ${otherKey}`);
+                // 使用另一个模式的数据
+                problemsData = otherData;
+            }
+        }
+
+        console.log(`Current mode: ${currentMode}`);
+        console.log(`Problems data type:`, typeof problemsData);
+        console.log(`Problems keys count:`, Object.keys(problemsData).length);
+
+        // 将对象转换为数组
+        const problems = Object.values(problemsData);
+
+        if (problems.length === 0) {
+            console.log('No problems found in storage');
+            // 尝试显示一些示例数据
+            if (Object.keys(otherData).length > 0) {
+                console.log(`Found ${Object.keys(otherData).length} problems in ${otherKey}, first problem:`, Object.values(otherData)[0]);
+            }
             return [];
         }
-        
+
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        
+
         // 过滤出今天需要复习但还未复习的题目
-        return problems.filter(problem => {
+        const reviewProblems = problems.filter(problem => {
             // 跳过已删除的题目
             if (problem.isDeleted) return false;
-            
-            // 检查是否有 FSRS 状态
-            if (!problem.fsrsState) return false;
-            
-            // 检查是否今天已经复习过
-            if (problem.fsrsState.lastReview) {
-                const lastReview = new Date(problem.fsrsState.lastReview);
-                lastReview.setHours(0, 0, 0, 0);
-                // 如果今天已经复习过，则不需要提醒
-                if (lastReview.getTime() === today.getTime()) {
-                    return false;
-                }
+
+            // 如果没有 FSRS 状态（新添加的题目），需要复习
+            if (!problem.fsrsState) {
+                console.log(`New problem without FSRS state needs review: ${problem.name}`);
+                return true;
             }
-            
+
+            // 如果从未复习过（新题目），需要复习
+            if (!problem.fsrsState.lastReview) {
+                console.log(`New problem needs review: ${problem.name} (never reviewed)`);
+                return true;
+            }
+
+            // 检查是否今天已经复习过
+            const lastReview = new Date(problem.fsrsState.lastReview);
+            lastReview.setHours(0, 0, 0, 0);
+            // 如果今天已经复习过，则不需要提醒
+            if (lastReview.getTime() === today.getTime()) {
+                return false;
+            }
+
             // 检查是否到了复习时间
             if (problem.fsrsState.nextReview) {
                 const nextReview = new Date(problem.fsrsState.nextReview);
                 nextReview.setHours(0, 0, 0, 0);
                 // 如果复习时间是今天或之前，需要复习
-                return nextReview.getTime() <= today.getTime();
+                const needsReview = nextReview.getTime() <= today.getTime();
+                if (needsReview) {
+                    console.log(`Problem due for review: ${problem.name} (due: ${nextReview.toDateString()})`);
+                }
+                return needsReview;
             }
-            
-            return false;
+
+            // 如果有 lastReview 但没有 nextReview（异常情况），也算需要复习
+            console.log(`Problem with missing nextReview: ${problem.name}`);
+            return true;
         });
+
+        console.log(`Found ${reviewProblems.length} problems need review from ${problems.length} total problems`);
+        return reviewProblems;
     } catch (error) {
         console.error('Error getting review problems:', error);
         return [];
@@ -204,7 +301,7 @@ async function showNotification(reviewCount, isTest = false) {
         requireInteraction: !isTest, // 测试通知不需要手动关闭
         buttons: isTest ? [] : [
             { title: 'Review Now' },
-            { title: 'Remind in 30 min' }
+            { title: 'Remind Later' }
         ]
     };
     
@@ -226,8 +323,11 @@ async function showNotification(reviewCount, isTest = false) {
 // 处理通知点击
 chrome.notifications.onClicked.addListener((notificationId) => {
     if (notificationId === 'leetcodeReminder') {
-        // 打开扩展弹窗
-        chrome.action.openPopup();
+        // 在 Manifest V3 中，不能直接调用 openPopup
+        // 改为创建新标签页或聚焦现有标签页
+        chrome.tabs.create({
+            url: chrome.runtime.getURL('popup.html')
+        });
         chrome.notifications.clear(notificationId);
     }
 });
@@ -236,16 +336,22 @@ chrome.notifications.onClicked.addListener((notificationId) => {
 chrome.notifications.onButtonClicked.addListener(async (notificationId, buttonIndex) => {
     if (notificationId === 'leetcodeReminder') {
         if (buttonIndex === 0) {
-            // Review Now - 打开扩展
-            chrome.action.openPopup();
+            // Review Now - 在新标签页打开扩展
+            chrome.tabs.create({
+                url: chrome.runtime.getURL('popup.html')
+            });
+            console.log('Review Now clicked - opening popup');
         } else if (buttonIndex === 1) {
-            // Remind Later - 延迟30分钟
-            const delay = 30 * 60 * 1000; // 30分钟
+            // Remind Later - 按用户设置的间隔延迟
+            const settings = await chrome.storage.local.get(['reminderInterval']);
+            const interval = parseFloat(settings.reminderInterval) || 60;
+            const delay = interval * 60 * 1000; // 转换为毫秒
+
             await chrome.storage.local.set({
                 lastReminderTime: Date.now(),
                 nextReminderDelay: delay
             });
-            console.log('Reminder delayed for 30 minutes');
+            console.log(`Reminder delayed for ${interval} minutes (user setting)`);
         }
         chrome.notifications.clear(notificationId);
     }
@@ -262,6 +368,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             console.error('Error showing notification:', error);
             sendResponse({ success: false, message: 'Failed to show notification: ' + error.message });
         }
+        return true; // 保持消息通道开放
+    }
+
+    // 手动触发提醒检查（用于调试）
+    if (request.action === 'checkReminder') {
+        checkAndShowReminder()
+            .then(() => {
+                sendResponse({ success: true, message: 'Reminder check completed' });
+            })
+            .catch(error => {
+                console.error('Error checking reminder:', error);
+                sendResponse({ success: false, message: error.message });
+            });
         return true; // 保持消息通道开放
     }
     

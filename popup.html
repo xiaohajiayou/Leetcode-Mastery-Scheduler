@@ -576,6 +576,7 @@
                                 <div style="margin-bottom: 8px;">
                                     <label style="font-size: 0.85em; margin-bottom: 4px;">Reminder Interval</label>
                                     <select id="reminderInterval" class="form-select form-control" style="font-size: 0.85em;">
+                                        <option value="0.5" style="color: #ff9800;">Every 30 seconds (Debug)</option>
                                         <option value="30">Every 30 minutes</option>
                                         <option value="60" selected>Every 1 hour</option>
                                         <option value="120">Every 2 hours</option>
@@ -587,9 +588,9 @@
                                 <div style="margin-bottom: 8px;">
                                     <label style="font-size: 0.85em; margin-bottom: 4px;">Active Hours</label>
                                     <div style="display: flex; gap: 8px; align-items: center;">
-                                        <input type="time" id="reminderStartTime" class="form-control" value="09:00" style="font-size: 0.85em;">
+                                        <input type="time" id="reminderStartTime" class="form-control" value="00:00" style="font-size: 0.85em;">
                                         <span style="font-size: 0.85em;">to</span>
-                                        <input type="time" id="reminderEndTime" class="form-control" value="22:00" style="font-size: 0.85em;">
+                                        <input type="time" id="reminderEndTime" class="form-control" value="23:59" style="font-size: 0.85em;">
                                     </div>
                                 </div>
                                 
