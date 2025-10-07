@@ -1,18 +1,23 @@
 # Changelog
 
-### [0.1.6] - 2025-09-10
+### [0.1.7] - 2025-10-07
 ----------------------
 
 #### Added
 
-- Desktop notification reminders with customizable intervals (30min - 4hours)
-- Configurable active hours and days for reminders
-- Test notification button to verify functionality
+- In-page “＋” control next to Rate to add the current problem to the review queue immediately
+- 支持在题目页通过 Rate 旁的“＋”一键加入待复习题目队列
+- support sync、resume to/from Nutstore WebDAV to keep data consistent
+- 支持同步、备份（与坚果云 WebDAV），确保本地与云端数据一致
+
+
+
+### [0.1.6] - 2025-09-10
+----------------------
+
+#### Added
 - Smart reminder logic that checks task completion status
 - 桌面通知提醒，支持自定义间隔（30分钟-4小时）
-- 可配置提醒的活动时段和日期
-- 测试通知按钮，验证功能是否正常
-- 智能提醒逻辑，检查任务完成状态
 
 #### Fixed
 

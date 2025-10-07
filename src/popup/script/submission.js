@@ -54,17 +54,30 @@ export const addRecordButton = () => {
             opacity: 1;
         }
         
-        .Leetcode-Mastery-Scheduler-record-btn .reset-position {
-            margin-left: 6px;  /* 减小间距 */
-            opacity: 0.7;
+        /* reset-position removed */
+
+        .Leetcode-Mastery-Scheduler-record-btn .separator {
+            margin: 0 6px;
+            opacity: 0.6;
+            user-select: none;
+        }
+
+        .Leetcode-Mastery-Scheduler-record-btn .add-today {
+            margin-left: 4px;
+            opacity: 0.95;
             cursor: pointer;
-            font-size: 12px;  /* 减小重置按钮大小 */
+            font-size: 12px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(255,255,255,0.12);
         }
-        
-        .Leetcode-Mastery-Scheduler-record-btn .reset-position:hover {
-            opacity: 1;
+        .Leetcode-Mastery-Scheduler-record-btn .add-today:hover {
+            background: rgba(255,255,255,0.22);
+            border-color: rgba(255,255,255,0.55);
         }
-        
+
         .Leetcode-Mastery-Scheduler-record-btn .star-icon {
             margin-right: 4px;
             font-size: 11px;
@@ -81,7 +94,8 @@ export const addRecordButton = () => {
     button.innerHTML = `
         <span class="drag-handle">⋮</span>
         <i class="fas fa-star star-icon"></i>Rate
-        <span class="reset-position" title="Reset position">↺</span>
+        <span class="separator">|</span>
+        <span class="add-today" title="加入待复习题目队列 | Add to review queue">＋</span>
     `;
     
     // 设置保存的位置
@@ -90,8 +104,11 @@ export const addRecordButton = () => {
     
     // 添加点击事件
     button.addEventListener('click', async (e) => {
-        // 如果点击的是拖动手柄或重置按钮，不触发评分
-        if (e.target.classList.contains('drag-handle') || e.target.classList.contains('reset-position')) {
+        // 如果点击的是拖动手柄、分隔符或“加入今日”，不触发评分
+        const t = e.target;
+        if (t && t.classList && (t.classList.contains('drag-handle') ||
+            t.classList.contains('separator') ||
+            t.classList.contains('add-today'))) {
             return;
         }
         
@@ -102,14 +119,27 @@ export const addRecordButton = () => {
         }
     });
     
-    // 重置位置
-    const resetButton = button.querySelector('.reset-position');
-    resetButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        button.style.bottom = '20px';
-        button.style.right = '20px';
-        localStorage.setItem('LMS_rateButtonPosition', JSON.stringify({bottom: 20, right: 20}));
-    });
+    // reset button removed
+
+    // 加入今日待复习（不触发评分）
+    const addTodayBtn = button.querySelector('.add-today');
+    if (addTodayBtn) {
+        addTodayBtn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            try {
+                const result = await handleAddProblem(window.location.href);
+                if (result) {
+                    showToast('已加入待复习题目队列\nAdded to review queue.', 'success');
+                }
+            } catch (error) {
+                if (error?.message && error.message.includes('Duplicate')) {
+                    showToast('题目已存在，未进行改动\nAlready exists. No changes made.', 'warning');
+                } else {
+                    showToast(`加入失败：${error?.message || 'Unknown error'}`, 'error');
+                }
+            }
+        });
+    }
     
     // 添加拖拽功能
     let isDragging = false;
@@ -666,4 +696,3 @@ export async function handleAddBlankProblem(name, level, customUrl = '') {
         throw error;
     }
 }
-

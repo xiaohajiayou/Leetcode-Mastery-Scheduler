@@ -5,7 +5,6 @@
 
 import { webdavEnhancedService } from '../service/webdavEnhancedService';
 import { syncManager } from '../service/syncManager';
-import EventBus from '../../core/events/EventBus';
 
 class WebDAVEnhancedSettings {
     constructor() {
@@ -324,8 +323,12 @@ class WebDAVEnhancedSettings {
                 this.showMessage(`连接成功${strategyText}`, 'success');
                 this.updateConnectionStatus(true);
 
-                // 触发同步
-                EventBus.emit('webdav:connected');
+                // 连接成功后进行一次同步
+                try {
+                    await syncManager.performSync();
+                } catch (e) {
+                    console.warn('Sync after connect failed:', e);
+                }
             } else {
                 this.showMessage('连接失败，请检查账号密码和网络设置', 'error');
                 this.updateConnectionStatus(false);
@@ -363,8 +366,7 @@ class WebDAVEnhancedSettings {
             const filename = await webdavEnhancedService.backupProblems(problemsArray);
             this.showMessage(`备份成功: ${filename}`, 'success');
 
-            // 触发备份完成事件
-            EventBus.emit('webdav:backup:complete', { filename });
+            // 备份完成（无全局事件通知）
         } catch (error) {
             console.error('Backup failed:', error);
             this.showMessage(`备份失败: ${error.message}`, 'error');
@@ -415,8 +417,7 @@ class WebDAVEnhancedSettings {
 
                 this.showMessage('数据恢复成功', 'success');
 
-                // 触发恢复完成事件
-                EventBus.emit('webdav:restore:complete', { filename: selectedBackup });
+                // 恢复完成（无全局事件通知）
 
                 // 刷新页面显示
                 setTimeout(() => {
@@ -512,8 +513,7 @@ class WebDAVEnhancedSettings {
             this.updateConnectionStatus(false);
             this.showMessage('已退出账号', 'info');
 
-            // 触发登出事件
-            EventBus.emit('webdav:logout');
+            // 已登出（无全局事件通知）
         }
     }
 
