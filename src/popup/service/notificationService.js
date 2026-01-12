@@ -4,6 +4,7 @@
  */
 
 import Swal from 'sweetalert2';
+import browser from '../../shared/browser.js';
 
 /**
  * 显示成功提示
@@ -221,7 +222,7 @@ export function closeModal() {
  */
 export async function testNotification() {
     try {
-        const response = await chrome.runtime.sendMessage({ action: 'testNotification' });
+        const response = await browser.runtime.sendMessage({ action: 'testNotification' });
         if (response && response.success) {
             // 显示成功反馈
             showSuccess('Test Successful', 'Check your desktop for the notification!', {

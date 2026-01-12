@@ -2,6 +2,7 @@ import { getLocalStorageData, setLocalStorageData } from "../delegate/localStora
 import { store } from "../store";
 import { CONFIG_INNER_KEY_ENABLE_CLOUD, CONFIG_KEY, PROBLEM_SORT_BY_KEY, REVIEW_INTV_KEY,DEFAULT_CARD_LIMIT_KEY, DEFAULT_CARD_LIMIT_VALUE } from "../util/keys"
 import { getSorterById, idOf, problemSorters } from "../util/sort";
+import browser from "../../shared/browser.js";
 
 // configurable review intervals (to be integrated)
 
@@ -94,11 +95,11 @@ export const loadDefaultCardLimit = async () => {
 
 // 添加新的配置项和方法
 export async function setReminderEnabled(enabled) {
-    await chrome.storage.local.set({ reminderEnabled: enabled });
+    await browser.storage.local.set({ reminderEnabled: enabled });
 }
 
 export async function isReminderEnabled() {
-    const { reminderEnabled } = await chrome.storage.local.get('reminderEnabled');
+    const { reminderEnabled } = await browser.storage.local.get('reminderEnabled');
     return reminderEnabled || false;
 }
 // 添加加载提醒设置到 store 的函数

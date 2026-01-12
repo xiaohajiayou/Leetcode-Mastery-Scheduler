@@ -22,7 +22,9 @@
     ],
     "host_permissions": [
         "https://dav.jianguoyun.com/*",
-        "https://*.jianguoyun.com/*"
+        "https://*.jianguoyun.com/*",
+        "https://leetcode.com/*",
+        "https://leetcode.cn/*"
     ],
     "background": {
         "service_worker": "dist/background.js"

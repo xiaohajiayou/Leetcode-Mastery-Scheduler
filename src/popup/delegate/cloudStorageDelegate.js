@@ -1,19 +1,18 @@
 import { simpleStringHash } from "../util/utils";
 import { StorageDelegate } from "./storageDelegate";
+import browser from "../../shared/browser.js";
 
 
 const getCloudStorageData = async (key) => {
-    return new Promise((resolve, reject) => {
-        chrome.storage.sync.get(key, (result) => {
-            if (result === undefined || result[key] === undefined) {
-                reject(key);
-            } else {
-                resolve(result[key]);
-            }
-        })
-    }).catch((key) => {
+    try {
+        const result = await browser.storage.sync.get(key);
+        if (result === undefined || result[key] === undefined) {
+            throw new Error(key);
+        }
+        return result[key];
+    } catch (error) {
         console.log(`get sync storage data failed for key = ${key}`);
-    });
+    }
 }
 
 const setCloudStorageData = async (key, val) => {
@@ -21,31 +20,31 @@ const setCloudStorageData = async (key, val) => {
     console.log("set to cloud");
     console.log([key, val]);
 
-    return new Promise((resolve) => {
-        chrome.storage.sync.set({ [key]: val });
-        resolve();
-    }).catch(e => console.log(e));
+    try {
+        await browser.storage.sync.set({ [key]: val });
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const batchSetCloudStorageDate = async (object) => {
-    return new Promise((resolve) => {
-        chrome.storage.sync.set(object);
-        resolve();
-    }).catch(e => console.log(e));
+    try {
+        await browser.storage.sync.set(object);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const batchGetCloudStorageDate = async (keyArr) => {
-    return new Promise((resolve, reject) => {
-        chrome.storage.sync.get(keyArr, (result) => {
-            if (result === undefined) {
-                reject(key);
-            } else {
-                resolve(result);
-            }
-        })
-    }).catch(e => {
-        console.log(console.log(e));
-    });
+    try {
+        const result = await browser.storage.sync.get(keyArr);
+        if (result === undefined) {
+            throw new Error(keyArr);
+        }
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 /**

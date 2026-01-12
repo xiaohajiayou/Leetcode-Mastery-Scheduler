@@ -1,31 +1,1258 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
+
+/***/ 150:
+/***/ (function(module, exports) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else { var mod; }
+})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (module) {
+  /* webextension-polyfill - v0.12.0 - Tue May 14 2024 18:01:29 */
+  /* -*- Mode: indent-tabs-mode: nil; js-indent-level: 2 -*- */
+  /* vim: set sts=2 sw=2 et tw=80: */
+  /* This Source Code Form is subject to the terms of the Mozilla Public
+   * License, v. 2.0. If a copy of the MPL was not distributed with this
+   * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+  "use strict";
+
+  if (!(globalThis.chrome && globalThis.chrome.runtime && globalThis.chrome.runtime.id)) {
+    throw new Error("This script should only be loaded in a browser extension.");
+  }
+  if (!(globalThis.browser && globalThis.browser.runtime && globalThis.browser.runtime.id)) {
+    const CHROME_SEND_MESSAGE_CALLBACK_NO_RESPONSE_MESSAGE = "The message port closed before a response was received.";
+
+    // Wrapping the bulk of this polyfill in a one-time-use function is a minor
+    // optimization for Firefox. Since Spidermonkey does not fully parse the
+    // contents of a function until the first time it's called, and since it will
+    // never actually need to be called, this allows the polyfill to be included
+    // in Firefox nearly for free.
+    const wrapAPIs = extensionAPIs => {
+      // NOTE: apiMetadata is associated to the content of the api-metadata.json file
+      // at build time by replacing the following "include" with the content of the
+      // JSON file.
+      const apiMetadata = {
+        "alarms": {
+          "clear": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "clearAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "get": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "getAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "bookmarks": {
+          "create": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "get": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getChildren": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getRecent": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getSubTree": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getTree": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "move": {
+            "minArgs": 2,
+            "maxArgs": 2
+          },
+          "remove": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeTree": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "search": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "update": {
+            "minArgs": 2,
+            "maxArgs": 2
+          }
+        },
+        "browserAction": {
+          "disable": {
+            "minArgs": 0,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "enable": {
+            "minArgs": 0,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "getBadgeBackgroundColor": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getBadgeText": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getPopup": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getTitle": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "openPopup": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "setBadgeBackgroundColor": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "setBadgeText": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "setIcon": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "setPopup": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "setTitle": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          }
+        },
+        "browsingData": {
+          "remove": {
+            "minArgs": 2,
+            "maxArgs": 2
+          },
+          "removeCache": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeCookies": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeDownloads": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeFormData": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeHistory": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeLocalStorage": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removePasswords": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removePluginData": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "settings": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "commands": {
+          "getAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "contextMenus": {
+          "remove": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "update": {
+            "minArgs": 2,
+            "maxArgs": 2
+          }
+        },
+        "cookies": {
+          "get": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getAll": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getAllCookieStores": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "remove": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "set": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "devtools": {
+          "inspectedWindow": {
+            "eval": {
+              "minArgs": 1,
+              "maxArgs": 2,
+              "singleCallbackArg": false
+            }
+          },
+          "panels": {
+            "create": {
+              "minArgs": 3,
+              "maxArgs": 3,
+              "singleCallbackArg": true
+            },
+            "elements": {
+              "createSidebarPane": {
+                "minArgs": 1,
+                "maxArgs": 1
+              }
+            }
+          }
+        },
+        "downloads": {
+          "cancel": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "download": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "erase": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getFileIcon": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "open": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "pause": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeFile": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "resume": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "search": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "show": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          }
+        },
+        "extension": {
+          "isAllowedFileSchemeAccess": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "isAllowedIncognitoAccess": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "history": {
+          "addUrl": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "deleteAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "deleteRange": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "deleteUrl": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getVisits": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "search": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "i18n": {
+          "detectLanguage": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getAcceptLanguages": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "identity": {
+          "launchWebAuthFlow": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "idle": {
+          "queryState": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "management": {
+          "get": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "getSelf": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "setEnabled": {
+            "minArgs": 2,
+            "maxArgs": 2
+          },
+          "uninstallSelf": {
+            "minArgs": 0,
+            "maxArgs": 1
+          }
+        },
+        "notifications": {
+          "clear": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "create": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "getAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "getPermissionLevel": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "update": {
+            "minArgs": 2,
+            "maxArgs": 2
+          }
+        },
+        "pageAction": {
+          "getPopup": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getTitle": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "hide": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "setIcon": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "setPopup": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "setTitle": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "show": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          }
+        },
+        "permissions": {
+          "contains": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "remove": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "request": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "runtime": {
+          "getBackgroundPage": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "getPlatformInfo": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "openOptionsPage": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "requestUpdateCheck": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "sendMessage": {
+            "minArgs": 1,
+            "maxArgs": 3
+          },
+          "sendNativeMessage": {
+            "minArgs": 2,
+            "maxArgs": 2
+          },
+          "setUninstallURL": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "sessions": {
+          "getDevices": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "getRecentlyClosed": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "restore": {
+            "minArgs": 0,
+            "maxArgs": 1
+          }
+        },
+        "storage": {
+          "local": {
+            "clear": {
+              "minArgs": 0,
+              "maxArgs": 0
+            },
+            "get": {
+              "minArgs": 0,
+              "maxArgs": 1
+            },
+            "getBytesInUse": {
+              "minArgs": 0,
+              "maxArgs": 1
+            },
+            "remove": {
+              "minArgs": 1,
+              "maxArgs": 1
+            },
+            "set": {
+              "minArgs": 1,
+              "maxArgs": 1
+            }
+          },
+          "managed": {
+            "get": {
+              "minArgs": 0,
+              "maxArgs": 1
+            },
+            "getBytesInUse": {
+              "minArgs": 0,
+              "maxArgs": 1
+            }
+          },
+          "sync": {
+            "clear": {
+              "minArgs": 0,
+              "maxArgs": 0
+            },
+            "get": {
+              "minArgs": 0,
+              "maxArgs": 1
+            },
+            "getBytesInUse": {
+              "minArgs": 0,
+              "maxArgs": 1
+            },
+            "remove": {
+              "minArgs": 1,
+              "maxArgs": 1
+            },
+            "set": {
+              "minArgs": 1,
+              "maxArgs": 1
+            }
+          }
+        },
+        "tabs": {
+          "captureVisibleTab": {
+            "minArgs": 0,
+            "maxArgs": 2
+          },
+          "create": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "detectLanguage": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "discard": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "duplicate": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "executeScript": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "get": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getCurrent": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "getZoom": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "getZoomSettings": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "goBack": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "goForward": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "highlight": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "insertCSS": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "move": {
+            "minArgs": 2,
+            "maxArgs": 2
+          },
+          "query": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "reload": {
+            "minArgs": 0,
+            "maxArgs": 2
+          },
+          "remove": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeCSS": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "sendMessage": {
+            "minArgs": 2,
+            "maxArgs": 3
+          },
+          "setZoom": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "setZoomSettings": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "update": {
+            "minArgs": 1,
+            "maxArgs": 2
+          }
+        },
+        "topSites": {
+          "get": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "webNavigation": {
+          "getAllFrames": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getFrame": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "webRequest": {
+          "handlerBehaviorChanged": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "windows": {
+          "create": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "get": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "getAll": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "getCurrent": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "getLastFocused": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "remove": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "update": {
+            "minArgs": 2,
+            "maxArgs": 2
+          }
+        }
+      };
+      if (Object.keys(apiMetadata).length === 0) {
+        throw new Error("api-metadata.json has not been included in browser-polyfill");
+      }
+
+      /**
+       * A WeakMap subclass which creates and stores a value for any key which does
+       * not exist when accessed, but behaves exactly as an ordinary WeakMap
+       * otherwise.
+       *
+       * @param {function} createItem
+       *        A function which will be called in order to create the value for any
+       *        key which does not exist, the first time it is accessed. The
+       *        function receives, as its only argument, the key being created.
+       */
+      class DefaultWeakMap extends WeakMap {
+        constructor(createItem, items = undefined) {
+          super(items);
+          this.createItem = createItem;
+        }
+        get(key) {
+          if (!this.has(key)) {
+            this.set(key, this.createItem(key));
+          }
+          return super.get(key);
+        }
+      }
+
+      /**
+       * Returns true if the given object is an object with a `then` method, and can
+       * therefore be assumed to behave as a Promise.
+       *
+       * @param {*} value The value to test.
+       * @returns {boolean} True if the value is thenable.
+       */
+      const isThenable = value => {
+        return value && typeof value === "object" && typeof value.then === "function";
+      };
+
+      /**
+       * Creates and returns a function which, when called, will resolve or reject
+       * the given promise based on how it is called:
+       *
+       * - If, when called, `chrome.runtime.lastError` contains a non-null object,
+       *   the promise is rejected with that value.
+       * - If the function is called with exactly one argument, the promise is
+       *   resolved to that value.
+       * - Otherwise, the promise is resolved to an array containing all of the
+       *   function's arguments.
+       *
+       * @param {object} promise
+       *        An object containing the resolution and rejection functions of a
+       *        promise.
+       * @param {function} promise.resolve
+       *        The promise's resolution function.
+       * @param {function} promise.reject
+       *        The promise's rejection function.
+       * @param {object} metadata
+       *        Metadata about the wrapped method which has created the callback.
+       * @param {boolean} metadata.singleCallbackArg
+       *        Whether or not the promise is resolved with only the first
+       *        argument of the callback, alternatively an array of all the
+       *        callback arguments is resolved. By default, if the callback
+       *        function is invoked with only a single argument, that will be
+       *        resolved to the promise, while all arguments will be resolved as
+       *        an array if multiple are given.
+       *
+       * @returns {function}
+       *        The generated callback function.
+       */
+      const makeCallback = (promise, metadata) => {
+        return (...callbackArgs) => {
+          if (extensionAPIs.runtime.lastError) {
+            promise.reject(new Error(extensionAPIs.runtime.lastError.message));
+          } else if (metadata.singleCallbackArg || callbackArgs.length <= 1 && metadata.singleCallbackArg !== false) {
+            promise.resolve(callbackArgs[0]);
+          } else {
+            promise.resolve(callbackArgs);
+          }
+        };
+      };
+      const pluralizeArguments = numArgs => numArgs == 1 ? "argument" : "arguments";
+
+      /**
+       * Creates a wrapper function for a method with the given name and metadata.
+       *
+       * @param {string} name
+       *        The name of the method which is being wrapped.
+       * @param {object} metadata
+       *        Metadata about the method being wrapped.
+       * @param {integer} metadata.minArgs
+       *        The minimum number of arguments which must be passed to the
+       *        function. If called with fewer than this number of arguments, the
+       *        wrapper will raise an exception.
+       * @param {integer} metadata.maxArgs
+       *        The maximum number of arguments which may be passed to the
+       *        function. If called with more than this number of arguments, the
+       *        wrapper will raise an exception.
+       * @param {boolean} metadata.singleCallbackArg
+       *        Whether or not the promise is resolved with only the first
+       *        argument of the callback, alternatively an array of all the
+       *        callback arguments is resolved. By default, if the callback
+       *        function is invoked with only a single argument, that will be
+       *        resolved to the promise, while all arguments will be resolved as
+       *        an array if multiple are given.
+       *
+       * @returns {function(object, ...*)}
+       *       The generated wrapper function.
+       */
+      const wrapAsyncFunction = (name, metadata) => {
+        return function asyncFunctionWrapper(target, ...args) {
+          if (args.length < metadata.minArgs) {
+            throw new Error(`Expected at least ${metadata.minArgs} ${pluralizeArguments(metadata.minArgs)} for ${name}(), got ${args.length}`);
+          }
+          if (args.length > metadata.maxArgs) {
+            throw new Error(`Expected at most ${metadata.maxArgs} ${pluralizeArguments(metadata.maxArgs)} for ${name}(), got ${args.length}`);
+          }
+          return new Promise((resolve, reject) => {
+            if (metadata.fallbackToNoCallback) {
+              // This API method has currently no callback on Chrome, but it return a promise on Firefox,
+              // and so the polyfill will try to call it with a callback first, and it will fallback
+              // to not passing the callback if the first call fails.
+              try {
+                target[name](...args, makeCallback({
+                  resolve,
+                  reject
+                }, metadata));
+              } catch (cbError) {
+                console.warn(`${name} API method doesn't seem to support the callback parameter, ` + "falling back to call it without a callback: ", cbError);
+                target[name](...args);
+
+                // Update the API method metadata, so that the next API calls will not try to
+                // use the unsupported callback anymore.
+                metadata.fallbackToNoCallback = false;
+                metadata.noCallback = true;
+                resolve();
+              }
+            } else if (metadata.noCallback) {
+              target[name](...args);
+              resolve();
+            } else {
+              target[name](...args, makeCallback({
+                resolve,
+                reject
+              }, metadata));
+            }
+          });
+        };
+      };
+
+      /**
+       * Wraps an existing method of the target object, so that calls to it are
+       * intercepted by the given wrapper function. The wrapper function receives,
+       * as its first argument, the original `target` object, followed by each of
+       * the arguments passed to the original method.
+       *
+       * @param {object} target
+       *        The original target object that the wrapped method belongs to.
+       * @param {function} method
+       *        The method being wrapped. This is used as the target of the Proxy
+       *        object which is created to wrap the method.
+       * @param {function} wrapper
+       *        The wrapper function which is called in place of a direct invocation
+       *        of the wrapped method.
+       *
+       * @returns {Proxy<function>}
+       *        A Proxy object for the given method, which invokes the given wrapper
+       *        method in its place.
+       */
+      const wrapMethod = (target, method, wrapper) => {
+        return new Proxy(method, {
+          apply(targetMethod, thisObj, args) {
+            return wrapper.call(thisObj, target, ...args);
+          }
+        });
+      };
+      let hasOwnProperty = Function.call.bind(Object.prototype.hasOwnProperty);
+
+      /**
+       * Wraps an object in a Proxy which intercepts and wraps certain methods
+       * based on the given `wrappers` and `metadata` objects.
+       *
+       * @param {object} target
+       *        The target object to wrap.
+       *
+       * @param {object} [wrappers = {}]
+       *        An object tree containing wrapper functions for special cases. Any
+       *        function present in this object tree is called in place of the
+       *        method in the same location in the `target` object tree. These
+       *        wrapper methods are invoked as described in {@see wrapMethod}.
+       *
+       * @param {object} [metadata = {}]
+       *        An object tree containing metadata used to automatically generate
+       *        Promise-based wrapper functions for asynchronous. Any function in
+       *        the `target` object tree which has a corresponding metadata object
+       *        in the same location in the `metadata` tree is replaced with an
+       *        automatically-generated wrapper function, as described in
+       *        {@see wrapAsyncFunction}
+       *
+       * @returns {Proxy<object>}
+       */
+      const wrapObject = (target, wrappers = {}, metadata = {}) => {
+        let cache = Object.create(null);
+        let handlers = {
+          has(proxyTarget, prop) {
+            return prop in target || prop in cache;
+          },
+          get(proxyTarget, prop, receiver) {
+            if (prop in cache) {
+              return cache[prop];
+            }
+            if (!(prop in target)) {
+              return undefined;
+            }
+            let value = target[prop];
+            if (typeof value === "function") {
+              // This is a method on the underlying object. Check if we need to do
+              // any wrapping.
+
+              if (typeof wrappers[prop] === "function") {
+                // We have a special-case wrapper for this method.
+                value = wrapMethod(target, target[prop], wrappers[prop]);
+              } else if (hasOwnProperty(metadata, prop)) {
+                // This is an async method that we have metadata for. Create a
+                // Promise wrapper for it.
+                let wrapper = wrapAsyncFunction(prop, metadata[prop]);
+                value = wrapMethod(target, target[prop], wrapper);
+              } else {
+                // This is a method that we don't know or care about. Return the
+                // original method, bound to the underlying object.
+                value = value.bind(target);
+              }
+            } else if (typeof value === "object" && value !== null && (hasOwnProperty(wrappers, prop) || hasOwnProperty(metadata, prop))) {
+              // This is an object that we need to do some wrapping for the children
+              // of. Create a sub-object wrapper for it with the appropriate child
+              // metadata.
+              value = wrapObject(value, wrappers[prop], metadata[prop]);
+            } else if (hasOwnProperty(metadata, "*")) {
+              // Wrap all properties in * namespace.
+              value = wrapObject(value, wrappers[prop], metadata["*"]);
+            } else {
+              // We don't need to do any wrapping for this property,
+              // so just forward all access to the underlying object.
+              Object.defineProperty(cache, prop, {
+                configurable: true,
+                enumerable: true,
+                get() {
+                  return target[prop];
+                },
+                set(value) {
+                  target[prop] = value;
+                }
+              });
+              return value;
+            }
+            cache[prop] = value;
+            return value;
+          },
+          set(proxyTarget, prop, value, receiver) {
+            if (prop in cache) {
+              cache[prop] = value;
+            } else {
+              target[prop] = value;
+            }
+            return true;
+          },
+          defineProperty(proxyTarget, prop, desc) {
+            return Reflect.defineProperty(cache, prop, desc);
+          },
+          deleteProperty(proxyTarget, prop) {
+            return Reflect.deleteProperty(cache, prop);
+          }
+        };
+
+        // Per contract of the Proxy API, the "get" proxy handler must return the
+        // original value of the target if that value is declared read-only and
+        // non-configurable. For this reason, we create an object with the
+        // prototype set to `target` instead of using `target` directly.
+        // Otherwise we cannot return a custom object for APIs that
+        // are declared read-only and non-configurable, such as `chrome.devtools`.
+        //
+        // The proxy handlers themselves will still use the original `target`
+        // instead of the `proxyTarget`, so that the methods and properties are
+        // dereferenced via the original targets.
+        let proxyTarget = Object.create(target);
+        return new Proxy(proxyTarget, handlers);
+      };
+
+      /**
+       * Creates a set of wrapper functions for an event object, which handles
+       * wrapping of listener functions that those messages are passed.
+       *
+       * A single wrapper is created for each listener function, and stored in a
+       * map. Subsequent calls to `addListener`, `hasListener`, or `removeListener`
+       * retrieve the original wrapper, so that  attempts to remove a
+       * previously-added listener work as expected.
+       *
+       * @param {DefaultWeakMap<function, function>} wrapperMap
+       *        A DefaultWeakMap object which will create the appropriate wrapper
+       *        for a given listener function when one does not exist, and retrieve
+       *        an existing one when it does.
+       *
+       * @returns {object}
+       */
+      const wrapEvent = wrapperMap => ({
+        addListener(target, listener, ...args) {
+          target.addListener(wrapperMap.get(listener), ...args);
+        },
+        hasListener(target, listener) {
+          return target.hasListener(wrapperMap.get(listener));
+        },
+        removeListener(target, listener) {
+          target.removeListener(wrapperMap.get(listener));
+        }
+      });
+      const onRequestFinishedWrappers = new DefaultWeakMap(listener => {
+        if (typeof listener !== "function") {
+          return listener;
+        }
+
+        /**
+         * Wraps an onRequestFinished listener function so that it will return a
+         * `getContent()` property which returns a `Promise` rather than using a
+         * callback API.
+         *
+         * @param {object} req
+         *        The HAR entry object representing the network request.
+         */
+        return function onRequestFinished(req) {
+          const wrappedReq = wrapObject(req, {} /* wrappers */, {
+            getContent: {
+              minArgs: 0,
+              maxArgs: 0
+            }
+          });
+          listener(wrappedReq);
+        };
+      });
+      const onMessageWrappers = new DefaultWeakMap(listener => {
+        if (typeof listener !== "function") {
+          return listener;
+        }
+
+        /**
+         * Wraps a message listener function so that it may send responses based on
+         * its return value, rather than by returning a sentinel value and calling a
+         * callback. If the listener function returns a Promise, the response is
+         * sent when the promise either resolves or rejects.
+         *
+         * @param {*} message
+         *        The message sent by the other end of the channel.
+         * @param {object} sender
+         *        Details about the sender of the message.
+         * @param {function(*)} sendResponse
+         *        A callback which, when called with an arbitrary argument, sends
+         *        that value as a response.
+         * @returns {boolean}
+         *        True if the wrapped listener returned a Promise, which will later
+         *        yield a response. False otherwise.
+         */
+        return function onMessage(message, sender, sendResponse) {
+          let didCallSendResponse = false;
+          let wrappedSendResponse;
+          let sendResponsePromise = new Promise(resolve => {
+            wrappedSendResponse = function (response) {
+              didCallSendResponse = true;
+              resolve(response);
+            };
+          });
+          let result;
+          try {
+            result = listener(message, sender, wrappedSendResponse);
+          } catch (err) {
+            result = Promise.reject(err);
+          }
+          const isResultThenable = result !== true && isThenable(result);
+
+          // If the listener didn't returned true or a Promise, or called
+          // wrappedSendResponse synchronously, we can exit earlier
+          // because there will be no response sent from this listener.
+          if (result !== true && !isResultThenable && !didCallSendResponse) {
+            return false;
+          }
+
+          // A small helper to send the message if the promise resolves
+          // and an error if the promise rejects (a wrapped sendMessage has
+          // to translate the message into a resolved promise or a rejected
+          // promise).
+          const sendPromisedResult = promise => {
+            promise.then(msg => {
+              // send the message value.
+              sendResponse(msg);
+            }, error => {
+              // Send a JSON representation of the error if the rejected value
+              // is an instance of error, or the object itself otherwise.
+              let message;
+              if (error && (error instanceof Error || typeof error.message === "string")) {
+                message = error.message;
+              } else {
+                message = "An unexpected error occurred";
+              }
+              sendResponse({
+                __mozWebExtensionPolyfillReject__: true,
+                message
+              });
+            }).catch(err => {
+              // Print an error on the console if unable to send the response.
+              console.error("Failed to send onMessage rejected reply", err);
+            });
+          };
+
+          // If the listener returned a Promise, send the resolved value as a
+          // result, otherwise wait the promise related to the wrappedSendResponse
+          // callback to resolve and send it as a response.
+          if (isResultThenable) {
+            sendPromisedResult(result);
+          } else {
+            sendPromisedResult(sendResponsePromise);
+          }
+
+          // Let Chrome know that the listener is replying.
+          return true;
+        };
+      });
+      const wrappedSendMessageCallback = ({
+        reject,
+        resolve
+      }, reply) => {
+        if (extensionAPIs.runtime.lastError) {
+          // Detect when none of the listeners replied to the sendMessage call and resolve
+          // the promise to undefined as in Firefox.
+          // See https://github.com/mozilla/webextension-polyfill/issues/130
+          if (extensionAPIs.runtime.lastError.message === CHROME_SEND_MESSAGE_CALLBACK_NO_RESPONSE_MESSAGE) {
+            resolve();
+          } else {
+            reject(new Error(extensionAPIs.runtime.lastError.message));
+          }
+        } else if (reply && reply.__mozWebExtensionPolyfillReject__) {
+          // Convert back the JSON representation of the error into
+          // an Error instance.
+          reject(new Error(reply.message));
+        } else {
+          resolve(reply);
+        }
+      };
+      const wrappedSendMessage = (name, metadata, apiNamespaceObj, ...args) => {
+        if (args.length < metadata.minArgs) {
+          throw new Error(`Expected at least ${metadata.minArgs} ${pluralizeArguments(metadata.minArgs)} for ${name}(), got ${args.length}`);
+        }
+        if (args.length > metadata.maxArgs) {
+          throw new Error(`Expected at most ${metadata.maxArgs} ${pluralizeArguments(metadata.maxArgs)} for ${name}(), got ${args.length}`);
+        }
+        return new Promise((resolve, reject) => {
+          const wrappedCb = wrappedSendMessageCallback.bind(null, {
+            resolve,
+            reject
+          });
+          args.push(wrappedCb);
+          apiNamespaceObj.sendMessage(...args);
+        });
+      };
+      const staticWrappers = {
+        devtools: {
+          network: {
+            onRequestFinished: wrapEvent(onRequestFinishedWrappers)
+          }
+        },
+        runtime: {
+          onMessage: wrapEvent(onMessageWrappers),
+          onMessageExternal: wrapEvent(onMessageWrappers),
+          sendMessage: wrappedSendMessage.bind(null, "sendMessage", {
+            minArgs: 1,
+            maxArgs: 3
+          })
+        },
+        tabs: {
+          sendMessage: wrappedSendMessage.bind(null, "sendMessage", {
+            minArgs: 2,
+            maxArgs: 3
+          })
+        }
+      };
+      const settingMetadata = {
+        clear: {
+          minArgs: 1,
+          maxArgs: 1
+        },
+        get: {
+          minArgs: 1,
+          maxArgs: 1
+        },
+        set: {
+          minArgs: 1,
+          maxArgs: 1
+        }
+      };
+      apiMetadata.privacy = {
+        network: {
+          "*": settingMetadata
+        },
+        services: {
+          "*": settingMetadata
+        },
+        websites: {
+          "*": settingMetadata
+        }
+      };
+      return wrapObject(extensionAPIs, staticWrappers, apiMetadata);
+    };
+
+    // The build process adds a UMD wrapper around this file, which makes the
+    // `module` variable available.
+    module.exports = wrapAPIs(chrome);
+  } else {
+    module.exports = globalThis.browser;
+  }
+});
+//# sourceMappingURL=browser-polyfill.js.map
+
+
+/***/ }),
 
 /***/ 188:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _util_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(384);
-/* harmony import */ var _storageDelegate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(648);
+/* harmony import */ var _storageDelegate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(648);
+/* harmony import */ var _shared_browser_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(867);
+
 
 
 
 
 const getCloudStorageData = async (key) => {
-    return new Promise((resolve, reject) => {
-        chrome.storage.sync.get(key, (result) => {
-            if (result === undefined || result[key] === undefined) {
-                reject(key);
-            } else {
-                resolve(result[key]);
-            }
-        })
-    }).catch((key) => {
+    try {
+        const result = await browser.storage.sync.get(key);
+        if (result === undefined || result[key] === undefined) {
+            throw new Error(key);
+        }
+        return result[key];
+    } catch (error) {
         console.log(`get sync storage data failed for key = ${key}`);
-    });
+    }
 }
 
 const setCloudStorageData = async (key, val) => {
@@ -33,31 +1260,31 @@ const setCloudStorageData = async (key, val) => {
     console.log("set to cloud");
     console.log([key, val]);
 
-    return new Promise((resolve) => {
-        chrome.storage.sync.set({ [key]: val });
-        resolve();
-    }).catch(e => console.log(e));
+    try {
+        await browser.storage.sync.set({ [key]: val });
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const batchSetCloudStorageDate = async (object) => {
-    return new Promise((resolve) => {
-        chrome.storage.sync.set(object);
-        resolve();
-    }).catch(e => console.log(e));
+    try {
+        await _shared_browser_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z.storage.sync.set(object);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const batchGetCloudStorageDate = async (keyArr) => {
-    return new Promise((resolve, reject) => {
-        chrome.storage.sync.get(keyArr, (result) => {
-            if (result === undefined) {
-                reject(key);
-            } else {
-                resolve(result);
-            }
-        })
-    }).catch(e => {
-        console.log(console.log(e));
-    });
+    try {
+        const result = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z.storage.sync.get(keyArr);
+        if (result === undefined) {
+            throw new Error(keyArr);
+        }
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 /**
@@ -116,7 +1343,7 @@ const shardedGetCloudStorageData = async (key) => {
     return res;
 }
 
-class CloudStorageDelegate extends _storageDelegate__WEBPACK_IMPORTED_MODULE_1__/* .StorageDelegate */ .i {
+class CloudStorageDelegate extends _storageDelegate__WEBPACK_IMPORTED_MODULE_2__/* .StorageDelegate */ .i {
     constructor(){
         super();
         this.get = shardedGetCloudStorageData;
@@ -132,36 +1359,38 @@ const cloudStorageDelegate = new CloudStorageDelegate();
 /***/ 891:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Cy: () => (/* binding */ getLocalStorageData),
 /* harmony export */   ZP: () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   qy: () => (/* binding */ setLocalStorageData)
 /* harmony export */ });
-/* harmony import */ var _storageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(648);
+/* harmony import */ var _storageDelegate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(648);
+/* harmony import */ var _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(867);
+
 
 
 const getLocalStorageData = async (key) => {
-    return new Promise((resolve, reject) => {
-        chrome.storage.local.get(key, (result) => {
-            if (result === undefined || result[key] === undefined) {
-                reject(key);
-            } else {
-                resolve(result[key]);
-            }
-        })
-    }).catch((key) => {
+    try {
+        const result = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.get(key);
+        if (result === undefined || result[key] === undefined) {
+            throw new Error(key);
+        }
+        return result[key];
+    } catch (error) {
         console.log(`get local storage data failed for key = ${key}`);
-    });
+    }
 }
 
 const setLocalStorageData = async (key, val) => {
-    return new Promise((resolve) => {
-        chrome.storage.local.set({ [key]: val });
-        resolve();
-    }).catch(e => console.log(e));
+    try {
+        await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.set({ [key]: val });
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-class LocalStorageDelegate extends _storageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .StorageDelegate */ .i {
+class LocalStorageDelegate extends _storageDelegate__WEBPACK_IMPORTED_MODULE_1__/* .StorageDelegate */ .i {
     constructor(){
         super();
         this.get = getLocalStorageData;
@@ -177,6 +1406,7 @@ const localStorageDelegate = new LocalStorageDelegate();
 /***/ 648:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   i: () => (/* binding */ StorageDelegate)
 /* harmony export */ });
@@ -194,6 +1424,7 @@ class StorageDelegate {
 /***/ 196:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* unused harmony exports OperationHistory, OPS_TYPE */
 class OperationHistory {
     constructor(before, isInCnMode, type, time) {
@@ -215,6 +1446,7 @@ const OPS_TYPE = Object.freeze({
 /***/ 875:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   tc: () => (/* binding */ Problem)
 /* harmony export */ });
@@ -285,6 +1517,7 @@ const copy = (p) => {
 /***/ 597:
 /***/ ((module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony import */ var _service_configService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(970);
 /* harmony import */ var _submission__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(853);
@@ -344,6 +1577,7 @@ __webpack_async_result__();
 /***/ 853:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   EB: () => (/* binding */ addRecordButton)
 /* harmony export */ });
@@ -408,17 +1642,30 @@ const addRecordButton = () => {
             opacity: 1;
         }
         
-        .Leetcode-Mastery-Scheduler-record-btn .reset-position {
-            margin-left: 6px;  /* 减小间距 */
-            opacity: 0.7;
+        /* reset-position removed */
+
+        .Leetcode-Mastery-Scheduler-record-btn .separator {
+            margin: 0 6px;
+            opacity: 0.6;
+            user-select: none;
+        }
+
+        .Leetcode-Mastery-Scheduler-record-btn .add-today {
+            margin-left: 4px;
+            opacity: 0.95;
             cursor: pointer;
-            font-size: 12px;  /* 减小重置按钮大小 */
+            font-size: 12px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(255,255,255,0.12);
         }
-        
-        .Leetcode-Mastery-Scheduler-record-btn .reset-position:hover {
-            opacity: 1;
+        .Leetcode-Mastery-Scheduler-record-btn .add-today:hover {
+            background: rgba(255,255,255,0.22);
+            border-color: rgba(255,255,255,0.55);
         }
-        
+
         .Leetcode-Mastery-Scheduler-record-btn .star-icon {
             margin-right: 4px;
             font-size: 11px;
@@ -435,7 +1682,8 @@ const addRecordButton = () => {
     button.innerHTML = `
         <span class="drag-handle">⋮</span>
         <i class="fas fa-star star-icon"></i>Rate
-        <span class="reset-position" title="Reset position">↺</span>
+        <span class="separator">|</span>
+        <span class="add-today" title="加入待复习题目队列 | Add to review queue">＋</span>
     `;
     
     // 设置保存的位置
@@ -444,8 +1692,11 @@ const addRecordButton = () => {
     
     // 添加点击事件
     button.addEventListener('click', async (e) => {
-        // 如果点击的是拖动手柄或重置按钮，不触发评分
-        if (e.target.classList.contains('drag-handle') || e.target.classList.contains('reset-position')) {
+        // 如果点击的是拖动手柄、分隔符或“加入今日”，不触发评分
+        const t = e.target;
+        if (t && t.classList && (t.classList.contains('drag-handle') ||
+            t.classList.contains('separator') ||
+            t.classList.contains('add-today'))) {
             return;
         }
         
@@ -456,14 +1707,27 @@ const addRecordButton = () => {
         }
     });
     
-    // 重置位置
-    const resetButton = button.querySelector('.reset-position');
-    resetButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        button.style.bottom = '20px';
-        button.style.right = '20px';
-        localStorage.setItem('LMS_rateButtonPosition', JSON.stringify({bottom: 20, right: 20}));
-    });
+    // reset button removed
+
+    // 加入今日待复习（不触发评分）
+    const addTodayBtn = button.querySelector('.add-today');
+    if (addTodayBtn) {
+        addTodayBtn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            try {
+                const result = await handleAddProblem(window.location.href);
+                if (result) {
+                    showToast('已加入待复习题目队列\nAdded to review queue.', 'success');
+                }
+            } catch (error) {
+                if (error?.message && error.message.includes('Duplicate')) {
+                    showToast('题目已存在，未进行改动\nAlready exists. No changes made.', 'warning');
+                } else {
+                    showToast(`加入失败：${error?.message || 'Unknown error'}`, 'error');
+                }
+            }
+        });
+    }
     
     // 添加拖拽功能
     let isDragging = false;
@@ -557,10 +1821,11 @@ const addRecordButton = () => {
 
 
 // 抽取成通用的处理函数
-async function handleFeedbackSubmission(problem = null) {
+async function handleFeedbackSubmission(problem = null, fromPopup = false) {
     try {
-        // 记录是否为页面提交
-        const isPageSubmission = !problem;
+        // 记录是否为页面提交（在 LeetCode 页面上点击 Rate 按钮）
+        // 只有当没有传入 problem 且不是从 popup 调用时，才是页面提交
+        const isPageSubmission = !problem && !fromPopup;
         
         // 显示难度反馈弹窗
         const feedback = await showDifficultyFeedbackDialog().catch(error => {
@@ -577,16 +1842,19 @@ async function handleFeedbackSubmission(problem = null) {
         if (!problem) {
             await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__/* .syncProblems */ .xd)();   // 同步云端数据
             const { problemIndex, problemName, problemLevel, problemUrl } = await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__/* .getCurrentProblemInfoFromLeetCodeByHref */ .cp)();
-            const problems = await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__/* .getAllProblems */ .kT)();
+            const problems = await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.getAllProblems)();
             problem = problems[problemIndex];
             
+            // 如果是新题目，创建新的 problem 对象
             if (!problem || problem.isDeleted == true) {
                 problem = new _entity_problem__WEBPACK_IMPORTED_MODULE_3__/* .Problem */ .tc(problemIndex, problemName, problemLevel, problemUrl, Date.now(), (0,_util_utils__WEBPACK_IMPORTED_MODULE_0__/* .getDifficultyBasedSteps */ .tL)(problemLevel)[0], Date.now());
+                // 新题目标记，跳过今日复习检查
+                problem.isNewProblem = true;
             }
         }
         
-        // 检查上次复习时间是否是今天，如果是则不允许再次复习
-        if (problem.fsrsState && problem.fsrsState.lastReview) {
+        // 检查上次复习时间是否是今天，如果是则不允许再次复习（新题目跳过此检查）
+        if (!problem.isNewProblem && problem.fsrsState && problem.fsrsState.lastReview) {
             const lastReviewDate = new Date(problem.fsrsState.lastReview);
             const today = new Date();
             
@@ -600,6 +1868,9 @@ async function handleFeedbackSubmission(problem = null) {
                 return null;
             }
         }
+        
+        // 清除新题目标记
+        delete problem.isNewProblem;
         
         problem = await (0,_service_fsrsService__WEBPACK_IMPORTED_MODULE_2__/* .updateProblemWithFSRS */ .Gq)(problem, feedback);
         await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__/* .createOrUpdateProblem */ .qu)(problem);
@@ -896,11 +2167,11 @@ const addDialogStyles = () => {
 // 处理新建题目 - 设置为今天待复习
 async function handleAddProblem(url) {
     try {
-        await syncProblems();  // 同步云端数据
-        const problems = await getAllProblems();
+        await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__/* .syncProblems */ .xd)();  // 同步云端数据
+        const problems = await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__.getAllProblems)();
         
         // 使用新的API获取题目信息
-        const problemInfo = await getCurrentProblemInfoFromLeetCodeByUrl(url);
+        const problemInfo = await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__/* .getCurrentProblemInfoFromLeetCodeByUrl */ .Oo)(url);
         
         const { problemIndex, problemName, problemLevel, problemUrl } = problemInfo;
         
@@ -911,7 +2182,7 @@ async function handleAddProblem(url) {
         
         const now = Date.now();
         // 创建新问题
-        const problem = new Problem(
+        const problem = new _entity_problem__WEBPACK_IMPORTED_MODULE_3__/* .Problem */ .tc(
             problemIndex,
             problemName,
             problemLevel,
@@ -938,8 +2209,8 @@ async function handleAddProblem(url) {
             quality: null
         };
         
-        await createOrUpdateProblem(problem);
-        await syncProblems();
+        await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__/* .createOrUpdateProblem */ .qu)(problem);
+        await (0,_service_problemService__WEBPACK_IMPORTED_MODULE_1__/* .syncProblems */ .xd)();
         
         return problem;
     } catch (error) {
@@ -1015,20 +2286,22 @@ async function handleAddBlankProblem(name, level, customUrl = '') {
 }
 
 
-
 /***/ }),
 
 /***/ 970:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   O1: () => (/* binding */ loadConfigs)
 /* harmony export */ });
 /* unused harmony exports getReviewIntervals, setReviewIntervals, loadReviewIntervals, getProblemSorter, setProblemSorter, loadProblemSorter, isCloudSyncEnabled, switchCloudSyncEnabled, setCloudSyncEnabled, loadCloudSyncConfig, getDefaultCardLimit, setDefaultCardLimit, loadDefaultCardLimit, setReminderEnabled, isReminderEnabled, loadReminderConfig */
 /* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(891);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(214);
-/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(134);
+/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(134);
 /* harmony import */ var _util_sort__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(192);
+/* harmony import */ var _shared_browser_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(867);
+
 
 
 
@@ -1037,7 +2310,7 @@ async function handleAddBlankProblem(name, level, customUrl = '') {
 // configurable review intervals (to be integrated)
 
 const getReviewIntervals = async () => {
-    return await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .REVIEW_INTV_KEY */ .FB);
+    return await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .REVIEW_INTV_KEY */ .FB);
 }
 
 const setReviewIntervals = async (customIntv) => {
@@ -1059,7 +2332,7 @@ const loadReviewIntervals = async () => {
 
 // configurable problem sort by
 const getProblemSorter = async () => {
-    return await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .PROBLEM_SORT_BY_KEY */ .ql);
+    return await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .PROBLEM_SORT_BY_KEY */ .ql);
 }
 
 const setProblemSorter = async (sorterId) => {
@@ -1075,8 +2348,8 @@ const loadProblemSorter = async () => {
 
 // config cloud sync
 const isCloudSyncEnabled = async () => {
-    const configs = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .CONFIG_KEY */ .fR);
-    const isEnabled = configs !== undefined ? configs[_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .CONFIG_INNER_KEY_ENABLE_CLOUD */ .$z] : false;
+    const configs = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .CONFIG_KEY */ .fR);
+    const isEnabled = configs !== undefined ? configs[_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .CONFIG_INNER_KEY_ENABLE_CLOUD */ .$z] : false;
     if (isEnabled === undefined) {
         isEnabled = false;
     }
@@ -1108,8 +2381,8 @@ const loadCloudSyncConfig = async () => {
 
 // 获取默认卡片数量
 const getDefaultCardLimit = async () => {
-    const limit = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .DEFAULT_CARD_LIMIT_KEY */ .hr);
-    return limit !== undefined ? limit : _util_keys__WEBPACK_IMPORTED_MODULE_3__/* .DEFAULT_CARD_LIMIT_VALUE */ .pD;
+    const limit = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .DEFAULT_CARD_LIMIT_KEY */ .hr);
+    return limit !== undefined ? limit : _util_keys__WEBPACK_IMPORTED_MODULE_4__/* .DEFAULT_CARD_LIMIT_VALUE */ .pD;
 }
 
 // 设置默认卡片数量
@@ -1125,11 +2398,11 @@ const loadDefaultCardLimit = async () => {
 
 // 添加新的配置项和方法
 async function setReminderEnabled(enabled) {
-    await chrome.storage.local.set({ reminderEnabled: enabled });
+    await browser.storage.local.set({ reminderEnabled: enabled });
 }
 
 async function isReminderEnabled() {
-    const { reminderEnabled } = await chrome.storage.local.get('reminderEnabled');
+    const { reminderEnabled } = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z.storage.local.get('reminderEnabled');
     return reminderEnabled || false;
 }
 // 添加加载提醒设置到 store 的函数
@@ -1151,6 +2424,7 @@ const loadConfigs = async () => {
 /***/ 990:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Gq: () => (/* binding */ updateProblemWithFSRS)
 /* harmony export */ });
@@ -1417,6 +2691,7 @@ const syncRevlogs = async () => {
 /***/ 733:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   B: () => (/* binding */ isInCnMode)
 /* harmony export */ });
@@ -1448,6 +2723,7 @@ const toggleMode = async () => {
 /***/ 809:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* unused harmony exports addNewOperationHistory, popLatestOperationHistory, undoLatestOperation, hasOperationHistory */
 /* harmony import */ var _entity_operationHistory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(196);
 /* harmony import */ var _modeService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(733);
@@ -1511,16 +2787,18 @@ const hasOperationHistory = async () => {
 /***/ 820:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
   qu: () => (/* binding */ createOrUpdateProblem),
-  kT: () => (/* binding */ getAllProblems),
+  getAllProblems: () => (/* binding */ getAllProblems),
   cp: () => (/* binding */ getCurrentProblemInfoFromLeetCodeByHref),
+  Oo: () => (/* binding */ getCurrentProblemInfoFromLeetCodeByUrl),
   xd: () => (/* binding */ syncProblems)
 });
 
-// UNUSED EXPORTS: batchUpdateProblems, deleteProblem, getAllProblemsInCloud, getCurrentProblemInfoFromLeetCodeByUrl, getProblemsByMode, markProblemAsMastered, resetProblem, setProblems, setProblemsByMode, setProblemsToCloud
+// UNUSED EXPORTS: batchUpdateProblems, deleteProblem, getAllProblemsInCloud, getProblemsByMode, markProblemAsMastered, resetProblem, setProblems, setProblemsByMode, setProblemsToCloud
 
 ;// CONCATENATED MODULE: ./src/popup/delegate/leetCodeDelegate.js
 const user_agent =
@@ -1601,7 +2879,7 @@ const getProblemInfoByHref = async () => {
 }
 
 // 从指定URL获取题目信息
-const leetCodeDelegate_getProblemInfoByUrl = async (url) => {
+const getProblemInfoByUrl = async (url) => {
     if (!url.includes('leetcode.com/problems/') && !url.includes('leetcode.cn/problems/')) {
         throw new Error('请输入有效的 LeetCode 题目链接');
     }
@@ -1625,8 +2903,8 @@ var store = __webpack_require__(214);
 var utils = __webpack_require__(384);
 // EXTERNAL MODULE: ./src/popup/delegate/cloudStorageDelegate.js
 var delegate_cloudStorageDelegate = __webpack_require__(188);
-// EXTERNAL MODULE: ./src/popup/service/webdavService.js
-var webdavService = __webpack_require__(6);
+// EXTERNAL MODULE: ./src/popup/service/webdavEnhancedService.js
+var webdavEnhancedService = __webpack_require__(189);
 // EXTERNAL MODULE: ./src/popup/service/syncManager.js
 var service_syncManager = __webpack_require__(584);
 ;// CONCATENATED MODULE: ./src/popup/service/problemService.js
@@ -1790,10 +3068,11 @@ const batchUpdateProblems = async (updates) => {
 /***/ 584:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   D: () => (/* binding */ syncManager)
 /* harmony export */ });
-/* harmony import */ var _webdavService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+/* harmony import */ var _webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(189);
 /* harmony import */ var _problemService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(820);
 /* harmony import */ var _modeService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(733);
 /* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(134);
@@ -1830,12 +3109,17 @@ class SyncManager {
      * 初始化同步管理器
      */
     async initialize() {
-        // 加载WebDAV配置
-        const webdavLoaded = await _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.loadConfig();
-        
-        // 启动时执行一次同步
+        // 加载 WebDAV 配置
+        const webdavLoaded = await _webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.loadConfig();
+        this.activeWebdavService = _webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n;
+
+        // 启动时异步执行一次同步，不阻塞初始化
         if (webdavLoaded || _store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
-            await this.performSync();
+            setTimeout(() => {
+                this.performSync().catch(error => {
+                    console.error('Initial sync failed:', error);
+                });
+            }, 1000); // 延迟1秒执行，让UI先加载完成
         }
         
         // 启动自动同步
@@ -1941,7 +3225,7 @@ class SyncManager {
         if (this.isSyncing) return;
         
         // 检查是否有任何同步方式启用
-        if (!_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured && !_store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
+        if (!_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.isConfigured && !_store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
             return;
         }
         
@@ -2012,9 +3296,9 @@ class SyncManager {
         }
         
         // 获取WebDAV数据
-        if (_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured) {
+        if (_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.isConfigured) {
             try {
-                const webdavData = await _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.downloadData('problems_sync.json');
+                const webdavData = await _webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.downloadData('problems_sync.json');
                 if (webdavData && webdavData.problems) {
                     cloudData.webdav = webdavData.problems;
                 }
@@ -2189,7 +3473,7 @@ class SyncManager {
         }
         
         // 保存到WebDAV
-        if (_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured) {
+        if (_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.isConfigured) {
             const syncData = {
                 version: '2.0',
                 lastSync: new Date().toISOString(),
@@ -2203,7 +3487,7 @@ class SyncManager {
             };
             
             savePromises.push(
-                _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.uploadData('problems_sync.json', syncData).catch(error => {
+                _webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.uploadData('problems_sync.json', syncData).catch(error => {
                     console.warn('Failed to save to WebDAV:', error);
                 })
             );
@@ -2259,8 +3543,8 @@ class SyncManager {
             deviceId: await this.getDeviceId()
         };
         
-        if (_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured) {
-            await _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.uploadData('incremental.json', syncData);
+        if (_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.isConfigured) {
+            await _webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.uploadData('incremental.json', syncData);
         }
     }
 
@@ -2268,7 +3552,7 @@ class SyncManager {
      * 获取指定时间后的更改
      */
     async getChangesSince(timestamp) {
-        const problems = await (0,_problemService__WEBPACK_IMPORTED_MODULE_1__/* .getAllProblems */ .kT)();
+        const problems = await (0,_problemService__WEBPACK_IMPORTED_MODULE_1__.getAllProblems)();
         const changes = [];
         
         Object.entries(problems).forEach(([id, problem]) => {
@@ -2291,106 +3575,393 @@ const syncManager = new SyncManager();
 
 /***/ }),
 
-/***/ 6:
+/***/ 189:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   i: () => (/* binding */ webdavService)
+/* harmony export */   n: () => (/* binding */ webdavEnhancedService)
 /* harmony export */ });
+/* harmony import */ var _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(867);
 /**
- * WebDAV Service for Nutstore (坚果云) Integration
- * Provides unlimited cloud storage for LeetCode problem data
+ * Enhanced WebDAV Service with Auto-fallback and Method Disguise
+ * Supports automatic HTTPS->HTTP fallback and PROPFIND->POST disguise
  */
 
-class WebDAVService {
+
+
+class WebDAVEnhancedService {
     constructor() {
         this.baseUrl = null;
         this.username = null;
         this.password = null;
         this.isConfigured = false;
-        this.folderPath = '/LeetcodeMasteryScheduler/'; // 坚果云中的存储路径
+        this.isAuthenticated = false;
+        this.folderPath = '/LeetcodeMasteryScheduler/';
+        this.onAuthStatusChange = null;
+
+        // 连接策略配置
+        this.connectionStrategy = {
+            protocol: 'auto', // 'auto', 'https', 'http'
+            method: 'auto',    // 'auto', 'native', 'disguised'
+            currentProtocol: null,
+            currentMethod: null,
+            lastSuccessfulStrategy: null
+        };
+
+        // 错误检测模式
+        this.errorPatterns = {
+            encryptionBlocked: ['ECONNRESET', 'ETIMEDOUT', 'CERT', 'SSL', 'TLS'],
+            methodBlocked: ['405', '403', 'Method Not Allowed', 'Forbidden'],
+            networkError: ['ENOTFOUND', 'ECONNREFUSED', 'Network']
+        };
+
+        // 重试配置
+        this.retryConfig = {
+            maxRetries: 3,
+            retryDelay: 1000,
+            timeout: 10000
+        };
     }
 
     /**
-     * 配置坚果云 WebDAV 连接
-     * @param {Object} config - 配置对象
-     * @param {string} config.username - 坚果云账号邮箱
-     * @param {string} config.password - 应用授权密码（非账号密码）
-     * @param {string} [config.serverUrl] - WebDAV 服务器地址，默认为坚果云
+     * 配置 WebDAV 连接，支持自动降级
      */
     async configure(config) {
-        // 坚果云 WebDAV 地址：https://dav.jianguoyun.com/dav/
-        this.baseUrl = config.serverUrl || 'https://dav.jianguoyun.com/dav';
+        // 保存基础配置
         this.username = config.username;
         this.password = config.password;
-        
-        // 验证连接
-        const isValid = await this.testConnection();
+
+        // 设置连接策略
+        if (config.connectionMode) {
+            this.connectionStrategy.protocol = config.connectionMode.protocol || 'auto';
+            this.connectionStrategy.method = config.connectionMode.method || 'auto';
+        }
+
+        // 设置重试配置
+        if (config.retryConfig) {
+            Object.assign(this.retryConfig, config.retryConfig);
+        }
+
+        // 构建基础 URL（不含协议）
+        const baseHost = config.serverUrl || 'dav.jianguoyun.com/dav';
+        this.baseUrl = baseHost.replace(/^https?:\/\//, '');
+
+        // 保存配置
+        await this.saveConfig({
+            ...config,
+            connectionStrategy: this.connectionStrategy
+        });
+        this.isConfigured = true;
+
+        // 智能连接测试
+        const isValid = await this.smartConnect();
+        this.isAuthenticated = isValid;
+
         if (isValid) {
-            this.isConfigured = true;
-            // 保存配置到本地（密码需要加密）
-            await this.saveConfig(config);
-            // 确保文件夹存在
             await this.ensureFolderExists();
+            if (this.onAuthStatusChange) {
+                this.onAuthStatusChange(true);
+            }
+            console.log('WebDAV connected successfully with strategy:', this.connectionStrategy.lastSuccessfulStrategy);
+        } else {
+            if (this.onAuthStatusChange) {
+                this.onAuthStatusChange(false);
+            }
         }
         return isValid;
     }
 
     /**
-     * 测试 WebDAV 连接
+     * 智能连接测试，自动尝试不同策略
      */
-    async testConnection() {
-        try {
-            const response = await this.request('PROPFIND', '/', {
-                headers: {
-                    'Depth': '0'
+    async smartConnect() {
+        const strategies = this.generateStrategies();
+
+        for (const strategy of strategies) {
+            console.log(`Trying connection strategy: ${strategy.protocol} + ${strategy.method}`);
+
+            try {
+                const success = await this.testConnectionWithStrategy(strategy);
+                if (success) {
+                    // 保存成功的策略
+                    this.connectionStrategy.currentProtocol = strategy.protocol;
+                    this.connectionStrategy.currentMethod = strategy.method;
+                    this.connectionStrategy.lastSuccessfulStrategy = {
+                        protocol: strategy.protocol,
+                        method: strategy.method,
+                        timestamp: new Date().toISOString()
+                    };
+                    await this.saveStrategy();
+                    return true;
                 }
+            } catch (error) {
+                console.log(`Strategy failed: ${error.message}`);
+                continue;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 生成连接策略列表
+     */
+    generateStrategies() {
+        const strategies = [];
+
+        // 根据配置生成策略
+        const protocols = this.connectionStrategy.protocol === 'auto'
+            ? ['https', 'http']
+            : [this.connectionStrategy.protocol];
+
+        const methods = this.connectionStrategy.method === 'auto'
+            ? ['native', 'disguised']
+            : [this.connectionStrategy.method];
+
+        // 如果不是自动模式，用户的选择优先
+        if (this.connectionStrategy.protocol !== 'auto') {
+            // 用户指定了协议，严格按照用户选择
+            for (const method of methods) {
+                strategies.push({ protocol: protocols[0], method, priority: 0 });
+            }
+            return strategies; // 直接返回，只使用用户选择的协议
+        }
+
+        // 自动模式：如果有上次成功的策略，优先尝试
+        if (this.connectionStrategy.lastSuccessfulStrategy) {
+            strategies.push({
+                protocol: this.connectionStrategy.lastSuccessfulStrategy.protocol,
+                method: this.connectionStrategy.lastSuccessfulStrategy.method,
+                priority: 0
             });
+        }
+
+        // 然后添加其他策略
+        for (const protocol of protocols) {
+            for (const method of methods) {
+                // 跳过已经添加的优先策略
+                if (this.connectionStrategy.lastSuccessfulStrategy &&
+                    protocol === this.connectionStrategy.lastSuccessfulStrategy.protocol &&
+                    method === this.connectionStrategy.lastSuccessfulStrategy.method) {
+                    continue;
+                }
+                strategies.push({ protocol, method, priority: 1 });
+            }
+        }
+
+        return strategies;
+    }
+
+    /**
+     * 使用特定策略测试连接
+     */
+    async testConnectionWithStrategy(strategy) {
+        try {
+            const response = await this.requestWithStrategy('PROPFIND', '/', {
+                headers: { 'Depth': '0' }
+            }, strategy);
+
             return response.ok;
         } catch (error) {
-            console.error('WebDAV connection test failed:', error);
+            // 分析错误类型，用于优化后续策略
+            this.analyzeError(error);
             return false;
         }
     }
 
     /**
-     * 发送 WebDAV 请求
+     * 使用特定策略发送请求
      */
-    async request(method, path, options = {}) {
-        const url = `${this.baseUrl}${path}`;
-        const auth = btoa(`${this.username}:${this.password}`);
-        
-        const defaultHeaders = {
-            'Authorization': `Basic ${auth}`,
-            'Content-Type': 'application/xml; charset=utf-8'
-        };
-        
-        const response = await fetch(url, {
-            method,
-            headers: {
-                ...defaultHeaders,
-                ...options.headers
-            },
-            body: options.body
-        });
-        
+    async requestWithStrategy(method, path, options = {}, strategy = null) {
+        // 如果没有指定策略，使用当前策略
+        if (!strategy) {
+            strategy = {
+                protocol: this.connectionStrategy.currentProtocol || 'https',
+                method: this.connectionStrategy.currentMethod || 'native'
+            };
+        }
+
+        // 构建 URL
+        const protocol = strategy.protocol;
+        const url = `${protocol}://${this.baseUrl}${path}`;
+
+        // 准备请求参数
+        let actualMethod = method;
+        let headers = this.buildHeaders(options.headers);
+
+        // 如果使用伪装模式
+        if (strategy.method === 'disguised' && ['PROPFIND', 'PROPPATCH', 'MKCOL'].includes(method)) {
+            actualMethod = 'POST';
+            headers['X-HTTP-Method-Override'] = method;
+            headers['X-Original-Method'] = method;
+            // 添加自定义标记，后端可以识别
+            headers['X-WebDAV-Disguised'] = 'true';
+        }
+
+        // 通过 background script 发送请求
+        const response = await this.sendRequest(actualMethod, url, headers, options.body);
         return response;
     }
 
     /**
-     * 确保存储文件夹存在
+     * 发送实际请求（通过 background script）
+     */
+    async sendRequest(method, url, headers, body) {
+        const response = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.runtime.sendMessage({
+            action: 'webdavRequest',
+            params: {
+                method,
+                url,
+                headers,
+                body,
+                timeout: this.retryConfig.timeout
+            }
+        });
+
+        if (!response.success) {
+            const error = new Error(response.error || 'WebDAV request failed');
+            error.details = response;
+            throw error;
+        }
+
+        return this.wrapResponse(response.data);
+    }
+
+    /**
+     * 包装响应对象
+     */
+    wrapResponse(data) {
+        return {
+            ok: data.ok,
+            status: data.status,
+            statusText: data.statusText,
+            data: data.data,
+            text: async () => {
+                if (typeof data.data === 'object') {
+                    return JSON.stringify(data.data);
+                }
+                return data.data;
+            },
+            json: async () => {
+                if (typeof data.data === 'string') {
+                    try {
+                        return JSON.parse(data.data);
+                    } catch {
+                        throw new Error('Invalid JSON response');
+                    }
+                }
+                return data.data;
+            }
+        };
+    }
+
+    /**
+     * 构建请求头
+     */
+    buildHeaders(customHeaders = {}) {
+        const auth = btoa(`${this.username}:${this.password}`);
+
+        return {
+            'Authorization': `Basic ${auth}`,
+            'Content-Type': 'application/xml; charset=utf-8',
+            'User-Agent': 'LeetcodeMasteryScheduler/1.0',
+            ...customHeaders
+        };
+    }
+
+    /**
+     * 分析错误类型，优化后续策略
+     */
+    analyzeError(error) {
+        const errorMsg = error.message.toLowerCase();
+
+        for (const [type, patterns] of Object.entries(this.errorPatterns)) {
+            if (patterns.some(pattern => errorMsg.includes(pattern.toLowerCase()))) {
+                console.log(`Detected error type: ${type}`);
+
+                // 根据错误类型调整策略
+                if (type === 'encryptionBlocked') {
+                    // 加密被阻止，优先使用 HTTP
+                    this.connectionStrategy.currentProtocol = 'http';
+                } else if (type === 'methodBlocked') {
+                    // 方法被阻止，使用伪装模式
+                    this.connectionStrategy.currentMethod = 'disguised';
+                }
+                break;
+            }
+        }
+    }
+
+    /**
+     * 智能请求方法 - 带自动重试和降级
+     */
+    async request(method, path, options = {}) {
+        let retries = 0;
+        let lastError = null;
+
+        while (retries < this.retryConfig.maxRetries) {
+            try {
+                // 如果有当前成功的策略，先尝试
+                if (this.connectionStrategy.currentProtocol && this.connectionStrategy.currentMethod) {
+                    try {
+                        return await this.requestWithStrategy(method, path, options);
+                    } catch (error) {
+                        console.log('Current strategy failed, trying alternatives...');
+                        lastError = error;
+                    }
+                }
+
+                // 尝试所有可能的策略
+                const strategies = this.generateStrategies();
+
+                for (const strategy of strategies) {
+                    try {
+                        const response = await this.requestWithStrategy(method, path, options, strategy);
+
+                        // 如果成功，更新当前策略
+                        if (response.ok || response.status < 500) {
+                            this.connectionStrategy.currentProtocol = strategy.protocol;
+                            this.connectionStrategy.currentMethod = strategy.method;
+                            return response;
+                        }
+                    } catch (error) {
+                        lastError = error;
+                        continue;
+                    }
+                }
+
+                retries++;
+                if (retries < this.retryConfig.maxRetries) {
+                    await this.delay(this.retryConfig.retryDelay * retries);
+                }
+            } catch (error) {
+                lastError = error;
+                retries++;
+            }
+        }
+
+        // 所有策略都失败
+        throw lastError || new Error('All connection strategies failed');
+    }
+
+    /**
+     * 延迟函数
+     */
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    /**
+     * 确保文件夹存在
      */
     async ensureFolderExists() {
         try {
-            // 检查文件夹是否存在
             const response = await this.request('PROPFIND', this.folderPath, {
-                headers: {
-                    'Depth': '0'
-                }
+                headers: { 'Depth': '0' }
             });
-            
+
             if (!response.ok && response.status === 404) {
-                // 创建文件夹
                 await this.request('MKCOL', this.folderPath);
                 console.log('Created folder:', this.folderPath);
             }
@@ -2400,114 +3971,106 @@ class WebDAVService {
     }
 
     /**
-     * 上传数据到坚果云
-     * @param {string} filename - 文件名
-     * @param {Object} data - 要保存的数据
+     * 上传数据
      */
     async uploadData(filename, data) {
         if (!this.isConfigured) {
             throw new Error('WebDAV not configured');
         }
-        
+
         const path = `${this.folderPath}${filename}`;
         const jsonData = JSON.stringify(data, null, 2);
-        
-        try {
-            const response = await this.request('PUT', path, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: jsonData
-            });
-            
-            if (response.ok || response.status === 201 || response.status === 204) {
-                console.log(`Data uploaded to ${path}`);
-                return true;
-            } else {
-                throw new Error(`Upload failed: ${response.status}`);
-            }
-        } catch (error) {
-            console.error('Error uploading data:', error);
-            throw error;
+
+        const response = await this.request('PUT', path, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonData
+        });
+
+        if (response.ok || response.status === 201 || response.status === 204) {
+            console.log(`Data uploaded to ${path}`);
+            return true;
+        } else {
+            throw new Error(`Upload failed: ${response.status}`);
         }
     }
 
     /**
-     * 从坚果云下载数据
-     * @param {string} filename - 文件名
+     * 下载数据
      */
     async downloadData(filename) {
         if (!this.isConfigured) {
             throw new Error('WebDAV not configured');
         }
-        
+
         const path = `${this.folderPath}${filename}`;
-        
-        try {
-            const response = await this.request('GET', path, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            
-            if (response.ok) {
-                const text = await response.text();
-                return JSON.parse(text);
-            } else if (response.status === 404) {
-                return null; // 文件不存在
-            } else {
-                throw new Error(`Download failed: ${response.status}`);
+        const response = await this.request('GET', path, {
+            headers: {
+                'Content-Type': 'application/json'
             }
-        } catch (error) {
-            console.error('Error downloading data:', error);
-            throw error;
+        });
+
+        if (response.ok) {
+            if (response.data !== undefined) {
+                if (typeof response.data === 'string') {
+                    try {
+                        return JSON.parse(response.data);
+                    } catch {
+                        return response.data;
+                    }
+                }
+                return response.data;
+            }
+            return await response.json();
+        } else if (response.status === 404) {
+            return null;
+        } else {
+            throw new Error(`Download failed: ${response.status}`);
         }
     }
 
     /**
-     * 列出文件夹中的所有文件
+     * 列出文件
      */
     async listFiles() {
         if (!this.isConfigured) {
             throw new Error('WebDAV not configured');
         }
-        
-        try {
-            const response = await this.request('PROPFIND', this.folderPath, {
-                headers: {
-                    'Depth': '1'
-                }
-            });
-            
-            if (response.ok) {
-                const text = await response.text();
-                // 解析 XML 响应获取文件列表
-                return this.parseFileList(text);
+
+        const response = await this.request('PROPFIND', this.folderPath, {
+            headers: { 'Depth': '1' }
+        });
+
+        if (response.ok) {
+            let xmlText;
+            if (response.data !== undefined) {
+                xmlText = typeof response.data === 'object' ? JSON.stringify(response.data) : response.data;
             } else {
-                throw new Error(`List files failed: ${response.status}`);
+                xmlText = await response.text();
             }
-        } catch (error) {
-            console.error('Error listing files:', error);
-            throw error;
+            return this.parseFileList(xmlText);
+        } else {
+            throw new Error(`List files failed: ${response.status}`);
         }
     }
 
     /**
-     * 解析 PROPFIND 响应中的文件列表
+     * 解析文件列表
      */
     parseFileList(xmlText) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(xmlText, 'text/xml');
         const responses = doc.getElementsByTagNameNS('DAV:', 'response');
-        
+
         const files = [];
-        for (let i = 1; i < responses.length; i++) { // Skip first (folder itself)
+        for (let i = 1; i < responses.length; i++) {
             const response = responses[i];
             const href = response.getElementsByTagNameNS('DAV:', 'href')[0]?.textContent;
             const displayName = response.getElementsByTagNameNS('DAV:', 'displayname')[0]?.textContent;
             const lastModified = response.getElementsByTagNameNS('DAV:', 'getlastmodified')[0]?.textContent;
             const contentLength = response.getElementsByTagNameNS('DAV:', 'getcontentlength')[0]?.textContent;
-            
+
             if (href && displayName) {
                 files.push({
                     name: displayName,
@@ -2517,7 +4080,7 @@ class WebDAVService {
                 });
             }
         }
-        
+
         return files;
     }
 
@@ -2528,48 +4091,114 @@ class WebDAVService {
         if (!this.isConfigured) {
             throw new Error('WebDAV not configured');
         }
-        
+
         const path = `${this.folderPath}${filename}`;
-        
-        try {
-            const response = await this.request('DELETE', path);
-            return response.ok || response.status === 204;
-        } catch (error) {
-            console.error('Error deleting file:', error);
-            throw error;
-        }
+        const response = await this.request('DELETE', path);
+        return response.ok || response.status === 204;
     }
 
     /**
-     * 保存配置到本地存储（加密敏感信息）
+     * 保存配置
      */
     async saveConfig(config) {
-        // 简单的 Base64 编码，实际使用应该用更安全的加密方式
         const encryptedConfig = {
             username: config.username,
-            password: btoa(config.password), // Base64 编码密码
-            serverUrl: config.serverUrl || 'https://dav.jianguoyun.com/dav',
+            password: btoa(config.password),
+            serverUrl: config.serverUrl || 'dav.jianguoyun.com/dav',
+            connectionStrategy: config.connectionStrategy || this.connectionStrategy,
+            retryConfig: config.retryConfig || this.retryConfig,
             enabled: true
         };
-        
-        await chrome.storage.local.set({
-            webdavConfig: encryptedConfig
+
+        await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.set({
+            webdavEnhancedConfig: encryptedConfig
         });
     }
 
     /**
-     * 从本地存储加载配置
+     * 保存连接策略
+     */
+    async saveStrategy() {
+        const result = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.get('webdavEnhancedConfig');
+        if (result.webdavEnhancedConfig) {
+            result.webdavEnhancedConfig.connectionStrategy = this.connectionStrategy;
+            await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.set({
+                webdavEnhancedConfig: result.webdavEnhancedConfig
+            });
+        }
+    }
+
+    /**
+     * 加载配置
      */
     async loadConfig() {
-        const result = await chrome.storage.local.get('webdavConfig');
-        if (result.webdavConfig && result.webdavConfig.enabled) {
-            const config = result.webdavConfig;
-            await this.configure({
-                username: config.username,
-                password: atob(config.password), // Base64 解码密码
-                serverUrl: config.serverUrl
-            });
-            return true;
+        try {
+            // 优先加载增强版配置
+            let result = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.get('webdavEnhancedConfig');
+            let config = result.webdavEnhancedConfig;
+
+            // 如果没有增强版配置，尝试迁移旧版配置
+            if (!config || !config.enabled) {
+                const oldResult = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.get('webdavConfig');
+                if (oldResult.webdavConfig && oldResult.webdavConfig.enabled) {
+                    console.log('Migrating from old WebDAV config to enhanced config');
+                    // 迁移旧配置
+                    config = {
+                        ...oldResult.webdavConfig,
+                        connectionStrategy: this.connectionStrategy,
+                        retryConfig: this.retryConfig
+                    };
+                    // 保存为增强版配置
+                    await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.set({ webdavEnhancedConfig: config });
+                    // 删除旧配置
+                    await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.remove('webdavConfig');
+                }
+            }
+
+            if (config && config.enabled) {
+
+                this.baseUrl = config.serverUrl || 'dav.jianguoyun.com/dav';
+                this.baseUrl = this.baseUrl.replace(/^https?:\/\//, '');
+                this.username = config.username;
+                this.password = atob(config.password);
+                this.isConfigured = true;
+
+                // 恢复连接策略
+                if (config.connectionStrategy) {
+                    this.connectionStrategy = config.connectionStrategy;
+                    // 如果有成功的策略记录，认为已认证
+                    if (config.connectionStrategy.lastSuccessfulStrategy) {
+                        this.isAuthenticated = true;
+
+                        // 如果策略较老（超过1小时），后台静默验证
+                        const strategyTime = new Date(config.connectionStrategy.lastSuccessfulStrategy.timestamp).getTime();
+                        if (Date.now() - strategyTime > 60 * 60 * 1000) {
+                            // 后台验证，不影响当前状态显示
+                            this.smartConnect().then(isValid => {
+                                this.isAuthenticated = isValid;
+                                if (this.onAuthStatusChange && !isValid) {
+                                    // 只在认证失败时通知
+                                    this.onAuthStatusChange(false);
+                                }
+                            }).catch(error => {
+                                console.error('WebDAV background connection test error:', error);
+                            });
+                        }
+                    } else {
+                        // 没有成功的策略记录，需要测试连接
+                        this.isAuthenticated = false;
+                    }
+                }
+
+                // 恢复重试配置
+                if (config.retryConfig) {
+                    this.retryConfig = config.retryConfig;
+                }
+
+                return true;
+            }
+        } catch (error) {
+            console.error('Error loading WebDAV config:', error);
         }
         return false;
     }
@@ -2582,35 +4211,48 @@ class WebDAVService {
         this.username = null;
         this.password = null;
         this.isConfigured = false;
-        
-        await chrome.storage.local.remove('webdavConfig');
+        this.connectionStrategy = {
+            protocol: 'auto',
+            method: 'auto',
+            currentProtocol: null,
+            currentMethod: null,
+            lastSuccessfulStrategy: null
+        };
+
+        await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.remove('webdavEnhancedConfig');
     }
 
     /**
-     * 备份所有问题数据到坚果云
+     * 获取连接状态信息
      */
+    getConnectionStatus() {
+        return {
+            isConfigured: this.isConfigured,
+            isAuthenticated: this.isAuthenticated,
+            strategy: this.connectionStrategy.lastSuccessfulStrategy,
+            currentProtocol: this.connectionStrategy.currentProtocol,
+            currentMethod: this.connectionStrategy.currentMethod
+        };
+    }
+
+    // 保留原有的备份、恢复、同步等方法...
     async backupProblems(problems) {
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
         const filename = `problems_backup_${timestamp}.json`;
-        
+
         const backupData = {
             version: '1.0',
             timestamp: new Date().toISOString(),
             problemCount: problems.length,
             problems: problems
         };
-        
+
         await this.uploadData(filename, backupData);
-        
-        // 保持最近的备份记录
         await this.maintainBackupHistory();
-        
+
         return filename;
     }
 
-    /**
-     * 恢复问题数据
-     */
     async restoreProblems(filename) {
         const data = await this.downloadData(filename);
         if (data && data.problems) {
@@ -2619,91 +4261,68 @@ class WebDAVService {
         throw new Error('Invalid backup file');
     }
 
-    /**
-     * 获取所有备份文件列表
-     */
     async getBackupList() {
         const files = await this.listFiles();
-        return files.filter(file => 
-            file.name.startsWith('problems_backup_') && 
+        return files.filter(file =>
+            file.name.startsWith('problems_backup_') &&
             file.name.endsWith('.json')
         ).sort((a, b) => b.lastModified - a.lastModified);
     }
 
-    /**
-     * 维护备份历史（保留最近10个备份）
-     */
     async maintainBackupHistory() {
         const backups = await this.getBackupList();
         if (backups.length > 10) {
-            // 删除旧的备份
             for (let i = 10; i < backups.length; i++) {
                 await this.deleteFile(backups[i].name);
             }
         }
     }
 
-    /**
-     * 同步数据（上传当前数据并下载最新数据）
-     */
     async syncData(localProblems, lastSyncTime) {
         const syncFilename = 'problems_sync.json';
-        
-        // 下载云端数据
         const cloudData = await this.downloadData(syncFilename);
-        
+
         if (!cloudData) {
-            // 云端没有数据，上传本地数据
             await this.uploadData(syncFilename, {
                 lastSync: new Date().toISOString(),
                 problems: localProblems
             });
             return { problems: localProblems, conflicts: [] };
         }
-        
-        // 合并数据（简单策略：以最新修改时间为准）
+
         const mergedData = this.mergeProblems(localProblems, cloudData.problems);
-        
-        // 上传合并后的数据
+
         await this.uploadData(syncFilename, {
             lastSync: new Date().toISOString(),
             problems: mergedData.problems
         });
-        
+
         return mergedData;
     }
 
-    /**
-     * 合并本地和云端的问题数据
-     */
     mergeProblems(localProblems, cloudProblems) {
         const merged = new Map();
         const conflicts = [];
-        
-        // 添加所有云端问题
+
         cloudProblems.forEach(problem => {
             merged.set(problem.id || problem.name, problem);
         });
-        
-        // 合并本地问题
+
         localProblems.forEach(problem => {
             const key = problem.id || problem.name;
             const cloudProblem = merged.get(key);
-            
+
             if (!cloudProblem) {
-                // 只在本地存在
                 merged.set(key, problem);
             } else {
-                // 比较修改时间，保留最新的
                 const localTime = new Date(problem.lastModified || 0).getTime();
                 const cloudTime = new Date(cloudProblem.lastModified || 0).getTime();
-                
+
                 if (localTime > cloudTime) {
                     merged.set(key, problem);
                 } else if (localTime < cloudTime) {
-                    // 云端更新，保持云端版本
+                    // Keep cloud version
                 } else if (JSON.stringify(problem) !== JSON.stringify(cloudProblem)) {
-                    // 时间相同但内容不同，记录冲突
                     conflicts.push({
                         problemId: key,
                         local: problem,
@@ -2712,7 +4331,7 @@ class WebDAVService {
                 }
             }
         });
-        
+
         return {
             problems: Array.from(merged.values()),
             conflicts
@@ -2721,13 +4340,14 @@ class WebDAVService {
 }
 
 // 导出单例
-const webdavService = new WebDAVService();
+const webdavEnhancedService = new WebDAVEnhancedService();
 
 /***/ }),
 
 /***/ 214:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   h: () => (/* binding */ store)
 /* harmony export */ });
@@ -2767,6 +4387,7 @@ const daily_store = {
 /***/ 497:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   mq: () => (/* binding */ forggettingCurve)
 /* harmony export */ });
@@ -2812,6 +4433,7 @@ const COMPILE_ERROR_AND_TLE_CLASSNAME_NEW = "mr-1 flex-1 whitespace-nowrap text-
 /***/ 878:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   JF: () => (/* binding */ getFSRSParams),
 /* harmony export */   Tb: () => (/* binding */ defaultParams),
@@ -2823,6 +4445,8 @@ const COMPILE_ERROR_AND_TLE_CLASSNAME_NEW = "mr-1 flex-1 whitespace-nowrap text-
 /* harmony import */ var _delegate_localStorageDelegate_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(891);
 /* harmony import */ var _delegate_cloudStorageDelegate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(188);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(214);
+/* harmony import */ var _shared_browser_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(867);
+
 
 
 
@@ -2907,11 +4531,8 @@ const saveFSRSParams = async (newParams) => {
 const saveRevlog = async (cardId, revlog) => {
     try {
         // 从 localStorage 获取现有的复习日志
-        const existingRevlogsStr = await new Promise((resolve) => {
-            chrome.storage.local.get(['fsrs_revlogs'], (result) => {
-                resolve(result.fsrs_revlogs || '{}');
-            });
-        });
+        const { fsrs_revlogs: existingRevlogsStr = '{}' } = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.storage.local.get('fsrs_revlogs');
+
         
         let existingRevlogs;
         try {
@@ -2930,10 +4551,8 @@ const saveRevlog = async (cardId, revlog) => {
         existingRevlogs[cardId].push(revlog);
         
         // 保存到本地存储
-        await new Promise((resolve) => {
-            chrome.storage.local.set({ 'fsrs_revlogs': JSON.stringify(existingRevlogs) });
-            resolve();
-        });
+        await _shared_browser_js__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.storage.local.set({ 'fsrs_revlogs': JSON.stringify(existingRevlogs) });
+
         
         // 如果启用了云同步，同时保存到云端
         if (_store__WEBPACK_IMPORTED_MODULE_3__/* .store */ .h.isCloudSyncEnabled) {
@@ -2962,11 +4581,9 @@ const getAllRevlogs = async () => {
         }
         
         // 如果云端没有数据或未启用云同步，从本地获取
-        result = await new Promise((resolve) => {
-            chrome.storage.local.get(['fsrs_revlogs'], (result) => {
-                resolve(result.fsrs_revlogs || '{}');
-            });
-        });
+        const { fsrs_revlogs: localRevlogs = '{}' } = await browser.storage.local.get('fsrs_revlogs');
+        result = localRevlogs;
+
         
         // 如果结果是字符串，尝试解析它
         if (typeof result === 'string') {
@@ -3019,6 +4636,7 @@ const exportRevlogsToCSV = async () => {
 /***/ 134:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   $z: () => (/* binding */ CONFIG_INNER_KEY_ENABLE_CLOUD),
 /* harmony export */   FB: () => (/* binding */ REVIEW_INTV_KEY),
@@ -3048,6 +4666,7 @@ const DEFAULT_CARD_LIMIT_VALUE = 3;
 /***/ 192:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   HF: () => (/* binding */ getSorterById),
 /* harmony export */   SL: () => (/* binding */ problemSorters),
@@ -3119,6 +4738,7 @@ const descriptionOf = (sorter) => {
 /***/ 384:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   J1: () => (/* binding */ getDelayedHours),
 /* harmony export */   tL: () => (/* binding */ getDifficultyBasedSteps),
@@ -3378,9 +4998,26 @@ const mergeRevlogs = (revlogs1, revlogs2) => {
 
 /***/ }),
 
+/***/ 867:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(150);
+/* harmony import */ var webextension_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__);
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((webextension_polyfill__WEBPACK_IMPORTED_MODULE_0___default()));
+
+
+/***/ }),
+
 /***/ 61:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   EI: () => (/* binding */ $),
 /* harmony export */   Ke: () => (/* binding */ W),
@@ -3417,7 +5054,7 @@ var c=(s=>(s[s.New=0]="New",s[s.Learning=1]="Learning",s[s.Review=2]="Review",s[
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -3490,6 +5127,18 @@ var c=(s=>(s[s.New=0]="New",s[s.Learning=1]="Learning",s[s.Review=2]="Review",s[
 /******/ 				return fn.r ? promise : getResult();
 /******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
 /******/ 			queue && queue.d < 0 && (queue.d = 0);
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	

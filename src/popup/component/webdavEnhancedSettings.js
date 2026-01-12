@@ -5,6 +5,7 @@
 
 import { webdavEnhancedService } from '../service/webdavEnhancedService';
 import { syncManager } from '../service/syncManager';
+import browser from '../../shared/browser.js';
 
 class WebDAVEnhancedSettings {
     constructor() {
@@ -123,7 +124,7 @@ class WebDAVEnhancedSettings {
             }
 
             // 加载配置值
-            const config = await chrome.storage.local.get('webdavEnhancedConfig');
+            const config = await browser.storage.local.get('webdavEnhancedConfig');
             if (config.webdavEnhancedConfig) {
                 const savedConfig = config.webdavEnhancedConfig;
 
@@ -205,7 +206,7 @@ class WebDAVEnhancedSettings {
      * 尝试使用保存的配置自动连接
      */
     async tryAutoConnect() {
-        const savedConfig = await chrome.storage.local.get('webdavEnhancedConfig');
+        const savedConfig = await browser.storage.local.get('webdavEnhancedConfig');
         if (savedConfig.webdavEnhancedConfig && savedConfig.webdavEnhancedConfig.enabled) {
             const config = savedConfig.webdavEnhancedConfig;
             if (config.username && config.password) {

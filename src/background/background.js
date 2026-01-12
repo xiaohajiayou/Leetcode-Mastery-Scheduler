@@ -1,3 +1,5 @@
+import browser from '../shared/browser.js';
+
 console.log('Background service worker started - v2.0 with records support');
 
 // 默认配置
@@ -10,18 +12,18 @@ const DEFAULT_SETTINGS = {
 };
 
 // 初始化扩展
-chrome.runtime.onInstalled.addListener(async () => {
+browser.runtime.onInstalled.addListener(async () => {
     console.log('Extension installed/updated');
     
     // 在 Manifest V3 中，notifications 权限在 manifest 中声明后直接可用
     console.log('Notifications API ready');
     
     // 初始化设置
-    const settings = await chrome.storage.local.get(Object.keys(DEFAULT_SETTINGS));
+    const settings = await browser.storage.local.get(Object.keys(DEFAULT_SETTINGS));
     const needsInit = Object.keys(DEFAULT_SETTINGS).some(key => !(key in settings));
     
     if (needsInit) {
-        await chrome.storage.local.set(DEFAULT_SETTINGS);
+        await browser.storage.local.set(DEFAULT_SETTINGS);
         console.log('Initialized default settings');
     }
     
@@ -30,7 +32,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 
 // 监听存储变化
-chrome.storage.onChanged.addListener((changes, namespace) => {
+browser.storage.onChanged.addListener((changes, namespace) => {
     if (namespace === 'local') {
         // 监听提醒开关或间隔时间的变化
         if (changes.reminderEnabled || changes.reminderInterval) {
@@ -45,20 +47,20 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
 
 // 设置闹钟
 async function setupAlarms() {
-    const { reminderEnabled, reminderInterval } = await chrome.storage.local.get([
+    const { reminderEnabled, reminderInterval } = await browser.storage.local.get([
         'reminderEnabled',
         'reminderInterval'
     ]);
 
     // 清除现有闹钟
-    await chrome.alarms.clear('dailyReminder');
+    await browser.alarms.clear('dailyReminder');
 
     if (reminderEnabled) {
         const interval = parseFloat(reminderInterval) || 60;
 
         // 创建周期性闹钟
         // 注意：Chrome要求periodInMinutes最小为1，但可以设置更小的值让Chrome自动调整
-        chrome.alarms.create('dailyReminder', {
+        browser.alarms.create('dailyReminder', {
             delayInMinutes: interval === 0.5 ? 0.5 : 1, // 调试模式30秒后首次触发
             periodInMinutes: interval
         });
@@ -69,7 +71,7 @@ async function setupAlarms() {
 }
 
 // 监听闹钟
-chrome.alarms.onAlarm.addListener(async (alarm) => {
+browser.alarms.onAlarm.addListener(async (alarm) => {
     if (alarm.name === 'dailyReminder') {
         console.log(`[Alarm Triggered] ${new Date().toLocaleTimeString()} - Running reminder check`);
         await checkAndShowReminder();
@@ -80,7 +82,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 async function checkAndShowReminder() {
     console.log('[checkAndShowReminder] Starting reminder check...');
 
-    const settings = await chrome.storage.local.get([
+    const settings = await browser.storage.local.get([
         'reminderEnabled',
         'reminderStartTime',
         'reminderEndTime',
@@ -147,7 +149,7 @@ async function checkAndShowReminder() {
         showNotification(reviewCount);
 
         // 更新最后提醒时间
-        await chrome.storage.local.set({
+        await browser.storage.local.set({
             lastReminderTime: now.getTime(),
             nextReminderDelay: 0
         });
@@ -166,7 +168,7 @@ function parseTime(timeStr) {
 async function getReviewProblems() {
     try {
         // 获取所有存储数据来调试
-        const allData = await chrome.storage.local.get(null);
+        const allData = await browser.storage.local.get(null);
         console.log('All storage keys:', Object.keys(allData));
 
         // 检查 configs 中是否有题目数据
@@ -182,7 +184,7 @@ async function getReviewProblems() {
 
         // 获取题目数据，支持中英文模式
         // 注意：实际存储使用的是 'records' 和 'cn_records'，不是 'problems'！
-        const data = await chrome.storage.local.get(['records', 'cn_records', 'cn_mode', 'currentMode', 'configs']);
+        const data = await browser.storage.local.get(['records', 'cn_records', 'cn_mode', 'currentMode', 'configs']);
 
         // 先检查是否在 configs 中
         let problemsData = {};
@@ -282,83 +284,85 @@ async function getReviewProblems() {
 async function showNotification(reviewCount, isTest = false) {
     // 先清除旧的通知（如果存在）
     try {
-        await chrome.notifications.clear('leetcodeReminder');
+        await browser.notifications.clear('leetcodeReminder');
     } catch (error) {
         // 忽略清除错误
     }
     
     // 为测试通知使用不同的 ID，避免冲突
     const notificationId = isTest ? `leetcodeTest_${Date.now()}` : 'leetcodeReminder';
+    const isFirefox = typeof browser.runtime.getBrowserInfo === 'function';
+    const supportsButtons = !isFirefox;
     
     const notificationOptions = {
         type: 'basic',
-        iconUrl: chrome.runtime.getURL('assets/bear.png'),
+        iconUrl: browser.runtime.getURL('assets/bear.png'),
         title: isTest ? '🎉 Test Notification' : 'LeetCode Review Reminder',
         message: isTest 
             ? 'Great! Notifications are working properly. When enabled, you\'ll receive reminders about your LeetCode review tasks at your scheduled intervals.'
             : `You have ${reviewCount} unfinished problem${reviewCount > 1 ? 's' : ''} to review today. Keep your skills sharp!`,
         priority: 2,
-        requireInteraction: !isTest, // 测试通知不需要手动关闭
-        buttons: isTest ? [] : [
-            { title: 'Review Now' },
-            { title: 'Remind Later' }
-        ]
+        ...(supportsButtons && !isTest ? {
+            buttons: [
+                { title: 'Review Now' },
+                { title: 'Remind Later' }
+            ]
+        } : {})
     };
     
-    chrome.notifications.create(notificationId, notificationOptions, (createdId) => {
-        if (chrome.runtime.lastError) {
-            console.error('Notification error:', chrome.runtime.lastError);
-        } else {
-            console.log('Notification created:', createdId);
-            // 测试通知60秒后自动清除
-            if (isTest) {
-                setTimeout(() => {
-                    chrome.notifications.clear(createdId);
-                }, 60000);  // 改为60秒（1分钟）
-            }
+    try {
+        const createdId = await browser.notifications.create(notificationId, notificationOptions);
+        console.log('Notification created:', createdId);
+        // 测试通知60秒后自动清除
+        if (isTest) {
+            setTimeout(() => {
+                browser.notifications.clear(createdId);
+            }, 60000);  // 改为60秒（1分钟）
         }
-    });
+    } catch (error) {
+        console.error('Notification error:', error);
+    }
 }
 
 // 处理通知点击
-chrome.notifications.onClicked.addListener((notificationId) => {
+browser.notifications.onClicked.addListener((notificationId) => {
     if (notificationId === 'leetcodeReminder') {
         // 在 Manifest V3 中，不能直接调用 openPopup
         // 改为创建新标签页或聚焦现有标签页
-        chrome.tabs.create({
-            url: chrome.runtime.getURL('popup.html')
+        browser.tabs.create({
+            url: browser.runtime.getURL('popup.html')
         });
-        chrome.notifications.clear(notificationId);
+        browser.notifications.clear(notificationId);
     }
 });
 
 // 处理通知按钮点击
-chrome.notifications.onButtonClicked.addListener(async (notificationId, buttonIndex) => {
+browser.notifications.onButtonClicked.addListener(async (notificationId, buttonIndex) => {
     if (notificationId === 'leetcodeReminder') {
         if (buttonIndex === 0) {
             // Review Now - 在新标签页打开扩展
-            chrome.tabs.create({
-                url: chrome.runtime.getURL('popup.html')
+            browser.tabs.create({
+                url: browser.runtime.getURL('popup.html')
             });
             console.log('Review Now clicked - opening popup');
         } else if (buttonIndex === 1) {
             // Remind Later - 按用户设置的间隔延迟
-            const settings = await chrome.storage.local.get(['reminderInterval']);
+            const settings = await browser.storage.local.get(['reminderInterval']);
             const interval = parseFloat(settings.reminderInterval) || 60;
             const delay = interval * 60 * 1000; // 转换为毫秒
 
-            await chrome.storage.local.set({
+            await browser.storage.local.set({
                 lastReminderTime: Date.now(),
                 nextReminderDelay: delay
             });
             console.log(`Reminder delayed for ${interval} minutes (user setting)`);
         }
-        chrome.notifications.clear(notificationId);
+        browser.notifications.clear(notificationId);
     }
 });
 
 // 监听来自popup的消息
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'testNotification') {
         // 在 Manifest V3 中，notifications 权限在 manifest 中声明后直接可用
         try {
