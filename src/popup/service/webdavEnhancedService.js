@@ -3,6 +3,8 @@
  * Supports automatic HTTPS->HTTP fallback and PROPFIND->POST disguise
  */
 
+import browser from '../../shared/browser.js';
+
 class WebDAVEnhancedService {
     constructor() {
         this.baseUrl = null;
@@ -221,7 +223,7 @@ class WebDAVEnhancedService {
      * 发送实际请求（通过 background script）
      */
     async sendRequest(method, url, headers, body) {
-        const response = await chrome.runtime.sendMessage({
+        const response = await browser.runtime.sendMessage({
             action: 'webdavRequest',
             params: {
                 method,
@@ -523,7 +525,7 @@ class WebDAVEnhancedService {
             enabled: true
         };
 
-        await chrome.storage.local.set({
+        await browser.storage.local.set({
             webdavEnhancedConfig: encryptedConfig
         });
     }
@@ -532,10 +534,10 @@ class WebDAVEnhancedService {
      * 保存连接策略
      */
     async saveStrategy() {
-        const result = await chrome.storage.local.get('webdavEnhancedConfig');
+        const result = await browser.storage.local.get('webdavEnhancedConfig');
         if (result.webdavEnhancedConfig) {
             result.webdavEnhancedConfig.connectionStrategy = this.connectionStrategy;
-            await chrome.storage.local.set({
+            await browser.storage.local.set({
                 webdavEnhancedConfig: result.webdavEnhancedConfig
             });
         }
@@ -547,12 +549,12 @@ class WebDAVEnhancedService {
     async loadConfig() {
         try {
             // 优先加载增强版配置
-            let result = await chrome.storage.local.get('webdavEnhancedConfig');
+            let result = await browser.storage.local.get('webdavEnhancedConfig');
             let config = result.webdavEnhancedConfig;
 
             // 如果没有增强版配置，尝试迁移旧版配置
             if (!config || !config.enabled) {
-                const oldResult = await chrome.storage.local.get('webdavConfig');
+                const oldResult = await browser.storage.local.get('webdavConfig');
                 if (oldResult.webdavConfig && oldResult.webdavConfig.enabled) {
                     console.log('Migrating from old WebDAV config to enhanced config');
                     // 迁移旧配置
@@ -562,9 +564,9 @@ class WebDAVEnhancedService {
                         retryConfig: this.retryConfig
                     };
                     // 保存为增强版配置
-                    await chrome.storage.local.set({ webdavEnhancedConfig: config });
+                    await browser.storage.local.set({ webdavEnhancedConfig: config });
                     // 删除旧配置
-                    await chrome.storage.local.remove('webdavConfig');
+                    await browser.storage.local.remove('webdavConfig');
                 }
             }
 
@@ -632,7 +634,7 @@ class WebDAVEnhancedService {
             lastSuccessfulStrategy: null
         };
 
-        await chrome.storage.local.remove('webdavEnhancedConfig');
+        await browser.storage.local.remove('webdavEnhancedConfig');
     }
 
     /**

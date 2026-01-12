@@ -14,6 +14,7 @@ import { webdavEnhancedService as webdavService } from './service/webdavEnhanced
 import { syncManager } from './service/syncManager.js';
 import { conflictResolver } from './component/conflictResolver.js';
 import Swal from 'sweetalert2';
+import browser from '../shared/browser.js';
 
 // 新增服务导入
 import {
@@ -778,7 +779,7 @@ async function initializeWebDAV() {
     if (hasConfig) {
         webdavSettings.style.display = 'block';
         // 显示已配置的用户名和密码
-        const config = await chrome.storage.local.get('webdavConfig');
+        const config = await browser.storage.local.get('webdavConfig');
         if (config.webdavConfig) {
             webdavUsername.value = config.webdavConfig.username;
             // 解码并显示密码
@@ -1119,7 +1120,7 @@ async function updateOptionsDisplay() {
     }
 
     // 更新提醒相关设置
-    const config = await chrome.storage.local.get([
+    const config = await browser.storage.local.get([
         'reminderEnabled',
         'reminderInterval',
         'reminderStartTime',
@@ -1212,7 +1213,7 @@ async function initializeOptions() {
     
     if (reminderToggle) {
         // 加载提醒设置
-        chrome.storage.local.get([
+        browser.storage.local.get([
             'reminderEnabled',
             'reminderInterval',
             'reminderStartTime',
@@ -1292,7 +1293,7 @@ async function initializeOptions() {
             console.log('Saving reminder interval:', intervalValue);
 
             // 始终保存所有提醒相关设置
-            await chrome.storage.local.set({
+            await browser.storage.local.set({
                 reminderEnabled: isReminderEnabled,
                 reminderInterval: intervalValue,  // 使用 parseFloat 以支持 0.5
                 reminderStartTime: reminderStartTime?.value || '09:00',

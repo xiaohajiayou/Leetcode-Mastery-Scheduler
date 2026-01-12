@@ -25,18 +25,25 @@ var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_g
 ___CSS_LOADER_EXPORT___.push([module.id, `/* 同步状态指示器样式 */
 .sync-indicator {
     position: fixed;
-    top: 10px;
+    bottom: 10px;
     right: 10px;
     display: flex;
     align-items: center;
     gap: 5px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 4px 8px;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    z-index: 1000;
-    font-size: 12px;
-    color: #333;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 3px 6px;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    z-index: 100;
+    font-size: 11px;
+    color: #666;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.sync-indicator:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
 .sync-indicator #syncIcon {
@@ -59,6 +66,18 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* 同步状态指示器样式 */
 
 .sync-indicator.success #syncIcon {
     color: #4CAF50;
+}
+
+.sync-indicator.warning {
+    background: rgba(255, 243, 224, 0.95);
+}
+
+.sync-indicator.warning #syncIcon {
+    color: #ff9800;
+}
+
+.sync-indicator.warning #syncStatus {
+    color: #ff9800;
 }
 
 @keyframes spin {
@@ -685,6 +704,76 @@ display: inline-block;  /* 确保渐变效果生效 */
     background: rgba(108, 117, 125, 0.1);
 }
 
+/* WebDAV按钮样式 - 统一设计系统 */
+.webdav-btn {
+    padding: 4px 8px;
+    font-size: 0.75em;
+    border: 1px solid rgba(74, 157, 156, 0.3);
+    background: rgba(29, 46, 61, 0.5);
+    color: #4a9d9c;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.webdav-btn:hover {
+    background: rgba(74, 157, 156, 0.1);
+    border-color: rgba(74, 157, 156, 0.5);
+    color: #61dafb;
+}
+
+.webdav-btn:active {
+    transform: scale(0.98);
+}
+
+.webdav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.webdav-btn i {
+    margin-right: 3px;
+    font-size: 0.85em;
+    vertical-align: middle;
+}
+
+/* 垂直布局按钮样式 */
+.webdav-btn-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 8px;
+    gap: 5px;
+    position: relative;
+}
+
+.webdav-btn-vertical i {
+    margin-right: 0;
+    font-size: 1.3em;
+}
+
+.webdav-btn-vertical span {
+    font-size: 0.95em;
+    line-height: 1;
+    font-weight: 600;
+}
+
+/* 退出按钮特殊样式 */
+.webdav-btn-logout {
+    border-color: rgba(74, 157, 156, 0.2);
+    color: rgba(156, 163, 175, 0.8);
+}
+
+.webdav-btn-logout:hover {
+    background: rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: rgba(239, 68, 68, 0.8);
+}
+
+
 
 
 
@@ -1298,7 +1387,7 @@ td, th {
         transparent
     ) !important;
     background-size: 1rem 1rem !important;
-}`, "",{"version":3,"sources":["webpack://./src/popup/popup.css"],"names":[],"mappings":"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","sourcesContent":["/* 同步状态指示器样式 */\n.sync-indicator {\n    position: fixed;\n    top: 10px;\n    right: 10px;\n    display: flex;\n    align-items: center;\n    gap: 5px;\n    background: rgba(255, 255, 255, 0.9);\n    padding: 4px 8px;\n    border-radius: 12px;\n    box-shadow: 0 1px 3px rgba(0,0,0,0.2);\n    z-index: 1000;\n    font-size: 12px;\n    color: #333;\n}\n\n.sync-indicator #syncIcon {\n    font-size: 12px;\n    color: #4CAF50;\n}\n\n.sync-indicator.syncing #syncIcon {\n    animation: spin 1s linear infinite;\n    color: #2196F3;\n}\n\n.sync-indicator.error {\n    background: rgba(255, 235, 238, 0.95);\n}\n\n.sync-indicator.error #syncIcon {\n    color: #f44336;\n}\n\n.sync-indicator.success #syncIcon {\n    color: #4CAF50;\n}\n\n@keyframes spin {\n    from { transform: rotate(0deg); }\n    to { transform: rotate(360deg); }\n}\n\nbody {\n    background-color: #0D1F2D; /* 深色背景 */\n    background-size: cover; /* 背景覆盖 */\n    color: #ffffff; /* 白色字体 */\n    font-family: 'Raleway', sans-serif;\n    position: relative;\n}\n/* 导航栏样式 */\n.nav-bar {\n    background-color: #0D1F2D;\n\n    display: flex;\n    flex-direction: column;  /* 改为纵向排列 */\n    align-items: center;     /* 水平居中 */\n    border-bottom: 1px solid #4a9d9c;\n}\n\n.nav-row {\n    display: flex;\n    justify-content: center;  /* 内容居中 */\n    align-items: center;\n    margin: 0;  /* 移除外边距 */\n    padding: 2px 0;  /* 减小上下内边距 */\n    line-height: 1;  /* 减小行高 */\n    margin-top: -5px;\n}\n\n/* 标题行样式 */\n.nav-title {\ncolor: #FF3D3D;\nfont-weight: 900;  /* 更粗的字体 */\nfont-size: 1.2em;  /* 更大的字号 */\ntext-transform: uppercase;  /* 转换为大写 */\nletter-spacing: 2px;  /* 字母间距 */\ntext-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  /* 添加阴影效果 */\nfont-family: 'Arial Black', Gadget, sans-serif;  /* 更粗重的字体 */\nmargin-top: 5px;\npadding: 5px 10px;  /* 添加内边距 */\nbackground: linear-gradient(180deg, #ff6b6b 0%, #FF3D3D 100%);  /* 渐变色 */\n-webkit-background-clip: text;  /* 使渐变色应用到文字 */\n-webkit-text-fill-color: transparent;  /* 使文字透明以显示背景 */\ndisplay: inline-block;  /* 确保渐变效果生效 */\n}\n\n/* 专门为标题容器添加类 */\n.nav-row.title-row {\n    margin: 0;\n    padding: 0;\n    line-height: 1;\n}\n\n/* 特别处理第二个标题行 */\n.nav-row.title-row + .nav-row.title-row {\n    margin-top: -10px;  /* 调整这个值来控制两行标题间的间距 */\n}\n\n/* 网站信息行样式 */\n.nav-site {\n    color: #4a9d9c;\n    font-size: 0.9em;\n    padding: 2px 8px;\n    border-radius: 4px;\n    background-color: rgba(74, 157, 156, 0.1);\n}\n\n/* 导航按钮行样式 */\n.nav-btn {\n    background: none;\n    border: none;\n    color: #888;\n    padding: 5px 15px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    font-size: 1em;\n    position: relative;\n}\n\n.nav-btn:hover {\n    color: #fff;\n}\n\n.nav-btn.active {\n    color: #fff;\n}\n\n.nav-btn.active::after {\n    content: '';\n    position: absolute;\n    bottom: -5px;\n    left: 50%;\n    transform: translateX(-50%);\n    width: 20px;\n    height: 2px;\n    background-color: #4a9d9c;\n    border-radius: 2px;\n}\n\n.nav-right {\n    display: flex;\n    gap: 10px;\n}\n\n/* 开关按钮样式 */\n.switch-btn {\n    background-color: #2a2b30;\n    border: 1px solid #3a3b40;\n    color: #888;\n    padding: 5px 15px;\n    border-radius: 4px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n}\n\n.switch-btn:hover {\n    background-color: #3a3b40;\n    color: #fff;\n}\n\n\n.text-date {\n    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */\n    font-size: 1em; /* 修改字体大小 */\n    align-items: center;\n    gap: 2px;\n}\n.text-muted {\n    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */\n    font-size: 0.8em; /* 修改字体大小 */\n    display: flex;\n    align-items: center;\n    gap: 5px;\n}\n\n\n\n.review-card {\n    background-color: #1d2e3d; /* 卡片背景 */\n    border-radius: 15px;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    padding: 10px;\n    margin: 20px 0;\n    transition: transform 0.2s;\n    \n}\n\n        .review-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px #4a9d9c;\n}\n\n.problem-title {\n    font-family: 'Press Start 2P', cursive;\n    font-size: 0.9em;\n    color: #ffffff; /* 白色字体 */\n}\n\n\n\n.difficulty-Easy {\n    color: #4a9d9c;\n}\n\n.difficulty-Medium {\n    color: #f0b215;\n}\n\n.difficulty-Hard {\n    color: #FF3D3D;\n}\n\n.progress {\n    height: 8px;\n    margin-top: 10px;\n}\n\n.btn-review {\n\n    border: none;\n    color: #e0e0e0;\n    font-size: 1.5em;\n    border-radius: 50%;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    font-weight: 500;\n    position: relative;\n    z-index: 1;\n    pointer-events: auto !important;\n}\n\n\n.btn-review:hover {\n    color: #afffff;\n    transform: translateY(-1px);\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n\n.btn-review:active {\n    transform: translateY(0);\n}\n\n.btn-review:disabled {\n\n    color: white;\n    opacity: 0.8;\n    cursor: not-allowed;\n}\n\n.btn-review.btn-lg {\n    font-size: 1.1em;\n    padding: 10px 24px;\n}\n\n.review-card .btn-review,\n.container .btn-review {\n    pointer-events: auto !important;\n    cursor: pointer !important;\n}\n\n.review-card.reviewed {\n    opacity: 0.6;\n}\n\n.header-section {\n    position: relative;\n    border-radius: 15px;\n    overflow: hidden;\n    background-color: #1d2e3d;\n    border: 1px solid rgba(74, 157, 156, 0.1);  /* 降低边框透明度 */\n    box-shadow: 0 0 8px rgba(74, 157, 156, 0.1);  /* 降低阴影透明度 */\n    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n    padding: 10px;\n    margin: 10px 15px;\n}\n\n.header-section:hover {\n    border-color: rgba(74, 157, 156, 0.2);  /* 降低悬停时边框透明度 */\n    box-shadow: \n        0 0 12px rgba(74, 157, 156, 0.15),  /* 降低外阴影透明度 */\n        inset 0 0 8px rgba(74, 157, 156, 0.05);  /* 降低内阴影透明度 */\n    transform: translateY(-1px);\n}\n\n.header-section::before {\n    content: '';\n    position: absolute;\n    top: -1px;\n    left: -1px;\n    right: -1px;\n    bottom: -1px;\n    border-radius: 15px;\n    background: linear-gradient(45deg, \n        rgba(74, 157, 156, 0.05),  /* 降低渐变透明度 */\n        rgba(74, 157, 156, 0.1),\n        rgba(74, 157, 156, 0.05)\n    );\n    z-index: -1;\n    opacity: 0;\n    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n}\n\n.header-section:hover::before {\n    opacity: 1;\n}\n\n.completion-circle {\n    width: 120px;\n    height: 120px;\n    border-radius: 50%;\n    background: conic-gradient(#afffff var(--percentage), #3a3a4d var(--percentage)); /* 使用深色作为背景 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin: 0 auto;\n    transition: background 0.5s ease; /* 背景渐变动画 */\n}\n\n.inner-circle {\n    width: 100px;\n    height: 100px;\n    background: #1d2e3d; /* 内圈背景 */\n    border-radius: 50%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 1.5em;\n    font-weight: bold;\n    color: #FF3D3D; /* 内圈字体颜色 */\n    transition: transform 0.5s ease; /* 内圈缩放动画 */\n}\n\n.retrievability {\n    font-size: 1.0em;\n    color: #ffffff; /* 白色字体 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.retrievability-icon {\n    margin-right: 10px;\n    color: #4a9d9c;\n}\n\n.retrievability-value {\n    font-weight: bold;\n    margin-left: 10px;\n    color: #4a9d9c; /* Green color for good retrievability */\n    transition: color 0.3s;\n}\n\n.retrievability-value.low {\n    color: #FF3D3D; /* Red color for low retrievability */\n}\n\n.trend-icon {\n    margin-left: 10px;\n    font-size: 1.5em;\n    transition: transform 0.3s;\n}\n\n.trend-up {\n    color: #4a9d9c; /* Green for upward trend */\n}\n\n.trend-down {\n    color: #FF3D3D; /* Red for downward trend */\n}\n\n.low-memory-warning {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    display: none;\n    z-index: 0;\n}\n\n.low-memory-warning.active {\n    display: flex;\n}\n\n.card-limit-input input[type=\"number\"]::-webkit-inner-spin-button,\n.card-limit-input input[type=\"number\"]::-webkit-outer-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n}\n\n.card-limit-input input[type=\"number\"] {\n    -moz-appearance: textfield;\n    background: #3a3a4d; /* 输入框背景 */\n    color: #ffffff; /* 输入框字体颜色 */\n    width: 40px;\n    height: 40px;\n    text-align: center;\n    font-size: 1.2em;\n    padding: 5px;\n    border: 2px solid #0D6E6E; /* 输入框边框颜色 */\n    border-radius: 8px;\n    margin: 0 10px;\n}\n\n.gear-button {\n    background: none;\n    border: none;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    padding: 5px;\n    position: relative;\n    width: 40px;\n    height: 40px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.gear-button .fa-gear {\n    font-size: 1.8em;\n    color: #0D6E6E; /* 齿轮图标颜色 */\n    transition: all 0.3s ease;\n}\n\n.gear-button .direction-icon {\n    position: absolute;\n    font-size: 1em;\n    color: #e2c027;\n    background-color: #fff;\n    border-radius: 50%;\n    width: 16px;\n    height: 16px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.3s ease;\n    left: 50%;\n    top: 50%;\n    transform: translate(-50%, -50%);\n    box-shadow: 0 1px 3px rgba(0,0,0,0.2);\n    font-weight: bold;\n}\n\n/* 悬停效果 */\n.gear-button:hover .fa-gear {\n    color: #4a9d9c; /* 悬停时齿轮图标颜色 */\n    filter: drop-shadow(0 0 2px rgba(255, 152, 0, 0.5));\n}\n\n.gear-button:hover .direction-icon {\n    color: #000;\n    background-color: #fff;\n    box-shadow: 0 2px 4px rgba(0,0,0,0.3);\n    transform: translate(-50%, -50%) scale(1.1);\n}\n\n/* 点击动画 */\n.gear-button.left:active {\n    transform: rotate(-45deg);\n}\n\n.gear-button.right:active {\n    transform: rotate(45deg);\n}\n\n.card-limit-input {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 5px;\n    margin-top: 10px;\n}\n\n.card-limit-label {\n    font-size: 1.1em;\n    color: #ffffff; /* 白色字体 */\n    margin-right: 5px;\n}\n\n/* 工具提示 */\n.gear-button::after {\n    content: attr(data-tooltip);\n    position: absolute;\n    bottom: -25px;\n    left: 50%;\n    transform: translateX(-50%);\n    background-color: rgba(0, 0, 0, 0.8);\n    color: white;\n    padding: 4px 8px;\n    border-radius: 4px;\n    font-size: 0.8em;\n    opacity: 0;\n    transition: opacity 0.3s ease;\n    pointer-events: none;\n    white-space: nowrap;\n}\n\n.gear-button:hover::after {\n    opacity: 1;\n}\n\n\n.add-problem-wrapper {\n    display: flex;\n    justify-content: center;\n}\n\n.empty-state {\n    text-align: center;\n    margin-top: 15px;\n    margin-bottom: 5px;\n    color: #4a9d9c;\n    font-size: 0.9em;\n    opacity: 0.8;\n    font-style: italic;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 8px;\n}\n\n.empty-state i {\n    font-size: 1em;\n    color: #ffd700;  /* 给灯泡图标一个金色 */\n}\n\n\n\n.add-problem {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    background: transparent;\n    border: 1px dashed rgba(74, 157, 156, 0.5);\n    width: 30px;\n    height: 30px;\n    border-radius: 8px;\n    color: #4a9d9c;\n    opacity: 0.8;\n}\n\n.add-problem-content {\n    display: flex;\n    align-items: center;\n}\n\n.add-problem i {\n    font-size: 0.8em;\n}\n\n\n/* 悬停效果 */\n.add-problem:hover {\n    background: rgba(74, 157, 156, 0.1);\n    border-style: solid;\n    opacity: 1;\n}\n\n/* 添加虚线分隔 */\n.add-problem-wrapper::before {\n    content: '';\n    position: absolute;\n    top: -8px;\n    left: 10%;\n    right: 10%;\n    height: 1px;\n    background: linear-gradient(\n        to right,\n        transparent,\n        rgba(74, 157, 156, 0.3),\n        transparent\n    );\n}\n.modal {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    background: rgba(0, 0, 0, 0.5);\n    z-index: 1000;\n    backdrop-filter: blur(4px);\n}\n\n.modal-content {\n    background: #1d2e3d;\n    border-radius: 8px;\n    padding: 16px;          /* 减小内边距 */\n    width: 280px;           /* 固定更小的宽度 */\n    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);\n    border: 1px solid rgba(97, 218, 251, 0.2);\n    animation: modalFadeIn 0.3s ease;\n}\n\n.modal-content h3 {\n    color: #61dafb;\n    margin-bottom: 12px;    /* 减小标题下方间距 */\n    font-size: 1em;         /* 减小标题字体 */\n}\n\n.form-group {\n    margin-bottom: 12px;    /* 减小表单组间距 */\n}\n\n.form-group label {\n    display: block;\n    margin-bottom: 4px;     /* 减小标签下方间距 */\n    color: #e9ecef;\n    font-size: 0.85em;      /* 减小标签字体 */\n}\n\n.form-group input {\n    width: 100%;\n    padding: 6px 8px;       /* 减小输入框内边距 */\n    border: 1px solid rgba(97, 218, 251, 0.3);\n    border-radius: 4px;\n    background: rgba(29, 46, 61, 0.8);\n    color: #e9ecef;\n    font-size: 0.85em;      /* 减小输入框字体 */\n}\n\n.button-group {\n    display: flex;\n    justify-content: flex-end;\n    gap: 8px;               /* 减小按钮间距 */\n    margin-top: 12px;       /* 减小按钮组上方间距 */\n}\n\n.button-group button {\n    padding: 4px 12px;      /* 减小按钮内边距 */\n    border-radius: 4px;\n    font-size: 0.85em;      /* 减小按钮字体 */\n}\n\n/* 自定义按钮样式 */\n.custom-btn {\n    border: 1px solid;\n}\n\n.btn-outline-warning {\n    border-color: #ffc107;\n    color: #ffc107;\n}\n\n.btn-outline-warning:hover {\n    background: rgba(255, 193, 7, 0.1);\n}\n\n.btn-outline-secondary {\n    border-color: #6c757d;\n    color: #6c757d;\n}\n\n.btn-outline-secondary:hover {\n    background: rgba(108, 117, 125, 0.1);\n}\n\n\n\n\n\n\n/* 视图容器样式 */\n.view {\n    display: none;\n    transition: opacity 0.3s ease;\n}\n\n.view.active {\n    display: block;\n}\n\n/* 题目列表页面样式 */\n.problem-list-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 20px;\n}\n\n.search-bar {\n    position: relative;\n    width: 300px;\n}\n\n.search-input {\n    width: 100%;\n    padding: 8px 35px 8px 15px;\n    border: none;\n    border-radius: 20px;\n    background: #2a2b30;\n    color: #fff;\n}\n\n.search-icon {\n    position: absolute;\n    right: 15px;\n    top: 50%;\n    transform: translateY(-50%);\n    color: #888;\n}\n\n.problem-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));\n    gap: 20px;\n    padding: 20px 0;\n}\n\n/* 更多选项页面样式 */\n.options-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));\n    gap: 20px;\n    padding: 20px 0;\n}\n\n\n\n/* 导航标签样式 */\n#problemListView .nav-tabs {\n    border-bottom: 1px solid #4a9d9c;\n\n}\n\n#problemListView .nav-tabs .nav-link {\n    color: #888;\n    border: none;\n    background: none;\n\n\n    transition: all 0.3s ease;\n}\n\n#problemListView .nav-tabs .nav-link:hover {\n    color: #fff;\n}\n\n#problemListView .nav-tabs .nav-link.active {\n    color: #4a9d9c;\n    background: none;\n    border-bottom: 2px solid #4a9d9c;\n}\n\n/* 确保tab内容区域正确显示 */\n#problemListView .tab-content {\n    display: flex;\n}\n\n#problemListView .tab-pane {\n    transition: opacity 0.3s ease;\n}\n\n#problemListView .tab-pane.active {\n    opacity: 1;\n}\n\n\n\n\n\niframe {\n    overflow: hidden;\n    border: 0;\n}\n\n.custom-btn {\n    border-color: #0D6E6E;\n    color: #4a9d9c;\n}\n\n.custom-btn:hover {\n    border-color: rgba(235, 173, 129, 1);\n    background-color: rgba(235, 173, 129, 1);\n}\n\n.custom-btn:disabled {\n    border-color: #e0e0e0;\n    color: #e0e0e0;\n}\n\n\n.footer {\n    background: linear-gradient(to bottom, rgba(29, 46, 61, 0.8) 0%, #1d2e3d 100%);\n    backdrop-filter: blur(5px);\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 12px;           /* 按钮之间的间距 */\n    border-top: 1px solid rgba(255, 255, 255, 0.1);\n    margin-top: auto;\n    padding: 8px 0;  /* 添加上下内边距 */\n}\n\n#github-star-container {\n    display: flex;\n    align-items: center;\n    height: 30px;\n}\n\n/* GitHub Star 按钮样式 */\n.github-star-btn {\n    font-size: 0.875rem;\n    font-family: 'Courier Prime', monospace;\n    background: #1d2e3d;\n    border: 1px solid rgba(97, 218, 251, 0.3);\n    color: #61dafb;\n    border-radius: 6px;\n    display: flex;\n    align-items: center;\n    gap: 0.6rem;\n    transition: all 0.3s ease;\n    position: relative;\n    overflow: hidden;\n    padding: 0.35rem 0.8rem;\n    animation: starPulse 2s infinite;\n}\n\n@keyframes starPulse {\n    0% {\n        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0.4);\n    }\n    70% {\n        box-shadow: 0 0 0 10px rgba(97, 218, 251, 0);\n    }\n    100% {\n        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0);\n    }\n}\n\n.github-star-btn i {\n    font-size: 0.875rem;\n    color: #61dafb;\n    transition: all 0.3s ease;\n    animation: starTwinkle 2s infinite;\n}\n\n@keyframes starTwinkle {\n    0% {\n        transform: scale(1);\n        opacity: 1;\n    }\n    50% {\n        transform: scale(1.2);\n        opacity: 0.8;\n    }\n    100% {\n        transform: scale(1);\n        opacity: 1;\n    }\n}\n\n.github-star-btn:hover {\n    background: #1a3244;\n    border-color: #61dafb;\n    box-shadow: 0 0 15px rgba(97, 218, 251, 0.7);\n    color: #61dafb;\n    animation: none; /* 悬停时停止脉冲动画 */\n}\n\n.github-star-btn:hover i {\n    animation: none; /* 悬停时停止星星闪烁动画 */\n    transform: scale(1.2);\n}\n\n.feedback-btn-review {\n    padding: 0.35rem 0.8rem !important;  /* 减小按钮内边距 */\n    font-size: 0.8rem !important;  /* 稍微减小字体 */\n    min-height: 28px;  /* 设置最小高度 */\n    padding: 0 12px;     /* 水平内边距 */\n}\n\n.feedback-btn-review .btn-content {\n    gap: 0.4rem !important;  /* 减小图标和文字间距 */\n}\n\n.feedback-btn-review i {\n    font-size: 0.8rem !important;  /* 减小图标大小 */\n}\n\n\n.page-input {\n    background-color: transparent;\n    color: #e0e0e0;\n    border: 1px solid #e0e0e0;\n    border-radius: 4px;\n    text-align: center;\n    font-size: 0.875rem;  /* 相当于 Bootstrap 的 sm 大小 */\n    margin-left: 5px !important; \n    margin-right: 5px !important;\n}\n\n.page-input:focus {\n    outline: none;\n    border-color: #afffff;\n    box-shadow: 0 0 5px rgba(74, 157, 156, 0.5);\n}\n\n.multifont {\n    font-family: 'Courier Prime', 'Noto Sans SC', sans-serif;\n}\n\na {\n    color: chocolate;\n}\n\n.custom-tooltip {\n    --bs-tooltip-bg: var(--bd-violet-bg);\n    --bs-tooltip-color: var(--bs-white);\n}\n\n/* 题目列表样式 */\n#problemListView {\n    padding: 5px;\n}\n\n.problem-list-header {\n    margin-bottom: 15px;\n}\n\n.nav-tabs {\n    border-bottom: 1px solid #dee2e6;\n}\n\n.nav-tabs .nav-link {\n    margin-bottom: -1px;\n    color: #495057;\n    border: 1px solid transparent;\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem;\n}\n\n.nav-tabs .nav-link.active {\n    color: #495057;\n    background-color: #fff;\n    border-color: #dee2e6 #dee2e6 #fff;\n}\n\n.tab-content {\n    padding: 10px;\n    background-color: #fff;\n    border: 1px solid #dee2e6;\n    border-top: none;\n}\n\n.tab-pane {\n    display: none;\n}\n.tab-pane.active {\n    display: block;\n}\n\n\n\n/* 确保switch容器不会阻挡点击事件 */\n#switch-area {\n    pointer-events: auto;\n    position: relative;\n    z-index: 100;\n}\n\n\n\n\n\n\n/* 自定义表格样式 */\n.table {\n    width: 100%;\n    table-layout: fixed;\n    word-wrap: break-word;\n\n\n    --bs-table-border-color: #afffff !important;       /* 边框颜色 */\n\n    --bs-table-hover-color: #f56464 !important;        /* 悬停文字颜色 */\n    --bs-table-hover-bg: #ebe3e3 !important;          /* 悬停背景颜色 */\n    border: none !important;              /* 移除表格外边框 */\n    border-collapse: collapse !important;  /* 确保边框合并 */\n}\n\n\ntd, th {\n    padding: 4px !important;\n}\n\n.table {\n    margin-bottom: 0;\n    min-width: auto !important;\n}\n\n/* 确保表格容器有正确的宽度和溢出处理 */\n.table-responsive {\n    width: 100%;\n    overflow-x: hidden;\n}\n\n\n\n/* 专门设置表头样式 */\n.table thead,\n.table > thead{\n    border: none !important;              \n    background: linear-gradient(to right, #0D6E6E, #4a9d9c) !important;  \n}\n\n/* 确保表头单元格没有背景色 */\n.table thead tr,\n.table thead th {\n    background: transparent !important;    /* 确保tr和th是透明的 */\n    border: none !important;              \n    color: #ffffff !important;            /* 表头文字颜色 */\n}\n\n\n\n\n/* 记忆概率指示器样式 */\n.memory-indicator {\n    display: inline-flex;\n    align-items: center;\n    padding: 4px 8px;\n    border-radius: 12px;\n    transition: all 0.3s ease;\n}\n\n.memory-indicator:hover {\n    background-color: rgba(255, 255, 255, 0.1);\n    transform: scale(1.05);\n}\n\n.memory-indicator i {\n    font-size: 1.1em;\n}\n\n/* 颜色类 */\n.text-success { color: #4caf50 !important; }\n.text-warning { color: #ff9800 !important; }\n.text-danger { color: #f44336 !important; }\n\n\n\n/* 设置卡片样式调整 */\n.option-card {\n    background-color: #1d2e3d;\n    border-radius: 10px;\n    padding: 20px;\n    text-align: center;\n    transition: all 0.3s ease;\n}\n\n.option-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px rgba(74, 157, 156, 0.2);\n}\n\n.option-card i {\n    font-size: 2em;\n    color: #4a9d9c;\n    margin-bottom: 15px;\n}\n\n.option-card h4 {\n    color: #fff;\n    margin-bottom: 15px;\n}\n\n.option-card p {\n    color: #888;\n    font-size: 0.9em;\n}\n\n/* 表单控件样式 */\n.form-select {\n    background-color: #0D1F2D;\n    color: #fff;\n    border: 1px solid #4a9d9c;\n    margin-top: 10px;\n}\n\n.sync-tips {\n    margin-top: 10px;\n    font-size: 1.0em;\n    color: #888;\n    display: flex;\n    flex-direction: column;\n    gap: 5px;\n}\n.reminder-tips {\n    margin-top: 10px;\n    font-size: 1.0em;\n    color: #888;\n    display: flex;\n    flex-direction: column;\n    gap: 5px;\n}\n.save-section {\n    grid-column: 1 / -1;\n    text-align: center;\n    margin-top: 20px;\n}\n\n/* 开关按钮样式 */\n.form-check-input.custom-switch {\n    background-color: #0D1F2D !important;\n    border-color: #4a9d9c !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    transition: all 0.3s ease;\n    cursor: pointer !important;\n    pointer-events: auto !important;\n    opacity: 1;\n    z-index: 100;\n    position: relative;\n    outline: none !important;\n    /* 自定义滑块圆圈颜色为亮蓝色 */\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e\") !important;\n}\n\n/* 选中状态下的样式 */\n.form-check-input.custom-switch:checked {\n    background-color: #0D6E6E !important;\n    border-color: #0D6E6E !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    /* 选中状态下保持相同的蓝色圆圈 */\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e\") !important;\n}\n\n/* 悬停状态加强发光效果 */\n.form-check-input.custom-switch:hover {\n    box-shadow: 0 0 15px rgba(97, 218, 251, 0.9);\n}\n\n/* 焦点状态 */\n.form-check-input.custom-switch:focus {\n    background-color: inherit !important;  /* 继承当前状态的背景色 */\n    border-color: #4a9d9c !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    outline: none !important;\n}\n\n/* 选中且焦点状态 */\n.form-check-input.custom-switch:checked:focus {\n    background-color: #4a9d9c !important;\n}\n\n\n\n\n\n/* SweetAlert2 自定义样式 */\n.colored-toast.swal2-icon-success {\n    background-color: #1d2e3d !important;\n    border: 1px solid #4a9d9c !important;\n}\n\n.colored-toast .swal2-title {\n    color: #ffffff !important;\n    font-size: 1em !important;\n}\n\n.colored-toast .swal2-close {\n    color: #4a9d9c !important;\n}\n\n.colored-toast .swal2-html-container {\n    color: #888 !important;\n    font-size: 0.9em !important;\n}\n\n/* 成功图标颜色 */\n.colored-toast .swal2-success-line-tip,\n.colored-toast .swal2-success-line-long {\n    background-color: #4a9d9c !important;\n}\n\n.colored-toast .swal2-success-ring {\n    border-color: #4a9d9c !important;\n}\n\n/* 更新概要样式 */\n.update-badge {\n    background-color: #FF3D3D;\n    color: white;\n    padding: 2px 5px;\n    border-radius: 3px;\n    font-size: 0.8em;\n    margin-right: 5px;\n    font-weight: bold;\n}\n\n.update-summary {\n    background-color: rgba(74, 157, 156, 0.1);\n    border-radius: 4px;\n    padding: 3px 0 !important;\n    margin-bottom: 8px !important;\n}\n\n.update-summary a {\n    color: #4a9d9c;\n    text-decoration: none;\n    margin-left: 5px;\n}\n\n.update-summary a:hover {\n    text-decoration: underline;\n    color: #afffff;\n}\n\n/* 图标按钮样式 */\n.btn-icon {\n    background: none;\n    border: none;\n    color: #4a9d9c;\n    font-size: 1em;\n    width: 28px;\n    height: 28px;\n    border-radius: 6px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    background-color: transparent;\n}\n\n.btn-icon:hover {\n    background-color: rgba(74, 157, 156, 0.1);\n    color: #61dafb;\n    transform: translateY(-1px);\n}\n\n.btn-icon:active {\n    transform: translateY(0);\n}\n\n.btn-icon-sm {\n    width: 24px;\n    height: 24px;\n}\n\n/* 优化参数进度条样式 */\n.optimize-progress {\n    height: 3px !important;\n    background-color: rgba(74, 157, 156, 0.1) !important;\n    border-radius: 4px !important;\n    margin-top: 12px !important;\n    overflow: hidden !important;\n}\n\n.optimize-progress .progress-bar {\n    background: linear-gradient(90deg, #4a9d9c, #61dafb) !important;\n    transition: width 0.3s ease !important;\n}\n\n.optimize-progress .progress-bar-animated {\n    animation: progress-bar-stripes 1s linear infinite !important;\n}\n\n.optimize-progress .progress-bar-striped {\n    background-image: linear-gradient(\n        45deg,\n        rgba(255, 255, 255, 0.15) 25%,\n        transparent 25%,\n        transparent 50%,\n        rgba(255, 255, 255, 0.15) 50%,\n        rgba(255, 255, 255, 0.15) 75%,\n        transparent 75%,\n        transparent\n    ) !important;\n    background-size: 1rem 1rem !important;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/popup/popup.css"],"names":[],"mappings":"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","sourcesContent":["/* 同步状态指示器样式 */\n.sync-indicator {\n    position: fixed;\n    bottom: 10px;\n    right: 10px;\n    display: flex;\n    align-items: center;\n    gap: 5px;\n    background: rgba(255, 255, 255, 0.85);\n    padding: 3px 6px;\n    border-radius: 10px;\n    box-shadow: 0 1px 2px rgba(0,0,0,0.15);\n    z-index: 100;\n    font-size: 11px;\n    color: #666;\n    opacity: 0.8;\n    transition: opacity 0.2s;\n}\n\n.sync-indicator:hover {\n    opacity: 1;\n    cursor: pointer;\n}\n\n.sync-indicator #syncIcon {\n    font-size: 12px;\n    color: #4CAF50;\n}\n\n.sync-indicator.syncing #syncIcon {\n    animation: spin 1s linear infinite;\n    color: #2196F3;\n}\n\n.sync-indicator.error {\n    background: rgba(255, 235, 238, 0.95);\n}\n\n.sync-indicator.error #syncIcon {\n    color: #f44336;\n}\n\n.sync-indicator.success #syncIcon {\n    color: #4CAF50;\n}\n\n.sync-indicator.warning {\n    background: rgba(255, 243, 224, 0.95);\n}\n\n.sync-indicator.warning #syncIcon {\n    color: #ff9800;\n}\n\n.sync-indicator.warning #syncStatus {\n    color: #ff9800;\n}\n\n@keyframes spin {\n    from { transform: rotate(0deg); }\n    to { transform: rotate(360deg); }\n}\n\nbody {\n    background-color: #0D1F2D; /* 深色背景 */\n    background-size: cover; /* 背景覆盖 */\n    color: #ffffff; /* 白色字体 */\n    font-family: 'Raleway', sans-serif;\n    position: relative;\n}\n/* 导航栏样式 */\n.nav-bar {\n    background-color: #0D1F2D;\n\n    display: flex;\n    flex-direction: column;  /* 改为纵向排列 */\n    align-items: center;     /* 水平居中 */\n    border-bottom: 1px solid #4a9d9c;\n}\n\n.nav-row {\n    display: flex;\n    justify-content: center;  /* 内容居中 */\n    align-items: center;\n    margin: 0;  /* 移除外边距 */\n    padding: 2px 0;  /* 减小上下内边距 */\n    line-height: 1;  /* 减小行高 */\n    margin-top: -5px;\n}\n\n/* 标题行样式 */\n.nav-title {\ncolor: #FF3D3D;\nfont-weight: 900;  /* 更粗的字体 */\nfont-size: 1.2em;  /* 更大的字号 */\ntext-transform: uppercase;  /* 转换为大写 */\nletter-spacing: 2px;  /* 字母间距 */\ntext-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  /* 添加阴影效果 */\nfont-family: 'Arial Black', Gadget, sans-serif;  /* 更粗重的字体 */\nmargin-top: 5px;\npadding: 5px 10px;  /* 添加内边距 */\nbackground: linear-gradient(180deg, #ff6b6b 0%, #FF3D3D 100%);  /* 渐变色 */\n-webkit-background-clip: text;  /* 使渐变色应用到文字 */\n-webkit-text-fill-color: transparent;  /* 使文字透明以显示背景 */\ndisplay: inline-block;  /* 确保渐变效果生效 */\n}\n\n/* 专门为标题容器添加类 */\n.nav-row.title-row {\n    margin: 0;\n    padding: 0;\n    line-height: 1;\n}\n\n/* 特别处理第二个标题行 */\n.nav-row.title-row + .nav-row.title-row {\n    margin-top: -10px;  /* 调整这个值来控制两行标题间的间距 */\n}\n\n/* 网站信息行样式 */\n.nav-site {\n    color: #4a9d9c;\n    font-size: 0.9em;\n    padding: 2px 8px;\n    border-radius: 4px;\n    background-color: rgba(74, 157, 156, 0.1);\n}\n\n/* 导航按钮行样式 */\n.nav-btn {\n    background: none;\n    border: none;\n    color: #888;\n    padding: 5px 15px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    font-size: 1em;\n    position: relative;\n}\n\n.nav-btn:hover {\n    color: #fff;\n}\n\n.nav-btn.active {\n    color: #fff;\n}\n\n.nav-btn.active::after {\n    content: '';\n    position: absolute;\n    bottom: -5px;\n    left: 50%;\n    transform: translateX(-50%);\n    width: 20px;\n    height: 2px;\n    background-color: #4a9d9c;\n    border-radius: 2px;\n}\n\n.nav-right {\n    display: flex;\n    gap: 10px;\n}\n\n/* 开关按钮样式 */\n.switch-btn {\n    background-color: #2a2b30;\n    border: 1px solid #3a3b40;\n    color: #888;\n    padding: 5px 15px;\n    border-radius: 4px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n}\n\n.switch-btn:hover {\n    background-color: #3a3b40;\n    color: #fff;\n}\n\n\n.text-date {\n    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */\n    font-size: 1em; /* 修改字体大小 */\n    align-items: center;\n    gap: 2px;\n}\n.text-muted {\n    color: #e0e0e0 !important; /* 更亮的灰色，使用 !important 确保优先级 */\n    font-size: 0.8em; /* 修改字体大小 */\n    display: flex;\n    align-items: center;\n    gap: 5px;\n}\n\n\n\n.review-card {\n    background-color: #1d2e3d; /* 卡片背景 */\n    border-radius: 15px;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    padding: 10px;\n    margin: 20px 0;\n    transition: transform 0.2s;\n    \n}\n\n        .review-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px #4a9d9c;\n}\n\n.problem-title {\n    font-family: 'Press Start 2P', cursive;\n    font-size: 0.9em;\n    color: #ffffff; /* 白色字体 */\n}\n\n\n\n.difficulty-Easy {\n    color: #4a9d9c;\n}\n\n.difficulty-Medium {\n    color: #f0b215;\n}\n\n.difficulty-Hard {\n    color: #FF3D3D;\n}\n\n.progress {\n    height: 8px;\n    margin-top: 10px;\n}\n\n.btn-review {\n\n    border: none;\n    color: #e0e0e0;\n    font-size: 1.5em;\n    border-radius: 50%;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    font-weight: 500;\n    position: relative;\n    z-index: 1;\n    pointer-events: auto !important;\n}\n\n\n.btn-review:hover {\n    color: #afffff;\n    transform: translateY(-1px);\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);\n}\n\n.btn-review:active {\n    transform: translateY(0);\n}\n\n.btn-review:disabled {\n\n    color: white;\n    opacity: 0.8;\n    cursor: not-allowed;\n}\n\n.btn-review.btn-lg {\n    font-size: 1.1em;\n    padding: 10px 24px;\n}\n\n.review-card .btn-review,\n.container .btn-review {\n    pointer-events: auto !important;\n    cursor: pointer !important;\n}\n\n.review-card.reviewed {\n    opacity: 0.6;\n}\n\n.header-section {\n    position: relative;\n    border-radius: 15px;\n    overflow: hidden;\n    background-color: #1d2e3d;\n    border: 1px solid rgba(74, 157, 156, 0.1);  /* 降低边框透明度 */\n    box-shadow: 0 0 8px rgba(74, 157, 156, 0.1);  /* 降低阴影透明度 */\n    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n    padding: 10px;\n    margin: 10px 15px;\n}\n\n.header-section:hover {\n    border-color: rgba(74, 157, 156, 0.2);  /* 降低悬停时边框透明度 */\n    box-shadow: \n        0 0 12px rgba(74, 157, 156, 0.15),  /* 降低外阴影透明度 */\n        inset 0 0 8px rgba(74, 157, 156, 0.05);  /* 降低内阴影透明度 */\n    transform: translateY(-1px);\n}\n\n.header-section::before {\n    content: '';\n    position: absolute;\n    top: -1px;\n    left: -1px;\n    right: -1px;\n    bottom: -1px;\n    border-radius: 15px;\n    background: linear-gradient(45deg, \n        rgba(74, 157, 156, 0.05),  /* 降低渐变透明度 */\n        rgba(74, 157, 156, 0.1),\n        rgba(74, 157, 156, 0.05)\n    );\n    z-index: -1;\n    opacity: 0;\n    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n}\n\n.header-section:hover::before {\n    opacity: 1;\n}\n\n.completion-circle {\n    width: 120px;\n    height: 120px;\n    border-radius: 50%;\n    background: conic-gradient(#afffff var(--percentage), #3a3a4d var(--percentage)); /* 使用深色作为背景 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin: 0 auto;\n    transition: background 0.5s ease; /* 背景渐变动画 */\n}\n\n.inner-circle {\n    width: 100px;\n    height: 100px;\n    background: #1d2e3d; /* 内圈背景 */\n    border-radius: 50%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 1.5em;\n    font-weight: bold;\n    color: #FF3D3D; /* 内圈字体颜色 */\n    transition: transform 0.5s ease; /* 内圈缩放动画 */\n}\n\n.retrievability {\n    font-size: 1.0em;\n    color: #ffffff; /* 白色字体 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.retrievability-icon {\n    margin-right: 10px;\n    color: #4a9d9c;\n}\n\n.retrievability-value {\n    font-weight: bold;\n    margin-left: 10px;\n    color: #4a9d9c; /* Green color for good retrievability */\n    transition: color 0.3s;\n}\n\n.retrievability-value.low {\n    color: #FF3D3D; /* Red color for low retrievability */\n}\n\n.trend-icon {\n    margin-left: 10px;\n    font-size: 1.5em;\n    transition: transform 0.3s;\n}\n\n.trend-up {\n    color: #4a9d9c; /* Green for upward trend */\n}\n\n.trend-down {\n    color: #FF3D3D; /* Red for downward trend */\n}\n\n.low-memory-warning {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    display: none;\n    z-index: 0;\n}\n\n.low-memory-warning.active {\n    display: flex;\n}\n\n.card-limit-input input[type=\"number\"]::-webkit-inner-spin-button,\n.card-limit-input input[type=\"number\"]::-webkit-outer-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n}\n\n.card-limit-input input[type=\"number\"] {\n    -moz-appearance: textfield;\n    background: #3a3a4d; /* 输入框背景 */\n    color: #ffffff; /* 输入框字体颜色 */\n    width: 40px;\n    height: 40px;\n    text-align: center;\n    font-size: 1.2em;\n    padding: 5px;\n    border: 2px solid #0D6E6E; /* 输入框边框颜色 */\n    border-radius: 8px;\n    margin: 0 10px;\n}\n\n.gear-button {\n    background: none;\n    border: none;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    padding: 5px;\n    position: relative;\n    width: 40px;\n    height: 40px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.gear-button .fa-gear {\n    font-size: 1.8em;\n    color: #0D6E6E; /* 齿轮图标颜色 */\n    transition: all 0.3s ease;\n}\n\n.gear-button .direction-icon {\n    position: absolute;\n    font-size: 1em;\n    color: #e2c027;\n    background-color: #fff;\n    border-radius: 50%;\n    width: 16px;\n    height: 16px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.3s ease;\n    left: 50%;\n    top: 50%;\n    transform: translate(-50%, -50%);\n    box-shadow: 0 1px 3px rgba(0,0,0,0.2);\n    font-weight: bold;\n}\n\n/* 悬停效果 */\n.gear-button:hover .fa-gear {\n    color: #4a9d9c; /* 悬停时齿轮图标颜色 */\n    filter: drop-shadow(0 0 2px rgba(255, 152, 0, 0.5));\n}\n\n.gear-button:hover .direction-icon {\n    color: #000;\n    background-color: #fff;\n    box-shadow: 0 2px 4px rgba(0,0,0,0.3);\n    transform: translate(-50%, -50%) scale(1.1);\n}\n\n/* 点击动画 */\n.gear-button.left:active {\n    transform: rotate(-45deg);\n}\n\n.gear-button.right:active {\n    transform: rotate(45deg);\n}\n\n.card-limit-input {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 5px;\n    margin-top: 10px;\n}\n\n.card-limit-label {\n    font-size: 1.1em;\n    color: #ffffff; /* 白色字体 */\n    margin-right: 5px;\n}\n\n/* 工具提示 */\n.gear-button::after {\n    content: attr(data-tooltip);\n    position: absolute;\n    bottom: -25px;\n    left: 50%;\n    transform: translateX(-50%);\n    background-color: rgba(0, 0, 0, 0.8);\n    color: white;\n    padding: 4px 8px;\n    border-radius: 4px;\n    font-size: 0.8em;\n    opacity: 0;\n    transition: opacity 0.3s ease;\n    pointer-events: none;\n    white-space: nowrap;\n}\n\n.gear-button:hover::after {\n    opacity: 1;\n}\n\n\n.add-problem-wrapper {\n    display: flex;\n    justify-content: center;\n}\n\n.empty-state {\n    text-align: center;\n    margin-top: 15px;\n    margin-bottom: 5px;\n    color: #4a9d9c;\n    font-size: 0.9em;\n    opacity: 0.8;\n    font-style: italic;\n    margin-bottom: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 8px;\n}\n\n.empty-state i {\n    font-size: 1em;\n    color: #ffd700;  /* 给灯泡图标一个金色 */\n}\n\n\n\n.add-problem {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    background: transparent;\n    border: 1px dashed rgba(74, 157, 156, 0.5);\n    width: 30px;\n    height: 30px;\n    border-radius: 8px;\n    color: #4a9d9c;\n    opacity: 0.8;\n}\n\n.add-problem-content {\n    display: flex;\n    align-items: center;\n}\n\n.add-problem i {\n    font-size: 0.8em;\n}\n\n\n/* 悬停效果 */\n.add-problem:hover {\n    background: rgba(74, 157, 156, 0.1);\n    border-style: solid;\n    opacity: 1;\n}\n\n/* 添加虚线分隔 */\n.add-problem-wrapper::before {\n    content: '';\n    position: absolute;\n    top: -8px;\n    left: 10%;\n    right: 10%;\n    height: 1px;\n    background: linear-gradient(\n        to right,\n        transparent,\n        rgba(74, 157, 156, 0.3),\n        transparent\n    );\n}\n.modal {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    background: rgba(0, 0, 0, 0.5);\n    z-index: 1000;\n    backdrop-filter: blur(4px);\n}\n\n.modal-content {\n    background: #1d2e3d;\n    border-radius: 8px;\n    padding: 16px;          /* 减小内边距 */\n    width: 280px;           /* 固定更小的宽度 */\n    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);\n    border: 1px solid rgba(97, 218, 251, 0.2);\n    animation: modalFadeIn 0.3s ease;\n}\n\n.modal-content h3 {\n    color: #61dafb;\n    margin-bottom: 12px;    /* 减小标题下方间距 */\n    font-size: 1em;         /* 减小标题字体 */\n}\n\n.form-group {\n    margin-bottom: 12px;    /* 减小表单组间距 */\n}\n\n.form-group label {\n    display: block;\n    margin-bottom: 4px;     /* 减小标签下方间距 */\n    color: #e9ecef;\n    font-size: 0.85em;      /* 减小标签字体 */\n}\n\n.form-group input {\n    width: 100%;\n    padding: 6px 8px;       /* 减小输入框内边距 */\n    border: 1px solid rgba(97, 218, 251, 0.3);\n    border-radius: 4px;\n    background: rgba(29, 46, 61, 0.8);\n    color: #e9ecef;\n    font-size: 0.85em;      /* 减小输入框字体 */\n}\n\n.button-group {\n    display: flex;\n    justify-content: flex-end;\n    gap: 8px;               /* 减小按钮间距 */\n    margin-top: 12px;       /* 减小按钮组上方间距 */\n}\n\n.button-group button {\n    padding: 4px 12px;      /* 减小按钮内边距 */\n    border-radius: 4px;\n    font-size: 0.85em;      /* 减小按钮字体 */\n}\n\n/* 自定义按钮样式 */\n.custom-btn {\n    border: 1px solid;\n}\n\n.btn-outline-warning {\n    border-color: #ffc107;\n    color: #ffc107;\n}\n\n.btn-outline-warning:hover {\n    background: rgba(255, 193, 7, 0.1);\n}\n\n.btn-outline-secondary {\n    border-color: #6c757d;\n    color: #6c757d;\n}\n\n.btn-outline-secondary:hover {\n    background: rgba(108, 117, 125, 0.1);\n}\n\n/* WebDAV按钮样式 - 统一设计系统 */\n.webdav-btn {\n    padding: 4px 8px;\n    font-size: 0.75em;\n    border: 1px solid rgba(74, 157, 156, 0.3);\n    background: rgba(29, 46, 61, 0.5);\n    color: #4a9d9c;\n    border-radius: 3px;\n    cursor: pointer;\n    transition: all 0.2s ease;\n    font-weight: 500;\n    line-height: 1.2;\n}\n\n.webdav-btn:hover {\n    background: rgba(74, 157, 156, 0.1);\n    border-color: rgba(74, 157, 156, 0.5);\n    color: #61dafb;\n}\n\n.webdav-btn:active {\n    transform: scale(0.98);\n}\n\n.webdav-btn:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n}\n\n.webdav-btn i {\n    margin-right: 3px;\n    font-size: 0.85em;\n    vertical-align: middle;\n}\n\n/* 垂直布局按钮样式 */\n.webdav-btn-vertical {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 10px 8px;\n    gap: 5px;\n    position: relative;\n}\n\n.webdav-btn-vertical i {\n    margin-right: 0;\n    font-size: 1.3em;\n}\n\n.webdav-btn-vertical span {\n    font-size: 0.95em;\n    line-height: 1;\n    font-weight: 600;\n}\n\n/* 退出按钮特殊样式 */\n.webdav-btn-logout {\n    border-color: rgba(74, 157, 156, 0.2);\n    color: rgba(156, 163, 175, 0.8);\n}\n\n.webdav-btn-logout:hover {\n    background: rgba(239, 68, 68, 0.05);\n    border-color: rgba(239, 68, 68, 0.3);\n    color: rgba(239, 68, 68, 0.8);\n}\n\n\n\n\n\n\n\n/* 视图容器样式 */\n.view {\n    display: none;\n    transition: opacity 0.3s ease;\n}\n\n.view.active {\n    display: block;\n}\n\n/* 题目列表页面样式 */\n.problem-list-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 20px;\n}\n\n.search-bar {\n    position: relative;\n    width: 300px;\n}\n\n.search-input {\n    width: 100%;\n    padding: 8px 35px 8px 15px;\n    border: none;\n    border-radius: 20px;\n    background: #2a2b30;\n    color: #fff;\n}\n\n.search-icon {\n    position: absolute;\n    right: 15px;\n    top: 50%;\n    transform: translateY(-50%);\n    color: #888;\n}\n\n.problem-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));\n    gap: 20px;\n    padding: 20px 0;\n}\n\n/* 更多选项页面样式 */\n.options-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));\n    gap: 20px;\n    padding: 20px 0;\n}\n\n\n\n/* 导航标签样式 */\n#problemListView .nav-tabs {\n    border-bottom: 1px solid #4a9d9c;\n\n}\n\n#problemListView .nav-tabs .nav-link {\n    color: #888;\n    border: none;\n    background: none;\n\n\n    transition: all 0.3s ease;\n}\n\n#problemListView .nav-tabs .nav-link:hover {\n    color: #fff;\n}\n\n#problemListView .nav-tabs .nav-link.active {\n    color: #4a9d9c;\n    background: none;\n    border-bottom: 2px solid #4a9d9c;\n}\n\n/* 确保tab内容区域正确显示 */\n#problemListView .tab-content {\n    display: flex;\n}\n\n#problemListView .tab-pane {\n    transition: opacity 0.3s ease;\n}\n\n#problemListView .tab-pane.active {\n    opacity: 1;\n}\n\n\n\n\n\niframe {\n    overflow: hidden;\n    border: 0;\n}\n\n.custom-btn {\n    border-color: #0D6E6E;\n    color: #4a9d9c;\n}\n\n.custom-btn:hover {\n    border-color: rgba(235, 173, 129, 1);\n    background-color: rgba(235, 173, 129, 1);\n}\n\n.custom-btn:disabled {\n    border-color: #e0e0e0;\n    color: #e0e0e0;\n}\n\n\n.footer {\n    background: linear-gradient(to bottom, rgba(29, 46, 61, 0.8) 0%, #1d2e3d 100%);\n    backdrop-filter: blur(5px);\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 12px;           /* 按钮之间的间距 */\n    border-top: 1px solid rgba(255, 255, 255, 0.1);\n    margin-top: auto;\n    padding: 8px 0;  /* 添加上下内边距 */\n}\n\n#github-star-container {\n    display: flex;\n    align-items: center;\n    height: 30px;\n}\n\n/* GitHub Star 按钮样式 */\n.github-star-btn {\n    font-size: 0.875rem;\n    font-family: 'Courier Prime', monospace;\n    background: #1d2e3d;\n    border: 1px solid rgba(97, 218, 251, 0.3);\n    color: #61dafb;\n    border-radius: 6px;\n    display: flex;\n    align-items: center;\n    gap: 0.6rem;\n    transition: all 0.3s ease;\n    position: relative;\n    overflow: hidden;\n    padding: 0.35rem 0.8rem;\n    animation: starPulse 2s infinite;\n}\n\n@keyframes starPulse {\n    0% {\n        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0.4);\n    }\n    70% {\n        box-shadow: 0 0 0 10px rgba(97, 218, 251, 0);\n    }\n    100% {\n        box-shadow: 0 0 0 0 rgba(97, 218, 251, 0);\n    }\n}\n\n.github-star-btn i {\n    font-size: 0.875rem;\n    color: #61dafb;\n    transition: all 0.3s ease;\n    animation: starTwinkle 2s infinite;\n}\n\n@keyframes starTwinkle {\n    0% {\n        transform: scale(1);\n        opacity: 1;\n    }\n    50% {\n        transform: scale(1.2);\n        opacity: 0.8;\n    }\n    100% {\n        transform: scale(1);\n        opacity: 1;\n    }\n}\n\n.github-star-btn:hover {\n    background: #1a3244;\n    border-color: #61dafb;\n    box-shadow: 0 0 15px rgba(97, 218, 251, 0.7);\n    color: #61dafb;\n    animation: none; /* 悬停时停止脉冲动画 */\n}\n\n.github-star-btn:hover i {\n    animation: none; /* 悬停时停止星星闪烁动画 */\n    transform: scale(1.2);\n}\n\n.feedback-btn-review {\n    padding: 0.35rem 0.8rem !important;  /* 减小按钮内边距 */\n    font-size: 0.8rem !important;  /* 稍微减小字体 */\n    min-height: 28px;  /* 设置最小高度 */\n    padding: 0 12px;     /* 水平内边距 */\n}\n\n.feedback-btn-review .btn-content {\n    gap: 0.4rem !important;  /* 减小图标和文字间距 */\n}\n\n.feedback-btn-review i {\n    font-size: 0.8rem !important;  /* 减小图标大小 */\n}\n\n\n.page-input {\n    background-color: transparent;\n    color: #e0e0e0;\n    border: 1px solid #e0e0e0;\n    border-radius: 4px;\n    text-align: center;\n    font-size: 0.875rem;  /* 相当于 Bootstrap 的 sm 大小 */\n    margin-left: 5px !important; \n    margin-right: 5px !important;\n}\n\n.page-input:focus {\n    outline: none;\n    border-color: #afffff;\n    box-shadow: 0 0 5px rgba(74, 157, 156, 0.5);\n}\n\n.multifont {\n    font-family: 'Courier Prime', 'Noto Sans SC', sans-serif;\n}\n\na {\n    color: chocolate;\n}\n\n.custom-tooltip {\n    --bs-tooltip-bg: var(--bd-violet-bg);\n    --bs-tooltip-color: var(--bs-white);\n}\n\n/* 题目列表样式 */\n#problemListView {\n    padding: 5px;\n}\n\n.problem-list-header {\n    margin-bottom: 15px;\n}\n\n.nav-tabs {\n    border-bottom: 1px solid #dee2e6;\n}\n\n.nav-tabs .nav-link {\n    margin-bottom: -1px;\n    color: #495057;\n    border: 1px solid transparent;\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem;\n}\n\n.nav-tabs .nav-link.active {\n    color: #495057;\n    background-color: #fff;\n    border-color: #dee2e6 #dee2e6 #fff;\n}\n\n.tab-content {\n    padding: 10px;\n    background-color: #fff;\n    border: 1px solid #dee2e6;\n    border-top: none;\n}\n\n.tab-pane {\n    display: none;\n}\n.tab-pane.active {\n    display: block;\n}\n\n\n\n/* 确保switch容器不会阻挡点击事件 */\n#switch-area {\n    pointer-events: auto;\n    position: relative;\n    z-index: 100;\n}\n\n\n\n\n\n\n/* 自定义表格样式 */\n.table {\n    width: 100%;\n    table-layout: fixed;\n    word-wrap: break-word;\n\n\n    --bs-table-border-color: #afffff !important;       /* 边框颜色 */\n\n    --bs-table-hover-color: #f56464 !important;        /* 悬停文字颜色 */\n    --bs-table-hover-bg: #ebe3e3 !important;          /* 悬停背景颜色 */\n    border: none !important;              /* 移除表格外边框 */\n    border-collapse: collapse !important;  /* 确保边框合并 */\n}\n\n\ntd, th {\n    padding: 4px !important;\n}\n\n.table {\n    margin-bottom: 0;\n    min-width: auto !important;\n}\n\n/* 确保表格容器有正确的宽度和溢出处理 */\n.table-responsive {\n    width: 100%;\n    overflow-x: hidden;\n}\n\n\n\n/* 专门设置表头样式 */\n.table thead,\n.table > thead{\n    border: none !important;              \n    background: linear-gradient(to right, #0D6E6E, #4a9d9c) !important;  \n}\n\n/* 确保表头单元格没有背景色 */\n.table thead tr,\n.table thead th {\n    background: transparent !important;    /* 确保tr和th是透明的 */\n    border: none !important;              \n    color: #ffffff !important;            /* 表头文字颜色 */\n}\n\n\n\n\n/* 记忆概率指示器样式 */\n.memory-indicator {\n    display: inline-flex;\n    align-items: center;\n    padding: 4px 8px;\n    border-radius: 12px;\n    transition: all 0.3s ease;\n}\n\n.memory-indicator:hover {\n    background-color: rgba(255, 255, 255, 0.1);\n    transform: scale(1.05);\n}\n\n.memory-indicator i {\n    font-size: 1.1em;\n}\n\n/* 颜色类 */\n.text-success { color: #4caf50 !important; }\n.text-warning { color: #ff9800 !important; }\n.text-danger { color: #f44336 !important; }\n\n\n\n/* 设置卡片样式调整 */\n.option-card {\n    background-color: #1d2e3d;\n    border-radius: 10px;\n    padding: 20px;\n    text-align: center;\n    transition: all 0.3s ease;\n}\n\n.option-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 16px rgba(74, 157, 156, 0.2);\n}\n\n.option-card i {\n    font-size: 2em;\n    color: #4a9d9c;\n    margin-bottom: 15px;\n}\n\n.option-card h4 {\n    color: #fff;\n    margin-bottom: 15px;\n}\n\n.option-card p {\n    color: #888;\n    font-size: 0.9em;\n}\n\n/* 表单控件样式 */\n.form-select {\n    background-color: #0D1F2D;\n    color: #fff;\n    border: 1px solid #4a9d9c;\n    margin-top: 10px;\n}\n\n.sync-tips {\n    margin-top: 10px;\n    font-size: 1.0em;\n    color: #888;\n    display: flex;\n    flex-direction: column;\n    gap: 5px;\n}\n.reminder-tips {\n    margin-top: 10px;\n    font-size: 1.0em;\n    color: #888;\n    display: flex;\n    flex-direction: column;\n    gap: 5px;\n}\n.save-section {\n    grid-column: 1 / -1;\n    text-align: center;\n    margin-top: 20px;\n}\n\n/* 开关按钮样式 */\n.form-check-input.custom-switch {\n    background-color: #0D1F2D !important;\n    border-color: #4a9d9c !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    transition: all 0.3s ease;\n    cursor: pointer !important;\n    pointer-events: auto !important;\n    opacity: 1;\n    z-index: 100;\n    position: relative;\n    outline: none !important;\n    /* 自定义滑块圆圈颜色为亮蓝色 */\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e\") !important;\n}\n\n/* 选中状态下的样式 */\n.form-check-input.custom-switch:checked {\n    background-color: #0D6E6E !important;\n    border-color: #0D6E6E !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    /* 选中状态下保持相同的蓝色圆圈 */\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2361dafb'/%3e%3c/svg%3e\") !important;\n}\n\n/* 悬停状态加强发光效果 */\n.form-check-input.custom-switch:hover {\n    box-shadow: 0 0 15px rgba(97, 218, 251, 0.9);\n}\n\n/* 焦点状态 */\n.form-check-input.custom-switch:focus {\n    background-color: inherit !important;  /* 继承当前状态的背景色 */\n    border-color: #4a9d9c !important;\n    box-shadow: 0 0 12px rgba(74, 157, 156, 0.9);\n    outline: none !important;\n}\n\n/* 选中且焦点状态 */\n.form-check-input.custom-switch:checked:focus {\n    background-color: #4a9d9c !important;\n}\n\n\n\n\n\n/* SweetAlert2 自定义样式 */\n.colored-toast.swal2-icon-success {\n    background-color: #1d2e3d !important;\n    border: 1px solid #4a9d9c !important;\n}\n\n.colored-toast .swal2-title {\n    color: #ffffff !important;\n    font-size: 1em !important;\n}\n\n.colored-toast .swal2-close {\n    color: #4a9d9c !important;\n}\n\n.colored-toast .swal2-html-container {\n    color: #888 !important;\n    font-size: 0.9em !important;\n}\n\n/* 成功图标颜色 */\n.colored-toast .swal2-success-line-tip,\n.colored-toast .swal2-success-line-long {\n    background-color: #4a9d9c !important;\n}\n\n.colored-toast .swal2-success-ring {\n    border-color: #4a9d9c !important;\n}\n\n/* 更新概要样式 */\n.update-badge {\n    background-color: #FF3D3D;\n    color: white;\n    padding: 2px 5px;\n    border-radius: 3px;\n    font-size: 0.8em;\n    margin-right: 5px;\n    font-weight: bold;\n}\n\n.update-summary {\n    background-color: rgba(74, 157, 156, 0.1);\n    border-radius: 4px;\n    padding: 3px 0 !important;\n    margin-bottom: 8px !important;\n}\n\n.update-summary a {\n    color: #4a9d9c;\n    text-decoration: none;\n    margin-left: 5px;\n}\n\n.update-summary a:hover {\n    text-decoration: underline;\n    color: #afffff;\n}\n\n/* 图标按钮样式 */\n.btn-icon {\n    background: none;\n    border: none;\n    color: #4a9d9c;\n    font-size: 1em;\n    width: 28px;\n    height: 28px;\n    border-radius: 6px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    background-color: transparent;\n}\n\n.btn-icon:hover {\n    background-color: rgba(74, 157, 156, 0.1);\n    color: #61dafb;\n    transform: translateY(-1px);\n}\n\n.btn-icon:active {\n    transform: translateY(0);\n}\n\n.btn-icon-sm {\n    width: 24px;\n    height: 24px;\n}\n\n/* 优化参数进度条样式 */\n.optimize-progress {\n    height: 3px !important;\n    background-color: rgba(74, 157, 156, 0.1) !important;\n    border-radius: 4px !important;\n    margin-top: 12px !important;\n    overflow: hidden !important;\n}\n\n.optimize-progress .progress-bar {\n    background: linear-gradient(90deg, #4a9d9c, #61dafb) !important;\n    transition: width 0.3s ease !important;\n}\n\n.optimize-progress .progress-bar-animated {\n    animation: progress-bar-stripes 1s linear infinite !important;\n}\n\n.optimize-progress .progress-bar-striped {\n    background-image: linear-gradient(\n        45deg,\n        rgba(255, 255, 255, 0.15) 25%,\n        transparent 25%,\n        transparent 50%,\n        rgba(255, 255, 255, 0.15) 50%,\n        rgba(255, 255, 255, 0.15) 75%,\n        transparent 75%,\n        transparent\n    ) !important;\n    background-size: 1rem 1rem !important;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6360,7 +6449,1889 @@ if (typeof this !== 'undefined' && this.Sweetalert2){this.swal = this.sweetAlert
 
 /***/ }),
 
-/***/ 906:
+/***/ 150:
+/***/ (function(module, exports) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else { var mod; }
+})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (module) {
+  /* webextension-polyfill - v0.12.0 - Tue May 14 2024 18:01:29 */
+  /* -*- Mode: indent-tabs-mode: nil; js-indent-level: 2 -*- */
+  /* vim: set sts=2 sw=2 et tw=80: */
+  /* This Source Code Form is subject to the terms of the Mozilla Public
+   * License, v. 2.0. If a copy of the MPL was not distributed with this
+   * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+  "use strict";
+
+  if (!(globalThis.chrome && globalThis.chrome.runtime && globalThis.chrome.runtime.id)) {
+    throw new Error("This script should only be loaded in a browser extension.");
+  }
+  if (!(globalThis.browser && globalThis.browser.runtime && globalThis.browser.runtime.id)) {
+    const CHROME_SEND_MESSAGE_CALLBACK_NO_RESPONSE_MESSAGE = "The message port closed before a response was received.";
+
+    // Wrapping the bulk of this polyfill in a one-time-use function is a minor
+    // optimization for Firefox. Since Spidermonkey does not fully parse the
+    // contents of a function until the first time it's called, and since it will
+    // never actually need to be called, this allows the polyfill to be included
+    // in Firefox nearly for free.
+    const wrapAPIs = extensionAPIs => {
+      // NOTE: apiMetadata is associated to the content of the api-metadata.json file
+      // at build time by replacing the following "include" with the content of the
+      // JSON file.
+      const apiMetadata = {
+        "alarms": {
+          "clear": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "clearAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "get": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "getAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "bookmarks": {
+          "create": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "get": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getChildren": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getRecent": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getSubTree": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getTree": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "move": {
+            "minArgs": 2,
+            "maxArgs": 2
+          },
+          "remove": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeTree": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "search": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "update": {
+            "minArgs": 2,
+            "maxArgs": 2
+          }
+        },
+        "browserAction": {
+          "disable": {
+            "minArgs": 0,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "enable": {
+            "minArgs": 0,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "getBadgeBackgroundColor": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getBadgeText": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getPopup": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getTitle": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "openPopup": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "setBadgeBackgroundColor": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "setBadgeText": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "setIcon": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "setPopup": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "setTitle": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          }
+        },
+        "browsingData": {
+          "remove": {
+            "minArgs": 2,
+            "maxArgs": 2
+          },
+          "removeCache": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeCookies": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeDownloads": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeFormData": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeHistory": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeLocalStorage": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removePasswords": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removePluginData": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "settings": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "commands": {
+          "getAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "contextMenus": {
+          "remove": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "update": {
+            "minArgs": 2,
+            "maxArgs": 2
+          }
+        },
+        "cookies": {
+          "get": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getAll": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getAllCookieStores": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "remove": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "set": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "devtools": {
+          "inspectedWindow": {
+            "eval": {
+              "minArgs": 1,
+              "maxArgs": 2,
+              "singleCallbackArg": false
+            }
+          },
+          "panels": {
+            "create": {
+              "minArgs": 3,
+              "maxArgs": 3,
+              "singleCallbackArg": true
+            },
+            "elements": {
+              "createSidebarPane": {
+                "minArgs": 1,
+                "maxArgs": 1
+              }
+            }
+          }
+        },
+        "downloads": {
+          "cancel": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "download": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "erase": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getFileIcon": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "open": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "pause": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeFile": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "resume": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "search": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "show": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          }
+        },
+        "extension": {
+          "isAllowedFileSchemeAccess": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "isAllowedIncognitoAccess": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "history": {
+          "addUrl": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "deleteAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "deleteRange": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "deleteUrl": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getVisits": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "search": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "i18n": {
+          "detectLanguage": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getAcceptLanguages": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "identity": {
+          "launchWebAuthFlow": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "idle": {
+          "queryState": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "management": {
+          "get": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "getSelf": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "setEnabled": {
+            "minArgs": 2,
+            "maxArgs": 2
+          },
+          "uninstallSelf": {
+            "minArgs": 0,
+            "maxArgs": 1
+          }
+        },
+        "notifications": {
+          "clear": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "create": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "getAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "getPermissionLevel": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "update": {
+            "minArgs": 2,
+            "maxArgs": 2
+          }
+        },
+        "pageAction": {
+          "getPopup": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getTitle": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "hide": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "setIcon": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "setPopup": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "setTitle": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          },
+          "show": {
+            "minArgs": 1,
+            "maxArgs": 1,
+            "fallbackToNoCallback": true
+          }
+        },
+        "permissions": {
+          "contains": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getAll": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "remove": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "request": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "runtime": {
+          "getBackgroundPage": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "getPlatformInfo": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "openOptionsPage": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "requestUpdateCheck": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "sendMessage": {
+            "minArgs": 1,
+            "maxArgs": 3
+          },
+          "sendNativeMessage": {
+            "minArgs": 2,
+            "maxArgs": 2
+          },
+          "setUninstallURL": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "sessions": {
+          "getDevices": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "getRecentlyClosed": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "restore": {
+            "minArgs": 0,
+            "maxArgs": 1
+          }
+        },
+        "storage": {
+          "local": {
+            "clear": {
+              "minArgs": 0,
+              "maxArgs": 0
+            },
+            "get": {
+              "minArgs": 0,
+              "maxArgs": 1
+            },
+            "getBytesInUse": {
+              "minArgs": 0,
+              "maxArgs": 1
+            },
+            "remove": {
+              "minArgs": 1,
+              "maxArgs": 1
+            },
+            "set": {
+              "minArgs": 1,
+              "maxArgs": 1
+            }
+          },
+          "managed": {
+            "get": {
+              "minArgs": 0,
+              "maxArgs": 1
+            },
+            "getBytesInUse": {
+              "minArgs": 0,
+              "maxArgs": 1
+            }
+          },
+          "sync": {
+            "clear": {
+              "minArgs": 0,
+              "maxArgs": 0
+            },
+            "get": {
+              "minArgs": 0,
+              "maxArgs": 1
+            },
+            "getBytesInUse": {
+              "minArgs": 0,
+              "maxArgs": 1
+            },
+            "remove": {
+              "minArgs": 1,
+              "maxArgs": 1
+            },
+            "set": {
+              "minArgs": 1,
+              "maxArgs": 1
+            }
+          }
+        },
+        "tabs": {
+          "captureVisibleTab": {
+            "minArgs": 0,
+            "maxArgs": 2
+          },
+          "create": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "detectLanguage": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "discard": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "duplicate": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "executeScript": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "get": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getCurrent": {
+            "minArgs": 0,
+            "maxArgs": 0
+          },
+          "getZoom": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "getZoomSettings": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "goBack": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "goForward": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "highlight": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "insertCSS": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "move": {
+            "minArgs": 2,
+            "maxArgs": 2
+          },
+          "query": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "reload": {
+            "minArgs": 0,
+            "maxArgs": 2
+          },
+          "remove": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "removeCSS": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "sendMessage": {
+            "minArgs": 2,
+            "maxArgs": 3
+          },
+          "setZoom": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "setZoomSettings": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "update": {
+            "minArgs": 1,
+            "maxArgs": 2
+          }
+        },
+        "topSites": {
+          "get": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "webNavigation": {
+          "getAllFrames": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "getFrame": {
+            "minArgs": 1,
+            "maxArgs": 1
+          }
+        },
+        "webRequest": {
+          "handlerBehaviorChanged": {
+            "minArgs": 0,
+            "maxArgs": 0
+          }
+        },
+        "windows": {
+          "create": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "get": {
+            "minArgs": 1,
+            "maxArgs": 2
+          },
+          "getAll": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "getCurrent": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "getLastFocused": {
+            "minArgs": 0,
+            "maxArgs": 1
+          },
+          "remove": {
+            "minArgs": 1,
+            "maxArgs": 1
+          },
+          "update": {
+            "minArgs": 2,
+            "maxArgs": 2
+          }
+        }
+      };
+      if (Object.keys(apiMetadata).length === 0) {
+        throw new Error("api-metadata.json has not been included in browser-polyfill");
+      }
+
+      /**
+       * A WeakMap subclass which creates and stores a value for any key which does
+       * not exist when accessed, but behaves exactly as an ordinary WeakMap
+       * otherwise.
+       *
+       * @param {function} createItem
+       *        A function which will be called in order to create the value for any
+       *        key which does not exist, the first time it is accessed. The
+       *        function receives, as its only argument, the key being created.
+       */
+      class DefaultWeakMap extends WeakMap {
+        constructor(createItem, items = undefined) {
+          super(items);
+          this.createItem = createItem;
+        }
+        get(key) {
+          if (!this.has(key)) {
+            this.set(key, this.createItem(key));
+          }
+          return super.get(key);
+        }
+      }
+
+      /**
+       * Returns true if the given object is an object with a `then` method, and can
+       * therefore be assumed to behave as a Promise.
+       *
+       * @param {*} value The value to test.
+       * @returns {boolean} True if the value is thenable.
+       */
+      const isThenable = value => {
+        return value && typeof value === "object" && typeof value.then === "function";
+      };
+
+      /**
+       * Creates and returns a function which, when called, will resolve or reject
+       * the given promise based on how it is called:
+       *
+       * - If, when called, `chrome.runtime.lastError` contains a non-null object,
+       *   the promise is rejected with that value.
+       * - If the function is called with exactly one argument, the promise is
+       *   resolved to that value.
+       * - Otherwise, the promise is resolved to an array containing all of the
+       *   function's arguments.
+       *
+       * @param {object} promise
+       *        An object containing the resolution and rejection functions of a
+       *        promise.
+       * @param {function} promise.resolve
+       *        The promise's resolution function.
+       * @param {function} promise.reject
+       *        The promise's rejection function.
+       * @param {object} metadata
+       *        Metadata about the wrapped method which has created the callback.
+       * @param {boolean} metadata.singleCallbackArg
+       *        Whether or not the promise is resolved with only the first
+       *        argument of the callback, alternatively an array of all the
+       *        callback arguments is resolved. By default, if the callback
+       *        function is invoked with only a single argument, that will be
+       *        resolved to the promise, while all arguments will be resolved as
+       *        an array if multiple are given.
+       *
+       * @returns {function}
+       *        The generated callback function.
+       */
+      const makeCallback = (promise, metadata) => {
+        return (...callbackArgs) => {
+          if (extensionAPIs.runtime.lastError) {
+            promise.reject(new Error(extensionAPIs.runtime.lastError.message));
+          } else if (metadata.singleCallbackArg || callbackArgs.length <= 1 && metadata.singleCallbackArg !== false) {
+            promise.resolve(callbackArgs[0]);
+          } else {
+            promise.resolve(callbackArgs);
+          }
+        };
+      };
+      const pluralizeArguments = numArgs => numArgs == 1 ? "argument" : "arguments";
+
+      /**
+       * Creates a wrapper function for a method with the given name and metadata.
+       *
+       * @param {string} name
+       *        The name of the method which is being wrapped.
+       * @param {object} metadata
+       *        Metadata about the method being wrapped.
+       * @param {integer} metadata.minArgs
+       *        The minimum number of arguments which must be passed to the
+       *        function. If called with fewer than this number of arguments, the
+       *        wrapper will raise an exception.
+       * @param {integer} metadata.maxArgs
+       *        The maximum number of arguments which may be passed to the
+       *        function. If called with more than this number of arguments, the
+       *        wrapper will raise an exception.
+       * @param {boolean} metadata.singleCallbackArg
+       *        Whether or not the promise is resolved with only the first
+       *        argument of the callback, alternatively an array of all the
+       *        callback arguments is resolved. By default, if the callback
+       *        function is invoked with only a single argument, that will be
+       *        resolved to the promise, while all arguments will be resolved as
+       *        an array if multiple are given.
+       *
+       * @returns {function(object, ...*)}
+       *       The generated wrapper function.
+       */
+      const wrapAsyncFunction = (name, metadata) => {
+        return function asyncFunctionWrapper(target, ...args) {
+          if (args.length < metadata.minArgs) {
+            throw new Error(`Expected at least ${metadata.minArgs} ${pluralizeArguments(metadata.minArgs)} for ${name}(), got ${args.length}`);
+          }
+          if (args.length > metadata.maxArgs) {
+            throw new Error(`Expected at most ${metadata.maxArgs} ${pluralizeArguments(metadata.maxArgs)} for ${name}(), got ${args.length}`);
+          }
+          return new Promise((resolve, reject) => {
+            if (metadata.fallbackToNoCallback) {
+              // This API method has currently no callback on Chrome, but it return a promise on Firefox,
+              // and so the polyfill will try to call it with a callback first, and it will fallback
+              // to not passing the callback if the first call fails.
+              try {
+                target[name](...args, makeCallback({
+                  resolve,
+                  reject
+                }, metadata));
+              } catch (cbError) {
+                console.warn(`${name} API method doesn't seem to support the callback parameter, ` + "falling back to call it without a callback: ", cbError);
+                target[name](...args);
+
+                // Update the API method metadata, so that the next API calls will not try to
+                // use the unsupported callback anymore.
+                metadata.fallbackToNoCallback = false;
+                metadata.noCallback = true;
+                resolve();
+              }
+            } else if (metadata.noCallback) {
+              target[name](...args);
+              resolve();
+            } else {
+              target[name](...args, makeCallback({
+                resolve,
+                reject
+              }, metadata));
+            }
+          });
+        };
+      };
+
+      /**
+       * Wraps an existing method of the target object, so that calls to it are
+       * intercepted by the given wrapper function. The wrapper function receives,
+       * as its first argument, the original `target` object, followed by each of
+       * the arguments passed to the original method.
+       *
+       * @param {object} target
+       *        The original target object that the wrapped method belongs to.
+       * @param {function} method
+       *        The method being wrapped. This is used as the target of the Proxy
+       *        object which is created to wrap the method.
+       * @param {function} wrapper
+       *        The wrapper function which is called in place of a direct invocation
+       *        of the wrapped method.
+       *
+       * @returns {Proxy<function>}
+       *        A Proxy object for the given method, which invokes the given wrapper
+       *        method in its place.
+       */
+      const wrapMethod = (target, method, wrapper) => {
+        return new Proxy(method, {
+          apply(targetMethod, thisObj, args) {
+            return wrapper.call(thisObj, target, ...args);
+          }
+        });
+      };
+      let hasOwnProperty = Function.call.bind(Object.prototype.hasOwnProperty);
+
+      /**
+       * Wraps an object in a Proxy which intercepts and wraps certain methods
+       * based on the given `wrappers` and `metadata` objects.
+       *
+       * @param {object} target
+       *        The target object to wrap.
+       *
+       * @param {object} [wrappers = {}]
+       *        An object tree containing wrapper functions for special cases. Any
+       *        function present in this object tree is called in place of the
+       *        method in the same location in the `target` object tree. These
+       *        wrapper methods are invoked as described in {@see wrapMethod}.
+       *
+       * @param {object} [metadata = {}]
+       *        An object tree containing metadata used to automatically generate
+       *        Promise-based wrapper functions for asynchronous. Any function in
+       *        the `target` object tree which has a corresponding metadata object
+       *        in the same location in the `metadata` tree is replaced with an
+       *        automatically-generated wrapper function, as described in
+       *        {@see wrapAsyncFunction}
+       *
+       * @returns {Proxy<object>}
+       */
+      const wrapObject = (target, wrappers = {}, metadata = {}) => {
+        let cache = Object.create(null);
+        let handlers = {
+          has(proxyTarget, prop) {
+            return prop in target || prop in cache;
+          },
+          get(proxyTarget, prop, receiver) {
+            if (prop in cache) {
+              return cache[prop];
+            }
+            if (!(prop in target)) {
+              return undefined;
+            }
+            let value = target[prop];
+            if (typeof value === "function") {
+              // This is a method on the underlying object. Check if we need to do
+              // any wrapping.
+
+              if (typeof wrappers[prop] === "function") {
+                // We have a special-case wrapper for this method.
+                value = wrapMethod(target, target[prop], wrappers[prop]);
+              } else if (hasOwnProperty(metadata, prop)) {
+                // This is an async method that we have metadata for. Create a
+                // Promise wrapper for it.
+                let wrapper = wrapAsyncFunction(prop, metadata[prop]);
+                value = wrapMethod(target, target[prop], wrapper);
+              } else {
+                // This is a method that we don't know or care about. Return the
+                // original method, bound to the underlying object.
+                value = value.bind(target);
+              }
+            } else if (typeof value === "object" && value !== null && (hasOwnProperty(wrappers, prop) || hasOwnProperty(metadata, prop))) {
+              // This is an object that we need to do some wrapping for the children
+              // of. Create a sub-object wrapper for it with the appropriate child
+              // metadata.
+              value = wrapObject(value, wrappers[prop], metadata[prop]);
+            } else if (hasOwnProperty(metadata, "*")) {
+              // Wrap all properties in * namespace.
+              value = wrapObject(value, wrappers[prop], metadata["*"]);
+            } else {
+              // We don't need to do any wrapping for this property,
+              // so just forward all access to the underlying object.
+              Object.defineProperty(cache, prop, {
+                configurable: true,
+                enumerable: true,
+                get() {
+                  return target[prop];
+                },
+                set(value) {
+                  target[prop] = value;
+                }
+              });
+              return value;
+            }
+            cache[prop] = value;
+            return value;
+          },
+          set(proxyTarget, prop, value, receiver) {
+            if (prop in cache) {
+              cache[prop] = value;
+            } else {
+              target[prop] = value;
+            }
+            return true;
+          },
+          defineProperty(proxyTarget, prop, desc) {
+            return Reflect.defineProperty(cache, prop, desc);
+          },
+          deleteProperty(proxyTarget, prop) {
+            return Reflect.deleteProperty(cache, prop);
+          }
+        };
+
+        // Per contract of the Proxy API, the "get" proxy handler must return the
+        // original value of the target if that value is declared read-only and
+        // non-configurable. For this reason, we create an object with the
+        // prototype set to `target` instead of using `target` directly.
+        // Otherwise we cannot return a custom object for APIs that
+        // are declared read-only and non-configurable, such as `chrome.devtools`.
+        //
+        // The proxy handlers themselves will still use the original `target`
+        // instead of the `proxyTarget`, so that the methods and properties are
+        // dereferenced via the original targets.
+        let proxyTarget = Object.create(target);
+        return new Proxy(proxyTarget, handlers);
+      };
+
+      /**
+       * Creates a set of wrapper functions for an event object, which handles
+       * wrapping of listener functions that those messages are passed.
+       *
+       * A single wrapper is created for each listener function, and stored in a
+       * map. Subsequent calls to `addListener`, `hasListener`, or `removeListener`
+       * retrieve the original wrapper, so that  attempts to remove a
+       * previously-added listener work as expected.
+       *
+       * @param {DefaultWeakMap<function, function>} wrapperMap
+       *        A DefaultWeakMap object which will create the appropriate wrapper
+       *        for a given listener function when one does not exist, and retrieve
+       *        an existing one when it does.
+       *
+       * @returns {object}
+       */
+      const wrapEvent = wrapperMap => ({
+        addListener(target, listener, ...args) {
+          target.addListener(wrapperMap.get(listener), ...args);
+        },
+        hasListener(target, listener) {
+          return target.hasListener(wrapperMap.get(listener));
+        },
+        removeListener(target, listener) {
+          target.removeListener(wrapperMap.get(listener));
+        }
+      });
+      const onRequestFinishedWrappers = new DefaultWeakMap(listener => {
+        if (typeof listener !== "function") {
+          return listener;
+        }
+
+        /**
+         * Wraps an onRequestFinished listener function so that it will return a
+         * `getContent()` property which returns a `Promise` rather than using a
+         * callback API.
+         *
+         * @param {object} req
+         *        The HAR entry object representing the network request.
+         */
+        return function onRequestFinished(req) {
+          const wrappedReq = wrapObject(req, {} /* wrappers */, {
+            getContent: {
+              minArgs: 0,
+              maxArgs: 0
+            }
+          });
+          listener(wrappedReq);
+        };
+      });
+      const onMessageWrappers = new DefaultWeakMap(listener => {
+        if (typeof listener !== "function") {
+          return listener;
+        }
+
+        /**
+         * Wraps a message listener function so that it may send responses based on
+         * its return value, rather than by returning a sentinel value and calling a
+         * callback. If the listener function returns a Promise, the response is
+         * sent when the promise either resolves or rejects.
+         *
+         * @param {*} message
+         *        The message sent by the other end of the channel.
+         * @param {object} sender
+         *        Details about the sender of the message.
+         * @param {function(*)} sendResponse
+         *        A callback which, when called with an arbitrary argument, sends
+         *        that value as a response.
+         * @returns {boolean}
+         *        True if the wrapped listener returned a Promise, which will later
+         *        yield a response. False otherwise.
+         */
+        return function onMessage(message, sender, sendResponse) {
+          let didCallSendResponse = false;
+          let wrappedSendResponse;
+          let sendResponsePromise = new Promise(resolve => {
+            wrappedSendResponse = function (response) {
+              didCallSendResponse = true;
+              resolve(response);
+            };
+          });
+          let result;
+          try {
+            result = listener(message, sender, wrappedSendResponse);
+          } catch (err) {
+            result = Promise.reject(err);
+          }
+          const isResultThenable = result !== true && isThenable(result);
+
+          // If the listener didn't returned true or a Promise, or called
+          // wrappedSendResponse synchronously, we can exit earlier
+          // because there will be no response sent from this listener.
+          if (result !== true && !isResultThenable && !didCallSendResponse) {
+            return false;
+          }
+
+          // A small helper to send the message if the promise resolves
+          // and an error if the promise rejects (a wrapped sendMessage has
+          // to translate the message into a resolved promise or a rejected
+          // promise).
+          const sendPromisedResult = promise => {
+            promise.then(msg => {
+              // send the message value.
+              sendResponse(msg);
+            }, error => {
+              // Send a JSON representation of the error if the rejected value
+              // is an instance of error, or the object itself otherwise.
+              let message;
+              if (error && (error instanceof Error || typeof error.message === "string")) {
+                message = error.message;
+              } else {
+                message = "An unexpected error occurred";
+              }
+              sendResponse({
+                __mozWebExtensionPolyfillReject__: true,
+                message
+              });
+            }).catch(err => {
+              // Print an error on the console if unable to send the response.
+              console.error("Failed to send onMessage rejected reply", err);
+            });
+          };
+
+          // If the listener returned a Promise, send the resolved value as a
+          // result, otherwise wait the promise related to the wrappedSendResponse
+          // callback to resolve and send it as a response.
+          if (isResultThenable) {
+            sendPromisedResult(result);
+          } else {
+            sendPromisedResult(sendResponsePromise);
+          }
+
+          // Let Chrome know that the listener is replying.
+          return true;
+        };
+      });
+      const wrappedSendMessageCallback = ({
+        reject,
+        resolve
+      }, reply) => {
+        if (extensionAPIs.runtime.lastError) {
+          // Detect when none of the listeners replied to the sendMessage call and resolve
+          // the promise to undefined as in Firefox.
+          // See https://github.com/mozilla/webextension-polyfill/issues/130
+          if (extensionAPIs.runtime.lastError.message === CHROME_SEND_MESSAGE_CALLBACK_NO_RESPONSE_MESSAGE) {
+            resolve();
+          } else {
+            reject(new Error(extensionAPIs.runtime.lastError.message));
+          }
+        } else if (reply && reply.__mozWebExtensionPolyfillReject__) {
+          // Convert back the JSON representation of the error into
+          // an Error instance.
+          reject(new Error(reply.message));
+        } else {
+          resolve(reply);
+        }
+      };
+      const wrappedSendMessage = (name, metadata, apiNamespaceObj, ...args) => {
+        if (args.length < metadata.minArgs) {
+          throw new Error(`Expected at least ${metadata.minArgs} ${pluralizeArguments(metadata.minArgs)} for ${name}(), got ${args.length}`);
+        }
+        if (args.length > metadata.maxArgs) {
+          throw new Error(`Expected at most ${metadata.maxArgs} ${pluralizeArguments(metadata.maxArgs)} for ${name}(), got ${args.length}`);
+        }
+        return new Promise((resolve, reject) => {
+          const wrappedCb = wrappedSendMessageCallback.bind(null, {
+            resolve,
+            reject
+          });
+          args.push(wrappedCb);
+          apiNamespaceObj.sendMessage(...args);
+        });
+      };
+      const staticWrappers = {
+        devtools: {
+          network: {
+            onRequestFinished: wrapEvent(onRequestFinishedWrappers)
+          }
+        },
+        runtime: {
+          onMessage: wrapEvent(onMessageWrappers),
+          onMessageExternal: wrapEvent(onMessageWrappers),
+          sendMessage: wrappedSendMessage.bind(null, "sendMessage", {
+            minArgs: 1,
+            maxArgs: 3
+          })
+        },
+        tabs: {
+          sendMessage: wrappedSendMessage.bind(null, "sendMessage", {
+            minArgs: 2,
+            maxArgs: 3
+          })
+        }
+      };
+      const settingMetadata = {
+        clear: {
+          minArgs: 1,
+          maxArgs: 1
+        },
+        get: {
+          minArgs: 1,
+          maxArgs: 1
+        },
+        set: {
+          minArgs: 1,
+          maxArgs: 1
+        }
+      };
+      apiMetadata.privacy = {
+        network: {
+          "*": settingMetadata
+        },
+        services: {
+          "*": settingMetadata
+        },
+        websites: {
+          "*": settingMetadata
+        }
+      };
+      return wrapObject(extensionAPIs, staticWrappers, apiMetadata);
+    };
+
+    // The build process adds a UMD wrapper around this file, which makes the
+    // `module` variable available.
+    module.exports = wrapAPIs(chrome);
+  } else {
+    module.exports = globalThis.browser;
+  }
+});
+//# sourceMappingURL=browser-polyfill.js.map
+
+
+/***/ }),
+
+/***/ 852:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   t: () => (/* binding */ webdavEnhancedSettings)
+/* harmony export */ });
+/* harmony import */ var _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(189);
+/* harmony import */ var _service_syncManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(584);
+/* harmony import */ var _shared_browser_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(867);
+/**
+ * WebDAV Enhanced Settings Component
+ * Handles UI interactions for the enhanced WebDAV service
+ */
+
+
+
+
+
+class WebDAVEnhancedSettings {
+    constructor() {
+        this.elements = {};
+        this.isInitialized = false;
+    }
+
+    /**
+     * 初始化组件
+     */
+    async initialize() {
+        if (this.isInitialized) return;
+
+        this.cacheElements();
+        this.attachEventListeners();
+        await this.loadCurrentConfig();
+
+        // 监听认证状态变化
+        _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.onAuthStatusChange = (isAuthenticated) => {
+            this.updateConnectionStatus(isAuthenticated);
+        };
+
+        this.isInitialized = true;
+    }
+
+    /**
+     * 缓存 DOM 元素
+     */
+    cacheElements() {
+        this.elements = {
+            toggle: document.getElementById('webdavToggle'),
+            settings: document.getElementById('webdavSettings'),
+            username: document.getElementById('webdavUsername'),
+            password: document.getElementById('webdavPassword'),
+
+            // 连接模式
+            modeRadios: document.querySelectorAll('input[name="webdavMode"]'),
+
+            // 高级设置
+            advanced: document.getElementById('webdavAdvanced'),
+            disguise: document.getElementById('webdavDisguise'),
+            retries: document.getElementById('webdavRetries'),
+            timeout: document.getElementById('webdavTimeout'),
+
+            // 按钮
+            testBtn: document.getElementById('testWebdav'),
+            backupBtn: document.getElementById('backupNow'),
+            restoreBtn: document.getElementById('restoreData'),
+            logoutBtn: document.getElementById('logoutWebdav'),
+
+            // 状态显示
+            status: document.getElementById('webdavStatus'),
+            statusText: document.getElementById('webdavStatusText')
+        };
+    }
+
+    /**
+     * 绑定事件监听器
+     */
+    attachEventListeners() {
+        // 开关切换
+        this.elements.toggle?.addEventListener('change', () => this.handleToggle());
+
+        // 测试连接按钮
+        this.elements.testBtn?.addEventListener('click', () => this.testConnection());
+
+        // 备份按钮
+        this.elements.backupBtn?.addEventListener('click', () => this.backupData());
+
+        // 恢复按钮
+        this.elements.restoreBtn?.addEventListener('click', () => this.restoreData());
+
+        // 登出按钮
+        this.elements.logoutBtn?.addEventListener('click', () => this.logout());
+
+        // 监听输入变化，自动保存
+        this.elements.username?.addEventListener('change', () => this.autoSave());
+        this.elements.password?.addEventListener('change', () => this.autoSave());
+
+        // 监听配置变化
+        this.elements.modeRadios?.forEach(radio => {
+            radio.addEventListener('change', () => this.autoSave());
+        });
+
+        this.elements.disguise?.addEventListener('change', () => this.autoSave());
+        this.elements.retries?.addEventListener('change', () => this.autoSave());
+        this.elements.timeout?.addEventListener('change', () => this.autoSave());
+    }
+
+    /**
+     * 加载当前配置
+     */
+    async loadCurrentConfig() {
+        const hasConfig = await _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.loadConfig();
+
+        if (hasConfig) {
+            // 设置开关状态
+            if (this.elements.toggle) {
+                this.elements.toggle.checked = true;
+                this.elements.settings.style.display = 'block';
+            }
+
+            // 立即显示当前认证状态
+            const status = _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.getConnectionStatus();
+            this.updateConnectionStatus(status.isAuthenticated);
+
+            // 如果已认证但没有最新状态，后台更新一次
+            if (status.isAuthenticated && (!status.strategy || !status.strategy.timestamp ||
+                Date.now() - new Date(status.strategy.timestamp).getTime() > 5 * 60 * 1000)) {
+                // 超过5分钟或没有状态记录，后台静默测试连接
+                _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.testConnection().then(result => {
+                    this.updateConnectionStatus(result.success);
+                }).catch(() => {
+                    // 静默失败，保持当前状态
+                });
+            }
+
+            // 加载配置值
+            const config = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z.storage.local.get('webdavEnhancedConfig');
+            if (config.webdavEnhancedConfig) {
+                const savedConfig = config.webdavEnhancedConfig;
+
+                // 基本信息
+                if (this.elements.username) {
+                    this.elements.username.value = savedConfig.username || '';
+                }
+                // 显示密码（像原来的设计一样）
+                if (this.elements.password && savedConfig.password) {
+                    this.elements.password.value = atob(savedConfig.password);
+                }
+
+                // 连接策略
+                if (savedConfig.connectionStrategy) {
+                    const protocol = savedConfig.connectionStrategy.protocol || 'auto';
+                    const methodDisguise = savedConfig.connectionStrategy.method === 'disguised';
+
+                    // 设置协议模式
+                    this.elements.modeRadios?.forEach(radio => {
+                        if (radio.value === protocol) {
+                            radio.checked = true;
+                        }
+                    });
+
+                    // 设置方法伪装
+                    if (this.elements.disguise) {
+                        this.elements.disguise.checked = methodDisguise ||
+                                                          savedConfig.connectionStrategy.method === 'auto';
+                    }
+                }
+
+                // 重试配置
+                if (savedConfig.retryConfig) {
+                    if (this.elements.retries) {
+                        this.elements.retries.value = savedConfig.retryConfig.maxRetries || 3;
+                    }
+                    if (this.elements.timeout) {
+                        this.elements.timeout.value = (savedConfig.retryConfig.timeout || 10000) / 1000;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 处理开关切换
+     */
+    async handleToggle() {
+        const isEnabled = this.elements.toggle.checked;
+
+        if (isEnabled) {
+            this.elements.settings.style.display = 'block';
+            // 如果有保存的配置，自动连接
+            const hasConfig = await _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.loadConfig();
+            if (hasConfig) {
+                await this.testConnection();
+            }
+        } else {
+            this.elements.settings.style.display = 'none';
+            await _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.clearConfig();
+            this.updateConnectionStatus(false);
+        }
+    }
+
+    /**
+     * 自动保存配置（防抖）
+     */
+    autoSave = (() => {
+        let timer;
+        return () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                this.saveConfig();
+            }, 1000);
+        };
+    })();
+
+    /**
+     * 尝试使用保存的配置自动连接
+     */
+    async tryAutoConnect() {
+        const savedConfig = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z.storage.local.get('webdavEnhancedConfig');
+        if (savedConfig.webdavEnhancedConfig && savedConfig.webdavEnhancedConfig.enabled) {
+            const config = savedConfig.webdavEnhancedConfig;
+            if (config.username && config.password) {
+                const actualConfig = {
+                    username: config.username,
+                    password: atob(config.password),
+                    connectionMode: config.connectionStrategy || { protocol: 'auto', method: 'auto' },
+                    retryConfig: config.retryConfig || { maxRetries: 3, timeout: 10000 }
+                };
+                return await _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.configure(actualConfig);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 保存配置
+     */
+    async saveConfig() {
+        const username = this.elements.username?.value;
+        const password = this.elements.password?.value;
+
+        if (!username || !password) {
+            return;
+        }
+
+        // 获取连接模式
+        let protocol = 'auto';
+        this.elements.modeRadios?.forEach(radio => {
+            if (radio.checked) {
+                protocol = radio.value;
+            }
+        });
+
+        // 获取方法模式
+        const methodDisguise = this.elements.disguise?.checked;
+        const method = methodDisguise ? 'auto' : 'native';
+
+        // 获取重试配置
+        const retries = parseInt(this.elements.retries?.value || 3);
+        const timeout = parseInt(this.elements.timeout?.value || 10) * 1000;
+
+        const config = {
+            username,
+            password,
+            connectionMode: {
+                protocol,
+                method
+            },
+            retryConfig: {
+                maxRetries: retries,
+                timeout: timeout
+            }
+        };
+
+        // 保存配置但不立即连接
+        await _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.saveConfig(config);
+    }
+
+    /**
+     * 测试连接
+     */
+    async testConnection() {
+        const username = this.elements.username?.value?.trim();
+        const password = this.elements.password?.value?.trim();
+
+        if (!username || !password) {
+            this.showMessage('请输入账号和密码', 'error');
+            return;
+        }
+
+        this.showMessage('正在测试连接...', 'info');
+        this.setButtonsDisabled(true);
+
+        // 获取配置
+        let protocol = 'auto';
+        this.elements.modeRadios?.forEach(radio => {
+            if (radio.checked) {
+                protocol = radio.value;
+            }
+        });
+
+        const methodDisguise = this.elements.disguise?.checked;
+        const method = methodDisguise ? 'auto' : 'native';
+
+        const retries = parseInt(this.elements.retries?.value || 3);
+        const timeout = parseInt(this.elements.timeout?.value || 10) * 1000;
+
+        try {
+            const config = {
+                username,
+                password,
+                connectionMode: {
+                    protocol,
+                    method
+                },
+                retryConfig: {
+                    maxRetries: retries,
+                    timeout: timeout
+                }
+            };
+
+            const success = await _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.configure(config);
+
+            if (success) {
+                const status = _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.getConnectionStatus();
+                let strategyText = '';
+
+                if (status.currentProtocol && status.currentMethod) {
+                    const protocolText = status.currentProtocol === 'https' ? 'HTTPS' : 'HTTP';
+                    const methodText = status.currentMethod === 'disguised' ? '伪装' : '原生';
+                    strategyText = ` (${protocolText} + ${methodText})`;
+                }
+
+                this.showMessage(`连接成功${strategyText}`, 'success');
+                this.updateConnectionStatus(true);
+
+                // 连接成功后进行一次同步
+                try {
+                    await _service_syncManager__WEBPACK_IMPORTED_MODULE_1__/* .syncManager */ .D.performSync();
+                } catch (e) {
+                    console.warn('Sync after connect failed:', e);
+                }
+            } else {
+                this.showMessage('连接失败，请检查账号密码和网络设置', 'error');
+                this.updateConnectionStatus(false);
+            }
+        } catch (error) {
+            console.error('Connection test failed:', error);
+            this.showMessage(`连接失败: ${error.message}`, 'error');
+            this.updateConnectionStatus(false);
+        } finally {
+            this.setButtonsDisabled(false);
+        }
+    }
+
+    /**
+     * 备份数据
+     */
+    async backupData() {
+        if (!_service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.isAuthenticated) {
+            // 尝试使用保存的配置自动连接
+            const connected = await this.tryAutoConnect();
+            if (!connected) {
+                this.showMessage('请先连接 WebDAV', 'error');
+                return;
+            }
+        }
+
+        this.showMessage('正在备份...', 'info');
+        this.setButtonsDisabled(true);
+
+        try {
+            const { getAllProblems } = await Promise.resolve(/* import() */).then(__webpack_require__.bind(__webpack_require__, 820));
+            const problems = await getAllProblems();
+            // 转换为数组
+            const problemsArray = Object.values(problems);
+            const filename = await _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.backupProblems(problemsArray);
+            this.showMessage(`备份成功: ${filename}`, 'success');
+
+            // 备份完成（无全局事件通知）
+        } catch (error) {
+            console.error('Backup failed:', error);
+            this.showMessage(`备份失败: ${error.message}`, 'error');
+        } finally {
+            this.setButtonsDisabled(false);
+        }
+    }
+
+    /**
+     * 恢复数据
+     */
+    async restoreData() {
+        if (!_service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.isAuthenticated) {
+            this.showMessage('请先连接 WebDAV', 'error');
+            return;
+        }
+
+        // 获取备份列表
+        this.showMessage('正在获取备份列表...', 'info');
+        this.setButtonsDisabled(true);
+
+        try {
+            const backups = await _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.getBackupList();
+
+            if (backups.length === 0) {
+                this.showMessage('没有找到备份文件', 'warning');
+                return;
+            }
+
+            // 显示备份选择对话框
+            const selectedBackup = await this.showBackupSelector(backups);
+
+            if (selectedBackup) {
+                this.showMessage('正在恢复数据...', 'info');
+                const problemsArray = await _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.restoreProblems(selectedBackup);
+
+                // 转换数组为对象格式（以 index 为 key）
+                const problemsObj = {};
+                problemsArray.forEach(problem => {
+                    if (problem.index) {
+                        problemsObj[problem.index] = problem;
+                    }
+                });
+
+                // 使用 setProblems 直接覆盖本地存储（会自动处理当前模式）
+                const { setProblems } = await Promise.resolve(/* import() */).then(__webpack_require__.bind(__webpack_require__, 820));
+                await setProblems(problemsObj);
+
+                this.showMessage('数据恢复成功', 'success');
+
+                // 恢复完成（无全局事件通知）
+
+                // 刷新页面显示
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+            }
+        } catch (error) {
+            console.error('Restore failed:', error);
+            this.showMessage(`恢复失败: ${error.message}`, 'error');
+        } finally {
+            this.setButtonsDisabled(false);
+        }
+    }
+
+    /**
+     * 显示备份选择对话框
+     */
+    async showBackupSelector(backups) {
+        // 导入 SweetAlert2
+        const Swal = (await Promise.resolve(/* import() */).then(__webpack_require__.t.bind(__webpack_require__, 455, 23))).default;
+
+        // 构建备份列表 HTML
+        const backupOptions = backups.slice(0, 5).map(backup => {
+            const date = new Date(backup.lastModified).toLocaleString();
+            const size = (backup.size / 1024).toFixed(2);
+            return `
+                <div style="padding: 10px; border: 1px solid #ddd; margin: 5px 0; border-radius: 5px; cursor: pointer;"
+                     class="backup-option" data-filename="${backup.name}">
+                    <strong>${backup.name}</strong><br>
+                    <small>时间: ${date} | 大小: ${size} KB</small>
+                </div>
+            `;
+        }).join('');
+
+        const result = await Swal.fire({
+            title: '选择要恢复的备份',
+            html: `
+                <div style="max-height: 300px; overflow-y: auto;">
+                    ${backupOptions}
+                </div>
+                <p style="margin-top: 10px; color: #ff6b6b;">
+                    <strong>⚠️ 警告：恢复将覆盖当前所有数据！</strong>
+                </p>
+            `,
+            showCancelButton: true,
+            confirmButtonText: '确认恢复',
+            cancelButtonText: '取消',
+            confirmButtonColor: '#ff6b6b',
+            didOpen: () => {
+                // 添加点击选择效果
+                const options = Swal.getHtmlContainer().querySelectorAll('.backup-option');
+                let selectedFilename = backups[0].name; // 默认选择第一个
+
+                options.forEach(option => {
+                    option.addEventListener('click', () => {
+                        options.forEach(opt => opt.style.background = '');
+                        option.style.background = '#e3f2fd';
+                        selectedFilename = option.dataset.filename;
+                    });
+                });
+
+                // 默认选中第一个
+                if (options[0]) {
+                    options[0].style.background = '#e3f2fd';
+                }
+
+                // 保存选中的文件名
+                Swal.selectedFilename = selectedFilename;
+            },
+            preConfirm: () => {
+                const options = Swal.getHtmlContainer().querySelectorAll('.backup-option');
+                let selectedFilename = null;
+                options.forEach(option => {
+                    if (option.style.background) {
+                        selectedFilename = option.dataset.filename;
+                    }
+                });
+                return selectedFilename || backups[0].name;
+            }
+        });
+
+        return result.isConfirmed ? result.value : null;
+    }
+
+    /**
+     * 登出
+     */
+    async logout() {
+        if (confirm('确定要退出 WebDAV 账号吗？')) {
+            await _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.clearConfig();
+            this.elements.username.value = '';
+            this.elements.password.value = '';
+            this.updateConnectionStatus(false);
+            this.showMessage('已退出账号', 'info');
+
+            // 已登出（无全局事件通知）
+        }
+    }
+
+    /**
+     * 更新连接状态显示
+     */
+    updateConnectionStatus(isConnected) {
+        if (!this.elements.status) return;
+
+        if (isConnected) {
+            const status = _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.getConnectionStatus();
+            let statusText = '已连接';
+
+            if (status.currentProtocol && status.currentMethod) {
+                const protocolText = status.currentProtocol === 'https' ? 'HTTPS' : 'HTTP';
+                const methodText = status.currentMethod === 'disguised' ? '伪装' : '原生';
+                statusText = `已连接 (${protocolText} + ${methodText})`;
+            }
+
+            this.elements.status.style.display = 'block';
+            this.elements.status.style.background = '#d4edda';
+            this.elements.status.style.border = '1px solid #c3e6cb';
+            this.elements.status.style.padding = '8px';
+            this.elements.status.style.borderRadius = '4px';
+            this.elements.statusText.textContent = statusText;
+            this.elements.statusText.style.color = '#155724';
+            this.elements.statusText.style.fontWeight = '500';
+        } else {
+            // 未连接时也显示状态
+            this.elements.status.style.display = 'block';
+            this.elements.status.style.background = '#f8d7da';
+            this.elements.status.style.border = '1px solid #f5c6cb';
+            this.elements.status.style.padding = '8px';
+            this.elements.status.style.borderRadius = '4px';
+            this.elements.statusText.textContent = '未连接';
+            this.elements.statusText.style.color = '#721c24';
+            this.elements.statusText.style.fontWeight = '500';
+        }
+    }
+
+    /**
+     * 显示消息
+     */
+    showMessage(message, type = 'info') {
+        // 清除之前的定时器
+        if (this.messageTimer) {
+            clearTimeout(this.messageTimer);
+        }
+
+        // 使用状态区域显示临时消息
+        if (this.elements.status && this.elements.statusText) {
+            this.elements.status.style.display = 'block';
+
+            // 使用更明显的颜色和更好的对比度
+            const colors = {
+                success: '#d4edda',  // 浅绿色背景
+                error: '#f8d7da',    // 浅红色背景
+                warning: '#fff3cd',  // 浅黄色背景
+                info: '#d1ecf1'      // 浅蓝色背景
+            };
+
+            const textColors = {
+                success: '#155724',  // 深绿色文字
+                error: '#721c24',    // 深红色文字
+                warning: '#856404',  // 深黄色文字
+                info: '#0c5460'      // 深蓝色文字
+            };
+
+            // 添加边框以增强可见性
+            const borderColors = {
+                success: '#c3e6cb',
+                error: '#f5c6cb',
+                warning: '#ffeeba',
+                info: '#bee5eb'
+            };
+
+            this.elements.status.style.background = colors[type] || colors.info;
+            this.elements.status.style.border = `1px solid ${borderColors[type] || borderColors.info}`;
+            this.elements.status.style.padding = '8px';
+            this.elements.status.style.borderRadius = '4px';
+            this.elements.statusText.textContent = message;
+            this.elements.statusText.style.color = textColors[type] || textColors.info;
+            this.elements.statusText.style.fontWeight = '500';
+
+            // 根据消息类型决定显示时长
+            const displayTime = type === 'error' ? 5000 : 3000;
+
+            // 如果是成功连接，不自动隐藏
+            if (type === 'success' && message.includes('连接成功')) {
+                // 更新为持久的连接状态
+                this.messageTimer = setTimeout(() => {
+                    this.updateConnectionStatus(true);
+                }, displayTime);
+            } else {
+                // 其他消息过后恢复正常状态
+                this.messageTimer = setTimeout(() => {
+                    const status = _service_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.getConnectionStatus();
+                    this.updateConnectionStatus(status.isAuthenticated);
+                }, displayTime);
+            }
+        }
+    }
+
+    /**
+     * 设置按钮禁用状态
+     */
+    setButtonsDisabled(disabled) {
+        const buttons = [
+            this.elements.testBtn,
+            this.elements.backupBtn,
+            this.elements.restoreBtn,
+            this.elements.logoutBtn
+        ];
+
+        buttons.forEach(btn => {
+            if (btn) {
+                btn.disabled = disabled;
+            }
+        });
+    }
+}
+
+// 导出单例
+const webdavEnhancedSettings = new WebDAVEnhancedSettings();
+
+
+/***/ }),
+
+/***/ 326:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6370,12 +8341,16 @@ __webpack_require__.d(__webpack_exports__, {
   M: () => (/* binding */ initializeReviewPage)
 });
 
-// UNUSED EXPORTS: changeCardLimit, initializeFeedbackButton, updateCardDisplay, updateCardLimitDisplay
+// UNUSED EXPORTS: initializeFeedbackButton, updateCardDisplay
 
-// EXTERNAL MODULE: ./src/popup/view/view.js + 7 modules
-var view = __webpack_require__(876);
+// EXTERNAL MODULE: ./src/popup/view/view.js + 8 modules
+var view = __webpack_require__(842);
 // EXTERNAL MODULE: ./src/popup/service/problemService.js + 1 modules
 var problemService = __webpack_require__(820);
+// EXTERNAL MODULE: ./src/popup/service/modeService.js
+var modeService = __webpack_require__(733);
+// EXTERNAL MODULE: ./src/popup/delegate/localStorageDelegate.js
+var localStorageDelegate = __webpack_require__(891);
 // EXTERNAL MODULE: ./src/popup/util/utils.js
 var utils = __webpack_require__(384);
 // EXTERNAL MODULE: ./src/popup/entity/problem.js
@@ -6439,17 +8414,30 @@ const addRecordButton = () => {
             opacity: 1;
         }
         
-        .Leetcode-Mastery-Scheduler-record-btn .reset-position {
-            margin-left: 6px;  /* 减小间距 */
-            opacity: 0.7;
+        /* reset-position removed */
+
+        .Leetcode-Mastery-Scheduler-record-btn .separator {
+            margin: 0 6px;
+            opacity: 0.6;
+            user-select: none;
+        }
+
+        .Leetcode-Mastery-Scheduler-record-btn .add-today {
+            margin-left: 4px;
+            opacity: 0.95;
             cursor: pointer;
-            font-size: 12px;  /* 减小重置按钮大小 */
+            font-size: 12px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(255,255,255,0.12);
         }
-        
-        .Leetcode-Mastery-Scheduler-record-btn .reset-position:hover {
-            opacity: 1;
+        .Leetcode-Mastery-Scheduler-record-btn .add-today:hover {
+            background: rgba(255,255,255,0.22);
+            border-color: rgba(255,255,255,0.55);
         }
-        
+
         .Leetcode-Mastery-Scheduler-record-btn .star-icon {
             margin-right: 4px;
             font-size: 11px;
@@ -6466,7 +8454,8 @@ const addRecordButton = () => {
     button.innerHTML = `
         <span class="drag-handle">⋮</span>
         <i class="fas fa-star star-icon"></i>Rate
-        <span class="reset-position" title="Reset position">↺</span>
+        <span class="separator">|</span>
+        <span class="add-today" title="加入待复习题目队列 | Add to review queue">＋</span>
     `;
     
     // 设置保存的位置
@@ -6475,8 +8464,11 @@ const addRecordButton = () => {
     
     // 添加点击事件
     button.addEventListener('click', async (e) => {
-        // 如果点击的是拖动手柄或重置按钮，不触发评分
-        if (e.target.classList.contains('drag-handle') || e.target.classList.contains('reset-position')) {
+        // 如果点击的是拖动手柄、分隔符或“加入今日”，不触发评分
+        const t = e.target;
+        if (t && t.classList && (t.classList.contains('drag-handle') ||
+            t.classList.contains('separator') ||
+            t.classList.contains('add-today'))) {
             return;
         }
         
@@ -6487,14 +8479,27 @@ const addRecordButton = () => {
         }
     });
     
-    // 重置位置
-    const resetButton = button.querySelector('.reset-position');
-    resetButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        button.style.bottom = '20px';
-        button.style.right = '20px';
-        localStorage.setItem('LMS_rateButtonPosition', JSON.stringify({bottom: 20, right: 20}));
-    });
+    // reset button removed
+
+    // 加入今日待复习（不触发评分）
+    const addTodayBtn = button.querySelector('.add-today');
+    if (addTodayBtn) {
+        addTodayBtn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            try {
+                const result = await handleAddProblem(window.location.href);
+                if (result) {
+                    showToast('已加入待复习题目队列\nAdded to review queue.', 'success');
+                }
+            } catch (error) {
+                if (error?.message && error.message.includes('Duplicate')) {
+                    showToast('题目已存在，未进行改动\nAlready exists. No changes made.', 'warning');
+                } else {
+                    showToast(`加入失败：${error?.message || 'Unknown error'}`, 'error');
+                }
+            }
+        });
+    }
     
     // 添加拖拽功能
     let isDragging = false;
@@ -6588,10 +8593,11 @@ const addRecordButton = () => {
 
 
 // 抽取成通用的处理函数
-async function handleFeedbackSubmission(problem = null) {
+async function handleFeedbackSubmission(problem = null, fromPopup = false) {
     try {
-        // 记录是否为页面提交
-        const isPageSubmission = !problem;
+        // 记录是否为页面提交（在 LeetCode 页面上点击 Rate 按钮）
+        // 只有当没有传入 problem 且不是从 popup 调用时，才是页面提交
+        const isPageSubmission = !problem && !fromPopup;
         
         // 显示难度反馈弹窗
         const feedback = await showDifficultyFeedbackDialog().catch(error => {
@@ -6608,16 +8614,19 @@ async function handleFeedbackSubmission(problem = null) {
         if (!problem) {
             await (0,problemService/* syncProblems */.xd)();   // 同步云端数据
             const { problemIndex, problemName, problemLevel, problemUrl } = await (0,problemService/* getCurrentProblemInfoFromLeetCodeByHref */.cp)();
-            const problems = await (0,problemService/* getAllProblems */.kT)();
+            const problems = await (0,problemService.getAllProblems)();
             problem = problems[problemIndex];
             
+            // 如果是新题目，创建新的 problem 对象
             if (!problem || problem.isDeleted == true) {
                 problem = new entity_problem/* Problem */.tc(problemIndex, problemName, problemLevel, problemUrl, Date.now(), (0,utils/* getDifficultyBasedSteps */.tL)(problemLevel)[0], Date.now());
+                // 新题目标记，跳过今日复习检查
+                problem.isNewProblem = true;
             }
         }
         
-        // 检查上次复习时间是否是今天，如果是则不允许再次复习
-        if (problem.fsrsState && problem.fsrsState.lastReview) {
+        // 检查上次复习时间是否是今天，如果是则不允许再次复习（新题目跳过此检查）
+        if (!problem.isNewProblem && problem.fsrsState && problem.fsrsState.lastReview) {
             const lastReviewDate = new Date(problem.fsrsState.lastReview);
             const today = new Date();
             
@@ -6631,6 +8640,9 @@ async function handleFeedbackSubmission(problem = null) {
                 return null;
             }
         }
+        
+        // 清除新题目标记
+        delete problem.isNewProblem;
         
         problem = await (0,fsrsService/* updateProblemWithFSRS */.Gq)(problem, feedback);
         await (0,problemService/* createOrUpdateProblem */.qu)(problem);
@@ -6928,7 +8940,7 @@ const addDialogStyles = () => {
 async function handleAddProblem(url) {
     try {
         await (0,problemService/* syncProblems */.xd)();  // 同步云端数据
-        const problems = await (0,problemService/* getAllProblems */.kT)();
+        const problems = await (0,problemService.getAllProblems)();
         
         // 使用新的API获取题目信息
         const problemInfo = await (0,problemService/* getCurrentProblemInfoFromLeetCodeByUrl */.Oo)(url);
@@ -6983,7 +8995,7 @@ async function handleAddProblem(url) {
 async function handleAddBlankProblem(name, level, customUrl = '') {
     try {
         await (0,problemService/* syncProblems */.xd)();  // 同步云端数据
-        const problems = await (0,problemService/* getAllProblems */.kT)();
+        const problems = await (0,problemService.getAllProblems)();
         
         // 获取当前自定义题目的数量，用于生成递增的索引
         const customProblems = Object.values(problems).filter(p => 
@@ -7045,26 +9057,23 @@ async function handleAddBlankProblem(name, level, customUrl = '') {
     }
 }
 
-
 // EXTERNAL MODULE: ./src/popup/popup.css
 var popup = __webpack_require__(823);
 // EXTERNAL MODULE: ./src/popup/service/configService.js
 var configService = __webpack_require__(970);
 // EXTERNAL MODULE: ./src/popup/store.js
 var store = __webpack_require__(214);
-// EXTERNAL MODULE: ./src/popup/util/doms.js
-var doms = __webpack_require__(422);
 // EXTERNAL MODULE: ./src/popup/util/sort.js
 var sort = __webpack_require__(192);
+// EXTERNAL MODULE: ./src/popup/util/fsrs.js
+var fsrs = __webpack_require__(878);
+// EXTERNAL MODULE: ./src/popup/service/webdavEnhancedService.js
+var webdavEnhancedService = __webpack_require__(189);
+// EXTERNAL MODULE: ./src/popup/service/syncManager.js
+var syncManager = __webpack_require__(584);
 // EXTERNAL MODULE: ./node_modules/sweetalert2/dist/sweetalert2.all.js
 var sweetalert2_all = __webpack_require__(455);
 var sweetalert2_all_default = /*#__PURE__*/__webpack_require__.n(sweetalert2_all);
-// EXTERNAL MODULE: ./src/popup/util/fsrs.js
-var fsrs = __webpack_require__(878);
-// EXTERNAL MODULE: ./src/popup/service/webdavService.js
-var webdavService = __webpack_require__(6);
-// EXTERNAL MODULE: ./src/popup/service/syncManager.js
-var syncManager = __webpack_require__(584);
 ;// CONCATENATED MODULE: ./src/popup/component/conflictResolver.js
 /**
  * Conflict Resolver Component for handling sync conflicts
@@ -7414,55 +9423,74 @@ document.head.appendChild(style);
 
 // 导出单例
 const conflictResolver = new ConflictResolver();
-;// CONCATENATED MODULE: ./src/popup/daily-review.js
+// EXTERNAL MODULE: ./src/shared/browser.js
+var browser = __webpack_require__(867);
+;// CONCATENATED MODULE: ./src/popup/service/reviewService.js
+/**
+ * Review Service
+ * 管理复习相关的业务逻辑
+ */
 
 
 
 
 
 
+/**
+ * 判断题目是否在今天复习过
+ */
+function isReviewedToday(problem) {
+    if (!problem.fsrsState?.lastReview) return false;
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
+    const lastReview = new Date(problem.fsrsState.lastReview);
+    lastReview.setHours(0, 0, 0, 0);
 
-
-// 在文件顶部导入 SweetAlert2
-
-// 导入 getAllRevlogs 函数
-
-
-
-
-
-
-// 在文件开头添加
-const LAST_AVERAGE_KEY = 'lastRetrievabilityAverage';
-const LAST_UPDATE_TIME_KEY = 'lastUpdateTime';
-let yesterdayRetrievabilityAverage = 0.00;
-
-
-
-async function loadProblemList() {
-    await (0,view/* renderAll */.xy)();
+    return lastReview.getTime() === today.getTime();
 }
 
+/**
+ * 判断题目是否是今天需要复习的
+ */
+function isReviewDueToday(problem) {
+    if (!problem.fsrsState?.nextReview) {
+        console.log('题目没有下次复习时间:', problem.name);
+        return false;
+    }
 
-// 获取上次存储的平均值和时间
-function loadLastAverageData() {
-    const lastData = {
-        average: parseFloat(localStorage.getItem(LAST_AVERAGE_KEY)) || 0.00,
-        timestamp: parseInt(localStorage.getItem(LAST_UPDATE_TIME_KEY)) || 0
-    };
-    return lastData;
-}
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-async function loadDailyReviewData() {
-    const problems = Object.values(await (0,problemService/* getAllProblems */.kT)()).filter(p => p.isDeleted !== true);
-    store/* daily_store */.S.reviewScheduledProblems = problems
-    .sort((a, b) => {
-        const retrievabilityA = (0,utils/* getCurrentRetrievability */.zV)(a);
-        const retrievabilityB = (0,utils/* getCurrentRetrievability */.zV)(b);
-        return retrievabilityA - retrievabilityB; // 升序排序，最小值在前
+    const nextReview = new Date(problem.fsrsState.nextReview);
+    nextReview.setHours(0, 0, 0, 0);
+
+    const isDue = nextReview <= today;
+
+    console.log('复习时间检查:', {
+        problemName: problem.name,
+        nextReview: nextReview.toISOString(),
+        today: today.toISOString(),
+        isDue: isDue
     });
+
+    return isDue;
+}
+
+/**
+ * 加载每日复习数据
+ */
+async function loadDailyReviewData() {
+    const problems = Object.values(await (0,problemService.getAllProblems)()).filter(p => p.isDeleted !== true);
+
+    // 按可检索性排序所有题目
+    store/* daily_store */.S.reviewScheduledProblems = problems
+        .sort((a, b) => {
+            const retrievabilityA = (0,utils/* getCurrentRetrievability */.zV)(a);
+            const retrievabilityB = (0,utils/* getCurrentRetrievability */.zV)(b);
+            return retrievabilityA - retrievabilityB; // 升序排序，最小值在前
+        });
 
     // 获取今天已复习和待复习的题目
     store/* daily_store */.S.dailyReviewProblems = store/* daily_store */.S.reviewScheduledProblems
@@ -7480,10 +9508,9 @@ async function loadDailyReviewData() {
             return retrievabilityA - retrievabilityB;
         });
 
-
     console.log('总题目数:', problems.length);
     console.log('今日待复习题目数:', store/* daily_store */.S.dailyReviewProblems.length);
-    
+
     // 添加调试日志
     store/* daily_store */.S.dailyReviewProblems.forEach(problem => {
         const isReviewed = isReviewedToday(problem);
@@ -7499,163 +9526,177 @@ async function loadDailyReviewData() {
     });
 }
 
-// 存储当前的平均值和时间
+/**
+ * 标记题目为已复习
+ */
+async function markAsReviewed(button, problem) {
+    console.log('执行 markAsReviewed', button, problem);
+
+    const card = button.closest('.review-card');
+    if (!card) {
+        console.log('未找到对应的卡片');
+        return;
+    }
+
+    console.log('找到卡片，开始更新状态');
+
+    // 更换图标并更改样式
+    const icon = button.querySelector('i');
+    icon.classList.remove('fa-check-circle');
+    icon.classList.add('fa-circle-check');
+    icon.style.color = '#0D6E6E';
+
+    // 禁用按钮
+    button.disabled = true;
+    card.style.opacity = '0.4';
+
+    console.log('更新完成');
+}
+
+/**
+ * 处理复习按钮点击
+ */
+async function handleReviewButtonClick(button, problem) {
+    console.log('复习按钮被点击');
+    const updatedProblem = await handleFeedbackSubmission(problem, true);
+    if (updatedProblem) {
+        await markAsReviewed(button, updatedProblem);
+    }
+    return updatedProblem;
+}
+
+/**
+ * 获取下次复习提示文本
+ */
+function getNextReviewTips(fsrsState) {
+    if (!fsrsState?.nextReview) {
+        return 'Not scheduled';
+    }
+
+    const nextReviewDate = new Date(fsrsState.nextReview);
+    const now = new Date();
+
+    // 获取当前日期和下次复习日期（不含时间）
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const reviewDay = new Date(nextReviewDate.getFullYear(), nextReviewDate.getMonth(), nextReviewDate.getDate());
+
+    // 计算日期差（天数）
+    const diffTime = reviewDay.getTime() - today.getTime();
+    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays < 0) {
+        // 已经过了计划复习日期
+        const daysOverdue = Math.abs(diffDays);
+        return `Delay by ${daysOverdue} day${daysOverdue > 1 ? 's' : ''}`;
+    } else if (diffDays === 0) {
+        // 今天需要复习
+        return 'Review today';
+    } else if (diffDays === 1) {
+        // 明天需要复习
+        return 'Review tomorrow';
+    } else {
+        // x天后复习
+        return `Review in ${diffDays} days`;
+    }
+}
+;// CONCATENATED MODULE: ./src/popup/service/statsService.js
+/**
+ * Statistics Service
+ * 管理统计相关的业务逻辑
+ */
+
+
+
+
+
+const LAST_AVERAGE_KEY = 'lastRetrievabilityAverage';
+const LAST_UPDATE_TIME_KEY = 'lastUpdateTime';
+
+/**
+ * 获取上次存储的平均值和时间
+ */
+function loadLastAverageData() {
+    const lastData = {
+        average: parseFloat(localStorage.getItem(LAST_AVERAGE_KEY)) || 0.00,
+        timestamp: parseInt(localStorage.getItem(LAST_UPDATE_TIME_KEY)) || 0
+    };
+    return lastData;
+}
+
+/**
+ * 存储当前的平均值和时间
+ */
 function saveCurrentAverageData(average) {
     localStorage.setItem(LAST_AVERAGE_KEY, average.toString());
     localStorage.setItem(LAST_UPDATE_TIME_KEY, Date.now().toString());
 }
 
-// 设置当前日期
-function setCurrentDate() {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const today = new Date().toLocaleDateString('en-US', options);
-    document.getElementById('currentDate').textContent = today;
-}
-
-
-// 判断是否是今天需要复习的题目
-function isReviewDueToday(problem) {
-    if (!problem.fsrsState?.nextReview) {
-        console.log('题目没有下次复习时间:', problem.name);
-        return false;
-    }
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    const nextReview = new Date(problem.fsrsState.nextReview);
-    nextReview.setHours(0, 0, 0, 0);
-    
-    const isDue = nextReview <= today;
-    
-    console.log('复习时间检查:', {
-        problemName: problem.name,
-        nextReview: nextReview.toISOString(),
-        today: today.toISOString(),
-        isDue: isDue
-    });
-    
-    return isDue;
-}
-
-function isReviewedToday(problem) {
-    if (!problem.fsrsState?.lastReview) return false;
-    
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    const lastReview = new Date(problem.fsrsState.lastReview);
-    lastReview.setHours(0, 0, 0, 0);
-    
-    return lastReview.getTime() === today.getTime();
-}
-
-
-
-
-// 计算可检索性均值
+/**
+ * 计算可检索性均值
+ */
 function calculateRetrievabilityAverage() {
     const problems = store/* daily_store */.S.reviewScheduledProblems;
     if (!problems || problems.length === 0) return 0;
-    
+
     const totalRetrievability = problems.reduce((sum, problem) => {
         const retrievability = (0,utils/* getCurrentRetrievability */.zV)(problem);
         return sum + retrievability;
     }, 0);
-    
+
     return Number((totalRetrievability / problems.length).toFixed(2));
 }
 
-
-// 更新顶部统计信息
-function updateStats() {
-    console.log('更新统计信息');
-    // 设置默认值
+/**
+ * 计算完成统计
+ */
+function calculateCompletionStats() {
     let completedCount = 0;
     let totalProblems = 0;
-    // 添加空值检查
+
     if (!store/* daily_store */.S || !store/* daily_store */.S.dailyReviewProblems) {
         console.log('daily_store 或 dailyReviewProblems 为空:', {
             daily_store: store/* daily_store */.S,
             problems: store/* daily_store */.S?.dailyReviewProblems
         });
-
-        
-        // 更新显示
-        document.getElementById('completedCount').textContent = completedCount;
-        document.getElementById('totalCount').textContent = totalProblems;
-        document.getElementById('completionRate').textContent = '0%';
-        updateProgressCircle(0);
-        return;
+        return { completedCount, totalProblems, completionRate: 0 };
     }
 
-
-
     // 获取当前显示的卡片数量
-    let cardLimit = parseInt(document.getElementById('cardLimit').value, 10)|| store/* store */.h.defaultCardLimit || 1;
-    console.log('当前卡片限制值:', {
-        rawValue: document.getElementById('cardLimit').value,
-        parsedCardLimit: cardLimit,
-        element: document.getElementById('cardLimit')
-    });
-
-
+    let cardLimit = parseInt(document.getElementById('cardLimit')?.value, 10) || store/* store */.h.defaultCardLimit || 1;
 
     // 计算今日已复习的题目数量
-    completedCount = store/* daily_store */.S.dailyReviewProblems.filter(problem => 
+    completedCount = store/* daily_store */.S.dailyReviewProblems.filter(problem =>
         isReviewedToday(problem)
     ).length;
 
-    
     totalProblems = store/* daily_store */.S.dailyReviewProblems?.length || 0;
     if (cardLimit > totalProblems) {
         cardLimit = totalProblems;
     }
 
-    // 添加空状态提示
-    const addProblemWrapper = document.querySelector('.add-problem-wrapper');
-    // 先移除可能存在的空状态提示
-    const existingEmptyState = document.querySelector('.empty-state');
-    if (existingEmptyState) {
-        existingEmptyState.remove();
-    }
-    
-    if (totalProblems === 0 || cardLimit === 0) {
-        const emptyState = document.createElement('div');
-        emptyState.className = 'empty-state';
-        emptyState.innerHTML = `
-
-        <i class="fas fa-lightbulb"></i>
-            Time to learn something new!
-        `;
-        addProblemWrapper.insertAdjacentElement('beforebegin', emptyState);
-    }
-
-    
-    // 更新显示的已复习数量
-    document.getElementById('completedCount').textContent = completedCount;
-    document.getElementById('totalCount').textContent = cardLimit; // 使用当前的卡片数量
-
-    // 更新进度条
     const completionRate = cardLimit > 0 ? Math.round((completedCount / cardLimit) * 100) : 0;
-    updateProgressCircle(completionRate);
-    document.getElementById('completionRate').textContent = `${completionRate}%`;
-    // document.querySelector('.completion-circle').style.setProperty('--percentage', `${completionRate}%`);
-    // 计算当前的可检索性均值，并确保是数字类型
-    const currentRetrievabilityAverage = parseFloat(calculateRetrievabilityAverage()) || 0;
-    console.log('当前可检索性均值:', {
-        raw: calculateRetrievabilityAverage(),
-        parsed: currentRetrievabilityAverage,
-        type: typeof currentRetrievabilityAverage
-    });
-    const retrievabilityElement = document.getElementById('retrievabilityAverage');
-    retrievabilityElement.textContent = currentRetrievabilityAverage;
 
+    return {
+        completedCount,
+        totalProblems,
+        cardLimit,
+        completionRate
+    };
+}
+
+/**
+ * 更新可检索性趋势
+ */
+function updateRetrievabilityTrend() {
+    // 计算当前的可检索性均值
+    const currentRetrievabilityAverage = parseFloat(calculateRetrievabilityAverage()) || 0;
 
     // 获取上次存储的数据
     const lastData = loadLastAverageData();
     const hoursSinceLastUpdate = (Date.now() - lastData.timestamp) / (1000 * 60 * 60);
-    
+
+    let yesterdayRetrievabilityAverage = lastData.average;
+
     // 如果超过24小时，更新存储的数据
     if (hoursSinceLastUpdate >= 24) {
         console.log('距离上次更新已超过24小时:', {
@@ -7664,10 +9705,9 @@ function updateStats() {
             lastAverage: lastData.average.toFixed(2),
             currentAverage: currentRetrievabilityAverage.toFixed(2)
         });
-        
-        yesterdayRetrievabilityAverage = lastData.average;
+
         saveCurrentAverageData(currentRetrievabilityAverage);
-        
+
         console.log('已更新存储数据:', {
             newYesterdayAverage: yesterdayRetrievabilityAverage.toFixed(2),
             savedCurrentAverage: currentRetrievabilityAverage.toFixed(2),
@@ -7679,75 +9719,57 @@ function updateStats() {
             lastUpdateTime: new Date(lastData.timestamp).toLocaleString(),
             usingLastAverage: lastData.average.toFixed(2)
         });
-        yesterdayRetrievabilityAverage = lastData.average;
     }
 
-    // 更新趋势图标
-    const trendIcon = document.getElementById('trendIcon');
-    if (currentRetrievabilityAverage > yesterdayRetrievabilityAverage) {
-        trendIcon.className = 'fas fa-arrow-up trend-icon trend-up';
-    } else if (currentRetrievabilityAverage < yesterdayRetrievabilityAverage) {
-        trendIcon.className = 'fas fa-arrow-down trend-icon trend-down';
-    } else {
-        trendIcon.className = '';
-    }
-
-    // 根据可检索性均值调整颜色和背景提示
-    const lowMemoryWarning = document.getElementById('lowMemoryWarning');
-    if (currentRetrievabilityAverage < 0.90) {
-        retrievabilityElement.classList.add('low');
-        lowMemoryWarning.classList.add('active');
-    } else {
-        retrievabilityElement.classList.remove('low');
-        lowMemoryWarning.classList.remove('active');
-    }
-    updateCardLimitDisplay(); // 这里也添加一次调用
+    return {
+        currentAverage: currentRetrievabilityAverage,
+        yesterdayAverage: yesterdayRetrievabilityAverage,
+        trend: currentRetrievabilityAverage > yesterdayRetrievabilityAverage ? 'up' :
+            currentRetrievabilityAverage < yesterdayRetrievabilityAverage ? 'down' : 'same'
+    };
 }
 
-function updateProgressCircle(completionRate) {
-    const progressCircle = document.querySelector('.completion-circle');
-    const radius = 54; // 圆的半径
-    const circumference = 2 * Math.PI * radius; // 圆的周长
-
-    // 计算偏移量
-    const offset = circumference - (completionRate / 100) * circumference;
-    progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-    progressCircle.style.strokeDashoffset = offset;
-
-    // 更新显示的百分比
-    // document.getElementById('completionRate').textContent = `${completionRate}%`;
-    document.querySelector('.completion-circle').style.setProperty('--percentage', `${completionRate}%`);
-
-    // 添加动画效果
-    const innerCircle = document.querySelector('.inner-circle');
-    innerCircle.style.transform = `scale(1.1)`; // 放大内圈
-    setTimeout(() => {
-        innerCircle.style.transform = `scale(1)`; // 恢复原状
-    }, 500); // 动画持续时间
+/**
+ * 设置当前日期
+ */
+function setCurrentDate() {
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const today = new Date().toLocaleDateString('en-US', options);
+    const element = document.getElementById('currentDate');
+    if (element) {
+        element.textContent = today;
+    }
 }
+;// CONCATENATED MODULE: ./src/popup/service/cardDisplayService.js
+/**
+ * Card Display Service
+ * 管理复习卡片的显示逻辑
+ */
 
 
 
 
-// 更新卡片限制和显示
+
+
+/**
+ * 更新卡片限制显示
+ */
 function updateCardLimitDisplay() {
     const input = document.getElementById('cardLimit');
     const totalDisplay = document.querySelector('.total-problems');
     const totalProblems = store/* daily_store */.S.dailyReviewProblems?.length || 0;
-    
+
     // 更新最大值和总数显示
     input.max = Math.max(totalProblems, 1);
     totalDisplay.textContent = `/ ${totalProblems}`;
-    
+
     // 使用保存的默认值或回退到3
     let currentValue = store/* store */.h.defaultCardLimit || 1;
     if (currentValue > totalProblems && totalProblems > 0) {
         currentValue = totalProblems;
-        // store.defaultCardLimit = totalProblems;
-        // setDefaultCardLimit(totalProblems);
     }
     input.value = currentValue;
-    
+
     // 禁用条件
     if (totalProblems === 0) {
         input.value = 0;
@@ -7764,70 +9786,53 @@ function updateCardLimitDisplay() {
     });
 }
 
-// 更新卡片显示
-function updateCardDisplay() {
-    console.log('更新卡片显示');
-    
-    updateStats(); // 更新统计信息，传递当前显示的卡片数量
-
-    
-    createReviewCards(); // 创建新的卡片
-}
-
-
-
-
-// 改变卡片数量
-// 所有功能函数
+/**
+ * 改变卡片数量
+ */
 async function changeCardLimit(delta) {
     console.log('执行 changeCardLimit, delta:', delta);
     const input = document.getElementById('cardLimit');
     const currentValue = parseInt(input.value, 10);
     const newValue = currentValue + delta;
     const maxValue = store/* daily_store */.S.dailyReviewProblems?.length || 0;
-    
+
     if (newValue >= 1 && newValue <= maxValue) {
         input.value = newValue;
         await (0,configService/* setDefaultCardLimit */.FO)(newValue);
         store/* store */.h.defaultCardLimit = newValue;
-        updateCardDisplay();
+        // 触发更新
+        const event = new Event('cardLimitChanged');
+        document.dispatchEvent(event);
     }
 }
 
+/**
+ * 更新进度圆圈
+ */
+function updateProgressCircle(completionRate) {
+    const progressCircle = document.querySelector('.completion-circle');
+    const radius = 54; // 圆的半径
+    const circumference = 2 * Math.PI * radius; // 圆的周长
 
+    // 计算偏移量
+    const offset = circumference - (completionRate / 100) * circumference;
+    progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+    progressCircle.style.strokeDashoffset = offset;
 
+    // 更新显示的百分比
+    document.querySelector('.completion-circle').style.setProperty('--percentage', `${completionRate}%`);
 
-// 标记题目为已复习
-async function markAsReviewed(button, problem) {
-    console.log('执行 markAsReviewed', button, problem);
-    
-    const card = button.closest('.review-card');
-    if (!card) {
-        console.log('未找到对应的卡片');
-        return;
-    }
-
-    console.log('找到卡片，开始更新状态');
-    
-    // 更换图标并更改样式
-    const icon = button.querySelector('i');
-    icon.classList.remove('fa-check-circle');
-    icon.classList.add('fa-circle-check');
-    icon.style.color = '#0D6E6E';
-    
-    // 禁用按钮
-    button.disabled = true;
-    card.style.opacity = '0.4';
-
-
-
-    // 更新统计信息
-    updateCardDisplay();
-    console.log('更新完成');
+    // 添加动画效果
+    const innerCircle = document.querySelector('.inner-circle');
+    innerCircle.style.transform = `scale(1.1)`; // 放大内圈
+    setTimeout(() => {
+        innerCircle.style.transform = `scale(1)`; // 恢复原状
+    }, 500); // 动画持续时间
 }
 
-
-// 创建题目卡片时的事件绑定
+/**
+ * 创建题目卡片
+ */
 function createReviewCards() {
     console.log('开始创建卡片');
     const reviewList = document.getElementById('reviewList');
@@ -7840,15 +9845,14 @@ function createReviewCards() {
     problems.slice(0, cardLimit).forEach((problem, index) => {
         const cardNode = template.content.cloneNode(true);
         const card = cardNode.querySelector('.review-card');
-        
+
         // 安全地访问 fsrsState
         const fsrsState = problem.fsrsState || {};
 
-        
         // 设置题目信息
         const problemName = card.querySelector('.problem-name');
         problemName.textContent = problem.name || 'unknown';
-        
+
         // 设置难度和复习信息
         const difficultySpan = card.querySelector('.difficulty');
         const level = problem.level || 'Unknown';
@@ -7861,63 +9865,32 @@ function createReviewCards() {
         const retrievabilitySpan = card.querySelector('.retrievability');
         retrievabilitySpan.textContent = `${retrievability.toFixed(1)}`;
         retrievabilitySpan.classList.add(retrievability < 0.9 ? 'text-danger' : 'text-success');
-        
-        
+
         // 设置下次复习时间
-        const nextReviewTips = fsrsState.nextReview 
-            ? (() => {
-                const nextReviewDate = new Date(fsrsState.nextReview);
-                const now = new Date();
-                
-                // 获取当前日期和下次复习日期（不含时间）
-                const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-                const reviewDay = new Date(nextReviewDate.getFullYear(), nextReviewDate.getMonth(), nextReviewDate.getDate());
-                
-                // 计算日期差（天数）
-                const diffTime = reviewDay.getTime() - today.getTime();
-                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-                
-                if (diffDays < 0) {
-                    // 已经过了计划复习日期
-                    const daysOverdue = Math.abs(diffDays);
-                    return `Delay by ${daysOverdue} day${daysOverdue > 1 ? 's' : ''}`;
-                } else if (diffDays === 0) {
-                    // 今天需要复习
-                    return 'Review today';
-                } else if (diffDays === 1) {
-                    // 明天需要复习
-                    return 'Review tomorrow';
-                } else {
-                    // x天后复习
-                    return `Review in ${diffDays} days`;
-                }
-            })()
-            : 'Not scheduled';
+        const nextReviewTips = getNextReviewTips(fsrsState);
         card.querySelector('.next-review').textContent = nextReviewTips;
 
         // 格式化上次复习时间
-        const lastReviewText = fsrsState.lastReview 
-        ? new Date(fsrsState.lastReview).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        })
-        : 'Never reviewed';
+        const lastReviewText = fsrsState.lastReview
+            ? new Date(fsrsState.lastReview).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })
+            : 'Never reviewed';
 
-        // 格式化上次复习时间
-        const nextReviewText = fsrsState.nextReview 
-        ? new Date(fsrsState.nextReview).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        })
-        : 'Never reviewed';
-
-
+        // 格式化下次复习时间
+        const nextReviewText = fsrsState.nextReview
+            ? new Date(fsrsState.nextReview).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })
+            : 'Never reviewed';
 
         // 设置hover提示
         const tooltipContent = [
@@ -7925,17 +9898,17 @@ function createReviewCards() {
             `Next Review: ${nextReviewText}`,
             problem.url ? 'Click to open problem' : ''
         ].filter(Boolean).join('\n');
-        
+
         card.title = tooltipContent;
 
         // 检查今日是否已复习
-        const isReviewedToday = fsrsState.lastReview && 
+        const isReviewedTodayFlag = fsrsState.lastReview &&
             new Date(fsrsState.lastReview).toDateString() === new Date().toDateString();
 
         // 设置按钮状态
         const reviewButton = card.querySelector('.btn-review');
         if (reviewButton) {
-            if (isReviewedToday) {
+            if (isReviewedTodayFlag) {
                 const icon = reviewButton.querySelector('i');
                 icon.classList.remove('fa-check-circle');
                 icon.classList.add('fa-circle-check');
@@ -7944,23 +9917,22 @@ function createReviewCards() {
                 card.style.opacity = '0.4';
             }
 
-            reviewButton.onclick = async function(e) {
+            reviewButton.onclick = async function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('复习按钮被点击');
-
-                const updatedProblem = await handleFeedbackSubmission(problem);
+                const updatedProblem = await handleReviewButtonClick(this, problem);
                 if (updatedProblem) {
-                    markAsReviewed(this, updatedProblem);
+                    // 触发更新事件
+                    const event = new Event('cardReviewed');
+                    document.dispatchEvent(event);
                 }
-                // markAsReviewed(this, problem); // 修改这里，传入按钮元素和问题对象
             };
         }
 
         // 添加题目链接功能
         if (problem.url) {
             card.style.cursor = 'pointer';
-            card.onclick = function(e) {
+            card.onclick = function (e) {
                 if (!e.target.closest('.btn-review')) {
                     window.open(problem.url, '_blank');
                 }
@@ -7970,6 +9942,391 @@ function createReviewCards() {
         reviewList.appendChild(cardNode);
     });
 }
+
+/**
+ * 显示空状态提示
+ */
+function showEmptyState() {
+    const addProblemWrapper = document.querySelector('.add-problem-wrapper');
+    // 先移除可能存在的空状态提示
+    const existingEmptyState = document.querySelector('.empty-state');
+    if (existingEmptyState) {
+        existingEmptyState.remove();
+    }
+
+    const totalProblems = store/* daily_store */.S.dailyReviewProblems?.length || 0;
+    const cardLimit = parseInt(document.getElementById('cardLimit')?.value, 10) || 0;
+
+    if (totalProblems === 0 || cardLimit === 0) {
+        const emptyState = document.createElement('div');
+        emptyState.className = 'empty-state';
+        emptyState.innerHTML = `
+            <i class="fas fa-lightbulb"></i>
+            Time to learn something new!
+        `;
+        addProblemWrapper.insertAdjacentElement('beforebegin', emptyState);
+    }
+}
+;// CONCATENATED MODULE: ./src/popup/service/notificationService.js
+/**
+ * Notification Service
+ * 管理所有通知和弹窗相关功能
+ */
+
+
+
+
+/**
+ * 显示成功提示
+ */
+function showSuccess(title, text, options = {}) {
+    return sweetalert2_all_default().fire({
+        icon: 'success',
+        title: title,
+        text: text,
+        showConfirmButton: false,
+        timer: options.timer || 1500,
+        background: '#1d2e3d',
+        color: '#ffffff',
+        toast: options.toast !== false,
+        position: options.position || 'center-end',
+        customClass: {
+            popup: 'colored-toast'
+        },
+        ...options
+    });
+}
+
+/**
+ * 显示错误提示
+ */
+function showError(title, text, options = {}) {
+    return sweetalert2_all_default().fire({
+        icon: 'error',
+        title: title,
+        text: text,
+        background: '#1d2e3d',
+        color: '#ffffff',
+        confirmButtonColor: '#4a9d9c',
+        ...options
+    });
+}
+
+/**
+ * 显示警告提示
+ */
+function showWarning(title, text, options = {}) {
+    return Swal.fire({
+        icon: 'warning',
+        title: title,
+        text: text,
+        background: '#1d2e3d',
+        color: '#ffffff',
+        confirmButtonColor: '#4a9d9c',
+        ...options
+    });
+}
+
+/**
+ * 显示确认对话框
+ */
+function showConfirm(title, text, options = {}) {
+    return Swal.fire({
+        title: title,
+        text: text,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#4a9d9c',
+        cancelButtonColor: '#d33',
+        confirmButtonText: options.confirmButtonText || 'Yes',
+        cancelButtonText: options.cancelButtonText || 'Cancel',
+        background: '#1d2e3d',
+        color: '#ffffff',
+        ...options
+    });
+}
+
+/**
+ * 显示信息提示
+ */
+function showInfo(title, text, options = {}) {
+    return Swal.fire({
+        icon: 'info',
+        title: title,
+        text: text,
+        background: '#1d2e3d',
+        color: '#ffffff',
+        confirmButtonColor: '#4a9d9c',
+        ...options
+    });
+}
+
+/**
+ * 显示自定义HTML内容的弹窗
+ */
+function showModal(title, content, buttons = null) {
+    const modalOptions = {
+        title: title,
+        html: content,
+        background: '#1d2e3d',
+        color: '#ffffff',
+        confirmButtonColor: '#4a9d9c',
+        width: '600px'
+    };
+
+    // 如果有自定义按钮，则使用自定义按钮
+    if (buttons && Array.isArray(buttons)) {
+        modalOptions.showConfirmButton = false;
+        modalOptions.showCloseButton = true;
+        modalOptions.html += `
+            <div class="d-flex justify-content-end mt-3">
+                ${buttons.map(btn => `
+                    <button class="${btn.className} ms-2" id="modal-btn-${btn.text}">
+                        ${btn.text}
+                    </button>
+                `).join('')}
+            </div>
+        `;
+
+        // 使用SweetAlert2显示模态框
+        sweetalert2_all_default().fire(modalOptions);
+
+        // 为每个按钮添加点击事件
+        setTimeout(() => {
+            buttons.forEach(btn => {
+                const btnElement = document.getElementById(`modal-btn-${btn.text}`);
+                if (btnElement && btn.onClick) {
+                    btnElement.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        try {
+                            // 执行按钮点击事件处理程序
+                            await btn.onClick();
+                            // 关闭弹窗
+                            sweetalert2_all_default().close();
+                        } catch (error) {
+                            console.error('按钮点击事件处理程序执行失败:', error);
+                        }
+                    });
+                }
+            });
+        }, 100); // 添加一个小延迟确保DOM已更新
+    } else {
+        // 如果没有自定义按钮，则使用默认按钮
+        modalOptions.showConfirmButton = true;
+        modalOptions.confirmButtonText = '确定';
+
+        // 使用SweetAlert2显示模态框
+        return sweetalert2_all_default().fire(modalOptions);
+    }
+}
+
+/**
+ * 显示带进度条的弹窗
+ */
+function showProgress(title, text, options = {}) {
+    return Swal.fire({
+        title: title,
+        html: text,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        background: '#1d2e3d',
+        color: '#ffffff',
+        didOpen: () => {
+            Swal.showLoading();
+        },
+        ...options
+    });
+}
+
+/**
+ * 显示输入对话框
+ */
+function showInput(title, options = {}) {
+    return Swal.fire({
+        title: title,
+        input: options.input || 'text',
+        inputLabel: options.inputLabel,
+        inputPlaceholder: options.inputPlaceholder,
+        inputValue: options.inputValue || '',
+        showCancelButton: true,
+        confirmButtonText: options.confirmButtonText || 'OK',
+        cancelButtonText: options.cancelButtonText || 'Cancel',
+        background: '#1d2e3d',
+        color: '#ffffff',
+        confirmButtonColor: '#4a9d9c',
+        inputValidator: options.inputValidator,
+        ...options
+    });
+}
+
+/**
+ * 显示选择对话框
+ */
+function showSelect(title, inputOptions, options = {}) {
+    return Swal.fire({
+        title: title,
+        input: 'select',
+        inputOptions: inputOptions,
+        inputPlaceholder: options.inputPlaceholder || 'Select an option',
+        showCancelButton: true,
+        confirmButtonText: options.confirmButtonText || 'Select',
+        cancelButtonText: options.cancelButtonText || 'Cancel',
+        background: '#1d2e3d',
+        color: '#ffffff',
+        confirmButtonColor: '#4a9d9c',
+        inputValue: options.inputValue,
+        ...options
+    });
+}
+
+/**
+ * 关闭当前弹窗
+ */
+function closeModal() {
+    Swal.close();
+}
+
+/**
+ * 测试通知功能
+ */
+async function testNotification() {
+    try {
+        const response = await browser/* default */.Z.runtime.sendMessage({ action: 'testNotification' });
+        if (response && response.success) {
+            // 显示成功反馈
+            showSuccess('Test Successful', 'Check your desktop for the notification!', {
+                timer: 2000,
+                position: 'top-end'
+            });
+        } else {
+            // 显示错误
+            showError('Test Failed', response?.message || 'Could not send notification', {
+                timer: 3000,
+                toast: true,
+                position: 'top-end'
+            });
+        }
+    } catch (error) {
+        console.error('Error sending test notification:', error);
+        showError('Error', 'Failed to send test notification', {
+            timer: 3000,
+            toast: true,
+            position: 'top-end'
+        });
+    }
+}
+;// CONCATENATED MODULE: ./src/popup/daily-review.js
+// 原有导入
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 新增服务导入
+
+
+
+
+
+
+
+
+
+
+
+async function loadProblemList() {
+    await (0,view/* renderAll */.xy)();
+}
+
+
+
+
+// 更新顶部统计信息
+function updateStats() {
+    console.log('更新统计信息');
+
+    // 计算完成统计
+    const stats = calculateCompletionStats();
+
+    if (stats.totalProblems === 0) {
+        // 更新显示
+        document.getElementById('completedCount').textContent = 0;
+        document.getElementById('totalCount').textContent = 0;
+        document.getElementById('completionRate').textContent = '0%';
+        updateProgressCircle(0);
+        showEmptyState();
+        return;
+    }
+
+    // 显示空状态
+    showEmptyState();
+
+    // 更新显示的已复习数量
+    document.getElementById('completedCount').textContent = stats.completedCount;
+    document.getElementById('totalCount').textContent = stats.cardLimit;
+
+    // 更新进度条
+    updateProgressCircle(stats.completionRate);
+    document.getElementById('completionRate').textContent = `${stats.completionRate}%`;
+
+    // 更新可检索性趋势
+    const trendData = updateRetrievabilityTrend();
+    const retrievabilityElement = document.getElementById('retrievabilityAverage');
+    retrievabilityElement.textContent = trendData.currentAverage;
+
+    // 更新趋势图标
+    const trendIcon = document.getElementById('trendIcon');
+    if (trendData.trend === 'up') {
+        trendIcon.className = 'fas fa-arrow-up trend-icon trend-up';
+    } else if (trendData.trend === 'down') {
+        trendIcon.className = 'fas fa-arrow-down trend-icon trend-down';
+    } else {
+        trendIcon.className = '';
+    }
+
+    // 根据可检索性均值调整颜色和背景提示
+    const lowMemoryWarning = document.getElementById('lowMemoryWarning');
+    if (trendData.currentAverage < 0.90) {
+        retrievabilityElement.classList.add('low');
+        lowMemoryWarning.classList.add('active');
+    } else {
+        retrievabilityElement.classList.remove('low');
+        lowMemoryWarning.classList.remove('active');
+    }
+
+    updateCardLimitDisplay();
+}
+
+
+
+
+
+
+// 更新卡片显示
+function updateCardDisplay() {
+    console.log('更新卡片显示');
+    updateStats(); // 更新统计信息
+    createReviewCards(); // 创建新的卡片
+}
+
+
+
+
+
+
 
 
 
@@ -8165,30 +10522,10 @@ function initializeAddProblem() {
                 updateCardDisplay();
                 
                 // 显示成功提示
-                sweetalert2_all_default().fire({
-                    icon: 'success',
-                    title: 'SUCCESS',
-                    text: 'Problem added to review list.',
-                    showConfirmButton: false,
-                    timer: 1500,
-                    background: '#1d2e3d',
-                    color: '#ffffff',
-                    toast: true,
-                    position: 'center-end',
-                    customClass: {
-                        popup: 'colored-toast'
-                    }
-                });
+                showSuccess('SUCCESS', 'Problem added to review list.');
             } catch (error) {
                 // 显示错误提示
-                sweetalert2_all_default().fire({
-                    icon: 'error',
-                    title: 'ADD FAIL',
-                    text: error.message,
-                    background: '#1d2e3d',
-                    color: '#ffffff',
-                    confirmButtonColor: '#4a9d9c'
-                });
+                showError('ADD FAIL', error.message);
             }
         });
     }
@@ -8204,81 +10541,87 @@ function initializeAddProblem() {
     }
 }
 
-// 显示弹窗函数
-function showModal(title, content, buttons = null) {
-    const modalOptions = {
-        title: title,
-        html: content,
-        background: '#1d2e3d',
-        color: '#ffffff',
-        confirmButtonColor: '#4a9d9c',
-        width: '600px'
-    };
-    
-    // 如果有自定义按钮，则使用自定义按钮
-    if (buttons && Array.isArray(buttons)) {
-        modalOptions.showConfirmButton = false;
-        modalOptions.showCloseButton = true;
-        modalOptions.html += `
-            <div class="d-flex justify-content-end mt-3">
-                ${buttons.map(btn => `
-                    <button class="${btn.className} ms-2" id="modal-btn-${btn.text}">
-                        ${btn.text}
-                    </button>
-                `).join('')}
-            </div>
-        `;
-        
-        // 使用SweetAlert2显示模态框
-        sweetalert2_all_default().fire(modalOptions);
-        
-        // 为每个按钮添加点击事件 - 移到这里，在Swal.fire之后立即绑定
-        setTimeout(() => {
-            buttons.forEach(btn => {
-                const btnElement = document.getElementById(`modal-btn-${btn.text}`);
-                if (btnElement && btn.onClick) {
-                    btnElement.addEventListener('click', async (e) => {
-                        e.preventDefault();
-                        try {
-                            // 执行按钮点击事件处理程序
-                            await btn.onClick();
-                            // 关闭弹窗
-                            sweetalert2_all_default().close();
-                        } catch (error) {
-                            console.error('按钮点击事件处理程序执行失败:', error);
-                        }
-                    });
-                }
-            });
-        }, 100); // 添加一个小延迟确保DOM已更新
-    } else {
-        // 如果没有自定义按钮，则使用默认按钮
-        modalOptions.showConfirmButton = true;
-        modalOptions.confirmButtonText = '确定';
-        
-        // 使用SweetAlert2显示模态框
-        sweetalert2_all_default().fire(modalOptions);
-    }
-}
 
 // 初始化同步状态指示器
 function initializeSyncStatusIndicator() {
+    // 防止重复初始化
+    if (syncStatusIndicatorInitialized) {
+        console.log('Sync status indicator already initialized, skipping');
+        return;
+    }
+    
     const syncIndicator = document.getElementById('syncIndicator');
     const syncIcon = document.getElementById('syncIcon');
     const syncStatus = document.getElementById('syncStatus');
     
     if (!syncIndicator || !syncIcon || !syncStatus) return;
     
+    // 只有在启用了同步功能时才显示
+    const showIndicator = webdavEnhancedService/* webdavEnhancedService */.n.isConfigured || store/* store */.h.isCloudSyncEnabled;
+    if (showIndicator) {
+        syncIndicator.style.display = 'flex';
+        
+        // 根据认证状态设置初始显示
+        if (webdavEnhancedService/* webdavEnhancedService */.n.isConfigured && !webdavEnhancedService/* webdavEnhancedService */.n.isAuthenticated) {
+            syncIndicator.className = 'sync-indicator warning';
+            syncStatus.textContent = 'Login Required';
+        } else {
+            syncIndicator.className = 'sync-indicator';
+            syncStatus.textContent = 'Synced';
+        }
+    } else {
+        syncIndicator.style.display = 'none';
+        return;
+    }
+    
+    // 监听认证状态变化
+    webdavEnhancedService/* webdavEnhancedService */.n.onAuthStatusChange = (isAuthenticated) => {
+        if (!isAuthenticated) {
+            syncIndicator.className = 'sync-indicator warning';
+            syncStatus.textContent = 'Login Required';
+        } else {
+            syncIndicator.className = 'sync-indicator';
+            syncStatus.textContent = 'Synced';
+            
+            // 认证成功后立即触发一次完整同步，确保本地数据上传到云端
+            setTimeout(() => {
+                syncManager/* syncManager */.D.immediateSync().then(() => {
+                    console.log('Initial sync completed after authentication');
+                }).catch(error => {
+                    console.error('Initial sync failed after authentication:', error);
+                });
+            }, 500); // 延迟500ms确保认证完全完成
+        }
+    };
+    
     // 添加同步状态监听器
     syncManager/* syncManager */.D.addSyncListener((event) => {
+        console.log('Sync event received in daily-review:', event);
         switch (event.status) {
             case 'syncing':
                 syncIndicator.className = 'sync-indicator syncing';
                 syncStatus.textContent = 'Syncing...';
+                console.log('Sync status: syncing');
                 break;
             case 'success':
                 syncIndicator.className = 'sync-indicator success';
                 syncStatus.textContent = 'Synced';
+                // 同步成功后自动刷新当前视图
+                console.log('Sync success - checking active tab for refresh');
+                const activeTab = document.querySelector('.nav-btn.active');
+                console.log('Active tab found:', activeTab ? activeTab.textContent : 'none');
+                if (activeTab && activeTab.textContent.includes('Review')) {
+                    console.log('Refreshing Review page data');
+                    // 强制重新初始化整个review页面
+                    initializeReviewPage().then(() => {
+                        console.log('Review page re-initialized after sync');
+                    }).catch(error => {
+                        console.error('Failed to re-initialize review page:', error);
+                    });
+                } else if (activeTab && activeTab.textContent.includes('Problems')) {
+                    console.log('Refreshing Problems page data');
+                    loadProblemList();
+                }
                 // 3秒后恢复正常状态
                 setTimeout(() => {
                     syncIndicator.className = 'sync-indicator';
@@ -8288,6 +10631,7 @@ function initializeSyncStatusIndicator() {
             case 'error':
                 syncIndicator.className = 'sync-indicator error';
                 syncStatus.textContent = 'Sync Error';
+                console.log('Sync error:', event.error);
                 // 5秒后恢复正常状态
                 setTimeout(() => {
                     syncIndicator.className = 'sync-indicator';
@@ -8300,13 +10644,47 @@ function initializeSyncStatusIndicator() {
         }
     });
     
-    // 点击同步指示器手动触发同步
+    // 点击同步指示器的行为
     syncIndicator.addEventListener('click', async () => {
-        await syncManager/* syncManager */.D.immediateSync();
+        // 如果未认证，跳转到设置页面
+        if (webdavEnhancedService/* webdavEnhancedService */.n.isConfigured && !webdavEnhancedService/* webdavEnhancedService */.n.isAuthenticated) {
+            const tabs = document.querySelectorAll('.nav-btn');
+            const contents = document.querySelectorAll('[id$="View"]');
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            const settingsTab = Array.from(tabs).find(t => t.textContent.includes('Settings'));
+            const settingsContent = document.getElementById('settingsView');
+            if (settingsTab && settingsContent) {
+                settingsTab.classList.add('active');
+                settingsContent.classList.add('active');
+                
+                // 滚动到WebDAV设置部分
+                const webdavToggle = document.getElementById('webdavToggle');
+                if (webdavToggle) {
+                    webdavToggle.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        } else {
+            // 已认证，执行同步
+            await syncManager/* syncManager */.D.immediateSync();
+            // 同步完成后刷新当前视图
+            const activeTab = document.querySelector('.nav-btn.active');
+            if (activeTab && activeTab.textContent.includes('Review')) {
+                console.log('Manual sync completed, re-initializing review page');
+                await initializeReviewPage();
+            } else if (activeTab && activeTab.textContent.includes('Problems')) {
+                await loadProblemList();
+            }
+        }
     });
     
     // 添加提示
-    syncIndicator.title = 'Click to sync now';
+    syncIndicator.title = webdavEnhancedService/* webdavEnhancedService */.n.isAuthenticated ? 'Click to sync now' : 'Click to login';
+    
+    // 标记已初始化
+    syncStatusIndicatorInitialized = true;
+    console.log('Sync status indicator initialized');
 }
 
 // 初始化FSRS参数优化卡片
@@ -8350,9 +10728,7 @@ async function initializeFSRSOptimization() {
                     document.body.removeChild(link);
                     
                     // 显示成功提示
-                    sweetalert2_all_default().fire({
-                        icon: 'success',
-                        title: 'Export Success',
+                    showSuccess('Export Success', '', {
                         html: `
                             <div>
                                 已成功导出 ${count} 条复习记录
@@ -8362,15 +10738,10 @@ async function initializeFSRSOptimization() {
                                 </small>
                             </div>
                         `,
-                        background: '#1d2e3d',
-                        color: '#ffffff',
-                        toast: true,
-                        position: 'center-end',
-                        customClass: {
-                            popup: 'colored-toast'
-                        },
                         confirmButtonColor: '#4a9d9c',
-                        confirmButtonText: 'OK'
+                        confirmButtonText: 'OK',
+                        showConfirmButton: true,
+                        timer: null
                     });
                 } catch (error) {
                     console.error('Error exporting revlogs:', error);
@@ -8556,6 +10927,11 @@ async function initializeFSRSOptimization() {
     }
 }
 
+// 标记是否已初始化
+let webdavInitialized = false;
+let syncManagerInitialized = false;
+let syncStatusIndicatorInitialized = false;
+
 // 初始化坚果云 WebDAV
 async function initializeWebDAV() {
     const webdavToggle = document.getElementById('webdavToggle');
@@ -8565,29 +10941,47 @@ async function initializeWebDAV() {
     const testWebdavBtn = document.getElementById('testWebdav');
     const backupNowBtn = document.getElementById('backupNow');
     const restoreDataBtn = document.getElementById('restoreData');
+    const logoutWebdavBtn = document.getElementById('logoutWebdav');
     
     if (!webdavToggle) return;
     
-    // 初始化同步管理器
-    syncManager/* syncManager */.D.setConflictResolver(async (conflict) => {
-        return await conflictResolver.resolveConflict(conflict);
-    });
+    // 如果已经初始化过，直接返回
+    if (webdavInitialized) {
+        return;
+    }
+    webdavInitialized = true;
     
-    // 设置同步状态监听器
-    initializeSyncStatusIndicator();
+    // 只初始化一次同步管理器
+    if (!syncManagerInitialized) {
+        syncManager/* syncManager */.D.setConflictResolver(async (conflict) => {
+            return await conflictResolver.resolveConflict(conflict);
+        });
+        
+        // 设置同步状态监听器
+        initializeSyncStatusIndicator();
+        
+        // 异步初始化同步管理器，不阻塞UI
+        setTimeout(() => {
+            syncManager/* syncManager */.D.initialize().then(() => {
+                console.log('Sync manager initialized');
+            });
+        }, 100);
+        
+        syncManagerInitialized = true;
+    }
     
-    await syncManager/* syncManager */.D.initialize();
-    
-    // 尝试加载已保存的配置
-    const hasConfig = await webdavService/* webdavService */.i.loadConfig();
+    // 快速加载已保存的配置
+    const hasConfig = await webdavEnhancedService/* webdavEnhancedService */.n.loadConfig();
     webdavToggle.checked = hasConfig;
     
     if (hasConfig) {
         webdavSettings.style.display = 'block';
-        // 显示已配置的用户名（不显示密码）
-        const config = await chrome.storage.local.get('webdavConfig');
+        // 显示已配置的用户名和密码
+        const config = await browser/* default */.Z.storage.local.get('webdavConfig');
         if (config.webdavConfig) {
             webdavUsername.value = config.webdavConfig.username;
+            // 解码并显示密码
+            webdavPassword.value = atob(config.webdavConfig.password);
         }
     }
     
@@ -8596,9 +10990,57 @@ async function initializeWebDAV() {
         webdavSettings.style.display = webdavToggle.checked ? 'block' : 'none';
         if (!webdavToggle.checked) {
             // 禁用时清除配置
-            webdavService/* webdavService */.i.clearConfig();
+            webdavEnhancedService/* webdavEnhancedService */.n.clearConfig();
+            // 更新同步指示器
+            const syncIndicator = document.getElementById('syncIndicator');
+            if (syncIndicator) {
+                syncIndicator.style.display = 'none';
+            }
         }
     });
+    
+    // 自动保存用户名和密码
+    let saveTimer = null;
+    const autoSaveCredentials = async () => {
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(async () => {
+            const username = webdavUsername.value.trim();
+            const password = webdavPassword.value.trim();
+            
+            if (username && password) {
+                // 自动保存并测试连接
+                try {
+                    const isValid = await webdavEnhancedService/* webdavEnhancedService */.n.configure({
+                        username,
+                        password
+                    });
+                    // 更新同步指示器
+                    initializeSyncStatusIndicator();
+                    
+                    // 如果是首次成功连接，立即同步本地数据
+                    if (isValid) {
+                        setTimeout(() => {
+                            syncManager/* syncManager */.D.immediateSync().then(() => {
+                                console.log('Auto-save sync completed');
+                            }).catch(error => {
+                                console.error('Auto-save sync failed:', error);
+                            });
+                        }, 1000);
+                    }
+                } catch (error) {
+                    console.error('Auto-save failed:', error);
+                }
+            }
+        }, 1000); // 输入停止1秒后自动保存
+    };
+    
+    if (webdavUsername) {
+        webdavUsername.addEventListener('input', autoSaveCredentials);
+    }
+    
+    if (webdavPassword) {
+        webdavPassword.addEventListener('input', autoSaveCredentials);
+    }
     
     // 测试连接
     if (testWebdavBtn) {
@@ -8617,20 +11059,36 @@ async function initializeWebDAV() {
             }
             
             testWebdavBtn.disabled = true;
-            testWebdavBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
+            testWebdavBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Testing...</span>';
             
             try {
-                const isValid = await webdavService/* webdavService */.i.configure({
+                const isValid = await webdavEnhancedService/* webdavEnhancedService */.n.configure({
                     username,
                     password
                 });
                 
                 if (isValid) {
+                    // 配置成功后显示同步指示器
+                    const syncIndicator = document.getElementById('syncIndicator');
+                    if (syncIndicator) {
+                        syncIndicator.style.display = 'flex';
+                        initializeSyncStatusIndicator();
+                    }
+                    
+                    // 立即触发一次同步，上传本地数据到云端
+                    setTimeout(() => {
+                        syncManager/* syncManager */.D.immediateSync().then(() => {
+                            console.log('Manual test sync completed');
+                        }).catch(error => {
+                            console.error('Manual test sync failed:', error);
+                        });
+                    }, 1000); // 延迟1秒确保UI更新完成
+                    
                     sweetalert2_all_default().fire({
                         icon: 'success',
                         title: 'Connected!',
-                        text: 'Successfully connected to Nutstore',
-                        timer: 2000
+                        text: 'Successfully connected to Nutstore. Syncing local data...',
+                        timer: 3000
                     });
                 } else {
                     throw new Error('Connection failed');
@@ -8644,7 +11102,7 @@ async function initializeWebDAV() {
                 });
             } finally {
                 testWebdavBtn.disabled = false;
-                testWebdavBtn.innerHTML = '<i class="fas fa-check"></i> Test';
+                testWebdavBtn.innerHTML = '<i class="fas fa-check"></i><span>Test</span>';
             }
         });
     }
@@ -8652,7 +11110,7 @@ async function initializeWebDAV() {
     // 立即备份
     if (backupNowBtn) {
         backupNowBtn.addEventListener('click', async () => {
-            if (!webdavService/* webdavService */.i.isConfigured) {
+            if (!webdavEnhancedService/* webdavEnhancedService */.n.isConfigured) {
                 sweetalert2_all_default().fire({
                     icon: 'warning',
                     title: 'Not Configured',
@@ -8663,11 +11121,11 @@ async function initializeWebDAV() {
             }
             
             backupNowBtn.disabled = true;
-            backupNowBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Backing up...';
+            backupNowBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Backing up...</span>';
             
             try {
-                const problems = await (0,problemService/* getAllProblems */.kT)();
-                const filename = await webdavService/* webdavService */.i.backupProblems(Object.values(problems));
+                const problems = await (0,problemService.getAllProblems)();
+                const filename = await webdavEnhancedService/* webdavEnhancedService */.n.backupProblems(Object.values(problems));
                 
                 sweetalert2_all_default().fire({
                     icon: 'success',
@@ -8684,7 +11142,7 @@ async function initializeWebDAV() {
                 });
             } finally {
                 backupNowBtn.disabled = false;
-                backupNowBtn.innerHTML = '<i class="fas fa-upload"></i> Backup';
+                backupNowBtn.innerHTML = '<i class="fas fa-upload"></i><span>Backup</span>';
             }
         });
     }
@@ -8692,7 +11150,7 @@ async function initializeWebDAV() {
     // 恢复数据
     if (restoreDataBtn) {
         restoreDataBtn.addEventListener('click', async () => {
-            if (!webdavService/* webdavService */.i.isConfigured) {
+            if (!webdavEnhancedService/* webdavEnhancedService */.n.isConfigured) {
                 sweetalert2_all_default().fire({
                     icon: 'warning',
                     title: 'Not Configured',
@@ -8704,7 +11162,7 @@ async function initializeWebDAV() {
             
             try {
                 // 获取备份列表
-                const backups = await webdavService/* webdavService */.i.getBackupList();
+                const backups = await webdavEnhancedService/* webdavEnhancedService */.n.getBackupList();
                 
                 if (backups.length === 0) {
                     sweetalert2_all_default().fire({
@@ -8716,21 +11174,34 @@ async function initializeWebDAV() {
                     return;
                 }
                 
-                // 让用户选择要恢复的备份
-                const options = backups.map(backup => ({
-                    value: backup.name,
-                    text: `${backup.name} (${new Date(backup.lastModified).toLocaleString()})`
-                }));
+                // 按时间排序，最新的在前
+                backups.sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
+                
+                // 默认选择最新的备份
+                const latestBackup = backups[0];
+                
+                // 显示备份列表，让用户确认或选择其他
+                const backupOptions = {};
+                backups.forEach((backup, index) => {
+                    const date = new Date(backup.lastModified);
+                    const isLatest = index === 0;
+                    backupOptions[backup.name] = `${date.toLocaleString()}${isLatest ? ' (Latest)' : ''}`;
+                });
                 
                 const { value: selectedBackup } = await sweetalert2_all_default().fire({
-                    title: 'Select Backup to Restore',
+                    title: 'Restore from Backup',
+                    html: `
+                        <div style="text-align: left; margin-bottom: 10px;">
+                            <strong>Latest backup:</strong><br>
+                            ${new Date(latestBackup.lastModified).toLocaleString()}
+                        </div>
+                    `,
                     input: 'select',
-                    inputOptions: options.reduce((obj, opt) => {
-                        obj[opt.value] = opt.text;
-                        return obj;
-                    }, {}),
-                    inputPlaceholder: 'Select a backup',
-                    showCancelButton: true
+                    inputOptions: backupOptions,
+                    inputValue: latestBackup.name, // 默认选中最新的
+                    showCancelButton: true,
+                    confirmButtonText: 'Restore',
+                    cancelButtonText: 'Cancel'
                 });
                 
                 if (selectedBackup) {
@@ -8746,17 +11217,27 @@ async function initializeWebDAV() {
                     
                     if (isConfirmed) {
                         restoreDataBtn.disabled = true;
-                        restoreDataBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Restoring...';
+                        restoreDataBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Restoring...</span>';
                         
-                        const problems = await webdavService/* webdavService */.i.restoreProblems(selectedBackup);
+                        const problemsArray = await webdavEnhancedService/* webdavEnhancedService */.n.restoreProblems(selectedBackup);
                         
-                        // 保存到本地存储
-                        await chrome.storage.local.set({ problems });
+                        // 转换为对象格式并保存
+                        const problemsObj = {};
+                        problemsArray.forEach(problem => {
+                            if (problem.index) {
+                                problemsObj[problem.index] = problem;
+                            }
+                        });
+                        
+                        // 根据当前模式保存
+                        const cnMode = await (0,modeService/* isInCnMode */.B)();
+                        const key = cnMode ? 'cnProblems' : 'problems';
+                        await (0,localStorageDelegate/* setLocalStorageData */.qy)(key, problemsObj);
                         
                         sweetalert2_all_default().fire({
                             icon: 'success',
                             title: 'Restore Complete',
-                            text: `Restored ${problems.length} problems from backup`,
+                            text: `Restored ${Object.keys(problemsObj).length} problems from backup`,
                             timer: 2000
                         }).then(() => {
                             // 刷新页面
@@ -8773,14 +11254,122 @@ async function initializeWebDAV() {
                 });
             } finally {
                 restoreDataBtn.disabled = false;
-                restoreDataBtn.innerHTML = '<i class="fas fa-download"></i> Restore';
+                restoreDataBtn.innerHTML = '<i class="fas fa-download"></i><span>Restore</span>';
+            }
+        });
+    }
+    
+    // 登出按钮
+    if (logoutWebdavBtn) {
+        logoutWebdavBtn.addEventListener('click', async () => {
+            const result = await sweetalert2_all_default().fire({
+                title: 'Logout from Nutstore?',
+                text: 'Your saved credentials will be removed',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, logout',
+                cancelButtonText: 'Cancel'
+            });
+            
+            if (result.isConfirmed) {
+                // 清除配置
+                await webdavEnhancedService/* webdavEnhancedService */.n.clearConfig();
+                
+                // 清空输入框
+                webdavUsername.value = '';
+                webdavPassword.value = '';
+                
+                // 隐藏同步指示器
+                const syncIndicator = document.getElementById('syncIndicator');
+                if (syncIndicator) {
+                    syncIndicator.style.display = 'none';
+                }
+                
+                // 取消勾选
+                webdavToggle.checked = false;
+                webdavSettings.style.display = 'none';
+                
+                sweetalert2_all_default().fire({
+                    icon: 'success',
+                    title: 'Logged Out',
+                    text: 'Successfully logged out from Nutstore',
+                    timer: 2000
+                });
             }
         });
     }
 }
 
+// 标记选项是否已初始化
+let optionsInitialized = false;
+
+// 快速更新选项显示
+async function updateOptionsDisplay() {
+    const problemSorterSelect = document.getElementById('problemSorterSelect');
+    if (problemSorterSelect && store/* store */.h.problemSorter) {
+        problemSorterSelect.value = store/* store */.h.problemSorter;
+    }
+
+    const defaultCardLimitInput = document.getElementById('defaultCardLimit');
+    if (defaultCardLimitInput && store/* store */.h.defaultCardLimit) {
+        defaultCardLimitInput.value = store/* store */.h.defaultCardLimit;
+    }
+
+    // 更新提醒相关设置
+    const config = await browser/* default */.Z.storage.local.get([
+        'reminderEnabled',
+        'reminderInterval',
+        'reminderStartTime',
+        'reminderEndTime',
+        'reminderDays'
+    ]);
+
+    const reminderToggle = document.getElementById('reminderToggle');
+    if (reminderToggle) {
+        reminderToggle.checked = config.reminderEnabled || false;
+
+        // 更新显示状态
+        const reminderSettings = document.getElementById('reminderSettings');
+        if (reminderSettings) {
+            reminderSettings.style.display = reminderToggle.checked ? 'block' : 'none';
+        }
+    }
+
+    const reminderInterval = document.getElementById('reminderInterval');
+    if (reminderInterval) {
+        reminderInterval.value = String(config.reminderInterval || 60);
+    }
+
+    const reminderStartTime = document.getElementById('reminderStartTime');
+    if (reminderStartTime) {
+        reminderStartTime.value = config.reminderStartTime || '09:00';
+    }
+
+    const reminderEndTime = document.getElementById('reminderEndTime');
+    if (reminderEndTime) {
+        reminderEndTime.value = config.reminderEndTime || '22:00';
+    }
+
+    // 更新星期选择
+    const reminderDays = config.reminderDays || [1, 2, 3, 4, 5, 6, 0];
+    for (let i = 0; i <= 6; i++) {
+        const dayCheckbox = document.getElementById(`day${i}`);
+        if (dayCheckbox) {
+            dayCheckbox.checked = reminderDays.includes(i);
+        }
+    }
+}
+
 // 添加设置相关的初始化函数
 async function initializeOptions() {
+    // 如果已经初始化过，只更新显示
+    if (optionsInitialized) {
+        await updateOptionsDisplay();
+        return;
+    }
+    
     await (0,configService/* loadConfigs */.O1)();
 
     const optionsForm = document.getElementById('optionsForm');
@@ -8822,7 +11411,7 @@ async function initializeOptions() {
     
     if (reminderToggle) {
         // 加载提醒设置
-        chrome.storage.local.get([
+        browser/* default */.Z.storage.local.get([
             'reminderEnabled',
             'reminderInterval',
             'reminderStartTime',
@@ -8830,7 +11419,11 @@ async function initializeOptions() {
             'reminderDays'
         ]).then(config => {
             reminderToggle.checked = config.reminderEnabled || false;
-            if (reminderInterval) reminderInterval.value = config.reminderInterval || 60;
+            // 使用字符串形式以正确显示 0.5
+            if (reminderInterval) {
+                const intervalValue = config.reminderInterval || 60;
+                reminderInterval.value = String(intervalValue);
+            }
             if (reminderStartTime) reminderStartTime.value = config.reminderStartTime || '09:00';
             if (reminderEndTime) reminderEndTime.value = config.reminderEndTime || '22:00';
             
@@ -8859,43 +11452,7 @@ async function initializeOptions() {
         // 测试通知按钮
         if (testNotificationBtn) {
             testNotificationBtn.addEventListener('click', async () => {
-                try {
-                    const response = await chrome.runtime.sendMessage({ action: 'testNotification' });
-                    if (response && response.success) {
-                        // 显示成功反馈
-                        sweetalert2_all_default().fire({
-                            icon: 'success',
-                            title: 'Test Successful',
-                            text: 'Check your desktop for the notification!',
-                            timer: 2000,
-                            showConfirmButton: false,
-                            toast: true,
-                            position: 'top-end'
-                        });
-                    } else {
-                        // 显示错误
-                        sweetalert2_all_default().fire({
-                            icon: 'error',
-                            title: 'Test Failed',
-                            text: response?.message || 'Could not send notification',
-                            timer: 3000,
-                            showConfirmButton: false,
-                            toast: true,
-                            position: 'top-end'
-                        });
-                    }
-                } catch (error) {
-                    console.error('Error sending test notification:', error);
-                    sweetalert2_all_default().fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Failed to send test notification',
-                        timer: 3000,
-                        showConfirmButton: false,
-                        toast: true,
-                        position: 'top-end'
-                    });
-                }
+                await testNotification();
             });
         }
     }
@@ -8904,18 +11461,23 @@ async function initializeOptions() {
     await initializeFSRSOptimization();
     
     // 修改保存成功提示
+    // 标记已初始化
+    optionsInitialized = true;
+    
     optionsForm.addEventListener('submit', async e => {
         e.preventDefault();
-        const selectedSorterId = problemSorterSelect.value;
-        const isCloudSyncEnabled = syncToggle.checked;
-        const isReminderEnabled = reminderToggle.checked;
+        console.log('Settings form submitted');
 
-        await (0,configService/* setProblemSorter */.Kr)(Number(selectedSorterId));
-        await (0,configService/* setCloudSyncEnabled */.sS)(isCloudSyncEnabled);
-        await (0,configService/* setReminderEnabled */.EQ)(isReminderEnabled);
-        
-        // 保存提醒详细设置
-        if (reminderToggle) {
+        try {
+            const selectedSorterId = problemSorterSelect.value;
+            const isCloudSyncEnabled = syncToggle.checked;
+            const isReminderEnabled = reminderToggle.checked;
+
+            await (0,configService/* setProblemSorter */.Kr)(Number(selectedSorterId));
+            await (0,configService/* setCloudSyncEnabled */.sS)(isCloudSyncEnabled);
+            await (0,configService/* setReminderEnabled */.EQ)(isReminderEnabled);
+
+            // 保存提醒详细设置（包括提醒开关状态）
             const selectedDays = [];
             for (let i = 0; i <= 6; i++) {
                 const dayCheckbox = document.getElementById(`day${i}`);
@@ -8923,31 +11485,28 @@ async function initializeOptions() {
                     selectedDays.push(i);
                 }
             }
-            
-            await chrome.storage.local.set({
+
+            // 获取当前的间隔值
+            const intervalValue = parseFloat(reminderInterval?.value || 60);
+            console.log('Saving reminder interval:', intervalValue);
+
+            // 始终保存所有提醒相关设置
+            await browser/* default */.Z.storage.local.set({
                 reminderEnabled: isReminderEnabled,
-                reminderInterval: parseInt(reminderInterval?.value || 60),
+                reminderInterval: intervalValue,  // 使用 parseFloat 以支持 0.5
                 reminderStartTime: reminderStartTime?.value || '09:00',
                 reminderEndTime: reminderEndTime?.value || '22:00',
                 reminderDays: selectedDays
             });
-        }
 
-        // 使用 SweetAlert2 显示保存成功提示
-        sweetalert2_all_default().fire({
-            icon: 'success',
-            title: 'Settings Saved',
-            text: 'Your settings have been successfully updated',
-            showConfirmButton: false,
-            timer: 1500,
-            background: '#1d2e3d',
-            color: '#ffffff',
-            toast: true,
-            position: 'center-end',
-            customClass: {
-                popup: 'colored-toast'
-            }
-        });
+            console.log('Settings saved successfully');
+
+            // 使用 notificationService 显示保存成功提示
+            showSuccess('Settings Saved', 'Your settings have been successfully updated');
+        } catch (error) {
+            console.error('Error saving settings:', error);
+            showError('Save Failed', 'Failed to save settings: ' + error.message);
+        }
     });
 }
 
@@ -8960,12 +11519,13 @@ async function initializeReviewPage() {
     await (0,configService/* loadConfigs */.O1)();
     console.log('加载的默认卡片数量:', store/* store */.h.defaultCardLimit);
     await loadDailyReviewData(); // 加载真实数据
+
+    // 清理旧的事件监听器
     const gearButtons = document.querySelectorAll('.gear-button');
     gearButtons.forEach(button => {
         button.replaceWith(button.cloneNode(true));
     });
-    
-    
+
     // 绑定齿轮按钮事件
     document.querySelectorAll('.gear-button').forEach(button => {
         button.addEventListener('click', function() {
@@ -8982,10 +11542,15 @@ async function initializeReviewPage() {
         updateCardDisplay();
     });
 
+    // 监听卡片限制变化事件
+    document.addEventListener('cardLimitChanged', updateCardDisplay);
+
+    // 监听卡片复习事件
+    document.addEventListener('cardReviewed', updateCardDisplay);
+
     // 初始化显示
     setCurrentDate();
     updateStats();
-    // updateCardLimitDisplay();
     createReviewCards();
     initializeAddProblem();
 }
@@ -9086,7 +11651,13 @@ document.addEventListener('DOMContentLoaded', async function() {
                     break;
                 case 'Settings':
                     viewId = 'moreView';
-                    await initializeOptions();
+                    // 并行初始化，不阻塞UI
+                    Promise.all([
+                        initializeOptions(),
+                        initializeWebDAV()
+                    ]).catch(error => {
+                        console.error('Settings initialization error:', error);
+                    });
                     break;
             }
             
@@ -9163,23 +11734,23 @@ window.onload = function() {
 /* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _util_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(384);
-/* harmony import */ var _storageDelegate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(648);
+/* harmony import */ var _storageDelegate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(648);
+/* harmony import */ var _shared_browser_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(867);
+
 
 
 
 
 const getCloudStorageData = async (key) => {
-    return new Promise((resolve, reject) => {
-        chrome.storage.sync.get(key, (result) => {
-            if (result === undefined || result[key] === undefined) {
-                reject(key);
-            } else {
-                resolve(result[key]);
-            }
-        })
-    }).catch((key) => {
+    try {
+        const result = await browser.storage.sync.get(key);
+        if (result === undefined || result[key] === undefined) {
+            throw new Error(key);
+        }
+        return result[key];
+    } catch (error) {
         console.log(`get sync storage data failed for key = ${key}`);
-    });
+    }
 }
 
 const setCloudStorageData = async (key, val) => {
@@ -9187,31 +11758,31 @@ const setCloudStorageData = async (key, val) => {
     console.log("set to cloud");
     console.log([key, val]);
 
-    return new Promise((resolve) => {
-        chrome.storage.sync.set({ [key]: val });
-        resolve();
-    }).catch(e => console.log(e));
+    try {
+        await browser.storage.sync.set({ [key]: val });
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const batchSetCloudStorageDate = async (object) => {
-    return new Promise((resolve) => {
-        chrome.storage.sync.set(object);
-        resolve();
-    }).catch(e => console.log(e));
+    try {
+        await _shared_browser_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z.storage.sync.set(object);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const batchGetCloudStorageDate = async (keyArr) => {
-    return new Promise((resolve, reject) => {
-        chrome.storage.sync.get(keyArr, (result) => {
-            if (result === undefined) {
-                reject(key);
-            } else {
-                resolve(result);
-            }
-        })
-    }).catch(e => {
-        console.log(console.log(e));
-    });
+    try {
+        const result = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z.storage.sync.get(keyArr);
+        if (result === undefined) {
+            throw new Error(keyArr);
+        }
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 /**
@@ -9270,7 +11841,7 @@ const shardedGetCloudStorageData = async (key) => {
     return res;
 }
 
-class CloudStorageDelegate extends _storageDelegate__WEBPACK_IMPORTED_MODULE_1__/* .StorageDelegate */ .i {
+class CloudStorageDelegate extends _storageDelegate__WEBPACK_IMPORTED_MODULE_2__/* .StorageDelegate */ .i {
     constructor(){
         super();
         this.get = shardedGetCloudStorageData;
@@ -9407,31 +11978,32 @@ const optimizeFSRSParams = async (csvContent, onProgress) => {
 /* harmony export */   ZP: () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   qy: () => (/* binding */ setLocalStorageData)
 /* harmony export */ });
-/* harmony import */ var _storageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(648);
+/* harmony import */ var _storageDelegate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(648);
+/* harmony import */ var _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(867);
+
 
 
 const getLocalStorageData = async (key) => {
-    return new Promise((resolve, reject) => {
-        chrome.storage.local.get(key, (result) => {
-            if (result === undefined || result[key] === undefined) {
-                reject(key);
-            } else {
-                resolve(result[key]);
-            }
-        })
-    }).catch((key) => {
+    try {
+        const result = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.get(key);
+        if (result === undefined || result[key] === undefined) {
+            throw new Error(key);
+        }
+        return result[key];
+    } catch (error) {
         console.log(`get local storage data failed for key = ${key}`);
-    });
+    }
 }
 
 const setLocalStorageData = async (key, val) => {
-    return new Promise((resolve) => {
-        chrome.storage.local.set({ [key]: val });
-        resolve();
-    }).catch(e => console.log(e));
+    try {
+        await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.set({ [key]: val });
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-class LocalStorageDelegate extends _storageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .StorageDelegate */ .i {
+class LocalStorageDelegate extends _storageDelegate__WEBPACK_IMPORTED_MODULE_1__/* .StorageDelegate */ .i {
     constructor(){
         super();
         this.get = getLocalStorageData;
@@ -9565,12 +12137,147 @@ const copy = (p) => {
 "use strict";
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony import */ var _popup_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(823);
-/* harmony import */ var _view_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(876);
+/* harmony import */ var _view_view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(842);
+/* harmony import */ var _service_syncManager_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(584);
+/* harmony import */ var _service_webdavEnhancedService_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(189);
+/* harmony import */ var _component_webdavEnhancedSettings_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(852);
+/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(214);
+
+
+
+
 
 
 
 console.log("Hello Leetcode-Mastery-Scheduler!");
+
+// 初始渲染
 await (0,_view_view_js__WEBPACK_IMPORTED_MODULE_1__/* .renderAll */ .xy)();
+
+// 初始化同步管理器
+await _service_syncManager_js__WEBPACK_IMPORTED_MODULE_2__/* .syncManager */ .D.initialize();
+
+// 初始化增强版 WebDAV 设置
+await _component_webdavEnhancedSettings_js__WEBPACK_IMPORTED_MODULE_4__/* .webdavEnhancedSettings */ .t.initialize();
+
+// 初始化同步状态指示器
+function initializeSyncStatusIndicator() {
+    const syncIndicator = document.getElementById('syncIndicator');
+
+    if (!syncIndicator) return;
+
+    // 检查 WebDAV 或云同步是否启用
+    const showIndicator = _service_webdavEnhancedService_js__WEBPACK_IMPORTED_MODULE_3__/* .webdavEnhancedService */ .n.isConfigured || _store_js__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled;
+    if (showIndicator) {
+        syncIndicator.style.display = 'flex';
+        
+        // 根据认证状态显示不同的内容
+        const initialStatus = _service_webdavEnhancedService_js__WEBPACK_IMPORTED_MODULE_3__/* .webdavEnhancedService */ .n.isAuthenticated ? 'Synced' : 'Login Required';
+        const initialClass = _service_webdavEnhancedService_js__WEBPACK_IMPORTED_MODULE_3__/* .webdavEnhancedService */ .n.isAuthenticated ? 'sync-indicator' : 'sync-indicator warning';
+
+        syncIndicator.className = initialClass;
+        syncIndicator.innerHTML = `
+            <span id="syncIcon">🔄</span>
+            <span id="syncStatus">${initialStatus}</span>
+        `;
+    } else {
+        syncIndicator.style.display = 'none';
+        return;
+    }
+
+    const syncIcon = document.getElementById('syncIcon');
+    const syncStatus = document.getElementById('syncStatus');
+
+    // 监听两个服务的认证状态变化
+    const updateAuthStatus = (isAuthenticated) => {
+        if (!isAuthenticated) {
+            syncIndicator.className = 'sync-indicator warning';
+            syncStatus.textContent = 'Login Required';
+            syncIndicator.title = 'Click to open settings and login';
+        } else {
+            syncIndicator.className = 'sync-indicator';
+            syncStatus.textContent = 'Synced';
+            syncIndicator.title = 'Click to sync now';
+            
+            // 认证成功后立即触发一次完整同步，确保本地数据上传到云端
+            setTimeout(() => {
+                _service_syncManager_js__WEBPACK_IMPORTED_MODULE_2__/* .syncManager */ .D.immediateSync().then(() => {
+                    console.log('Initial sync completed after authentication');
+                }).catch(error => {
+                    console.error('Initial sync failed after authentication:', error);
+                });
+            }, 500); // 延迟500ms确保认证完全完成
+        }
+    };
+    
+    // 监听认证状态变化
+    _service_webdavEnhancedService_js__WEBPACK_IMPORTED_MODULE_3__/* .webdavEnhancedService */ .n.onAuthStatusChange = updateAuthStatus;
+
+    // 添加同步状态监听器
+    _service_syncManager_js__WEBPACK_IMPORTED_MODULE_2__/* .syncManager */ .D.addSyncListener((event) => {
+        // 检查认证状态
+        if (!_service_webdavEnhancedService_js__WEBPACK_IMPORTED_MODULE_3__/* .webdavEnhancedService */ .n.isAuthenticated && _service_webdavEnhancedService_js__WEBPACK_IMPORTED_MODULE_3__/* .webdavEnhancedService */ .n.isConfigured) {
+            return;
+        }
+        
+        switch (event.status) {
+            case 'syncing':
+                syncIndicator.className = 'sync-indicator syncing';
+                syncStatus.textContent = 'Syncing...';
+                break;
+            case 'success':
+                syncIndicator.className = 'sync-indicator success';
+                syncStatus.textContent = 'Synced';
+                // 同步成功后自动刷新视图
+                (0,_view_view_js__WEBPACK_IMPORTED_MODULE_1__/* .renderAll */ .xy)().catch(console.error);
+                // 3秒后恢复正常状态
+                setTimeout(() => {
+                    syncIndicator.className = 'sync-indicator';
+                    syncStatus.textContent = 'Synced';
+                }, 3000);
+                break;
+            case 'error':
+                syncIndicator.className = 'sync-indicator error';
+                syncStatus.textContent = 'Sync Error';
+                // 5秒后恢复正常状态
+                setTimeout(() => {
+                    syncIndicator.className = 'sync-indicator';
+                    syncStatus.textContent = 'Synced';
+                }, 5000);
+                break;
+            default:
+                syncIndicator.className = 'sync-indicator';
+                syncStatus.textContent = 'Synced';
+        }
+    });
+    
+    // 点击同步指示器的行为
+    syncIndicator.addEventListener('click', async () => {
+        if (!_service_webdavEnhancedService_js__WEBPACK_IMPORTED_MODULE_3__/* .webdavEnhancedService */ .n.isAuthenticated && _service_webdavEnhancedService_js__WEBPACK_IMPORTED_MODULE_3__/* .webdavEnhancedService */ .n.isConfigured) {
+            // 如果未认证，跳转到设置页面
+            const tabs = document.querySelectorAll('.nav-btn');
+            const contents = document.querySelectorAll('[id$="View"]');
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            const settingsTab = Array.from(tabs).find(t => t.textContent.includes('Settings'));
+            const settingsContent = document.getElementById('settingsView');
+            if (settingsTab && settingsContent) {
+                settingsTab.classList.add('active');
+                settingsContent.classList.add('active');
+            }
+        } else {
+            // 已认证，执行同步
+            await _service_syncManager_js__WEBPACK_IMPORTED_MODULE_2__/* .syncManager */ .D.immediateSync();
+        }
+    });
+    
+    // 添加提示
+    syncIndicator.title = _service_webdavEnhancedService_js__WEBPACK_IMPORTED_MODULE_3__/* .webdavEnhancedService */ .n.isAuthenticated ? 'Click to sync now' : 'Click to open settings and login';
+}
+
+// 初始化同步指示器
+initializeSyncStatusIndicator();
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);
 
@@ -9590,8 +12297,10 @@ __webpack_async_result__();
 /* unused harmony exports getReviewIntervals, setReviewIntervals, loadReviewIntervals, getProblemSorter, loadProblemSorter, isCloudSyncEnabled, switchCloudSyncEnabled, loadCloudSyncConfig, getDefaultCardLimit, loadDefaultCardLimit, isReminderEnabled, loadReminderConfig */
 /* harmony import */ var _delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(891);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(214);
-/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(134);
+/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(134);
 /* harmony import */ var _util_sort__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(192);
+/* harmony import */ var _shared_browser_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(867);
+
 
 
 
@@ -9600,7 +12309,7 @@ __webpack_async_result__();
 // configurable review intervals (to be integrated)
 
 const getReviewIntervals = async () => {
-    return await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .REVIEW_INTV_KEY */ .FB);
+    return await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .REVIEW_INTV_KEY */ .FB);
 }
 
 const setReviewIntervals = async (customIntv) => {
@@ -9622,11 +12331,11 @@ const loadReviewIntervals = async () => {
 
 // configurable problem sort by
 const getProblemSorter = async () => {
-    return await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .PROBLEM_SORT_BY_KEY */ .ql);
+    return await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .PROBLEM_SORT_BY_KEY */ .ql);
 }
 
 const setProblemSorter = async (sorterId) => {
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .PROBLEM_SORT_BY_KEY */ .ql, sorterId);
+    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .PROBLEM_SORT_BY_KEY */ .ql, sorterId);
 }
 
 const loadProblemSorter = async () => {
@@ -9638,8 +12347,8 @@ const loadProblemSorter = async () => {
 
 // config cloud sync
 const isCloudSyncEnabled = async () => {
-    const configs = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .CONFIG_KEY */ .fR);
-    const isEnabled = configs !== undefined ? configs[_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .CONFIG_INNER_KEY_ENABLE_CLOUD */ .$z] : false;
+    const configs = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .CONFIG_KEY */ .fR);
+    const isEnabled = configs !== undefined ? configs[_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .CONFIG_INNER_KEY_ENABLE_CLOUD */ .$z] : false;
     if (isEnabled === undefined) {
         isEnabled = false;
     }
@@ -9657,11 +12366,11 @@ const switchCloudSyncEnabled = async () => {
 }
 
 const setCloudSyncEnabled = async (isEnabled) => {
-    const configs = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .CONFIG_KEY */ .fR) || {
+    const configs = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .CONFIG_KEY */ .fR) || {
         CONFIG_INNER_KEY_ENABLE_CLOUD: false
     };
-    configs[_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .CONFIG_INNER_KEY_ENABLE_CLOUD */ .$z] = isEnabled;
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .CONFIG_KEY */ .fR, configs);
+    configs[_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .CONFIG_INNER_KEY_ENABLE_CLOUD */ .$z] = isEnabled;
+    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .CONFIG_KEY */ .fR, configs);
 }
 
 
@@ -9671,14 +12380,14 @@ const loadCloudSyncConfig = async () => {
 
 // 获取默认卡片数量
 const getDefaultCardLimit = async () => {
-    const limit = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .DEFAULT_CARD_LIMIT_KEY */ .hr);
-    return limit !== undefined ? limit : _util_keys__WEBPACK_IMPORTED_MODULE_3__/* .DEFAULT_CARD_LIMIT_VALUE */ .pD;
+    const limit = await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .getLocalStorageData */ .Cy)(_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .DEFAULT_CARD_LIMIT_KEY */ .hr);
+    return limit !== undefined ? limit : _util_keys__WEBPACK_IMPORTED_MODULE_4__/* .DEFAULT_CARD_LIMIT_VALUE */ .pD;
 }
 
 // 设置默认卡片数量
 const setDefaultCardLimit = async (limit) => {
     if (limit == null || limit == undefined) return;
-    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_3__/* .DEFAULT_CARD_LIMIT_KEY */ .hr, limit);
+    await (0,_delegate_localStorageDelegate__WEBPACK_IMPORTED_MODULE_0__/* .setLocalStorageData */ .qy)(_util_keys__WEBPACK_IMPORTED_MODULE_4__/* .DEFAULT_CARD_LIMIT_KEY */ .hr, limit);
 }
 
 // 加载默认卡片数量到 store
@@ -9688,11 +12397,11 @@ const loadDefaultCardLimit = async () => {
 
 // 添加新的配置项和方法
 async function setReminderEnabled(enabled) {
-    await chrome.storage.local.set({ reminderEnabled: enabled });
+    await _shared_browser_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z.storage.local.set({ reminderEnabled: enabled });
 }
 
 async function isReminderEnabled() {
-    const { reminderEnabled } = await chrome.storage.local.get('reminderEnabled');
+    const { reminderEnabled } = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z.storage.local.get('reminderEnabled');
     return reminderEnabled || false;
 }
 // 添加加载提醒设置到 store 的函数
@@ -10094,17 +12803,18 @@ const hasOperationHistory = async () => {
 __webpack_require__.d(__webpack_exports__, {
   qu: () => (/* binding */ createOrUpdateProblem),
   aG: () => (/* binding */ deleteProblem),
-  kT: () => (/* binding */ getAllProblems),
+  getAllProblems: () => (/* binding */ getAllProblems),
   cp: () => (/* binding */ getCurrentProblemInfoFromLeetCodeByHref),
   Oo: () => (/* binding */ getCurrentProblemInfoFromLeetCodeByUrl),
   JW: () => (/* binding */ getProblemsByMode),
   Vv: () => (/* binding */ markProblemAsMastered),
   wB: () => (/* binding */ resetProblem),
+  setProblems: () => (/* binding */ setProblems),
   Ur: () => (/* binding */ setProblemsByMode),
   xd: () => (/* binding */ syncProblems)
 });
 
-// UNUSED EXPORTS: batchUpdateProblems, getAllProblemsInCloud, setProblems, setProblemsToCloud
+// UNUSED EXPORTS: batchUpdateProblems, getAllProblemsInCloud, setProblemsToCloud
 
 ;// CONCATENATED MODULE: ./src/popup/delegate/leetCodeDelegate.js
 const user_agent =
@@ -10211,8 +12921,8 @@ var store = __webpack_require__(214);
 var utils = __webpack_require__(384);
 // EXTERNAL MODULE: ./src/popup/delegate/cloudStorageDelegate.js
 var delegate_cloudStorageDelegate = __webpack_require__(188);
-// EXTERNAL MODULE: ./src/popup/service/webdavService.js
-var webdavService = __webpack_require__(6);
+// EXTERNAL MODULE: ./src/popup/service/webdavEnhancedService.js
+var webdavEnhancedService = __webpack_require__(189);
 // EXTERNAL MODULE: ./src/popup/service/syncManager.js
 var service_syncManager = __webpack_require__(584);
 ;// CONCATENATED MODULE: ./src/popup/service/problemService.js
@@ -10380,7 +13090,7 @@ const batchUpdateProblems = async (updates) => {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   D: () => (/* binding */ syncManager)
 /* harmony export */ });
-/* harmony import */ var _webdavService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+/* harmony import */ var _webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(189);
 /* harmony import */ var _problemService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(820);
 /* harmony import */ var _modeService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(733);
 /* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(134);
@@ -10417,12 +13127,17 @@ class SyncManager {
      * 初始化同步管理器
      */
     async initialize() {
-        // 加载WebDAV配置
-        const webdavLoaded = await _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.loadConfig();
-        
-        // 启动时执行一次同步
+        // 加载 WebDAV 配置
+        const webdavLoaded = await _webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.loadConfig();
+        this.activeWebdavService = _webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n;
+
+        // 启动时异步执行一次同步，不阻塞初始化
         if (webdavLoaded || _store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
-            await this.performSync();
+            setTimeout(() => {
+                this.performSync().catch(error => {
+                    console.error('Initial sync failed:', error);
+                });
+            }, 1000); // 延迟1秒执行，让UI先加载完成
         }
         
         // 启动自动同步
@@ -10528,7 +13243,7 @@ class SyncManager {
         if (this.isSyncing) return;
         
         // 检查是否有任何同步方式启用
-        if (!_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured && !_store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
+        if (!_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.isConfigured && !_store__WEBPACK_IMPORTED_MODULE_5__/* .store */ .h.isCloudSyncEnabled) {
             return;
         }
         
@@ -10599,9 +13314,9 @@ class SyncManager {
         }
         
         // 获取WebDAV数据
-        if (_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured) {
+        if (_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.isConfigured) {
             try {
-                const webdavData = await _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.downloadData('problems_sync.json');
+                const webdavData = await _webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.downloadData('problems_sync.json');
                 if (webdavData && webdavData.problems) {
                     cloudData.webdav = webdavData.problems;
                 }
@@ -10776,7 +13491,7 @@ class SyncManager {
         }
         
         // 保存到WebDAV
-        if (_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured) {
+        if (_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.isConfigured) {
             const syncData = {
                 version: '2.0',
                 lastSync: new Date().toISOString(),
@@ -10790,7 +13505,7 @@ class SyncManager {
             };
             
             savePromises.push(
-                _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.uploadData('problems_sync.json', syncData).catch(error => {
+                _webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.uploadData('problems_sync.json', syncData).catch(error => {
                     console.warn('Failed to save to WebDAV:', error);
                 })
             );
@@ -10846,8 +13561,8 @@ class SyncManager {
             deviceId: await this.getDeviceId()
         };
         
-        if (_webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.isConfigured) {
-            await _webdavService__WEBPACK_IMPORTED_MODULE_0__/* .webdavService */ .i.uploadData('incremental.json', syncData);
+        if (_webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.isConfigured) {
+            await _webdavEnhancedService__WEBPACK_IMPORTED_MODULE_0__/* .webdavEnhancedService */ .n.uploadData('incremental.json', syncData);
         }
     }
 
@@ -10855,7 +13570,7 @@ class SyncManager {
      * 获取指定时间后的更改
      */
     async getChangesSince(timestamp) {
-        const problems = await (0,_problemService__WEBPACK_IMPORTED_MODULE_1__/* .getAllProblems */ .kT)();
+        const problems = await (0,_problemService__WEBPACK_IMPORTED_MODULE_1__.getAllProblems)();
         const changes = [];
         
         Object.entries(problems).forEach(([id, problem]) => {
@@ -10878,107 +13593,393 @@ const syncManager = new SyncManager();
 
 /***/ }),
 
-/***/ 6:
+/***/ 189:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   i: () => (/* binding */ webdavService)
+/* harmony export */   n: () => (/* binding */ webdavEnhancedService)
 /* harmony export */ });
+/* harmony import */ var _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(867);
 /**
- * WebDAV Service for Nutstore (坚果云) Integration
- * Provides unlimited cloud storage for LeetCode problem data
+ * Enhanced WebDAV Service with Auto-fallback and Method Disguise
+ * Supports automatic HTTPS->HTTP fallback and PROPFIND->POST disguise
  */
 
-class WebDAVService {
+
+
+class WebDAVEnhancedService {
     constructor() {
         this.baseUrl = null;
         this.username = null;
         this.password = null;
         this.isConfigured = false;
-        this.folderPath = '/LeetcodeMasteryScheduler/'; // 坚果云中的存储路径
+        this.isAuthenticated = false;
+        this.folderPath = '/LeetcodeMasteryScheduler/';
+        this.onAuthStatusChange = null;
+
+        // 连接策略配置
+        this.connectionStrategy = {
+            protocol: 'auto', // 'auto', 'https', 'http'
+            method: 'auto',    // 'auto', 'native', 'disguised'
+            currentProtocol: null,
+            currentMethod: null,
+            lastSuccessfulStrategy: null
+        };
+
+        // 错误检测模式
+        this.errorPatterns = {
+            encryptionBlocked: ['ECONNRESET', 'ETIMEDOUT', 'CERT', 'SSL', 'TLS'],
+            methodBlocked: ['405', '403', 'Method Not Allowed', 'Forbidden'],
+            networkError: ['ENOTFOUND', 'ECONNREFUSED', 'Network']
+        };
+
+        // 重试配置
+        this.retryConfig = {
+            maxRetries: 3,
+            retryDelay: 1000,
+            timeout: 10000
+        };
     }
 
     /**
-     * 配置坚果云 WebDAV 连接
-     * @param {Object} config - 配置对象
-     * @param {string} config.username - 坚果云账号邮箱
-     * @param {string} config.password - 应用授权密码（非账号密码）
-     * @param {string} [config.serverUrl] - WebDAV 服务器地址，默认为坚果云
+     * 配置 WebDAV 连接，支持自动降级
      */
     async configure(config) {
-        // 坚果云 WebDAV 地址：https://dav.jianguoyun.com/dav/
-        this.baseUrl = config.serverUrl || 'https://dav.jianguoyun.com/dav';
+        // 保存基础配置
         this.username = config.username;
         this.password = config.password;
-        
-        // 验证连接
-        const isValid = await this.testConnection();
+
+        // 设置连接策略
+        if (config.connectionMode) {
+            this.connectionStrategy.protocol = config.connectionMode.protocol || 'auto';
+            this.connectionStrategy.method = config.connectionMode.method || 'auto';
+        }
+
+        // 设置重试配置
+        if (config.retryConfig) {
+            Object.assign(this.retryConfig, config.retryConfig);
+        }
+
+        // 构建基础 URL（不含协议）
+        const baseHost = config.serverUrl || 'dav.jianguoyun.com/dav';
+        this.baseUrl = baseHost.replace(/^https?:\/\//, '');
+
+        // 保存配置
+        await this.saveConfig({
+            ...config,
+            connectionStrategy: this.connectionStrategy
+        });
+        this.isConfigured = true;
+
+        // 智能连接测试
+        const isValid = await this.smartConnect();
+        this.isAuthenticated = isValid;
+
         if (isValid) {
-            this.isConfigured = true;
-            // 保存配置到本地（密码需要加密）
-            await this.saveConfig(config);
-            // 确保文件夹存在
             await this.ensureFolderExists();
+            if (this.onAuthStatusChange) {
+                this.onAuthStatusChange(true);
+            }
+            console.log('WebDAV connected successfully with strategy:', this.connectionStrategy.lastSuccessfulStrategy);
+        } else {
+            if (this.onAuthStatusChange) {
+                this.onAuthStatusChange(false);
+            }
         }
         return isValid;
     }
 
     /**
-     * 测试 WebDAV 连接
+     * 智能连接测试，自动尝试不同策略
      */
-    async testConnection() {
-        try {
-            const response = await this.request('PROPFIND', '/', {
-                headers: {
-                    'Depth': '0'
+    async smartConnect() {
+        const strategies = this.generateStrategies();
+
+        for (const strategy of strategies) {
+            console.log(`Trying connection strategy: ${strategy.protocol} + ${strategy.method}`);
+
+            try {
+                const success = await this.testConnectionWithStrategy(strategy);
+                if (success) {
+                    // 保存成功的策略
+                    this.connectionStrategy.currentProtocol = strategy.protocol;
+                    this.connectionStrategy.currentMethod = strategy.method;
+                    this.connectionStrategy.lastSuccessfulStrategy = {
+                        protocol: strategy.protocol,
+                        method: strategy.method,
+                        timestamp: new Date().toISOString()
+                    };
+                    await this.saveStrategy();
+                    return true;
                 }
+            } catch (error) {
+                console.log(`Strategy failed: ${error.message}`);
+                continue;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 生成连接策略列表
+     */
+    generateStrategies() {
+        const strategies = [];
+
+        // 根据配置生成策略
+        const protocols = this.connectionStrategy.protocol === 'auto'
+            ? ['https', 'http']
+            : [this.connectionStrategy.protocol];
+
+        const methods = this.connectionStrategy.method === 'auto'
+            ? ['native', 'disguised']
+            : [this.connectionStrategy.method];
+
+        // 如果不是自动模式，用户的选择优先
+        if (this.connectionStrategy.protocol !== 'auto') {
+            // 用户指定了协议，严格按照用户选择
+            for (const method of methods) {
+                strategies.push({ protocol: protocols[0], method, priority: 0 });
+            }
+            return strategies; // 直接返回，只使用用户选择的协议
+        }
+
+        // 自动模式：如果有上次成功的策略，优先尝试
+        if (this.connectionStrategy.lastSuccessfulStrategy) {
+            strategies.push({
+                protocol: this.connectionStrategy.lastSuccessfulStrategy.protocol,
+                method: this.connectionStrategy.lastSuccessfulStrategy.method,
+                priority: 0
             });
+        }
+
+        // 然后添加其他策略
+        for (const protocol of protocols) {
+            for (const method of methods) {
+                // 跳过已经添加的优先策略
+                if (this.connectionStrategy.lastSuccessfulStrategy &&
+                    protocol === this.connectionStrategy.lastSuccessfulStrategy.protocol &&
+                    method === this.connectionStrategy.lastSuccessfulStrategy.method) {
+                    continue;
+                }
+                strategies.push({ protocol, method, priority: 1 });
+            }
+        }
+
+        return strategies;
+    }
+
+    /**
+     * 使用特定策略测试连接
+     */
+    async testConnectionWithStrategy(strategy) {
+        try {
+            const response = await this.requestWithStrategy('PROPFIND', '/', {
+                headers: { 'Depth': '0' }
+            }, strategy);
+
             return response.ok;
         } catch (error) {
-            console.error('WebDAV connection test failed:', error);
+            // 分析错误类型，用于优化后续策略
+            this.analyzeError(error);
             return false;
         }
     }
 
     /**
-     * 发送 WebDAV 请求
+     * 使用特定策略发送请求
      */
-    async request(method, path, options = {}) {
-        const url = `${this.baseUrl}${path}`;
-        const auth = btoa(`${this.username}:${this.password}`);
-        
-        const defaultHeaders = {
-            'Authorization': `Basic ${auth}`,
-            'Content-Type': 'application/xml; charset=utf-8'
-        };
-        
-        const response = await fetch(url, {
-            method,
-            headers: {
-                ...defaultHeaders,
-                ...options.headers
-            },
-            body: options.body
-        });
-        
+    async requestWithStrategy(method, path, options = {}, strategy = null) {
+        // 如果没有指定策略，使用当前策略
+        if (!strategy) {
+            strategy = {
+                protocol: this.connectionStrategy.currentProtocol || 'https',
+                method: this.connectionStrategy.currentMethod || 'native'
+            };
+        }
+
+        // 构建 URL
+        const protocol = strategy.protocol;
+        const url = `${protocol}://${this.baseUrl}${path}`;
+
+        // 准备请求参数
+        let actualMethod = method;
+        let headers = this.buildHeaders(options.headers);
+
+        // 如果使用伪装模式
+        if (strategy.method === 'disguised' && ['PROPFIND', 'PROPPATCH', 'MKCOL'].includes(method)) {
+            actualMethod = 'POST';
+            headers['X-HTTP-Method-Override'] = method;
+            headers['X-Original-Method'] = method;
+            // 添加自定义标记，后端可以识别
+            headers['X-WebDAV-Disguised'] = 'true';
+        }
+
+        // 通过 background script 发送请求
+        const response = await this.sendRequest(actualMethod, url, headers, options.body);
         return response;
     }
 
     /**
-     * 确保存储文件夹存在
+     * 发送实际请求（通过 background script）
+     */
+    async sendRequest(method, url, headers, body) {
+        const response = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.runtime.sendMessage({
+            action: 'webdavRequest',
+            params: {
+                method,
+                url,
+                headers,
+                body,
+                timeout: this.retryConfig.timeout
+            }
+        });
+
+        if (!response.success) {
+            const error = new Error(response.error || 'WebDAV request failed');
+            error.details = response;
+            throw error;
+        }
+
+        return this.wrapResponse(response.data);
+    }
+
+    /**
+     * 包装响应对象
+     */
+    wrapResponse(data) {
+        return {
+            ok: data.ok,
+            status: data.status,
+            statusText: data.statusText,
+            data: data.data,
+            text: async () => {
+                if (typeof data.data === 'object') {
+                    return JSON.stringify(data.data);
+                }
+                return data.data;
+            },
+            json: async () => {
+                if (typeof data.data === 'string') {
+                    try {
+                        return JSON.parse(data.data);
+                    } catch {
+                        throw new Error('Invalid JSON response');
+                    }
+                }
+                return data.data;
+            }
+        };
+    }
+
+    /**
+     * 构建请求头
+     */
+    buildHeaders(customHeaders = {}) {
+        const auth = btoa(`${this.username}:${this.password}`);
+
+        return {
+            'Authorization': `Basic ${auth}`,
+            'Content-Type': 'application/xml; charset=utf-8',
+            'User-Agent': 'LeetcodeMasteryScheduler/1.0',
+            ...customHeaders
+        };
+    }
+
+    /**
+     * 分析错误类型，优化后续策略
+     */
+    analyzeError(error) {
+        const errorMsg = error.message.toLowerCase();
+
+        for (const [type, patterns] of Object.entries(this.errorPatterns)) {
+            if (patterns.some(pattern => errorMsg.includes(pattern.toLowerCase()))) {
+                console.log(`Detected error type: ${type}`);
+
+                // 根据错误类型调整策略
+                if (type === 'encryptionBlocked') {
+                    // 加密被阻止，优先使用 HTTP
+                    this.connectionStrategy.currentProtocol = 'http';
+                } else if (type === 'methodBlocked') {
+                    // 方法被阻止，使用伪装模式
+                    this.connectionStrategy.currentMethod = 'disguised';
+                }
+                break;
+            }
+        }
+    }
+
+    /**
+     * 智能请求方法 - 带自动重试和降级
+     */
+    async request(method, path, options = {}) {
+        let retries = 0;
+        let lastError = null;
+
+        while (retries < this.retryConfig.maxRetries) {
+            try {
+                // 如果有当前成功的策略，先尝试
+                if (this.connectionStrategy.currentProtocol && this.connectionStrategy.currentMethod) {
+                    try {
+                        return await this.requestWithStrategy(method, path, options);
+                    } catch (error) {
+                        console.log('Current strategy failed, trying alternatives...');
+                        lastError = error;
+                    }
+                }
+
+                // 尝试所有可能的策略
+                const strategies = this.generateStrategies();
+
+                for (const strategy of strategies) {
+                    try {
+                        const response = await this.requestWithStrategy(method, path, options, strategy);
+
+                        // 如果成功，更新当前策略
+                        if (response.ok || response.status < 500) {
+                            this.connectionStrategy.currentProtocol = strategy.protocol;
+                            this.connectionStrategy.currentMethod = strategy.method;
+                            return response;
+                        }
+                    } catch (error) {
+                        lastError = error;
+                        continue;
+                    }
+                }
+
+                retries++;
+                if (retries < this.retryConfig.maxRetries) {
+                    await this.delay(this.retryConfig.retryDelay * retries);
+                }
+            } catch (error) {
+                lastError = error;
+                retries++;
+            }
+        }
+
+        // 所有策略都失败
+        throw lastError || new Error('All connection strategies failed');
+    }
+
+    /**
+     * 延迟函数
+     */
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    /**
+     * 确保文件夹存在
      */
     async ensureFolderExists() {
         try {
-            // 检查文件夹是否存在
             const response = await this.request('PROPFIND', this.folderPath, {
-                headers: {
-                    'Depth': '0'
-                }
+                headers: { 'Depth': '0' }
             });
-            
+
             if (!response.ok && response.status === 404) {
-                // 创建文件夹
                 await this.request('MKCOL', this.folderPath);
                 console.log('Created folder:', this.folderPath);
             }
@@ -10988,114 +13989,106 @@ class WebDAVService {
     }
 
     /**
-     * 上传数据到坚果云
-     * @param {string} filename - 文件名
-     * @param {Object} data - 要保存的数据
+     * 上传数据
      */
     async uploadData(filename, data) {
         if (!this.isConfigured) {
             throw new Error('WebDAV not configured');
         }
-        
+
         const path = `${this.folderPath}${filename}`;
         const jsonData = JSON.stringify(data, null, 2);
-        
-        try {
-            const response = await this.request('PUT', path, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: jsonData
-            });
-            
-            if (response.ok || response.status === 201 || response.status === 204) {
-                console.log(`Data uploaded to ${path}`);
-                return true;
-            } else {
-                throw new Error(`Upload failed: ${response.status}`);
-            }
-        } catch (error) {
-            console.error('Error uploading data:', error);
-            throw error;
+
+        const response = await this.request('PUT', path, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonData
+        });
+
+        if (response.ok || response.status === 201 || response.status === 204) {
+            console.log(`Data uploaded to ${path}`);
+            return true;
+        } else {
+            throw new Error(`Upload failed: ${response.status}`);
         }
     }
 
     /**
-     * 从坚果云下载数据
-     * @param {string} filename - 文件名
+     * 下载数据
      */
     async downloadData(filename) {
         if (!this.isConfigured) {
             throw new Error('WebDAV not configured');
         }
-        
+
         const path = `${this.folderPath}${filename}`;
-        
-        try {
-            const response = await this.request('GET', path, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            
-            if (response.ok) {
-                const text = await response.text();
-                return JSON.parse(text);
-            } else if (response.status === 404) {
-                return null; // 文件不存在
-            } else {
-                throw new Error(`Download failed: ${response.status}`);
+        const response = await this.request('GET', path, {
+            headers: {
+                'Content-Type': 'application/json'
             }
-        } catch (error) {
-            console.error('Error downloading data:', error);
-            throw error;
+        });
+
+        if (response.ok) {
+            if (response.data !== undefined) {
+                if (typeof response.data === 'string') {
+                    try {
+                        return JSON.parse(response.data);
+                    } catch {
+                        return response.data;
+                    }
+                }
+                return response.data;
+            }
+            return await response.json();
+        } else if (response.status === 404) {
+            return null;
+        } else {
+            throw new Error(`Download failed: ${response.status}`);
         }
     }
 
     /**
-     * 列出文件夹中的所有文件
+     * 列出文件
      */
     async listFiles() {
         if (!this.isConfigured) {
             throw new Error('WebDAV not configured');
         }
-        
-        try {
-            const response = await this.request('PROPFIND', this.folderPath, {
-                headers: {
-                    'Depth': '1'
-                }
-            });
-            
-            if (response.ok) {
-                const text = await response.text();
-                // 解析 XML 响应获取文件列表
-                return this.parseFileList(text);
+
+        const response = await this.request('PROPFIND', this.folderPath, {
+            headers: { 'Depth': '1' }
+        });
+
+        if (response.ok) {
+            let xmlText;
+            if (response.data !== undefined) {
+                xmlText = typeof response.data === 'object' ? JSON.stringify(response.data) : response.data;
             } else {
-                throw new Error(`List files failed: ${response.status}`);
+                xmlText = await response.text();
             }
-        } catch (error) {
-            console.error('Error listing files:', error);
-            throw error;
+            return this.parseFileList(xmlText);
+        } else {
+            throw new Error(`List files failed: ${response.status}`);
         }
     }
 
     /**
-     * 解析 PROPFIND 响应中的文件列表
+     * 解析文件列表
      */
     parseFileList(xmlText) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(xmlText, 'text/xml');
         const responses = doc.getElementsByTagNameNS('DAV:', 'response');
-        
+
         const files = [];
-        for (let i = 1; i < responses.length; i++) { // Skip first (folder itself)
+        for (let i = 1; i < responses.length; i++) {
             const response = responses[i];
             const href = response.getElementsByTagNameNS('DAV:', 'href')[0]?.textContent;
             const displayName = response.getElementsByTagNameNS('DAV:', 'displayname')[0]?.textContent;
             const lastModified = response.getElementsByTagNameNS('DAV:', 'getlastmodified')[0]?.textContent;
             const contentLength = response.getElementsByTagNameNS('DAV:', 'getcontentlength')[0]?.textContent;
-            
+
             if (href && displayName) {
                 files.push({
                     name: displayName,
@@ -11105,7 +14098,7 @@ class WebDAVService {
                 });
             }
         }
-        
+
         return files;
     }
 
@@ -11116,48 +14109,114 @@ class WebDAVService {
         if (!this.isConfigured) {
             throw new Error('WebDAV not configured');
         }
-        
+
         const path = `${this.folderPath}${filename}`;
-        
-        try {
-            const response = await this.request('DELETE', path);
-            return response.ok || response.status === 204;
-        } catch (error) {
-            console.error('Error deleting file:', error);
-            throw error;
-        }
+        const response = await this.request('DELETE', path);
+        return response.ok || response.status === 204;
     }
 
     /**
-     * 保存配置到本地存储（加密敏感信息）
+     * 保存配置
      */
     async saveConfig(config) {
-        // 简单的 Base64 编码，实际使用应该用更安全的加密方式
         const encryptedConfig = {
             username: config.username,
-            password: btoa(config.password), // Base64 编码密码
-            serverUrl: config.serverUrl || 'https://dav.jianguoyun.com/dav',
+            password: btoa(config.password),
+            serverUrl: config.serverUrl || 'dav.jianguoyun.com/dav',
+            connectionStrategy: config.connectionStrategy || this.connectionStrategy,
+            retryConfig: config.retryConfig || this.retryConfig,
             enabled: true
         };
-        
-        await chrome.storage.local.set({
-            webdavConfig: encryptedConfig
+
+        await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.set({
+            webdavEnhancedConfig: encryptedConfig
         });
     }
 
     /**
-     * 从本地存储加载配置
+     * 保存连接策略
+     */
+    async saveStrategy() {
+        const result = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.get('webdavEnhancedConfig');
+        if (result.webdavEnhancedConfig) {
+            result.webdavEnhancedConfig.connectionStrategy = this.connectionStrategy;
+            await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.set({
+                webdavEnhancedConfig: result.webdavEnhancedConfig
+            });
+        }
+    }
+
+    /**
+     * 加载配置
      */
     async loadConfig() {
-        const result = await chrome.storage.local.get('webdavConfig');
-        if (result.webdavConfig && result.webdavConfig.enabled) {
-            const config = result.webdavConfig;
-            await this.configure({
-                username: config.username,
-                password: atob(config.password), // Base64 解码密码
-                serverUrl: config.serverUrl
-            });
-            return true;
+        try {
+            // 优先加载增强版配置
+            let result = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.get('webdavEnhancedConfig');
+            let config = result.webdavEnhancedConfig;
+
+            // 如果没有增强版配置，尝试迁移旧版配置
+            if (!config || !config.enabled) {
+                const oldResult = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.get('webdavConfig');
+                if (oldResult.webdavConfig && oldResult.webdavConfig.enabled) {
+                    console.log('Migrating from old WebDAV config to enhanced config');
+                    // 迁移旧配置
+                    config = {
+                        ...oldResult.webdavConfig,
+                        connectionStrategy: this.connectionStrategy,
+                        retryConfig: this.retryConfig
+                    };
+                    // 保存为增强版配置
+                    await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.set({ webdavEnhancedConfig: config });
+                    // 删除旧配置
+                    await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.remove('webdavConfig');
+                }
+            }
+
+            if (config && config.enabled) {
+
+                this.baseUrl = config.serverUrl || 'dav.jianguoyun.com/dav';
+                this.baseUrl = this.baseUrl.replace(/^https?:\/\//, '');
+                this.username = config.username;
+                this.password = atob(config.password);
+                this.isConfigured = true;
+
+                // 恢复连接策略
+                if (config.connectionStrategy) {
+                    this.connectionStrategy = config.connectionStrategy;
+                    // 如果有成功的策略记录，认为已认证
+                    if (config.connectionStrategy.lastSuccessfulStrategy) {
+                        this.isAuthenticated = true;
+
+                        // 如果策略较老（超过1小时），后台静默验证
+                        const strategyTime = new Date(config.connectionStrategy.lastSuccessfulStrategy.timestamp).getTime();
+                        if (Date.now() - strategyTime > 60 * 60 * 1000) {
+                            // 后台验证，不影响当前状态显示
+                            this.smartConnect().then(isValid => {
+                                this.isAuthenticated = isValid;
+                                if (this.onAuthStatusChange && !isValid) {
+                                    // 只在认证失败时通知
+                                    this.onAuthStatusChange(false);
+                                }
+                            }).catch(error => {
+                                console.error('WebDAV background connection test error:', error);
+                            });
+                        }
+                    } else {
+                        // 没有成功的策略记录，需要测试连接
+                        this.isAuthenticated = false;
+                    }
+                }
+
+                // 恢复重试配置
+                if (config.retryConfig) {
+                    this.retryConfig = config.retryConfig;
+                }
+
+                return true;
+            }
+        } catch (error) {
+            console.error('Error loading WebDAV config:', error);
         }
         return false;
     }
@@ -11170,35 +14229,48 @@ class WebDAVService {
         this.username = null;
         this.password = null;
         this.isConfigured = false;
-        
-        await chrome.storage.local.remove('webdavConfig');
+        this.connectionStrategy = {
+            protocol: 'auto',
+            method: 'auto',
+            currentProtocol: null,
+            currentMethod: null,
+            lastSuccessfulStrategy: null
+        };
+
+        await _shared_browser_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.storage.local.remove('webdavEnhancedConfig');
     }
 
     /**
-     * 备份所有问题数据到坚果云
+     * 获取连接状态信息
      */
+    getConnectionStatus() {
+        return {
+            isConfigured: this.isConfigured,
+            isAuthenticated: this.isAuthenticated,
+            strategy: this.connectionStrategy.lastSuccessfulStrategy,
+            currentProtocol: this.connectionStrategy.currentProtocol,
+            currentMethod: this.connectionStrategy.currentMethod
+        };
+    }
+
+    // 保留原有的备份、恢复、同步等方法...
     async backupProblems(problems) {
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
         const filename = `problems_backup_${timestamp}.json`;
-        
+
         const backupData = {
             version: '1.0',
             timestamp: new Date().toISOString(),
             problemCount: problems.length,
             problems: problems
         };
-        
+
         await this.uploadData(filename, backupData);
-        
-        // 保持最近的备份记录
         await this.maintainBackupHistory();
-        
+
         return filename;
     }
 
-    /**
-     * 恢复问题数据
-     */
     async restoreProblems(filename) {
         const data = await this.downloadData(filename);
         if (data && data.problems) {
@@ -11207,91 +14279,68 @@ class WebDAVService {
         throw new Error('Invalid backup file');
     }
 
-    /**
-     * 获取所有备份文件列表
-     */
     async getBackupList() {
         const files = await this.listFiles();
-        return files.filter(file => 
-            file.name.startsWith('problems_backup_') && 
+        return files.filter(file =>
+            file.name.startsWith('problems_backup_') &&
             file.name.endsWith('.json')
         ).sort((a, b) => b.lastModified - a.lastModified);
     }
 
-    /**
-     * 维护备份历史（保留最近10个备份）
-     */
     async maintainBackupHistory() {
         const backups = await this.getBackupList();
         if (backups.length > 10) {
-            // 删除旧的备份
             for (let i = 10; i < backups.length; i++) {
                 await this.deleteFile(backups[i].name);
             }
         }
     }
 
-    /**
-     * 同步数据（上传当前数据并下载最新数据）
-     */
     async syncData(localProblems, lastSyncTime) {
         const syncFilename = 'problems_sync.json';
-        
-        // 下载云端数据
         const cloudData = await this.downloadData(syncFilename);
-        
+
         if (!cloudData) {
-            // 云端没有数据，上传本地数据
             await this.uploadData(syncFilename, {
                 lastSync: new Date().toISOString(),
                 problems: localProblems
             });
             return { problems: localProblems, conflicts: [] };
         }
-        
-        // 合并数据（简单策略：以最新修改时间为准）
+
         const mergedData = this.mergeProblems(localProblems, cloudData.problems);
-        
-        // 上传合并后的数据
+
         await this.uploadData(syncFilename, {
             lastSync: new Date().toISOString(),
             problems: mergedData.problems
         });
-        
+
         return mergedData;
     }
 
-    /**
-     * 合并本地和云端的问题数据
-     */
     mergeProblems(localProblems, cloudProblems) {
         const merged = new Map();
         const conflicts = [];
-        
-        // 添加所有云端问题
+
         cloudProblems.forEach(problem => {
             merged.set(problem.id || problem.name, problem);
         });
-        
-        // 合并本地问题
+
         localProblems.forEach(problem => {
             const key = problem.id || problem.name;
             const cloudProblem = merged.get(key);
-            
+
             if (!cloudProblem) {
-                // 只在本地存在
                 merged.set(key, problem);
             } else {
-                // 比较修改时间，保留最新的
                 const localTime = new Date(problem.lastModified || 0).getTime();
                 const cloudTime = new Date(cloudProblem.lastModified || 0).getTime();
-                
+
                 if (localTime > cloudTime) {
                     merged.set(key, problem);
                 } else if (localTime < cloudTime) {
-                    // 云端更新，保持云端版本
+                    // Keep cloud version
                 } else if (JSON.stringify(problem) !== JSON.stringify(cloudProblem)) {
-                    // 时间相同但内容不同，记录冲突
                     conflicts.push({
                         problemId: key,
                         local: problem,
@@ -11300,7 +14349,7 @@ class WebDAVService {
                 }
             }
         });
-        
+
         return {
             problems: Array.from(merged.values()),
             conflicts
@@ -11309,7 +14358,7 @@ class WebDAVService {
 }
 
 // 导出单例
-const webdavService = new WebDAVService();
+const webdavEnhancedService = new WebDAVEnhancedService();
 
 /***/ }),
 
@@ -11403,60 +14452,6 @@ const COMPILE_ERROR_AND_TLE_CLASSNAME_NEW = "mr-1 flex-1 whitespace-nowrap text-
 
 /***/ }),
 
-/***/ 422:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   $0: () => (/* binding */ configButtonDOMs),
-/* harmony export */   J8: () => (/* binding */ switchButtonDOM),
-/* harmony export */   R4: () => (/* binding */ deleteButtonDOMs),
-/* harmony export */   Tv: () => (/* binding */ resetButtonDOMs),
-/* harmony export */   WA: () => (/* binding */ prevButton1DOM),
-/* harmony export */   Y1: () => (/* binding */ popupPageDOM),
-/* harmony export */   _p: () => (/* binding */ input1DOM),
-/* harmony export */   aJ: () => (/* binding */ inputLabel1DOM),
-/* harmony export */   bE: () => (/* binding */ nextButton1DOM),
-/* harmony export */   dt: () => (/* binding */ undoButtonDOMs),
-/* harmony export */   hO: () => (/* binding */ noReviewTableDOM),
-/* harmony export */   r2: () => (/* binding */ siteLabelDOM),
-/* harmony export */   uV: () => (/* binding */ checkButtonDOMs)
-/* harmony export */ });
-/* unused harmony exports input0DOM, inputLabel0DOM, prevButton0DOM, nextButton0DOM, input2DOM, inputLabel2DOM, prevButton2DOM, nextButton2DOM, needReviewTableDOM, completedTableDOM, optionPageFeedbackMsgDOM */
-const input0DOM = document.getElementById("pageInput0");
-const inputLabel0DOM = document.getElementById("pageInputLabel0");
-const prevButton0DOM = document.getElementById("prevButton0");
-const nextButton0DOM = document.getElementById("nextButton0");
-
-const input1DOM = document.getElementById("pageInput1");
-const inputLabel1DOM = document.getElementById("pageInputLabel1");
-const prevButton1DOM = document.getElementById("prevButton1");
-const nextButton1DOM = document.getElementById("nextButton1");
-
-const input2DOM = document.getElementById("pageInput2");
-const inputLabel2DOM = document.getElementById("pageInputLabel2");
-const prevButton2DOM = document.getElementById("prevButton2");
-const nextButton2DOM = document.getElementById("nextButton2");
-
-const needReviewTableDOM = document.getElementById("need-review-table");
-const noReviewTableDOM = document.getElementById("no-review-table");
-const completedTableDOM = document.getElementById("completed-table");
-
-const checkButtonDOMs = document.getElementsByClassName("check-btn-mark");
-const deleteButtonDOMs = document.getElementsByClassName("delete-btn-mark");
-const resetButtonDOMs = document.getElementsByClassName("reset-btn-mark");
-const undoButtonDOMs = document.getElementsByClassName("undo-ops-btn");
-const configButtonDOMs = document.getElementsByClassName("config-btn");
-
-const siteLabelDOM = document.getElementById("siteLabel");
-const switchButtonDOM = document.getElementById('switchButton');
-
-const optionPageFeedbackMsgDOM = document.getElementById('feedbackMessage');
-
-const popupPageDOM = document.defaultView;
-
-/***/ }),
-
 /***/ 878:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -11474,6 +14469,8 @@ const popupPageDOM = document.defaultView;
 /* harmony import */ var _delegate_localStorageDelegate_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(891);
 /* harmony import */ var _delegate_cloudStorageDelegate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(188);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(214);
+/* harmony import */ var _shared_browser_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(867);
+
 
 
 
@@ -11558,11 +14555,8 @@ const saveFSRSParams = async (newParams) => {
 const saveRevlog = async (cardId, revlog) => {
     try {
         // 从 localStorage 获取现有的复习日志
-        const existingRevlogsStr = await new Promise((resolve) => {
-            chrome.storage.local.get(['fsrs_revlogs'], (result) => {
-                resolve(result.fsrs_revlogs || '{}');
-            });
-        });
+        const { fsrs_revlogs: existingRevlogsStr = '{}' } = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.storage.local.get('fsrs_revlogs');
+
         
         let existingRevlogs;
         try {
@@ -11581,10 +14575,8 @@ const saveRevlog = async (cardId, revlog) => {
         existingRevlogs[cardId].push(revlog);
         
         // 保存到本地存储
-        await new Promise((resolve) => {
-            chrome.storage.local.set({ 'fsrs_revlogs': JSON.stringify(existingRevlogs) });
-            resolve();
-        });
+        await _shared_browser_js__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.storage.local.set({ 'fsrs_revlogs': JSON.stringify(existingRevlogs) });
+
         
         // 如果启用了云同步，同时保存到云端
         if (_store__WEBPACK_IMPORTED_MODULE_3__/* .store */ .h.isCloudSyncEnabled) {
@@ -11613,11 +14605,9 @@ const getAllRevlogs = async () => {
         }
         
         // 如果云端没有数据或未启用云同步，从本地获取
-        result = await new Promise((resolve) => {
-            chrome.storage.local.get(['fsrs_revlogs'], (result) => {
-                resolve(result.fsrs_revlogs || '{}');
-            });
-        });
+        const { fsrs_revlogs: localRevlogs = '{}' } = await _shared_browser_js__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z.storage.local.get('fsrs_revlogs');
+        result = localRevlogs;
+
         
         // 如果结果是字符串，尝试解析它
         if (typeof result === 'string') {
@@ -12039,7 +15029,7 @@ const mergeRevlogs = (revlogs1, revlogs2) => {
 
 /***/ }),
 
-/***/ 876:
+/***/ 842:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -12060,22 +15050,55 @@ var modeService = __webpack_require__(733);
 var problemService = __webpack_require__(820);
 // EXTERNAL MODULE: ./src/popup/util/constants.js
 var constants = __webpack_require__(497);
-// EXTERNAL MODULE: ./src/popup/util/doms.js
-var doms = __webpack_require__(422);
+;// CONCATENATED MODULE: ./src/popup/util/doms.js
+const doms_input0DOM = document.getElementById("pageInput0");
+const doms_inputLabel0DOM = document.getElementById("pageInputLabel0");
+const doms_prevButton0DOM = document.getElementById("prevButton0");
+const doms_nextButton0DOM = document.getElementById("nextButton0");
+
+const input1DOM = document.getElementById("pageInput1");
+const inputLabel1DOM = document.getElementById("pageInputLabel1");
+const prevButton1DOM = document.getElementById("prevButton1");
+const nextButton1DOM = document.getElementById("nextButton1");
+
+const doms_input2DOM = document.getElementById("pageInput2");
+const doms_inputLabel2DOM = document.getElementById("pageInputLabel2");
+const doms_prevButton2DOM = document.getElementById("prevButton2");
+const doms_nextButton2DOM = document.getElementById("nextButton2");
+
+const doms_needReviewTableDOM = document.getElementById("need-review-table");
+const noReviewTableDOM = document.getElementById("no-review-table");
+const doms_completedTableDOM = document.getElementById("completed-table");
+
+const checkButtonDOMs = document.getElementsByClassName("check-btn-mark");
+const deleteButtonDOMs = document.getElementsByClassName("delete-btn-mark");
+const resetButtonDOMs = document.getElementsByClassName("reset-btn-mark");
+const undoButtonDOMs = document.getElementsByClassName("undo-ops-btn");
+const configButtonDOMs = document.getElementsByClassName("config-btn");
+
+const siteLabelDOM = document.getElementById("siteLabel");
+const switchButtonDOM = document.getElementById('switchButton');
+
+const optionPageFeedbackMsgDOM = document.getElementById('feedbackMessage');
+
+const popupPageDOM = document.defaultView;
 // EXTERNAL MODULE: ./src/popup/util/utils.js
 var utils = __webpack_require__(384);
+// EXTERNAL MODULE: ./src/shared/browser.js
+var browser = __webpack_require__(867);
 ;// CONCATENATED MODULE: ./src/popup/handler/configJumpHandler.js
 
 
+
 const setConfigJumpHandlers = () => {
-    if (doms/* configButtonDOMs */.$0 !== undefined) {
-        Array.prototype.forEach.call(doms/* configButtonDOMs */.$0, (btn) => btn.onclick = async (e) => {
-            chrome.runtime.openOptionsPage();
+    if (configButtonDOMs !== undefined) {
+        Array.prototype.forEach.call(configButtonDOMs, (btn) => btn.onclick = async (e) => {
+            browser/* default */.Z.runtime.openOptionsPage();
         });
     }
 }
-// EXTERNAL MODULE: ./src/popup/daily-review.js + 2 modules
-var daily_review = __webpack_require__(906);
+// EXTERNAL MODULE: ./src/popup/daily-review.js + 6 modules
+var daily_review = __webpack_require__(326);
 ;// CONCATENATED MODULE: ./src/popup/handler/modeSwitchHandler.js
 
 
@@ -12090,7 +15113,7 @@ const switchMode = async () => {
 }
 
 const setModeSwitchHandlers = () => {
-    doms/* switchButtonDOM */.J8.onclick = switchMode;
+    switchButtonDOM.onclick = switchMode;
 }
 // EXTERNAL MODULE: ./src/popup/service/operationHistoryService.js
 var operationHistoryService = __webpack_require__(809);
@@ -12114,32 +15137,32 @@ const recordOperationHandler_setRecordOperationHandlers = () => {
 
     initTooltips();
 
-    if (doms/* checkButtonDOMs */.uV !== undefined) {
-        Array.prototype.forEach.call(doms/* checkButtonDOMs */.uV, (btn) => btn.onclick = async (event) => {
+    if (checkButtonDOMs !== undefined) {
+        Array.prototype.forEach.call(checkButtonDOMs, (btn) => btn.onclick = async (event) => {
             hide_all_tooltips();
             await (0,problemService/* markProblemAsMastered */.Vv)(event.target.dataset.id);
             await renderAll();
         });
     }
 
-    if (doms/* deleteButtonDOMs */.R4 !== undefined) {
-        Array.prototype.forEach.call(doms/* deleteButtonDOMs */.R4, (btn) => btn.onclick = async (event) => {
+    if (deleteButtonDOMs !== undefined) {
+        Array.prototype.forEach.call(deleteButtonDOMs, (btn) => btn.onclick = async (event) => {
             hide_all_tooltips();
             await (0,problemService/* deleteProblem */.aG)(event.target.dataset.id);
             await renderAll();
         });
     }
 
-    if (doms/* resetButtonDOMs */.Tv !== undefined) {
-        Array.prototype.forEach.call(doms/* resetButtonDOMs */.Tv, (btn) => btn.onclick = async (event) => {
+    if (resetButtonDOMs !== undefined) {
+        Array.prototype.forEach.call(resetButtonDOMs, (btn) => btn.onclick = async (event) => {
             hide_all_tooltips();
             await (0,problemService/* resetProblem */.wB)(event.target.dataset.id);
             await renderAll();
         });
     }
 
-    if (doms/* undoButtonDOMs */.dt !== undefined) {
-        Array.prototype.forEach.call(doms/* undoButtonDOMs */.dt, (btn) => btn.onclick = async () => {
+    if (undoButtonDOMs !== undefined) {
+        Array.prototype.forEach.call(undoButtonDOMs, (btn) => btn.onclick = async () => {
             hide_all_tooltips();
             await (0,operationHistoryService/* undoLatestOperation */.Z_)();
             await renderAll();
@@ -12248,7 +15271,7 @@ const openNoteModal = async (problemIndex) => {
         console.log("打开笔记模态框，问题索引:", problemIndex);
         
         // 使用 getAllProblems 获取问题数据
-        const problems = await (0,problemService/* getAllProblems */.kT)();
+        const problems = await (0,problemService.getAllProblems)();
         const problem = problems[problemIndex];
         
         // 如果没有找到问题数据
@@ -12337,7 +15360,7 @@ const saveNote = async () => {
         const notes = await getAllNotes();
         
         // 使用 getAllProblems 获取问题数据
-        const problems = await (0,problemService/* getAllProblems */.kT)();
+        const problems = await (0,problemService.getAllProblems)();
         const problem = problems[problemIndex];
         
         if (!problem) {
@@ -12370,7 +15393,7 @@ const saveNote = async () => {
         noteModal.classList.remove('show');
         
         // 获取最新的问题数据
-        const allProblems = await (0,problemService/* getAllProblems */.kT)();
+        const allProblems = await (0,problemService.getAllProblems)();
         
         // 先销毁所有现有的工具提示
         const existingTooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
@@ -12412,7 +15435,7 @@ const saveNote = async () => {
 const exportAllNotes = async () => {
     try {
         // 使用 getAllProblems 获取问题数据
-        const problems = await (0,problemService/* getAllProblems */.kT)();
+        const problems = await (0,problemService.getAllProblems)();
         const notes = await getAllNotes();
         let notesContent = "# LeetCode Mastery Scheduler notes\n\n";
         notesContent += "开源仓库链接/repo url: https://github.com/xiaohajiayou/Leetcode-Mastery-Scheduler" + "\n\n";
@@ -12522,10 +15545,10 @@ const jumpToSchedulePage = (event) => {
     if (event.keyCode !== 13) return;
     let page = parseInt(event.target.value);
     if (isNaN(page) || !Number.isInteger(page)) {
-        doms/* input1DOM */._p.classList.add("is-invalid");
+        input1DOM.classList.add("is-invalid");
         return;
     }
-    doms/* input1DOM */._p.classList.remove("is-invalid");
+    input1DOM.classList.remove("is-invalid");
     if (page === popup_store/* store */.h.scheduledPage) return;
     renderScheduledTableContent(popup_store/* store */.h.reviewScheduledProblems, page);
     recordOperationHandler_setRecordOperationHandlers();
@@ -12547,13 +15570,13 @@ const jumpToCompletedPage = (event) => {
 const setPageJumpHandlers = () => {
     // prevButton0DOM.onclick = goToPrevReviewPage;
     // nextButton0DOM.onclick = goToNextReviewPage;
-    doms/* prevButton1DOM */.WA.onclick = goToPrevSchedulePage;
-    doms/* nextButton1DOM */.bE.onclick = goToNextSchedulePage;
+    prevButton1DOM.onclick = goToPrevSchedulePage;
+    nextButton1DOM.onclick = goToNextSchedulePage;
     // prevButton2DOM.onclick = goToPrevCompletedPage;
     // nextButton2DOM.onclick = goToNextCompletedPage;
     
     // input0DOM.onkeydown = jumpToReviewPage;
-    doms/* input1DOM */._p.onkeydown = jumpToSchedulePage;
+    input1DOM.onkeydown = jumpToSchedulePage;
     // input2DOM.onkeydown = jumpToCompletedPage;
 }
 ;// CONCATENATED MODULE: ./src/popup/handler/popupUnloadHandler.js
@@ -12562,9 +15585,9 @@ const setPageJumpHandlers = () => {
 
 
 const setPopupUnloadHandler = () => {
-    if (doms/* popupPageDOM */.Y1 !== undefined) {
+    if (popupPageDOM !== undefined) {
         
-        doms/* popupPageDOM */.Y1.addEventListener('unload', async () => {    
+        popupPageDOM.addEventListener('unload', async () => {    
             await (0,problemService/* syncProblems */.xd)();
         })
     }
@@ -12883,21 +15906,21 @@ const view_renderReviewTableContent = (problems, page) => {
 const renderScheduledTableContent = async (problems, page) => {
     /* validation */
     if (page > popup_store/* store */.h.scheduledMaxPage || page < 1) {
-        doms/* input1DOM */._p.classList.add("is-invalid");
+        input1DOM.classList.add("is-invalid");
         return;
     }
-    doms/* input1DOM */._p.classList.remove("is-invalid");
+    input1DOM.classList.remove("is-invalid");
 
     popup_store/* store */.h.scheduledPage = page;
 
     /* update pagination elements */
-    doms/* input1DOM */._p.value = page;
-    doms/* inputLabel1DOM */.aJ.innerText = `/${popup_store/* store */.h.scheduledMaxPage}`;
+    input1DOM.value = page;
+    inputLabel1DOM.innerText = `/${popup_store/* store */.h.scheduledMaxPage}`;
 
-    if (page === 1) doms/* prevButton1DOM */.WA.setAttribute("disabled", "disabled");
-    if (page !== 1) doms/* prevButton1DOM */.WA.removeAttribute("disabled");
-    if (page === popup_store/* store */.h.scheduledMaxPage) doms/* nextButton1DOM */.bE.setAttribute("disabled", "disabled");
-    if (page !== popup_store/* store */.h.scheduledMaxPage) doms/* nextButton1DOM */.bE.removeAttribute("disabled");
+    if (page === 1) prevButton1DOM.setAttribute("disabled", "disabled");
+    if (page !== 1) prevButton1DOM.removeAttribute("disabled");
+    if (page === popup_store/* store */.h.scheduledMaxPage) nextButton1DOM.setAttribute("disabled", "disabled");
+    if (page !== popup_store/* store */.h.scheduledMaxPage) nextButton1DOM.removeAttribute("disabled");
 
     let content_html =
         '\
@@ -12936,7 +15959,7 @@ const renderScheduledTableContent = async (problems, page) => {
 
     content_html += `</tbody>`
 
-    doms/* noReviewTableDOM */.hO.innerHTML = content_html;
+    noReviewTableDOM.innerHTML = content_html;
     
     // 初始化 tooltip
     setTimeout(() => {
@@ -12995,26 +16018,27 @@ const view_renderCompletedTableContent = (problems, page) => {
 const renderSiteMode = async () => {
     let cnMode = await (0,modeService/* isInCnMode */.B)();
     if (cnMode) {
-        doms/* switchButtonDOM */.J8.setAttribute("checked", "checked");
-        doms/* siteLabelDOM */.r2.innerHTML = constants/* CN_LABLE */.zY;
+        switchButtonDOM.setAttribute("checked", "checked");
+        siteLabelDOM.innerHTML = constants/* CN_LABLE */.zY;
     } else {
-        doms/* switchButtonDOM */.J8.removeAttribute("checked");
-        doms/* siteLabelDOM */.r2.innerHTML = constants/* GL_LABLE */.Hj;
+        switchButtonDOM.removeAttribute("checked");
+        siteLabelDOM.innerHTML = constants/* GL_LABLE */.Hj;
     }
 }
 
 const renderUndoButton = async () => {
     if (await (0,operationHistoryService/* hasOperationHistory */.$j)()) {
-        Array.prototype.forEach.call(doms/* undoButtonDOMs */.dt, btn => btn.removeAttribute("disabled"));
+        Array.prototype.forEach.call(undoButtonDOMs, btn => btn.removeAttribute("disabled"));
     } else {
-        Array.prototype.forEach.call(doms/* undoButtonDOMs */.dt, btn => btn.setAttribute("disabled", "disabled"));
+        Array.prototype.forEach.call(undoButtonDOMs, btn => btn.setAttribute("disabled", "disabled"));
     }
 } 
 
 const renderAll = async () => {
     await (0,configService/* loadConfigs */.O1)();
     await renderSiteMode();
-    await (0,problemService/* syncProblems */.xd)();
+    // 不要在每次 renderAll 时都同步，这会干扰防抖同步
+    // await syncProblems();
     // await syncFSRSHistory();
 
     // 创建笔记模态框
@@ -13022,7 +16046,7 @@ const renderAll = async () => {
     
 
 
-    const problems = Object.values(await (0,problemService/* getAllProblems */.kT)()).filter(p => p.isDeleted !== true);
+    const problems = Object.values(await (0,problemService.getAllProblems)()).filter(p => p.isDeleted !== true);
     console.log('Filtering and sorting problems...');
     
     // 过滤不同类型的问题
@@ -13085,6 +16109,22 @@ const renderAll = async () => {
         }
     });
 }
+
+
+/***/ }),
+
+/***/ 867:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(150);
+/* harmony import */ var webextension_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(webextension_polyfill__WEBPACK_IMPORTED_MODULE_0__);
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((webextension_polyfill__WEBPACK_IMPORTED_MODULE_0___default()));
 
 
 /***/ }),
@@ -13230,6 +16270,36 @@ var c=(s=>(s[s.New=0]="New",s[s.Learning=1]="Learning",s[s.Review=2]="Review",s[
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/create fake namespace object */
+/******/ 	(() => {
+/******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
+/******/ 		var leafPrototypes;
+/******/ 		// create a fake namespace object
+/******/ 		// mode & 1: value is a module id, require it
+/******/ 		// mode & 2: merge all properties of value into the ns
+/******/ 		// mode & 4: return value when already ns object
+/******/ 		// mode & 16: return value when it's Promise-like
+/******/ 		// mode & 8|1: behave like require
+/******/ 		__webpack_require__.t = function(value, mode) {
+/******/ 			if(mode & 1) value = this(value);
+/******/ 			if(mode & 8) return value;
+/******/ 			if(typeof value === 'object' && value) {
+/******/ 				if((mode & 4) && value.__esModule) return value;
+/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
+/******/ 			}
+/******/ 			var ns = Object.create(null);
+/******/ 			__webpack_require__.r(ns);
+/******/ 			var def = {};
+/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
+/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
+/******/ 				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => (value[key])));
+/******/ 			}
+/******/ 			def['default'] = () => (value);
+/******/ 			__webpack_require__.d(ns, def);
+/******/ 			return ns;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -13245,6 +16315,17 @@ var c=(s=>(s[s.New=0]="New",s[s.Learning=1]="Learning",s[s.Review=2]="Review",s[
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
@@ -13284,7 +16365,7 @@ var c=(s=>(s[s.New=0]="New",s[s.Learning=1]="Learning",s[s.Review=2]="Review",s[
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module used 'module' so it can't be inlined
 /******/ 	__webpack_require__(14);
-/******/ 	var __webpack_exports__ = __webpack_require__(906);
+/******/ 	var __webpack_exports__ = __webpack_require__(326);
 /******/ 	
 /******/ })()
 ;

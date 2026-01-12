@@ -2,6 +2,7 @@ import { FSRS, Rating, S_MIN, State, TypeConvert, createEmptyCard, dateDiffInDay
 import localStorageDelegate from '../delegate/localStorageDelegate.js';
 import cloudStorageDelegate from '../delegate/cloudStorageDelegate.js';
 import { store } from '../store';
+import browser from '../../shared/browser.js';
 
 // 1. 创建自定义参数
 export const defaultParams = generatorParameters({
@@ -82,11 +83,8 @@ export const saveFSRSParams = async (newParams) => {
 export const saveRevlog = async (cardId, revlog) => {
     try {
         // 从 localStorage 获取现有的复习日志
-        const existingRevlogsStr = await new Promise((resolve) => {
-            chrome.storage.local.get(['fsrs_revlogs'], (result) => {
-                resolve(result.fsrs_revlogs || '{}');
-            });
-        });
+        const { fsrs_revlogs: existingRevlogsStr = '{}' } = await browser.storage.local.get('fsrs_revlogs');
+
         
         let existingRevlogs;
         try {
@@ -105,10 +103,8 @@ export const saveRevlog = async (cardId, revlog) => {
         existingRevlogs[cardId].push(revlog);
         
         // 保存到本地存储
-        await new Promise((resolve) => {
-            chrome.storage.local.set({ 'fsrs_revlogs': JSON.stringify(existingRevlogs) });
-            resolve();
-        });
+        await browser.storage.local.set({ 'fsrs_revlogs': JSON.stringify(existingRevlogs) });
+
         
         // 如果启用了云同步，同时保存到云端
         if (store.isCloudSyncEnabled) {
@@ -137,11 +133,9 @@ export const getAllRevlogs = async () => {
         }
         
         // 如果云端没有数据或未启用云同步，从本地获取
-        result = await new Promise((resolve) => {
-            chrome.storage.local.get(['fsrs_revlogs'], (result) => {
-                resolve(result.fsrs_revlogs || '{}');
-            });
-        });
+        const { fsrs_revlogs: localRevlogs = '{}' } = await browser.storage.local.get('fsrs_revlogs');
+        result = localRevlogs;
+
         
         // 如果结果是字符串，尝试解析它
         if (typeof result === 'string') {

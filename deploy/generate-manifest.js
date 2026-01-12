@@ -2,10 +2,12 @@ const fs = require('fs');
 const path = require('path');
 
 const manifestPath = path.join(__dirname, '../manifest.base.json');
-const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+const baseManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
 
 const isDev = process.env.NODE_ENV === 'dev';
 const privateKey = process.env.EXTENSION_PRIVATE_KEY;
+const browserTarget = process.env.BROWSER || 'chrome';
+const isFirefox = browserTarget === 'firefox';
 
 /**
  * set env variable:
@@ -21,8 +23,41 @@ const privateKey = process.env.EXTENSION_PRIVATE_KEY;
  * 
  */
 
-if (isDev && privateKey) {
+const manifest = JSON.parse(JSON.stringify(baseManifest));
+
+if (isDev && privateKey && !isFirefox) {
   manifest.key = privateKey;
+} else if (manifest.key) {
+  delete manifest.key;
+}
+
+if (isFirefox) {
+  manifest.manifest_version = 2;
+
+  if (manifest.action) {
+    manifest.browser_action = manifest.action;
+    delete manifest.action;
+  }
+
+  if (manifest.background && manifest.background.service_worker) {
+    manifest.background = {
+      scripts: [manifest.background.service_worker],
+      persistent: false
+    };
+  }
+
+  if (manifest.host_permissions) {
+    const permissions = new Set([...(manifest.permissions || []), ...manifest.host_permissions]);
+    manifest.permissions = Array.from(permissions);
+    delete manifest.host_permissions;
+  }
+
+  manifest.browser_specific_settings = {
+    gecko: {
+      id: 'leetcode-mastery-scheduler@xiaohajiayou.github.io',
+      strict_min_version: '109.0'
+    }
+  };
 }
 
 const outputPath = path.join(__dirname, '../', 'manifest.json');
