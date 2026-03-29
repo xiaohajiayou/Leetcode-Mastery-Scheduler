@@ -3,6 +3,7 @@ import localStorageDelegate from '../delegate/localStorageDelegate.js';
 import cloudStorageDelegate from '../delegate/cloudStorageDelegate.js';
 import { webdavEnhancedService } from '../service/webdavEnhancedService.js';
 import { store } from '../store';
+import { mergeRevlogs } from './utils';
 
 export const FSRS_PARAMS_FILENAME = 'fsrs_params.json';
 export const FSRS_REVLOGS_FILENAME = 'fsrs_revlogs.json';
@@ -173,33 +174,26 @@ export const saveRevlog = async (cardId, revlog) => {
 // 6. 获取所有复习日志
 export const getAllRevlogs = async () => {
     try {
-        let result;
-        
-        // 如果启用了云同步，优先从云端获取
-        if (store.isCloudSyncEnabled) {
-            result = await cloudStorageDelegate.get('fsrs_revlogs');
-            if (result && Object.keys(result).length > 0) {
-                console.log('从云端获取复习日志:', result);
-                return result;
-            }
-        }
+        let mergedRevlogs = {};
 
-        if (webdavEnhancedService.isConfigured) {
-            const webdavResult = await webdavEnhancedService.downloadData(FSRS_REVLOGS_FILENAME);
-            if (webdavResult?.revlogs && Object.keys(webdavResult.revlogs).length > 0) {
-                console.log('从 WebDAV 获取复习日志:', webdavResult.revlogs);
-                return webdavResult.revlogs;
-            }
-        }
-        
-        // 如果云端没有数据或未启用云同步，从本地获取
-        result = await new Promise((resolve) => {
+        const localResult = await new Promise((resolve) => {
             chrome.storage.local.get(['fsrs_revlogs'], (result) => {
                 resolve(result.fsrs_revlogs || '{}');
             });
         });
-        
-        return parseRevlogsData(result);
+        mergedRevlogs = mergeRevlogs(mergedRevlogs, parseRevlogsData(localResult));
+
+        if (store.isCloudSyncEnabled) {
+            const cloudResult = await cloudStorageDelegate.get('fsrs_revlogs');
+            mergedRevlogs = mergeRevlogs(mergedRevlogs, parseRevlogsData(cloudResult));
+        }
+
+        if (webdavEnhancedService.isConfigured) {
+            const webdavResult = await webdavEnhancedService.downloadData(FSRS_REVLOGS_FILENAME);
+            mergedRevlogs = mergeRevlogs(mergedRevlogs, parseRevlogsData(webdavResult?.revlogs));
+        }
+
+        return mergedRevlogs;
     } catch (error) {
         console.error('Error getting revlogs:', error);
         return {};

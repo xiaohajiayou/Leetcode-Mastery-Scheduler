@@ -9,7 +9,7 @@ import { isCloudSyncEnabled, loadConfigs, setCloudSyncEnabled, setProblemSorter,
 import { store, daily_store } from './store';
 import { descriptionOf, idOf, problemSorterArr } from "./util/sort";
 import { getAllRevlogs, exportRevlogsToCSV, saveFSRSParams } from './util/fsrs.js';
-import { getRevlogCount, optimizeParameters, updateFSRSInstance } from './service/fsrsService.js';
+import { getRevlogCount, optimizeParameters, syncFSRSHistory, updateFSRSInstance } from './service/fsrsService.js';
 import { webdavEnhancedService as webdavService } from './service/webdavEnhancedService.js';
 import { syncManager } from './service/syncManager.js';
 import { conflictResolver } from './component/conflictResolver.js';
@@ -491,6 +491,8 @@ function initializeSyncStatusIndicator() {
 // 初始化FSRS参数优化卡片
 async function initializeFSRSOptimization() {
     try {
+        await syncFSRSHistory();
+
         // 获取并显示复习记录数量
         const count = await getRevlogCount();
         const revlogCountElement = document.getElementById('revlogCount');
