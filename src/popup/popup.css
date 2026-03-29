@@ -1007,6 +1007,57 @@ a {
 /* 题目列表样式 */
 #problemListView {
     padding: 5px;
+    font-size: 12px;
+}
+
+.problem-browser-panel {
+    margin: 12px 0 10px;
+    padding: 12px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(20, 38, 54, 0.96) 0%, rgba(15, 31, 45, 0.96) 100%);
+    border: 1px solid rgba(74, 157, 156, 0.22);
+    box-shadow: 0 10px 24px rgba(4, 12, 18, 0.28);
+}
+
+.problem-browser-search {
+    position: relative;
+}
+
+.problem-browser-search-icon {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: rgba(175, 255, 255, 0.58);
+    font-size: 12px;
+}
+
+.problem-browser-search-input {
+    width: 100%;
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid rgba(97, 218, 251, 0.14);
+    background: rgba(7, 20, 32, 0.9);
+    color: #eef7fb;
+    padding: 0 12px 0 34px;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.problem-browser-search-input::placeholder {
+    color: rgba(224, 224, 224, 0.46);
+}
+
+.problem-browser-search-input:focus {
+    border-color: rgba(97, 218, 251, 0.44);
+    box-shadow: 0 0 0 3px rgba(97, 218, 251, 0.08);
+}
+
+.problem-browser-summary {
+    margin-top: 10px;
+    font-size: 11px;
+    color: rgba(224, 247, 250, 0.66);
 }
 
 .problem-list-header {
@@ -1105,6 +1156,120 @@ td, th {
     background: transparent !important;    /* 确保tr和th是透明的 */
     border: none !important;              
     color: #ffffff !important;            /* 表头文字颜色 */
+}
+
+#problemListView .table {
+    border-radius: 0;
+    overflow: hidden;
+    background: rgba(16, 31, 43, 0.94);
+    font-size: 12px;
+}
+
+#problemListView .table tbody tr {
+    border-bottom: 1px solid rgba(97, 218, 251, 0.08);
+}
+
+#problemListView .table tbody tr:last-child {
+    border-bottom: none;
+}
+
+#problemListView td,
+#problemListView th {
+    padding: 3px 4px !important;
+}
+
+#problemListView td small,
+#problemListView th small {
+    font-size: 11px;
+}
+
+.problem-history-name {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.problem-history-link {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.problem-history-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-size: 10px;
+    color: rgba(224, 247, 250, 0.66);
+}
+
+.problem-history-chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 2px 7px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    line-height: 1.2;
+}
+
+.problem-history-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 4px 8px;
+    min-width: 72px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.problem-history-status.status-due {
+    background: rgba(255, 109, 106, 0.12);
+    color: #ff8e88;
+    border: 1px solid rgba(255, 109, 106, 0.24);
+}
+
+.problem-history-status.status-scheduled {
+    background: rgba(255, 193, 7, 0.12);
+    color: #ffd166;
+    border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.problem-history-status.status-mastered {
+    background: rgba(34, 197, 94, 0.12);
+    color: #7ee2a8;
+    border: 1px solid rgba(34, 197, 94, 0.22);
+}
+
+.problem-history-next {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.problem-history-next-date {
+    font-size: 12px;
+    font-weight: 600;
+    color: #eef7fb;
+}
+
+.problem-history-next-sub {
+    font-size: 10px;
+    color: rgba(224, 247, 250, 0.6);
+}
+
+.problem-history-empty {
+    text-align: center;
+    padding: 24px 12px;
+    color: rgba(224, 247, 250, 0.68);
+    font-size: 12px;
 }
 
 

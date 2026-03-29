@@ -10,11 +10,114 @@ import { loadConfigs } from "../service/configService";
 import { getLocalStorageData, setLocalStorageData } from "../../popup/delegate/localStorageDelegate";
 import { syncFSRSHistory } from "../service/fsrsService";
 
+const getProblemSearchInputDOM = () => document.getElementById('problemSearchInput');
+const getProblemSearchSummaryDOM = () => document.getElementById('problemSearchSummary');
+
+const normalizeSearchText = (value = '') => value.toLowerCase().replace(/\s+/g, '');
+
+const fuzzyMatchProblem = (problem, query) => {
+    if (!query) {
+        return { matched: true, score: 0 };
+    }
+
+    const normalizedQuery = normalizeSearchText(query);
+    const searchFields = [
+        problem.name,
+        problem.index,
+        problem.level,
+        problem.url
+    ].filter(Boolean).map(normalizeSearchText);
+
+    let bestScore = -1;
+
+    for (const field of searchFields) {
+        if (!field) continue;
+
+        const includesAt = field.indexOf(normalizedQuery);
+        if (includesAt >= 0) {
+            const score = 200 - includesAt - Math.max(0, field.length - normalizedQuery.length);
+            bestScore = Math.max(bestScore, score);
+            continue;
+        }
+
+        let queryPtr = 0;
+        let gapPenalty = 0;
+        for (let i = 0; i < field.length && queryPtr < normalizedQuery.length; i++) {
+            if (field[i] === normalizedQuery[queryPtr]) {
+                queryPtr += 1;
+            } else if (queryPtr > 0) {
+                gapPenalty += 1;
+            }
+        }
+
+        if (queryPtr === normalizedQuery.length) {
+            bestScore = Math.max(bestScore, 100 - gapPenalty);
+        }
+    }
+
+    return {
+        matched: bestScore >= 0,
+        score: bestScore
+    };
+};
+
+const applyProblemHistoryFilters = (problems) => {
+    const query = (store.problemHistoryQuery || '').trim();
+    const indexedProblems = problems.map((problem, index) => {
+        const match = fuzzyMatchProblem(problem, query);
+        return {
+            problem,
+            index,
+            match
+        };
+    }).filter(({ match }) => match.matched);
+
+    if (query) {
+        indexedProblems.sort((a, b) => {
+            if (b.match.score !== a.match.score) {
+                return b.match.score - a.match.score;
+            }
+            return a.index - b.index;
+        });
+    }
+
+    return indexedProblems.map(item => item.problem);
+};
+
+const updateProblemSearchSummary = (filteredCount, totalCount) => {
+    const summaryDOM = getProblemSearchSummaryDOM();
+    if (!summaryDOM) return;
+
+    if (totalCount === 0) {
+        summaryDOM.textContent = 'No problems yet';
+        return;
+    }
+
+    if (filteredCount === totalCount) {
+        summaryDOM.textContent = `${totalCount} problems`;
+        return;
+    }
+
+    summaryDOM.textContent = `${filteredCount} / ${totalCount} problems`;
+};
+
+const initializeProblemBrowserControls = () => {
+    const searchInputDOM = getProblemSearchInputDOM();
+    if (searchInputDOM && !searchInputDOM.dataset.bound) {
+        searchInputDOM.dataset.bound = 'true';
+        searchInputDOM.addEventListener('input', async (event) => {
+            store.problemHistoryQuery = event.target.value;
+            await renderScheduledTableContent(store.problemHistoryProblems || [], 1);
+        });
+    }
+};
+
 /*
     Tag for problem records
 */
-const getProblemUrlCell = (problem, width) => {
+const getProblemUrlCell = (problem, width, options = {}) => {
     const levelColor = getLevelColor(problem.level);
+    const nameFontSize = options.nameFontSize || '0.95em';
     return `<td style="width: ${width || 45}%;  min-width: 60px; max-width: 0; overflow: hidden;">\
         <a target="_blank" 
            href=${problem.url}
@@ -22,7 +125,7 @@ const getProblemUrlCell = (problem, width) => {
            data-bs-placement="top" 
            title="${problem.name} (${problem.level})"
            style="text-decoration: none; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">\
-            <small style="color: ${levelColor}; font-size: 0.95em;">${problem.name}</small>\
+            <small style="color: ${levelColor}; font-size: ${nameFontSize};">${problem.name}</small>\
         </a>\
     </td>`;
 };
@@ -94,24 +197,16 @@ const createReviewProblemRecord = (problem) => {
     ;
 }
 
-const createScheduleProblemRecord = async (problem) => {
+const createScheduleProblemRecord = async (problem, notes) => {
     const nextReviewDate = getNextReviewTime(problem);
-    
-    // 获取笔记数据
-    let notes = {};
-    try {
-        notes = await getLocalStorageData("notes") || {};
-    } catch (e) {
-        console.error("获取笔记数据失败", e);
-    }
     
     const htmlTag =
         `\
     <tr style="vertical-align:middle">\
-        ${getProblemUrlCell(problem, 45)}\
-        <td style="text-align: center; width: 20%; padding: 0;"><small data-bs-toggle="tooltip" data-bs-placement="top" title="${formatFullDate(nextReviewDate)}">${formatDateTime(nextReviewDate)}</small></td>\
+        ${getProblemUrlCell(problem, 49, { nameFontSize: '0.88em' })}\
+        <td style="text-align: center; width: 18%; padding: 0;"><small data-bs-toggle="tooltip" data-bs-placement="top" title="${formatFullDate(nextReviewDate)}">${formatDateTime(nextReviewDate)}</small></td>\
         ${getRetrievabilityCell(problem)}\
-        <td style="width: 20%; text-align: center; vertical-align:middle">\
+        <td style="width: 18%; text-align: center; vertical-align:middle; white-space: nowrap;">\
             ${getDeleteButtonTag(problem)}\
             ${getNoteButtonTag(problem, notes)}\
         </td>\
@@ -289,46 +384,29 @@ export const renderReviewTableContent = (problems, page) => {
 }
 
 export const renderScheduledTableContent = async (problems, page) => {
-    /* validation */
-    if (page > store.scheduledMaxPage || page < 1) {
-        input1DOM.classList.add("is-invalid");
-        return;
-    }
     input1DOM.classList.remove("is-invalid");
+    store.scheduledPage = 1;
+    input1DOM.value = 1;
+    inputLabel1DOM.innerText = `/1`;
+    prevButton1DOM.setAttribute("disabled", "disabled");
+    nextButton1DOM.setAttribute("disabled", "disabled");
 
-    store.scheduledPage = page;
-
-    /* update pagination elements */
-    input1DOM.value = page;
-    inputLabel1DOM.innerText = `/${store.scheduledMaxPage}`;
-
-    if (page === 1) prevButton1DOM.setAttribute("disabled", "disabled");
-    if (page !== 1) prevButton1DOM.removeAttribute("disabled");
-    if (page === store.scheduledMaxPage) nextButton1DOM.setAttribute("disabled", "disabled");
-    if (page !== store.scheduledMaxPage) nextButton1DOM.removeAttribute("disabled");
+    const filteredProblems = applyProblemHistoryFilters(problems);
+    updateProblemSearchSummary(filteredProblems.length, problems.length);
 
     let content_html =
         '\
     <thead>\
-        <tr style="font-size: smaller">\
-            <th class="text-center" style="width: 35%">Problem</th>\
-            <th class="text-center" style="width: 25%">Review</th>\
-            <th class="text-center" style="width: 20%">Recall</th>\
-            <th class="text-center" style="width: 20%">Action</th>\
+        <tr style="font-size: 11px">\
+            <th class="text-center" style="width: 49%">Problem</th>\
+            <th class="text-center" style="width: 18%">Review</th>\
+            <th class="text-center" style="width: 15%">Recall</th>\
+            <th class="text-center" style="width: 18%">Action</th>\
         </tr>\
     </thead>\
     <tbody>\
     ';
 
-    // if (!Array.isArray(problems)) {
-    //     problems = Object.values(problems);
-    // }
-    // problems为store.reviewScheduledProblems,即滤除了delete的题目
-    problems = problems.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
-
-    let keys = Object.keys(problems);
-    
-    // 获取笔记数据
     let notes = {};
     try {
         notes = await getLocalStorageData("notes") || {};
@@ -336,10 +414,12 @@ export const renderScheduledTableContent = async (problems, page) => {
         console.error("获取笔记数据失败", e);
     }
 
-    for (const i of keys) {
-        const problem = problems[i];
-        // 使用 createScheduleProblemRecord 函数创建问题记录
-        content_html += await createScheduleProblemRecord(problem);
+    if (filteredProblems.length === 0) {
+        content_html += `<tr><td colspan="4"><div class="problem-history-empty">No matching problems found.</div></td></tr>`;
+    }
+
+    for (const problem of filteredProblems) {
+        content_html += await createScheduleProblemRecord(problem, notes);
     }
 
     content_html += `</tbody>`
@@ -468,11 +548,19 @@ export const renderAll = async () => {
     store.needReviewProblems.sort(store.problemSortBy);
     store.reviewScheduledProblems.sort(store.problemSortBy);
     store.completedProblems.sort(store.problemSortBy);
+    store.problemHistoryProblems = [...problems].sort(store.problemSortBy);
+    if (store.problemHistoryQuery === undefined) store.problemHistoryQuery = '';
     
     console.log('Filtering and sorting completed.');
 
+    initializeProblemBrowserControls();
+    const problemSearchInputDOM = getProblemSearchInputDOM();
+    if (problemSearchInputDOM && problemSearchInputDOM.value !== store.problemHistoryQuery) {
+        problemSearchInputDOM.value = store.problemHistoryQuery;
+    }
+
     // renderReviewTableContent(store.needReviewProblems, 1);
-    await renderScheduledTableContent(store.reviewScheduledProblems, 1);
+    await renderScheduledTableContent(store.problemHistoryProblems, 1);
     // renderCompletedTableContent(store.completedProblems, 1);
     await renderUndoButton();
     renderNoteModal();
