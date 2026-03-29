@@ -1,5 +1,18 @@
 # Changelog
 
+### [0.1.8] - 2026-03-29
+----------------------
+
+#### Added
+
+- Show preview review intervals in the difficulty popup so each rating option displays the estimated next review delay before submission
+- 新增评分弹窗预估提示，在提交前展示不同难度对应的预计下次复习间隔
+- Sync `fsrs_params` and `fsrs_revlogs` to Nutstore WebDAV in addition to local storage and Chrome Sync
+- 新增 `fsrs_params` 与 `fsrs_revlogs` 的坚果云 WebDAV 同步能力
+- add fuzzy search in Problems page
+- 新增题目名称模糊匹配
+
+
 ### [0.1.7] - 2025-10-07
 ----------------------
 

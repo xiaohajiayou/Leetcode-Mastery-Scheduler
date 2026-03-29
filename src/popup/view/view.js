@@ -24,8 +24,7 @@ const fuzzyMatchProblem = (problem, query) => {
     const searchFields = [
         problem.name,
         problem.index,
-        problem.level,
-        problem.url
+        problem.level
     ].filter(Boolean).map(normalizeSearchText);
 
     let bestScore = -1;
@@ -37,21 +36,6 @@ const fuzzyMatchProblem = (problem, query) => {
         if (includesAt >= 0) {
             const score = 200 - includesAt - Math.max(0, field.length - normalizedQuery.length);
             bestScore = Math.max(bestScore, score);
-            continue;
-        }
-
-        let queryPtr = 0;
-        let gapPenalty = 0;
-        for (let i = 0; i < field.length && queryPtr < normalizedQuery.length; i++) {
-            if (field[i] === normalizedQuery[queryPtr]) {
-                queryPtr += 1;
-            } else if (queryPtr > 0) {
-                gapPenalty += 1;
-            }
-        }
-
-        if (queryPtr === normalizedQuery.length) {
-            bestScore = Math.max(bestScore, 100 - gapPenalty);
         }
     }
 
@@ -384,14 +368,25 @@ export const renderReviewTableContent = (problems, page) => {
 }
 
 export const renderScheduledTableContent = async (problems, page) => {
-    input1DOM.classList.remove("is-invalid");
-    store.scheduledPage = 1;
-    input1DOM.value = 1;
-    inputLabel1DOM.innerText = `/1`;
-    prevButton1DOM.setAttribute("disabled", "disabled");
-    nextButton1DOM.setAttribute("disabled", "disabled");
-
     const filteredProblems = applyProblemHistoryFilters(problems);
+    const filteredMaxPage = Math.max(calculatePageNum(filteredProblems), 1);
+
+    if (page > filteredMaxPage || page < 1) {
+        input1DOM.classList.add("is-invalid");
+        return;
+    }
+
+    input1DOM.classList.remove("is-invalid");
+    store.scheduledPage = page;
+    store.scheduledMaxPage = filteredMaxPage;
+    input1DOM.value = page;
+    inputLabel1DOM.innerText = `/${filteredMaxPage}`;
+
+    if (page === 1) prevButton1DOM.setAttribute("disabled", "disabled");
+    if (page !== 1) prevButton1DOM.removeAttribute("disabled");
+    if (page === filteredMaxPage) nextButton1DOM.setAttribute("disabled", "disabled");
+    if (page !== filteredMaxPage) nextButton1DOM.removeAttribute("disabled");
+
     updateProblemSearchSummary(filteredProblems.length, problems.length);
 
     let content_html =
@@ -414,11 +409,13 @@ export const renderScheduledTableContent = async (problems, page) => {
         console.error("获取笔记数据失败", e);
     }
 
+    const pagedProblems = filteredProblems.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
     if (filteredProblems.length === 0) {
         content_html += `<tr><td colspan="4"><div class="problem-history-empty">No matching problems found.</div></td></tr>`;
     }
 
-    for (const problem of filteredProblems) {
+    for (const problem of pagedProblems) {
         content_html += await createScheduleProblemRecord(problem, notes);
     }
 
