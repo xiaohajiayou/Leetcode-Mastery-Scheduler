@@ -1,7 +1,7 @@
 import { getDifficultyBasedSteps, getSubmissionResult, isSubmissionSuccess, isSubmitButton, needReview, updateProblemUponSuccessSubmission } from "../util/utils";
 import { getAllProblems, createOrUpdateProblem, getCurrentProblemInfoFromLeetCodeByHref,getCurrentProblemInfoFromLeetCodeByUrl, syncProblems } from "../service/problemService";
 import { Problem } from "../entity/problem";
-import { updateProblemWithFSRS } from "../service/fsrsService";
+import { calculateNextReview, updateProblemWithFSRS } from "../service/fsrsService";
 
 
 
@@ -231,6 +231,69 @@ export const addRecordButton = () => {
     });
 };
 
+const cloneProblemForPreview = (problem) => {
+    if (!problem) return problem;
+
+    return {
+        ...problem,
+        fsrsState: problem.fsrsState ? { ...problem.fsrsState } : problem.fsrsState
+    };
+};
+
+const formatPreviewInterval = (nextReview) => {
+    if (!nextReview) {
+        return 'next: n/a';
+    }
+
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const reviewDate = new Date(nextReview);
+    const reviewDay = new Date(reviewDate.getFullYear(), reviewDate.getMonth(), reviewDate.getDate());
+    const diffDays = Math.round((reviewDay.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+
+    return `next: ${Math.max(0, diffDays)}d`;
+};
+
+const buildReviewPreviewOptions = async (problem) => {
+    const labels = {
+        1: 'Very Hard',
+        2: 'Hard',
+        3: 'Medium',
+        4: 'Easy'
+    };
+
+    const previews = await Promise.all([1, 2, 3, 4].map(async (quality) => {
+        const previewProblem = cloneProblemForPreview(problem);
+        const result = await calculateNextReview(previewProblem, { quality });
+
+        return {
+            quality,
+            label: labels[quality],
+            previewText: formatPreviewInterval(result.nextReview)
+        };
+    }));
+
+    return previews;
+};
+
+const resolveSubmissionProblem = async (problem = null) => {
+    if (problem) {
+        return problem;
+    }
+
+    await syncProblems();
+    const { problemIndex, problemName, problemLevel, problemUrl } = await getCurrentProblemInfoFromLeetCodeByHref();
+    const problems = await getAllProblems();
+    let currentProblem = problems[problemIndex];
+
+    if (!currentProblem || currentProblem.isDeleted == true) {
+        currentProblem = new Problem(problemIndex, problemName, problemLevel, problemUrl, Date.now(), getDifficultyBasedSteps(problemLevel)[0], Date.now());
+        currentProblem.isNewProblem = true;
+    }
+
+    return currentProblem;
+};
+
 
 // 抽取成通用的处理函数
 export async function handleFeedbackSubmission(problem = null, fromPopup = false) {
@@ -238,32 +301,8 @@ export async function handleFeedbackSubmission(problem = null, fromPopup = false
         // 记录是否为页面提交（在 LeetCode 页面上点击 Rate 按钮）
         // 只有当没有传入 problem 且不是从 popup 调用时，才是页面提交
         const isPageSubmission = !problem && !fromPopup;
-        
-        // 显示难度反馈弹窗
-        const feedback = await showDifficultyFeedbackDialog().catch(error => {
-            console.log(error);  // "用户取消评分"
-            return null;  // 返回 null 表示用户取消
-        });
 
-        // 如果用户取消，直接返回
-        if (!feedback) {
-            return null;
-        }
-
-        // 如果没有传入 problem，说明是页面提交，需要获取题目信息
-        if (!problem) {
-            await syncProblems();   // 同步云端数据
-            const { problemIndex, problemName, problemLevel, problemUrl } = await getCurrentProblemInfoFromLeetCodeByHref();
-            const problems = await getAllProblems();
-            problem = problems[problemIndex];
-            
-            // 如果是新题目，创建新的 problem 对象
-            if (!problem || problem.isDeleted == true) {
-                problem = new Problem(problemIndex, problemName, problemLevel, problemUrl, Date.now(), getDifficultyBasedSteps(problemLevel)[0], Date.now());
-                // 新题目标记，跳过今日复习检查
-                problem.isNewProblem = true;
-            }
-        }
+        problem = await resolveSubmissionProblem(problem);
         
         // 检查上次复习时间是否是今天，如果是则不允许再次复习（新题目跳过此检查）
         if (!problem.isNewProblem && problem.fsrsState && problem.fsrsState.lastReview) {
@@ -279,6 +318,19 @@ export async function handleFeedbackSubmission(problem = null, fromPopup = false
                 showToast("今天已经复习过这道题了，请明天再来！\nYou've already reviewed this problem today. Please come back tomorrow!", "warning");
                 return null;
             }
+        }
+
+        const previewOptions = await buildReviewPreviewOptions(problem);
+
+        // 显示难度反馈弹窗
+        const feedback = await showDifficultyFeedbackDialog(previewOptions).catch(error => {
+            console.log(error);
+            return null;
+        });
+
+        // 如果用户取消，直接返回
+        if (!feedback) {
+            return null;
         }
         
         // 清除新题目标记
@@ -413,9 +465,25 @@ function showToast(message, type = "info", duration = 4000) {
 }
 
 // 6. 显示评分对话框
-const showDifficultyFeedbackDialog = () => {
+const showDifficultyFeedbackDialog = (previewOptions = []) => {
     return new Promise((resolve) => {
         addDialogStyles();
+
+        const buttonsHtml = previewOptions.length > 0
+            ? previewOptions.map(({ quality, label, previewText }) => `
+                <button data-quality="${quality}">
+                    <span class="quality-button-inner">
+                        <span class="quality-label">${label}</span>
+                        <span class="quality-preview">${previewText}</span>
+                    </span>
+                </button>
+            `).join('')
+            : `
+                <button data-quality="1"><span class="quality-button-inner"><span class="quality-label">Very Hard</span></span></button>
+                <button data-quality="2"><span class="quality-button-inner"><span class="quality-label">Hard</span></span></button>
+                <button data-quality="3"><span class="quality-button-inner"><span class="quality-label">Medium</span></span></button>
+                <button data-quality="4"><span class="quality-button-inner"><span class="quality-label">Easy</span></span></button>
+            `;
 
         const overlay = document.createElement('div');
         overlay.className = 'fsrs-modal-overlay';
@@ -426,10 +494,7 @@ const showDifficultyFeedbackDialog = () => {
             <button class="close-button">&times;</button>
             <h3>How difficult was this problem for you?</h3>
             <div class="quality-buttons">
-                <button data-quality="1">Very Hard</button>
-                <button data-quality="2">Hard</button>
-                <button data-quality="3">Medium</button>
-                <button data-quality="4">Easy</button>
+                ${buttonsHtml}
             </div>
         `;
         // 点击遮罩层关闭
@@ -540,33 +605,108 @@ const addDialogStyles = () => {
         }
 
         .quality-buttons button {
-            padding: 12px 20px;
+            padding: 0;
             border: none;
-            border-radius: 8px;
-            background: #f8f9fa;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #fbfcfe 0%, #f4f7fb 100%);
             cursor: pointer;
             transition: all 0.2s ease;
-            font-size: 15px;
             color: #495057;
             border: 1px solid #e9ecef;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
         }
 
         .quality-buttons button:hover {
-            background: #2563eb;
-            color: white;
             transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.12);
+            border-color: rgba(37, 99, 235, 0.24);
         }
 
-        .quality-buttons button:nth-child(1) { border-left: 4px solid #dc2626; }
-        .quality-buttons button:nth-child(2) { border-left: 4px solid #ea580c; }
-        .quality-buttons button:nth-child(3) { border-left: 4px solid #16a34a; }
-        .quality-buttons button:nth-child(4) { border-left: 4px solid #2563eb; }
+        .quality-button-inner {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            min-height: 52px;
+            padding: 0 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-        .quality-buttons button:nth-child(1):hover { background: #dc2626; }
-        .quality-buttons button:nth-child(2):hover { background: #ea580c; }
-        .quality-buttons button:nth-child(3):hover { background: #16a34a; }
-        .quality-buttons button:nth-child(4):hover { background: #2563eb; }
+        .quality-label {
+            grid-column: 2;
+            justify-self: center;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            color: #1f2937;
+            text-align: center;
+        }
+
+        .quality-preview {
+            grid-column: 3;
+            justify-self: end;
+            font-size: 11px;
+            line-height: 1;
+            opacity: 0.65;
+            color: #475569;
+            background: rgba(148, 163, 184, 0.14);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            padding: 5px 8px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .quality-buttons button:hover .quality-label {
+            color: white;
+        }
+
+        .quality-buttons button:hover .quality-preview {
+            color: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.16);
+            border-color: rgba(255, 255, 255, 0.2);
+            opacity: 1;
+        }
+
+        .quality-buttons button:hover .quality-button-inner {
+            color: white;
+        }
+
+        .quality-buttons button:nth-child(1):hover {
+            background: linear-gradient(180deg, #dc2626 0%, #c81e1e 100%);
+        }
+
+        .quality-buttons button:nth-child(2):hover {
+            background: linear-gradient(180deg, #ea580c 0%, #d9480f 100%);
+        }
+
+        .quality-buttons button:nth-child(3):hover {
+            background: linear-gradient(180deg, #16a34a 0%, #15803d 100%);
+        }
+
+        .quality-buttons button:nth-child(4):hover {
+            background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+        }
+
+        .quality-buttons button:nth-child(1) {
+            border-left: 4px solid #dc2626;
+        }
+
+        .quality-buttons button:nth-child(2) {
+            border-left: 4px solid #ea580c;
+        }
+
+        .quality-buttons button:nth-child(3) {
+            border-left: 4px solid #16a34a;
+        }
+
+        .quality-buttons button:nth-child(4) {
+            border-left: 4px solid #2563eb;
+        }
+
+        .quality-buttons button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(15, 23, 42, 0.12);
+        }
     `;
     document.head.appendChild(style);
 };
