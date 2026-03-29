@@ -1,7 +1,45 @@
 import { FSRS, Rating, S_MIN, State, TypeConvert, createEmptyCard, dateDiffInDays, generatorParameters } from 'ts-fsrs';
 import localStorageDelegate from '../delegate/localStorageDelegate.js';
 import cloudStorageDelegate from '../delegate/cloudStorageDelegate.js';
+import { webdavEnhancedService } from '../service/webdavEnhancedService.js';
 import { store } from '../store';
+
+export const FSRS_PARAMS_FILENAME = 'fsrs_params.json';
+export const FSRS_REVLOGS_FILENAME = 'fsrs_revlogs.json';
+
+export const parseFSRSParamsData = (rawData) => {
+    if (!rawData) {
+        return null;
+    }
+
+    if (typeof rawData === 'string') {
+        try {
+            return JSON.parse(rawData);
+        } catch (error) {
+            console.error('解析 FSRS 参数失败:', error);
+            return null;
+        }
+    }
+
+    return rawData;
+};
+
+export const parseRevlogsData = (rawData) => {
+    if (!rawData) {
+        return {};
+    }
+
+    if (typeof rawData === 'string') {
+        try {
+            return JSON.parse(rawData);
+        } catch (error) {
+            console.error('解析复习日志失败:', error);
+            return {};
+        }
+    }
+
+    return typeof rawData === 'object' ? rawData : {};
+};
 
 // 1. 创建自定义参数
 export const defaultParams = generatorParameters({
@@ -33,15 +71,10 @@ export const getFSRSParams = async () => {
         }
         
         // 如果结果是字符串，尝试解析它
-        if (typeof result === 'string') {
-            try {
-                const localParams = JSON.parse(result);
-                console.log('获取到本地FSRS参数:', localParams);
-                return localParams;
-            } catch (e) {
-                console.error('解析本地FSRS参数失败:', e);
-                return defaultParams;
-            }
+        const parsedParams = parseFSRSParamsData(result);
+        if (parsedParams) {
+            console.log('获取到本地FSRS参数:', parsedParams);
+            return parsedParams;
         }
         
         // 如果结果已经是对象，直接返回
@@ -69,6 +102,14 @@ export const saveFSRSParams = async (newParams) => {
         if (store.isCloudSyncEnabled) {
             await cloudStorageDelegate.set('fsrs_params', paramsWithTimestamp);
             console.log('FSRS参数已保存到云端存储');
+        }
+
+        if (webdavEnhancedService.isConfigured) {
+            await webdavEnhancedService.uploadData(FSRS_PARAMS_FILENAME, {
+                params: paramsWithTimestamp,
+                lastSync: new Date().toISOString()
+            });
+            console.log('FSRS参数已保存到 WebDAV');
         }
         
         return true;
@@ -114,6 +155,13 @@ export const saveRevlog = async (cardId, revlog) => {
         if (store.isCloudSyncEnabled) {
             await cloudStorageDelegate.set('fsrs_revlogs', existingRevlogs);
         }
+
+        if (webdavEnhancedService.isConfigured) {
+            await webdavEnhancedService.uploadData(FSRS_REVLOGS_FILENAME, {
+                revlogs: existingRevlogs,
+                lastSync: new Date().toISOString()
+            });
+        }
         
         return true;
     } catch (error) {
@@ -135,6 +183,14 @@ export const getAllRevlogs = async () => {
                 return result;
             }
         }
+
+        if (webdavEnhancedService.isConfigured) {
+            const webdavResult = await webdavEnhancedService.downloadData(FSRS_REVLOGS_FILENAME);
+            if (webdavResult?.revlogs && Object.keys(webdavResult.revlogs).length > 0) {
+                console.log('从 WebDAV 获取复习日志:', webdavResult.revlogs);
+                return webdavResult.revlogs;
+            }
+        }
         
         // 如果云端没有数据或未启用云同步，从本地获取
         result = await new Promise((resolve) => {
@@ -143,18 +199,7 @@ export const getAllRevlogs = async () => {
             });
         });
         
-        // 如果结果是字符串，尝试解析它
-        if (typeof result === 'string') {
-            try {
-                return JSON.parse(result);
-            } catch (e) {
-                console.error('Error parsing revlogs:', e);
-                return {};
-            }
-        }
-        
-        // 如果结果已经是对象，直接返回
-        return result || {};
+        return parseRevlogsData(result);
     } catch (error) {
         console.error('Error getting revlogs:', error);
         return {};

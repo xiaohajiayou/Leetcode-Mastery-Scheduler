@@ -9,6 +9,7 @@ import { CN_PROBLEM_KEY, PROBLEM_KEY } from '../util/keys';
 import { getLocalStorageData, setLocalStorageData } from '../delegate/localStorageDelegate';
 import cloudStorageDelegate from '../delegate/cloudStorageDelegate';
 import { store } from '../store';
+import { syncFSRSHistory } from './fsrsService';
 
 class SyncManager {
     constructor() {
@@ -171,8 +172,11 @@ class SyncManager {
             
             // 5. 保存合并后的数据到所有位置
             await this.saveDataEverywhere(key, mergedData.problems);
+
+            // 6. 同步 FSRS 参数与复习日志
+            await syncFSRSHistory();
             
-            // 6. 清空同步队列
+            // 7. 清空同步队列
             this.syncQueue.clear();
             this.lastSyncTime = new Date().toISOString();
             

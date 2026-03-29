@@ -1,10 +1,12 @@
 import { FSRS, Rating, S_MIN, State, TypeConvert, createEmptyCard } from 'ts-fsrs';
-import { defaultParams, qualityToRating, getFSRSParams, saveFSRSParams, saveRevlog, getAllRevlogs, exportRevlogsToCSV } from '../util/fsrs.js';
+import { defaultParams, qualityToRating, getFSRSParams, saveFSRSParams, saveRevlog, getAllRevlogs, exportRevlogsToCSV, FSRS_PARAMS_FILENAME, FSRS_REVLOGS_FILENAME, parseFSRSParamsData, parseRevlogsData } from '../util/fsrs.js';
 import { optimizeFSRSParams } from '../delegate/fsrsDelegate.js';
 import { syncLocalAndCloudStorage } from '../util/utils.js';
 import localStorageDelegate from '../delegate/localStorageDelegate.js';
 import { store } from "../store";
 import { mergeFSRSParams, mergeRevlogs } from '../util/utils';
+import cloudStorageDelegate from '../delegate/cloudStorageDelegate.js';
+import { webdavEnhancedService } from './webdavEnhancedService.js';
 
 
 
@@ -219,17 +221,14 @@ export const optimizeParameters = async (onProgress) => {
 // 同步FSRS历史记录
 export const syncFSRSHistory = async () => {
     try {
-        // 检查是否启用了云同步
-        if (!store.isCloudSyncEnabled) {
-            console.log('云同步未启用，跳过FSRS历史记录同步');
+        if (!store.isCloudSyncEnabled && !webdavEnhancedService.isConfigured) {
+            console.log('未启用 Chrome Sync 或 WebDAV，跳过 FSRS 历史记录同步');
             return;
         }
 
-        // 同步FSRS参数和复习日志
         await syncFSRSParams();
         await syncRevlogs();
         
-        // 更新FSRS实例
         const updatedParams = await getFSRSParams();
         await updateFSRSInstance(updatedParams);
         
@@ -241,11 +240,68 @@ export const syncFSRSHistory = async () => {
 
 
 export const syncFSRSParams = async () => {
-    if (!store.isCloudSyncEnabled) return;
-    await syncLocalAndCloudStorage('fsrs_params', mergeFSRSParams);
+    const localParams = parseFSRSParamsData(await localStorageDelegate.get('fsrs_params'));
+    let mergedParams = localParams;
+
+    if (store.isCloudSyncEnabled) {
+        const cloudParams = parseFSRSParamsData(await cloudStorageDelegate.get('fsrs_params'));
+        mergedParams = mergeFSRSParams(mergedParams, cloudParams);
+    }
+
+    if (webdavEnhancedService.isConfigured) {
+        const webdavData = await webdavEnhancedService.downloadData(FSRS_PARAMS_FILENAME).catch(error => {
+            console.warn('从 WebDAV 获取 FSRS 参数失败:', error);
+            return null;
+        });
+        const webdavParams = parseFSRSParamsData(webdavData?.params);
+        mergedParams = mergeFSRSParams(mergedParams, webdavParams);
+    }
+
+    if (!mergedParams) {
+        return;
+    }
+
+    await localStorageDelegate.set('fsrs_params', JSON.stringify(mergedParams));
+
+    if (store.isCloudSyncEnabled) {
+        await cloudStorageDelegate.set('fsrs_params', mergedParams);
+    }
+
+    if (webdavEnhancedService.isConfigured) {
+        await webdavEnhancedService.uploadData(FSRS_PARAMS_FILENAME, {
+            params: mergedParams,
+            lastSync: new Date().toISOString()
+        });
+    }
 }
 
 export const syncRevlogs = async () => {
-    if (!store.isCloudSyncEnabled) return;
-    await syncLocalAndCloudStorage('fsrs_revlogs', mergeRevlogs);
+    let mergedRevlogs = parseRevlogsData(await localStorageDelegate.get('fsrs_revlogs'));
+
+    if (store.isCloudSyncEnabled) {
+        const cloudRevlogs = parseRevlogsData(await cloudStorageDelegate.get('fsrs_revlogs'));
+        mergedRevlogs = mergeRevlogs(mergedRevlogs, cloudRevlogs);
+    }
+
+    if (webdavEnhancedService.isConfigured) {
+        const webdavData = await webdavEnhancedService.downloadData(FSRS_REVLOGS_FILENAME).catch(error => {
+            console.warn('从 WebDAV 获取 FSRS 复习日志失败:', error);
+            return null;
+        });
+        const webdavRevlogs = parseRevlogsData(webdavData?.revlogs);
+        mergedRevlogs = mergeRevlogs(mergedRevlogs, webdavRevlogs);
+    }
+
+    await localStorageDelegate.set('fsrs_revlogs', JSON.stringify(mergedRevlogs));
+
+    if (store.isCloudSyncEnabled) {
+        await cloudStorageDelegate.set('fsrs_revlogs', mergedRevlogs);
+    }
+
+    if (webdavEnhancedService.isConfigured) {
+        await webdavEnhancedService.uploadData(FSRS_REVLOGS_FILENAME, {
+            revlogs: mergedRevlogs,
+            lastSync: new Date().toISOString()
+        });
+    }
 }
