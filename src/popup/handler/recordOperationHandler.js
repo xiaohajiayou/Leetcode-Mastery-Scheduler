@@ -1,4 +1,3 @@
-import { checkButtonDOMs, deleteButtonDOMs, resetButtonDOMs, undoButtonDOMs } from "../util/doms";
 import { store } from "../store";
 import { deleteProblem, markProblemAsMastered, resetProblem } from "../service/problemService";
 import { renderAll } from "../view/view";
@@ -10,42 +9,58 @@ const initTooltips = () => {
 }
 
 const hide_all_tooltips = () => {
+    if (!store.tooltipList) return;
     store.tooltipList.forEach(tooltip => tooltip._hideModalHandler());
 }
+
+const handleCheckButtonClick = async (event) => {
+    const button = event.target.closest('.check-btn-mark');
+    if (!button) return;
+
+    hide_all_tooltips();
+    await markProblemAsMastered(button.dataset.id);
+    await renderAll();
+};
+
+const handleDeleteButtonClick = async (event) => {
+    const button = event.target.closest('.delete-btn-mark');
+    if (!button) return;
+
+    hide_all_tooltips();
+    await deleteProblem(button.dataset.id);
+    await renderAll();
+};
+
+const handleResetButtonClick = async (event) => {
+    const button = event.target.closest('.reset-btn-mark');
+    if (!button) return;
+
+    hide_all_tooltips();
+    await resetProblem(button.dataset.id);
+    await renderAll();
+};
+
+const handleUndoButtonClick = async (event) => {
+    const button = event.target.closest('.undo-ops-btn');
+    if (!button) return;
+
+    hide_all_tooltips();
+    await undoLatestOperation();
+    await renderAll();
+};
 
 export const setRecordOperationHandlers = () => {
 
     initTooltips();
 
-    if (checkButtonDOMs !== undefined) {
-        Array.prototype.forEach.call(checkButtonDOMs, (btn) => btn.onclick = async (event) => {
-            hide_all_tooltips();
-            await markProblemAsMastered(event.target.dataset.id);
-            await renderAll();
-        });
-    }
+    // Delegate actions so re-rendered table rows after search/filter still work.
+    document.removeEventListener('click', handleCheckButtonClick);
+    document.removeEventListener('click', handleDeleteButtonClick);
+    document.removeEventListener('click', handleResetButtonClick);
+    document.removeEventListener('click', handleUndoButtonClick);
 
-    if (deleteButtonDOMs !== undefined) {
-        Array.prototype.forEach.call(deleteButtonDOMs, (btn) => btn.onclick = async (event) => {
-            hide_all_tooltips();
-            await deleteProblem(event.target.dataset.id);
-            await renderAll();
-        });
-    }
-
-    if (resetButtonDOMs !== undefined) {
-        Array.prototype.forEach.call(resetButtonDOMs, (btn) => btn.onclick = async (event) => {
-            hide_all_tooltips();
-            await resetProblem(event.target.dataset.id);
-            await renderAll();
-        });
-    }
-
-    if (undoButtonDOMs !== undefined) {
-        Array.prototype.forEach.call(undoButtonDOMs, (btn) => btn.onclick = async () => {
-            hide_all_tooltips();
-            await undoLatestOperation();
-            await renderAll();
-        });
-    }
+    document.addEventListener('click', handleCheckButtonClick);
+    document.addEventListener('click', handleDeleteButtonClick);
+    document.addEventListener('click', handleResetButtonClick);
+    document.addEventListener('click', handleUndoButtonClick);
 }
