@@ -503,6 +503,22 @@
                             </div>
                         </div>
 
+                        <!-- 每日刷新时间设置（类似 Anki 的「下一天开始于」） -->
+                        <div class="option-card" style="padding: 12px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <i class="fas fa-clock" style="font-size: 0.95em; line-height: 1; position: relative; top: 7px;"></i>
+                                    <h4 style="margin: 0; font-size: 0.95em; line-height: 1;">Next Day Starts At</h4>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-select form-control" id="dayStartHourSelect" name="dayStartHourSelect" style="font-size: 0.9em;">
+                                    <!-- daily-review.js will add hour options -->
+                                </select>
+                                <small style="color: #8096a8;">Reviews before this hour count as the previous day.</small>
+                            </div>
+                        </div>
+
                         <!-- 云同步设置 -->
                         <div class="option-card" style="padding: 12px;">
                             <div style="display: flex; align-items: center; justify-content: space-between">

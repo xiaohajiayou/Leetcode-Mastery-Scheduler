@@ -1,3 +1,5 @@
+import { getLogicalDayStart, normalizeDayStartHour } from '../popup/util/dayBoundary.js';
+
 console.log('Background service worker started - v2.0 with records support');
 
 // 默认配置
@@ -225,8 +227,10 @@ async function getReviewProblems() {
             return [];
         }
 
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        // 按每日刷新时间（逻辑日）判断今天
+        const { dayStartHour: rawDayStartHour } = await chrome.storage.local.get('dayStartHour');
+        const dayStartHour = normalizeDayStartHour(rawDayStartHour);
+        const today = new Date(getLogicalDayStart(Date.now(), dayStartHour));
 
         // 过滤出今天需要复习但还未复习的题目
         const reviewProblems = problems.filter(problem => {
@@ -246,8 +250,7 @@ async function getReviewProblems() {
             }
 
             // 检查是否今天已经复习过
-            const lastReview = new Date(problem.fsrsState.lastReview);
-            lastReview.setHours(0, 0, 0, 0);
+            const lastReview = new Date(getLogicalDayStart(problem.fsrsState.lastReview, dayStartHour));
             // 如果今天已经复习过，则不需要提醒
             if (lastReview.getTime() === today.getTime()) {
                 return false;
@@ -255,8 +258,7 @@ async function getReviewProblems() {
 
             // 检查是否到了复习时间
             if (problem.fsrsState.nextReview) {
-                const nextReview = new Date(problem.fsrsState.nextReview);
-                nextReview.setHours(0, 0, 0, 0);
+                const nextReview = new Date(getLogicalDayStart(problem.fsrsState.nextReview, dayStartHour));
                 // 如果复习时间是今天或之前，需要复习
                 const needsReview = nextReview.getTime() <= today.getTime();
                 if (needsReview) {

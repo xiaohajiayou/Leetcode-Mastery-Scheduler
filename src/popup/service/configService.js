@@ -1,6 +1,7 @@
 import { getLocalStorageData, setLocalStorageData } from "../delegate/localStorageDelegate"
 import { store } from "../store";
-import { CONFIG_INNER_KEY_ENABLE_CLOUD, CONFIG_KEY, PROBLEM_SORT_BY_KEY, REVIEW_INTV_KEY,DEFAULT_CARD_LIMIT_KEY, DEFAULT_CARD_LIMIT_VALUE } from "../util/keys"
+import { CONFIG_INNER_KEY_ENABLE_CLOUD, CONFIG_KEY, PROBLEM_SORT_BY_KEY, REVIEW_INTV_KEY,DEFAULT_CARD_LIMIT_KEY, DEFAULT_CARD_LIMIT_VALUE, DAY_START_HOUR_KEY } from "../util/keys"
+import { normalizeDayStartHour } from "../util/dayBoundary";
 import { getSorterById, idOf, problemSorters } from "../util/sort";
 
 // configurable review intervals (to be integrated)
@@ -92,6 +93,19 @@ export const loadDefaultCardLimit = async () => {
     store.defaultCardLimit = await getDefaultCardLimit();
 }
 
+// 每日复习刷新时间（类似 Anki 的「下一天开始于」）
+export const getDayStartHour = async () => {
+    return normalizeDayStartHour(await getLocalStorageData(DAY_START_HOUR_KEY));
+}
+
+export const setDayStartHour = async (hour) => {
+    await setLocalStorageData(DAY_START_HOUR_KEY, normalizeDayStartHour(hour));
+}
+
+export const loadDayStartHour = async () => {
+    store.dayStartHour = await getDayStartHour();
+}
+
 // 添加新的配置项和方法
 export async function setReminderEnabled(enabled) {
     await chrome.storage.local.set({ reminderEnabled: enabled });
@@ -113,4 +127,5 @@ export const loadConfigs = async () => {
     await loadCloudSyncConfig();
     await loadDefaultCardLimit();
     await loadReminderConfig();  // 添加这一行
+    await loadDayStartHour();
 }

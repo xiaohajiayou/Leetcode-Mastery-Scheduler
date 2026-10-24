@@ -2,6 +2,8 @@ import { getDifficultyBasedSteps, getSubmissionResult, isSubmissionSuccess, isSu
 import { getAllProblems, createOrUpdateProblem, getCurrentProblemInfoFromLeetCodeByHref,getCurrentProblemInfoFromLeetCodeByUrl, syncProblems } from "../service/problemService";
 import { Problem } from "../entity/problem";
 import { calculateNextReview, updateProblemWithFSRS } from "../service/fsrsService";
+import { getDayStartHour } from "../service/configService";
+import { getLogicalDayStart, isSameLogicalDay, logicalDayDiff } from "../util/dayBoundary";
 
 
 
@@ -240,21 +242,17 @@ const cloneProblemForPreview = (problem) => {
     };
 };
 
-const formatPreviewInterval = (nextReview) => {
+const formatPreviewInterval = (nextReview, dayStartHour) => {
     if (!nextReview) {
         return 'next: n/a';
     }
 
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const reviewDate = new Date(nextReview);
-    const reviewDay = new Date(reviewDate.getFullYear(), reviewDate.getMonth(), reviewDate.getDate());
-    const diffDays = Math.round((reviewDay.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+    const diffDays = logicalDayDiff(Date.now(), nextReview, dayStartHour);
 
     return `next: ${Math.max(0, diffDays)}d`;
 };
 
-const buildReviewPreviewOptions = async (problem) => {
+const buildReviewPreviewOptions = async (problem, dayStartHour) => {
     const labels = {
         1: 'Very Hard',
         2: 'Hard',
@@ -269,7 +267,7 @@ const buildReviewPreviewOptions = async (problem) => {
         return {
             quality,
             label: labels[quality],
-            previewText: formatPreviewInterval(result.nextReview)
+            previewText: formatPreviewInterval(result.nextReview, dayStartHour)
         };
     }));
 
@@ -303,16 +301,13 @@ export async function handleFeedbackSubmission(problem = null, fromPopup = false
         const isPageSubmission = !problem && !fromPopup;
 
         problem = await resolveSubmissionProblem(problem);
+        // 每日刷新时间（content script 中没有加载 store，需直接读取配置）
+        const dayStartHour = await getDayStartHour();
         
         // 检查上次复习时间是否是今天，如果是则不允许再次复习（新题目跳过此检查）
         if (!problem.isNewProblem && problem.fsrsState && problem.fsrsState.lastReview) {
-            const lastReviewDate = new Date(problem.fsrsState.lastReview);
-            const today = new Date();
-            
-            // 比较年、月、日是否相同（考虑时区影响）
-            if (lastReviewDate.getFullYear() === today.getFullYear() &&
-                lastReviewDate.getMonth() === today.getMonth() &&
-                lastReviewDate.getDate() === today.getDate()) {
+            // 按逻辑日比较，刷新时间之前的复习算作前一天
+            if (isSameLogicalDay(problem.fsrsState.lastReview, Date.now(), dayStartHour)) {
                 
                 // 显示双语警告提示
                 showToast("今天已经复习过这道题了，请明天再来！\nYou've already reviewed this problem today. Please come back tomorrow!", "warning");
@@ -320,7 +315,7 @@ export async function handleFeedbackSubmission(problem = null, fromPopup = false
             }
         }
 
-        const previewOptions = await buildReviewPreviewOptions(problem);
+        const previewOptions = await buildReviewPreviewOptions(problem, dayStartHour);
 
         // 显示难度反馈弹窗
         const feedback = await showDifficultyFeedbackDialog(previewOptions).catch(error => {
@@ -342,10 +337,9 @@ export async function handleFeedbackSubmission(problem = null, fromPopup = false
         // 只有在页面提交时才显示成功提示
         if (isPageSubmission) {
             // 计算下次复习时间与今天的天数差
-            const nextReviewDate = new Date(problem.fsrsState.nextReview);
-            const today = new Date();
-            const diffTime = nextReviewDate.getTime() - today.getTime();
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            // 按逻辑日计算，和评分弹窗的预览、复习列表保持一致
+            const nextReviewDate = new Date(getLogicalDayStart(problem.fsrsState.nextReview, dayStartHour));
+            const diffDays = logicalDayDiff(Date.now(), problem.fsrsState.nextReview, dayStartHour);
 
             // 显示复习成功提示，包含下次复习时间
             showToast(`复习成功！下次复习时间：${nextReviewDate.toLocaleDateString()}（${diffDays}天后）\nReview successful! Next review: ${nextReviewDate.toLocaleDateString()} (in ${diffDays} days)`, "success");

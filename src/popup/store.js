@@ -18,7 +18,8 @@ export const store = {
     problemSortBy: problemSorters.sortByReviewTimeAsc,
     isCloudSyncEnabled: false,
     defaultCardLimit: 1,
-    isReminderEnabled: false
+    isReminderEnabled: false,
+    dayStartHour: 0
 }
 
 export const daily_store = {

@@ -6,6 +6,7 @@
 import { daily_store, store } from '../store.js';
 import { getCurrentRetrievability } from '../util/utils.js';
 import { isReviewedToday } from './reviewService.js';
+import { getLogicalDayStart } from '../util/dayBoundary.js';
 
 const LAST_AVERAGE_KEY = 'lastRetrievabilityAverage';
 const LAST_UPDATE_TIME_KEY = 'lastUpdateTime';
@@ -132,7 +133,8 @@ export function updateRetrievabilityTrend() {
  */
 export function setCurrentDate() {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const today = new Date().toLocaleDateString('en-US', options);
+    // 未到每日刷新时间时仍显示前一天的日期
+    const today = new Date(getLogicalDayStart(Date.now(), store.dayStartHour)).toLocaleDateString('en-US', options);
     const element = document.getElementById('currentDate');
     if (element) {
         element.textContent = today;

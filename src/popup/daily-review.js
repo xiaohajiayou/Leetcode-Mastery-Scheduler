@@ -5,7 +5,7 @@ import { isInCnMode } from "./service/modeService.js";
 import { setLocalStorageData } from "./delegate/localStorageDelegate.js";
 import { handleAddBlankProblem, handleAddProblem } from './script/submission.js';
 import './popup.css';
-import { isCloudSyncEnabled, loadConfigs, setCloudSyncEnabled, setProblemSorter, setDefaultCardLimit, setReminderEnabled } from "./service/configService";
+import { isCloudSyncEnabled, loadConfigs, setCloudSyncEnabled, setProblemSorter, setDefaultCardLimit, setReminderEnabled, setDayStartHour, loadDayStartHour } from "./service/configService";
 import { store, daily_store } from './store';
 import { descriptionOf, idOf, problemSorterArr } from "./util/sort";
 import { getAllRevlogs, exportRevlogsToCSV, saveFSRSParams } from './util/fsrs.js';
@@ -1120,6 +1120,11 @@ async function updateOptionsDisplay() {
         defaultCardLimitInput.value = store.defaultCardLimit;
     }
 
+    const dayStartHourSelect = document.getElementById('dayStartHourSelect');
+    if (dayStartHourSelect) {
+        dayStartHourSelect.value = String(store.dayStartHour);
+    }
+
     // 更新提醒相关设置
     const config = await chrome.storage.local.get([
         'reminderEnabled',
@@ -1192,6 +1197,18 @@ async function initializeOptions() {
             optionElement.textContent = sorterMeta.text;
             problemSorterSelect.append(optionElement);
         });
+    }
+
+    // 初始化每日刷新时间选择器
+    const dayStartHourSelect = document.getElementById('dayStartHourSelect');
+    if (dayStartHourSelect) {
+        for (let hour = 0; hour < 24; hour++) {
+            const optionElement = document.createElement('option');
+            optionElement.value = String(hour);
+            optionElement.textContent = `${String(hour).padStart(2, '0')}:00${hour === 0 ? ' (default)' : ''}`;
+            dayStartHourSelect.append(optionElement);
+        }
+        dayStartHourSelect.value = String(store.dayStartHour);
     }
 
     // 初始化云同步开关
@@ -1301,6 +1318,16 @@ async function initializeOptions() {
                 reminderEndTime: reminderEndTime?.value || '22:00',
                 reminderDays: selectedDays
             });
+
+            // 放在其他设置保存之后，避免刷新列表出错时影响其他设置的保存
+            if (dayStartHourSelect) {
+                await setDayStartHour(Number(dayStartHourSelect.value));
+                await loadDayStartHour();
+                // 刷新时间变化会影响「今天」的判定，重新加载复习列表
+                await loadDailyReviewData();
+                setCurrentDate();
+                updateCardDisplay();
+            }
 
             console.log('Settings saved successfully');
 

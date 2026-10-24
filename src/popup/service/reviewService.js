@@ -5,7 +5,8 @@
 
 import { getAllProblems } from './problemService.js';
 import { getCurrentRetrievability } from '../util/utils.js';
-import { daily_store } from '../store.js';
+import { daily_store, store } from '../store.js';
+import { getLogicalDayStart, isSameLogicalDay, logicalDayDiff } from '../util/dayBoundary.js';
 import { handleFeedbackSubmission } from '../script/submission.js';
 
 /**
@@ -14,13 +15,7 @@ import { handleFeedbackSubmission } from '../script/submission.js';
 export function isReviewedToday(problem) {
     if (!problem.fsrsState?.lastReview) return false;
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const lastReview = new Date(problem.fsrsState.lastReview);
-    lastReview.setHours(0, 0, 0, 0);
-
-    return lastReview.getTime() === today.getTime();
+    return isSameLogicalDay(problem.fsrsState.lastReview, Date.now(), store.dayStartHour);
 }
 
 /**
@@ -32,11 +27,8 @@ export function isReviewDueToday(problem) {
         return false;
     }
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const nextReview = new Date(problem.fsrsState.nextReview);
-    nextReview.setHours(0, 0, 0, 0);
+    const today = new Date(getLogicalDayStart(Date.now(), store.dayStartHour));
+    const nextReview = new Date(getLogicalDayStart(problem.fsrsState.nextReview, store.dayStartHour));
 
     const isDue = nextReview <= today;
 
@@ -145,16 +137,8 @@ export function getNextReviewTips(fsrsState) {
         return 'Not scheduled';
     }
 
-    const nextReviewDate = new Date(fsrsState.nextReview);
-    const now = new Date();
-
-    // 获取当前日期和下次复习日期（不含时间）
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const reviewDay = new Date(nextReviewDate.getFullYear(), nextReviewDate.getMonth(), nextReviewDate.getDate());
-
-    // 计算日期差（天数）
-    const diffTime = reviewDay.getTime() - today.getTime();
-    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+    // 按逻辑日（考虑每日刷新时间）计算日期差（天数）
+    const diffDays = logicalDayDiff(Date.now(), fsrsState.nextReview, store.dayStartHour);
 
     if (diffDays < 0) {
         // 已经过了计划复习日期

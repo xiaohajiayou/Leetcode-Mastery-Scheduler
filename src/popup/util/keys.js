@@ -9,3 +9,4 @@ export const CONFIG_INNER_KEY_ENABLE_CLOUD = 'enable_cloud';
 // 添加新的常量
 export const DEFAULT_CARD_LIMIT_KEY = 'defaultCardLimit';
 export const DEFAULT_CARD_LIMIT_VALUE = 3;
+export const DAY_START_HOUR_KEY = 'dayStartHour';

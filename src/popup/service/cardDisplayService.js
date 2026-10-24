@@ -164,8 +164,7 @@ export function createReviewCards() {
         card.title = tooltipContent;
 
         // 检查今日是否已复习
-        const isReviewedTodayFlag = fsrsState.lastReview &&
-            new Date(fsrsState.lastReview).toDateString() === new Date().toDateString();
+        const isReviewedTodayFlag = isReviewedToday(problem);
 
         // 设置按钮状态
         const reviewButton = card.querySelector('.btn-review');
